@@ -46,6 +46,25 @@
 
 @implementation NSDate (CupertinoYankee)
 
+- (NSDate*)tomorrow {
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents* components = [calendar components:(CYCalendarUnitYear | CYCalendarUnitMonth | CYCalendarUnitDay | CYCalendarUnitHour | CYCalendarUnitMinute | CYCalendarUnitSecond) fromDate:self];
+    components.day += 1;
+    
+    return [calendar dateFromComponents:components];
+}
+
+- (NSDate*)yesterday {
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents* components = [calendar components:(CYCalendarUnitYear | CYCalendarUnitMonth | CYCalendarUnitDay | CYCalendarUnitHour | CYCalendarUnitMinute | CYCalendarUnitSecond) fromDate:self];
+    components.day -= 1;
+    return [calendar dateFromComponents:components];
+}
+
+#pragma mark -
+
 - (NSDate *)beginningOfDay {
     NSCalendar *calendar = [NSCalendar currentCalendar];
 

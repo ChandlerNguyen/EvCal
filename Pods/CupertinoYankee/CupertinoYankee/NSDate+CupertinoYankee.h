@@ -28,6 +28,20 @@
  @discussion All date calculations are based on `NSCalendar +currentCalendar`.
  */
 @interface NSDate (CupertinoYankee)
+///-----------------------------------------
+/// @name Calculating a relative day
+///-----------------------------------------
+
+/**
+*  Returns a new date with the same hour, second, and minute on the day following the receiver.
+*/
+- (NSDate*)tomorrow;
+
+/**
+ *  Returns a new date with the same hour, second, and minute on the day preceding the receiver.
+ */
+- (NSDate*)yesterday;
+
 
 ///-----------------------------------------
 /// @name Calculating Beginning / End of Day
