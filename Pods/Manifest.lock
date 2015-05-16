@@ -1,0 +1,10 @@
+PODS:
+  - CupertinoYankee (1.0.2)
+
+DEPENDENCIES:
+  - CupertinoYankee (~> 1.0.2)
+
+SPEC CHECKSUMS:
+  CupertinoYankee: c288994087c791657fce35a43d2a604e64eef23e
+
+COCOAPODS: 0.37.1

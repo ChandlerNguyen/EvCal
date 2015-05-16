@@ -1,5 +1,5 @@
 //
-//  ECDayViewController.h
+//  ECDayView.h
 //  EvCal
 //
 //  Created by Tom on 5/16/15.
@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ECDayViewController : UIViewController
-
+@interface ECDayView : UIScrollView
 
 @end

@@ -12,6 +12,8 @@
 		84C459041B073A860066B6A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84C459031B073A860066B6A9 /* Images.xcassets */; };
 		84C459131B073A860066B6A9 /* EvCalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C459121B073A860066B6A9 /* EvCalTests.m */; };
 		84C4591E1B073DB90066B6A9 /* ECDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C4591D1B073DB90066B6A9 /* ECDayViewController.m */; };
+		84C459221B074BDD0066B6A9 /* ECDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C459211B074BDD0066B6A9 /* ECDayView.m */; };
+		CC4E4F7120FF97FF238954E4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C545F2A12B052E9FA014F156 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +27,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0CD2922DCA6CD50DC54BED4D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		26A52386135E7399D21E9C48 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		84C458F31B073A860066B6A9 /* EvCal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvCal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C458F71B073A860066B6A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84C458F81B073A860066B6A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -36,6 +40,9 @@
 		84C459121B073A860066B6A9 /* EvCalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EvCalTests.m; sourceTree = "<group>"; };
 		84C4591C1B073DB90066B6A9 /* ECDayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDayViewController.h; path = Controllers/ECDayViewController.h; sourceTree = "<group>"; };
 		84C4591D1B073DB90066B6A9 /* ECDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDayViewController.m; path = Controllers/ECDayViewController.m; sourceTree = "<group>"; };
+		84C459201B074BDD0066B6A9 /* ECDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDayView.h; path = Views/ECDayView.h; sourceTree = "<group>"; };
+		84C459211B074BDD0066B6A9 /* ECDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDayView.m; path = Views/ECDayView.m; sourceTree = "<group>"; };
+		C545F2A12B052E9FA014F156 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC4E4F7120FF97FF238954E4 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +70,8 @@
 				84C458F51B073A860066B6A9 /* EvCal */,
 				84C4590F1B073A860066B6A9 /* EvCalTests */,
 				84C458F41B073A860066B6A9 /* Products */,
+				D93D40FC1C2E10D342AD6CDC /* Pods */,
+				CD5360421152C667B1D9EB7A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,6 +89,8 @@
 			children = (
 				84C458FA1B073A860066B6A9 /* AppDelegate.h */,
 				84C458FB1B073A860066B6A9 /* AppDelegate.m */,
+				84C459271B074DC20066B6A9 /* Support */,
+				84C459231B074BE10066B6A9 /* Views */,
 				84C4591F1B073DBE0066B6A9 /* Controllers */,
 				84C459031B073A860066B6A9 /* Images.xcassets */,
 				84C458F61B073A860066B6A9 /* Supporting Files */,
@@ -121,6 +133,39 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		84C459231B074BE10066B6A9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				84C459201B074BDD0066B6A9 /* ECDayView.h */,
+				84C459211B074BDD0066B6A9 /* ECDayView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		84C459271B074DC20066B6A9 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
+		CD5360421152C667B1D9EB7A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C545F2A12B052E9FA014F156 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D93D40FC1C2E10D342AD6CDC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				26A52386135E7399D21E9C48 /* Pods.debug.xcconfig */,
+				0CD2922DCA6CD50DC54BED4D /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -128,9 +173,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84C459161B073A860066B6A9 /* Build configuration list for PBXNativeTarget "EvCal" */;
 			buildPhases = (
+				E353D1FB578AA42979BAAC17 /* Check Pods Manifest.lock */,
 				84C458EF1B073A850066B6A9 /* Sources */,
 				84C458F01B073A850066B6A9 /* Frameworks */,
 				84C458F11B073A850066B6A9 /* Resources */,
+				4A91993D458FF8F7E41C330B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -214,6 +261,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4A91993D458FF8F7E41C330B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E353D1FB578AA42979BAAC17 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		84C458EF1B073A850066B6A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -222,6 +302,7 @@
 				84C458FC1B073A860066B6A9 /* AppDelegate.m in Sources */,
 				84C4591E1B073DB90066B6A9 /* ECDayViewController.m in Sources */,
 				84C458F91B073A860066B6A9 /* main.m in Sources */,
+				84C459221B074BDD0066B6A9 /* ECDayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +405,7 @@
 		};
 		84C459171B073A860066B6A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 26A52386135E7399D21E9C48 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = EvCal/Info.plist;
@@ -334,6 +416,7 @@
 		};
 		84C459181B073A860066B6A9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CD2922DCA6CD50DC54BED4D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = EvCal/Info.plist;
@@ -395,6 +478,7 @@
 				84C459181B073A860066B6A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		84C459191B073A860066B6A9 /* Build configuration list for PBXNativeTarget "EvCalTests" */ = {
 			isa = XCConfigurationList;
@@ -403,6 +487,7 @@
 				84C4591B1B073A860066B6A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
