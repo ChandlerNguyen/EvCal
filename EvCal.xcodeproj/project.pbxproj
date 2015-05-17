@@ -45,7 +45,6 @@
 		84C459211B074BDD0066B6A9 /* ECDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDayView.m; path = Views/ECDayView.m; sourceTree = "<group>"; };
 		84EF225F1B08769A003DA610 /* ECEventLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEventLoader.h; path = Model/ECEventLoader.h; sourceTree = "<group>"; };
 		84EF22601B08769A003DA610 /* ECEventLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEventLoader.m; path = Model/ECEventLoader.m; sourceTree = "<group>"; };
-		84EF22631B087A3D003DA610 /* ECLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ECLog.h; path = Support/ECLog.h; sourceTree = "<group>"; };
 		C545F2A12B052E9FA014F156 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -108,7 +107,6 @@
 			children = (
 				84C458F71B073A860066B6A9 /* Info.plist */,
 				84C458F81B073A860066B6A9 /* main.m */,
-				84EF22631B087A3D003DA610 /* ECLog.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -424,6 +422,7 @@
 			baseConfigurationReference = 26A52386135E7399D21E9C48 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = EvCal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -435,6 +434,7 @@
 			baseConfigurationReference = 0CD2922DCA6CD50DC54BED4D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = EvCal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

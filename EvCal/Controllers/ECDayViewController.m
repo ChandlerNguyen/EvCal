@@ -8,8 +8,11 @@
 
 @import EventKit;
 
-#import "ECLog.h"
+// CocoaPods
 #import "NSDate+CupertinoYankee.h"
+#import "CocoaLumberjack.h"
+
+// EvCal Classes
 #import "ECDayViewController.h"
 #import "ECDayView.h"
 #import "ECEventLoader.h"
@@ -65,9 +68,9 @@
 - (void)refreshEvents
 {
     NSArray* events = [[ECEventLoader sharedInstance] loadEventsFrom:[self.displayDate beginningOfDay] to:[self.displayDate endOfDay]];
-    
+
     for (EKEvent* event in events) {
-        ALog(@"Loaded Event: %@", event.title);
+        DDLogInfo(@"Loaded Event: %@", event.title);
     }
 }
 
