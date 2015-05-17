@@ -1,10 +1,20 @@
 PODS:
+  - CocoaLumberjack (2.0.0):
+    - CocoaLumberjack/Default (= 2.0.0)
+    - CocoaLumberjack/Extensions (= 2.0.0)
+  - CocoaLumberjack/Core (2.0.0)
+  - CocoaLumberjack/Default (2.0.0):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.0.0):
+    - CocoaLumberjack/Default
   - CupertinoYankee (1.0.2)
 
 DEPENDENCIES:
+  - CocoaLumberjack
   - CupertinoYankee (~> 1.0.2)
 
 SPEC CHECKSUMS:
+  CocoaLumberjack: a6f77d987d65dc7ba86b0f84db7d0b9084f77bcb
   CupertinoYankee: c288994087c791657fce35a43d2a604e64eef23e
 
 COCOAPODS: 0.37.1

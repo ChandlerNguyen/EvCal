@@ -2,3 +2,4 @@
 # platform :ios, '6.0'
 
 pod 'CupertinoYankee', '~> 1.0.2'
+pod 'CocoaLumberjack'
