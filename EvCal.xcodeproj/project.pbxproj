@@ -13,6 +13,7 @@
 		84C459131B073A860066B6A9 /* EvCalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C459121B073A860066B6A9 /* EvCalTests.m */; };
 		84C4591E1B073DB90066B6A9 /* ECDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C4591D1B073DB90066B6A9 /* ECDayViewController.m */; };
 		84C459221B074BDD0066B6A9 /* ECDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C459211B074BDD0066B6A9 /* ECDayView.m */; };
+		84EF22611B08769A003DA610 /* ECEventLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EF22601B08769A003DA610 /* ECEventLoader.m */; };
 		CC4E4F7120FF97FF238954E4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C545F2A12B052E9FA014F156 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,9 @@
 		84C4591D1B073DB90066B6A9 /* ECDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDayViewController.m; path = Controllers/ECDayViewController.m; sourceTree = "<group>"; };
 		84C459201B074BDD0066B6A9 /* ECDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDayView.h; path = Views/ECDayView.h; sourceTree = "<group>"; };
 		84C459211B074BDD0066B6A9 /* ECDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDayView.m; path = Views/ECDayView.m; sourceTree = "<group>"; };
+		84EF225F1B08769A003DA610 /* ECEventLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEventLoader.h; path = Model/ECEventLoader.h; sourceTree = "<group>"; };
+		84EF22601B08769A003DA610 /* ECEventLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEventLoader.m; path = Model/ECEventLoader.m; sourceTree = "<group>"; };
+		84EF22631B087A3D003DA610 /* ECLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ECLog.h; path = Support/ECLog.h; sourceTree = "<group>"; };
 		C545F2A12B052E9FA014F156 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -90,6 +94,7 @@
 				84C458FA1B073A860066B6A9 /* AppDelegate.h */,
 				84C458FB1B073A860066B6A9 /* AppDelegate.m */,
 				84C459271B074DC20066B6A9 /* Support */,
+				84EF22621B08769E003DA610 /* Model */,
 				84C459231B074BE10066B6A9 /* Views */,
 				84C4591F1B073DBE0066B6A9 /* Controllers */,
 				84C459031B073A860066B6A9 /* Images.xcassets */,
@@ -103,6 +108,7 @@
 			children = (
 				84C458F71B073A860066B6A9 /* Info.plist */,
 				84C458F81B073A860066B6A9 /* main.m */,
+				84EF22631B087A3D003DA610 /* ECLog.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -147,6 +153,15 @@
 			children = (
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		84EF22621B08769E003DA610 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				84EF225F1B08769A003DA610 /* ECEventLoader.h */,
+				84EF22601B08769A003DA610 /* ECEventLoader.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		CD5360421152C667B1D9EB7A /* Frameworks */ = {
@@ -303,6 +318,7 @@
 				84C4591E1B073DB90066B6A9 /* ECDayViewController.m in Sources */,
 				84C458F91B073A860066B6A9 /* main.m in Sources */,
 				84C459221B074BDD0066B6A9 /* ECDayView.m in Sources */,
+				84EF22611B08769A003DA610 /* ECEventLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
