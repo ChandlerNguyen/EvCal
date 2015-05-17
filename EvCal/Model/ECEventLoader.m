@@ -31,12 +31,12 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
         _loader = [[ECEventLoader alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserver:_loader selector:@selector(postCalendarChangedNotification) name:EKEventStoreChangedNotification object:nil];
         DDLogDebug(@"Shared ECEventLoader created");
     });
     
     return _loader;
 }
-
 
 - (EKEventStore*)eventStore
 {
@@ -68,6 +68,20 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     } ;
 }
 
+#pragma mark - Posting notifications
+
+
+- (void)postAuthorizationStatusChangedNotification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:ECEventLoaderAuthorizationStatusChangedNotification object:nil];
+}
+
+- (void)postCalendarChangedNotification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:ECEventLoaderCalendarChangedNotification object:nil];
+}
+
+
 
 #pragma mark - Loading User Events
 
@@ -92,7 +106,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
         case ECAuthorizationStatusAuthorized: {
             NSPredicate* dateRangePredicate = [self.eventStore predicateForEventsWithStartDate:startDate endDate:endDate calendars:calendars];
             NSArray* events = [self.eventStore eventsMatchingPredicate:dateRangePredicate];
-            DDLogDebug(@"Loaded %lul events", (unsigned long)events.count);
+            DDLogDebug(@"Loaded %lu events", (unsigned long)events.count);
             return events;
         }
     }
@@ -112,9 +126,5 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     }];
 }
 
-- (void)postAuthorizationStatusChangedNotification
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:ECEventLoaderAuthorizationStatusChangedNotification object:nil];
-}
 
 @end

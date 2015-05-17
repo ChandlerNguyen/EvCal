@@ -33,6 +33,7 @@
     self.dayView.backgroundColor = [UIColor whiteColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEvents) name:ECEventLoaderAuthorizationStatusChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEvents) name:ECEventLoaderCalendarChangedNotification object:nil];
     [self refreshEvents];
 }
 

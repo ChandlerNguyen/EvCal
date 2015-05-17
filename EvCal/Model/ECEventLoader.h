@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define ECEventLoaderAuthorizationStatusChangedNotification @"AuthorizationStatusChanged"
+#define ECEventLoaderCalendarChangedNotification            @"CalendarChanged"
 
 typedef NS_ENUM(NSUInteger, ECAuthorizationStatus) {
     ECAuthorizationStatusNotDetermined,
