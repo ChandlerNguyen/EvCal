@@ -10,5 +10,6 @@
 
 @interface ECDayViewController : UIViewController
 
+@property (nonatomic, strong) NSDate* displayDate;
 
 @end
