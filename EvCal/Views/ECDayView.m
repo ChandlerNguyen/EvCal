@@ -6,8 +6,12 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
-#import "ECDayView.h"
+// CocoaPods
 #import "NSDate+CupertinoYankee.h"
+
+// EvCal Classes
+#import "ECDayView.h"
+
 
 @implementation ECDayView
 

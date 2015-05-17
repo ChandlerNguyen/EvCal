@@ -10,4 +10,13 @@
 
 @implementation UIView (ECAdditions)
 
+- (UILabel*)addLabel
+{
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
+    
+    [self addSubview:label];
+    
+    return label;
+}
+
 @end

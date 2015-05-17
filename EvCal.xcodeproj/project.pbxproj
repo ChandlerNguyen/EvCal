@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84B2E13E1B08E0A000CD0029 /* UIView+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B2E13D1B08E0A000CD0029 /* UIView+ECAdditions.m */; };
 		84C458F91B073A860066B6A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C458F81B073A860066B6A9 /* main.m */; };
 		84C458FC1B073A860066B6A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C458FB1B073A860066B6A9 /* AppDelegate.m */; };
 		84C459041B073A860066B6A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84C459031B073A860066B6A9 /* Images.xcassets */; };
@@ -14,6 +15,8 @@
 		84C4591E1B073DB90066B6A9 /* ECDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C4591D1B073DB90066B6A9 /* ECDayViewController.m */; };
 		84C459221B074BDD0066B6A9 /* ECDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C459211B074BDD0066B6A9 /* ECDayView.m */; };
 		84EF22611B08769A003DA610 /* ECEventLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EF22601B08769A003DA610 /* ECEventLoader.m */; };
+		84EF22691B08D59E003DA610 /* ECEventViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EF22681B08D59E003DA610 /* ECEventViewFactory.m */; };
+		84EF226C1B08D5BD003DA610 /* ECEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EF226B1B08D5BD003DA610 /* ECEventView.m */; };
 		CC4E4F7120FF97FF238954E4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C545F2A12B052E9FA014F156 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +33,8 @@
 /* Begin PBXFileReference section */
 		0CD2922DCA6CD50DC54BED4D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		26A52386135E7399D21E9C48 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		84B2E13C1B08E0A000CD0029 /* UIView+ECAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+ECAdditions.h"; path = "Support/UIView+ECAdditions.h"; sourceTree = "<group>"; };
+		84B2E13D1B08E0A000CD0029 /* UIView+ECAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+ECAdditions.m"; path = "Support/UIView+ECAdditions.m"; sourceTree = "<group>"; };
 		84C458F31B073A860066B6A9 /* EvCal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvCal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C458F71B073A860066B6A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84C458F81B073A860066B6A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -45,6 +50,10 @@
 		84C459211B074BDD0066B6A9 /* ECDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDayView.m; path = Views/ECDayView.m; sourceTree = "<group>"; };
 		84EF225F1B08769A003DA610 /* ECEventLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEventLoader.h; path = Model/ECEventLoader.h; sourceTree = "<group>"; };
 		84EF22601B08769A003DA610 /* ECEventLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEventLoader.m; path = Model/ECEventLoader.m; sourceTree = "<group>"; };
+		84EF22671B08D59E003DA610 /* ECEventViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEventViewFactory.h; path = Views/ECEventViewFactory.h; sourceTree = "<group>"; };
+		84EF22681B08D59E003DA610 /* ECEventViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEventViewFactory.m; path = Views/ECEventViewFactory.m; sourceTree = "<group>"; };
+		84EF226A1B08D5BD003DA610 /* ECEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEventView.h; path = Views/ECEventView.h; sourceTree = "<group>"; };
+		84EF226B1B08D5BD003DA610 /* ECEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEventView.m; path = Views/ECEventView.m; sourceTree = "<group>"; };
 		C545F2A12B052E9FA014F156 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -142,6 +151,10 @@
 			children = (
 				84C459201B074BDD0066B6A9 /* ECDayView.h */,
 				84C459211B074BDD0066B6A9 /* ECDayView.m */,
+				84EF22671B08D59E003DA610 /* ECEventViewFactory.h */,
+				84EF22681B08D59E003DA610 /* ECEventViewFactory.m */,
+				84EF226A1B08D5BD003DA610 /* ECEventView.h */,
+				84EF226B1B08D5BD003DA610 /* ECEventView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -149,6 +162,8 @@
 		84C459271B074DC20066B6A9 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				84B2E13C1B08E0A000CD0029 /* UIView+ECAdditions.h */,
+				84B2E13D1B08E0A000CD0029 /* UIView+ECAdditions.m */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -314,8 +329,11 @@
 			files = (
 				84C458FC1B073A860066B6A9 /* AppDelegate.m in Sources */,
 				84C4591E1B073DB90066B6A9 /* ECDayViewController.m in Sources */,
+				84B2E13E1B08E0A000CD0029 /* UIView+ECAdditions.m in Sources */,
+				84EF22691B08D59E003DA610 /* ECEventViewFactory.m in Sources */,
 				84C458F91B073A860066B6A9 /* main.m in Sources */,
 				84C459221B074BDD0066B6A9 /* ECDayView.m in Sources */,
+				84EF226C1B08D5BD003DA610 /* ECEventView.m in Sources */,
 				84EF22611B08769A003DA610 /* ECEventLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

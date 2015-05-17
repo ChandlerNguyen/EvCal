@@ -10,4 +10,15 @@
 
 @interface UIView (ECAdditions)
 
+//------------------------------------------------------------------------------
+// @name Adding Views
+//------------------------------------------------------------------------------
+
+/**
+ * Adds a new UILabel to the receiver's subviews
+ *
+ * @return  The label just added to the receiver's subviews
+ */
+- (UILabel*)addLabel;
+
 @end
