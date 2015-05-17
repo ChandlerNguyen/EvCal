@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "CocoaLumberjack.h"
 #import "ECDayviewController.h"
 
 @interface AppDelegate ()
@@ -21,6 +22,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = [[ECDayViewController alloc] init];
     [self.window makeKeyAndVisible];
+    
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
     
     return YES;
 }
