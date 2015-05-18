@@ -6,8 +6,7 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
-#import <CocoaLumberjack/CocoaLumberjack.h>
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+
 
 @import EventKit;
 #import "ECEventLoader.h"
@@ -73,11 +72,13 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 - (void)postAuthorizationStatusChangedNotification
 {
+    DDLogDebug(@"Posting authorization status changed notification");
     [[NSNotificationCenter defaultCenter] postNotificationName:ECEventLoaderAuthorizationStatusChangedNotification object:nil];
 }
 
 - (void)postCalendarChangedNotification
 {
+    DDLogDebug(@"Posting calendar changed notification");
     [[NSNotificationCenter defaultCenter] postNotificationName:ECEventLoaderCalendarChangedNotification object:nil];
 }
 
