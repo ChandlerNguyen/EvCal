@@ -28,7 +28,7 @@
 - (instancetype)initWithEvent:(EKEvent*)event
 {
     self = [super initWithFrame:CGRectZero];
-    if (!self) {
+    if (self) {
         // set event without updating layout
         _event = event;
         [self updateLabelsWithEvent:event];
@@ -49,6 +49,7 @@
 {
     if (!_titleLabel) {
         _titleLabel = [self addLabel];
+        _titleLabel.font = [UIFont systemFontOfSize:11];
     }
     
     return _titleLabel;
@@ -58,6 +59,7 @@
 {
     if (!_locationLabel) {
         _locationLabel = [self addLabel];
+        _locationLabel.font = [UIFont systemFontOfSize:11];
     }
     
     return _locationLabel;
@@ -75,6 +77,8 @@
 
 #pragma mark - Layout
 
+#define LABEL_PADDING   8.0f
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -84,7 +88,13 @@
 
 - (void)layoutLabels
 {
-    // pass
+    CGRect titleLabelFrame = CGRectMake(self.bounds.origin.x + LABEL_PADDING, self.bounds.origin.y + LABEL_PADDING, self.bounds.size.width, (self.bounds.size.height - 3 * LABEL_PADDING) / 2);
+    
+    self.titleLabel.frame = titleLabelFrame;
+    
+    CGRect locationLabelFrame = CGRectMake(titleLabelFrame.origin.x, CGRectGetMaxY(titleLabelFrame) + LABEL_PADDING, titleLabelFrame.size.width, titleLabelFrame.size.height);
+    
+    self.locationLabel.frame = locationLabelFrame;
 }
 
 @end

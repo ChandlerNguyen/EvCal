@@ -16,10 +16,11 @@
 #import "ECDayViewController.h"
 #import "ECDayView.h"
 #import "ECEventLoader.h"
+#import "ECEventViewFactory.h"
 
 @interface ECDayViewController ()
 
-@property (nonatomic, weak) UIView* dayView;
+@property (nonatomic, weak) ECDayView* dayView;
 
 @end
 
@@ -30,16 +31,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.dayView.backgroundColor = [UIColor whiteColor];
+    [self setupDayView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEvents) name:ECEventLoaderAuthorizationStatusChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEvents) name:ECEventLoaderCalendarChangedNotification object:nil];
     [self refreshEvents];
 }
 
-- (UIView*)dayView {
+- (ECDayView*)dayView {
     if (!_dayView) {
-        UIView* dayView = [[ECDayView alloc] initWithFrame:self.view.bounds];
+        ECDayView* dayView = [[ECDayView alloc] initWithFrame:CGRectZero];
         _dayView = dayView;
         [self.view addSubview:_dayView];
     }
@@ -66,6 +67,18 @@
     [self refreshEvents];
 }
 
+#pragma mark - View setup
+
+- (void)setupDayView
+{
+    self.dayView.backgroundColor = [UIColor whiteColor];
+    
+    CGRect dayViewFrame = self.view.bounds;
+    CGSize dayViewContentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 2.5);
+    self.dayView.frame = dayViewFrame;
+    self.dayView.contentSize = dayViewContentSize;
+}
+
 #pragma mark - User Events
 
 - (void)refreshEvents
@@ -75,6 +88,10 @@
     for (EKEvent* event in events) {
         DDLogInfo(@"Loaded Event: %@", event.title);
     }
+    
+    NSArray* eventViews = [ECEventViewFactory eventViewsForEvents:events];
+    
+    [self.dayView addEventViews:eventViews];
 }
 
 
