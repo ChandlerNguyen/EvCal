@@ -60,7 +60,9 @@
 
 - (void)setDisplayDate:(NSDate *)displayDate
 {
+    DDLogDebug(@"Day View display date changed OLD: %@, NEW: %@", _displayDate, displayDate);
     _displayDate = displayDate;
+    
     [self refreshEvents];
 }
 
