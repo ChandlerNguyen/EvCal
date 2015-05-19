@@ -15,7 +15,7 @@
 // EvCal Classes
 #import "ECDayViewController.h"
 #import "ECDayView.h"
-#import "ECEventLoader.h"
+#import "ECEventStoreProxy.h"
 #import "ECEventViewFactory.h"
 
 @interface ECDayViewController ()
@@ -33,8 +33,8 @@
     // Do any additional setup after loading the view.
     [self setupDayView];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEvents) name:ECEventLoaderAuthorizationStatusChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEvents) name:ECEventLoaderCalendarChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEvents) name:ECEventStoreProxyAuthorizationStatusChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEvents) name:ECEventStoreProxyCalendarChangedNotification object:nil];
     [self refreshEvents];
 }
 
@@ -83,7 +83,7 @@
 
 - (void)refreshEvents
 {
-    NSArray* events = [[ECEventLoader sharedInstance] loadEventsFrom:[self.displayDate beginningOfDay] to:[self.displayDate endOfDay]];
+    NSArray* events = [[ECEventStoreProxy sharedInstance] eventsFrom:[self.displayDate beginningOfDay] to:[self.displayDate endOfDay]];
 
     for (EKEvent* event in events) {
         DDLogInfo(@"Loaded Event: %@", event.title);
