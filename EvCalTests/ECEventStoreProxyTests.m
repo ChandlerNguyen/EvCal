@@ -13,6 +13,7 @@
 #import <CocoaLumberjack/CocoaLumberjack.h>
 static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaLumberjack
 #import "NSDate+CupertinoYankee.h"
+#import "NSArray+ECTesting.h"
 
 #import "ECEventStoreProxy.h"
 
@@ -24,15 +25,6 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
 @end
 
 @implementation ECEventStoreProxyTests
-
-- (BOOL)array:(NSArray*)left hasSameElementsAsArray:(NSArray*)right
-{
-    for (id obj in left) {
-        if (![right containsObject:obj]) return NO;
-    }
-    
-    return YES;
-}
 
 - (void)setUp {
     [super setUp];
@@ -70,16 +62,17 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
 
 - (void)testCalendars
 {
-    //
+    // Test calendars are equal
     NSArray* proxyCalendars = self.eventStoreProxy.calendars;
     NSArray* eventKitCalendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
+    XCTAssertTrue([proxyCalendars hasSameElements:eventKitCalendars]);
     
-    XCTAssertTrue([self array:proxyCalendars hasSameElementsAsArray:eventKitCalendars]);
+    // Test default calendar
+    XCTAssertTrue([self.eventStoreProxy.defaultCalendarForNewEvents isEqual:self.eventStore.defaultCalendarForNewEvents]);
     
-    XCTAssertEqual(self.eventStoreProxy.defaultCalendarForNewEvents, self.eventStore.defaultCalendarForNewEvents);
-    
+    // Test using calendar identifiers
     for (EKCalendar* calendar in eventKitCalendars) {
-        XCTAssertEqual([self.eventStoreProxy calendarWithIdentifier:calendar.calendarIdentifier], [self.eventStore calendarWithIdentifier:calendar.calendarIdentifier]);
+        XCTAssertTrue([[self.eventStoreProxy calendarWithIdentifier:calendar.calendarIdentifier] isEqual:[self.eventStore calendarWithIdentifier:calendar.calendarIdentifier]]);
     }
 }
 
@@ -92,12 +85,22 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     NSDate* endOfToday = [today endOfDay];
     // Fetching today's events (all calendars)
     NSPredicate* todayPredicate = [self.eventStore predicateForEventsWithStartDate:beginningOfToday endDate:endOfToday calendars:nil];
-    XCTAssertTrue([self array:[self.eventStoreProxy eventsFrom:beginningOfToday to:endOfToday]
-       hasSameElementsAsArray:[self.eventStore eventsMatchingPredicate:todayPredicate]]);
+    XCTAssertTrue([[self.eventStoreProxy eventsFrom:beginningOfToday to:endOfToday] hasSameElements:[self.eventStore eventsMatchingPredicate:todayPredicate]]);
     
+    // Fetching today's events in a given calendar
     for (EKCalendar* calendar in [self.eventStore calendarsForEntityType:EKEntityTypeEvent]) {
         NSPredicate* pred = [self.eventStore predicateForEventsWithStartDate:beginningOfToday endDate:endOfToday calendars:@[calendar]];
-        XCTAssertTrue([self array:[self.eventStoreProxy eventsFrom:beginningOfToday to:endOfToday] hasSameElementsAsArray:[self.eventStore eventsMatchingPredicate:pred]]);
+        NSArray* proxyEvents = [self.eventStoreProxy eventsFrom:beginningOfToday to:endOfToday in:@[calendar]];
+        NSArray* storeEvents = [self.eventStore eventsMatchingPredicate:pred];
+        
+        // EKEventStore returns nil if no events could be found in the given time span.
+        // Since the proxy attempts to remain true to EKEventStore's behavior it will
+        // also return nil.
+        if (!storeEvents) {
+            XCTAssertNil(proxyEvents);
+        } else {
+            XCTAssertTrue([proxyEvents hasSameElements:storeEvents]);
+        }
     }
 
     
@@ -106,13 +109,14 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     NSDate* endOfYear = [today endOfYear];
     
     NSPredicate* thisYearPredicate = [self.eventStore predicateForEventsWithStartDate:beginningOfYear endDate:endOfYear calendars:nil];
-    XCTAssertTrue([self array:[self.eventStoreProxy eventsFrom:beginningOfYear to:endOfYear]
-       hasSameElementsAsArray:[self.eventStore eventsMatchingPredicate:thisYearPredicate]]);
+    XCTAssertTrue([[self.eventStoreProxy eventsFrom:beginningOfYear to:endOfYear] hasSameElements:[self.eventStore eventsMatchingPredicate:thisYearPredicate]]);
     
     for (EKCalendar* calendar in [self.eventStore calendarsForEntityType:EKEntityTypeEvent]) {
         NSPredicate* pred = [self.eventStore predicateForEventsWithStartDate:beginningOfYear endDate:endOfYear calendars:@[calendar]];
-        XCTAssertTrue([self array:[self.eventStoreProxy eventsFrom:beginningOfYear to:endOfYear in:@[calendar]] hasSameElementsAsArray:[self.eventStore eventsMatchingPredicate:pred]]);
+        XCTAssertTrue([[self.eventStoreProxy eventsFrom:beginningOfYear to:endOfYear in:@[calendar]] hasSameElements:[self.eventStore eventsMatchingPredicate:pred]]);
     }
+    
+    XCTAssertTrue([[self.eventStoreProxy eventsFrom:beginningOfYear to:endOfYear] hasSameElements:[self.eventStoreProxy eventsFrom:beginningOfYear to:endOfYear in:nil]]);
     
     // Fetching events with invalid start and end dates
     XCTAssertNil([self.eventStoreProxy eventsFrom:beginningOfToday to:beginningOfToday]);

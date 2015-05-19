@@ -100,6 +100,24 @@
 }
 
 
+#pragma mark - Calendars
+
+- (NSArray*)calendars
+{
+    return [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
+}
+
+- (EKCalendar*)defaultCalendarForNewEvents
+{
+    return self.eventStore.defaultCalendarForNewEvents;
+}
+
+- (EKCalendar*)calendarWithIdentifier:(NSString *)identifier
+{
+    EKCalendar* calendar = [self.eventStore calendarWithIdentifier:identifier];
+    DDLogDebug(@"Fetched calendar %@", calendar.title);
+    return calendar;
+}
 
 #pragma mark - Loading User Events
 
@@ -122,17 +140,17 @@
 - (BOOL)validateStartDate:(NSDate*)startDate endDate:(NSDate*)endDate
 {
     if (!startDate) {
-        DDLogError(@"Start date is nil");
+        DDLogError(@"Invalid Event Dates: Start date is nil");
         return NO;
     }
     
     if (!endDate) {
-        DDLogError(@"End date is nil");
+        DDLogError(@"Invalid Event Dates: End date is nil");
         return NO;
     }
     
     if ([startDate compare:endDate] != NSOrderedAscending) {
-        DDLogError(@"Start date must be prior to end date");
+        DDLogError(@"Invalid Event Dates: Start date must be prior to end date");
         return NO;
     }
     
@@ -146,12 +164,12 @@
 
 - (NSArray*)eventsFrom:(NSDate *)startDate to:(NSDate *)endDate in:(NSArray *)calendars
 {
-    NSString* calendarString = [self stringForCalendars:calendars];
-    DDLogDebug(@"Fetching events from %@ to %@ in %@", startDate, endDate, calendarString);
-
     if (![self validateStartDate:startDate endDate:endDate]) {
         return nil;
     }
+    
+    NSString* calendarString = [self stringForCalendars:calendars];
+    DDLogDebug(@"Fetching events from %@ to %@ in %@", startDate, endDate, calendarString);
     
     switch (self.authorizationStatus) {
         case ECAuthorizationStatusNotDetermined:
