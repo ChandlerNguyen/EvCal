@@ -63,6 +63,29 @@
     return [calendar dateFromComponents:components];
 }
 
+#pragma mark - 
+
+- (NSDate*)beginningOfHour {
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents* components = [calendar components:(CYCalendarUnitYear | CYCalendarUnitMonth | CYCalendarUnitDay | CYCalendarUnitHour) fromDate:self];
+    
+    return [calendar dateFromComponents:components];
+}
+
+- (NSDate*)endOfHour {
+    return [[self nextHour] dateByAddingTimeInterval:-1];
+}
+
+- (NSDate*)nextHour {
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents* components = [calendar components:(CYCalendarUnitYear | CYCalendarUnitMonth | CYCalendarUnitDay | CYCalendarUnitHour) fromDate:self];
+    components.hour += 1;
+    
+    return [calendar dateFromComponents:components];
+}
+
 #pragma mark -
 
 - (NSDate *)beginningOfDay {

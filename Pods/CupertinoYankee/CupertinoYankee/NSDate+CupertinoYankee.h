@@ -42,6 +42,24 @@
  */
 - (NSDate*)yesterday;
 
+///------------------------------------------------------------------------------
+/// @name Calculating Beginning / End of Hour
+///------------------------------------------------------------------------------
+
+/**
+ *  Returns a new date with the first second of the hour of the receiver
+ */
+- (NSDate*)beginningOfHour;
+
+/**
+ * Returns a new date with the last second of the hour of the receiver
+ */
+- (NSDate*)endOfHour;
+
+/**
+ * Returns a new date with the first second of the hour following the receiver's
+ */
+- (NSDate*)nextHour;
 
 ///-----------------------------------------
 /// @name Calculating Beginning / End of Day
