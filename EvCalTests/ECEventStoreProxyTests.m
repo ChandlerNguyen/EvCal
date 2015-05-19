@@ -129,7 +129,14 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
 
 - (void)testEventCreationAndSynchronization
 {
+    XCTFail(@"Not implemented yet");
     
+    // Test creating events
+    //EKEvent* event = [self.eventStoreProxy createEvent];
+    
+    //XCTAssertNotNil(event);
+    //XCTAssertNil(event.title);
+    //XCTAssertEqual(event.calendar, self.eventStoreProxy.defaultCalendarForNewEvents);
 }
 
 @end
