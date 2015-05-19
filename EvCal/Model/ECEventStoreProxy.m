@@ -1,5 +1,5 @@
 //
-//  ECEventLoader.m
+//  ECEventStoreProxy.m
 //  EvCal
 //
 //  Created by Tom on 5/17/15.
@@ -9,10 +9,10 @@
 
 
 @import EventKit;
-#import "ECEventLoader.h"
+#import "ECEventStoreProxy.h"
 
 
-@interface ECEventLoader()
+@interface ECEventStoreProxy()
 
 @property (nonatomic, readwrite) ECAuthorizationStatus authorizationStatus;
 
@@ -20,18 +20,18 @@
 
 @end
 
-@implementation ECEventLoader
+@implementation ECEventStoreProxy
 
 #pragma mark - Lifecycle and Properties
 
 + (instancetype)sharedInstance
 {
-    __strong static ECEventLoader* _loader = nil;
+    __strong static ECEventStoreProxy* _loader = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        _loader = [[ECEventLoader alloc] init];
+        _loader = [[ECEventStoreProxy alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:_loader selector:@selector(postCalendarChangedNotification) name:EKEventStoreChangedNotification object:nil];
-        DDLogDebug(@"Shared ECEventLoader created");
+        DDLogDebug(@"Shared ECEventStoreProxy created");
     });
     
     return _loader;
@@ -73,13 +73,13 @@
 - (void)postAuthorizationStatusChangedNotification
 {
     DDLogDebug(@"Posting authorization status changed notification");
-    [[NSNotificationCenter defaultCenter] postNotificationName:ECEventLoaderAuthorizationStatusChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ECEventStoreProxyAuthorizationStatusChangedNotification object:nil];
 }
 
 - (void)postCalendarChangedNotification
 {
     DDLogDebug(@"Posting calendar changed notification");
-    [[NSNotificationCenter defaultCenter] postNotificationName:ECEventLoaderCalendarChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ECEventStoreProxyCalendarChangedNotification object:nil];
 }
 
 

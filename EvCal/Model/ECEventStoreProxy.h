@@ -1,5 +1,5 @@
 //
-//  ECEventLoader.h
+//  ECEventStoreProxy.h
 //  EvCal
 //
 //  Created by Tom on 5/17/15.
@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define ECEventLoaderAuthorizationStatusChangedNotification @"AuthorizationStatusChanged"
-#define ECEventLoaderCalendarChangedNotification            @"CalendarChanged"
+#define ECEventStoreProxyAuthorizationStatusChangedNotification @"AuthorizationStatusChanged"
+#define ECEventStoreProxyCalendarChangedNotification            @"CalendarChanged"
 
 typedef NS_ENUM(NSUInteger, ECAuthorizationStatus) {
     ECAuthorizationStatusNotDetermined,
@@ -17,22 +17,31 @@ typedef NS_ENUM(NSUInteger, ECAuthorizationStatus) {
     ECAuthorizationStatusAuthorized,
 };
 
-@interface ECEventLoader : NSObject
+@interface ECEventStoreProxy : NSObject
 
 
 @property (nonatomic, readonly) ECAuthorizationStatus authorizationStatus;
+
+//------------------------------------------------------------------------------
+// @name Calendars
+//------------------------------------------------------------------------------
+
+@property (nonatomic, readonly) NSArray* calendars;
+@property (nonatomic, readonly) EKCalendar* primaryCalendarForNewEvents;
+@property (nonatomic, readonly) EKCalendar* calendarWithIdentifier;
+
 
 //------------------------------------------------------------------------------
 // @name Accessing shared instance
 //------------------------------------------------------------------------------
 
 /**
- *  Returns the shared instance of ECEventLoader
+ *  Returns the shared instance of ECEventStoreProxy
  */
 + (instancetype)sharedInstance;
 
 //------------------------------------------------------------------------------
-// @name Loading User Events
+// @name Accessing User Events
 //------------------------------------------------------------------------------
 
 /**
@@ -42,8 +51,8 @@ typedef NS_ENUM(NSUInteger, ECAuthorizationStatus) {
  *  @param startDate The start date of the range of user events to load.
  *  @param endDate   The end date of the range of user events to load.
  *
- *  @return An array (possibly empty) of EKEvents or nil if user has denied 
- *          calendar access.
+ *  @return An array (possibly empty) of EKEvents or nil on error or if the user 
+ *          has denied calendar access.
  */
 - (NSArray*)loadEventsFrom:(NSDate*)startDate to:(NSDate*)endDate;
 
