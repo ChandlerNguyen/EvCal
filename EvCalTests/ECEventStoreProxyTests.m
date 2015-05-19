@@ -1,19 +1,19 @@
 //
-//  EvCalTests.m
-//  EvCalTests
+//  ECEventStoreProxyTests.m
+//  
 //
-//  Created by Tom on 5/16/15.
-//  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
+//  Created by Tom on 5/19/15.
+//
 //
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-@interface EvCalTests : XCTestCase
+@interface ECEventStoreProxyTests : XCTestCase
 
 @end
 
-@implementation EvCalTests
+@implementation ECEventStoreProxyTests
 
 - (void)setUp {
     [super setUp];
