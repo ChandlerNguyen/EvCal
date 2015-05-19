@@ -27,8 +27,9 @@ typedef NS_ENUM(NSUInteger, ECAuthorizationStatus) {
 //------------------------------------------------------------------------------
 
 @property (nonatomic, readonly) NSArray* calendars;
-@property (nonatomic, readonly) EKCalendar* primaryCalendarForNewEvents;
-@property (nonatomic, readonly) EKCalendar* calendarWithIdentifier;
+@property (nonatomic, readonly) EKCalendar* defaultCalendarForNewEvents;
+
+- (EKCalendar*)calendarWithIdentifier:(NSString*)identifier;
 
 
 //------------------------------------------------------------------------------
@@ -54,7 +55,7 @@ typedef NS_ENUM(NSUInteger, ECAuthorizationStatus) {
  *  @return An array (possibly empty) of EKEvents or nil on error or if the user 
  *          has denied calendar access.
  */
-- (NSArray*)loadEventsFrom:(NSDate*)startDate to:(NSDate*)endDate;
+- (NSArray*)eventsFrom:(NSDate*)startDate to:(NSDate*)endDate;
 
 /**
  *  Creates and returns an array of the user's events in the given calendar which
@@ -68,6 +69,6 @@ typedef NS_ENUM(NSUInteger, ECAuthorizationStatus) {
  *  @return An array (possibly empty) of EKEvents or nil if user had denied 
  *          calendar access.
  */
-- (NSArray*)loadEventsFrom:(NSDate*)startDate to:(NSDate*)endDate in:(NSArray*)calendars;
+- (NSArray*)eventsFrom:(NSDate*)startDate to:(NSDate*)endDate in:(NSArray*)calendars;
 
 @end

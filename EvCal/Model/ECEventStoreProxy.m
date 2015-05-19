@@ -30,11 +30,28 @@
     static dispatch_once_t once;
     dispatch_once(&once, ^{
         _loader = [[ECEventStoreProxy alloc] init];
-        [[NSNotificationCenter defaultCenter] addObserver:_loader selector:@selector(postCalendarChangedNotification) name:EKEventStoreChangedNotification object:nil];
         DDLogDebug(@"Shared ECEventStoreProxy created");
     });
     
     return _loader;
+}
+
+// Clients of the ECEventStoreProxy should only access the shared instance.
+// This init method exists only for testing purposes (to ensure clean state).
+// No behavior guarantees are made if multiple proxies are instantiated.
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postCalendarChangedNotification) name:EKEventStoreChangedNotification object:nil];
+        DDLogDebug(@"Event store proxy is added to event store change observers");
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (EKEventStore*)eventStore
@@ -86,14 +103,56 @@
 
 #pragma mark - Loading User Events
 
-- (NSArray*)loadEventsFrom:(NSDate *)startDate to:(NSDate *)endDate
+- (NSString*)stringForCalendars:(NSArray*)calendars
 {
-    return [self loadEventsFrom:startDate to:endDate in:nil];
+    NSMutableString* calendarString = [[NSMutableString alloc] init];
+    if (!calendars) {
+        [calendarString appendString:@"all calendars"];
+    } else {
+        NSString* separator = @"";
+        for (EKCalendar* calendar in calendars) {
+            [calendarString appendFormat:@"%@%@", separator, calendar.title];
+            separator = @", ";
+        }
+    }
+    
+    return [calendarString copy];
 }
 
-- (NSArray*)loadEventsFrom:(NSDate *)startDate to:(NSDate *)endDate in:(NSArray *)calendars
+- (BOOL)validateStartDate:(NSDate*)startDate endDate:(NSDate*)endDate
 {
-    DDLogDebug(@"Loading events from %@ to %@ in [%@]", startDate, endDate, calendars ? @"all calendars" : calendars);
+    if (!startDate) {
+        DDLogError(@"Start date is nil");
+        return NO;
+    }
+    
+    if (!endDate) {
+        DDLogError(@"End date is nil");
+        return NO;
+    }
+    
+    if ([startDate compare:endDate] != NSOrderedAscending) {
+        DDLogError(@"Start date must be prior to end date");
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (NSArray*)eventsFrom:(NSDate *)startDate to:(NSDate *)endDate
+{
+    return [self eventsFrom:startDate to:endDate in:nil];
+}
+
+- (NSArray*)eventsFrom:(NSDate *)startDate to:(NSDate *)endDate in:(NSArray *)calendars
+{
+    NSString* calendarString = [self stringForCalendars:calendars];
+    DDLogDebug(@"Fetching events from %@ to %@ in %@", startDate, endDate, calendarString);
+
+    if (![self validateStartDate:startDate endDate:endDate]) {
+        return nil;
+    }
+    
     switch (self.authorizationStatus) {
         case ECAuthorizationStatusNotDetermined:
             [self requestAccessToEvents];
