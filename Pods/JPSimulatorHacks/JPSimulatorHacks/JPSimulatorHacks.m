@@ -108,6 +108,13 @@ static NSTimeInterval JPSimulatorHacksTimeout = 15.0f;
                                allowed:YES];
 }
 
++ (BOOL)revokeAccessToCalendar
+{
+    return [self changeAccessToService:JPSimulatorHacksServiceCalendar
+                      bundleIdentifier:[NSBundle mainBundle].bundleIdentifier
+                               allowed:NO];
+}
+
 + (BOOL)grantAccessToCalendarForBundleIdentifier:(NSString *)bundleIdentifier
 {
     return [self changeAccessToService:JPSimulatorHacksServiceCalendar

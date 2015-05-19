@@ -6,5 +6,5 @@ pod 'CupertinoYankee', '~> 1.0.2'
 pod 'CocoaLumberjack'
 
 target :EvCalTests do
-	pod 'JPSimulatorHacks', '~> 1.2.0'
+	pod 'JPSimulatorHacks', '1.2.0'
 end

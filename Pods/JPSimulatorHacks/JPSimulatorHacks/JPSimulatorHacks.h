@@ -43,6 +43,7 @@
 + (BOOL)grantAccessToPhotosForBundleIdentifier:(NSString *)bundleIdentifier;
 
 + (BOOL)grantAccessToCalendar;
++ (BOOL)revokeAccessToCalendar;
 + (BOOL)grantAccessToCalendarForBundleIdentifier:(NSString *)bundleIdentifier;
 
 + (void)setTimeout:(NSTimeInterval)timeout;
