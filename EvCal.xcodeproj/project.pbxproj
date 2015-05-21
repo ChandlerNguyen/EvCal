@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84443EF71B0DE6DB00385E5A /* ECTestsEventQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443EF61B0DE6DB00385E5A /* ECTestsEventQuery.m */; };
+		84443EFC1B0DE8D700385E5A /* ECTestsOneDayEventQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443EFB1B0DE8D700385E5A /* ECTestsOneDayEventQuery.m */; };
 		844989D81B0B62E100DCE38F /* NSArray+ECTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 844989D71B0B62E100DCE38F /* NSArray+ECTesting.m */; };
 		847571FF1B0AFF9B0019E393 /* ECEventStoreProxyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 847571FE1B0AFF9B0019E393 /* ECEventStoreProxyTests.m */; };
 		84B2E13E1B08E0A000CD0029 /* UIView+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B2E13D1B08E0A000CD0029 /* UIView+ECAdditions.m */; };
@@ -36,6 +38,10 @@
 		0CD2922DCA6CD50DC54BED4D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		26A52386135E7399D21E9C48 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		5F3614751A065418C790A255 /* Pods-EvCalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvCalTests/Pods-EvCalTests.release.xcconfig"; sourceTree = "<group>"; };
+		84443EF51B0DE6DB00385E5A /* ECTestsEventQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECTestsEventQuery.h; path = ECFoundrySpecs/ECTestsEventQuery.h; sourceTree = "<group>"; };
+		84443EF61B0DE6DB00385E5A /* ECTestsEventQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECTestsEventQuery.m; path = ECFoundrySpecs/ECTestsEventQuery.m; sourceTree = "<group>"; };
+		84443EFA1B0DE8D700385E5A /* ECTestsOneDayEventQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECTestsOneDayEventQuery.h; sourceTree = "<group>"; };
+		84443EFB1B0DE8D700385E5A /* ECTestsOneDayEventQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECTestsOneDayEventQuery.m; sourceTree = "<group>"; };
 		844989D61B0B62E100DCE38F /* NSArray+ECTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ECTesting.h"; sourceTree = "<group>"; };
 		844989D71B0B62E100DCE38F /* NSArray+ECTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ECTesting.m"; sourceTree = "<group>"; };
 		847571FE1B0AFF9B0019E393 /* ECEventStoreProxyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEventStoreProxyTests.m; sourceTree = "<group>"; };
@@ -85,6 +91,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84443EF81B0DE6DF00385E5A /* Foundry Specs */ = {
+			isa = PBXGroup;
+			children = (
+				84443EF51B0DE6DB00385E5A /* ECTestsEventQuery.h */,
+				84443EF61B0DE6DB00385E5A /* ECTestsEventQuery.m */,
+				84443EFA1B0DE8D700385E5A /* ECTestsOneDayEventQuery.h */,
+				84443EFB1B0DE8D700385E5A /* ECTestsOneDayEventQuery.m */,
+			);
+			name = "Foundry Specs";
+			sourceTree = "<group>";
+		};
+		84443EF91B0DE6E800385E5A /* Test Suites */ = {
+			isa = PBXGroup;
+			children = (
+				844989D61B0B62E100DCE38F /* NSArray+ECTesting.h */,
+				844989D71B0B62E100DCE38F /* NSArray+ECTesting.m */,
+			);
+			name = "Test Suites";
+			sourceTree = "<group>";
+		};
 		847A81651B09B157008F5168 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,8 +169,8 @@
 			children = (
 				847571FE1B0AFF9B0019E393 /* ECEventStoreProxyTests.m */,
 				84C459101B073A860066B6A9 /* Supporting Files */,
-				844989D61B0B62E100DCE38F /* NSArray+ECTesting.h */,
-				844989D71B0B62E100DCE38F /* NSArray+ECTesting.m */,
+				84443EF91B0DE6E800385E5A /* Test Suites */,
+				84443EF81B0DE6DF00385E5A /* Foundry Specs */,
 			);
 			path = EvCalTests;
 			sourceTree = "<group>";
@@ -397,8 +423,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84443EF71B0DE6DB00385E5A /* ECTestsEventQuery.m in Sources */,
 				847571FF1B0AFF9B0019E393 /* ECEventStoreProxyTests.m in Sources */,
 				844989D81B0B62E100DCE38F /* NSArray+ECTesting.m in Sources */,
+				84443EFC1B0DE8D700385E5A /* ECTestsOneDayEventQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
-#import "ECTestsDateRange.h"
+#import "ECTestsEventQuery.h"
 
-@implementation ECTestsDateRange
+@implementation ECTestsEventQuery
 
 @end
