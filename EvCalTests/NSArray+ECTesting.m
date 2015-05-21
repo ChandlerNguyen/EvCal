@@ -10,6 +10,15 @@
 
 @implementation NSArray (ECTesting)
 
++ (BOOL)eventsArray:(NSArray *)left isSameAsArray:(NSArray *)right
+{
+    if (!left && !right) {
+        return YES;
+    } else {
+        return [left hasSameElements:right];
+    }
+}
+
 - (BOOL)hasSameElements:(NSArray *)other
 {
     if (self.count != other.count) {
