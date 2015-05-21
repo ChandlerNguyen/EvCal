@@ -36,6 +36,18 @@
 #define COCOAPODS_VERSION_MINOR_CupertinoYankee 0
 #define COCOAPODS_VERSION_PATCH_CupertinoYankee 2
 
+// Foundry
+#define COCOAPODS_POD_AVAILABLE_Foundry
+#define COCOAPODS_VERSION_MAJOR_Foundry 0
+#define COCOAPODS_VERSION_MINOR_Foundry 1
+#define COCOAPODS_VERSION_PATCH_Foundry 1
+
+// Gizou
+#define COCOAPODS_POD_AVAILABLE_Gizou
+#define COCOAPODS_VERSION_MAJOR_Gizou 0
+#define COCOAPODS_VERSION_MINOR_Gizou 1
+#define COCOAPODS_VERSION_PATCH_Gizou 3
+
 // JPSimulatorHacks
 #define COCOAPODS_POD_AVAILABLE_JPSimulatorHacks
 #define COCOAPODS_VERSION_MAJOR_JPSimulatorHacks 1
