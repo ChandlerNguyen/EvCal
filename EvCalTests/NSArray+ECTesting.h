@@ -6,9 +6,23 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
+@class EKEvent;
 #import <Foundation/Foundation.h>
 
 @interface NSArray (ECTesting)
+
+//------------------------------------------------------------------------------
+// @name Searching test elements from arrays
+//------------------------------------------------------------------------------
+
+/**
+ *  Finds and returns the event with the given identifier.
+ *
+ *  @param identifier THe identifier of the event to be returned.
+ *
+ *  @return The event with the given identifier or nil if it cannot be found.
+ */
+- (EKEvent*)eventWithIdentifier:(NSString*)identifier;
 
 //------------------------------------------------------------------------------
 // @name Comparing Arrays

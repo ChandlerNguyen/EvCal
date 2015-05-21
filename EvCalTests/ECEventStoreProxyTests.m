@@ -74,9 +74,6 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     NSArray* eventKitCalendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
     XCTAssertTrue([proxyCalendars hasSameElements:eventKitCalendars]);
     
-    // Test default calendar
-    XCTAssertTrue([self.eventStoreProxy.defaultCalendarForNewEvents isEqual:self.eventStore.defaultCalendarForNewEvents]);
-    
     // Test using calendar identifiers
     for (EKCalendar* calendar in eventKitCalendars) {
         XCTAssertTrue([[self.eventStoreProxy calendarWithIdentifier:calendar.calendarIdentifier] isEqual:[self.eventStore calendarWithIdentifier:calendar.calendarIdentifier]]);
@@ -127,14 +124,49 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
 
 - (void)testEventCreationAndSynchronization
 {
-    XCTFail(@"Not implemented yet");
+    #warning Remember to erase test events
+    // Test creating single event
+    EKEvent* event = [self.eventStoreProxy createEvent];
     
-    // Test creating events
-    //EKEvent* event = [self.eventStoreProxy createEvent];
+    XCTAssertNotNil(event);
+    XCTAssertNil(event.title);
+    XCTAssertNil(event.startDate);
+    XCTAssertNil(event.endDate);
+    XCTAssertEqual(event.calendar, self.eventStore.defaultCalendarForNewEvents);
     
-    //XCTAssertNotNil(event);
-    //XCTAssertNil(event.title);
-    //XCTAssertEqual(event.calendar, self.eventStoreProxy.defaultCalendarForNewEvents);
+    
+    // Test saving events
+    //  - Valid data * Multiple span rules
+    //  - Multiple updates * Multiple span rules
+    //  - Invalid data * Multiple span rules
+    //      - Nil event
+    //      - No title
+    //      - No start date
+    //      - No end date
+    //      - End date prior to start date
+    //      - No calendar
+    //      - Not created in proxy's event store
+    event.title = @"First Event Title";
+    event.location = @"123 Fake Street";
+    event.startDate = [[NSDate date] beginningOfHour];
+    event.endDate = [event.startDate endOfHour];
+    
+    NSString* identifier = event.eventIdentifier;
+    
+    [self.eventStoreProxy saveEvent:event span:EKSpanThisEvent];
+    NSArray* events = [self.eventStoreProxy eventsFrom:[event.startDate beginningOfDay] to:[event.endDate endOfDay]];
+    
+    XCTAssertNotNil(events);
+    XCTAssertNotNil([events eventWithIdentifier:identifier]);
+    
+    // Test removing events
+    //  - Valid removal * Multiple span rules
+    //  - Invalid removal * Multiple span rules
+    //      - Remove nil
+    //      - Remove fake event
+    //      - Remove event twice
+    
+
 }
 
 @end

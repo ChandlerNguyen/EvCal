@@ -28,8 +28,6 @@ typedef NS_ENUM(NSUInteger, ECAuthorizationStatus) {
 
 // The user's event calendars
 @property (nonatomic, readonly) NSArray* calendars;
-// Default calendar is determined by phone settings
-@property (nonatomic, readonly) EKCalendar* defaultCalendarForNewEvents;
 
 /**
  *  Returns the calendar object with the given identfier. Calendar identifiers
@@ -82,5 +80,51 @@ typedef NS_ENUM(NSUInteger, ECAuthorizationStatus) {
  *          has denied calendar access.
  */
 - (NSArray*)eventsFrom:(NSDate*)startDate to:(NSDate*)endDate in:(NSArray*)calendars;
+
+
+//------------------------------------------------------------------------------
+// @name Creating events
+//------------------------------------------------------------------------------
+
+/**
+ *  Returns a newly created event with its calendar and event store set
+ */
+- (EKEvent*)createEvent;
+
+
+//------------------------------------------------------------------------------
+// @name Updating events
+//------------------------------------------------------------------------------
+
+/**
+ *  Saves changes made to the event or to multiple occurrences of the event.
+ *
+ *  @param event The event to be saved to the permanent store.
+ *  @param span  The span of events to update. Indicates whether only one
+ *               occurrence or all future occurrences of the event should be
+ *               updated.
+ *
+ *  @return YES if the event was successfully saved or NO otherwise.
+ */
+- (BOOL)saveEvent:(EKEvent*)event span:(EKSpan)span;
+
+//------------------------------------------------------------------------------
+// @name Removing events
+//------------------------------------------------------------------------------
+
+/**
+ *  Removes the event from the user's calendar.
+ *
+ *  @param event The event to be removed.
+ *  @param span  The span of events to remove. Indicates whether only one 
+ *               occurrence or all future ouccurrences of the event should be
+ *               removed.
+ *
+ *
+ *  @return YES if the event was successfully removed or NO otherwise.
+ */
+- (BOOL)removeEvent:(EKEvent*)event span:(EKSpan)span;
+
+
 
 @end

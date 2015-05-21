@@ -6,9 +6,21 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
+@import EventKit;
 #import "NSArray+ECTesting.h"
 
 @implementation NSArray (ECTesting)
+
+- (EKEvent*)eventWithIdentifier:(NSString *)identifier
+{
+    for (EKEvent* event in self) {
+        if ([event.eventIdentifier isEqualToString:identifier]) {
+            return event;
+        }
+    }
+    
+    return nil;
+}
 
 + (BOOL)eventsArray:(NSArray *)left isSameAsArray:(NSArray *)right
 {
