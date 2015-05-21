@@ -1,6 +1,6 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/CupertinoYankee" "${PODS_ROOT}/Headers/Public/Foundry" "${PODS_ROOT}/Headers/Public/Gizou" "${PODS_ROOT}/Headers/Public/JPSimulatorHacks"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/CocoaLumberjack" -isystem "${PODS_ROOT}/Headers/Public/CupertinoYankee" -isystem "${PODS_ROOT}/Headers/Public/Foundry" -isystem "${PODS_ROOT}/Headers/Public/Gizou" -isystem "${PODS_ROOT}/Headers/Public/JPSimulatorHacks"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-EvCalTests-CocoaLumberjack" -l"Pods-EvCalTests-CupertinoYankee" -l"Pods-EvCalTests-Foundry" -l"Pods-EvCalTests-Gizou" -l"Pods-EvCalTests-JPSimulatorHacks" -l"sqlite3" -framework "Foundation"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/CupertinoYankee" "${PODS_ROOT}/Headers/Public/JPSimulatorHacks"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/CocoaLumberjack" -isystem "${PODS_ROOT}/Headers/Public/CupertinoYankee" -isystem "${PODS_ROOT}/Headers/Public/JPSimulatorHacks"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-EvCalTests-CocoaLumberjack" -l"Pods-EvCalTests-CupertinoYankee" -l"Pods-EvCalTests-JPSimulatorHacks" -l"sqlite3"
 OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
 PODS_ROOT = ${SRCROOT}/Pods

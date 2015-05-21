@@ -1,5 +1,0 @@
-#import <Foundation/Foundation.h>
-@interface PodsDummy_Pods_EvCalTests_Foundry : NSObject
-@end
-@implementation PodsDummy_Pods_EvCalTests_Foundry
-@end
