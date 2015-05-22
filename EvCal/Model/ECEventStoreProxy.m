@@ -190,6 +190,57 @@
     }
 }
 
+#pragma mark - Creating Events
+
+- (EKEvent*)createEvent
+{
+    EKEvent* event = [EKEvent eventWithEventStore:self.eventStore];
+    event.calendar = self.eventStore.defaultCalendarForNewEvents;
+    
+    return event;
+}
+
+
+#pragma mark - Saving Events
+
+- (BOOL)saveEvent:(EKEvent *)event span:(EKSpan)span
+{
+    if (!event) {
+        DDLogWarn(@"Attempting to save nil event");
+        return NO;
+    }
+    
+    NSError* err;
+    BOOL result = [self.eventStore saveEvent:event span:span commit:YES error:&err];
+    
+    if (!result && err) {
+        DDLogError(@"Failed to save event with error: %@", err);
+    }
+    
+    return result;
+}
+
+
+#pragma mark - Removing Events
+
+- (BOOL)removeEvent:(EKEvent *)event span:(EKSpan)span
+{
+    if (!event) {
+        DDLogWarn(@"Attempting to remove nil event");
+        return NO;
+    }
+    
+    NSError* err;
+    BOOL result = [self.eventStore removeEvent:event span:span commit:YES error:&err];
+    
+    if (!result && err) {
+        DDLogError(@"Failed to remove event with error: %@", err);
+    }
+    
+    return result;
+}
+
+
 #pragma mark - Managing Calendar Access
 
 - (void)requestAccessToEvents
@@ -199,7 +250,7 @@
             DDLogInfo(@"Calendar authorization status changed");
             [self postAuthorizationStatusChangedNotification];
         } else {
-            DDLogError(@"Error requesting calendar authorization: %@, %@", err, err.description);
+            DDLogError(@"Error requesting calendar authorization: %@", err);
         }
     }];
 }

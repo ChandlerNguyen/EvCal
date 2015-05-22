@@ -29,6 +29,8 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
 @property (nonatomic, strong) EKEventStore* eventStore;
 @property (nonatomic, strong) ECEventStoreProxy* eventStoreProxy;
 
+@property (nonatomic, strong) EKCalendar* testCalendar;
+
 @end
 
 @implementation ECEventStoreProxyTests
@@ -39,11 +41,27 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     
     self.eventStore = [[EKEventStore alloc] init];
     self.eventStoreProxy = [[ECEventStoreProxy alloc] init];
+    
+    // Save events to this calendar for easier testing/removal
+    self.testCalendar = [EKCalendar calendarForEntityType:EKEntityTypeEvent eventStore:self.eventStore];
+    
+    EKSource* local = nil;
+    for (EKSource* source in self.eventStore.sources) {
+        if (source.sourceType == EKSourceTypeLocal) {
+            local = source;
+            break;
+        }
+    }
+    self.testCalendar.source = local;
+    self.testCalendar.title = @"Test Calendar";
+    [self.eventStore saveCalendar:self.testCalendar commit:YES error:nil];
 }
 
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+    
+    [self.eventStore removeCalendar:self.testCalendar commit:YES error:nil];
     
     self.eventStore = nil;
     self.eventStoreProxy = nil;
@@ -124,19 +142,20 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
 
 - (void)testEventCreationAndSynchronization
 {
-    #warning Remember to erase test events
+    NSDate* now = [[NSDate date] beginningOfHour]; // Standardized date to avoid timing failures
+    
+    
+    
     // Test creating single event
-    EKEvent* event = [self.eventStoreProxy createEvent];
+    EKEvent* singleEvent = [self.eventStoreProxy createEvent];
     
-    XCTAssertNotNil(event);
-    XCTAssertNil(event.title);
-    XCTAssertNil(event.startDate);
-    XCTAssertNil(event.endDate);
-    XCTAssertEqual(event.calendar, self.eventStore.defaultCalendarForNewEvents);
-    
+    XCTAssertNotNil(singleEvent);
+    XCTAssertNil(singleEvent.title);
+    XCTAssertNil(singleEvent.startDate);
+    XCTAssertNil(singleEvent.endDate);
+    XCTAssertTrue([singleEvent.calendar isEqual:self.eventStore.defaultCalendarForNewEvents]);
     
     // Test saving events
-    //  - Valid data * Multiple span rules
     //  - Multiple updates * Multiple span rules
     //  - Invalid data * Multiple span rules
     //      - Nil event
@@ -146,27 +165,49 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     //      - End date prior to start date
     //      - No calendar
     //      - Not created in proxy's event store
-    event.title = @"First Event Title";
-    event.location = @"123 Fake Street";
-    event.startDate = [[NSDate date] beginningOfHour];
-    event.endDate = [event.startDate endOfHour];
     
-    NSString* identifier = event.eventIdentifier;
+    // Valid data
+    singleEvent.title = @"First Event Title";
+    singleEvent.location = @"123 Fake Street";
+    singleEvent.startDate = now;
+    singleEvent.endDate = [singleEvent.startDate endOfHour];
+    singleEvent.calendar = self.testCalendar;
     
-    [self.eventStoreProxy saveEvent:event span:EKSpanThisEvent];
-    NSArray* events = [self.eventStoreProxy eventsFrom:[event.startDate beginningOfDay] to:[event.endDate endOfDay]];
+    XCTAssert([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]);
+    NSArray* events = [self.eventStoreProxy eventsFrom:[singleEvent.startDate beginningOfDay] to:[singleEvent.endDate endOfDay] in:@[self.testCalendar]];
+    NSString* singleEventID = singleEvent.eventIdentifier;
     
-    XCTAssertNotNil(events);
-    XCTAssertNotNil([events eventWithIdentifier:identifier]);
+    XCTAssert(events.count == 1);
+    XCTAssertNotNil([events eventWithIdentifier:singleEventID]);
+    XCTAssert([self.eventStoreProxy removeEvent:singleEvent span:EKSpanThisEvent]);
+    XCTAssert([self.eventStoreProxy eventsFrom:[singleEvent.startDate beginningOfDay] to:[singleEvent.endDate endOfDay] in:@[self.testCalendar]].count == 0);
+    
+    // Recurring event
+    EKEvent* recurringEvent = [self.eventStoreProxy createEvent];
+    recurringEvent.title = @"Recurring Event Title";
+    recurringEvent.location = @"123 Fake Street";
+    recurringEvent.startDate = now;
+    recurringEvent.endDate = [recurringEvent.startDate endOfHour];
+    recurringEvent.calendar = self.testCalendar;
+    EKRecurrenceRule* weeklyRecurrence = [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:EKRecurrenceFrequencyWeekly
+                                                                                      interval:1
+                                                                                           end:[EKRecurrenceEnd recurrenceEndWithOccurrenceCount:50]];
+    [recurringEvent addRecurrenceRule:weeklyRecurrence];
+    
+    XCTAssert([self.eventStoreProxy saveEvent:recurringEvent span:EKSpanFutureEvents]);
+    XCTAssert([self.eventStoreProxy eventsFrom:[now beginningOfDay] to:[[[now endOfYear]tomorrow] endOfYear] in:@[self.testCalendar]].count == 50);
+    XCTAssert([self.eventStoreProxy removeEvent:recurringEvent span:EKSpanFutureEvents]);
+    XCTAssert([self.eventStoreProxy eventsFrom:[now beginningOfDay] to:[[[now endOfYear]tomorrow] endOfYear] in:@[self.testCalendar]].count == 0);
     
     // Test removing events
-    //  - Valid removal * Multiple span rules
     //  - Invalid removal * Multiple span rules
     //      - Remove nil
     //      - Remove fake event
     //      - Remove event twice
     
-
+    // Fail safe methods to ensure clean test state
+    [self.eventStore removeEvent:singleEvent span:EKSpanThisEvent commit:YES error:nil];
+    [self.eventStore removeEvent:recurringEvent span:EKSpanFutureEvents commit:YES error:nil];
 }
 
 @end
