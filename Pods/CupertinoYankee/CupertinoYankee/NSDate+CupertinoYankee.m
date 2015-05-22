@@ -68,11 +68,12 @@
 - (NSArray*)hoursOfDay
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSRange hours = [calendar rangeOfUnit:NSCalendarUnitHour inUnit:NSCalendarUnitDay forDate:self];
+    NSDate* beginningOfDay = [self beginningOfDay];
+    NSRange hours = [calendar rangeOfUnit:NSCalendarUnitHour inUnit:NSCalendarUnitDay forDate:beginningOfDay];
     
     NSMutableArray* mutableHoursOfDay = [[NSMutableArray alloc] init];
     for (NSInteger i = hours.location; i < hours.location + hours.length; i++) {
-        [mutableHoursOfDay addObject:[calendar dateByAddingUnit:NSCalendarUnitHour value:i toDate:self options:0]];
+        [mutableHoursOfDay addObject:[calendar dateByAddingUnit:NSCalendarUnitHour value:i toDate:beginningOfDay options:0]];
     }
     
     return [mutableHoursOfDay copy];
