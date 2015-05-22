@@ -144,9 +144,7 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
 {
     NSDate* now = [[NSDate date] beginningOfHour]; // Standardized date to avoid timing failures
     
-    
-    
-    // Test creating single event
+    //** CREATING EVENT **//
     EKEvent* singleEvent = [self.eventStoreProxy createEvent];
     
     XCTAssertNotNil(singleEvent);
@@ -155,18 +153,7 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     XCTAssertNil(singleEvent.endDate);
     XCTAssertTrue([singleEvent.calendar isEqual:self.eventStore.defaultCalendarForNewEvents]);
     
-    // Test saving events
-    //  - Multiple updates * Multiple span rules
-    //  - Invalid data * Multiple span rules
-    //      - Nil event
-    //      - No title
-    //      - No start date
-    //      - No end date
-    //      - End date prior to start date
-    //      - No calendar
-    //      - Not created in proxy's event store
-    
-    // Valid data
+    //** VALID DATA **//
     singleEvent.title = @"First Event Title";
     singleEvent.location = @"123 Fake Street";
     singleEvent.startDate = now;
@@ -180,9 +167,10 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     XCTAssert(events.count == 1);
     XCTAssertNotNil([events eventWithIdentifier:singleEventID]);
     XCTAssert([self.eventStoreProxy removeEvent:singleEvent span:EKSpanThisEvent]);
+    XCTAssertFalse([self.eventStoreProxy removeEvent:singleEvent span:EKSpanThisEvent]);
     XCTAssert([self.eventStoreProxy eventsFrom:[singleEvent.startDate beginningOfDay] to:[singleEvent.endDate endOfDay] in:@[self.testCalendar]].count == 0);
     
-    // Recurring event
+
     EKEvent* recurringEvent = [self.eventStoreProxy createEvent];
     recurringEvent.title = @"Recurring Event Title";
     recurringEvent.location = @"123 Fake Street";
@@ -199,11 +187,29 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     XCTAssert([self.eventStoreProxy removeEvent:recurringEvent span:EKSpanFutureEvents]);
     XCTAssert([self.eventStoreProxy eventsFrom:[now beginningOfDay] to:[[[now endOfYear]tomorrow] endOfYear] in:@[self.testCalendar]].count == 0);
     
-    // Test removing events
-    //  - Invalid removal * Multiple span rules
-    //      - Remove nil
-    //      - Remove fake event
-    //      - Remove event twice
+    
+     //** INVALID DATA **//
+    XCTAssertFalse([self.eventStoreProxy saveEvent:nil span:EKSpanThisEvent]); // save nil
+
+    singleEvent.title = nil;
+    XCTAssertFalse([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]); // no title
+    
+    singleEvent.title = @"Single Event Title";
+    singleEvent.startDate = nil;
+    XCTAssertFalse([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]); // no start date
+    
+    singleEvent.startDate = now;
+    singleEvent.endDate = nil;
+    XCTAssertFalse([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]); // no end date
+    
+    singleEvent.endDate = now;
+    singleEvent.startDate = [now endOfHour];
+    XCTAssertFalse([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]); // end date prior to start date
+    
+    singleEvent.startDate = now;
+    singleEvent.endDate = [now endOfHour];
+    singleEvent.calendar = nil;
+    XCTAssertFalse([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]); // no calendar
     
     // Fail safe methods to ensure clean test state
     [self.eventStore removeEvent:singleEvent span:EKSpanThisEvent commit:YES error:nil];
