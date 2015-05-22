@@ -43,6 +43,15 @@
 - (NSDate*)yesterday;
 
 ///------------------------------------------------------------------------------
+/// @name Calculating Hours In A Day
+///------------------------------------------------------------------------------
+
+/**
+ *  Returns an array of date objects with the first second of each hour in the same day as the receiver.
+ */
+- (NSArray*)hoursOfDay;
+
+///------------------------------------------------------------------------------
 /// @name Calculating Beginning / End of Hour
 ///------------------------------------------------------------------------------
 

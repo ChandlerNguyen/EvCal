@@ -15,7 +15,7 @@
 
 @interface ECDayView()
 
-@property (nonatomic, strong) NSMutableArray* eventViews;
+@property (nonatomic, strong, readwrite) NSMutableArray* eventViews;
 
 @end
 
@@ -33,13 +33,20 @@
     return self;
 }
 
-- (NSMutableArray*)eventViews
+- (NSArray*)eventViews
 {
     if (!_eventViews) {
-        _eventViews = [[NSMutableArray alloc] init];
+        _eventViews = [[NSArray alloc] init];
     }
     
     return _eventViews;
+}
+
+- (void)setDisplayDate:(NSDate *)displayDate
+{
+    _displayDate = displayDate;
+    
+    [self setNeedsLayout];
 }
 
 #pragma mark - Layout
@@ -55,11 +62,19 @@
 
 - (void)layoutEventViews
 {
+    NSArray* hours = [self.displayDate hoursOfDay];
+    
     for (int i = 0; i < self.eventViews.count; i++) {
         CGRect eventViewFrame = CGRectMake(self.bounds.origin.x, i * EVENT_VIEW_HEIGHT + [UIApplication sharedApplication].statusBarFrame.size.height, self.bounds.size.width, EVENT_VIEW_HEIGHT);
         
         ECEventView* eventView = self.eventViews[i];
         eventView.frame = eventViewFrame;
+    }
+    
+    NSArray* columns = [[NSArray alloc] init];
+    
+    for (ECEventView* eventView in self.eventViews) {
+        
     }
 }
 
@@ -69,26 +84,49 @@
 - (void)addEventView:(ECEventView *)eventView
 {
     [self addSubview:eventView];
-    [self.eventViews addObject:eventView];
+    
+    NSMutableArray* mutableEventViews = [self.eventViews mutableCopy];
+    [mutableEventViews addObject:eventView];
+    self.eventViews = [mutableEventViews copy];
+    
+    [self setNeedsLayout];
 }
 
 - (void)addEventViews:(NSArray *)eventViews
 {
+    NSMutableArray* mutableEventViews = [self.eventViews mutableCopy];
     for (ECEventView* eventView in eventViews) {
-        [self addEventView:eventView];
+        [self addSubview:eventView];
+        [mutableEventViews addObject:eventView];
     }
+    
+    self.eventViews = [mutableEventViews copy];
+    
+    [self setNeedsLayout];
 }
 
 - (void)removeEventView:(ECEventView *)eventView
 {
-    [self.eventViews removeObject:eventView];
+    NSMutableArray* mutableEventViews = [self.eventViews mutableCopy];
+    [mutableEventViews removeObject:eventView];
+    self.eventViews = [mutableEventViews copy];
     [eventView removeFromSuperview];
+    
+    [self setNeedsLayout];
 }
 
 - (void)removeEventViews:(NSArray *)eventViews
 {
     for (ECEventView* eventView in eventViews) {
-        [self removeEventView:eventView];
+        [eventView removeFromSuperview];
     }
+    self.eventViews = nil;
+    
+    [self setNeedsLayout];
+}
+
+- (void)clearEventViews
+{
+    [self removeEventViews:self.eventViews];
 }
 @end

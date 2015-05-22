@@ -63,6 +63,21 @@
     return [calendar dateFromComponents:components];
 }
 
+#pragma mark -
+
+- (NSArray*)hoursOfDay
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSRange hours = [calendar rangeOfUnit:NSCalendarUnitHour inUnit:NSCalendarUnitDay forDate:self];
+    
+    NSMutableArray* mutableHoursOfDay = [[NSMutableArray alloc] init];
+    for (NSInteger i = hours.location; i < hours.location + hours.length; i++) {
+        [mutableHoursOfDay addObject:[calendar dateByAddingUnit:NSCalendarUnitHour value:i toDate:self options:0]];
+    }
+    
+    return [mutableHoursOfDay copy];
+}
+
 #pragma mark - 
 
 - (NSDate*)beginningOfHour {

@@ -42,6 +42,7 @@
     if (!_dayView) {
         ECDayView* dayView = [[ECDayView alloc] initWithFrame:CGRectZero];
         _dayView = dayView;
+        dayView.displayDate = self.displayDate;
         [self.view addSubview:_dayView];
     }
     
@@ -53,7 +54,7 @@
 - (NSDate*)displayDate
 {
     if (!_displayDate) {
-        _displayDate = [NSDate date];
+        _displayDate = [[NSDate date] beginningOfDay];
     }
     
     return _displayDate;

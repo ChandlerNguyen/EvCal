@@ -8,6 +8,7 @@
 
 // iOS Modules
 @import EventKit;
+@import QuartzCore;
 
 // EvCal Classes
 #import "ECEventView.h"
@@ -29,9 +30,10 @@
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
-        // set event without updating layout
-        _event = event;
-        [self updateLabelsWithEvent:event];
+        [self setEvent:event animated:NO];
+        self.layer.cornerRadius = 5.0;
+        self.layer.borderColor = [UIColor blackColor].CGColor;
+        self.layer.borderWidth = 1.0;
     }
     
     return self;
@@ -41,6 +43,7 @@
 {
     _event = event;
     
+    self.backgroundColor = [UIColor colorWithCGColor:event.calendar.CGColor];
     [self updateLabelsWithEvent:event];
     [self setNeedsLayout];
 }
