@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		84443EFF1B0DEBF900385E5A /* NSDate+ECTestAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443EFE1B0DEBF900385E5A /* NSDate+ECTestAdditions.m */; };
 		84443F021B0DFDF300385E5A /* ECTestsEventQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443F011B0DFDF300385E5A /* ECTestsEventQuery.m */; };
+		84443F0D1B1076B300385E5A /* ECDayViewLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443F0C1B1076B300385E5A /* ECDayViewLayoutTests.m */; };
+		84443F101B10794700385E5A /* ECTestsEventFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443F0F1B10794700385E5A /* ECTestsEventFactory.m */; };
 		844989D81B0B62E100DCE38F /* NSArray+ECTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 844989D71B0B62E100DCE38F /* NSArray+ECTesting.m */; };
 		847571FF1B0AFF9B0019E393 /* ECEventStoreProxyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 847571FE1B0AFF9B0019E393 /* ECEventStoreProxyTests.m */; };
 		84B2E13E1B08E0A000CD0029 /* UIView+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B2E13D1B08E0A000CD0029 /* UIView+ECAdditions.m */; };
@@ -42,6 +44,9 @@
 		84443EFE1B0DEBF900385E5A /* NSDate+ECTestAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+ECTestAdditions.m"; path = "Support/NSDate+ECTestAdditions.m"; sourceTree = "<group>"; };
 		84443F001B0DFDF300385E5A /* ECTestsEventQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECTestsEventQuery.h; path = Classes/ECTestsEventQuery.h; sourceTree = "<group>"; };
 		84443F011B0DFDF300385E5A /* ECTestsEventQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECTestsEventQuery.m; path = Classes/ECTestsEventQuery.m; sourceTree = "<group>"; };
+		84443F0C1B1076B300385E5A /* ECDayViewLayoutTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDayViewLayoutTests.m; sourceTree = "<group>"; };
+		84443F0E1B10794700385E5A /* ECTestsEventFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECTestsEventFactory.h; path = Classes/ECTestsEventFactory.h; sourceTree = "<group>"; };
+		84443F0F1B10794700385E5A /* ECTestsEventFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECTestsEventFactory.m; path = Classes/ECTestsEventFactory.m; sourceTree = "<group>"; };
 		844989D61B0B62E100DCE38F /* NSArray+ECTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ECTesting.h"; sourceTree = "<group>"; };
 		844989D71B0B62E100DCE38F /* NSArray+ECTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ECTesting.m"; sourceTree = "<group>"; };
 		847571FE1B0AFF9B0019E393 /* ECEventStoreProxyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEventStoreProxyTests.m; sourceTree = "<group>"; };
@@ -96,6 +101,8 @@
 			children = (
 				84443F001B0DFDF300385E5A /* ECTestsEventQuery.h */,
 				84443F011B0DFDF300385E5A /* ECTestsEventQuery.m */,
+				84443F0E1B10794700385E5A /* ECTestsEventFactory.h */,
+				84443F0F1B10794700385E5A /* ECTestsEventFactory.m */,
 			);
 			name = "Test Objects";
 			sourceTree = "<group>";
@@ -103,6 +110,7 @@
 		84443EF91B0DE6E800385E5A /* Test Suites */ = {
 			isa = PBXGroup;
 			children = (
+				84443F0C1B1076B300385E5A /* ECDayViewLayoutTests.m */,
 				847571FE1B0AFF9B0019E393 /* ECEventStoreProxyTests.m */,
 			);
 			name = "Test Suites";
@@ -424,9 +432,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				84443EFF1B0DEBF900385E5A /* NSDate+ECTestAdditions.m in Sources */,
+				84443F0D1B1076B300385E5A /* ECDayViewLayoutTests.m in Sources */,
 				84443F021B0DFDF300385E5A /* ECTestsEventQuery.m in Sources */,
 				847571FF1B0AFF9B0019E393 /* ECEventStoreProxyTests.m in Sources */,
 				844989D81B0B62E100DCE38F /* NSArray+ECTesting.m in Sources */,
+				84443F101B10794700385E5A /* ECTestsEventFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
