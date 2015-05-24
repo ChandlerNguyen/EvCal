@@ -69,6 +69,19 @@
 }
 
 
+#pragma mark - Comparing Event Views
+
+- (NSComparisonResult)compare:(ECEventView *)other
+{
+    NSComparisonResult result = [self.event compareStartDateWithEvent:other.event];
+    if (result == NSOrderedSame) {
+        return [self.event.endDate compare:other.event.endDate];
+    } else {
+        return result;
+    }
+}
+
+
 #pragma mark - Event Labels
 
 - (void)updateLabelsWithEvent:(EKEvent*)event

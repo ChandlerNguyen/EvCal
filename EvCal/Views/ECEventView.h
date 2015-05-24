@@ -32,4 +32,26 @@
  */
 - (instancetype)initWithEvent:(EKEvent*)event;
 
+
+//------------------------------------------------------------------------------
+// @name Comparing Event Views
+//------------------------------------------------------------------------------
+
+/**
+ *  Compares the receiver to another event view first using their start dates
+ *  and then their end dates.
+ *
+ *  @param other The other event view to compare against
+ *
+ *  @return NSOrderedAscending - if the receiver's start date is prior to the
+ *          operands or the start dates are identical and the receiver's end 
+ *          date is prior to the other event view's.
+ *          NSOrderedDescending - if the receiver's start date is after the
+ *          other event view's or the start dates are identical and the
+ *          receiver's end date is after the other event view's.
+ *          NSOrderedSame - if the start and end dates of the receiver and
+ *          other event view are identical.
+ */
+- (NSComparisonResult)compare:(ECEventView*)other;
+
 @end
