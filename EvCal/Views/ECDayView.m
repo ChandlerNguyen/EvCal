@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
+// iOS Frameworks
+@import EventKit;
+
 // CocoaPods
 #import "NSDate+CupertinoYankee.h"
 
@@ -62,8 +65,7 @@
 
 - (void)layoutEventViews
 {
-    NSArray* hours = [self.displayDate hoursOfDay];
-    
+    // simple layout method
     for (int i = 0; i < self.eventViews.count; i++) {
         CGRect eventViewFrame = CGRectMake(self.bounds.origin.x, i * EVENT_VIEW_HEIGHT + [UIApplication sharedApplication].statusBarFrame.size.height, self.bounds.size.width, EVENT_VIEW_HEIGHT);
         
@@ -71,10 +73,33 @@
         eventView.frame = eventViewFrame;
     }
     
-    NSArray* columns = [[NSArray alloc] init];
+    CGFloat width = self.bounds.size.width;
+    NSDate* lastEndDate = nil;
+    
+    NSArray* hours = [self.displayDate hoursOfDay];
+    
+    self.eventViews = [self.eventViews sortedArrayUsingSelector:@selector(compare:)];
+    
+    NSMutableArray* columns = [[NSMutableArray alloc] init];
     
     for (ECEventView* eventView in self.eventViews) {
-        
+        if (lastEndDate && [eventView.event.startDate compare:lastEndDate] == NSOrderedAscending) {
+            [self layoutColumns:columns];
+            columns = [@[] mutableCopy];
+            lastEndDate = nil;
+            
+        }
+    }
+}
+
+- (void)layoutColumns:(NSArray*)columns
+{
+    NSInteger numGroups = columns.count;
+    for (NSInteger i = 0; i < numGroups; i++) {
+        NSArray* column = columns[i];
+        for (NSInteger j = 0; j < column.count; j++) {
+            
+        }
     }
 }
 
@@ -83,46 +108,69 @@
 
 - (void)addEventView:(ECEventView *)eventView
 {
-    [self addSubview:eventView];
-    
-    NSMutableArray* mutableEventViews = [self.eventViews mutableCopy];
-    [mutableEventViews addObject:eventView];
-    self.eventViews = [mutableEventViews copy];
-    
-    [self setNeedsLayout];
+    if (eventView) {
+        [self addSubview:eventView];
+        
+        NSMutableArray* mutableEventViews = [self.eventViews mutableCopy];
+        [mutableEventViews addObject:eventView];
+        self.eventViews = [mutableEventViews copy];
+        
+        [self setNeedsLayout];
+    } else {
+        DDLogWarn(@"Adding nil event view to ECDayView");
+    }
 }
 
 - (void)addEventViews:(NSArray *)eventViews
 {
     NSMutableArray* mutableEventViews = [self.eventViews mutableCopy];
-    for (ECEventView* eventView in eventViews) {
-        [self addSubview:eventView];
-        [mutableEventViews addObject:eventView];
+    if (eventViews) {
+        for (ECEventView* eventView in eventViews) {
+            [self addSubview:eventView];
+            [mutableEventViews addObject:eventView];
+        }
+        
+        self.eventViews = [mutableEventViews copy];
+        
+        [self setNeedsLayout];
+    } else {
+        DDLogWarn(@"Adding nil array of event views to ECDayView");
     }
-    
-    self.eventViews = [mutableEventViews copy];
-    
-    [self setNeedsLayout];
 }
 
 - (void)removeEventView:(ECEventView *)eventView
 {
-    NSMutableArray* mutableEventViews = [self.eventViews mutableCopy];
-    [mutableEventViews removeObject:eventView];
-    self.eventViews = [mutableEventViews copy];
-    [eventView removeFromSuperview];
-    
-    [self setNeedsLayout];
+    if (eventView) {
+        NSMutableArray* mutableEventViews = [self.eventViews mutableCopy];
+        [mutableEventViews removeObject:eventView];
+        self.eventViews = [mutableEventViews copy];
+        [eventView removeFromSuperview];
+        
+        [self setNeedsLayout];
+    } else {
+        DDLogWarn(@"Removing nil event view from ECDayView");
+    }
 }
 
 - (void)removeEventViews:(NSArray *)eventViews
 {
-    for (ECEventView* eventView in eventViews) {
-        [eventView removeFromSuperview];
+    if (eventViews) {
+        NSMutableIndexSet* victims = [NSMutableIndexSet indexSet];
+        for (ECEventView* eventView in eventViews) {
+            [eventView removeFromSuperview];
+            NSUInteger eventViewIndex = [self.eventViews indexOfObject:eventView];
+            
+            if (eventViewIndex != NSNotFound)
+                [victims addIndex:eventViewIndex];
+        }
+        NSMutableArray* mutableEventViews = [self.eventViews mutableCopy];
+        [mutableEventViews removeObjectsAtIndexes:victims];
+        self.eventViews = [mutableEventViews copy];
+        
+        [self setNeedsLayout];
+    } else {
+        DDLogWarn(@"Removing nil array of event views from ECDayView");
     }
-    self.eventViews = nil;
-    
-    [self setNeedsLayout];
 }
 
 - (void)clearEventViews
