@@ -156,10 +156,34 @@
     return (float)[end timeIntervalSinceDate:start] / 3600.0f;
 }
 
+- (CGFloat)verticalPositionInRect:(CGRect)rect forDate:(NSDate *)date
+{
+    NSDate* beginningOfDay = [date beginningOfDay];
+    if ([self.event.startDate compare:beginningOfDay] == NSOrderedAscending) {
+        return rect.origin.y;
+    }
+    
+    NSDate* endOfDay = [date endOfDay];
+    if ([self.event.startDate compare:endOfDay] == NSOrderedDescending) {
+        return CGRectGetMaxY(rect);
+    }
+    
+    CGFloat position = rect.origin.y;
+    if (rect.size.height > 0) {
+        
+        NSArray* hours = [date hoursOfDay];
+        
+        float hoursAfterBeginningOfDay = ([self.event.startDate timeIntervalSinceDate:beginningOfDay] / (60 * 60));
+        
+        position += (rect.size.height / hours.count) * hoursAfterBeginningOfDay;
+    }
+    
+    return position;
+}
+
 - (NSDate*)closestDatePrecedingDate:(NSDate*)date inDates:(NSArray*)dates
 {
     NSArray* sortedDates = [dates sortedArrayUsingSelector:@selector(compare:)];
-    NSDate* previousDate = nil;
     for (NSDate* otherDate in sortedDates) {
         NSComparisonResult result = [date compare:otherDate];
         
@@ -172,14 +196,13 @@
                 break;
                 
             case NSOrderedDescending:
-                break;
-                
-            default:
+                return otherDate;
                 break;
         }
     }
     
-    return previousDate;
+    DDLogError(@"Unable to determine which hour precedes the start date of an event while determining event view layout");
+    return nil;
 }
 
 

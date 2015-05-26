@@ -86,8 +86,9 @@
  *              vertical position.
  *
  *  @return The absolute vertical position of the event view within the given
- *          rect.
+ *          rect or the maximum y value of the rect if the view's event starts
+ *          after the given date.
  */
-- (CGFloat)positionInRect:(CGRect)rect forDate:(NSDate*)date;
+- (CGFloat)verticalPositionInRect:(CGRect)rect forDate:(NSDate*)date;
 
 @end

@@ -19,6 +19,7 @@
 @interface ECDayView()
 
 @property (nonatomic, strong, readwrite) NSMutableArray* eventViews;
+@property (nonatomic, strong) NSMutableDictionary* eventViewFrames;
 
 @end
 
@@ -66,12 +67,12 @@
 - (void)layoutEventViews
 {
     // simple layout method
-    for (int i = 0; i < self.eventViews.count; i++) {
-        CGRect eventViewFrame = CGRectMake(self.bounds.origin.x, i * EVENT_VIEW_HEIGHT + [UIApplication sharedApplication].statusBarFrame.size.height, self.bounds.size.width, EVENT_VIEW_HEIGHT);
-        
-        ECEventView* eventView = self.eventViews[i];
-        eventView.frame = eventViewFrame;
-    }
+//    for (int i = 0; i < self.eventViews.count; i++) {
+//        CGRect eventViewFrame = CGRectMake(self.bounds.origin.x, i * EVENT_VIEW_HEIGHT + [UIApplication sharedApplication].statusBarFrame.size.height, self.bounds.size.width, EVENT_VIEW_HEIGHT);
+//        
+//        ECEventView* eventView = self.eventViews[i];
+//        eventView.frame = eventViewFrame;
+//    }
     
     CGFloat width = self.bounds.size.width;
     NSDate* lastEndDate = nil;
@@ -115,11 +116,20 @@
 
 - (void)layoutColumns:(NSArray*)columns width:(CGFloat)width displayedHours:(NSArray*)hours
 {
+    CGRect contentRect = CGRectMake(self.bounds.origin.x,
+                                    self.bounds.origin.y - self.contentOffset.y,
+                                    self.contentSize.width,
+                                    self.contentSize.height);
     NSInteger numGroups = columns.count;
     for (NSInteger i = 0; i < numGroups; i++) {
         NSArray* column = columns[i];
         for (NSInteger j = 0; j < column.count; j++) {
-            
+            ECEventView* eventView = column[j];
+            CGRect eventViewFrame = CGRectMake(self.bounds.origin.x + i * floorf(self.contentSize.width / numGroups),
+                                               [eventView verticalPositionInRect:contentRect forDate:self.displayDate],
+                                               floorf(self.bounds.size.width / numGroups),
+                                               [eventView heightInRect:contentRect forDate:self.displayDate]);
+            eventView.frame = eventViewFrame;
         }
     }
 }
