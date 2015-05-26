@@ -85,6 +85,7 @@
 
 #pragma mark - Tests
 
+#pragma mark Height
 - (void)testEventViewHeightForCGRectZero
 {
     NSDate* startDate = [[NSDate date] beginningOfDay];
@@ -126,5 +127,62 @@
     
     XCTAssertEqualWithAccuracy([eventView heightInRect:self.testFrame forDate:startDate], self.testFrame.size.height, 1);
 }
+
+#pragma mark Position
+
+- (void)testEventViewPositionForCGRectZeroIsZero
+{
+    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate];
+    
+    XCTAssert([eventView verticalPositionInRect:self.testFrame forDate:startDate] == 0);
+}
+
+- (void)testEventViewPositionForDateAtStartOfDay
+{
+    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate];
+    
+    XCTAssert([eventView verticalPositionInRect:self.testFrame forDate:startDate] == 0);
+}
+
+- (void)testEventViewPositionForDateLaterInDay
+{
+    NSDate* startDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:[[NSDate date] beginningOfDay] options:0];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate];
+    
+    XCTAssertEqualWithAccuracy([eventView verticalPositionInRect:self.testFrame forDate:startDate], self.testFrame.origin.y + self.testFrame.size.height / 24, 1);
+}
+
+- (void)testEventViewPositionForRectWithNonZeroOrigin
+{
+    self.testFrame = CGRectMake(0, 100, self.testFrame.size.width, self.testFrame.size.height);
+    
+    NSDate* startDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:[[NSDate date] beginningOfDay] options:0];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate];
+    
+    XCTAssertEqualWithAccuracy([eventView verticalPositionInRect:self.testFrame forDate:startDate], self.testFrame.origin.y + self.testFrame.size.height / 24, 1);
+}
+
+- (void)testEventViewPositionForStartDateBeforeDay
+{
+    NSDate* startDate = [[[NSDate date] yesterday] beginningOfDay];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate];
+    
+    XCTAssert([eventView verticalPositionInRect:self.testFrame forDate:[startDate tomorrow]] == 0);
+}
+
+
+
 
 @end
