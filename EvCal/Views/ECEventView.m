@@ -10,6 +10,9 @@
 @import EventKit;
 @import QuartzCore;
 
+// Helpers
+#import "NSDate+CupertinoYankee.h"
+
 // EvCal Classes
 #import "ECEventView.h"
 #import "UIView+ECAdditions.h"
@@ -111,6 +114,46 @@
     CGRect locationLabelFrame = CGRectMake(titleLabelFrame.origin.x, CGRectGetMaxY(titleLabelFrame) + LABEL_PADDING, titleLabelFrame.size.width, titleLabelFrame.size.height);
     
     self.locationLabel.frame = locationLabelFrame;
+}
+
+
+#pragma mark Height and Positioning
+
+- (CGFloat)heightInRect:(CGRect)rect forDate:(NSDate *)date
+{
+    CGFloat height = 0;
+    
+    if (rect.size.height > 0) {
+        NSArray* hours = [date hoursOfDay];
+        float eventHoursInDay = [self eventHoursInDate:date];
+        
+        height = floorf(rect.size.height * (eventHoursInDay / hours.count));
+    }
+    
+    return height;
+}
+
+- (float)eventHoursInDate:(NSDate*)date
+{
+    NSDate* beginningOfDay = [date beginningOfDay];
+    NSDate* endOfDay = [date endOfDay];
+    
+    NSDate* start = nil;
+    NSDate* end = nil;
+    
+    if ([self.event.startDate compare:beginningOfDay] == NSOrderedAscending) { // event starts before the given day
+        start = beginningOfDay;
+    } else {
+        start = self.event.startDate;
+    }
+    
+    if ([self.event.endDate compare:endOfDay] == NSOrderedDescending) { // event begins after the given day
+        end = endOfDay;
+    } else {
+        end = self.event.endDate;
+    }
+    
+    return (float)[end timeIntervalSinceDate:start] / 3600.0f;
 }
 
 - (NSDate*)closestDatePrecedingDate:(NSDate*)date inDates:(NSArray*)dates

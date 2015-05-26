@@ -26,7 +26,7 @@
 @property (nonatomic, strong) ECDayView* dayView;
 @property (nonatomic, strong) EKEventStore* eventStore;
 @property (nonatomic, strong) EKCalendar* testCalendar;
-@property (nonatomic, strong) NSDate* currentTestStartDate;
+@property (nonatomic) CGRect testFrame;
 
 @end
 
@@ -36,8 +36,6 @@
 
 - (void)setUp {
     [super setUp];
-
-    self.currentTestStartDate = [NSDate date];
     
     self.dayView = [[ECDayView alloc] initWithFrame:CGRectZero];
     self.eventStore = [[EKEventStore alloc] init];
@@ -52,9 +50,12 @@
             break;
         }
     }
+    
     self.testCalendar.source = local;
     self.testCalendar.title = @"Test Calendar";
     [self.eventStore saveCalendar:self.testCalendar commit:YES error:nil];
+    
+    self.testFrame = CGRectMake(0, 0, 1, 2400);
 }
 
 - (void)tearDown {
@@ -70,69 +71,60 @@
 
 #pragma mark - Helpers
 
-- (ECEventView*)createSingleEventView
+- (ECEventView*)createEventViewWithStartDate:(NSDate*)startDate endDate:(NSDate*)endDate
 {
     EKEvent* event = [EKEvent eventWithEventStore:self.eventStore];
     event.title = @"Test Event View Creation";
     event.location = @"Simulator/iOS Device";
-    event.startDate = [self.currentTestStartDate beginningOfDay];
-    event.endDate = [event.startDate endOfDay];
+    event.startDate = startDate;
+    event.endDate = endDate;
     event.calendar = self.testCalendar;
     
     return [[ECEventView alloc] initWithEvent:event];
-}
-
-- (NSArray*)createMultipleEventViews:(NSInteger)count
-{
-    if (count > 0) {
-        NSMutableArray* eventViews = [[NSMutableArray alloc] init];
-        for (NSInteger i = 0; i < count; i++) {
-            [eventViews addObject:[[ECEventView alloc] initWithEvent:[ECTestsEventFactory randomEventInDay:self.currentTestStartDate
-                                                                                                     store:self.eventStore
-                                                                                                  calendar:self.testCalendar
-                                                                                         allowMultipleDays:YES]]];
-        }
-        return [eventViews copy];
-    } else {
-        return @[];
-    }
 }
 
 #pragma mark - Tests
 
 - (void)testEventViewHeightForCGRectZero
 {
-    XCTFail(@"Not Implemented");
+    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate];
+    
+    XCTAssert([eventView heightInRect:CGRectZero forDate:startDate] == 0);
 }
 
-- (void)testEventViewHeightForEventWithin24HourDay
+- (void)testEventViewHeightForEventWithinDay
 {
-    XCTFail(@"Not Implemented");
-}
-
-- (void)testEventViewHeightForEventWtihinDaylightSavingsDay
-{
-    XCTFail(@"Not Implemented");
+    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate];
+    
+    XCTAssert([eventView heightInRect:self.testFrame forDate:startDate] == self.testFrame.size.height / 24);
 }
 
 - (void)testEventViewHeightForEventWithStartDateInPreviousDay
 {
-    XCTFail(@"Not Implemented");
+    // Start date is the the beginning of the previous day and end date is one
+    // hour into the day
+    NSDate* startDate = [[[NSDate date] yesterday] beginningOfDay];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:[[startDate tomorrow] beginningOfDay] options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate];
+    
+    XCTAssertEqualWithAccuracy([eventView heightInRect:self.testFrame forDate:endDate], self.testFrame.size.height / 24, 1);
 }
 
 - (void)testEventViewHeightForEventWithEndDateInFollowingDay
 {
-    XCTFail(@"Not Implemented");
-}
-
-- (void)testEventViewHeightForEventThatSpansEntireDay
-{
-    XCTFail(@"Not Implemented");
-}
-
-- (void)testEventViewHeightForEventThatSpansMultipleDays
-{
-    XCTFail(@"Not Implemented");
+    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:2 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate];
+    
+    XCTAssertEqualWithAccuracy([eventView heightInRect:self.testFrame forDate:startDate], self.testFrame.size.height, 1);
 }
 
 @end
