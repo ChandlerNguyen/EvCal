@@ -32,6 +32,8 @@
 
 @implementation ECDayViewLayoutTests
 
+#pragma mark - Setup & Teardown
+
 - (void)setUp {
     [super setUp];
 
@@ -65,6 +67,9 @@
     self.eventStore = nil;
 }
 
+
+#pragma mark - Helpers
+
 - (ECEventView*)createSingleEventView
 {
     EKEvent* event = [EKEvent eventWithEventStore:self.eventStore];
@@ -93,158 +98,41 @@
     }
 }
 
-- (void)testEventViewCreation
+#pragma mark - Tests
+
+- (void)testEventViewHeightForCGRectZero
 {
-    ECEventView* eventView = [self createSingleEventView];
-    
-    XCTAssertNotNil(eventView);
-    XCTAssertTrue(CGRectEqualToRect(eventView.frame, CGRectZero));
-    XCTAssertTrue([eventView.event.title isEqualToString:@"Test Event View Creation"]);
-    XCTAssertTrue([eventView.event.location isEqualToString:@"Simulator/iOS Device"]);
-    XCTAssertTrue([eventView.event.startDate isEqualToDate:[self.currentTestStartDate beginningOfDay]]);
-    XCTAssertTrue([eventView.event.endDate isEqualToDate:[self.currentTestStartDate endOfDay]]);
-    XCTAssertTrue([eventView.backgroundColor isEqual:[UIColor colorWithCGColor:eventView.event.calendar.CGColor]]);
+    XCTFail(@"Not Implemented");
 }
 
-- (void)testAddingNilAndEmptyEvents
+- (void)testEventViewHeightForEventWithin24HourDay
 {
-    [self.dayView addEventView:nil];
-    XCTAssert(self.dayView.eventViews.count == 0);
-    
-    [self.dayView addEventViews:nil];
-    XCTAssert(self.dayView.eventViews.count == 0);
-    
-    [self.dayView addEventViews:@[]];
-    XCTAssert(self.dayView.eventViews.count == 0);
+    XCTFail(@"Not Implemented");
 }
 
-- (void)testAddingSingleEventView
+- (void)testEventViewHeightForEventWtihinDaylightSavingsDay
 {
-    ECEventView* eventView = [self createSingleEventView];
-    
-    [self.dayView addEventView:eventView];
-    XCTAssert(self.dayView.eventViews.count == 1);
+    XCTFail(@"Not Implemented");
 }
 
-- (void)testRemovingSingleEventView
+- (void)testEventViewHeightForEventWithStartDateInPreviousDay
 {
-    ECEventView* eventView = [self createSingleEventView];
-    
-    [self.dayView addEventView:eventView];
-    [self.dayView removeEventView:eventView];
-    XCTAssertTrue(self.dayView.eventViews.count == 0);
+    XCTFail(@"Not Implemented");
 }
 
-- (void)testRemovingEventViewThatIsNotInDayView
+- (void)testEventViewHeightForEventWithEndDateInFollowingDay
 {
-    NSInteger eventViewCount = 2;
-    NSArray* eventViews = [self createMultipleEventViews:eventViewCount];
-    
-    NSInteger eventViewIndex = (NSInteger)arc4random_uniform((u_int32_t)eventViewCount);
-    NSInteger nextEventViewIndex = (eventViewIndex + 1) % eventViewCount;
-    
-    // Add random event view
-    [self.dayView addEventView:eventViews[eventViewIndex]];
-    [self.dayView removeEventView:eventViews[nextEventViewIndex]];
-    XCTAssertTrue(self.dayView.eventViews.count == 1);
+    XCTFail(@"Not Implemented");
 }
 
-- (void)testAddingMultipleEventViews
+- (void)testEventViewHeightForEventThatSpansEntireDay
 {
-    NSInteger eventViewCount = 10;
-    NSArray* eventViews = [self createMultipleEventViews:eventViewCount];
-    
-    [self.dayView addEventViews:eventViews];
-    XCTAssert(self.dayView.eventViews.count == eventViewCount);
+    XCTFail(@"Not Implemented");
 }
 
-- (void)testRemovingMultipleEventViews
+- (void)testEventViewHeightForEventThatSpansMultipleDays
 {
-    NSInteger eventViewCount = 10;
-    NSArray* eventViews = [self createMultipleEventViews:eventViewCount];
-    
-    [self.dayView addEventViews:eventViews];
-    
-    NSArray* eventViewsSubset = [eventViews objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, eventViewCount / 2)]];
-    [self.dayView removeEventViews:eventViewsSubset];
-    
-    NSSet* dayViewEventViews = [NSSet setWithArray:self.dayView.eventViews];
-    NSSet* removedEventViews = [NSSet setWithArray:eventViewsSubset];
-    
-    XCTAssert(self.dayView.eventViews.count == (eventViewCount - eventViewsSubset.count));
-    XCTAssertFalse([dayViewEventViews intersectsSet:removedEventViews]);
-}
-
-- (void)testRemovingEventViewsThatAreNotInDayView
-{
-    NSInteger eventViewCount = 10;
-    NSArray* addedEventViews = [self createMultipleEventViews:eventViewCount];
-    NSArray* notAddedEventViews = [self createMultipleEventViews:eventViewCount];
-
-    [self.dayView addEventViews:addedEventViews];
-    [self.dayView removeEventViews:notAddedEventViews];
-
-    XCTAssert(self.dayView.eventViews.count == eventViewCount);
-}
-
-- (void)testRemovingEventViewsWithMixedDayViewMembership
-{
-    NSInteger eventViewCount = 10;
-    NSArray* addedEventViews = [self createMultipleEventViews:eventViewCount];
-    NSArray* notAddedEventViews = [self createMultipleEventViews:eventViewCount];
-    
-    NSIndexSet* halfOfArrayIndexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, eventViewCount / 2)];
-    NSArray* mixedEventViews = [[addedEventViews objectsAtIndexes:halfOfArrayIndexSet] arrayByAddingObjectsFromArray:[notAddedEventViews objectsAtIndexes:halfOfArrayIndexSet]];
-    
-    [self.dayView addEventViews:addedEventViews];
-    [self.dayView removeEventViews:mixedEventViews];
-    
-    XCTAssert(self.dayView.eventViews.count == eventViewCount / 2);
-}
-
-- (void)testClearingEventViews
-{
-    NSInteger eventViewCount = 10;
-    NSArray* eventViews = [self createMultipleEventViews:eventViewCount];
-    
-    NSInteger eventViewIndex = (NSInteger)arc4random_uniform((u_int32_t)eventViewCount);
-    
-    [self.dayView addEventView:eventViews[eventViewIndex]];
-    [self.dayView clearEventViews];
-    XCTAssert(self.dayView.eventViews.count == 0);
-
-}
-
-- (void)testEventViewManagement
-{
-    NSInteger eventViewCount = 10;
-    NSArray* eventViews = [self createMultipleEventViews:eventViewCount];
-    
-    NSInteger eventViewIndex = (NSInteger)arc4random_uniform((u_int32_t)eventViewCount);
-    NSInteger nextEventViewIndex = (eventViewIndex + 1) % eventViewCount;
- 
-    // Remvoe event view
-    [self.dayView removeEventView:eventViews[eventViewIndex]];
-    XCTAssert(self.dayView.eventViews.count == 0);
-    
-    [self.dayView addEventViews:eventViews];
-    XCTAssert(self.dayView.eventViews.count == eventViewCount);
-    XCTAssertTrue([self.dayView.eventViews hasSameElements:eventViews]);
-    
-    [self.dayView removeEventView:eventViews[eventViewIndex]];
-    XCTAssert(self.dayView.eventViews.count == eventViewCount - 1);
-    
-    // remove the event already removed and one more
-    [self.dayView removeEventViews:@[eventViews[eventViewIndex], eventViews[nextEventViewIndex]]];
-    XCTAssert(self.dayView.eventViews.count == eventViewCount - 2);
-    
-    [self.dayView clearEventViews];
-    XCTAssert(self.dayView.eventViews.count == 0);
-}
-
-- (void)testEventViewLayout
-{
-    XCTFail(@"Not implemented yet");
+    XCTFail(@"Not Implemented");
 }
 
 @end

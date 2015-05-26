@@ -35,6 +35,8 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
 
 @implementation ECEventStoreProxyTests
 
+#pragma mark - Setup & Teardown
+
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -66,6 +68,8 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     self.eventStore = nil;
     self.eventStoreProxy = nil;
 }
+
+#pragma mark - Tests
 
 - (void)testCalendarAccess
 {

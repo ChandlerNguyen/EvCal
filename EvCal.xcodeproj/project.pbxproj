@@ -13,6 +13,7 @@
 		84443F101B10794700385E5A /* ECTestsEventFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443F0F1B10794700385E5A /* ECTestsEventFactory.m */; };
 		844989D81B0B62E100DCE38F /* NSArray+ECTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 844989D71B0B62E100DCE38F /* NSArray+ECTesting.m */; };
 		847571FF1B0AFF9B0019E393 /* ECEventStoreProxyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 847571FE1B0AFF9B0019E393 /* ECEventStoreProxyTests.m */; };
+		8478F7811B14890A0096F1B7 /* ECDayViewEventViewManagementTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F7801B14890A0096F1B7 /* ECDayViewEventViewManagementTests.m */; };
 		84B2E13E1B08E0A000CD0029 /* UIView+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B2E13D1B08E0A000CD0029 /* UIView+ECAdditions.m */; };
 		84C458F91B073A860066B6A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C458F81B073A860066B6A9 /* main.m */; };
 		84C458FC1B073A860066B6A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C458FB1B073A860066B6A9 /* AppDelegate.m */; };
@@ -50,6 +51,7 @@
 		844989D61B0B62E100DCE38F /* NSArray+ECTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ECTesting.h"; sourceTree = "<group>"; };
 		844989D71B0B62E100DCE38F /* NSArray+ECTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ECTesting.m"; sourceTree = "<group>"; };
 		847571FE1B0AFF9B0019E393 /* ECEventStoreProxyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEventStoreProxyTests.m; sourceTree = "<group>"; };
+		8478F7801B14890A0096F1B7 /* ECDayViewEventViewManagementTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDayViewEventViewManagementTests.m; sourceTree = "<group>"; };
 		847A81661B09B18B008F5168 /* ECLogging.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ECLogging.pch; path = Application/ECLogging.pch; sourceTree = "<group>"; };
 		84B2E13C1B08E0A000CD0029 /* UIView+ECAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+ECAdditions.h"; path = "Support/UIView+ECAdditions.h"; sourceTree = "<group>"; };
 		84B2E13D1B08E0A000CD0029 /* UIView+ECAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+ECAdditions.m"; path = "Support/UIView+ECAdditions.m"; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 		84443EF91B0DE6E800385E5A /* Test Suites */ = {
 			isa = PBXGroup;
 			children = (
+				8478F7801B14890A0096F1B7 /* ECDayViewEventViewManagementTests.m */,
 				84443F0C1B1076B300385E5A /* ECDayViewLayoutTests.m */,
 				847571FE1B0AFF9B0019E393 /* ECEventStoreProxyTests.m */,
 			);
@@ -434,6 +437,7 @@
 				84443EFF1B0DEBF900385E5A /* NSDate+ECTestAdditions.m in Sources */,
 				84443F0D1B1076B300385E5A /* ECDayViewLayoutTests.m in Sources */,
 				84443F021B0DFDF300385E5A /* ECTestsEventQuery.m in Sources */,
+				8478F7811B14890A0096F1B7 /* ECDayViewEventViewManagementTests.m in Sources */,
 				847571FF1B0AFF9B0019E393 /* ECEventStoreProxyTests.m in Sources */,
 				844989D81B0B62E100DCE38F /* NSArray+ECTesting.m in Sources */,
 				84443F101B10794700385E5A /* ECTestsEventFactory.m in Sources */,
