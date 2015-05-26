@@ -84,15 +84,36 @@
     
     for (ECEventView* eventView in self.eventViews) {
         if (lastEndDate && [eventView.event.startDate compare:lastEndDate] == NSOrderedAscending) {
-            [self layoutColumns:columns];
+            [self layoutColumns:columns width:width displayedHours:hours];
             columns = [@[] mutableCopy];
             lastEndDate = nil;
-            
+        }
+        
+        BOOL placed = NO;
+        for (NSInteger i = 0; i < columns.count; i++) {
+            NSArray* column = columns[i];
+            if (![self eventView:eventView overlapsEventView:[column lastObject]]) {
+                columns[i] = [column arrayByAddingObject:eventView];
+                placed = YES;
+                break;
+            }
+        }
+        
+        if (!placed) {
+            [columns addObject:@[eventView]];
+        }
+        
+        if (!lastEndDate || [eventView.event.endDate compare:lastEndDate] == NSOrderedAscending) {
+            lastEndDate = eventView.event.endDate;
+        }
+        
+        if (columns.count > 0) {
+            [self layoutColumns:columns width:width displayedHours:hours];
         }
     }
 }
 
-- (void)layoutColumns:(NSArray*)columns
+- (void)layoutColumns:(NSArray*)columns width:(CGFloat)width displayedHours:(NSArray*)hours
 {
     NSInteger numGroups = columns.count;
     for (NSInteger i = 0; i < numGroups; i++) {
@@ -101,6 +122,18 @@
             
         }
     }
+}
+
+
+// PREDCONDITION
+// This test assumes that the left event view precedes the right event view as
+// defined by ECEventView's compare method
+- (BOOL)eventView:(ECEventView*)left overlapsEventView:(ECEventView*)right
+{
+    BOOL leftStartsAboveRight = [left.event.startDate compare:right.event.endDate] == NSOrderedAscending;
+    BOOL rightStartsAboveLeft = [left.event.endDate compare:right.event.startDate] == NSOrderedAscending;
+    
+    return leftStartsAboveRight || rightStartsAboveLeft;
 }
 
 

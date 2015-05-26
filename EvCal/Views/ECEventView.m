@@ -113,4 +113,31 @@
     self.locationLabel.frame = locationLabelFrame;
 }
 
+- (NSDate*)closestDatePrecedingDate:(NSDate*)date inDates:(NSArray*)dates
+{
+    NSArray* sortedDates = [dates sortedArrayUsingSelector:@selector(compare:)];
+    NSDate* previousDate = nil;
+    for (NSDate* otherDate in sortedDates) {
+        NSComparisonResult result = [date compare:otherDate];
+        
+        switch (result) {
+            case NSOrderedSame:
+                return otherDate;
+                break;
+                
+            case NSOrderedAscending:
+                break;
+                
+            case NSOrderedDescending:
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    return previousDate;
+}
+
+
 @end
