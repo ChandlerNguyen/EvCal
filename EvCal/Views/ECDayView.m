@@ -66,14 +66,6 @@
 
 - (void)layoutEventViews
 {
-    // simple layout method
-//    for (int i = 0; i < self.eventViews.count; i++) {
-//        CGRect eventViewFrame = CGRectMake(self.bounds.origin.x, i * EVENT_VIEW_HEIGHT + [UIApplication sharedApplication].statusBarFrame.size.height, self.bounds.size.width, EVENT_VIEW_HEIGHT);
-//        
-//        ECEventView* eventView = self.eventViews[i];
-//        eventView.frame = eventViewFrame;
-//    }
-    
     CGFloat width = self.bounds.size.width;
     NSDate* lastEndDate = nil;
     
@@ -84,7 +76,7 @@
     NSMutableArray* columns = [[NSMutableArray alloc] init];
     
     for (ECEventView* eventView in self.eventViews) {
-        if (lastEndDate && [eventView.event.startDate compare:lastEndDate] == NSOrderedAscending) {
+        if (lastEndDate && [eventView.event.startDate compare:lastEndDate] == NSOrderedDescending) {
             [self layoutColumns:columns width:width displayedHours:hours];
             columns = [@[] mutableCopy];
             lastEndDate = nil;
