@@ -22,7 +22,7 @@
     self = [super initWithFrame:CGRectZero];
     if (self) {
         self.hour = hour;
-        self.hourLineInset = 100.0f;
+        self.hourLineInset = 80.0f;
     }
     
     return self;
@@ -105,7 +105,7 @@
     [[UIColor blackColor] setFill];
     [[UIColor blackColor] setStroke];
     
-    CGPoint dotCenter = CGPointMake(CGRectGetMaxX(self.hourLabel.frame), CGRectGetMidY(self.hourLabel.frame));
+    CGPoint dotCenter = CGPointMake(CGRectGetMaxX(self.hourLabel.frame) + HOUR_LINE_LEFT_PADDING, CGRectGetMidY(self.hourLabel.frame));
     CGRect dotRect = CGRectMake(dotCenter.x - HOUR_LINE_DOT_RADIUS,
                                 dotCenter.y - HOUR_LINE_DOT_RADIUS,
                                 2 * HOUR_LINE_DOT_RADIUS,

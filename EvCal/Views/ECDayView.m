@@ -19,6 +19,9 @@
 
 @interface ECDayView()
 
+@property (nonatomic) CGRect allDayViewFrame;
+@property (nonatomic) CGRect contentViewFrame;
+
 @property (nonatomic, strong) NSArray* hourLines;
 @property (nonatomic, strong, readwrite) NSArray* eventViews;
 @property (nonatomic, strong) NSMutableDictionary* eventViewFrames;
@@ -48,6 +51,24 @@
     return _eventViews;
 }
 
+//- (UIView*)allDayView
+//{
+//    if (!_allDayView) {
+//        _allDayView = [self createAllDayView];
+//    }
+//    
+//    return _allDayView;
+//}
+//
+//- (UIView*)contentView
+//{
+//    if (!_contentView) {
+//        _contentView = [self createContentView];
+//    }
+//    
+//    return _contentView;
+//}
+
 - (NSArray*)hourLines
 {
     if (!_hourLines) {
@@ -56,6 +77,15 @@
     
     return _hourLines;
 }
+
+- (void)setDisplayDate:(NSDate *)displayDate
+{
+    _displayDate = displayDate;
+    
+    [self setNeedsLayout];
+}
+
+#pragma mark - Creating Views
 
 - (NSArray*)createHourLines
 {
@@ -72,21 +102,52 @@
     return [mutableHourLines copy];
 }
 
-- (void)setDisplayDate:(NSDate *)displayDate
-{
-    _displayDate = displayDate;
-    
-    [self setNeedsLayout];
-}
+//- (UIView*)createAllDayView
+//{
+//    UIView* allDayView = [[UIView alloc] initWithFrame:CGRectZero];
+//    
+//    [self addSubview:allDayView];
+//    _allDayView = allDayView;
+//    
+//    return allDayView;
+//}
+//
+//- (UIView*)createContentView
+//{
+//    UIView* contentView = [[UIView alloc] initWithFrame:CGRectZero];
+//    
+//    [self addSubview:contentView];
+//    _contentView = contentView;
+//    
+//    return contentView;
+//}
 
 #pragma mark - Layout
 
+#define ALL_DAY_VIEW_HEIGHT 44.0f
+
 #define HOUR_LINE_HEIGHT    22.0f
-#define HOUR_LINE_DOT_INSET 100.0f
+#define HOUR_LINE_DOT_INSET 80.0f
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    
+    [self layoutAllDayView];
+    [self layoutContentView];
+}
+
+- (void)layoutAllDayView
+{
+    CGRect allDayFrame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y - self.contentOffset.y, self.contentSize.width, ALL_DAY_VIEW_HEIGHT);
+    self.allDayViewFrame = allDayFrame;
+}
+
+- (void)layoutContentView
+{
+    CGRect contentViewFrame = CGRectMake(self.bounds.origin.x, CGRectGetMaxY(self.allDayViewFrame), self.contentSize.width, self.contentSize.height - ALL_DAY_VIEW_HEIGHT);
+    
+    self.contentViewFrame = contentViewFrame;
     
     [self layoutHourLines];
     [self layoutEventViews];
@@ -96,7 +157,7 @@
 {
     for (ECHourLine* hourLine in self.hourLines) {
         CGRect hourLineFrame = CGRectMake(self.bounds.origin.x,
-                                          hourLine.hour * (self.contentSize.height / self.hourLines.count),
+                                          self.contentViewFrame.origin.y + hourLine.hour * (self.contentViewFrame.size.height / self.hourLines.count),
                                           self.bounds.size.width,
                                           HOUR_LINE_HEIGHT);
         hourLine.frame = hourLineFrame;
@@ -147,6 +208,7 @@
 
 - (void)layoutColumns:(NSArray*)columns width:(CGFloat)width displayedHours:(NSArray*)hours
 {
+    CGFloat eventOriginX = self.bounds.origin.x + HOUR_LINE_DOT_INSET + 6.0f;
     CGRect contentRect = CGRectMake(self.bounds.origin.x,
                                     self.bounds.origin.y - self.contentOffset.y,
                                     self.contentSize.width,
@@ -156,9 +218,9 @@
         NSArray* column = columns[i];
         for (NSInteger j = 0; j < column.count; j++) {
             ECEventView* eventView = column[j];
-            CGRect eventViewFrame = CGRectMake(self.bounds.origin.x + i * floorf(self.contentSize.width / numGroups),
+            CGRect eventViewFrame = CGRectMake(eventOriginX + i * floorf(self.contentSize.width / numGroups),
                                                [eventView verticalPositionInRect:contentRect forDate:self.displayDate],
-                                               floorf(self.bounds.size.width / numGroups),
+                                               floorf((self.bounds.size.width - HOUR_LINE_DOT_INSET - 6.0f) / numGroups),
                                                [eventView heightInRect:contentRect forDate:self.displayDate]);
             eventView.frame = eventViewFrame;
         }
