@@ -15,10 +15,12 @@
 // EvCal Classes
 #import "ECDayView.h"
 #import "ECEventView.h"
+#import "ECHourLine.h"
 
 @interface ECDayView()
 
-@property (nonatomic, strong, readwrite) NSMutableArray* eventViews;
+@property (nonatomic, strong) NSArray* hourLines;
+@property (nonatomic, strong, readwrite) NSArray* eventViews;
 @property (nonatomic, strong) NSMutableDictionary* eventViewFrames;
 
 @end
@@ -46,6 +48,30 @@
     return _eventViews;
 }
 
+- (NSArray*)hourLines
+{
+    if (!_hourLines) {
+        _hourLines = [self createHourLines];
+    }
+    
+    return _hourLines;
+}
+
+- (NSArray*)createHourLines
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSMutableArray* mutableHourLines = [[NSMutableArray alloc] init];
+    
+    for (NSDate* date in [self.displayDate hoursOfDay]) {
+        ECHourLine* line = [[ECHourLine alloc] initWithHour:[calendar component:NSCalendarUnitHour fromDate:date]];
+        
+        [mutableHourLines addObject:line];
+        [self insertSubview:line atIndex:0];
+    }
+    
+    return [mutableHourLines copy];
+}
+
 - (void)setDisplayDate:(NSDate *)displayDate
 {
     _displayDate = displayDate;
@@ -55,13 +81,26 @@
 
 #pragma mark - Layout
 
-#define EVENT_VIEW_HEIGHT       44.0f
+#define HOUR_LINE_HEIGHT    22.0f
+#define HOUR_LINE_DOT_INSET 100.0f
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
+    [self layoutHourLines];
     [self layoutEventViews];
+}
+
+- (void)layoutHourLines
+{
+    for (ECHourLine* hourLine in self.hourLines) {
+        CGRect hourLineFrame = CGRectMake(self.bounds.origin.x,
+                                          hourLine.hour * (self.contentSize.height / self.hourLines.count),
+                                          self.bounds.size.width,
+                                          HOUR_LINE_HEIGHT);
+        hourLine.frame = hourLineFrame;
+    }
 }
 
 - (void)layoutEventViews
