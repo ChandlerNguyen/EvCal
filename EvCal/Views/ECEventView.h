@@ -71,7 +71,7 @@
  *  @param date The date with which event view should calculate its relative 
  *              height.
  *  @return The positive height for the event view or zero if the height could
- *          not be determined.
+ *          not be determined (such as if the event is all day).
  */
 - (CGFloat)heightInRect:(CGRect)rect forDate:(NSDate*)date;
 
@@ -87,7 +87,8 @@
  *
  *  @return The absolute vertical position of the event view within the given
  *          rect or the maximum y value of the rect if the view's event starts
- *          after the given date.
+ *          after the given date. Returns the origin of the rect if the
+ *          receiver's event is all day.
  */
 - (CGFloat)verticalPositionInRect:(CGRect)rect forDate:(NSDate*)date;
 

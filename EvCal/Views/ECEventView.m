@@ -123,7 +123,7 @@
 {
     CGFloat height = 0;
     
-    if (rect.size.height > 0) {
+    if (rect.size.height > 0 && !self.event.isAllDay) {
         NSArray* hours = [date hoursOfDay];
         float eventHoursInDay = [self eventHoursInDate:date];
         
@@ -158,6 +158,10 @@
 
 - (CGFloat)verticalPositionInRect:(CGRect)rect forDate:(NSDate *)date
 {
+    if (self.event.isAllDay) {
+        return rect.origin.y;
+    }
+    
     NSDate* beginningOfDay = [date beginningOfDay];
     if ([self.event.startDate compare:beginningOfDay] == NSOrderedAscending) {
         return rect.origin.y;
