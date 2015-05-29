@@ -23,6 +23,8 @@
     if (self) {
         self.hour = hour;
         self.hourLineInset = 80.0f;
+        
+        self.layer.borderWidth = 1.0f;
     }
     
     return self;

@@ -19,8 +19,10 @@
 
 @interface ECDayView()
 
-@property (nonatomic) CGRect allDayViewFrame;
-@property (nonatomic) CGRect contentViewFrame;
+@property (nonatomic) BOOL eventViewsLayoutIsValid;
+
+@property (nonatomic, weak) UIView* allDayEventsView;
+@property (nonatomic, weak) UIView* durationEventsView;
 
 @property (nonatomic, strong) NSArray* hourLines;
 @property (nonatomic, strong, readwrite) NSArray* eventViews;
@@ -37,6 +39,8 @@
     if (self) {
         self.showsHorizontalScrollIndicator = NO;
         self.showsVerticalScrollIndicator = NO;
+        
+        self.eventViewsLayoutIsValid = NO;
     }
     
     return self;
@@ -51,23 +55,23 @@
     return _eventViews;
 }
 
-//- (UIView*)allDayView
-//{
-//    if (!_allDayView) {
-//        _allDayView = [self createAllDayView];
-//    }
-//    
-//    return _allDayView;
-//}
-//
-//- (UIView*)contentView
-//{
-//    if (!_contentView) {
-//        _contentView = [self createContentView];
-//    }
-//    
-//    return _contentView;
-//}
+- (UIView*)allDayEventsView
+{
+    if (!_allDayEventsView) {
+        _allDayEventsView = [self createallDayEventsView];
+    }
+    
+    return _allDayEventsView;
+}
+
+- (UIView*)durationEventsView
+{
+    if (!_durationEventsView) {
+        _durationEventsView = [self createDurationEventsView];
+    }
+    
+    return _durationEventsView;
+}
 
 - (NSArray*)hourLines
 {
@@ -96,31 +100,29 @@
         ECHourLine* line = [[ECHourLine alloc] initWithHour:[calendar component:NSCalendarUnitHour fromDate:date]];
         
         [mutableHourLines addObject:line];
-        [self insertSubview:line atIndex:0];
+        [self.durationEventsView insertSubview:line atIndex:0];
     }
     
     return [mutableHourLines copy];
 }
 
-//- (UIView*)createAllDayView
-//{
-//    UIView* allDayView = [[UIView alloc] initWithFrame:CGRectZero];
-//    
-//    [self addSubview:allDayView];
-//    _allDayView = allDayView;
-//    
-//    return allDayView;
-//}
-//
-//- (UIView*)createContentView
-//{
-//    UIView* contentView = [[UIView alloc] initWithFrame:CGRectZero];
-//    
-//    [self addSubview:contentView];
-//    _contentView = contentView;
-//    
-//    return contentView;
-//}
+- (UIView*)createallDayEventsView
+{
+    UIView* allDayEventsView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    [self addSubview:allDayEventsView];
+    
+    return allDayEventsView;
+}
+
+- (UIView*)createDurationEventsView
+{
+    UIView* durationEventsView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    [self addSubview:durationEventsView];
+    
+    return durationEventsView;
+}
 
 #pragma mark - Layout
 
@@ -133,21 +135,21 @@
 {
     [super layoutSubviews];
     
-    [self layoutAllDayView];
-    [self layoutContentView];
+    [self layoutAllDayEventsView];
+    [self layoutDurationEventsView];
 }
 
-- (void)layoutAllDayView
+- (void)layoutAllDayEventsView
 {
     CGRect allDayFrame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y - self.contentOffset.y, self.contentSize.width, ALL_DAY_VIEW_HEIGHT);
-    self.allDayViewFrame = allDayFrame;
+    self.allDayEventsView.frame = allDayFrame;
 }
 
-- (void)layoutContentView
+- (void)layoutDurationEventsView
 {
-    CGRect contentViewFrame = CGRectMake(self.bounds.origin.x, CGRectGetMaxY(self.allDayViewFrame), self.contentSize.width, self.contentSize.height - ALL_DAY_VIEW_HEIGHT);
+    CGRect durationEventsViewFrame = CGRectMake(self.bounds.origin.x, CGRectGetMaxY(self.allDayEventsView.frame), self.contentSize.width, self.contentSize.height - ALL_DAY_VIEW_HEIGHT);
     
-    self.contentViewFrame = contentViewFrame;
+    self.durationEventsView.frame = durationEventsViewFrame;
     
     [self layoutHourLines];
     [self layoutEventViews];
@@ -156,9 +158,9 @@
 - (void)layoutHourLines
 {
     for (ECHourLine* hourLine in self.hourLines) {
-        CGRect hourLineFrame = CGRectMake(self.bounds.origin.x,
-                                          self.contentViewFrame.origin.y + hourLine.hour * (self.contentViewFrame.size.height / self.hourLines.count),
-                                          self.bounds.size.width,
+        CGRect hourLineFrame = CGRectMake(self.durationEventsView.bounds.origin.x,
+                                          self.durationEventsView.bounds.origin.y + hourLine.hour * (self.durationEventsView.bounds.size.height / self.hourLines.count),
+                                          self.durationEventsView.bounds.size.width,
                                           HOUR_LINE_HEIGHT);
         hourLine.frame = hourLineFrame;
     }
@@ -166,62 +168,73 @@
 
 - (void)layoutEventViews
 {
-    CGFloat width = self.bounds.size.width;
-    NSDate* lastEndDate = nil;
-    
-    NSArray* hours = [self.displayDate hoursOfDay];
-    
-    self.eventViews = [self.eventViews sortedArrayUsingSelector:@selector(compare:)];
-    
-    NSMutableArray* columns = [[NSMutableArray alloc] init];
-    
-    for (ECEventView* eventView in self.eventViews) {
-        if (lastEndDate && [eventView.event.startDate compare:lastEndDate] == NSOrderedDescending) {
-            [self layoutColumns:columns width:width displayedHours:hours];
-            columns = [@[] mutableCopy];
-            lastEndDate = nil;
-        }
+    if (!self.eventViewsLayoutIsValid) {
+        // Prepare layout state
+        CGFloat width = self.bounds.size.width;
+        NSDate* lastEndDate = nil;
         
-        BOOL placed = NO;
-        for (NSInteger i = 0; i < columns.count; i++) {
-            NSArray* column = columns[i];
-            if (![self eventView:eventView overlapsEventView:[column lastObject]]) {
-                columns[i] = [column arrayByAddingObject:eventView];
-                placed = YES;
-                break;
+        NSArray* hours = [self.displayDate hoursOfDay];
+        
+        self.eventViews = [self.eventViews sortedArrayUsingSelector:@selector(compare:)];
+        
+        // Columns is a jagged two dimensional array
+        NSMutableArray* columns = [[NSMutableArray alloc] init];
+        
+        for (ECEventView* eventView in self.eventViews) {
+            // this view doesn't overlap the previous cluster of views
+            if (lastEndDate && [eventView.event.startDate compare:lastEndDate] == NSOrderedDescending) {
+                [self layoutColumns:columns width:width displayedHours:hours];
+                
+                // start new cluster
+                columns = [@[] mutableCopy];
+                lastEndDate = nil;
+            }
+            
+            BOOL placed = NO;
+            for (NSInteger i = 0; i < columns.count; i++) {
+                // determine if view can be added to the end of a current column
+                NSArray* column = columns[i];
+                if (![self eventView:eventView overlapsEventView:[column lastObject]]) {
+                    // add view to end of column
+                    columns[i] = [column arrayByAddingObject:eventView];
+                    placed = YES;
+                    break;
+                }
+            }
+            
+            // view overlaps all columns, add a new column
+            if (!placed) {
+                [columns addObject:@[eventView]];
+            }
+            
+            // last date isn't set or the view's end date is later than current end date
+            if (!lastEndDate || [eventView.event.endDate compare:lastEndDate] == NSOrderedAscending) {
+                lastEndDate = eventView.event.endDate;
+            }
+            
+            // layout current column setup
+            if (columns.count > 0) {
+                [self layoutColumns:columns width:width displayedHours:hours];
             }
         }
-        
-        if (!placed) {
-            [columns addObject:@[eventView]];
-        }
-        
-        if (!lastEndDate || [eventView.event.endDate compare:lastEndDate] == NSOrderedAscending) {
-            lastEndDate = eventView.event.endDate;
-        }
-        
-        if (columns.count > 0) {
-            [self layoutColumns:columns width:width displayedHours:hours];
-        }
+        self.eventViewsLayoutIsValid = YES;
     }
 }
 
 - (void)layoutColumns:(NSArray*)columns width:(CGFloat)width displayedHours:(NSArray*)hours
 {
+    // Shift events to the right so hours can be seen
     CGFloat eventOriginX = self.bounds.origin.x + HOUR_LINE_DOT_INSET + 6.0f;
-    CGRect contentRect = CGRectMake(self.bounds.origin.x,
-                                    self.bounds.origin.y - self.contentOffset.y,
-                                    self.contentSize.width,
-                                    self.contentSize.height);
+
     NSInteger numGroups = columns.count;
     for (NSInteger i = 0; i < numGroups; i++) {
         NSArray* column = columns[i];
         for (NSInteger j = 0; j < column.count; j++) {
             ECEventView* eventView = column[j];
             CGRect eventViewFrame = CGRectMake(eventOriginX + i * floorf(self.contentSize.width / numGroups),
-                                               [eventView verticalPositionInRect:contentRect forDate:self.displayDate],
+                                               [eventView verticalPositionInRect:self.durationEventsView.bounds forDate:self.displayDate],
                                                floorf((self.bounds.size.width - HOUR_LINE_DOT_INSET - 6.0f) / numGroups),
-                                               [eventView heightInRect:contentRect forDate:self.displayDate]);
+                                               [eventView heightInRect:self.durationEventsView.bounds forDate:self.displayDate]);
             eventView.frame = eventViewFrame;
         }
     }
@@ -242,16 +255,22 @@
 
 #pragma mark - Update event views
 
+- (void)setEventViewsNeedLayout
+{
+    self.eventViewsLayoutIsValid = NO;
+    [self setNeedsLayout];
+}
+
 - (void)addEventView:(ECEventView *)eventView
 {
     if (eventView) {
-        [self addSubview:eventView];
+        [self addEventViewToView:eventView];
         
         NSMutableArray* mutableEventViews = [self.eventViews mutableCopy];
         [mutableEventViews addObject:eventView];
         self.eventViews = [mutableEventViews copy];
         
-        [self setNeedsLayout];
+        [self setEventViewsNeedLayout];
     } else {
         DDLogWarn(@"Adding nil event view to ECDayView");
     }
@@ -262,15 +281,25 @@
     NSMutableArray* mutableEventViews = [self.eventViews mutableCopy];
     if (eventViews) {
         for (ECEventView* eventView in eventViews) {
-            [self addSubview:eventView];
+            [self addEventViewToView:eventView];
+            
             [mutableEventViews addObject:eventView];
         }
         
         self.eventViews = [mutableEventViews copy];
-        
-        [self setNeedsLayout];
+ 
+        [self setEventViewsNeedLayout];
     } else {
         DDLogWarn(@"Adding nil array of event views to ECDayView");
+    }
+}
+
+- (void)addEventViewToView:(ECEventView*)eventView
+{
+    if (!eventView.event.isAllDay) {
+        [self.durationEventsView addSubview:eventView];
+    } else {
+        [self.allDayEventsView addSubview:eventView];
     }
 }
 
@@ -282,7 +311,7 @@
         self.eventViews = [mutableEventViews copy];
         [eventView removeFromSuperview];
         
-        [self setNeedsLayout];
+        [self setEventViewsNeedLayout];
     } else {
         DDLogWarn(@"Removing nil event view from ECDayView");
     }
@@ -303,7 +332,7 @@
         [mutableEventViews removeObjectsAtIndexes:victims];
         self.eventViews = [mutableEventViews copy];
         
-        [self setNeedsLayout];
+        [self setEventViewsNeedLayout];
     } else {
         DDLogWarn(@"Removing nil array of event views from ECDayView");
     }
@@ -312,5 +341,6 @@
 - (void)clearEventViews
 {
     [self removeEventViews:self.eventViews];
+    [self setEventViewsNeedLayout];
 }
 @end
