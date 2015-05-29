@@ -52,4 +52,20 @@
     return YES;
 }
 
+- (NSUInteger)indexOfDateInSameDayAsDate:(NSDate *)date
+{
+    NSInteger index = [self indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL* stop){
+        // only test arrays consisting entirely of dates
+        if (![obj isKindOfClass:[NSDate class]]) {
+            *stop = YES;
+        }
+        
+        NSDate* testDate = (NSDate*)obj;
+        
+        return [[NSCalendar currentCalendar] isDate:testDate inSameDayAsDate:date];
+    }];
+    
+    return index;
+}
+
 @end

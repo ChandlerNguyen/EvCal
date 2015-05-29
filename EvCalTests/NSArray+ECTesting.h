@@ -24,6 +24,19 @@
  */
 - (EKEvent*)eventWithIdentifier:(NSString*)identifier;
 
+/**
+ *  Calculates the index of the element in the receiver in the same day as the
+ *  given date by calling NSCalendar's isDate:inSameDayAsDate: method on each
+ *  element in the receiver. The receiver must be an array consisting entirely
+ *  of NSDate elements.
+ *
+ *  @param date The date to compare dates within the array against
+ *
+ *  @return The index of the first element in the same day as the given date
+ *          or NSNotFound if no such element exists.
+ */
+- (NSUInteger)indexOfDateInSameDayAsDate:(NSDate*)date;
+
 //------------------------------------------------------------------------------
 // @name Comparing Arrays
 //------------------------------------------------------------------------------
