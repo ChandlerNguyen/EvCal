@@ -8,12 +8,16 @@
 
 #import "AppDelegate.h"
 #import <CocoaLumberjack/CocoaLumberjack.h>
+#import "ECLogFormatter.h"
 #import "ECDayviewController.h"
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [DDASLLogger sharedInstance].logFormatter = [[ECLogFormatter alloc] init];
+    [DDTTYLogger sharedInstance].logFormatter = [[ECLogFormatter alloc] init];
+    
     [DDLog addLogger:[DDASLLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     
