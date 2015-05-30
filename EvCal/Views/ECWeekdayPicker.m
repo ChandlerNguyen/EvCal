@@ -7,12 +7,18 @@
 //
 
 #import "ECWeekdayPicker.h"
-@interface ECWeekdayPicker()
+#import "ECDatePickerCell.h"
+
+#define DATE_PICKER_CELL_REUSE_ID   @"DatePickerCell"
+
+@interface ECWeekdayPicker() <UICollectionViewDataSource, UICollectionViewDelegate>
+
+@property (nonatomic, weak) UICollectionView* weekdaysCollectionView;
 
 // weekday arrays
 @property (nonatomic, strong, readwrite) NSArray* weekdays;
-@property (nonatomic, strong) NSArray* leftWeekdays;
-@property (nonatomic, strong) NSArray* rightWeekdays;
+@property (nonatomic, strong) NSArray* prevWeekdays;
+@property (nonatomic, strong) NSArray* nextWeekdays;
 
 @end
 
@@ -25,6 +31,8 @@
     self = [super initWithFrame:CGRectZero];
     if (self) {
         [self setSelectedDate:date animated:YES];
+        
+        [self addWeekdaysCollectionView];
     }
     
     return self;
@@ -38,6 +46,21 @@
     [self.pickerDelegate weekdayPicker:self didSelectDate:selectedDate];
 }
 
+- (void)addWeekdaysCollectionView
+{
+    UICollectionViewLayout* flow = [[UICollectionViewFlowLayout alloc] init];
+    UICollectionView* weekdaysCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flow];
+    
+    weekdaysCollectionView.pagingEnabled = YES;
+    weekdaysCollectionView.delegate = self;
+    weekdaysCollectionView.dataSource = self;
+    
+    [weekdaysCollectionView registerClass:[ECDatePickerCell class] forCellWithReuseIdentifier:DATE_PICKER_CELL_REUSE_ID];
+    
+    self.weekdaysCollectionView = weekdaysCollectionView;
+    [self addSubview:weekdaysCollectionView];
+}
+
 #pragma mark - Setting Weekdays
 
 - (void)updateWeekdaysWithDate:(NSDate*)date
@@ -45,8 +68,8 @@
     self.weekdays = [self weekdaysForDate:date];
     
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    self.leftWeekdays = [self weekdaysForDate:[calendar dateByAddingUnit:NSCalendarUnitDay value:-7 toDate:date options:0]];
-    self.rightWeekdays = [self weekdaysForDate:[calendar dateByAddingUnit:NSCalendarUnitDay value:7 toDate:date options:0]];
+    self.prevWeekdays = [self weekdaysForDate:[calendar dateByAddingUnit:NSCalendarUnitDay value:-7 toDate:date options:0]];
+    self.nextWeekdays = [self weekdaysForDate:[calendar dateByAddingUnit:NSCalendarUnitDay value:7 toDate:date options:0]];
 }
 
 - (NSArray*)weekdaysForDate:(NSDate*)date
@@ -78,5 +101,58 @@
 }
 
 
-#pragma mark - UI Events
+#pragma mark - Configuring Collection View Cells
+
+#define LAST_WEEK_SECTION 0
+#define CURRENT_WEEK_SECTION 1
+#define NEXT_WEEK_SECTION 2
+
+- (void)configureCell:(ECDatePickerCell*)cell forIndexPath:(NSIndexPath*)indexPath
+{
+    switch (indexPath.section) {
+        case LAST_WEEK_SECTION:
+            cell.date = self.prevWeekdays[indexPath.row];
+            break;
+            
+        case CURRENT_WEEK_SECTION:
+            cell.date = self.weekdays[indexPath.row];
+            break;
+            
+        case NEXT_WEEK_SECTION:
+            cell.date = self.nextWeekdays[indexPath.row];
+            break;
+            
+        default:
+            DDLogError(@"Invalid index path for collection view, indexPath: %@", indexPath);
+            break;
+    }
+}
+
+
+#pragma mark - UI Collection View Delegate and Datasource
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 3;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 7;
+}
+
+- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ECDatePickerCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:DATE_PICKER_CELL_REUSE_ID forIndexPath:indexPath];
+    
+    [self configureCell:cell forIndexPath:indexPath];
+    
+    return cell;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    // pass
+}
+
 @end
