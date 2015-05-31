@@ -31,28 +31,26 @@
     return dateView;
 }
 
-- (ECDateView*)configureDateView:(ECDateView *)dateView forDate:(NSDate *)date
+- (void)configureDateView:(ECDateView *)dateView forDate:(NSDate *)date
 {
     dateView.date = date;
     
-    [self addAccessoryViewsForDate:date toDateView:dateView];
-    
-    return dateView;
+    [self addAccessoryViewsForDate:date toDateView:dateView];    
 }
 
 - (void)addAccessoryViewsForDate:(NSDate*)date toDateView:(ECDateView*)dateView
 {
     ECEventStoreProxy* eventStoreProxy = [ECEventStoreProxy sharedInstance];
     
-    NSMutableArray* accessoryViews = [[NSMutableArray alloc] init];
+    NSMutableArray* mutableAccessoryViews = [[NSMutableArray alloc] init];
     for (EKCalendar* calendar in eventStoreProxy.calendars) {
         NSArray* events = [eventStoreProxy eventsFrom:[date beginningOfDay] to:[date endOfDay] in:@[calendar]];
         if (events.count > 0) {
             ECDateViewAccessoryView* accessoryView = [[ECDateViewAccessoryView alloc] initWithColor:[UIColor colorWithCGColor:calendar.CGColor] eventCount:events.count];
-            [accessoryViews addObject:accessoryView];
+            [mutableAccessoryViews addObject:accessoryView];
         }
     }
     
-    dateView.accessoryViews = [accessoryViews copy];
+    dateView.eventAccessoryViews = [mutableAccessoryViews copy];
 }
 @end
