@@ -79,6 +79,8 @@
                                        self.bounds.origin.y,
                                        self.hourLineInset,
                                        self.bounds.size.height);
+    
+    DDLogDebug(@"Hour Label Frame: %@", NSStringFromCGRect(hourLabelFrame));
     self.hourLabel.frame = hourLabelFrame;
 }
 

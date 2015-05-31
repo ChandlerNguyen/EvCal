@@ -107,12 +107,20 @@
 
 - (void)layoutLabels
 {
-    CGRect titleLabelFrame = CGRectMake(self.bounds.origin.x + LABEL_PADDING, self.bounds.origin.y + LABEL_PADDING, self.bounds.size.width, (self.bounds.size.height - 3 * LABEL_PADDING) / 2);
+    CGRect titleLabelFrame = CGRectMake(self.bounds.origin.x + LABEL_PADDING,
+                                        self.bounds.origin.y + LABEL_PADDING,
+                                        self.bounds.size.width,
+                                        (self.bounds.size.height - 3 * LABEL_PADDING) / 2);
     
+    DDLogDebug(@"Title Label Frame: %@", NSStringFromCGRect(titleLabelFrame));
     self.titleLabel.frame = titleLabelFrame;
     
-    CGRect locationLabelFrame = CGRectMake(titleLabelFrame.origin.x, CGRectGetMaxY(titleLabelFrame) + LABEL_PADDING, titleLabelFrame.size.width, titleLabelFrame.size.height);
+    CGRect locationLabelFrame = CGRectMake(titleLabelFrame.origin.x,
+                                           CGRectGetMaxY(titleLabelFrame) + LABEL_PADDING,
+                                           titleLabelFrame.size.width,
+                                           titleLabelFrame.size.height);
     
+    DDLogDebug(@"Location Label Frame: %@", NSStringFromCGRect(locationLabelFrame));
     self.locationLabel.frame = locationLabelFrame;
 }
 

@@ -141,14 +141,23 @@
 
 - (void)layoutAllDayEventsView
 {
-    CGRect allDayFrame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y - self.contentOffset.y, self.contentSize.width, ALL_DAY_VIEW_HEIGHT);
+    CGRect allDayFrame = CGRectMake(self.bounds.origin.x,
+                                    self.bounds.origin.y - self.contentOffset.y,
+                                    self.contentSize.width,
+                                    ALL_DAY_VIEW_HEIGHT);
+    
+    DDLogDebug(@"All Day Events View Frame: %@", NSStringFromCGRect(allDayFrame));
     self.allDayEventsView.frame = allDayFrame;
 }
 
 - (void)layoutDurationEventsView
 {
-    CGRect durationEventsViewFrame = CGRectMake(self.bounds.origin.x, CGRectGetMaxY(self.allDayEventsView.frame), self.contentSize.width, self.contentSize.height - ALL_DAY_VIEW_HEIGHT);
+    CGRect durationEventsViewFrame = CGRectMake(self.bounds.origin.x,
+                                                CGRectGetMaxY(self.allDayEventsView.frame),
+                                                self.contentSize.width,
+                                                self.contentSize.height - ALL_DAY_VIEW_HEIGHT);
     
+    DDLogDebug(@"Duration Events View Frame: %@", NSStringFromCGRect(durationEventsViewFrame));
     self.durationEventsView.frame = durationEventsViewFrame;
     
     [self layoutHourLines];
@@ -157,11 +166,15 @@
 
 - (void)layoutHourLines
 {
+    CGFloat yOffset = floorf(self.durationEventsView.bounds.size.height / self.hourLines.count);
     for (ECHourLine* hourLine in self.hourLines) {
+        CGFloat originY = self.durationEventsView.bounds.origin.y + hourLine.hour * yOffset;
         CGRect hourLineFrame = CGRectMake(self.durationEventsView.bounds.origin.x,
-                                          self.durationEventsView.bounds.origin.y + hourLine.hour * (self.durationEventsView.bounds.size.height / self.hourLines.count),
+                                          originY,
                                           self.durationEventsView.bounds.size.width,
                                           HOUR_LINE_HEIGHT);
+        
+        DDLogDebug(@"Hour Line Frame (%lu): %@", hourLine.hour, NSStringFromCGRect(hourLineFrame));
         hourLine.frame = hourLineFrame;
     }
 }

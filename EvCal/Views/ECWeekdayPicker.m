@@ -253,8 +253,9 @@
                                               self.bounds.origin.y,
                                               weekdayLabelWidth,
                                               WEEKDAY_LABEL_HEIGHT);
-        
         UILabel* weekdayLabel = self.weekdayLabels[i];
+        
+        DDLogDebug(@"Weekday Label Frame (%@): %@", weekdayLabel.text, NSStringFromCGRect(weekdayLabelFrame));
         weekdayLabel.frame = weekdayLabelFrame;
     }
 }
@@ -267,9 +268,12 @@
                                                CGRectGetMaxY(firstWeekdayLabel.frame),
                                                self.bounds.size.width,
                                                self.bounds.size.height - WEEKDAY_LABEL_HEIGHT);
+    CGSize weekdayScrollViewContentSize = CGSizeMake(self.bounds.size.width * 3, self.bounds.size.height - WEEKDAY_LABEL_HEIGHT);
     
+    DDLogDebug(@"Weekday Scroll View Frame: %@", NSStringFromCGRect(weekdayScrollViewFrame));
+    DDLogDebug(@"Weekday Scroll View Content Size: %@", NSStringFromCGSize(weekdayScrollViewContentSize));
     self.weekdaysScrollView.frame = weekdayScrollViewFrame;
-    self.weekdaysScrollView.contentSize = CGSizeMake(self.bounds.size.width * 3, self.bounds.size.height - WEEKDAY_LABEL_HEIGHT);
+    self.weekdaysScrollView.contentSize = weekdayScrollViewContentSize;
     
     [self layoutDateViews];
     self.weekdaysScrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
@@ -302,8 +306,12 @@
     CGFloat dateViewWidth = floorf(rect.size.width / dateViews.count);
 
     for (NSInteger i = 0; i < dateViews.count; i++) {
-        CGRect dateViewFrame = CGRectMake(rect.origin.x + i * dateViewWidth, rect.origin.y, dateViewWidth, rect.size.height);
+        CGRect dateViewFrame = CGRectMake(rect.origin.x + i * dateViewWidth,
+                                          rect.origin.y,
+                                          dateViewWidth,
+                                          rect.size.height);
         
+        DDLogDebug(@"Date View Frame: %@", NSStringFromCGRect(dateViewFrame));
         ECDateView* dateView = dateViews[i];
         dateView.frame = dateViewFrame;
     }

@@ -92,6 +92,7 @@
 
 - (void)layoutDateLabel
 {
+    DDLogDebug(@"Date Label Frame: %@", NSStringFromCGRect(self.bounds));
     self.dateLabel.frame = self.bounds;
 }
 

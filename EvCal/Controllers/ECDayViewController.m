@@ -109,6 +109,7 @@
                                             self.view.bounds.origin.y,
                                             self.view.bounds.size.width,
                                             [UIApplication sharedApplication].statusBarFrame.size.height);
+    DDLogDebug(@"Status Bar Cover Frame: %@", NSStringFromCGRect(statusBarCoverFrame));
     self.statusBarCover.frame = statusBarCoverFrame;
 }
 
@@ -120,6 +121,8 @@
                                            CGRectGetMaxY(self.statusBarCover.frame),
                                            self.view.bounds.size.width,
                                            WEEKDAY_PICKER_HEIGHT);
+    
+    DDLogDebug(@"Weekday Picker Frame: %@", NSStringFromCGRect(weekdayPickerFrame));
     
     self.weekdayPicker.frame = weekdayPickerFrame;
 }
@@ -134,6 +137,10 @@
                                      self.view.bounds.size.height - (self.statusBarCover.frame.size.height + self.weekdayPicker.frame.size.height));
     
     CGSize dayViewContentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 2);
+    
+    DDLogDebug(@"Day View Frame: %@", NSStringFromCGRect(dayViewFrame));
+    DDLogDebug(@"Day View Content Size: %@", NSStringFromCGSize(dayViewContentSize));
+    
     self.dayView.frame = dayViewFrame;
     self.dayView.contentSize = dayViewContentSize;
 }
