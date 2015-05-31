@@ -155,9 +155,14 @@
 {
     NSMutableArray* mutableDateViews = [[NSMutableArray alloc] init];
     
+    NSCalendar* calendar = [NSCalendar currentCalendar];
     ECDateViewFactory* factory = [[ECDateViewFactory alloc] init];
     for (NSDate* date in weekdays) {
         ECDateView* dateView = [factory dateViewForDate:date];
+        
+        if ([calendar isDate:date inSameDayAsDate:self.selectedDate]) {
+            [dateView setSelectedDate:YES animated:NO];
+        }
         
         [self.weekdaysScrollView addSubview:dateView];
         [mutableDateViews addObject:dateView];
