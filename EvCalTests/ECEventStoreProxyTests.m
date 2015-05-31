@@ -31,6 +31,8 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
 
 @property (nonatomic, strong) EKCalendar* testCalendar;
 
+@property (nonatomic, strong) NSDate* testStartDate;
+
 @end
 
 @implementation ECEventStoreProxyTests
@@ -39,8 +41,9 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
     
+    self.testStartDate = [NSDate date];
+
     self.eventStore = [[EKEventStore alloc] init];
     self.eventStoreProxy = [[ECEventStoreProxy alloc] init];
     
@@ -65,13 +68,15 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     
     [self.eventStore removeCalendar:self.testCalendar commit:YES error:nil];
     
+    self.testStartDate = nil;
     self.eventStore = nil;
     self.eventStoreProxy = nil;
 }
 
 #pragma mark - Tests
 
-- (void)testCalendarAccess
+#pragma mark Testing Access
+- (void)testCalendarAccessAuthorizationStatusMatchesApplicationsStatus
 {
     switch ([EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent]) {
         case (EKAuthorizationStatusNotDetermined):
@@ -89,18 +94,17 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     }
 }
 
-- (void)testCalendars
+#pragma mark - Testing Calendars
+- (void)testProxysCalendarListIsSameAsEKEventStores
 {
     // Test calendars are equal
     NSArray* proxyCalendars = self.eventStoreProxy.calendars;
     NSArray* eventKitCalendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
     XCTAssertTrue([proxyCalendars hasSameElements:eventKitCalendars]);
-    
-    // Test using calendar identifiers
-    for (EKCalendar* calendar in eventKitCalendars) {
-        XCTAssertTrue([[self.eventStoreProxy calendarWithIdentifier:calendar.calendarIdentifier] isEqual:[self.eventStore calendarWithIdentifier:calendar.calendarIdentifier]]);
-    }
 }
+
+
+#pragma mark Testing Event Fetching
 
 - (void)compareEventsFromStore:(EKEventStore*)store proxy:(ECEventStoreProxy*)proxy query:(ECTestsEventQuery*)query
 {
@@ -111,113 +115,275 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     XCTAssertTrue([NSArray eventsArray:proxyEvents isSameAsArray:storeEvents]);
 }
 
-- (void)testFetchingEvents
+- (void)testFetchingEventsForOneDay
 {
-    NSDate* now = [NSDate date];
-    ECTestsEventQuery* todayQuery = [[ECTestsEventQuery alloc] initWithStartDate:now type:ECTestsEventQueryTypeDay calendars:nil];
-    ECTestsEventQuery* thisWeekQuery = [[ECTestsEventQuery alloc] initWithStartDate:now type:ECTestsEventQueryTypeWeek calendars:nil];
-    ECTestsEventQuery* thisMonthQuery = [[ECTestsEventQuery alloc] initWithStartDate:now type:ECTestsEventQueryTypeMonth calendars:nil];
-    ECTestsEventQuery* thisYearQuery = [[ECTestsEventQuery alloc] initWithStartDate:now type:ECTestsEventQueryTypeYear calendars:nil];
-    NSArray* queries = @[todayQuery, thisWeekQuery, thisMonthQuery, thisYearQuery];
-    
-    // Fetching events within a given time range (all calendars)
+    ECTestsEventQuery* todayQuery = [[ECTestsEventQuery alloc] initWithStartDate:self.testStartDate type:ECTestsEventQueryTypeDay calendars:nil];
+
     [self compareEventsFromStore:self.eventStore proxy:self.eventStoreProxy query:todayQuery];
+}
+
+- (void)testFetchingEventsForOneWeek
+{
+    ECTestsEventQuery* thisWeekQuery = [[ECTestsEventQuery alloc] initWithStartDate:self.testStartDate type:ECTestsEventQueryTypeWeek calendars:nil];
+    
     [self compareEventsFromStore:self.eventStore proxy:self.eventStoreProxy query:thisWeekQuery];
+}
+
+- (void)testFetchingEventsForOneMonth
+{
+    ECTestsEventQuery* thisMonthQuery = [[ECTestsEventQuery alloc] initWithStartDate:self.testStartDate type:ECTestsEventQueryTypeMonth calendars:nil];
+
     [self compareEventsFromStore:self.eventStore proxy:self.eventStoreProxy query:thisMonthQuery];
+}
+
+- (void)testFetchingEventsForOneYear
+{
+    ECTestsEventQuery* thisYearQuery = [[ECTestsEventQuery alloc] initWithStartDate:self.testStartDate type:ECTestsEventQueryTypeYear calendars:nil];
+
     [self compareEventsFromStore:self.eventStore proxy:self.eventStoreProxy query:thisYearQuery];
+}
+
+- (void)testFetchingEventsInAGivenCalendar
+{
+    ECTestsEventQuery* thisYearQuery = [[ECTestsEventQuery alloc] initWithStartDate:self.testStartDate type:ECTestsEventQueryTypeYear calendars:nil];
     
-    // Fetching events in a given calendar
-    for (ECTestsEventQuery* query in queries) {
-        for (EKCalendar* calendar in [self.eventStore calendarsForEntityType:EKEntityTypeEvent]) {
-            query.calendars = @[calendar];
-            [self compareEventsFromStore:self.eventStore proxy:self.eventStoreProxy query:query];
-            query.calendars = nil; // restore test state
-        }
+    for (EKCalendar* calendar in [self.eventStore calendarsForEntityType:EKEntityTypeEvent]) {
+        thisYearQuery.calendars = @[calendar];
+        [self compareEventsFromStore:self.eventStore proxy:self.eventStoreProxy query:thisYearQuery];
+        thisYearQuery.calendars = nil; // restore test state
     }
+}
+
+- (void)testFetchingEventsWithStartDateAndEndDateSwappedReturnsNil
+{
+    ECTestsEventQuery* todayQuery = [[ECTestsEventQuery alloc] initWithStartDate:self.testStartDate type:ECTestsEventQueryTypeDay calendars:nil];
     
-    // Fetching events with invalid start and end dates
-    XCTAssertNil([self.eventStoreProxy eventsFrom:todayQuery.startDate to:todayQuery.endDate]);
     XCTAssertNil([self.eventStoreProxy eventsFrom:todayQuery.endDate to:todayQuery.startDate], @"End date prior to start date should return nil");
+}
+
+- (void)testFetchingEventsWithNilEndDateReturnsNil
+{
+    ECTestsEventQuery* todayQuery = [[ECTestsEventQuery alloc] initWithStartDate:self.testStartDate type:ECTestsEventQueryTypeDay calendars:nil];
+    
     XCTAssertNil([self.eventStoreProxy eventsFrom:todayQuery.startDate to:nil], @"No end date should return nil");
+}
+
+- (void)testFetchingEventsWithNilStartDateReturnsNil
+{
+    ECTestsEventQuery* todayQuery = [[ECTestsEventQuery alloc] initWithStartDate:self.testStartDate type:ECTestsEventQueryTypeDay calendars:nil];
+    
     XCTAssertNil([self.eventStoreProxy eventsFrom:nil to:todayQuery.endDate], @"No start date should return nil");
-    XCTAssertNil([self.eventStoreProxy eventsFrom:nil to:nil], @"No dates should return nil");
 }
 
 
-- (void)testEventCreationAndSynchronization
+#pragma mark Testing Event Creation
+
+- (void)testCreatingEventReturnsNonNilEvent
 {
-    NSDate* now = [[NSDate date] beginningOfHour]; // Standardized date to avoid timing failures
-    
-    //** CREATING EVENT **//
     EKEvent* singleEvent = [self.eventStoreProxy createEvent];
     
     XCTAssertNotNil(singleEvent);
+}
+
+- (void)testNewlyCreatedEventHasNilTitle
+{
+    EKEvent* singleEvent = [self.eventStoreProxy createEvent];
+
     XCTAssertNil(singleEvent.title);
+}
+
+- (void)testNewlyCreatedEventHasNilStartDate
+{
+    EKEvent* singleEvent = [self.eventStoreProxy createEvent];
+
     XCTAssertNil(singleEvent.startDate);
+
+}
+
+- (void)testNewlyCreatedEventHasNilEndDate
+{
+    EKEvent* singleEvent = [self.eventStoreProxy createEvent];
+
     XCTAssertNil(singleEvent.endDate);
+}
+
+- (void)testNewlyCreatedEventHasDefaultCalendarForNewEvents
+{
+    EKEvent* singleEvent = [self.eventStoreProxy createEvent];
+
     XCTAssertTrue([singleEvent.calendar isEqual:self.eventStore.defaultCalendarForNewEvents]);
-    
-    //** VALID DATA **//
+}
+
+
+#pragma mark Testing Saving Events
+
+- (void)testSavingEventReturnsYesOnSuccess
+{
+    EKEvent* singleEvent = [self.eventStoreProxy createEvent];
+
     singleEvent.title = @"First Event Title";
     singleEvent.location = @"123 Fake Street";
-    singleEvent.startDate = now;
+    singleEvent.startDate = self.testStartDate;
     singleEvent.endDate = [singleEvent.startDate endOfHour];
     singleEvent.calendar = self.testCalendar;
-    
+
     XCTAssert([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]);
+    
+    [self.eventStore removeEvent:singleEvent span:EKSpanThisEvent commit:YES error:nil];
+}
+
+- (void)testSavedEventCanBeFetched
+{
+    EKEvent* singleEvent = [self.eventStoreProxy createEvent];
+    
+    singleEvent.title = @"First Event Title";
+    singleEvent.location = @"123 Fake Street";
+    singleEvent.startDate = self.testStartDate;
+    singleEvent.endDate = [singleEvent.startDate endOfHour];
+    singleEvent.calendar = self.testCalendar;
+
+    [self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent];
     NSArray* events = [self.eventStoreProxy eventsFrom:[singleEvent.startDate beginningOfDay] to:[singleEvent.endDate endOfDay] in:@[self.testCalendar]];
     NSString* singleEventID = singleEvent.eventIdentifier;
     
-    XCTAssert(events.count == 1);
     XCTAssertNotNil([events eventWithIdentifier:singleEventID]);
-    XCTAssert([self.eventStoreProxy removeEvent:singleEvent span:EKSpanThisEvent]);
-    XCTAssertFalse([self.eventStoreProxy removeEvent:singleEvent span:EKSpanThisEvent]);
-    XCTAssert([self.eventStoreProxy eventsFrom:[singleEvent.startDate beginningOfDay] to:[singleEvent.endDate endOfDay] in:@[self.testCalendar]].count == 0);
     
+    [self.eventStore removeEvent:singleEvent span:EKSpanThisEvent commit:YES error:nil];
+}
 
+- (void)testSavingRecurrinvEventCreatesMultipleEvents
+{
     EKEvent* recurringEvent = [self.eventStoreProxy createEvent];
     recurringEvent.title = @"Recurring Event Title";
     recurringEvent.location = @"123 Fake Street";
-    recurringEvent.startDate = now;
+    recurringEvent.startDate = self.testStartDate;
     recurringEvent.endDate = [recurringEvent.startDate endOfHour];
     recurringEvent.calendar = self.testCalendar;
     EKRecurrenceRule* weeklyRecurrence = [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:EKRecurrenceFrequencyWeekly
                                                                                       interval:1
                                                                                            end:[EKRecurrenceEnd recurrenceEndWithOccurrenceCount:50]];
     [recurringEvent addRecurrenceRule:weeklyRecurrence];
+    [self.eventStoreProxy saveEvent:recurringEvent span:EKSpanFutureEvents];
     
-    XCTAssert([self.eventStoreProxy saveEvent:recurringEvent span:EKSpanFutureEvents]);
-    XCTAssert([self.eventStoreProxy eventsFrom:[now beginningOfDay] to:[[[now endOfYear]tomorrow] endOfYear] in:@[self.testCalendar]].count == 50);
-    XCTAssert([self.eventStoreProxy removeEvent:recurringEvent span:EKSpanFutureEvents]);
-    XCTAssert([self.eventStoreProxy eventsFrom:[now beginningOfDay] to:[[[now endOfYear]tomorrow] endOfYear] in:@[self.testCalendar]].count == 0);
+    XCTAssert([self.eventStoreProxy eventsFrom:[self.testStartDate beginningOfDay] to:[[[self.testStartDate endOfYear]tomorrow] endOfYear] in:@[self.testCalendar]].count == 50);
     
-    
-     //** INVALID DATA **//
-    XCTAssertFalse([self.eventStoreProxy saveEvent:nil span:EKSpanThisEvent]); // save nil
+    [self.eventStore removeEvent:recurringEvent span:EKSpanFutureEvents commit:YES error:nil];
+}
 
-    singleEvent.title = nil;
-    XCTAssertFalse([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]); // no title
+#pragma mark Testing Removing Events
+
+- (void)testRemovingEventReturnsYesOnSuccess
+{
+    EKEvent* singleEvent = [self.eventStoreProxy createEvent];
+    
+    singleEvent.title = @"First Event Title";
+    singleEvent.location = @"123 Fake Street";
+    singleEvent.startDate = self.testStartDate;
+    singleEvent.endDate = [singleEvent.startDate endOfHour];
+    singleEvent.calendar = self.testCalendar;
+    
+    [self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent];
+    XCTAssert([self.eventStoreProxy removeEvent:singleEvent span:EKSpanThisEvent]);
+}
+
+- (void)testRemovingEventTwiceIsUnsuccessful
+{
+    EKEvent* singleEvent = [self.eventStoreProxy createEvent];
+    
+    singleEvent.title = @"First Event Title";
+    singleEvent.location = @"123 Fake Street";
+    singleEvent.startDate = self.testStartDate;
+    singleEvent.endDate = [singleEvent.startDate endOfHour];
+    singleEvent.calendar = self.testCalendar;
+    
+    [self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent];
+    [self.eventStoreProxy removeEvent:singleEvent span:EKSpanThisEvent];
+    XCTAssertFalse([self.eventStoreProxy removeEvent:singleEvent span:EKSpanThisEvent]);
+}
+
+- (void)testRemovedEventsAreNoLongerFetched
+{
+    EKEvent* singleEvent = [self.eventStoreProxy createEvent];
+    
+    singleEvent.title = @"First Event Title";
+    singleEvent.location = @"123 Fake Street";
+    singleEvent.startDate = self.testStartDate;
+    singleEvent.endDate = [singleEvent.startDate endOfHour];
+    singleEvent.calendar = self.testCalendar;
+
+    [self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent];
+    [self.eventStoreProxy removeEvent:singleEvent span:EKSpanThisEvent];
+    NSArray* events = [self.eventStoreProxy eventsFrom:[singleEvent.startDate beginningOfDay] to:[singleEvent.endDate endOfDay] in:@[self.testCalendar]];
+    XCTAssertNil(events);
+}
+
+- (void)testAllInstancesOfARecurringEventAreRemoved
+{
+    EKEvent* recurringEvent = [self.eventStoreProxy createEvent];
+    recurringEvent.title = @"Recurring Event Title";
+    recurringEvent.location = @"123 Fake Street";
+    recurringEvent.startDate = self.testStartDate;
+    recurringEvent.endDate = [recurringEvent.startDate endOfHour];
+    recurringEvent.calendar = self.testCalendar;
+    EKRecurrenceRule* weeklyRecurrence = [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:EKRecurrenceFrequencyWeekly
+                                                                                      interval:1
+                                                                                           end:[EKRecurrenceEnd recurrenceEndWithOccurrenceCount:50]];
+    [recurringEvent addRecurrenceRule:weeklyRecurrence];
+    [self.eventStoreProxy saveEvent:recurringEvent span:EKSpanFutureEvents];
+    [self.eventStoreProxy removeEvent:recurringEvent span:EKSpanFutureEvents];
+    
+    XCTAssert([self.eventStoreProxy eventsFrom:[self.testStartDate beginningOfDay] to:[[[self.testStartDate endOfYear]tomorrow] endOfYear] in:@[self.testCalendar]].count == 0);
+}
+
+- (void)testSavingNilEventFails
+{
+    XCTAssertFalse([self.eventStoreProxy saveEvent:nil span:EKSpanThisEvent]); // save nil
+}
+
+- (void)testSavingEventWithNoStartDateFails
+{
+    EKEvent* singleEvent = [self.eventStoreProxy createEvent];
     
     singleEvent.title = @"Single Event Title";
-    singleEvent.startDate = nil;
+    singleEvent.endDate = self.testStartDate;
+    singleEvent.calendar = self.testCalendar;
+    
     XCTAssertFalse([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]); // no start date
+}
+
+- (void)testSavingEventWithNoEndDateFails
+{
+    EKEvent* singleEvent = [self.eventStoreProxy createEvent];
     
-    singleEvent.startDate = now;
-    singleEvent.endDate = nil;
+    singleEvent.title = @"Single Event Title";
+    singleEvent.startDate = self.testStartDate;
+    singleEvent.calendar = self.testCalendar;
+    
     XCTAssertFalse([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]); // no end date
+}
+
+- (void)testSavingEventWithEndDatePriorToStartDateFails
+{
+    EKEvent* singleEvent = [self.eventStoreProxy createEvent];
     
-    singleEvent.endDate = now;
-    singleEvent.startDate = [now endOfHour];
+    singleEvent.title = @"Single Event Title";
+    singleEvent.endDate = self.testStartDate;
+    singleEvent.startDate = [self.testStartDate endOfHour];
+    singleEvent.calendar = self.testCalendar;
+    
     XCTAssertFalse([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]); // end date prior to start date
+}
+
+- (void)testSavingEventWithNoCalendarFails
+{
+    EKEvent* singleEvent = [self.eventStoreProxy createEvent];
     
-    singleEvent.startDate = now;
-    singleEvent.endDate = [now endOfHour];
+    singleEvent.title = @"Single Event Title";
+    singleEvent.startDate = self.testStartDate;
+    singleEvent.endDate = [self.testStartDate endOfHour];
+    
     singleEvent.calendar = nil;
-    XCTAssertFalse([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]); // no calendar
-    
-    // Fail safe methods to ensure clean test state
-    [self.eventStore removeEvent:singleEvent span:EKSpanThisEvent commit:YES error:nil];
-    [self.eventStore removeEvent:recurringEvent span:EKSpanFutureEvents commit:YES error:nil];
+    XCTAssertFalse([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]); // no end date
 }
 
 @end
