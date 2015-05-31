@@ -6,14 +6,18 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
+#import "UIView+ECAdditions.h"
 #import "ECWeekdayPicker.h"
-#import "ECDatePickerCell.h"
 
 #define DATE_PICKER_CELL_REUSE_ID   @"DatePickerCell"
 
-@interface ECWeekdayPicker() <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface ECWeekdayPicker()
 
-@property (nonatomic, weak) UICollectionView* weekdaysCollectionView;
+@property (nonatomic, strong) NSDateFormatter* dateFormatter;
+
+// views
+@property (nonatomic, strong) NSArray* weekdayLabels;
+@property (nonatomic, weak) UIScrollView* weekdaysScrollView;
 
 // weekday arrays
 @property (nonatomic, strong, readwrite) NSArray* weekdays;
@@ -28,38 +32,79 @@
 
 - (instancetype)initWithDate:(NSDate *)date
 {
+    DDLogDebug(@"Initializing weekday picker with date %@", date);
     self = [super initWithFrame:CGRectZero];
     if (self) {
         [self setSelectedDate:date animated:YES];
         
-        [self addWeekdaysCollectionView];
+        self.backgroundColor = [UIColor whiteColor];
     }
     
     return self;
 }
 
+- (NSDateFormatter*)dateFormatter
+{
+    if (!_dateFormatter) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        
+        _dateFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"dd" options:0 locale:[NSLocale currentLocale]];
+    }
+    
+    return _dateFormatter;
+}
+
 - (void)setSelectedDate:(NSDate *)selectedDate animated:(BOOL)animated
 {
+    DDLogDebug(@"Changing weekday picker selected date to %@", selectedDate);
     _selectedDate = selectedDate;
     [self updateWeekdaysWithDate:selectedDate];
     
     [self.pickerDelegate weekdayPicker:self didSelectDate:selectedDate];
 }
 
-- (void)addWeekdaysCollectionView
+- (UIScrollView *)weekdaysScrollView
 {
-    UICollectionViewLayout* flow = [[UICollectionViewFlowLayout alloc] init];
-    UICollectionView* weekdaysCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flow];
+    if (!_weekdaysScrollView) {
+        UIScrollView* weekdaysScrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
+        
+        _weekdaysScrollView = weekdaysScrollView;
+        [self addSubview:weekdaysScrollView];
+    }
     
-    weekdaysCollectionView.pagingEnabled = YES;
-    weekdaysCollectionView.delegate = self;
-    weekdaysCollectionView.dataSource = self;
-    
-    [weekdaysCollectionView registerClass:[ECDatePickerCell class] forCellWithReuseIdentifier:DATE_PICKER_CELL_REUSE_ID];
-    
-    self.weekdaysCollectionView = weekdaysCollectionView;
-    [self addSubview:weekdaysCollectionView];
+    return _weekdaysScrollView;
 }
+
+- (NSArray*)weekdayLabels
+{
+    if (!_weekdayLabels) {
+        _weekdayLabels = [self createWeekdayLabels];
+    }
+    
+    return _weekdayLabels;
+}
+
+
+#pragma mark - Creating Views
+
+- (NSArray*)createWeekdayLabels
+{
+    NSMutableArray* mutableWeekdayLabels = [[NSMutableArray alloc] init];
+    
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    for (NSInteger i = 0; i < calendar.shortWeekdaySymbols.count; i++) {
+        UILabel* weekdayLabel = [self addLabel];
+        
+        weekdayLabel.textAlignment = NSTextAlignmentCenter;
+        weekdayLabel.font = [UIFont systemFontOfSize:11.0f];
+        weekdayLabel.text = calendar.shortWeekdaySymbols[i];
+        
+        [mutableWeekdayLabels addObject:weekdayLabel];
+    }
+    
+    return [mutableWeekdayLabels copy];
+}
+
 
 #pragma mark - Setting Weekdays
 
@@ -100,59 +145,44 @@
     [self.pickerDelegate weekdayPicker:self didScrollFrom:oldWeekdays to:self.weekdays];
 }
 
+#pragma mark - Layout
 
-#pragma mark - Configuring Collection View Cells
+#define WEEKDAY_LABEL_HEIGHT   22.0f
 
-#define LAST_WEEK_SECTION 0
-#define CURRENT_WEEK_SECTION 1
-#define NEXT_WEEK_SECTION 2
-
-- (void)configureCell:(ECDatePickerCell*)cell forIndexPath:(NSIndexPath*)indexPath
+- (void)layoutSubviews
 {
-    switch (indexPath.section) {
-        case LAST_WEEK_SECTION:
-            cell.date = self.prevWeekdays[indexPath.row];
-            break;
-            
-        case CURRENT_WEEK_SECTION:
-            cell.date = self.weekdays[indexPath.row];
-            break;
-            
-        case NEXT_WEEK_SECTION:
-            cell.date = self.nextWeekdays[indexPath.row];
-            break;
-            
-        default:
-            DDLogError(@"Invalid index path for collection view, indexPath: %@", indexPath);
-            break;
+    [super layoutSubviews];
+    
+    [self layoutWeekdayLabels];
+    [self layoutWeekdayScrollView];
+}
+
+- (void)layoutWeekdayLabels
+{
+    CGFloat weekdayLabelWidth = floorf(self.bounds.size.width / self.weekdayLabels.count);
+    
+    for (NSInteger i = 0; i < self.weekdayLabels.count; i++) {
+        CGRect weekdayLabelFrame = CGRectMake(self.bounds.origin.x + i * weekdayLabelWidth,
+                                              self.bounds.origin.y,
+                                              weekdayLabelWidth,
+                                              WEEKDAY_LABEL_HEIGHT);
+        
+        UILabel* weekdayLabel = self.weekdayLabels[i];
+        weekdayLabel.frame = weekdayLabelFrame;
     }
 }
 
-
-#pragma mark - UI Collection View Delegate and Datasource
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+- (void)layoutWeekdayScrollView
 {
-    return 3;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return 7;
-}
-
-- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    ECDatePickerCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:DATE_PICKER_CELL_REUSE_ID forIndexPath:indexPath];
+    UILabel* firstWeekdayLabel = [self.weekdayLabels firstObject];
     
-    [self configureCell:cell forIndexPath:indexPath];
+    CGRect weekdayScrollViewFrame = CGRectMake(self.bounds.origin.x,
+                                               CGRectGetMaxY(firstWeekdayLabel.frame),
+                                               self.bounds.size.width,
+                                               self.bounds.size.height - WEEKDAY_LABEL_HEIGHT);
     
-    return cell;
+    self.weekdaysScrollView.frame = weekdayScrollViewFrame;
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    // pass
-}
 
 @end

@@ -17,9 +17,11 @@
 #import "ECDayView.h"
 #import "ECEventStoreProxy.h"
 #import "ECEventViewFactory.h"
+#import "ECWeekdayPicker.h"
 
 @interface ECDayViewController ()
 
+@property (nonatomic, weak) ECWeekdayPicker* weekdayPicker;
 @property (nonatomic, weak) ECDayView* dayView;
 @property (nonatomic, weak) UIView* statusBarCover;
 
@@ -33,6 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupStatusBarCover];
+    [self setupWeekdayPicker];
     [self setupDayView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEvents) name:ECEventStoreProxyAuthorizationStatusChangedNotification object:nil];
@@ -63,6 +66,18 @@
     return _statusBarCover;
 }
 
+- (ECWeekdayPicker*)weekdayPicker
+{
+    if (!_weekdayPicker) {
+        ECWeekdayPicker* weekdayPicker = [[ECWeekdayPicker alloc] initWithDate:self.displayDate];
+        
+        _weekdayPicker = weekdayPicker;
+        [self.view addSubview:weekdayPicker];
+    }
+    
+    return _weekdayPicker;
+}
+
 @synthesize displayDate = _displayDate;
 
 - (NSDate*)displayDate
@@ -84,6 +99,8 @@
 
 #pragma mark - View setup
 
+#define WEEKDAY_PICKER_HEIGHT   88.0f
+
 - (void)setupStatusBarCover
 {
     self.statusBarCover.backgroundColor = [UIColor whiteColor];
@@ -95,16 +112,26 @@
     self.statusBarCover.frame = statusBarCoverFrame;
 }
 
+- (void)setupWeekdayPicker
+{
+    CGRect weekdayPickerFrame = CGRectMake(self.view.bounds.origin.x,
+                                           CGRectGetMaxY(self.statusBarCover.frame),
+                                           self.view.bounds.size.width,
+                                           WEEKDAY_PICKER_HEIGHT);
+    
+    self.weekdayPicker.frame = weekdayPickerFrame;
+}
+
 - (void)setupDayView
 {
     self.dayView.backgroundColor = [UIColor whiteColor];
     
     CGRect dayViewFrame = CGRectMake(self.view.bounds.origin.x,
-                                     CGRectGetMaxY(self.statusBarCover.frame),
+                                     CGRectGetMaxY(self.weekdayPicker.frame),
                                      self.view.bounds.size.width,
-                                     self.view.bounds.size.height - self.statusBarCover.frame.size.height);
+                                     self.view.bounds.size.height - (self.statusBarCover.frame.size.height + self.weekdayPicker.frame.size.height));
     
-    CGSize dayViewContentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 2.5);
+    CGSize dayViewContentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 2);
     self.dayView.frame = dayViewFrame;
     self.dayView.contentSize = dayViewContentSize;
 }
