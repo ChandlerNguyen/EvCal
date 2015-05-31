@@ -8,6 +8,9 @@
 
 #import "UIView+ECAdditions.h"
 #import "ECWeekdayPicker.h"
+#import "ECDateView.h"
+#import "ECDateViewFactory.h"
+
 
 #define DATE_PICKER_CELL_REUSE_ID   @"DatePickerCell"
 
@@ -18,6 +21,10 @@
 // views
 @property (nonatomic, strong) NSArray* weekdayLabels;
 @property (nonatomic, weak) UIScrollView* weekdaysScrollView;
+
+@property (nonatomic, strong) NSArray* leftDateViews;
+@property (nonatomic, strong) NSArray* currentDateViews;
+@property (nonatomic, strong) NSArray* rightDateViews;
 
 // weekday arrays
 @property (nonatomic, strong, readwrite) NSArray* weekdays;
@@ -68,6 +75,9 @@
     if (!_weekdaysScrollView) {
         UIScrollView* weekdaysScrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
         
+        weekdaysScrollView.pagingEnabled = YES;
+        weekdaysScrollView.showsHorizontalScrollIndicator = NO;
+        
         _weekdaysScrollView = weekdaysScrollView;
         [self addSubview:weekdaysScrollView];
     }
@@ -82,6 +92,40 @@
     }
     
     return _weekdayLabels;
+}
+
+// Instantiate date views together to avoid race conditions
+- (NSArray*)currentDateViews
+{
+    if (!_currentDateViews) {
+        _currentDateViews = [self createDateViewsForWeek:self.weekdays];
+        _leftDateViews = [self createDateViewsForWeek:self.prevWeekdays];
+        _rightDateViews = [self createDateViewsForWeek:self.nextWeekdays];
+    }
+    
+    return _currentDateViews;
+}
+
+- (NSArray*)leftDateViews
+{
+    if (!_leftDateViews) {
+        _currentDateViews = [self createDateViewsForWeek:self.weekdays];
+        _leftDateViews = [self createDateViewsForWeek:self.prevWeekdays];
+        _rightDateViews = [self createDateViewsForWeek:self.nextWeekdays];
+    }
+    
+    return _leftDateViews;
+}
+
+- (NSArray*)rightDateViews
+{
+    if (!_rightDateViews) {
+        _currentDateViews = [self createDateViewsForWeek:self.weekdays];
+        _leftDateViews = [self createDateViewsForWeek:self.prevWeekdays];
+        _rightDateViews = [self createDateViewsForWeek:self.nextWeekdays];
+    }
+    
+    return _rightDateViews;
 }
 
 
@@ -99,10 +143,27 @@
         weekdayLabel.font = [UIFont systemFontOfSize:11.0f];
         weekdayLabel.text = calendar.shortWeekdaySymbols[i];
         
+        weekdayLabel.layer.borderWidth = 1.0f;
+        
         [mutableWeekdayLabels addObject:weekdayLabel];
     }
     
     return [mutableWeekdayLabels copy];
+}
+
+- (NSArray*)createDateViewsForWeek:(NSArray*)weekdays
+{
+    NSMutableArray* mutableDateViews = [[NSMutableArray alloc] init];
+    
+    ECDateViewFactory* factory = [[ECDateViewFactory alloc] init];
+    for (NSDate* date in weekdays) {
+        ECDateView* dateView = [factory dateViewForDate:date];
+        
+        [self.weekdaysScrollView addSubview:dateView];
+        [mutableDateViews addObject:dateView];
+    }
+    
+    return [mutableDateViews copy];
 }
 
 
@@ -182,7 +243,47 @@
                                                self.bounds.size.height - WEEKDAY_LABEL_HEIGHT);
     
     self.weekdaysScrollView.frame = weekdayScrollViewFrame;
+    self.weekdaysScrollView.contentSize = CGSizeMake(self.bounds.size.width * 3, self.bounds.size.height - WEEKDAY_LABEL_HEIGHT);
+    
+    [self layoutDateViews];
+    self.weekdaysScrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
 }
+
+- (void)layoutDateViews
+{
+    CGRect leftDateViewsBounds = CGRectMake(self.weekdaysScrollView.bounds.origin.x,
+                                            self.weekdaysScrollView.bounds.origin.y,
+                                            self.bounds.size.width,
+                                            self.weekdaysScrollView.bounds.size.height);
+    [self layoutDateViews:self.leftDateViews inRect:leftDateViewsBounds];
+    
+    CGRect currentDateViewBounds = CGRectMake(self.weekdaysScrollView.bounds.origin.x + self.bounds.size.width,
+                                              self.weekdaysScrollView.bounds.origin.y,
+                                              self.bounds.size.width,
+                                              self.weekdaysScrollView.bounds.size.height);
+    [self layoutDateViews:self.currentDateViews inRect:currentDateViewBounds];
+    
+    CGRect rightDateViewBounds = CGRectMake(self.weekdaysScrollView.bounds.origin.x + 2 * self.bounds.size.width,
+                                            self.weekdaysScrollView.bounds.origin.y,
+                                            self.weekdaysScrollView.bounds.size.width,
+                                            self.weekdaysScrollView.bounds.size.height);
+    [self layoutDateViews:self.rightDateViews inRect:rightDateViewBounds];
+
+}
+
+- (void)layoutDateViews:(NSArray*)dateViews inRect:(CGRect)rect
+{
+    CGFloat dateViewWidth = floorf(rect.size.width / dateViews.count);
+
+    for (NSInteger i = 0; i < dateViews.count; i++) {
+        CGRect dateViewFrame = CGRectMake(rect.origin.x + i * dateViewWidth, rect.origin.y, dateViewWidth, rect.size.height);
+        
+        ECDateView* dateView = dateViews[i];
+        dateView.frame = dateViewFrame;
+    }
+}
+
+
 
 
 @end

@@ -33,4 +33,18 @@
  */
 - (void)setSelectedDate:(BOOL)selectedDate animated:(BOOL)animated;
 
+//------------------------------------------------------------------------------
+// @name Initializing
+//------------------------------------------------------------------------------
+
+/**
+ *  DESIGNATED INITIALIZER
+ *  Creates a new date view with the given date.
+ *
+ *  @param date The date with which to initialize the view.
+ *
+ *  @return A newly created date view with the given date.
+ */
+- (instancetype)initWithDate:(NSDate*)date;
+
 @end

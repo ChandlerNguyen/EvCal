@@ -21,10 +21,7 @@
 
 - (ECDateView*)dateViewForDate:(NSDate *)date
 {
-    ECDateView* dateView = [[ECDateView alloc] initWithFrame:CGRectZero];
-    
-    dateView.date = date;
-    [dateView setSelectedDate:NO animated:NO];
+    ECDateView* dateView = [[ECDateView alloc] initWithDate:date];
     
     [self addAccessoryViewsForDate:date toDateView:dateView];
     
