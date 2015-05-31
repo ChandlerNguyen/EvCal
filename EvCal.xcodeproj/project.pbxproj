@@ -22,6 +22,7 @@
 		8478F7951B1AB26E0096F1B7 /* ECDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F7941B1AB26E0096F1B7 /* ECDateView.m */; };
 		8478F7981B1AB2D50096F1B7 /* ECDateViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F7971B1AB2D50096F1B7 /* ECDateViewFactory.m */; };
 		8478F79A1B1AE8FF0096F1B7 /* ECDateViewFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F7991B1AE8FF0096F1B7 /* ECDateViewFactoryTests.m */; };
+		8478F79D1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F79C1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.m */; };
 		84B2E13E1B08E0A000CD0029 /* UIView+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B2E13D1B08E0A000CD0029 /* UIView+ECAdditions.m */; };
 		84C458F91B073A860066B6A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C458F81B073A860066B6A9 /* main.m */; };
 		84C458FC1B073A860066B6A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C458FB1B073A860066B6A9 /* AppDelegate.m */; };
@@ -74,6 +75,8 @@
 		8478F7961B1AB2D50096F1B7 /* ECDateViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDateViewFactory.h; path = Views/ECDateViewFactory.h; sourceTree = "<group>"; };
 		8478F7971B1AB2D50096F1B7 /* ECDateViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDateViewFactory.m; path = Views/ECDateViewFactory.m; sourceTree = "<group>"; };
 		8478F7991B1AE8FF0096F1B7 /* ECDateViewFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDateViewFactoryTests.m; sourceTree = "<group>"; };
+		8478F79B1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDateViewAccessoryView.h; path = Views/ECDateViewAccessoryView.h; sourceTree = "<group>"; };
+		8478F79C1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDateViewAccessoryView.m; path = Views/ECDateViewAccessoryView.m; sourceTree = "<group>"; };
 		847A81661B09B18B008F5168 /* ECLogging.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ECLogging.pch; path = Application/ECLogging.pch; sourceTree = "<group>"; };
 		84B2E13C1B08E0A000CD0029 /* UIView+ECAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+ECAdditions.h"; path = "Support/UIView+ECAdditions.h"; sourceTree = "<group>"; };
 		84B2E13D1B08E0A000CD0029 /* UIView+ECAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+ECAdditions.m"; path = "Support/UIView+ECAdditions.m"; sourceTree = "<group>"; };
@@ -246,6 +249,8 @@
 				8478F7941B1AB26E0096F1B7 /* ECDateView.m */,
 				8478F7961B1AB2D50096F1B7 /* ECDateViewFactory.h */,
 				8478F7971B1AB2D50096F1B7 /* ECDateViewFactory.m */,
+				8478F79B1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.h */,
+				8478F79C1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -467,6 +472,7 @@
 				84EF226C1B08D5BD003DA610 /* ECEventView.m in Sources */,
 				8478F78A1B1822AA0096F1B7 /* ECWeekdayPicker.m in Sources */,
 				8478F7981B1AB2D50096F1B7 /* ECDateViewFactory.m in Sources */,
+				8478F79D1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.m in Sources */,
 				84EF22611B08769A003DA610 /* ECEventStoreProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,4 +10,16 @@
 
 @implementation ECDateView
 
+- (BOOL)isTodaysDate
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    return [calendar isDateInToday:self.date];
+}
+
+- (void)setSelectedDate:(BOOL)selectedDate animated:(BOOL)animated
+{
+    _selectedDate = selectedDate;
+}
+
 @end

@@ -9,12 +9,19 @@
 // iOS Frameworks
 #import <XCTest/XCTest.h>
 
+// Helpers
+#import "NSDate+CupertinoYankee.h"
+
 // EvCal Classes
+#import "ECEventStoreProxy.h"
 #import "ECDateView.h"
 #import "ECDateViewFactory.h"
+#import "ECDateViewAccessoryView.h"
 
 
 @interface ECDateViewFactoryTests : XCTestCase
+
+@property (nonatomic, strong) ECEventStoreProxy* eventStoreProxy;
 
 @property (nonatomic, strong) ECDateViewFactory* dateViewFactory;
 
@@ -31,11 +38,17 @@
 
     self.testStartDate = [NSDate date];
     self.dateViewFactory = [[ECDateViewFactory alloc] init];
+    self.eventStoreProxy = [[ECEventStoreProxy alloc] init];
 }
 
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+- (void)tearDown
+{
+    self.eventStoreProxy = nil;
+    self.dateViewFactory = nil;
+    self.testStartDate = nil;
+    
     [super tearDown];
+    
 }
 
 #pragma mark - Testing
@@ -90,5 +103,35 @@
     [dateView setSelectedDate:YES animated:NO];
     XCTAssertTrue(dateView.isSelectedDate);
 }
+
+#pragma mark Testing Date View Accessory Views
+
+- (void)testDateViewHasCorrectNumberOfAccessoryViews
+{
+    ECDateView* dateView = [self.dateViewFactory dateViewForDate:self.testStartDate];
+    
+    // Count calendars with events in them
+    NSInteger count = 0;
+    for (EKCalendar* calendar in self.eventStoreProxy.calendars) {
+        if ([self.eventStoreProxy eventsFrom:[self.testStartDate beginningOfDay] to:[self.testStartDate endOfDay] in:@[calendar]]) {
+            count++;
+        }
+    }
+    
+    XCTAssertEqual(count, dateView.accessoryViews.count, @"Date view should have the same number of accessory views as the user has calendars with events");
+}
+
+- (void)testDateViewHasCorrectAccessoryViewEventCount
+{
+    ECDateView* dateView = [self.dateViewFactory dateViewForDate:self.testStartDate];
+    
+    NSInteger count = 0;
+    for (ECDateViewAccessoryView* accessoryView in dateView.accessoryViews) {
+        count += accessoryView.eventCount;
+    }
+    
+    XCTAssertEqual(count, [self.eventStoreProxy eventsFrom:[self.testStartDate beginningOfDay] to:[self.testStartDate endOfDay]].count, @"Date view accessory counts should total the number of events for the day");
+}
+
 
 @end

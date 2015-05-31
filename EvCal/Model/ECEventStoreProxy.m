@@ -6,11 +6,7 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
-
-
-@import EventKit;
 #import "ECEventStoreProxy.h"
-
 
 @interface ECEventStoreProxy()
 

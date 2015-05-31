@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
+@import EventKit;
 #import <Foundation/Foundation.h>
 
 #define ECEventStoreProxyAuthorizationStatusChangedNotification @"AuthorizationStatusChanged"
@@ -18,7 +19,6 @@ typedef NS_ENUM(NSUInteger, ECAuthorizationStatus) {
 };
 
 @interface ECEventStoreProxy : NSObject
-
 
 @property (nonatomic, readonly) ECAuthorizationStatus authorizationStatus;
 

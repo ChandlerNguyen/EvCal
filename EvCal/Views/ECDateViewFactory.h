@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ECDateView;
 
-@interface ECDateViewFactory : UIView
+@interface ECDateViewFactory : NSObject
+
+- (ECDateView*)dateViewForDate:(NSDate*)date;
+- (ECDateView*)configureDateView:(ECDateView*)dateView forDate:(NSDate*)date;
 
 @end

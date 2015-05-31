@@ -10,4 +10,12 @@
 
 @interface ECDateView : UIView
 
+@property (nonatomic, strong) NSDate* date;
+@property (nonatomic, getter=isSelectedDate, readonly) BOOL selectedDate;
+@property (nonatomic, getter=isTodaysDate) BOOL todaysDate;
+
+@property (nonatomic, strong) NSArray* accessoryViews;
+
+- (void)setSelectedDate:(BOOL)selectedDate animated:(BOOL)animated;
+
 @end
