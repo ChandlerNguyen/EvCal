@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NSDate* testStartDate;
 @property (nonatomic, strong) ECWeekdayPicker* picker;
 
+
 @end
 
 @implementation ECWeekdayPickerTests
@@ -138,6 +139,7 @@
     
     XCTAssertTrue(self.didSelectDateCalled, @"ECWeekdayPicker should call its delegate when selected date is changed");
 }
+
 
 
 
