@@ -52,6 +52,7 @@
     _selectedDate = selectedDate;
     
     [self updateLabel];
+    [self setNeedsDisplay];
 }
 
 - (UILabel*)dateLabel

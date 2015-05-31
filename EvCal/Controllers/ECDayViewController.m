@@ -19,7 +19,7 @@
 #import "ECEventViewFactory.h"
 #import "ECWeekdayPicker.h"
 
-@interface ECDayViewController ()
+@interface ECDayViewController () <ECWeekdayPickerDelegate>
 
 @property (nonatomic, weak) ECWeekdayPicker* weekdayPicker;
 @property (nonatomic, weak) ECDayView* dayView;
@@ -114,6 +114,8 @@
 
 - (void)setupWeekdayPicker
 {
+    self.weekdayPicker.pickerDelegate = self;
+    
     CGRect weekdayPickerFrame = CGRectMake(self.view.bounds.origin.x,
                                            CGRectGetMaxY(self.statusBarCover.frame),
                                            self.view.bounds.size.width,
@@ -136,6 +138,16 @@
     self.dayView.contentSize = dayViewContentSize;
 }
 
+#pragma mark - Selecting Dates
+
+- (void)weekdayPicker:(ECWeekdayPicker *)picker didSelectDate:(NSDate *)date
+{
+    self.displayDate = date;
+    self.dayView.displayDate = date;
+    
+    [self refreshEvents];
+}
+
 #pragma mark - User Events
 
 - (void)refreshEvents
@@ -148,6 +160,7 @@
     
     NSArray* eventViews = [ECEventViewFactory eventViewsForEvents:events];
     
+    [self.dayView clearEventViews];
     [self.dayView addEventViews:eventViews];
 }
 

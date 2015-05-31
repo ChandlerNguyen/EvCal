@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSArray* weekdayLabels;
 @property (nonatomic, weak) UIScrollView* weekdaysScrollView;
 
+@property (nonatomic, weak) ECDateView* selectedDateView;
 @property (nonatomic, strong) NSArray* leftDateViews;
 @property (nonatomic, strong) NSArray* currentDateViews;
 @property (nonatomic, strong) NSArray* rightDateViews;
@@ -160,8 +161,10 @@
     for (NSDate* date in weekdays) {
         ECDateView* dateView = [factory dateViewForDate:date];
         
+        [dateView addTarget:self action:@selector(dateViewTapped:) forControlEvents:UIControlEventTouchUpInside];
+        
         if ([calendar isDate:date inSameDayAsDate:self.selectedDate]) {
-            [dateView setSelectedDate:YES animated:NO];
+            [self selectDateView:dateView animated:NO];
         }
         
         [self.weekdaysScrollView addSubview:dateView];
@@ -209,6 +212,24 @@
     [self updateWeekdaysWithDate:date];
     
     [self.pickerDelegate weekdayPicker:self didScrollFrom:oldWeekdays to:self.weekdays];
+}
+
+#pragma mark - UI Events
+
+- (void)dateViewTapped:(ECDateView*)dateView
+{
+    if (!dateView.isSelectedDate) {
+        [self setSelectedDate:dateView.date animated:YES];
+
+        [self.selectedDateView setSelectedDate:NO animated:YES];
+        [self selectDateView:dateView animated:YES];
+    }
+}
+
+- (void)selectDateView:(ECDateView*)dateView animated:(BOOL)animated
+{
+    self.selectedDateView = dateView;
+    [dateView setSelectedDate:YES animated:animated];
 }
 
 #pragma mark - Layout
