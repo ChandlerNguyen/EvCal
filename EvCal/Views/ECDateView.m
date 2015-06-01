@@ -119,7 +119,7 @@
         [[UIColor redColor] setFill];
     }
     
-    CGPoint circleCenter = CGPointMake(self.bounds.origin.x + self.bounds.size.width / 2, self.bounds.origin.y + self.bounds.size.width / 2);
+    CGPoint circleCenter = self.dateLabel.center;
     CGRect circleFrame = CGRectMake(circleCenter.x - CIRCLE_RADIUS,
                                     circleCenter.y - CIRCLE_RADIUS,
                                     2 * CIRCLE_RADIUS,

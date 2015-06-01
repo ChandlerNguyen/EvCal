@@ -145,7 +145,7 @@
     self.dayView.contentSize = dayViewContentSize;
 }
 
-#pragma mark - Selecting Dates
+#pragma mark - ECWeekdayPicker Delegate
 
 - (void)weekdayPicker:(ECWeekdayPicker *)picker didSelectDate:(NSDate *)date
 {
@@ -153,6 +153,11 @@
     self.dayView.displayDate = date;
     
     [self refreshEvents];
+}
+
+- (void)weekdayPicker:(ECWeekdayPicker *)picker didScrollFrom:(NSArray *)fromWeek to:(NSArray *)toWeek
+{
+    // pass
 }
 
 #pragma mark - User Events

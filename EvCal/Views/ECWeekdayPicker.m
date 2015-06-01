@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
+#import "NSDate+CupertinoYankee.h"
 #import "UIView+ECAdditions.h"
 #import "ECWeekdayPicker.h"
 #import "ECDateView.h"
@@ -188,14 +189,11 @@
 
 - (NSArray*)weekdaysForDate:(NSDate*)date
 {
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDate* startOfWeek;
-    
-    // grab first day of week containing date
-    [calendar rangeOfUnit:NSCalendarUnitWeekday startDate:&startOfWeek interval:nil forDate:date];
+    NSDate* startOfWeek = [date beginningOfWeek];
     
     DDLogDebug(@"Weekday Picker - Date: %@, First day of week: %@", date, startOfWeek);
     
+    NSCalendar* calendar = [NSCalendar currentCalendar];
     NSMutableArray* mutableWeekdays = [[NSMutableArray alloc] init];
     for (NSUInteger i = 0; i < 7; i++) {
         NSDate* date = [calendar dateByAddingUnit:NSCalendarUnitDay value:i toDate:startOfWeek options:0];
