@@ -34,6 +34,7 @@
     self = [super initWithFrame:CGRectZero];
     if (self) {
         [self setEvent:event animated:NO];
+        self.opaque = NO;
         self.layer.cornerRadius = 5.0;
         self.layer.borderColor = [UIColor blackColor].CGColor;
         self.layer.borderWidth = 1.0;
@@ -42,11 +43,13 @@
     return self;
 }
 
+#define EVENT_VIEW_ALPHA    0.85
+
 - (void)setEvent:(EKEvent *)event animated:(BOOL)animated
 {
     _event = event;
     
-    self.backgroundColor = [UIColor colorWithCGColor:event.calendar.CGColor];
+    self.backgroundColor = [[UIColor colorWithCGColor:event.calendar.CGColor] colorWithAlphaComponent:EVENT_VIEW_ALPHA];
     [self updateLabelsWithEvent:event];
     [self setNeedsLayout];
 }

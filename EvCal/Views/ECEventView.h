@@ -11,7 +11,7 @@
 
 #define EC_EVENT_VIEW_MINIMUM_HEIGHT    12.0f
 
-@interface ECEventView : UIView
+@interface ECEventView : UIControl
 
 //------------------------------------------------------------------------------
 // @name Changing events

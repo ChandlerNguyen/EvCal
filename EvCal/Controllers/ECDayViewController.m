@@ -160,6 +160,15 @@
     // pass
 }
 
+
+#pragma mark - Editing Events
+
+- (void)eventViewWasTapped:(ECEventView*)eventView
+{
+    DDLogInfo(@"Event view tapped, Event Title: %@", eventView.event.title);
+}
+
+
 #pragma mark - User Events
 
 - (void)refreshEvents
@@ -171,9 +180,17 @@
     }
     
     NSArray* eventViews = [ECEventViewFactory eventViewsForEvents:events];
+    [self addTapListenerToEventViews:eventViews];
     
     [self.dayView clearEventViews];
     [self.dayView addEventViews:eventViews];
+}
+
+- (void)addTapListenerToEventViews:(NSArray*)eventViews
+{
+    for (ECEventView* eventView in eventViews) {
+        [eventView addTarget:self action:@selector(eventViewWasTapped:) forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 
