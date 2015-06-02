@@ -14,15 +14,18 @@
 
 // EvCal Classes
 #import "ECDayViewController.h"
+#import "ECEditEventViewController.h"
 #import "ECDayView.h"
 #import "ECEventStoreProxy.h"
 #import "ECEventViewFactory.h"
 #import "ECWeekdayPicker.h"
 
-@interface ECDayViewController () <ECWeekdayPickerDelegate>
+@interface ECDayViewController () <ECWeekdayPickerDelegate, ECEditEventViewControllerDelegate>
 
 @property (nonatomic, weak) ECWeekdayPicker* weekdayPicker;
 @property (nonatomic, weak) ECDayView* dayView;
+
+@property (nonatomic, strong) NSDateFormatter* dateFormatter;
 
 @end
 
@@ -35,6 +38,8 @@
     // Do any additional setup after loading the view.
     [self setupWeekdayPicker];
     [self setupDayView];
+    
+    self.title = [self.dateFormatter stringFromDate:self.displayDate];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEvents) name:ECEventStoreProxyAuthorizationStatusChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEvents) name:ECEventStoreProxyCalendarChangedNotification object:nil];
@@ -81,7 +86,19 @@
     DDLogDebug(@"Day View display date changed OLD: %@, NEW: %@", _displayDate, displayDate);
     _displayDate = displayDate;
     
+    self.title = [self.dateFormatter stringFromDate:displayDate];
+    
     [self refreshEvents];
+}
+
+- (NSDateFormatter*)dateFormatter
+{
+    if (!_dateFormatter) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        _dateFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"MMMM yyyy" options:0 locale:[NSLocale autoupdatingCurrentLocale]];
+    }
+    
+    return _dateFormatter;
 }
 
 #pragma mark - View setup
@@ -136,12 +153,36 @@
     // pass
 }
 
+#pragma mark - ECEditEventViewController Delegate
+
+- (void)editEventViewControllerDidCancel:(ECEditEventViewController *)controller
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)editEventViewControllerDidSave:(ECEditEventViewController *)controller
+{
+    [self refreshEvents];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 #pragma mark - Editing Events
 
 - (void)eventViewWasTapped:(ECEventView*)eventView
 {
     DDLogInfo(@"Event view tapped, Event Title: %@", eventView.event.title);
+    
+    [self presentEditEventViewControllerWithEvent:eventView.event];
+}
+
+- (void)presentEditEventViewControllerWithEvent:(EKEvent*)event
+{
+    ECEditEventViewController* eevc = [[ECEditEventViewController alloc] initWithNibName:@"ECEditEventView" bundle:nil];
+    eevc.event = event;
+    eevc.delegate = self;
+    
+    [self.navigationController pushViewController:eevc animated:YES];
 }
 
 
