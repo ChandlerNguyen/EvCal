@@ -178,7 +178,7 @@
 
 - (void)presentEditEventViewControllerWithEvent:(EKEvent*)event
 {
-    ECEditEventViewController* eevc = [[ECEditEventViewController alloc] initWithNibName:@"ECEditEventView" bundle:nil];
+    ECEditEventViewController* eevc = [[ECEditEventViewController alloc] init];
     eevc.event = event;
     eevc.delegate = self;
     

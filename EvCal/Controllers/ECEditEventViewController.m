@@ -19,8 +19,8 @@
 
 
 // Event Data Fields
-@property (nonatomic, weak) UITextField* titleTextField;
-@property (nonatomic, weak) UITextField* locationTextField;
+@property (weak, nonatomic) IBOutlet UITextField *titleTextField;
+@property (nonatomic, weak) IBOutlet UITextField* locationTextField;
 
 @property (nonatomic, weak) UIDatePicker* startDatePicker;
 @property (nonatomic, weak) UIDatePicker* endDatePicker;
