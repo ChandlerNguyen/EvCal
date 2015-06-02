@@ -23,7 +23,6 @@
 
 @property (nonatomic, weak) ECWeekdayPicker* weekdayPicker;
 @property (nonatomic, weak) ECDayView* dayView;
-@property (nonatomic, weak) UIView* statusBarCover;
 
 @end
 
@@ -34,7 +33,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setupStatusBarCover];
     [self setupWeekdayPicker];
     [self setupDayView];
     
@@ -54,17 +52,6 @@
     return _dayView;
 }
 
-- (UIView*)statusBarCover
-{
-    if (!_statusBarCover) {
-        UIView* statusBarCover = [[UIView alloc] initWithFrame:CGRectZero];
-        
-        _statusBarCover = statusBarCover;
-        [self.view addSubview:statusBarCover];
-    }
-    
-    return _statusBarCover;
-}
 
 - (ECWeekdayPicker*)weekdayPicker
 {
@@ -101,24 +88,13 @@
 
 #define WEEKDAY_PICKER_HEIGHT   88.0f
 
-- (void)setupStatusBarCover
-{
-    self.statusBarCover.backgroundColor = [UIColor whiteColor];
-    
-    CGRect statusBarCoverFrame = CGRectMake(self.view.bounds.origin.x,
-                                            self.view.bounds.origin.y,
-                                            self.view.bounds.size.width,
-                                            [UIApplication sharedApplication].statusBarFrame.size.height);
-    DDLogDebug(@"Status Bar Cover Frame: %@", NSStringFromCGRect(statusBarCoverFrame));
-    self.statusBarCover.frame = statusBarCoverFrame;
-}
 
 - (void)setupWeekdayPicker
 {
     self.weekdayPicker.pickerDelegate = self;
     
     CGRect weekdayPickerFrame = CGRectMake(self.view.bounds.origin.x,
-                                           CGRectGetMaxY(self.statusBarCover.frame),
+                                           CGRectGetMaxY(self.navigationController.navigationBar.frame),
                                            self.view.bounds.size.width,
                                            WEEKDAY_PICKER_HEIGHT);
     
@@ -134,7 +110,7 @@
     CGRect dayViewFrame = CGRectMake(self.view.bounds.origin.x,
                                      CGRectGetMaxY(self.weekdayPicker.frame),
                                      self.view.bounds.size.width,
-                                     self.view.bounds.size.height - (self.statusBarCover.frame.size.height + self.weekdayPicker.frame.size.height));
+                                     self.view.bounds.size.height - self.weekdayPicker.frame.size.height);
     
     CGSize dayViewContentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 2);
     

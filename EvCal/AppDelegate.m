@@ -21,9 +21,11 @@
     [DDLog addLogger:[DDASLLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:[[ECDayViewController alloc] init]];
+    
     // Set launch view controller to day view
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = [[ECDayViewController alloc] init];
+    self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
     
     return YES;
