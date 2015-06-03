@@ -17,13 +17,12 @@
 @property (nonatomic, weak) UIBarButtonItem* cancelButton;
 @property (nonatomic, weak) UIBarButtonItem* deleteButton;
 
-
 // Event Data Fields
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (nonatomic, weak) IBOutlet UITextField* locationTextField;
 
-@property (nonatomic, weak) UIDatePicker* startDatePicker;
-@property (nonatomic, weak) UIDatePicker* endDatePicker;
+@property (nonatomic, weak) IBOutlet UIDatePicker* startDatePicker;
+@property (nonatomic, weak) IBOutlet UIDatePicker* endDatePicker;
 
 @property (nonatomic, weak) UITextView* notesView;
 

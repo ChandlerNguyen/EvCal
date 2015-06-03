@@ -17,7 +17,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ECEditEventViewController : UIViewController
+#define EC_EDIT_EVENT_VIEW_CONTROLLER_STORYBOARD_ID @"ECEditEventViewController"
+
+@interface ECEditEventViewController : UITableViewController
 
 @property (nonatomic, strong) EKEvent* event;
 

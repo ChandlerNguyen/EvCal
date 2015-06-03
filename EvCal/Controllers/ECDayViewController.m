@@ -178,7 +178,7 @@
 
 - (void)presentEditEventViewControllerWithEvent:(EKEvent*)event
 {
-    ECEditEventViewController* eevc = [[ECEditEventViewController alloc] init];
+    ECEditEventViewController* eevc = [self.storyboard instantiateViewControllerWithIdentifier:EC_EDIT_EVENT_VIEW_CONTROLLER_STORYBOARD_ID];
     eevc.event = event;
     eevc.delegate = self;
     
