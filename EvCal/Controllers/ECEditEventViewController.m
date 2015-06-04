@@ -6,7 +6,13 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
+// iOS Frameworks
 @import EventKit;
+
+// Helpers
+#import "NSDate+CupertinoYankee.h"
+
+// EvCal Classes
 #import "ECEditEventViewController.h"
 #import "ECEventStoreProxy.h"
 
@@ -33,6 +39,7 @@
 - (void)viewDidLoad
 {
     [self setupNavigationBar];
+    [self synchronizeFields];
 }
 
 - (void)setupNavigationBar
@@ -53,6 +60,33 @@
     self.event.startDate = self.startDatePicker.date;
     self.event.endDate = self.endDatePicker.date;
     self.event.notes = self.notesView.text;
+}
+
+- (void)synchronizeFields
+{
+    self.titleTextField.text = self.event.title;
+    self.locationTextField.text = self.event.location;
+    self.startDatePicker.date = [self startDateForEvent:self.event];
+    self.endDatePicker.date = [self endDateForEvent:self.event];
+    self.notesView.text = self.event.notes;
+}
+
+- (NSDate*)startDateForEvent:(EKEvent*)event
+{
+    if (event) {
+        return event.startDate;
+    } else {
+        return [[NSDate date] beginningOfHour];
+    }
+}
+
+- (NSDate*)endDateForEvent:(EKEvent*)event
+{
+    if (event) {
+        return event.endDate;
+    } else {
+        return [[NSDate date] endOfHour];
+    }
 }
 
 - (void)saveEventChanges:(EKSpan)span
@@ -92,16 +126,16 @@
 
 - (void)saveButtonTapped:(UIBarButtonItem*)sender
 {
-//    if (!self.event) {
-//        self.event = [[ECEventStoreProxy sharedInstance] createEvent];
-//        [self saveEventChanges:EKSpanThisEvent];
-//    } else {
-//        if (self.event.recurrenceRules.count > 0) {
-//            [self presentSaveSpanActionSheet];
-//        } else {
-//            [self saveEventChanges:EKSpanThisEvent];
-//        }
-//    }
+    if (!self.event) {
+        self.event = [[ECEventStoreProxy sharedInstance] createEvent];
+        [self saveEventChanges:EKSpanThisEvent];
+    } else {
+        if (self.event.recurrenceRules.count > 0) {
+            [self presentSaveSpanActionSheet];
+        } else {
+            [self saveEventChanges:EKSpanThisEvent];
+        }
+    }
     
     [self.delegate editEventViewControllerDidSave:self];
 }
