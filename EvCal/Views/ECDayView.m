@@ -20,6 +20,7 @@
 @interface ECDayView()
 
 @property (nonatomic) BOOL eventViewsLayoutIsValid;
+@property (nonatomic) BOOL hourLabelsLayoutIsValid;
 
 @property (nonatomic, weak) UIView* allDayEventsView;
 @property (nonatomic, weak) UIView* durationEventsView;
@@ -41,6 +42,7 @@
         self.showsVerticalScrollIndicator = NO;
         
         self.eventViewsLayoutIsValid = NO;
+        self.hourLabelsLayoutIsValid = NO;
     }
     
     return self;
@@ -87,6 +89,14 @@
     _displayDate = displayDate;
     
     [self setNeedsLayout];
+}
+
+- (void)setFrame:(CGRect)frame
+{
+    self.eventViewsLayoutIsValid = NO;
+    self.hourLabelsLayoutIsValid = NO;
+    
+    [super setFrame:frame];
 }
 
 #pragma mark - Creating Views
@@ -166,16 +176,20 @@
 
 - (void)layoutHourLines
 {
-    CGFloat yOffset = floorf(self.durationEventsView.bounds.size.height / self.hourLines.count);
-    for (ECHourLine* hourLine in self.hourLines) {
-        CGFloat originY = self.durationEventsView.bounds.origin.y + hourLine.hour * yOffset;
-        CGRect hourLineFrame = CGRectMake(self.durationEventsView.bounds.origin.x,
-                                          originY,
-                                          self.durationEventsView.bounds.size.width,
-                                          HOUR_LINE_HEIGHT);
+    if (!self.hourLabelsLayoutIsValid) {
+        CGFloat yOffset = floorf(self.durationEventsView.bounds.size.height / self.hourLines.count);
+        for (ECHourLine* hourLine in self.hourLines) {
+            CGFloat originY = self.durationEventsView.bounds.origin.y + hourLine.hour * yOffset;
+            CGRect hourLineFrame = CGRectMake(self.durationEventsView.bounds.origin.x,
+                                              originY,
+                                              self.durationEventsView.bounds.size.width,
+                                              HOUR_LINE_HEIGHT);
+            
+            DDLogDebug(@"Hour Line Frame (%lu): %@", hourLine.hour, NSStringFromCGRect(hourLineFrame));
+            hourLine.frame = hourLineFrame;
+        }
         
-        DDLogDebug(@"Hour Line Frame (%lu): %@", hourLine.hour, NSStringFromCGRect(hourLineFrame));
-        hourLine.frame = hourLineFrame;
+        self.hourLabelsLayoutIsValid = YES;
     }
 }
 
