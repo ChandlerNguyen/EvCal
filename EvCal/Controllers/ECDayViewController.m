@@ -127,7 +127,7 @@
     CGRect dayViewFrame = CGRectMake(self.view.bounds.origin.x,
                                      CGRectGetMaxY(self.weekdayPicker.frame),
                                      self.view.bounds.size.width,
-                                     self.view.bounds.size.height - self.weekdayPicker.frame.size.height);
+                                     self.view.bounds.size.height - (self.weekdayPicker.frame.size.height + self.navigationController.navigationBar.frame.size.height));
     
     CGSize dayViewContentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 2);
     
