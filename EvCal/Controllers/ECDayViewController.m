@@ -166,6 +166,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)editEventViewControllerDidDelete:(ECEditEventViewController *)controller
+{
+    [self refreshEvents];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 #pragma mark - Editing Events
 

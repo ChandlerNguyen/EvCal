@@ -10,8 +10,26 @@
 @class ECEditEventViewController;
 @protocol ECEditEventViewControllerDelegate <NSObject>
 
+/**
+ *  Tells the receiver that the view controller cancelled editing without saving
+ *
+ *  @param controller The controller in which editing was cancelled
+ */
 - (void)editEventViewControllerDidCancel:(ECEditEventViewController*)controller;
+
+/**
+ *  Tells the receiver that the view controller saved changes to the event
+ *
+ *  @param controller THe controller in which changes were saved
+ */
 - (void)editEventViewControllerDidSave:(ECEditEventViewController*)controller;
+
+/**
+ *  Tells the receiver that the controller deleted the event it was editing
+ *
+ *  @param controller The controller in which the event was deleted
+ */
+- (void)editEventViewControllerDidDelete:(ECEditEventViewController*)controller;
 
 @end
 
@@ -21,8 +39,10 @@
 
 @interface ECEditEventViewController : UITableViewController
 
+// The event being edited by the controller, leave nil to create a new event
 @property (nonatomic, strong) EKEvent* event;
 
+// The delegate that receives messages from edit event view controller
 @property (nonatomic, weak) id<ECEditEventViewControllerDelegate> delegate;
 
 @end

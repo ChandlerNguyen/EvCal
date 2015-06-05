@@ -23,7 +23,6 @@
 // Navigation Elements
 @property (nonatomic, weak) UIBarButtonItem* saveButton;
 @property (nonatomic, weak) UIBarButtonItem* cancelButton;
-@property (nonatomic, weak) UIBarButtonItem* deleteButton;
 
 // Event Data Fields
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
@@ -132,32 +131,103 @@
     [self synchronizeEvent];
     
     [[ECEventStoreProxy sharedInstance] saveEvent:self.event span:span];
+    
+    [self.delegate editEventViewControllerDidSave:self];
 }
 
 - (void)deleteEvent:(EKSpan)span
 {
     [[ECEventStoreProxy sharedInstance] removeEvent:self.event span:span];
+    
+    [self.delegate editEventViewControllerDidDelete:self];
 }
 
 #pragma mark - Presenting Alert Views
 
-#define EKSPAN_THIS_EVENT_BUTTON_KEY        @"EKSpanThisEvent"
-#define EKSPAN_FUTURE_EVENTS_BUTTON_KEY     @"EKSpanFutureEvents"
+#define SAVE_SPAN_ACTION_SHEET_TAG          101
+#define DELETE_EVENT_ACTION_SHEET_TAG       102
+#define DELETE_SPAN_ACTION_SHEET_TAG        103
 
 - (void)presentSaveSpanActionSheet
 {
-    UIActionSheet* saveSpanActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"EditEvent.ActionSheet.This is a repeating event", @"The event being saved is repeating")
+    UIActionSheet* saveSpanActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"EditEvent.SaveSpan.ActionSheet.This is a repeating event", @"The event being saved is repeating")
                                                                      delegate:self
-                                                            cancelButtonTitle:NSLocalizedString(@"EditEvent.ActionSheet.Cancel", @"Cancel saving event")
+                                                            cancelButtonTitle:NSLocalizedString(@"EditEvent.SaveSpan.ActionSheet.Cancel", @"Cancel saving event")
                                                        destructiveButtonTitle:nil
-                                                            otherButtonTitles:NSLocalizedString(@"EditEvent.ActionSheet.Save for this event only", @"Save changes only for the selected occurrence of the event"),
-                                                                              NSLocalizedString(@"EditEvent.ActionSheet.Save for future events", @"Save changes for all future occurrences of the event"), nil];
+                                                            otherButtonTitles:NSLocalizedString(@"EditEvent.SaveSpan.ActionSheet.Save for this event only", @"Save changes only for the selected occurrence of the event"),
+                                                                              NSLocalizedString(@"EditEvent.SaveSpan.ActionSheet.Save for future events", @"Save changes for all future occurrences of the event"), nil];
+    saveSpanActionSheet.tag = SAVE_SPAN_ACTION_SHEET_TAG;
     [saveSpanActionSheet showInView:self.view];
+}
+
+- (void)presentDeleteActionSheet
+{
+    UIActionSheet* deleteActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"EditEvent.DeleteEvent.ActionSheet.You cannot undo this action", @"The user cannot undo deleting an event")
+                                                                   delegate:self
+                                                          cancelButtonTitle:NSLocalizedString(@"EditEvent.DeleteEvent.ActionSheet.Cancel", @"Cancel deleting event") destructiveButtonTitle:NSLocalizedString(@"EditEvent.DeleteEvent.ActionSheet.Delete Event", @"Delete the event")
+                                                          otherButtonTitles:nil];
+    
+    deleteActionSheet.tag = DELETE_EVENT_ACTION_SHEET_TAG;
+    [deleteActionSheet showInView:self.view];
+}
+
+- (void)presentDeleteSpanActionSheet
+{
+    UIActionSheet* deleteSpanActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"EditEvent.DeleteSpan.ActionSheet.This is a repeating event", @"The event being deleted is repeating")
+                                                                       delegate:self
+                                                              cancelButtonTitle:NSLocalizedString(@"EditEvent.DeleteSpan.ActionSheet.Cancel", @"Cancel deleting event")
+                                                         destructiveButtonTitle:nil
+                                                              otherButtonTitles:NSLocalizedString(@"EditEvent.DeleteSpan.ActionSheet.Delete this event only", @"Delete only the given occurrence of the event"),
+                                                                                NSLocalizedString(@"EditEvent.DeleteSpan,ActionSheet.Delete future events", @"Delete all future occurrences of the event"), nil];
+    
+    deleteSpanActionSheet.tag = DELETE_SPAN_ACTION_SHEET_TAG;
+    [deleteSpanActionSheet showInView:self.view];
+    
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    
+    switch (actionSheet.tag) {
+        case SAVE_SPAN_ACTION_SHEET_TAG:
+            [self saveSpanActionSheet:actionSheet didDismissWithButtonIndex:buttonIndex];
+            break;
+            
+        case DELETE_EVENT_ACTION_SHEET_TAG:
+            [self deleteEventActionSheet:actionSheet didDismissWithButtonIndex:buttonIndex];
+            break;
+            
+        case DELETE_SPAN_ACTION_SHEET_TAG:
+            [self deleteSpanActionSheet:actionSheet didDismissWithButtonIndex:buttonIndex];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)saveSpanActionSheet:(UIActionSheet*)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"EditEvent.SaveSpan.ActionSheet.Save for this event only", @"Save changes only for the selected occurrence of the event")]) {
+        [self saveEventChanges:EKSpanThisEvent];
+    } else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"EditEvent.SaveSpan.ActionSheet.Save for future events", @"Save changes for all future occurrences of the event")]) {
+        [self saveEventChanges:EKSpanFutureEvents];
+    }
+}
+
+- (void)deleteEventActionSheet:(UIActionSheet*)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.destructiveButtonIndex) {
+        [self deleteEvent:EKSpanThisEvent];
+    }
+}
+
+- (void)deleteSpanActionSheet:(UIActionSheet*)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"EditEvent.DeleteSpan.ActionSheet.Delete this event only", @"Delete only the given occurrence of the event")]) {
+        [self deleteEvent:EKSpanThisEvent];
+    } else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"EditEvent.DeleteSpan,ActionSheet.Delete future events", @"Delete all future occurrences of the event")]) {
+        [self deleteEvent:EKSpanFutureEvents];
+    }
 }
 
 #pragma mark - UI Events
@@ -174,13 +244,15 @@
             [self saveEventChanges:EKSpanThisEvent];
         }
     }
-    
-    [self.delegate editEventViewControllerDidSave:self];
 }
 
 - (void)cancelButtonTapped:(UIBarButtonItem*)sender
 {
     [self.delegate editEventViewControllerDidCancel:self];
+}
+
+- (IBAction)deleteButtonTapped:(UIButton *)sender {
+    [self presentDeleteActionSheet];
 }
 
 @end

@@ -179,6 +179,32 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jxq-3i-nG4">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jxq-3i-nG4" id="ItO-ZR-Qa0">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vid-Gk-UJp">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <state key="normal" title="Delete Event">
+                                                        <color key="titleColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="deleteButtonTapped:" destination="61o-ly-PSA" eventType="touchUpInside" id="isV-3M-1in"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="vid-Gk-UJp" secondAttribute="bottom" constant="-8.5" id="Hnh-d8-HE1"/>
+                                                <constraint firstItem="vid-Gk-UJp" firstAttribute="top" secondItem="ItO-ZR-Qa0" secondAttribute="top" id="YR8-bL-F8p"/>
+                                                <constraint firstItem="vid-Gk-UJp" firstAttribute="leading" secondItem="ItO-ZR-Qa0" secondAttribute="leading" id="jrx-W1-5dm"/>
+                                                <constraint firstAttribute="trailing" secondItem="vid-Gk-UJp" secondAttribute="trailing" id="wmM-Ah-lty"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
