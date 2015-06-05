@@ -18,6 +18,8 @@
 
 @interface ECEditEventViewController() <UIActionSheetDelegate>
 
+@property (nonatomic, strong) NSDateFormatter* dateFormatter;
+
 // Navigation Elements
 @property (nonatomic, weak) UIBarButtonItem* saveButton;
 @property (nonatomic, weak) UIBarButtonItem* cancelButton;
@@ -27,7 +29,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (nonatomic, weak) IBOutlet UITextField* locationTextField;
 
+@property (weak, nonatomic) IBOutlet UILabel *startDateLabel;
 @property (nonatomic, weak) IBOutlet UIDatePicker* startDatePicker;
+@property (weak, nonatomic) IBOutlet UILabel *endDateLabel;
 @property (nonatomic, weak) IBOutlet UIDatePicker* endDatePicker;
 
 @property (nonatomic, weak) UITextView* notesView;
@@ -36,10 +40,13 @@
 
 @implementation ECEditEventViewController
 
+#pragma mark - Lifecycle and Properties
+
 - (void)viewDidLoad
 {
     [self setupNavigationBar];
     [self synchronizeFields];
+    [self addObserverToDatePickers];
 }
 
 - (void)setupNavigationBar
@@ -52,6 +59,25 @@
     self.navigationItem.leftBarButtonItem = cancelButton;
     self.cancelButton = cancelButton;
 }
+
+- (void)addObserverToDatePickers
+{
+    [self.startDatePicker addTarget:self action:@selector(updateStartDateLabel:) forControlEvents:UIControlEventValueChanged];
+    [self.endDatePicker addTarget:self action:@selector(updateEndDateLabel:) forControlEvents:UIControlEventValueChanged];
+}
+
+- (NSDateFormatter*)dateFormatter
+{
+    if (!_dateFormatter) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        _dateFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"j:mm MMMM d, YYYY" options:0 locale:[NSLocale currentLocale]];
+    }
+    
+    return _dateFormatter;
+}
+
+
+#pragma mark - Synchronizing event and fields
 
 - (void)synchronizeEvent
 {
@@ -67,7 +93,9 @@
     self.titleTextField.text = self.event.title;
     self.locationTextField.text = self.event.location;
     self.startDatePicker.date = [self startDateForEvent:self.event];
+    [self updateStartDateLabel:self.startDatePicker];
     self.endDatePicker.date = [self endDateForEvent:self.event];
+    [self updateEndDateLabel:self.endDatePicker];
     self.notesView.text = self.event.notes;
 }
 
@@ -87,6 +115,16 @@
     } else {
         return [[NSDate date] endOfHour];
     }
+}
+
+- (void)updateStartDateLabel:(UIDatePicker*)sender
+{
+    self.startDateLabel.text = [self.dateFormatter stringFromDate:sender.date];
+}
+
+- (void)updateEndDateLabel:(UIDatePicker*)sender
+{
+    self.endDateLabel.text = [self.dateFormatter stringFromDate:sender.date];
 }
 
 - (void)saveEventChanges:(EKSpan)span

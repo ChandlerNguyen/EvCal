@@ -118,12 +118,21 @@
                                                         <!--2015-06-03 02:24:18 +0000-->
                                                     </date>
                                                 </datePicker>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEI-tJ-KTd">
+                                                    <rect key="frame" x="270" y="8" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="LmS-XZ-6Q4" secondAttribute="trailing" id="1hO-1c-48Q"/>
                                                 <constraint firstItem="YTG-38-Vol" firstAttribute="leading" secondItem="Q17-q8-yKu" secondAttribute="leading" constant="8" id="5H0-yY-sam"/>
                                                 <constraint firstItem="LmS-XZ-6Q4" firstAttribute="top" secondItem="YTG-38-Vol" secondAttribute="bottom" constant="8" id="8CP-UZ-TEy"/>
+                                                <constraint firstAttribute="trailing" secondItem="FEI-tJ-KTd" secondAttribute="trailing" constant="8" id="BxB-qY-329"/>
+                                                <constraint firstItem="LmS-XZ-6Q4" firstAttribute="top" secondItem="FEI-tJ-KTd" secondAttribute="bottom" constant="8" id="Inn-Yt-oy4"/>
                                                 <constraint firstItem="YTG-38-Vol" firstAttribute="top" secondItem="Q17-q8-yKu" secondAttribute="top" constant="8" id="V46-XK-838"/>
+                                                <constraint firstItem="FEI-tJ-KTd" firstAttribute="top" secondItem="Q17-q8-yKu" secondAttribute="top" constant="8" id="hz3-gQ-ulh"/>
                                                 <constraint firstItem="LmS-XZ-6Q4" firstAttribute="leading" secondItem="Q17-q8-yKu" secondAttribute="leading" id="sZi-XY-ujy"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -152,12 +161,21 @@
                                                         <!--2015-06-03 02:25:30 +0000-->
                                                     </date>
                                                 </datePicker>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwT-rO-g3w">
+                                                    <rect key="frame" x="270" y="8" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="qwT-rO-g3w" firstAttribute="top" secondItem="taM-8f-gk7" secondAttribute="top" constant="8" id="0lO-Xh-zRV"/>
                                                 <constraint firstItem="r91-UA-2kz" firstAttribute="leading" secondItem="taM-8f-gk7" secondAttribute="leading" id="6yb-8w-pGY"/>
                                                 <constraint firstItem="r91-UA-2kz" firstAttribute="top" secondItem="tXY-UG-tCE" secondAttribute="bottom" constant="8" id="MPG-Bh-gi0"/>
+                                                <constraint firstItem="r91-UA-2kz" firstAttribute="top" secondItem="qwT-rO-g3w" secondAttribute="bottom" constant="8" id="OV8-Dk-jNG"/>
                                                 <constraint firstItem="tXY-UG-tCE" firstAttribute="top" secondItem="taM-8f-gk7" secondAttribute="top" constant="8" id="Omh-Lr-OGa"/>
                                                 <constraint firstItem="tXY-UG-tCE" firstAttribute="leading" secondItem="taM-8f-gk7" secondAttribute="leading" constant="8" id="s4j-yC-sjt"/>
+                                                <constraint firstAttribute="trailing" secondItem="qwT-rO-g3w" secondAttribute="trailing" constant="8" id="y4p-xc-evz"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -170,8 +188,10 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="endDateLabel" destination="qwT-rO-g3w" id="Eng-my-xDh"/>
                         <outlet property="endDatePicker" destination="r91-UA-2kz" id="9QI-wd-7Dd"/>
                         <outlet property="locationTextField" destination="7ys-z5-jS9" id="wjN-oD-JKO"/>
+                        <outlet property="startDateLabel" destination="FEI-tJ-KTd" id="GsG-u1-YJB"/>
                         <outlet property="startDatePicker" destination="LmS-XZ-6Q4" id="Oi9-tC-Z5i"/>
                         <outlet property="titleTextField" destination="ZM3-jQ-Alx" id="UAB-DK-yax"/>
                     </connections>
