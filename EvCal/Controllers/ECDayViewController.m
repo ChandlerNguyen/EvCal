@@ -22,8 +22,12 @@
 
 @interface ECDayViewController () <ECWeekdayPickerDelegate, ECEditEventViewControllerDelegate>
 
-@property (nonatomic, weak) ECWeekdayPicker* weekdayPicker;
-@property (nonatomic, weak) ECDayView* dayView;
+// Buttons
+@property (nonatomic, weak) IBOutlet UIBarButtonItem* addEventButton;
+@property (weak, nonatomic) IBOutlet UIToolbar *bottomToolbar;
+
+@property (nonatomic, weak) IBOutlet ECWeekdayPicker* weekdayPicker;
+@property (nonatomic, weak) IBOutlet ECDayView* dayView;
 
 @property (nonatomic, strong) NSDateFormatter* dateFormatter;
 
@@ -109,32 +113,34 @@
 - (void)setupWeekdayPicker
 {
     self.weekdayPicker.pickerDelegate = self;
+    [self.weekdayPicker setSelectedDate:self.displayDate animated:NO];
     
-    CGRect weekdayPickerFrame = CGRectMake(self.view.bounds.origin.x,
-                                           CGRectGetMaxY(self.navigationController.navigationBar.frame),
-                                           self.view.bounds.size.width,
-                                           WEEKDAY_PICKER_HEIGHT);
-    
-    DDLogDebug(@"Weekday Picker Frame: %@", NSStringFromCGRect(weekdayPickerFrame));
-    
-    self.weekdayPicker.frame = weekdayPickerFrame;
+//    CGRect weekdayPickerFrame = CGRectMake(self.view.bounds.origin.x,
+//                                           CGRectGetMaxY(self.navigationController.navigationBar.frame),
+//                                           self.view.bounds.size.width,
+//                                           WEEKDAY_PICKER_HEIGHT);
+//    
+//    DDLogDebug(@"Weekday Picker Frame: %@", NSStringFromCGRect(weekdayPickerFrame));
+//    
+//    self.weekdayPicker.frame = weekdayPickerFrame;
 }
 
 - (void)setupDayView
 {
-    self.dayView.backgroundColor = [UIColor whiteColor];
+    self.dayView.displayDate = self.displayDate;
     
-    CGRect dayViewFrame = CGRectMake(self.view.bounds.origin.x,
-                                     CGRectGetMaxY(self.weekdayPicker.frame),
-                                     self.view.bounds.size.width,
-                                     self.view.bounds.size.height - (self.weekdayPicker.frame.size.height + self.navigationController.navigationBar.frame.size.height));
     
+//    CGRect dayViewFrame = CGRectMake(self.view.bounds.origin.x,
+//                                     CGRectGetMaxY(self.weekdayPicker.frame),
+//                                     self.view.bounds.size.width,
+//                                     self.view.bounds.size.height - (self.weekdayPicker.frame.size.height + self.navigationController.navigationBar.frame.size.height + self.bottomToolbar.frame.size.height));
+//    
     CGSize dayViewContentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 2);
-    
-    DDLogDebug(@"Day View Frame: %@", NSStringFromCGRect(dayViewFrame));
-    DDLogDebug(@"Day View Content Size: %@", NSStringFromCGSize(dayViewContentSize));
-    
-    self.dayView.frame = dayViewFrame;
+//    
+//    DDLogDebug(@"Day View Frame: %@", NSStringFromCGRect(dayViewFrame));
+//    DDLogDebug(@"Day View Content Size: %@", NSStringFromCGSize(dayViewContentSize));
+//    
+//    self.dayView.frame = dayViewFrame;
     self.dayView.contentSize = dayViewContentSize;
 }
 
@@ -216,5 +222,11 @@
     }
 }
 
+#pragma mark - UI Events
+
+- (IBAction)addEventButtonTapped:(UIBarButtonItem *)sender
+{
+    [self presentEditEventViewControllerWithEvent:nil];
+}
 
 @end

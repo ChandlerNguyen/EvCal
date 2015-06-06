@@ -16,9 +16,51 @@
                     <view key="view" contentMode="scaleToFill" id="wde-oB-yac">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0Y-1Y-8xx" customClass="ECDayView">
+                                <rect key="frame" x="0.0" y="129" width="320" height="395"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jIF-aL-AxT" customClass="ECWeekdayPicker">
+                                <rect key="frame" x="0.0" y="64" width="320" height="66"/>
+                                <color key="backgroundColor" red="0.043137254899999998" green="0.37647058820000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="sFA-mU-GFU"/>
+                                </constraints>
+                            </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XjS-3O-ccb">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="9xL-rs-OuV"/>
+                                    <barButtonItem title="+" id="1V5-CR-Gg8">
+                                        <connections>
+                                            <action selector="addEventButtonTapped:" destination="qNj-KM-reM" id="T1S-55-fbA"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XjS-3O-ccb" firstAttribute="leading" secondItem="e0Y-1Y-8xx" secondAttribute="leading" id="Bbi-Mx-HhV"/>
+                            <constraint firstItem="XjS-3O-ccb" firstAttribute="trailing" secondItem="e0Y-1Y-8xx" secondAttribute="trailing" id="Efh-Yl-fze"/>
+                            <constraint firstAttribute="trailing" secondItem="jIF-aL-AxT" secondAttribute="trailing" id="LWx-Gn-NEw"/>
+                            <constraint firstItem="e0Y-1Y-8xx" firstAttribute="top" secondItem="556-VY-LXQ" secondAttribute="bottom" constant="65" id="MhV-iq-kpf"/>
+                            <constraint firstItem="jIF-aL-AxT" firstAttribute="leading" secondItem="wde-oB-yac" secondAttribute="leading" id="Np8-2h-nNp"/>
+                            <constraint firstItem="XjS-3O-ccb" firstAttribute="bottom" secondItem="HQi-PI-mQN" secondAttribute="top" id="bzM-uN-adu"/>
+                            <constraint firstItem="jIF-aL-AxT" firstAttribute="top" secondItem="556-VY-LXQ" secondAttribute="bottom" id="e7Y-eh-8C5"/>
+                            <constraint firstItem="XjS-3O-ccb" firstAttribute="top" secondItem="e0Y-1Y-8xx" secondAttribute="bottom" id="eSu-NW-eEq"/>
+                            <constraint firstItem="e0Y-1Y-8xx" firstAttribute="leading" secondItem="wde-oB-yac" secondAttribute="leading" id="hgg-9Z-Wow"/>
+                            <constraint firstAttribute="trailing" secondItem="e0Y-1Y-8xx" secondAttribute="trailing" id="pCT-kG-XXW"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Twq-eO-8SM"/>
+                    <connections>
+                        <outlet property="addEventButton" destination="1V5-CR-Gg8" id="ZiG-HR-jgM"/>
+                        <outlet property="bottomToolbar" destination="XjS-3O-ccb" id="C3u-8k-8fx"/>
+                        <outlet property="dayView" destination="e0Y-1Y-8xx" id="ZOi-DO-jHB"/>
+                        <outlet property="weekdayPicker" destination="jIF-aL-AxT" id="ppo-Be-ZqY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7z-dO-wZi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

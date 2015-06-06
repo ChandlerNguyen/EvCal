@@ -39,17 +39,29 @@
 
 #pragma mark - Lifecycle and Properties
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    [self setup];
+}
+
 - (instancetype)initWithDate:(NSDate *)date
 {
     DDLogDebug(@"Initializing weekday picker with date %@", date);
     self = [super initWithFrame:CGRectZero];
     if (self) {
-        [self setSelectedDate:date animated:YES];
+        [self setup];
         
-        self.backgroundColor = [UIColor whiteColor];
+        [self setSelectedDate:date animated:YES];
     }
     
     return self;
+}
+
+- (void)setup
+{
+    self.backgroundColor = [UIColor whiteColor];
 }
 
 - (NSDateFormatter*)dateFormatter

@@ -35,17 +35,31 @@
 
 #pragma mark - Lifecycle and Properties
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    [self setup];
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.showsHorizontalScrollIndicator = NO;
-        self.showsVerticalScrollIndicator = NO;
-        
-        self.eventViewsLayoutIsValid = NO;
-        self.hourLabelsLayoutIsValid = NO;
+        [self setup];
     }
     
     return self;
+}
+
+- (void)setup
+{
+    self.showsHorizontalScrollIndicator = NO;
+    self.showsVerticalScrollIndicator = NO;
+    
+    self.eventViewsLayoutIsValid = NO;
+    self.hourLabelsLayoutIsValid = NO;
+    
+    self.backgroundColor = [UIColor whiteColor];
 }
 
 - (NSArray*)eventViews
