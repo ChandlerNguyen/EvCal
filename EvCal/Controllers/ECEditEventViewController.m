@@ -252,7 +252,11 @@
 }
 
 - (IBAction)deleteButtonTapped:(UIButton *)sender {
-    [self presentDeleteActionSheet];
+    if (self.event.recurrenceRules.count > 0) {
+        [self presentDeleteSpanActionSheet];
+    } else {
+        [self presentDeleteActionSheet];
+    }
 }
 
 @end
