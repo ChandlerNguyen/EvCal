@@ -28,7 +28,6 @@
         
         self.backgroundColor = [UIColor whiteColor];
         
-        self.layer.borderWidth = 1.0f;
     }
     
     return self;

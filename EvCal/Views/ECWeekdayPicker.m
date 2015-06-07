@@ -156,9 +156,7 @@
         weekdayLabel.textAlignment = NSTextAlignmentCenter;
         weekdayLabel.font = [UIFont systemFontOfSize:11.0f];
         weekdayLabel.text = calendar.shortWeekdaySymbols[i];
-        
-        weekdayLabel.layer.borderWidth = 1.0f;
-        
+                
         [mutableWeekdayLabels addObject:weekdayLabel];
     }
     
@@ -278,15 +276,16 @@
                                                CGRectGetMaxY(firstWeekdayLabel.frame),
                                                self.bounds.size.width,
                                                self.bounds.size.height - WEEKDAY_LABEL_HEIGHT);
-    CGSize weekdayScrollViewContentSize = CGSizeMake(self.bounds.size.width * 3, self.bounds.size.height - WEEKDAY_LABEL_HEIGHT);
+    CGSize weekdayScrollViewContentSize = CGSizeMake(weekdayScrollViewFrame.size.width * 3, weekdayScrollViewFrame.size.height);
     
     DDLogDebug(@"Weekday Scroll View Frame: %@", NSStringFromCGRect(weekdayScrollViewFrame));
     DDLogDebug(@"Weekday Scroll View Content Size: %@", NSStringFromCGSize(weekdayScrollViewContentSize));
     self.weekdaysScrollView.frame = weekdayScrollViewFrame;
     self.weekdaysScrollView.contentSize = weekdayScrollViewContentSize;
     
+    self.weekdaysScrollView.contentOffset = CGPointZero; // recenter before laying out date views
     [self layoutDateViews];
-    self.weekdaysScrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
+    self.weekdaysScrollView.contentOffset = CGPointMake(self.weekdaysScrollView.bounds.size.width, 0); // set to middle view
 }
 
 - (void)layoutDateViews
