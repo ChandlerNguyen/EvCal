@@ -11,7 +11,8 @@
 
 @interface ECDatePickerCell()
 
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint* datePickerHeight;
+@property (nonatomic, weak) IBOutlet UILabel* dateLabel;
+@property (nonatomic, weak) IBOutlet UIDatePicker* datePicker;
 
 @end
 
@@ -23,19 +24,17 @@
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self.datePicker addTarget:self action:@selector(updateDateLabel:) forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)setDate:(NSDate *)date
+{
+    self.datePicker.date = date;
     [self updateDateLabel:self.datePicker];
 }
 
-#define DATE_PICKER_SELECTED_HEIGHT 162.0f
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+- (NSDate*)date
 {
-    [super setSelected:selected animated:animated];
-    
-    if (selected) {
-        self.datePickerHeight.constant = DATE_PICKER_SELECTED_HEIGHT;
-    } else {
-        self.datePickerHeight.constant = 0;
-    }
+    return self.datePicker.date;
 }
 
 - (void)updateDateLabel:(UIDatePicker*)datePicker

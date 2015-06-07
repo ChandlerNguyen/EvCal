@@ -10,7 +10,6 @@
 
 @interface ECDatePickerCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UILabel* dateLabel;
-@property (nonatomic, weak) IBOutlet UIDatePicker* datePicker;
+@property (nonatomic, weak) NSDate* date;
 
 @end

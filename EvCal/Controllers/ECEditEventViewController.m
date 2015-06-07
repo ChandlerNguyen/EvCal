@@ -28,10 +28,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (nonatomic, weak) IBOutlet UITextField* locationTextField;
 
-@property (weak, nonatomic) IBOutlet UILabel *startDateLabel;
-@property (nonatomic, weak) IBOutlet UIDatePicker* startDatePicker;
-@property (weak, nonatomic) IBOutlet UILabel *endDateLabel;
-@property (nonatomic, weak) IBOutlet UIDatePicker* endDatePicker;
+@property (nonatomic, weak) IBOutlet ECDatePickerCell* startDatePickerCell;
+@property (nonatomic, weak) IBOutlet ECDatePickerCell* endDatePickerCell;
 
 @property (nonatomic, weak) UITextView* notesView;
 
@@ -79,8 +77,8 @@
 {
     self.event.title = self.titleTextField.text;
     self.event.location = self.locationTextField.text;
-    self.event.startDate = self.startDatePicker.date;
-    self.event.endDate = self.endDatePicker.date;
+    self.event.startDate = self.startDatePickerCell.date;
+    self.event.endDate = self.endDatePickerCell.date;
     self.event.notes = self.notesView.text;
 }
 
@@ -88,8 +86,8 @@
 {
     self.titleTextField.text = self.event.title;
     self.locationTextField.text = self.event.location;
-    self.startDatePicker.date = [self startDateForEvent:self.event];
-    self.endDatePicker.date = [self endDateForEvent:self.event];
+    self.startDatePickerCell.date = [self startDateForEvent:self.event];
+    self.endDatePickerCell.date = [self endDateForEvent:self.event];
     self.notesView.text = self.event.notes;
 }
 

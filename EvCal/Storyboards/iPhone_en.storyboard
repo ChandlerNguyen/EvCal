@@ -260,11 +260,9 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="endDateLabel" destination="qwT-rO-g3w" id="Eng-my-xDh"/>
-                        <outlet property="endDatePicker" destination="r91-UA-2kz" id="9QI-wd-7Dd"/>
+                        <outlet property="endDatePickerCell" destination="RTT-Yv-f0Q" id="Bev-rC-VV5"/>
                         <outlet property="locationTextField" destination="7ys-z5-jS9" id="wjN-oD-JKO"/>
-                        <outlet property="startDateLabel" destination="FEI-tJ-KTd" id="GsG-u1-YJB"/>
-                        <outlet property="startDatePicker" destination="LmS-XZ-6Q4" id="Oi9-tC-Z5i"/>
+                        <outlet property="startDatePickerCell" destination="HJN-1E-Iad" id="5ce-ec-2kG"/>
                         <outlet property="titleTextField" destination="ZM3-jQ-Alx" id="UAB-DK-yax"/>
                     </connections>
                 </tableViewController>
