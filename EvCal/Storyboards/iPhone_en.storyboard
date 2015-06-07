@@ -77,7 +77,7 @@
                         <sections>
                             <tableViewSection id="eIO-76-P7P">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="qC9-n0-Ekw">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="qC9-n0-Ekw">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qC9-n0-Ekw" id="8Wb-NL-56b">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -108,7 +108,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="IFp-r9-iT8">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="IFp-r9-iT8">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IFp-r9-iT8" id="5kn-cB-HA6">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -137,7 +137,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="200" id="HJN-1E-Iad">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="214" id="HJN-1E-Iad" customClass="ECDatePickerCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HJN-1E-Iad" id="Q17-q8-yKu">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -151,35 +151,38 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEI-tJ-KTd">
+                                                    <rect key="frame" x="270" y="8" width="42" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="LmS-XZ-6Q4">
-                                                    <rect key="frame" x="0.0" y="37" width="320" height="162"/>
+                                                    <rect key="frame" x="0.0" y="43" width="320" height="162"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="162" id="lh3-xH-Ovb"/>
+                                                        <constraint firstAttribute="height" constant="162" id="TOK-Mp-ZwK"/>
                                                     </constraints>
                                                     <date key="date" timeIntervalSinceReferenceDate="454991058.71614802">
                                                         <!--2015-06-03 02:24:18 +0000-->
                                                     </date>
                                                 </datePicker>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEI-tJ-KTd">
-                                                    <rect key="frame" x="270" y="8" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="LmS-XZ-6Q4" secondAttribute="trailing" id="1hO-1c-48Q"/>
                                                 <constraint firstItem="YTG-38-Vol" firstAttribute="leading" secondItem="Q17-q8-yKu" secondAttribute="leading" constant="8" id="5H0-yY-sam"/>
-                                                <constraint firstItem="LmS-XZ-6Q4" firstAttribute="top" secondItem="YTG-38-Vol" secondAttribute="bottom" constant="8" id="8CP-UZ-TEy"/>
+                                                <constraint firstItem="LmS-XZ-6Q4" firstAttribute="top" secondItem="YTG-38-Vol" secondAttribute="bottom" constant="14" id="8CP-UZ-TEy"/>
                                                 <constraint firstAttribute="trailing" secondItem="FEI-tJ-KTd" secondAttribute="trailing" constant="8" id="BxB-qY-329"/>
-                                                <constraint firstItem="LmS-XZ-6Q4" firstAttribute="top" secondItem="FEI-tJ-KTd" secondAttribute="bottom" constant="8" id="Inn-Yt-oy4"/>
                                                 <constraint firstItem="YTG-38-Vol" firstAttribute="top" secondItem="Q17-q8-yKu" secondAttribute="top" constant="8" id="V46-XK-838"/>
                                                 <constraint firstItem="FEI-tJ-KTd" firstAttribute="top" secondItem="Q17-q8-yKu" secondAttribute="top" constant="8" id="hz3-gQ-ulh"/>
                                                 <constraint firstItem="LmS-XZ-6Q4" firstAttribute="leading" secondItem="Q17-q8-yKu" secondAttribute="leading" id="sZi-XY-ujy"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="FEI-tJ-KTd" id="e3B-Uy-NMc"/>
+                                            <outlet property="datePicker" destination="LmS-XZ-6Q4" id="9i6-rV-8W7"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="200" id="RTT-Yv-f0Q">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="206" id="RTT-Yv-f0Q" customClass="ECDatePickerCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RTT-Yv-f0Q" id="taM-8f-gk7">
@@ -194,21 +197,18 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="r91-UA-2kz">
-                                                    <rect key="frame" x="0.0" y="37" width="320" height="162"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="162" id="kJ4-mT-AyD"/>
-                                                    </constraints>
-                                                    <date key="date" timeIntervalSinceReferenceDate="454991130.044541">
-                                                        <!--2015-06-03 02:25:30 +0000-->
-                                                    </date>
-                                                </datePicker>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwT-rO-g3w">
                                                     <rect key="frame" x="270" y="8" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="r91-UA-2kz">
+                                                    <rect key="frame" x="0.0" y="37" width="320" height="168.5"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="454991130.044541">
+                                                        <!--2015-06-03 02:25:30 +0000-->
+                                                    </date>
+                                                </datePicker>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="qwT-rO-g3w" firstAttribute="top" secondItem="taM-8f-gk7" secondAttribute="top" constant="8" id="0lO-Xh-zRV"/>
@@ -220,6 +220,10 @@
                                                 <constraint firstAttribute="trailing" secondItem="qwT-rO-g3w" secondAttribute="trailing" constant="8" id="y4p-xc-evz"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="qwT-rO-g3w" id="ARp-zH-CVG"/>
+                                            <outlet property="datePicker" destination="r91-UA-2kz" id="TNn-7c-1Gx"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jxq-3i-nG4">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

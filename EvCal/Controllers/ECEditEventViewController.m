@@ -18,7 +18,7 @@
 
 @interface ECEditEventViewController() <UIActionSheetDelegate>
 
-@property (nonatomic, strong) NSDateFormatter* dateFormatter;
+@property (nonatomic, strong) NSIndexPath* selectedIndexPath;
 
 // Navigation Elements
 @property (nonatomic, weak) UIBarButtonItem* saveButton;
@@ -45,7 +45,6 @@
 {
     [self setupNavigationBar];
     [self synchronizeFields];
-    [self addObserverToDatePickers];
 }
 
 - (void)setupNavigationBar
@@ -57,22 +56,6 @@
     UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     self.cancelButton = cancelButton;
-}
-
-- (void)addObserverToDatePickers
-{
-    [self.startDatePicker addTarget:self action:@selector(updateStartDateLabel:) forControlEvents:UIControlEventValueChanged];
-    [self.endDatePicker addTarget:self action:@selector(updateEndDateLabel:) forControlEvents:UIControlEventValueChanged];
-}
-
-- (NSDateFormatter*)dateFormatter
-{
-    if (!_dateFormatter) {
-        _dateFormatter = [[NSDateFormatter alloc] init];
-        _dateFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"j:mm MMMM d, YYYY" options:0 locale:[NSLocale currentLocale]];
-    }
-    
-    return _dateFormatter;
 }
 
 - (NSDate*)startDate
@@ -110,9 +93,7 @@
     self.titleTextField.text = self.event.title;
     self.locationTextField.text = self.event.location;
     self.startDatePicker.date = [self startDateForEvent:self.event];
-    [self updateStartDateLabel:self.startDatePicker];
     self.endDatePicker.date = [self endDateForEvent:self.event];
-    [self updateEndDateLabel:self.endDatePicker];
     self.notesView.text = self.event.notes;
 }
 
@@ -132,16 +113,6 @@
     } else {
         return self.endDate;
     }
-}
-
-- (void)updateStartDateLabel:(UIDatePicker*)sender
-{
-    self.startDateLabel.text = [self.dateFormatter stringFromDate:sender.date];
-}
-
-- (void)updateEndDateLabel:(UIDatePicker*)sender
-{
-    self.endDateLabel.text = [self.dateFormatter stringFromDate:sender.date];
 }
 
 - (void)saveEventChanges:(EKSpan)span
@@ -275,6 +246,34 @@
     } else {
         [self presentDeleteActionSheet];
     }
+}
+
+
+#pragma mark - UITableView Delegate and Datasource
+
+#define DEFAULT_ROW_HEIGHT              44.0f
+#define EXPANDED_DATE_PICKER_ROW_HEIGHT 214.0f
+
+#define START_DATE_PICKER_ROW           2
+#define END_DATE_PICKER_ROW             3
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == START_DATE_PICKER_ROW || indexPath.row == END_DATE_PICKER_ROW) {
+        if ([indexPath isEqual:self.selectedIndexPath]) {
+            return EXPANDED_DATE_PICKER_ROW_HEIGHT;
+        }
+    }
+    
+    return DEFAULT_ROW_HEIGHT;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.selectedIndexPath = indexPath;
+    
+    [tableView beginUpdates];
+    [tableView endUpdates];
 }
 
 @end

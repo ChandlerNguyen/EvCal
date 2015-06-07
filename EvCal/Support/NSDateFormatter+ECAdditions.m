@@ -12,15 +12,27 @@
 
 + (instancetype)ecDateViewFormatter
 {
-    static NSDateFormatter* instance = nil;
+    static NSDateFormatter* dateViewFormatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[NSDateFormatter alloc] init];
+        dateViewFormatter = [[NSDateFormatter alloc] init];
         
-        instance.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"dd" options:0 locale:[NSLocale currentLocale]];
+        dateViewFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"dd" options:0 locale:[NSLocale currentLocale]];
     });
     
-    return instance;
+    return dateViewFormatter;
+}
+
++ (instancetype)ecEventDatesFormatter
+{
+    static NSDateFormatter* eventDatesFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        eventDatesFormatter = [[NSDateFormatter alloc] init];
+        eventDatesFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"j:mm MMMM d, YYYY" options:0 locale:[NSLocale currentLocale]];
+    });
+    
+    return eventDatesFormatter;
 }
 
 @end

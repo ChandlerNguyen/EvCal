@@ -11,5 +11,6 @@
 @interface NSDateFormatter (ECAdditions)
 
 + (instancetype)ecDateViewFormatter;
++ (instancetype)ecEventDatesFormatter;
 
 @end
