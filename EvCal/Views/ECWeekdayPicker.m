@@ -20,7 +20,6 @@
 @property (nonatomic, strong) NSDateFormatter* dateFormatter;
 
 // views
-@property (nonatomic, strong) NSArray* weekdayLabels;
 @property (nonatomic, weak) UIScrollView* weekdaysScrollView;
 
 @property (nonatomic, weak) ECDateView* selectedDateView;
@@ -97,15 +96,6 @@
     }
     
     return _weekdaysScrollView;
-}
-
-- (NSArray*)weekdayLabels
-{
-    if (!_weekdayLabels) {
-        _weekdayLabels = [self createWeekdayLabels];
-    }
-    
-    return _weekdayLabels;
 }
 
 // Instantiate date views together to avoid race conditions
@@ -242,40 +232,19 @@
 
 #pragma mark - Layout
 
-#define WEEKDAY_LABEL_HEIGHT   22.0f
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    [self layoutWeekdayLabels];
-    [self layoutWeekdayScrollView];
-}
 
-- (void)layoutWeekdayLabels
-{
-    CGFloat weekdayLabelWidth = floorf(self.bounds.size.width / self.weekdayLabels.count);
-    
-    for (NSInteger i = 0; i < self.weekdayLabels.count; i++) {
-        CGRect weekdayLabelFrame = CGRectMake(self.bounds.origin.x + i * weekdayLabelWidth,
-                                              self.bounds.origin.y,
-                                              weekdayLabelWidth,
-                                              WEEKDAY_LABEL_HEIGHT);
-        UILabel* weekdayLabel = self.weekdayLabels[i];
-        
-        DDLogDebug(@"Weekday Label Frame (%@): %@", weekdayLabel.text, NSStringFromCGRect(weekdayLabelFrame));
-        weekdayLabel.frame = weekdayLabelFrame;
-    }
+    [self layoutWeekdayScrollView];
 }
 
 - (void)layoutWeekdayScrollView
 {
-    UILabel* firstWeekdayLabel = [self.weekdayLabels firstObject];
-    
     CGRect weekdayScrollViewFrame = CGRectMake(self.bounds.origin.x,
-                                               CGRectGetMaxY(firstWeekdayLabel.frame),
+                                               self.bounds.origin.y,
                                                self.bounds.size.width,
-                                               self.bounds.size.height - WEEKDAY_LABEL_HEIGHT);
+                                               self.bounds.size.height);
     CGSize weekdayScrollViewContentSize = CGSizeMake(weekdayScrollViewFrame.size.width * 3, weekdayScrollViewFrame.size.height);
     
     DDLogDebug(@"Weekday Scroll View Frame: %@", NSStringFromCGRect(weekdayScrollViewFrame));

@@ -11,6 +11,7 @@
 #import "NSDateFormatter+ECAdditions.h"
 @interface ECDateView()
 
+@property (nonatomic, weak) UILabel* weekdayLabel;
 @property (nonatomic, weak) UILabel* dateLabel;
 
 @end
@@ -27,7 +28,7 @@
         _selectedDate = NO;
         
         self.backgroundColor = [UIColor whiteColor];
-        
+        self.layer.borderWidth = 0.5f;
     }
     
     return self;
@@ -36,7 +37,7 @@
 - (void)setDate:(NSDate *)date
 {
     _date = date;
-    [self updateLabel];
+    [self updateLabels];
 }
 
 - (BOOL)isTodaysDate
@@ -50,7 +51,7 @@
 {
     _selectedDate = selectedDate;
     
-    [self updateLabel];
+    [self updateLabels];
     [self setNeedsDisplay];
 }
 
@@ -65,7 +66,24 @@
     return _dateLabel;
 }
 
-- (void)updateLabel
+- (UILabel*)weekdayLabel
+{
+    if (!_weekdayLabel) {
+        _weekdayLabel = [self addLabel];
+        
+        _weekdayLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    
+    return _weekdayLabel;
+}
+
+- (void)updateLabels
+{
+    [self updateDateLabel];
+    [self updateWeekdayLabel];
+}
+
+- (void)updateDateLabel
 {
     NSDateFormatter* instance = [NSDateFormatter ecDateViewFormatter];
     NSString* dateString = [instance stringFromDate:self.date];
@@ -80,19 +98,44 @@
     }
 }
 
+- (void)updateWeekdayLabel
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSInteger weekday = [calendar component:NSCalendarUnitWeekday fromDate:self.date];
+    
+    self.weekdayLabel.text = calendar.veryShortWeekdaySymbols[weekday - 1]; // weekdays are not 0 based
+}
+
 #pragma mark - Layout
+
+#define WEEKDAY_LABEL_HEIGHT    21.0f
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
+    [self layoutWeekdayLabel];
     [self layoutDateLabel];
+}
+
+- (void)layoutWeekdayLabel
+{
+    CGRect weekdayLabelFrame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, WEEKDAY_LABEL_HEIGHT);
+    self.weekdayLabel.frame = weekdayLabelFrame;
+    
+    DDLogDebug(@"Weekday Label Frame: %@", NSStringFromCGRect(weekdayLabelFrame));
 }
 
 - (void)layoutDateLabel
 {
-    DDLogDebug(@"Date Label Frame: %@", NSStringFromCGRect(self.bounds));
-    self.dateLabel.frame = self.bounds;
+    CGRect dateLabelFrame = CGRectMake(self.bounds.origin.x,
+                                       CGRectGetMaxY(self.weekdayLabel.frame),
+                                       self.bounds.size.width,
+                                       self.bounds.size.height - WEEKDAY_LABEL_HEIGHT);
+    self.dateLabel.frame = dateLabelFrame;
+    
+    DDLogDebug(@"Date Label Frame: %@", NSStringFromCGRect(dateLabelFrame));
+
 }
 
 #pragma mark - Drawing
