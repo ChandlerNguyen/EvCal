@@ -8,6 +8,10 @@
 
 @class EKEvent;
 @class ECEditEventViewController;
+
+//------------------------------------------------------------------------------
+// @name Delegate methods
+//------------------------------------------------------------------------------
 @protocol ECEditEventViewControllerDelegate <NSObject>
 
 /**
@@ -39,8 +43,17 @@
 
 @interface ECEditEventViewController : UITableViewController
 
+//------------------------------------------------------------------------------
+// @name Properties
+//------------------------------------------------------------------------------
+
 // The event being edited by the controller, leave nil to create a new event
 @property (nonatomic, strong) EKEvent* event;
+
+// The start date for the event, if an event is set this value will be ignored
+@property (nonatomic, strong) NSDate* startDate;
+// The end date for the event, if an event is set this value will be ignored
+@property (nonatomic, strong) NSDate* endDate;
 
 // The delegate that receives messages from edit event view controller
 @property (nonatomic, weak) id<ECEditEventViewControllerDelegate> delegate;

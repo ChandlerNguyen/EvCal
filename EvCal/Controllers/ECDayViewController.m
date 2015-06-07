@@ -10,6 +10,7 @@
 
 // CocoaPods
 #import "NSDate+CupertinoYankee.h"
+#import "NSDate+ECEventAdditions.h"
 #import "CocoaLumberjack.h"
 
 // EvCal Classes
@@ -192,6 +193,7 @@
 {
     ECEditEventViewController* eevc = [self.storyboard instantiateViewControllerWithIdentifier:EC_EDIT_EVENT_VIEW_CONTROLLER_STORYBOARD_ID];
     eevc.event = event;
+    eevc.startDate = [self.displayDate dateWithTimeOfDate:[[NSDate date] beginningOfHour]];
     eevc.delegate = self;
     
     [self.navigationController pushViewController:eevc animated:YES];

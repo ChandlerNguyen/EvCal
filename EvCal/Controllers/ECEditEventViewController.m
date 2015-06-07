@@ -75,6 +75,24 @@
     return _dateFormatter;
 }
 
+- (NSDate*)startDate
+{
+    if (!_startDate) {
+        _startDate = [[NSDate date] beginningOfHour];
+    }
+    
+    return _startDate;
+}
+
+- (NSDate*)endDate
+{
+    if (!_endDate) {
+        _endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:self.startDate options:0];
+    }
+    
+    return _endDate;
+}
+
 
 #pragma mark - Synchronizing event and fields
 
@@ -103,7 +121,7 @@
     if (event) {
         return event.startDate;
     } else {
-        return [[NSDate date] beginningOfHour];
+        return self.startDate;
     }
 }
 
@@ -112,7 +130,7 @@
     if (event) {
         return event.endDate;
     } else {
-        return [[NSDate date] endOfHour];
+        return self.endDate;
     }
 }
 
