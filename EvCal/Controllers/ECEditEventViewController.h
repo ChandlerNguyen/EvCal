@@ -15,13 +15,6 @@
 @protocol ECEditEventViewControllerDelegate <NSObject>
 
 /**
- *  Tells the receiver that the view controller cancelled editing without saving
- *
- *  @param controller The controller in which editing was cancelled
- */
-- (void)editEventViewControllerDidCancel:(ECEditEventViewController*)controller;
-
-/**
  *  Tells the receiver that the view controller saved changes to the event
  *
  *  @param controller THe controller in which changes were saved

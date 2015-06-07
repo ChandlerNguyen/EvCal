@@ -15,6 +15,7 @@
 // EvCal Classes
 #import "ECEditEventViewController.h"
 #import "ECEventStoreProxy.h"
+#import "ECDatePickerCell.h"
 
 @interface ECEditEventViewController() <UIActionSheetDelegate>
 
@@ -22,7 +23,6 @@
 
 // Navigation Elements
 @property (nonatomic, weak) UIBarButtonItem* saveButton;
-@property (nonatomic, weak) UIBarButtonItem* cancelButton;
 
 // Event Data Fields
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
@@ -52,10 +52,6 @@
     UIBarButtonItem* saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonTapped:)];
     self.navigationItem.rightBarButtonItem = saveButton;
     self.saveButton = saveButton;
-    
-    UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped:)];
-    self.navigationItem.leftBarButtonItem = cancelButton;
-    self.cancelButton = cancelButton;
 }
 
 - (NSDate*)startDate
@@ -233,11 +229,6 @@
             [self saveEventChanges:EKSpanThisEvent];
         }
     }
-}
-
-- (void)cancelButtonTapped:(UIBarButtonItem*)sender
-{
-    [self.delegate editEventViewControllerDidCancel:self];
 }
 
 - (IBAction)deleteButtonTapped:(UIButton *)sender {
