@@ -103,7 +103,6 @@
     XCTAssertTrue([eventView.event.location isEqualToString:@"Simulator/iOS Device"]);
     XCTAssertTrue([eventView.event.startDate isEqualToDate:[self.currentTestStartDate beginningOfDay]]);
     XCTAssertTrue([eventView.event.endDate isEqualToDate:[self.currentTestStartDate endOfDay]]);
-    XCTAssertTrue([eventView.backgroundColor isEqual:[UIColor colorWithCGColor:eventView.event.calendar.CGColor]]);
 }
 
 - (void)testAddingNilAndEmptyEvents
