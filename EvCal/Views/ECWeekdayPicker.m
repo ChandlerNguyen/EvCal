@@ -15,8 +15,9 @@
 
 #define DATE_PICKER_CELL_REUSE_ID   @"DatePickerCell"
 
-@interface ECWeekdayPicker()
+@interface ECWeekdayPicker() <UIScrollViewDelegate>
 
+@property (nonatomic, strong, readwrite) NSDate* selectedDate;
 @property (nonatomic, strong) NSDateFormatter* dateFormatter;
 
 // views
@@ -74,13 +75,25 @@
     return _dateFormatter;
 }
 
+- (void)setSelectedDate:(NSDate *)selectedDate
+{
+    _selectedDate = selectedDate;
+    
+    if ([self.pickerDelegate respondsToSelector:@selector(weekdayPicker:didSelectDate:)]) {
+        [self.pickerDelegate weekdayPicker:self didSelectDate:selectedDate];
+    }
+}
+
 - (void)setSelectedDate:(NSDate *)selectedDate animated:(BOOL)animated
 {
     DDLogDebug(@"Changing weekday picker selected date to %@", selectedDate);
     _selectedDate = selectedDate;
     [self updateWeekdaysWithDate:selectedDate];
+    [self setNeedsLayout];
     
-    [self.pickerDelegate weekdayPicker:self didSelectDate:selectedDate];
+    if ([self.pickerDelegate respondsToSelector:@selector(weekdayPicker:didSelectDate:)]) {
+        [self.pickerDelegate weekdayPicker:self didSelectDate:selectedDate];
+    }
 }
 
 - (UIScrollView *)weekdaysScrollView
@@ -90,6 +103,7 @@
         
         weekdaysScrollView.pagingEnabled = YES;
         weekdaysScrollView.showsHorizontalScrollIndicator = NO;
+        weekdaysScrollView.delegate = self;
         
         _weekdaysScrollView = weekdaysScrollView;
         [self addSubview:weekdaysScrollView];
@@ -209,7 +223,9 @@
     NSArray* oldWeekdays = [self.weekdays copy];
     [self updateWeekdaysWithDate:date];
     
-    [self.pickerDelegate weekdayPicker:self didScrollFrom:oldWeekdays to:self.weekdays];
+    if ([self.pickerDelegate respondsToSelector:@selector(weekdayPicker:didScrollFrom:to:)]) {
+        [self.pickerDelegate weekdayPicker:self didScrollFrom:oldWeekdays to:self.weekdays];
+    }
 }
 
 #pragma mark - UI Events
@@ -296,6 +312,83 @@
 }
 
 
+#pragma mark - Scroll View Delegate
 
+typedef NS_ENUM(NSInteger, ECWeekdayPickerScrollDirection) {
+    ECWeekdayPickerScrollDirectionLeft = -1,
+    ECWeekdayPickerScrollDirectionRight = 1,
+};
 
+- (CGPoint)weekdayPickerCenterOffset
+{
+    CGFloat centerX = (self.weekdaysScrollView.contentSize.width - self.weekdaysScrollView.bounds.size.width) / 2;
+    
+    return CGPointMake(centerX, self.weekdaysScrollView.bounds.origin.y);
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    CGPoint centerOffset = [self weekdayPickerCenterOffset];
+    
+    CGFloat offsetDelta = scrollView.contentOffset.x - centerOffset.x;
+    if (offsetDelta < -(self.weekdaysScrollView.bounds.size.width / 2)) {
+        [self swapCurrentWeekdaysWithPrevious];
+        [self swapCurrentDateViewsWithLeft];
+    } else if (offsetDelta > self.weekdaysScrollView.bounds.size.width / 2) {
+        [self swapCurrentWeekdaysWithNext];
+        [self swapCurrentDateViewsWithRight];
+    }
+    
+    self.selectedDate = self.weekdays.firstObject;
+    [self layoutWeekdayScrollView];
+}
+
+- (void)swapCurrentWeekdaysWithPrevious
+{
+    self.nextWeekdays = self.weekdays; // move current to next
+    self.weekdays = self.prevWeekdays; // move previous to current
+    
+    // load new next weekdays
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    self.prevWeekdays = [self weekdaysForDate:[calendar dateByAddingUnit:NSCalendarUnitDay value:-7 toDate:self.weekdays.firstObject options:0]];
+}
+
+- (void)swapCurrentDateViewsWithLeft
+{
+    NSArray* temp = self.rightDateViews;
+    self.rightDateViews = self.currentDateViews;
+    self.currentDateViews = self.leftDateViews;
+    self.leftDateViews = temp;
+    
+    [ECWeekdayPicker updateDateViews:self.leftDateViews withDates:self.prevWeekdays];
+}
+
+- (void)swapCurrentWeekdaysWithNext
+{
+    self.prevWeekdays = self.weekdays; // move current weekdays to previous
+    self.weekdays = self.nextWeekdays; // move next into current
+    
+    // load new previous weekdays
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    self.nextWeekdays = [self weekdaysForDate:[calendar dateByAddingUnit:NSCalendarUnitDay value:7 toDate:self.weekdays.firstObject options:0]];
+}
+
+- (void)swapCurrentDateViewsWithRight
+{
+    NSArray* temp = self.leftDateViews;
+    self.leftDateViews = self.currentDateViews;
+    self.currentDateViews = self.rightDateViews;
+    self.rightDateViews = temp;
+    
+    [ECWeekdayPicker updateDateViews:self.rightDateViews withDates:self.nextWeekdays];
+}
+
++ (void)updateDateViews:(NSArray*)dateViews withDates:(NSArray*)dates
+{
+    for (NSInteger i = 0; i < dateViews.count; i++) {
+        ECDateView* dateView = dateViews[i];
+        NSDate* date = dates[i];
+        dateView.date = date;
+    }
+}
 @end

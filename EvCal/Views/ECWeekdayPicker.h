@@ -11,6 +11,7 @@
 @class ECWeekdayPicker;
 @protocol ECWeekdayPickerDelegate <NSObject>
 
+@optional
 /**
  *  Tells the delegate when a new weekday is selected in the picker view.
  *
