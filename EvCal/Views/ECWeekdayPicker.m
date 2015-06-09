@@ -62,6 +62,7 @@
 - (void)setup
 {
     self.backgroundColor = [UIColor whiteColor];
+    
 }
 
 - (NSDateFormatter*)dateFormatter
@@ -89,6 +90,7 @@
     DDLogDebug(@"Changing weekday picker selected date to %@", selectedDate);
     _selectedDate = selectedDate;
     [self updateWeekdaysWithDate:selectedDate];
+    [self updateSelectedDateView];
     [self setNeedsLayout];
     
     if ([self.pickerDelegate respondsToSelector:@selector(weekdayPicker:didSelectDate:)]) {
@@ -171,22 +173,29 @@
 {
     NSMutableArray* mutableDateViews = [[NSMutableArray alloc] init];
     
-    NSCalendar* calendar = [NSCalendar currentCalendar];
     ECDateViewFactory* factory = [[ECDateViewFactory alloc] init];
     for (NSDate* date in weekdays) {
         ECDateView* dateView = [factory dateViewForDate:date];
         
         [dateView addTarget:self action:@selector(dateViewTapped:) forControlEvents:UIControlEventTouchUpInside];
         
-        if ([calendar isDate:date inSameDayAsDate:self.selectedDate]) {
-            [self selectDateView:dateView animated:NO];
-        }
-        
         [self.weekdaysScrollView addSubview:dateView];
         [mutableDateViews addObject:dateView];
     }
     
     return [mutableDateViews copy];
+}
+
+- (void)updateSelectedDateView
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+
+    [self.selectedDateView setSelectedDate:NO animated:NO];
+    for (ECDateView* dateView in self.currentDateViews) {
+        if ([calendar isDate:dateView.date inSameDayAsDate:self.selectedDate]) {
+            [self selectDateView:dateView animated:NO];
+        }
+    }
 }
 
 
@@ -234,9 +243,6 @@
 {
     if (!dateView.isSelectedDate) {
         [self setSelectedDate:dateView.date animated:YES];
-
-        [self.selectedDateView setSelectedDate:NO animated:YES];
-        [self selectDateView:dateView animated:YES];
     }
 }
 
@@ -331,16 +337,24 @@ typedef NS_ENUM(NSInteger, ECWeekdayPickerScrollDirection) {
     CGPoint centerOffset = [self weekdayPickerCenterOffset];
     
     CGFloat offsetDelta = scrollView.contentOffset.x - centerOffset.x;
-    if (offsetDelta < -(self.weekdaysScrollView.bounds.size.width / 2)) {
-        [self swapCurrentWeekdaysWithPrevious];
-        [self swapCurrentDateViewsWithLeft];
-    } else if (offsetDelta > self.weekdaysScrollView.bounds.size.width / 2) {
-        [self swapCurrentWeekdaysWithNext];
-        [self swapCurrentDateViewsWithRight];
+    if (fabs(offsetDelta) > self.weekdaysScrollView.bounds.size.width / 2) {
+        NSArray* oldWeekdays = [self.weekdays copy]; // create a copy before swapping
+        if (offsetDelta < 0) {
+            [self swapCurrentWeekdaysWithPrevious];
+            [self swapCurrentDateViewsWithLeft];
+        } else if (offsetDelta > 0) {
+            [self swapCurrentWeekdaysWithNext];
+            [self swapCurrentDateViewsWithRight];
+        }
+        
+        if ([self.pickerDelegate respondsToSelector:@selector(weekdayPicker:didScrollFrom:to:)]) {
+            NSArray* newWeekdays = [self.weekdays copy]; // pass a copy to keep weekdays readonly
+            [self.pickerDelegate weekdayPicker:self didScrollFrom:oldWeekdays to:newWeekdays];
+        }
+        self.selectedDate = self.weekdays.firstObject;
+        [self updateSelectedDateView];
+        [self layoutWeekdayScrollView];
     }
-    
-    self.selectedDate = self.weekdays.firstObject;
-    [self layoutWeekdayScrollView];
 }
 
 - (void)swapCurrentWeekdaysWithPrevious
