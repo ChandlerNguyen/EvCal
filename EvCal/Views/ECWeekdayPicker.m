@@ -42,8 +42,6 @@
 {
     DDLogDebug(@"Waking ECWeekdayPicker from nib");
     [super awakeFromNib];
-    
-    [self setup];
 }
 
 - (instancetype)initWithDate:(NSDate *)date
@@ -51,18 +49,10 @@
     DDLogDebug(@"Initializing weekday picker with date %@", date);
     self = [super initWithFrame:CGRectZero];
     if (self) {
-        [self setup];
-        
         [self setSelectedDate:date animated:YES];
     }
     
     return self;
-}
-
-- (void)setup
-{
-    self.backgroundColor = [UIColor whiteColor];
-    
 }
 
 
@@ -75,6 +65,7 @@
     DDLogDebug(@"Changing weekday picker selected date from %@ to %@", _selectedDate, selectedDate);
     _selectedDate = selectedDate;
     
+    [self updateSelectedDateView:NO];
     [self informDelegateSelectedDateChanged:selectedDate];
 }
 
@@ -83,17 +74,17 @@
     DDLogDebug(@"Changing weekday picker selected date from %@ to %@", _selectedDate, selectedDate);
     _selectedDate = selectedDate;
     [self updateWeekdaysWithDate:selectedDate];
-    [self updateSelectedDateView];
+    [self updateSelectedDateView:animated];
     [self setNeedsLayout];
     
     [self informDelegateSelectedDateChanged:selectedDate];
 }
 
-- (void)updateSelectedDateView
+- (void)updateSelectedDateView:(BOOL)animated
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
     
-    [self.selectedDateView setSelectedDate:NO animated:NO];
+    [self.selectedDateView setSelectedDate:NO animated:animated];
     for (ECDateView* dateView in self.currentDateViews) {
         if ([calendar isDate:dateView.date inSameDayAsDate:self.selectedDate]) {
             DDLogDebug(@"Changing selected date view to view with date %@", dateView.date);
@@ -320,8 +311,8 @@
 #pragma mark - Scroll View Delegate
 
 typedef NS_ENUM(NSInteger, ECWeekdayPickerScrollDirection) {
-    ECWeekdayPickerScrollDirectionLeft = -1,
-    ECWeekdayPickerScrollDirectionRight = 1,
+    ECWeekdayPickerScrollDirectionLeft = 1,
+    ECWeekdayPickerScrollDirectionRight = -1,
 };
 
 - (CGPoint)weekdayPickerCenterOffset
@@ -335,26 +326,60 @@ typedef NS_ENUM(NSInteger, ECWeekdayPickerScrollDirection) {
 {
     CGPoint centerOffset = [self weekdayPickerCenterOffset];
     
-    CGFloat offsetDelta = scrollView.contentOffset.x - centerOffset.x;
+    CGFloat offsetDelta = centerOffset.x - scrollView.contentOffset.x;
     if (fabs(offsetDelta) > self.weekdaysScrollView.bounds.size.width / 2) {
-        NSArray* oldWeekdays = [self.weekdays copy]; // create a copy before swapping
-        if (offsetDelta < 0) {
-            DDLogDebug(@"Moving weekdays forward one week");
-            [self swapCurrentWeekdaysWithPrevious];
-            [self swapCurrentDateViewsWithLeft];
-        } else if (offsetDelta > 0) {
-            DDLogDebug(@"Moving weekdays backward one week");
-            [self swapCurrentWeekdaysWithNext];
-            [self swapCurrentDateViewsWithRight];
-        }
         
-        NSArray* newWeekdays = [self.weekdays copy]; // pass a copy to keep weekdays readonly
-        [self informDelegatePickerScrolledFrom:oldWeekdays to:newWeekdays];
-        
-        self.selectedDate = self.weekdays.firstObject;
-        [self updateSelectedDateView];
-        [self layoutWeekdayScrollView];
+        ECWeekdayPickerScrollDirection direction = (offsetDelta < 0) ? ECWeekdayPickerScrollDirectionRight : ECWeekdayPickerScrollDirectionLeft;
+        [self moveWeekdaysOneWeek:direction];
     }
+}
+
+
+#pragma mark - Changing visible weekdays
+
+- (void)moveWeekdaysOneWeek:(ECWeekdayPickerScrollDirection)direction
+{
+    NSArray* oldWeekdays = [self.weekdays copy]; // create a copy before swapping
+    switch (direction) {
+        case ECWeekdayPickerScrollDirectionLeft:
+            [self moveWeekdaysForwardsOneWeek];
+            break;
+            
+        case ECWeekdayPickerScrollDirectionRight:
+            [self moveWeekdaysBackwardsOneWeek];
+            break;
+            
+        default:
+            DDLogError(@"Unrecognized direction %lu", direction);
+            break;
+    }
+    
+    NSArray* newWeekdays = [self.weekdays copy]; // pass a copy to keep weekdays readonly
+    [self informDelegatePickerScrolledFrom:oldWeekdays to:newWeekdays];
+    
+    self.selectedDate = self.weekdays.firstObject;
+    [self layoutWeekdayScrollView];
+}
+
+- (void)moveWeekdaysForwardsOneWeek
+{
+    DDLogDebug(@"Moving weekdays forward one week");
+    [self swapCurrentWeekdaysWithNext];
+    [self swapCurrentDateViewsWithRight];
+}
+
+- (void)moveWeekdaysBackwardsOneWeek
+{
+    DDLogDebug(@"Moving weekdays backward one week");
+    [self swapCurrentWeekdaysWithPrevious];
+    [self swapCurrentDateViewsWithLeft];
+}
+
+- (void)changeWeekdays:(NSArray*)weekdays previous:(NSArray*)previousWeekdays next:(NSArray*)nextWeekdays
+{
+    self.weekdays = weekdays;
+    self.prevWeekdays = previousWeekdays;
+    self.nextWeekdays = nextWeekdays;
 }
 
 - (void)swapCurrentWeekdaysWithPrevious
