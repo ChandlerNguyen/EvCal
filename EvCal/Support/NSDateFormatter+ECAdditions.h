@@ -10,7 +10,20 @@
 
 @interface NSDateFormatter (ECAdditions)
 
+//------------------------------------------------------------------------------
+// @name Creating contextual date formatters
+//------------------------------------------------------------------------------
+
+/**
+ *  @return A date formatter with the proper regional formatting for date views
+ *          within an ECWeekdayPicker.
+ */
 + (instancetype)ecDateViewFormatter;
+
+/**
+ *  @return A date formatter with the proper regional formatting for start and
+ *          end date labels associated with events.
+ */
 + (instancetype)ecEventDatesFormatter;
 
 @end

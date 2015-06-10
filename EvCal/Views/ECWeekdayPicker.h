@@ -40,12 +40,18 @@
 // The picker's currently selected date
 @property (nonatomic, strong, readonly) NSDate* selectedDate;
 
-
+/**
+ *  Change the selected date of the receiver with or without an animation
+ *
+ *  @param selectedDate The new selected date value
+ *  @param animated     Determines whether the change should be animated
+ */
 - (void)setSelectedDate:(NSDate *)selectedDate animated:(BOOL)animated;
 
 // An ordered week of dates
 @property (nonatomic, strong, readonly) NSArray* weekdays;
 
+// The delegate that will receive updates about picker events
 @property (nonatomic, weak) id<ECWeekdayPickerDelegate> pickerDelegate;
 
 

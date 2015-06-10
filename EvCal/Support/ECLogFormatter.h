@@ -11,4 +11,18 @@
 
 @interface ECLogFormatter : NSObject <DDLogFormatter>
 
+//------------------------------------------------------------------------------
+// @name Formatting Log Messages
+//------------------------------------------------------------------------------
+
+/**
+ *  Appends the log level and calling method to the front of any log message
+ *
+ *  @param logMessage The log message being modified
+ *
+ *  @return A newly created string with the log level, calling function, and 
+ *          original message concatenated together.
+ */
+- (NSString*)formatLogMessage:(DDLogMessage *)logMessage;
+
 @end

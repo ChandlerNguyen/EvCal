@@ -10,6 +10,11 @@
 
 @interface ECDatePickerCell : UITableViewCell
 
+//------------------------------------------------------------------------------
+// @name Properties
+//------------------------------------------------------------------------------
+
+// The date displayed by the cell and in its picker
 @property (nonatomic, weak) NSDate* date;
 
 @end

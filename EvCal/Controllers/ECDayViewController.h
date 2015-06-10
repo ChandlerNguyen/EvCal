@@ -10,6 +10,12 @@
 
 @interface ECDayViewController : UIViewController
 
+//------------------------------------------------------------------------------
+// @name Properties
+//------------------------------------------------------------------------------
+
+// The date currently displayed by the controller. Should be set before presenting
+// the controller and then managed internally by the controller.
 @property (nonatomic, strong) NSDate* displayDate;
 
 @end
