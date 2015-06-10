@@ -10,12 +10,13 @@
 
 @implementation ECDateViewAccessoryView
 
-- (instancetype)initWithColor:(UIColor *)color eventCount:(NSInteger)eventCount
+- (instancetype)initWithColor:(UIColor *)color
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         self.calendarColor = color;
-        self.eventCount = eventCount;
+        self.backgroundColor = color;
+        self.layer.cornerRadius = 4.0f;
     }
     
     return self;

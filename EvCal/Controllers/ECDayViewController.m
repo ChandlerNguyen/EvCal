@@ -108,7 +108,7 @@
 
 #pragma mark - View setup
 
-#define WEEKDAY_PICKER_HEIGHT   88.0f
+//#define WEEKDAY_PICKER_HEIGHT   88.0f
 
 
 - (void)setupWeekdayPicker

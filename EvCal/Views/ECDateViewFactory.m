@@ -43,7 +43,7 @@
     for (EKCalendar* calendar in eventStoreProxy.calendars) {
         NSArray* events = [eventStoreProxy eventsFrom:[date beginningOfDay] to:[date endOfDay] in:@[calendar]];
         if (events.count > 0) {
-            ECDateViewAccessoryView* accessoryView = [[ECDateViewAccessoryView alloc] initWithColor:[UIColor colorWithCGColor:calendar.CGColor] eventCount:events.count];
+            ECDateViewAccessoryView* accessoryView = [[ECDateViewAccessoryView alloc] initWithColor:[UIColor colorWithCGColor:calendar.CGColor]];
             [mutableAccessoryViews addObject:accessoryView];
         }
     }

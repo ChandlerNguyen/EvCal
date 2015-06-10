@@ -18,14 +18,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0Y-1Y-8xx" customClass="ECDayView">
-                                <rect key="frame" x="0.0" y="129" width="320" height="395"/>
+                                <rect key="frame" x="0.0" y="142" width="320" height="382"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jIF-aL-AxT" customClass="ECWeekdayPicker">
-                                <rect key="frame" x="0.0" y="64" width="320" height="66"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="78"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="66" id="sFA-mU-GFU"/>
+                                    <constraint firstAttribute="height" constant="78" id="sFA-mU-GFU"/>
                                 </constraints>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XjS-3O-ccb">
@@ -45,7 +45,7 @@
                             <constraint firstItem="XjS-3O-ccb" firstAttribute="leading" secondItem="e0Y-1Y-8xx" secondAttribute="leading" id="Bbi-Mx-HhV"/>
                             <constraint firstItem="XjS-3O-ccb" firstAttribute="trailing" secondItem="e0Y-1Y-8xx" secondAttribute="trailing" id="Efh-Yl-fze"/>
                             <constraint firstAttribute="trailing" secondItem="jIF-aL-AxT" secondAttribute="trailing" id="LWx-Gn-NEw"/>
-                            <constraint firstItem="e0Y-1Y-8xx" firstAttribute="top" secondItem="556-VY-LXQ" secondAttribute="bottom" constant="65" id="MhV-iq-kpf"/>
+                            <constraint firstItem="e0Y-1Y-8xx" firstAttribute="top" secondItem="556-VY-LXQ" secondAttribute="bottom" constant="78" id="MhV-iq-kpf"/>
                             <constraint firstItem="jIF-aL-AxT" firstAttribute="leading" secondItem="wde-oB-yac" secondAttribute="leading" id="Np8-2h-nNp"/>
                             <constraint firstItem="XjS-3O-ccb" firstAttribute="bottom" secondItem="HQi-PI-mQN" secondAttribute="top" id="bzM-uN-adu"/>
                             <constraint firstItem="jIF-aL-AxT" firstAttribute="top" secondItem="556-VY-LXQ" secondAttribute="bottom" id="e7Y-eh-8C5"/>

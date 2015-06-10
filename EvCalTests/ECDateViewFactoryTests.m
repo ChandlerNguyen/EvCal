@@ -121,17 +121,4 @@
     XCTAssertEqual(count, dateView.eventAccessoryViews.count, @"Date view should have the same number of accessory views as the user has calendars with events");
 }
 
-- (void)testDateViewHasCorrectAccessoryViewEventCount
-{
-    ECDateView* dateView = [self.dateViewFactory dateViewForDate:self.testStartDate];
-    
-    NSInteger count = 0;
-    for (ECDateViewAccessoryView* accessoryView in dateView.eventAccessoryViews) {
-        count += accessoryView.eventCount;
-    }
-    
-    XCTAssertEqual(count, [self.eventStoreProxy eventsFrom:[self.testStartDate beginningOfDay] to:[self.testStartDate endOfDay]].count, @"Date view accessory counts should total the number of events for the day");
-}
-
-
 @end

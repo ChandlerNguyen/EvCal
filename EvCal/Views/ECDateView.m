@@ -6,9 +6,14 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
-#import "ECDateView.h"
+// Helpers
 #import "UIView+ECAdditions.h"
+
+// EvCal Classes
+#import "ECDateView.h"
 #import "NSDateFormatter+ECAdditions.h"
+#import "ECDateViewAccessoryView.h"
+
 @interface ECDateView()
 
 @property (nonatomic, weak) UILabel* weekdayLabel;
@@ -47,6 +52,21 @@
     return [calendar isDateInToday:self.date];
 }
 
+- (void)setEventAccessoryViews:(NSArray *)eventAccessoryViews
+{
+    if (_eventAccessoryViews) {
+        for (ECDateViewAccessoryView* accessoryView in _eventAccessoryViews) {
+            [accessoryView removeFromSuperview];
+        }
+    }
+    
+    for (ECDateViewAccessoryView* accessoryView in eventAccessoryViews) {
+        [self addSubview:accessoryView];
+    }
+    
+    _eventAccessoryViews = eventAccessoryViews;
+}
+
 - (void)setSelectedDate:(BOOL)selectedDate animated:(BOOL)animated
 {
     _selectedDate = selectedDate;
@@ -60,6 +80,7 @@
     if (!_dateLabel) {
         _dateLabel = [self addLabel];
         
+        _dateLabel.font = [UIFont systemFontOfSize:19.0f];
         _dateLabel.textAlignment = NSTextAlignmentCenter;
     }
     
@@ -71,6 +92,7 @@
     if (!_weekdayLabel) {
         _weekdayLabel = [self addLabel];
         
+        _weekdayLabel.font = [UIFont systemFontOfSize:12.0f];
         _weekdayLabel.textAlignment = NSTextAlignmentCenter;
     }
     
@@ -108,7 +130,8 @@
 
 #pragma mark - Layout
 
-#define WEEKDAY_LABEL_HEIGHT    21.0f
+#define WEEKDAY_LABEL_HEIGHT        15.0f
+#define ACCESSORY_VIEWS_HEIGHT      15.0f
 
 - (void)layoutSubviews
 {
@@ -116,6 +139,7 @@
     
     [self layoutWeekdayLabel];
     [self layoutDateLabel];
+    [self layoutAccessoryViews];
 }
 
 - (void)layoutWeekdayLabel
@@ -131,11 +155,32 @@
     CGRect dateLabelFrame = CGRectMake(self.bounds.origin.x,
                                        CGRectGetMaxY(self.weekdayLabel.frame),
                                        self.bounds.size.width,
-                                       self.bounds.size.height - WEEKDAY_LABEL_HEIGHT);
+                                       self.bounds.size.height - WEEKDAY_LABEL_HEIGHT - ACCESSORY_VIEWS_HEIGHT);
     self.dateLabel.frame = dateLabelFrame;
     
     DDLogDebug(@"Date Label Frame: %@", NSStringFromCGRect(dateLabelFrame));
 
+}
+
+#define ACCESSORY_VIEW_WIDTH    8.0f
+#define ACCESSORY_VIEW_HEIGHT   8.0f
+#define ACCESSORY_VIEW_PADDING  4.0f
+
+- (void)layoutAccessoryViews
+{
+    CGFloat accessoryViewsWidth = self.eventAccessoryViews.count * ACCESSORY_VIEW_WIDTH + (self.eventAccessoryViews.count - 1) * ACCESSORY_VIEW_PADDING;
+    CGFloat accessoryViewsOriginX = floorf(self.bounds.origin.x + (self.bounds.size.width - accessoryViewsWidth) / 2.0f);
+    CGFloat accessoryViewsOriginY = floorf(CGRectGetMaxY(self.dateLabel.frame) + (ACCESSORY_VIEWS_HEIGHT / 2.0f) - ACCESSORY_VIEW_HEIGHT / 2.0f);
+    
+    for (NSInteger i = 0; i < self.eventAccessoryViews.count; i++) {
+        CGRect accessoryViewFrame = CGRectMake(accessoryViewsOriginX + i * (ACCESSORY_VIEW_PADDING + ACCESSORY_VIEW_WIDTH),
+                                               accessoryViewsOriginY,
+                                               ACCESSORY_VIEW_WIDTH,
+                                               ACCESSORY_VIEW_HEIGHT);
+        
+        ECDateViewAccessoryView* accessoryView = self.eventAccessoryViews[i];
+        accessoryView.frame = accessoryViewFrame;
+    }
 }
 
 #pragma mark - Drawing
@@ -155,11 +200,8 @@
 
 - (void)drawCircle
 {
-    if (self.isTodaysDate) {
-        [[UIColor blueColor] setFill];
-    } else {
-        [[UIColor redColor] setFill];
-    }
+
+    [[UIColor colorWithRed:76.0f/255.0f green:0.0f/255.0f blue:179.0f/255.0f alpha:1.0f] setFill];
     
     CGPoint circleCenter = self.dateLabel.center;
     CGRect circleFrame = CGRectMake(circleCenter.x - CIRCLE_RADIUS,

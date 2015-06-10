@@ -16,9 +16,6 @@
 
 // The color of the calendar represented by the accessory view
 @property (nonatomic, strong) UIColor* calendarColor;
-// The number of events represented by the accessory view
-@property (nonatomic) NSInteger eventCount;
-
 
 //------------------------------------------------------------------------------
 // @name Initializing
@@ -29,11 +26,9 @@
  *
  *  @param color      The color of the calendar represented by the accessory 
  *                    view
- *  @param eventCount The number of events represented by the accessory view
- *
  *  @return A newly created accessory view with the given color and event count
  */
 
-- (instancetype)initWithColor:(UIColor*)color eventCount:(NSInteger)eventCount;
+- (instancetype)initWithColor:(UIColor*)color;
 
 @end
