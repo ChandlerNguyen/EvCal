@@ -69,14 +69,10 @@
 #pragma mark - Properties
 
 #pragma mark Selected Date
-- (void)logSelectedDateChangeFrom:(NSDate*)oldDate to:(NSDate*)newDate
-{
-    DDLogDebug(@"Changing weekday picker selected date from %@ to %@", oldDate, newDate);
-}
 
 - (void)setSelectedDate:(NSDate *)selectedDate
 {
-    [self logSelectedDateChangeFrom:_selectedDate to:selectedDate];
+    DDLogDebug(@"Changing weekday picker selected date from %@ to %@", _selectedDate, selectedDate);
     _selectedDate = selectedDate;
     
     [self informDelegateSelectedDateChanged:selectedDate];
@@ -84,7 +80,7 @@
 
 - (void)setSelectedDate:(NSDate *)selectedDate animated:(BOOL)animated
 {
-    [self logSelectedDateChangeFrom:_selectedDate to:selectedDate];
+    DDLogDebug(@"Changing weekday picker selected date from %@ to %@", _selectedDate, selectedDate);
     _selectedDate = selectedDate;
     [self updateWeekdaysWithDate:selectedDate];
     [self updateSelectedDateView];
