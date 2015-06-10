@@ -329,7 +329,7 @@ typedef NS_ENUM(NSInteger, ECWeekdayPickerScrollDirection) {
     CGFloat offsetDelta = centerOffset.x - scrollView.contentOffset.x;
     if (fabs(offsetDelta) > self.weekdaysScrollView.bounds.size.width / 2) {
         
-        ECWeekdayPickerScrollDirection direction = (offsetDelta < 0) ? ECWeekdayPickerScrollDirectionRight : ECWeekdayPickerScrollDirectionLeft;
+        ECWeekdayPickerScrollDirection direction = (offsetDelta < 0) ? ECWeekdayPickerScrollDirectionLeft : ECWeekdayPickerScrollDirectionRight;
         [self moveWeekdaysOneWeek:direction];
     }
 }
@@ -356,8 +356,19 @@ typedef NS_ENUM(NSInteger, ECWeekdayPickerScrollDirection) {
     
     NSArray* newWeekdays = [self.weekdays copy]; // pass a copy to keep weekdays readonly
     [self informDelegatePickerScrolledFrom:oldWeekdays to:newWeekdays];
+
+    BOOL selectedTodaysDate = NO;
+    NSDate* today = [NSDate date];
+    for (NSDate* date in self.weekdays) {
+        if ([[NSCalendar currentCalendar] isDate:date inSameDayAsDate:today]) {
+            self.selectedDate = date;
+            selectedTodaysDate = YES;
+        }
+    }
+    if (!selectedTodaysDate) {
+        self.selectedDate = self.weekdays.firstObject;
+    }
     
-    self.selectedDate = self.weekdays.firstObject;
     [self layoutWeekdayScrollView];
 }
 
