@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import UIKit;
 
 @class ECEventView;
 @class ECDayViewEventsLayout;
@@ -17,7 +17,6 @@
 @protocol ECDayViewEventsLayoutDataSource <NSObject>
 
 @required
-
 /**
  *  Provides the layout with the proper bounds within which to layout the given
  *  event views. The default value is CGRectZero.
@@ -56,6 +55,13 @@
 @end
 
 @interface ECDayViewEventsLayout : NSObject
+
+//------------------------------------------------------------------------------
+// @name Properties
+//------------------------------------------------------------------------------
+
+// The data source for providing required layout information
+@property (nonatomic, weak) id<ECDayViewEventsLayoutDataSource> layoutDataSource;
 
 //------------------------------------------------------------------------------
 // @name Creating Event View frames
