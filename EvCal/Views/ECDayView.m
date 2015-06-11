@@ -211,7 +211,8 @@
 {
     if (!self.eventViewsLayoutIsValid) {
         // Prepare layout state
-        CGFloat width = self.bounds.size.width;
+        CGFloat width = self.bounds.size.width - (HOUR_LINE_DOT_INSET + 6.0f);
+        CGPoint origin = CGPointMake(self.bounds.origin.x + (HOUR_LINE_DOT_INSET + 6.0f), self.bounds.origin.y);
         NSDate* lastEndDate = nil;
         
         NSArray* hours = [self.displayDate hoursOfDay];
@@ -224,7 +225,7 @@
         for (ECEventView* eventView in self.eventViews) {
             // this view doesn't overlap the previous cluster of views
             if (lastEndDate && [eventView.event.startDate compare:lastEndDate] == NSOrderedDescending) {
-                [self layoutColumns:columns width:width displayedHours:hours];
+                [self layoutColumns:columns width:width origin:origin displayedHours:hours];
                 
                 // start new cluster
                 columns = [@[] mutableCopy];
@@ -255,26 +256,23 @@
             
             // layout current column setup
             if (columns.count > 0) {
-                [self layoutColumns:columns width:width displayedHours:hours];
+                [self layoutColumns:columns width:width origin:origin displayedHours:hours];
             }
         }
         self.eventViewsLayoutIsValid = YES;
     }
 }
 
-- (void)layoutColumns:(NSArray*)columns width:(CGFloat)width displayedHours:(NSArray*)hours
+- (void)layoutColumns:(NSArray*)columns width:(CGFloat)width origin:(CGPoint)origin displayedHours:(NSArray*)hours
 {
-    // Shift events to the right so hours can be seen
-    CGFloat eventOriginX = self.bounds.origin.x + HOUR_LINE_DOT_INSET + 6.0f;
-
     NSInteger numGroups = columns.count;
     for (NSInteger i = 0; i < numGroups; i++) {
         NSArray* column = columns[i];
         for (NSInteger j = 0; j < column.count; j++) {
             ECEventView* eventView = column[j];
-            CGRect eventViewFrame = CGRectMake(eventOriginX + i * floorf(self.contentSize.width / numGroups),
+            CGRect eventViewFrame = CGRectMake(origin.x + i * floorf(width / numGroups),
                                                [eventView verticalPositionInRect:self.durationEventsView.bounds forDate:self.displayDate],
-                                               floorf((self.bounds.size.width - HOUR_LINE_DOT_INSET - 6.0f) / numGroups),
+                                               floorf(width / numGroups),
                                                [eventView heightInRect:self.durationEventsView.bounds forDate:self.displayDate]);
             eventView.frame = eventViewFrame;
         }
