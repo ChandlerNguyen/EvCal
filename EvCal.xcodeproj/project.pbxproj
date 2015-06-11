@@ -171,9 +171,11 @@
 		847A81651B09B157008F5168 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				84C459031B073A860066B6A9 /* Images.xcassets */,
+				84C458F71B073A860066B6A9 /* Info.plist */,
+				84C458F81B073A860066B6A9 /* main.m */,
 				84C458FA1B073A860066B6A9 /* AppDelegate.h */,
 				84C458FB1B073A860066B6A9 /* AppDelegate.m */,
-				847A81661B09B18B008F5168 /* ECLogging.pch */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -201,25 +203,14 @@
 		84C458F51B073A860066B6A9 /* EvCal */ = {
 			isa = PBXGroup;
 			children = (
-				8478F7A71B1DFEA20096F1B7 /* Storyboards */,
 				847A81651B09B157008F5168 /* Application */,
 				84C459271B074DC20066B6A9 /* Support */,
-				84EF22621B08769E003DA610 /* Model */,
+				8478F7A71B1DFEA20096F1B7 /* Storyboards */,
 				84C459231B074BE10066B6A9 /* Views */,
 				84C4591F1B073DBE0066B6A9 /* Controllers */,
-				84C459031B073A860066B6A9 /* Images.xcassets */,
-				84C458F61B073A860066B6A9 /* Supporting Files */,
+				84EF22621B08769E003DA610 /* Model */,
 			);
 			path = EvCal;
-			sourceTree = "<group>";
-		};
-		84C458F61B073A860066B6A9 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				84C458F71B073A860066B6A9 /* Info.plist */,
-				84C458F81B073A860066B6A9 /* main.m */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		84C4590F1B073A860066B6A9 /* EvCalTests */ = {
@@ -260,14 +251,40 @@
 		84C459231B074BE10066B6A9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				84C459201B074BDD0066B6A9 /* ECDayView.h */,
-				84C459211B074BDD0066B6A9 /* ECDayView.m */,
+				84D92C941B2998820050015D /* Edit Event View */,
+				84D92C931B29986D0050015D /* Weekday Picker */,
+				84D92C921B2998490050015D /* Day View */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		84C459271B074DC20066B6A9 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				84D92C961B2998BC0050015D /* Logging */,
+				84D92C951B29989B0050015D /* Foundation Categories */,
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
+		84D92C921B2998490050015D /* Day View */ = {
+			isa = PBXGroup;
+			children = (
 				84EF22671B08D59E003DA610 /* ECEventViewFactory.h */,
 				84EF22681B08D59E003DA610 /* ECEventViewFactory.m */,
 				84EF226A1B08D5BD003DA610 /* ECEventView.h */,
 				84EF226B1B08D5BD003DA610 /* ECEventView.m */,
 				8478F7851B1741EE0096F1B7 /* ECHourLine.h */,
 				8478F7861B1741EE0096F1B7 /* ECHourLine.m */,
+				84C459201B074BDD0066B6A9 /* ECDayView.h */,
+				84C459211B074BDD0066B6A9 /* ECDayView.m */,
+			);
+			name = "Day View";
+			sourceTree = "<group>";
+		};
+		84D92C931B29986D0050015D /* Weekday Picker */ = {
+			isa = PBXGroup;
+			children = (
 				8478F7881B1822AA0096F1B7 /* ECWeekdayPicker.h */,
 				8478F7891B1822AA0096F1B7 /* ECWeekdayPicker.m */,
 				8478F7931B1AB26E0096F1B7 /* ECDateView.h */,
@@ -276,25 +293,40 @@
 				8478F7971B1AB2D50096F1B7 /* ECDateViewFactory.m */,
 				8478F79B1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.h */,
 				8478F79C1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.m */,
+			);
+			name = "Weekday Picker";
+			sourceTree = "<group>";
+		};
+		84D92C941B2998820050015D /* Edit Event View */ = {
+			isa = PBXGroup;
+			children = (
 				8478F7B31B24519B0096F1B7 /* ECDatePickerCell.h */,
 				8478F7B41B24519B0096F1B7 /* ECDatePickerCell.m */,
 			);
-			name = Views;
+			name = "Edit Event View";
 			sourceTree = "<group>";
 		};
-		84C459271B074DC20066B6A9 /* Support */ = {
+		84D92C951B29989B0050015D /* Foundation Categories */ = {
 			isa = PBXGroup;
 			children = (
 				84B2E13C1B08E0A000CD0029 /* UIView+ECAdditions.h */,
 				84B2E13D1B08E0A000CD0029 /* UIView+ECAdditions.m */,
-				8478F78D1B19A29A0096F1B7 /* ECLogFormatter.h */,
-				8478F78E1B19A29A0096F1B7 /* ECLogFormatter.m */,
 				8478F79E1B1B06700096F1B7 /* NSDateFormatter+ECAdditions.h */,
 				8478F79F1B1B06700096F1B7 /* NSDateFormatter+ECAdditions.m */,
 				8478F7B01B244AF80096F1B7 /* NSDate+ECEventAdditions.h */,
 				8478F7B11B244AF80096F1B7 /* NSDate+ECEventAdditions.m */,
 			);
-			name = Support;
+			name = "Foundation Categories";
+			sourceTree = "<group>";
+		};
+		84D92C961B2998BC0050015D /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				847A81661B09B18B008F5168 /* ECLogging.pch */,
+				8478F78D1B19A29A0096F1B7 /* ECLogFormatter.h */,
+				8478F78E1B19A29A0096F1B7 /* ECLogFormatter.m */,
+			);
+			name = Logging;
 			sourceTree = "<group>";
 		};
 		84EF22621B08769E003DA610 /* Model */ = {
