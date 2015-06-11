@@ -21,7 +21,7 @@
 #import "ECDayView.h"
 #import "ECEventView.h"
 
-@interface ECDayViewLayoutTests : XCTestCase
+@interface ECEventViewTests : XCTestCase
 
 @property (nonatomic, strong) ECDayView* dayView;
 @property (nonatomic, strong) EKEventStore* eventStore;
@@ -30,7 +30,7 @@
 
 @end
 
-@implementation ECDayViewLayoutTests
+@implementation ECEventViewTests
 
 #pragma mark - Setup & Teardown
 
@@ -55,7 +55,7 @@
     self.testCalendar.title = @"Test Calendar";
     [self.eventStore saveCalendar:self.testCalendar commit:YES error:nil];
     
-    self.testFrame = CGRectMake(0, 0, 1, 2400);
+    self.testFrame = CGRectMake(0, 0, 120, 2400);
 }
 
 - (void)tearDown {
@@ -202,6 +202,5 @@
     
     XCTAssert([eventView verticalPositionInRect:self.testFrame forDate:[startDate tomorrow]] == 0);
 }
-
 
 @end
