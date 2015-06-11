@@ -23,7 +23,21 @@
 
 - (CGRect)frameForEventView:(ECEventView *)eventView
 {
+    if (!self.eventViewFrames) {
+        self.eventViewFrames = [self createEventViewFrames];
+    }
+    
     return CGRectZero;
+}
+
+- (NSMutableDictionary*)createEventViewFrames
+{
+    NSMutableDictionary* eventViewFrames = [[NSMutableDictionary alloc] init];
+    
+    NSArray* eventViews = [self.layoutDataSource eventViewsForLayout:self];
+    CGRect eventViewsBounds = [self.layoutDataSource layout:self boundsForEventViews:eventViews];
+    
+    return eventViewFrames;
 }
 
 @end

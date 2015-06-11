@@ -101,6 +101,7 @@
 
 - (CGRect)layout:(ECDayViewEventsLayout *)layout boundsForEventViews:(NSArray *)eventViews
 {
+    self.eventViewBoundsRequested = YES;
     return self.testBounds;
 }
 
@@ -112,7 +113,6 @@
 
 - (CGFloat)minimumEventHeightForLayout:(ECDayViewEventsLayout *)layout
 {
-    self.eventViewBoundsRequested = YES;
     return self.minimumHeight;
 }
 
