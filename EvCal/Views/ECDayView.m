@@ -223,40 +223,44 @@
         NSMutableArray* columns = [[NSMutableArray alloc] init];
         
         for (ECEventView* eventView in self.eventViews) {
-            // this view doesn't overlap the previous cluster of views
-            if (lastEndDate && [eventView.event.startDate compare:lastEndDate] == NSOrderedDescending) {
-                [self layoutColumns:columns width:width origin:origin displayedHours:hours];
-                
-                // start new cluster
-                columns = [@[] mutableCopy];
-                lastEndDate = nil;
-            }
-            
-            BOOL placed = NO;
-            for (NSInteger i = 0; i < columns.count; i++) {
-                // determine if view can be added to the end of a current column
-                NSArray* column = columns[i];
-                if (![self eventView:eventView overlapsEventView:[column lastObject]]) {
-                    // add view to end of column
-                    columns[i] = [column arrayByAddingObject:eventView];
-                    placed = YES;
-                    break;
+            if (eventView.event.isAllDay) {
+                eventView.frame = self.allDayEventsView.bounds;
+            } else {
+                // this view doesn't overlap the previous cluster of views
+                if (lastEndDate && [eventView.event.startDate compare:lastEndDate] == NSOrderedDescending) {
+                    [self layoutColumns:columns width:width origin:origin displayedHours:hours];
+                    
+                    // start new cluster
+                    columns = [@[] mutableCopy];
+                    lastEndDate = nil;
                 }
-            }
-            
-            // view overlaps all columns, add a new column
-            if (!placed) {
-                [columns addObject:@[eventView]];
-            }
-            
-            // last date isn't set or the view's end date is later than current end date
-            if (!lastEndDate || [eventView.event.endDate compare:lastEndDate] == NSOrderedAscending) {
-                lastEndDate = eventView.event.endDate;
-            }
-            
-            // layout current column setup
-            if (columns.count > 0) {
-                [self layoutColumns:columns width:width origin:origin displayedHours:hours];
+                
+                BOOL placed = NO;
+                for (NSInteger i = 0; i < columns.count; i++) {
+                    // determine if view can be added to the end of a current column
+                    NSArray* column = columns[i];
+                    if (![self eventView:eventView overlapsEventView:[column lastObject]]) {
+                        // add view to end of column
+                        columns[i] = [column arrayByAddingObject:eventView];
+                        placed = YES;
+                        break;
+                    }
+                }
+                
+                // view overlaps all columns, add a new column
+                if (!placed) {
+                    [columns addObject:@[eventView]];
+                }
+                
+                // last date isn't set or the view's end date is later than current end date
+                if (!lastEndDate || [eventView.event.endDate compare:lastEndDate] == NSOrderedAscending) {
+                    lastEndDate = eventView.event.endDate;
+                }
+                
+                // layout current column setup
+                if (columns.count > 0) {
+                    [self layoutColumns:columns width:width origin:origin displayedHours:hours];
+                }
             }
         }
         self.eventViewsLayoutIsValid = YES;
