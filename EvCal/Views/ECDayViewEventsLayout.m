@@ -8,6 +8,22 @@
 
 #import "ECDayViewEventsLayout.h"
 
+@interface ECDayViewEventsLayout()
+
+@property (nonatomic, strong) NSMutableDictionary* eventViewFrames;
+
+@end
+
 @implementation ECDayViewEventsLayout
+
+- (void)invalidateLayout
+{
+    self.eventViewFrames = nil;
+}
+
+- (CGRect)frameForEventView:(ECEventView *)eventView
+{
+    return CGRectZero;
+}
 
 @end
