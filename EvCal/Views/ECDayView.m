@@ -195,7 +195,7 @@
     CGRect durationEventsViewFrame = CGRectMake(self.bounds.origin.x,
                                                 CGRectGetMaxY(self.allDayEventsView.frame),
                                                 self.contentSize.width,
-                                                self.contentSize.height - ALL_DAY_VIEW_HEIGHT);
+                                                self.contentSize.height - self.allDayEventsView.frame.size.height);
     
     DDLogDebug(@"Duration Events View Frame: %@", NSStringFromCGRect(durationEventsViewFrame));
     self.durationEventsView.frame = durationEventsViewFrame;
