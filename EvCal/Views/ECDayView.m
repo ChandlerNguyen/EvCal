@@ -178,10 +178,13 @@
 
 - (void)layoutAllDayEventsView
 {
-    CGRect allDayFrame = CGRectMake(self.bounds.origin.x,
-                                    self.bounds.origin.y - self.contentOffset.y,
-                                    self.contentSize.width,
-                                    ALL_DAY_VIEW_HEIGHT);
+    CGRect allDayFrame = CGRectZero;
+    if ([self containsAllDayEventView]) {
+        allDayFrame = CGRectMake(self.bounds.origin.x,
+                                 self.bounds.origin.y - self.contentOffset.y,
+                                 self.contentSize.width,
+                                 ALL_DAY_VIEW_HEIGHT);
+    }
     
     DDLogDebug(@"All Day Events View Frame: %@", NSStringFromCGRect(allDayFrame));
     self.allDayEventsView.frame = allDayFrame;
@@ -235,6 +238,17 @@
 
         self.eventViewsLayoutIsValid = YES;
     }
+}
+
+- (BOOL)containsAllDayEventView
+{
+    for (ECEventView* eventView in self.eventViews) {
+        if (eventView.event.isAllDay) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 

@@ -51,6 +51,14 @@
     [self refreshEvents];
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    [self layoutWeekdayPicker];
+    [self layoutDayView];
+}
+
 - (ECDayView*)dayView {
     if (!_dayView) {
         ECDayView* dayView = [[ECDayView alloc] initWithFrame:CGRectZero];
@@ -108,40 +116,45 @@
 
 #pragma mark - View setup
 
-//#define WEEKDAY_PICKER_HEIGHT   88.0f
+#define WEEKDAY_PICKER_HEIGHT   78.0f
 
 
 - (void)setupWeekdayPicker
 {
     self.weekdayPicker.pickerDelegate = self;
     [self.weekdayPicker setSelectedDate:self.displayDate animated:NO];
-    
-//    CGRect weekdayPickerFrame = CGRectMake(self.view.bounds.origin.x,
-//                                           CGRectGetMaxY(self.navigationController.navigationBar.frame),
-//                                           self.view.bounds.size.width,
-//                                           WEEKDAY_PICKER_HEIGHT);
-//    
-//    DDLogDebug(@"Weekday Picker Frame: %@", NSStringFromCGRect(weekdayPickerFrame));
-//    
-//    self.weekdayPicker.frame = weekdayPickerFrame;
 }
 
 - (void)setupDayView
 {
     self.dayView.displayDate = self.displayDate;
+}
+
+- (void)layoutWeekdayPicker
+{
+    CGRect weekdayPickerFrame = CGRectMake(self.view.bounds.origin.x,
+                                           CGRectGetMaxY(self.navigationController.navigationBar.frame),
+                                           self.view.bounds.size.width,
+                                           WEEKDAY_PICKER_HEIGHT);
     
+    DDLogDebug(@"Weekday Picker Frame: %@", NSStringFromCGRect(weekdayPickerFrame));
     
-//    CGRect dayViewFrame = CGRectMake(self.view.bounds.origin.x,
-//                                     CGRectGetMaxY(self.weekdayPicker.frame),
-//                                     self.view.bounds.size.width,
-//                                     self.view.bounds.size.height - (self.weekdayPicker.frame.size.height + self.navigationController.navigationBar.frame.size.height + self.bottomToolbar.frame.size.height));
-//    
+    self.weekdayPicker.frame = weekdayPickerFrame;
+}
+
+- (void)layoutDayView
+{
+    CGRect dayViewFrame = CGRectMake(self.view.bounds.origin.x,
+                                     CGRectGetMaxY(self.weekdayPicker.frame),
+                                     self.view.bounds.size.width,
+                                     self.bottomToolbar.frame.origin.y - CGRectGetMaxY(self.weekdayPicker.frame));
+    
     CGSize dayViewContentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 2);
-//    
-//    DDLogDebug(@"Day View Frame: %@", NSStringFromCGRect(dayViewFrame));
-//    DDLogDebug(@"Day View Content Size: %@", NSStringFromCGSize(dayViewContentSize));
-//    
-//    self.dayView.frame = dayViewFrame;
+    
+    DDLogDebug(@"Day View Frame: %@", NSStringFromCGRect(dayViewFrame));
+    DDLogDebug(@"Day View Content Size: %@", NSStringFromCGSize(dayViewContentSize));
+    
+    self.dayView.frame = dayViewFrame;
     self.dayView.contentSize = dayViewContentSize;
 }
 
