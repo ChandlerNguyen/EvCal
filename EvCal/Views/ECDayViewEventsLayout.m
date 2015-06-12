@@ -52,14 +52,14 @@
 {
     NSArray* eventViews = [self.layoutDataSource eventViewsForLayout:self];
     CGRect eventViewsBounds = [self.layoutDataSource layout:self boundsForEventViews:eventViews];
-    NSDate* displayDate = [self requestDisplayDate:[NSDate date]];
+    NSDate* displayDate = [self requestDisplayDateForEventViews:eventViews defaultDate:[NSDate date]];
     
     return [self framesForEventViews:eventViews bounds:eventViewsBounds displayDate:displayDate];
 }
 
-- (NSDate*)requestDisplayDate:(NSDate*)defaultDate
+- (NSDate*)requestDisplayDateForEventViews:(NSArray*)eventViews defaultDate:(NSDate*)defaultDate
 {
-    NSDate* displayDate = [self.layoutDataSource displayDateForLayout:self];
+    NSDate* displayDate = [self.layoutDataSource layout:self displayDateForEventViews:eventViews];
     
     if (!displayDate) {
         DDLogError(@"Display date provided by layout data source was nil, using default value of %@", defaultDate);

@@ -43,12 +43,13 @@
  *  Provides the layout with the date within which the event views will be 
  *  displayed.
  *
- *  @param layout The layout object making the request
+ *  @param layout       The layout object making the request
+ *  @param eventViews   The event views being displayed
  *
  *  @return An NSDate object representing the day within which the event views
  *          will be displayed.
  */
-- (NSDate*)displayDateForLayout:(ECDayViewEventsLayout*)layout;
+- (NSDate*)layout:(ECDayViewEventsLayout*)layout displayDateForEventViews:(NSArray*)eventViews;
 
 @end
 

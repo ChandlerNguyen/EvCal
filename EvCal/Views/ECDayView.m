@@ -16,9 +16,11 @@
 #import "ECDayView.h"
 #import "ECEventView.h"
 #import "ECHourLine.h"
+#import "ECDayViewEventsLayout.h"
 
-@interface ECDayView()
+@interface ECDayView() <ECDayViewEventsLayoutDataSource>
 
+@property (nonatomic, strong) ECDayViewEventsLayout* eventsLayout;
 @property (nonatomic) BOOL eventViewsLayoutIsValid;
 @property (nonatomic) BOOL hourLabelsLayoutIsValid;
 
@@ -71,10 +73,21 @@
     return _eventViews;
 }
 
+- (ECDayViewEventsLayout*)eventsLayout
+{
+    if (!_eventsLayout) {
+        _eventsLayout = [[ECDayViewEventsLayout alloc] init];
+        _eventsLayout.layoutDataSource = self;
+    }
+    
+    return _eventsLayout;
+}
+
 - (UIView*)allDayEventsView
 {
     if (!_allDayEventsView) {
         _allDayEventsView = [self createallDayEventsView];
+        _allDayEventsView.layer.borderWidth = 1.0f;
     }
     
     return _allDayEventsView;
@@ -84,6 +97,7 @@
 {
     if (!_durationEventsView) {
         _durationEventsView = [self createDurationEventsView];
+        _durationEventsView.layer.borderWidth = 1.0f;
     }
     
     return _durationEventsView;
@@ -191,9 +205,12 @@
 - (void)layoutHourLines
 {
     if (!self.hourLabelsLayoutIsValid) {
-        CGFloat yOffset = floorf(self.durationEventsView.bounds.size.height / self.hourLines.count);
+        CGFloat adjustedHeight = self.durationEventsView.bounds.size.height - HOUR_LINE_HEIGHT;
+        CGFloat adjustedOriginY = self.durationEventsView.bounds.origin.y + HOUR_LINE_HEIGHT / 2.0f;
+    
+        CGFloat yOffset = floorf(adjustedHeight / self.hourLines.count);
         for (ECHourLine* hourLine in self.hourLines) {
-            CGFloat originY = self.durationEventsView.bounds.origin.y + hourLine.hour * yOffset;
+            CGFloat originY = adjustedOriginY + hourLine.hour * yOffset - HOUR_LINE_HEIGHT / 2.0f;
             CGRect hourLineFrame = CGRectMake(self.durationEventsView.bounds.origin.x,
                                               originY,
                                               self.durationEventsView.bounds.size.width,
@@ -210,89 +227,14 @@
 - (void)layoutEventViews
 {
     if (!self.eventViewsLayoutIsValid) {
-        // Prepare layout state
-        CGFloat width = self.bounds.size.width - (HOUR_LINE_DOT_INSET + 6.0f);
-        CGPoint origin = CGPointMake(self.bounds.origin.x + (HOUR_LINE_DOT_INSET + 6.0f), self.bounds.origin.y);
-        NSDate* lastEndDate = nil;
         
-        NSArray* hours = [self.displayDate hoursOfDay];
-        
-        self.eventViews = [self.eventViews sortedArrayUsingSelector:@selector(compare:)];
-        
-        // Columns is a jagged two dimensional array
-        NSMutableArray* columns = [[NSMutableArray alloc] init];
-        
+        [self.eventsLayout invalidateLayout];
         for (ECEventView* eventView in self.eventViews) {
-            if (eventView.event.isAllDay) {
-                eventView.frame = self.allDayEventsView.bounds;
-            } else {
-                // this view doesn't overlap the previous cluster of views
-                if (lastEndDate && [eventView.event.startDate compare:lastEndDate] == NSOrderedDescending) {
-                    [self layoutColumns:columns width:width origin:origin displayedHours:hours];
-                    
-                    // start new cluster
-                    columns = [@[] mutableCopy];
-                    lastEndDate = nil;
-                }
-                
-                BOOL placed = NO;
-                for (NSInteger i = 0; i < columns.count; i++) {
-                    // determine if view can be added to the end of a current column
-                    NSArray* column = columns[i];
-                    if (![self eventView:eventView overlapsEventView:[column lastObject]]) {
-                        // add view to end of column
-                        columns[i] = [column arrayByAddingObject:eventView];
-                        placed = YES;
-                        break;
-                    }
-                }
-                
-                // view overlaps all columns, add a new column
-                if (!placed) {
-                    [columns addObject:@[eventView]];
-                }
-                
-                // last date isn't set or the view's end date is later than current end date
-                if (!lastEndDate || [eventView.event.endDate compare:lastEndDate] == NSOrderedAscending) {
-                    lastEndDate = eventView.event.endDate;
-                }
-                
-                // layout current column setup
-                if (columns.count > 0) {
-                    [self layoutColumns:columns width:width origin:origin displayedHours:hours];
-                }
-            }
+            eventView.frame = [self.eventsLayout frameForEventView:eventView];
         }
+
         self.eventViewsLayoutIsValid = YES;
     }
-}
-
-- (void)layoutColumns:(NSArray*)columns width:(CGFloat)width origin:(CGPoint)origin displayedHours:(NSArray*)hours
-{
-    NSInteger numGroups = columns.count;
-    for (NSInteger i = 0; i < numGroups; i++) {
-        NSArray* column = columns[i];
-        for (NSInteger j = 0; j < column.count; j++) {
-            ECEventView* eventView = column[j];
-            CGRect eventViewFrame = CGRectMake(origin.x + i * floorf(width / numGroups),
-                                               [eventView verticalPositionInRect:self.durationEventsView.bounds forDate:self.displayDate],
-                                               floorf(width / numGroups),
-                                               [eventView heightInRect:self.durationEventsView.bounds forDate:self.displayDate]);
-            eventView.frame = eventViewFrame;
-        }
-    }
-}
-
-
-// PREDCONDITION
-// This test assumes that the left event view precedes the right event view as
-// defined by ECEventView's compare method
-- (BOOL)eventView:(ECEventView*)left overlapsEventView:(ECEventView*)right
-{
-    BOOL leftStartsAboveRight = [left.event.startDate compare:right.event.endDate] == NSOrderedAscending;
-    BOOL rightStartsAboveLeft = [left.event.endDate compare:right.event.startDate] == NSOrderedAscending;
-    
-    return leftStartsAboveRight || rightStartsAboveLeft;
 }
 
 
@@ -385,5 +327,28 @@
 {
     [self removeEventViews:self.eventViews];
     [self setEventViewsNeedLayout];
+}
+
+
+#pragma mark - ECDayViewEventsLayout Datasource
+
+- (NSArray*)eventViewsForLayout:(ECDayViewEventsLayout *)layout
+{
+    return self.eventViews;
+}
+
+- (NSDate*)layout:(ECDayViewEventsLayout*)layout displayDateForEventViews:(NSArray*)eventViews
+{
+    return self.displayDate;
+}
+
+- (CGRect)layout:(ECDayViewEventsLayout *)layout boundsForEventViews:(NSArray *)eventViews
+{
+    CGRect eventViewsBounds = CGRectMake(self.durationEventsView.bounds.origin.x + HOUR_LINE_DOT_INSET + 6.0f,
+                                         self.durationEventsView.bounds.origin.y + HOUR_LINE_HEIGHT / 2.0f,
+                                         self.durationEventsView.bounds.size.width - (HOUR_LINE_DOT_INSET + 6.0f),
+                                         self.durationEventsView.bounds.size.height - HOUR_LINE_HEIGHT);
+    
+    return eventViewsBounds;
 }
 @end
