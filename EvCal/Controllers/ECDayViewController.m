@@ -147,7 +147,7 @@
     CGRect dayViewFrame = CGRectMake(self.view.bounds.origin.x,
                                      CGRectGetMaxY(self.weekdayPicker.frame),
                                      self.view.bounds.size.width,
-                                     self.bottomToolbar.frame.origin.y - CGRectGetMaxY(self.weekdayPicker.frame));
+                                     self.bottomToolbar.frame.origin.y - CGRectGetMaxY(self.weekdayPicker.frame) - 1); // -1 so toolbar separator will show
     
     CGSize dayViewContentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 2);
     
