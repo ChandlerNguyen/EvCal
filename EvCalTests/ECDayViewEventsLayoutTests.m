@@ -342,10 +342,10 @@
     
     NSLog(@"\nA Frame: %@\nB Frame: %@\nC Frame: %@\nD Frame: %@", NSStringFromCGRect(aFrame), NSStringFromCGRect(bFrame), NSStringFromCGRect(cFrame), NSStringFromCGRect(dFrame));
     
-    XCTAssertTrue(aFrame.origin.y == 700 && CGSizeEqualToSize(aFrame.size, CGSizeMake(60, 200)) &&
-                  bFrame.origin.y == 700 && CGSizeEqualToSize(bFrame.size, CGSizeMake(60, 100)) &&
-                  cFrame.origin.y == 800 && CGSizeEqualToSize(cFrame.size, CGSizeMake(30, 100)) &&
-                  dFrame.origin.y == 800 && CGSizeEqualToSize(dFrame.size, CGSizeMake(30, 100)) &&
+    XCTAssertTrue(aFrame.origin.y == 700 && CGSizeEqualToSize(aFrame.size, CGSizeMake(40, 200)) &&
+                  bFrame.origin.y == 700 && CGSizeEqualToSize(bFrame.size, CGSizeMake(40, 100)) &&
+                  cFrame.origin.y == 800 && CGSizeEqualToSize(cFrame.size, CGSizeMake(40, 100)) &&
+                  dFrame.origin.y == 800 && CGSizeEqualToSize(dFrame.size, CGSizeMake(40, 100)) &&
                   !CGRectIntersectsRect(aFrame, bFrame) && !CGRectIntersectsRect(aFrame, cFrame) && !CGRectIntersectsRect(aFrame, dFrame) &&
                   !CGRectIntersectsRect(bFrame, cFrame) && !CGRectIntersectsRect(bFrame, dFrame) && !CGRectIntersectsRect(cFrame, dFrame));
 }
