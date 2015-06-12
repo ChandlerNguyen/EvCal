@@ -126,7 +126,7 @@
 }
 
 #pragma mark - Creating Views
-#define HOUR_LINE_DOT_INSET 66.0f
+#define HOUR_LINE_DOT_INSET 44.0f
 
 - (NSArray*)createHourLines
 {
