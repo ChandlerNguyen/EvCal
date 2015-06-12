@@ -126,6 +126,7 @@
 }
 
 #pragma mark - Creating Views
+#define HOUR_LINE_DOT_INSET 66.0f
 
 - (NSArray*)createHourLines
 {
@@ -133,6 +134,7 @@
     
     for (NSDate* date in [self.displayDate hoursOfDay]) {
         ECHourLine* line = [[ECHourLine alloc] initWithDate:date];
+        line.hourLineInset = HOUR_LINE_DOT_INSET;
         
         [mutableHourLines addObject:line];
         [self.durationEventsView insertSubview:line atIndex:0];
@@ -164,7 +166,7 @@
 #define ALL_DAY_VIEW_HEIGHT 44.0f
 
 #define HOUR_LINE_HEIGHT    22.0f
-#define HOUR_LINE_DOT_INSET 80.0f
+
 
 - (void)layoutSubviews
 {

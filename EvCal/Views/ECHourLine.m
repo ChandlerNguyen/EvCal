@@ -22,7 +22,7 @@
     self = [super initWithFrame:CGRectZero];
     if (self) {
         self.date = date;
-        self.hourLineInset = 80.0f;
+        self.hourLineInset = 66.0f;
     }
     
     return self;
@@ -35,11 +35,21 @@
     [self updateHourLabel:date];
 }
 
+- (void)setHourLineInset:(CGFloat)hourLineInset
+{
+    _hourLineInset = hourLineInset;
+    
+    [self setNeedsDisplay];
+    [self setNeedsLayout];
+}
+
 - (UILabel*)hourLabel
 {
     if (!_hourLabel) {
         UILabel* hourLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+
         hourLabel.textAlignment = NSTextAlignmentRight;
+        hourLabel.font = [UIFont systemFontOfSize:11.0f];
         
         _hourLabel = hourLabel;
         
@@ -59,7 +69,6 @@
 
 #pragma mark - Layout
 
-#define HOUR_LABEL_WIDTH        60.0f
 #define HOUR_LABEL_HEIGHT       22.0f
 
 - (void)layoutSubviews
@@ -82,8 +91,7 @@
 
 
 #pragma mark - Drawing
-#define HOUR_LINE_LEFT_PADDING  8.0f
-#define HOUR_LINE_DOT_RADIUS    2.0f
+#define HOUR_LINE_LEFT_PADDING  6.0f
 
 - (void)drawRect:(CGRect)rect
 {
@@ -102,21 +110,14 @@
 
 - (void)drawHourLine
 {
-    [[UIColor blackColor] setFill];
-    [[UIColor blackColor] setStroke];
+    [[UIColor colorWithWhite:0.0f alpha:0.5f] setFill];
+    [[UIColor colorWithWhite:0.0f alpha:0.5f] setStroke];
     
-    CGPoint dotCenter = CGPointMake(CGRectGetMaxX(self.hourLabel.frame) + HOUR_LINE_LEFT_PADDING, CGRectGetMidY(self.hourLabel.frame));
-    CGRect dotRect = CGRectMake(dotCenter.x - HOUR_LINE_DOT_RADIUS,
-                                dotCenter.y - HOUR_LINE_DOT_RADIUS,
-                                2 * HOUR_LINE_DOT_RADIUS,
-                                2 * HOUR_LINE_DOT_RADIUS);
-    
-    [[UIBezierPath bezierPathWithOvalInRect:dotRect] fill];
-    
-    CGPoint lineTerminal = CGPointMake(CGRectGetMaxX(self.bounds), dotCenter.y);
+    CGPoint lineOrigin = CGPointMake(CGRectGetMaxX(self.hourLabel.frame) + HOUR_LINE_LEFT_PADDING, CGRectGetMidY(self.hourLabel.frame));
+    CGPoint lineTerminal = CGPointMake(CGRectGetMaxX(self.bounds), lineOrigin.y);
     
     UIBezierPath* linePath = [UIBezierPath bezierPath];
-    [linePath moveToPoint:dotCenter];
+    [linePath moveToPoint:lineOrigin];
     [linePath addLineToPoint:lineTerminal];
     
     [linePath stroke];
