@@ -40,27 +40,15 @@
 - (NSArray*)eventViewsForLayout:(ECDayViewEventsLayout*)layout;
 
 /**
- *  Provides the layout with the number of hours in the day of date within which
- *  to lay out event views.
+ *  Provides the layout with the date within which the event views will be 
+ *  displayed.
  *
  *  @param layout The layout object making the request
  *
- *  @return The number of hours in the day being displayed
+ *  @return An NSDate object representing the day within which the event views
+ *          will be displayed.
  */
-- (NSInteger)numberOfHoursInDayForLayout:(ECDayViewEventsLayout*)layout;
-
-@optional
-/**
- *  Returns the minimum height for an event view. This value will be used 
- *  when an event view's start and end date would naturally give it a height 
- *  less than the minimum height. The value should be a non-negative integer.
- *  The default value is 22.0f.
- *
- *  @param layout The layout object making the request.
- *
- *  @return The minimum height to be used by the layout object.
- */
-- (CGFloat)minimumEventHeightForLayout:(ECDayViewEventsLayout*)layout;
+- (NSDate*)displayDateForLayout:(ECDayViewEventsLayout*)layout;
 
 @end
 

@@ -23,6 +23,7 @@
 
 @property (nonatomic, strong) EKEventStore* eventStore;
 @property (nonatomic, strong) EKCalendar* testCalendar;
+@property (nonatomic, strong) NSMutableArray* createdEvents;
 @property (nonatomic, strong) NSDate* testStartDate;
 
 @property (nonatomic) CGFloat minimumHeight;
@@ -31,8 +32,7 @@
 
 @property (nonatomic) BOOL eventViewsRequested;
 @property (nonatomic) BOOL eventViewBoundsRequested;
-@property (nonatomic) BOOL numberOfHoursRequested;
-@property (nonatomic) BOOL minimumHeightRequested;
+@property (nonatomic) BOOL displayDateRequested;
 
 @end
 
@@ -57,8 +57,7 @@
     // Data source method call booleans
     self.eventViewsRequested = NO;
     self.eventViewBoundsRequested = NO;
-    self.numberOfHoursRequested = NO;
-    self.minimumHeightRequested = NO;
+    self.displayDateRequested = NO;
     
     // Save events to this calendar for easier testing/removal
     self.eventStore = [[EKEventStore alloc] init];
@@ -86,9 +85,12 @@
 
     self.eventViewsRequested = NO;
     self.eventViewBoundsRequested = NO;
-    self.numberOfHoursRequested = NO;
-    self.minimumHeightRequested = NO;
+    self.displayDateRequested = NO;
 
+    for (EKEvent* event in self.createdEvents) {
+        [self.eventStore removeEvent:event span:EKSpanThisEvent commit:YES error:nil];
+    }
+    
     [self.eventStore removeCalendar:self.testCalendar commit:YES error:nil];
     self.testCalendar = nil;
     self.eventStore = nil;
@@ -108,6 +110,9 @@
     event.allDay = allDay;
     event.calendar = self.testCalendar;
     
+    [self.eventStore saveEvent:event span:EKSpanThisEvent commit:YES error:nil];
+    [self.createdEvents addObject:event];
+    
     return [[ECEventView alloc] initWithEvent:event];
 }
 
@@ -126,18 +131,11 @@
     return self.eventViews;
 }
 
-- (NSInteger)numberOfHoursInDayForLayout:(ECDayViewEventsLayout *)layout
+- (NSDate*)displayDateForLayout:(ECDayViewEventsLayout *)layout
 {
-    self.numberOfHoursRequested = YES;
-    return [self.testStartDate hoursOfDay].count;
+    self.displayDateRequested = YES;
+    return self.testStartDate;
 }
-
-- (CGFloat)minimumEventHeightForLayout:(ECDayViewEventsLayout *)layout
-{
-    self.minimumHeightRequested = YES;
-    return self.minimumHeight;
-}
-
 
 #pragma mark - Tests
 
@@ -155,35 +153,28 @@
 #pragma mark Testing Data Source calls
 - (void)testEventViewLayoutAsksDataSourceForBounds
 {
-    ECEventView* eventView = [self createEventViewWithStartDate:self.testStartDate endDate:[self.testStartDate endOfHour] allDay:NO];
+    self.eventViews = @[[self createEventViewWithStartDate:self.testStartDate endDate:[self.testStartDate endOfHour] allDay:NO]];
     
-    [self.layout frameForEventView:eventView];
+    [self.layout frameForEventView:self.eventViews.firstObject];
     XCTAssertTrue(self.eventViewBoundsRequested);
 }
 
 - (void)testEventViewLayoutAsksDataSourceForEventViews
 {
-    ECEventView* eventView = [self createEventViewWithStartDate:self.testStartDate endDate:[self.testStartDate endOfHour] allDay:NO];
+    self.eventViews = @[[self createEventViewWithStartDate:self.testStartDate endDate:[self.testStartDate endOfHour] allDay:NO]];
     
-    [self.layout frameForEventView:eventView];
+    [self.layout frameForEventView:self.eventViews.firstObject];
     XCTAssertTrue(self.eventViewsRequested);
 }
 
-- (void)testEventViewLayoutAsksDataSourceForNumberOfHours
+- (void)testEventViewLayoutAsksDataSourceForDisplayDate
 {
     ECEventView* eventView = [self createEventViewWithStartDate:self.testStartDate endDate:[self.testStartDate endOfHour] allDay:NO];
     
     [self.layout frameForEventView:eventView];
-    XCTAssertTrue(self.numberOfHoursRequested);
+    XCTAssertTrue(self.displayDateRequested);
 }
 
-- (void)testEventViewLayoutAsksDataSourceForMinimumHeight
-{
-    ECEventView* eventView = [self createEventViewWithStartDate:self.testStartDate endDate:[self.testStartDate endOfHour] allDay:NO];
-    
-    [self.layout frameForEventView:eventView];
-    XCTAssert(self.minimumHeightRequested);
-}
 
 - (void)testEventViewLayoutRequestsBoundsAfterLayoutInvalidation
 {
@@ -215,10 +206,10 @@
     
     [self.layout frameForEventView:self.eventViews.firstObject];
     [self.layout invalidateLayout];
-    self.numberOfHoursRequested = NO;
+    self.displayDateRequested = NO;
     [self.layout frameForEventView:self.eventViews.firstObject];
     
-    XCTAssertTrue(self.numberOfHoursRequested);
+    XCTAssertTrue(self.displayDateRequested);
 }
 
 
@@ -348,6 +339,8 @@
     CGRect bFrame = [self.layout frameForEventView:b];
     CGRect cFrame = [self.layout frameForEventView:c];
     CGRect dFrame = [self.layout frameForEventView:d];
+    
+    NSLog(@"\nA Frame: %@\nB Frame: %@\nC Frame: %@\nD Frame: %@", NSStringFromCGRect(aFrame), NSStringFromCGRect(bFrame), NSStringFromCGRect(cFrame), NSStringFromCGRect(dFrame));
     
     XCTAssertTrue(aFrame.origin.y == 700 && CGSizeEqualToSize(aFrame.size, CGSizeMake(60, 200)) &&
                   bFrame.origin.y == 700 && CGSizeEqualToSize(bFrame.size, CGSizeMake(60, 100)) &&
