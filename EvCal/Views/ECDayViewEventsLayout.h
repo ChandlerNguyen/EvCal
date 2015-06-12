@@ -39,6 +39,16 @@
  */
 - (NSArray*)eventViewsForLayout:(ECDayViewEventsLayout*)layout;
 
+/**
+ *  Provides the layout with the number of hours in the day of date within which
+ *  to lay out event views.
+ *
+ *  @param layout The layout object making the request
+ *
+ *  @return The number of hours in the day being displayed
+ */
+- (NSInteger)numberOfHoursInDayForLayout:(ECDayViewEventsLayout*)layout;
+
 @optional
 /**
  *  Returns the minimum height for an event view. This value will be used 
