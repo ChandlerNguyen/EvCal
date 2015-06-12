@@ -170,7 +170,11 @@
 {
     CGFloat accessoryViewsWidth = self.eventAccessoryViews.count * ACCESSORY_VIEW_WIDTH + (self.eventAccessoryViews.count - 1) * ACCESSORY_VIEW_PADDING;
     CGFloat accessoryViewsOriginX = floorf(self.bounds.origin.x + (self.bounds.size.width - accessoryViewsWidth) / 2.0f);
-    CGFloat accessoryViewsOriginY = floorf(CGRectGetMaxY(self.dateLabel.frame) + (ACCESSORY_VIEWS_HEIGHT / 2.0f) - ACCESSORY_VIEW_HEIGHT / 2.0f);
+    
+    CGRect circleFrame = [self circleFrame];
+    CGFloat distanceBetweenCircleAndBounds = CGRectGetMaxY(self.bounds) - CGRectGetMaxY(circleFrame);
+    CGFloat centeredAccessoryViewOffset = floorf((distanceBetweenCircleAndBounds - ACCESSORY_VIEW_HEIGHT) / 2.0f);
+    CGFloat accessoryViewsOriginY = CGRectGetMaxY(circleFrame) + centeredAccessoryViewOffset;
     
     for (NSInteger i = 0; i < self.eventAccessoryViews.count; i++) {
         CGRect accessoryViewFrame = CGRectMake(accessoryViewsOriginX + i * (ACCESSORY_VIEW_PADDING + ACCESSORY_VIEW_WIDTH),
@@ -185,7 +189,7 @@
 
 #pragma mark - Drawing
 
-#define CIRCLE_RADIUS   20.0f
+#define CIRCLE_RADIUS   21.0f
 
 - (void)drawRect:(CGRect)rect
 {
@@ -203,15 +207,21 @@
 
     [[UIColor colorWithRed:76.0f/255.0f green:0.0f/255.0f blue:179.0f/255.0f alpha:1.0f] setFill];
     
-    CGPoint circleCenter = self.dateLabel.center;
-    CGRect circleFrame = CGRectMake(circleCenter.x - CIRCLE_RADIUS,
-                                    circleCenter.y - CIRCLE_RADIUS,
-                                    2 * CIRCLE_RADIUS,
-                                    2 * CIRCLE_RADIUS);
-    
-    UIBezierPath* circlePath = [UIBezierPath bezierPathWithOvalInRect:circleFrame];
+    UIBezierPath* circlePath = [UIBezierPath bezierPathWithOvalInRect:[self circleFrame]];
     
     [circlePath fill];
+}
+
+- (CGRect)circleFrame
+{
+    CGFloat circleRadius = ceilf(.35 * self.bounds.size.width);
+    CGPoint circleCenter = self.dateLabel.center;
+    CGRect circleFrame = CGRectMake(circleCenter.x - circleRadius,
+                                    circleCenter.y - circleRadius,
+                                    2 * circleRadius,
+                                    2 * circleRadius);
+    
+    return circleFrame;
 }
 
 - (void)eraseCircle
