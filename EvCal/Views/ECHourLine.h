@@ -10,8 +10,8 @@
 
 @interface ECHourLine : UIView
 
-// The hour displayed by the hour line (24 hour format)
-@property (nonatomic) NSInteger hour;
+// The date displayed by the hour line (24 hour format)
+@property (nonatomic) NSDate* date;
 
 // The distance from the hour line's left origin that the actual line drawing
 // should begin. Default is 100
@@ -29,6 +29,6 @@
  *
  *  @return A newly created hour line view with its hour set to the given value
  */
-- (instancetype)initWithHour:(NSInteger)hour;
+- (instancetype)initWithDate:(NSDate*)date;
 
 @end

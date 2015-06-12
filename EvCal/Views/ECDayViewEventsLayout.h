@@ -84,4 +84,42 @@
  */
 - (CGRect)frameForEventView:(ECEventView*)eventView;
 
+//------------------------------------------------------------------------------
+// @name Calculating vertical position and height
+//------------------------------------------------------------------------------
+
+/**
+ *  Calculates the apropriate height for an event with the given start and end 
+ *  date within the given rect on the given displayed date.
+ *
+ *  If only a portion of the event falls on the same day at the date parameter
+ *  event view will return the height for the corresponding portion.
+ *
+ *  @param startDate    The start date of the event.
+ *  @param endDate      The end date of the event.
+ *  @param displayDate  The date with which event view should calculate its relative
+ *                      height.
+ *  @param bounds       The rect within which the event view should determine
+ *                      its height. Rect should have a positive height.
+ *  @return The positive height for the event view or zero if the height could
+ *          not be determined (such as if the event is all day).
+ */
+- (CGFloat)heightOfEventWithStartDate:(NSDate*)startDate endDate:(NSDate*)endDate displayDate:(NSDate*)displayDate bounds:(CGRect)bounds;
+
+/**
+ *  Calculates the appropriate vertical position for a date relative to the
+ *  day of the display date and the height and y origin of the bounds.
+ *
+ *  @param date         The date for which to calculate vertical position.
+ *  @param displayDate  The date relative to which vertical position should be
+ *                      calculated.
+ *  @param bounds       The rect within which the event view should determine
+ *                      its vertical position.
+ *
+ *  @return The absolute vertical position of the date within the given
+ *          rect or the maximum y value of the rect if the date follows
+ *          after the day of the display date. 
+ */
+- (CGFloat)verticalPositionForDate:(NSDate*)date relativeToDate:(NSDate*)displayDate inRect:(CGRect)rect;
+
 @end

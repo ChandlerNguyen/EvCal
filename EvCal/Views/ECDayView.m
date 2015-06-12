@@ -87,7 +87,6 @@
 {
     if (!_allDayEventsView) {
         _allDayEventsView = [self createallDayEventsView];
-        _allDayEventsView.layer.borderWidth = 1.0f;
     }
     
     return _allDayEventsView;
@@ -97,7 +96,6 @@
 {
     if (!_durationEventsView) {
         _durationEventsView = [self createDurationEventsView];
-        _durationEventsView.layer.borderWidth = 1.0f;
     }
     
     return _durationEventsView;
@@ -131,11 +129,10 @@
 
 - (NSArray*)createHourLines
 {
-    NSCalendar* calendar = [NSCalendar currentCalendar];
     NSMutableArray* mutableHourLines = [[NSMutableArray alloc] init];
     
     for (NSDate* date in [self.displayDate hoursOfDay]) {
-        ECHourLine* line = [[ECHourLine alloc] initWithHour:[calendar component:NSCalendarUnitHour fromDate:date]];
+        ECHourLine* line = [[ECHourLine alloc] initWithDate:date];
         
         [mutableHourLines addObject:line];
         [self.durationEventsView insertSubview:line atIndex:0];
@@ -205,18 +202,19 @@
 - (void)layoutHourLines
 {
     if (!self.hourLabelsLayoutIsValid) {
-        CGFloat adjustedHeight = self.durationEventsView.bounds.size.height - HOUR_LINE_HEIGHT;
-        CGFloat adjustedOriginY = self.durationEventsView.bounds.origin.y + HOUR_LINE_HEIGHT / 2.0f;
+        CGRect adjustedBounds = CGRectMake(self.durationEventsView.bounds.origin.x,
+                                           self.durationEventsView.bounds.origin.y + HOUR_LINE_HEIGHT / 2.0f,
+                                           self.durationEventsView.bounds.size.width,
+                                           self.durationEventsView.bounds.size.height - HOUR_LINE_HEIGHT);
     
-        CGFloat yOffset = floorf(adjustedHeight / self.hourLines.count);
         for (ECHourLine* hourLine in self.hourLines) {
-            CGFloat originY = adjustedOriginY + hourLine.hour * yOffset - HOUR_LINE_HEIGHT / 2.0f;
+            CGFloat originY = [self.eventsLayout verticalPositionForDate:hourLine.date relativeToDate:self.displayDate inRect:adjustedBounds] - HOUR_LINE_HEIGHT / 2.0f;
             CGRect hourLineFrame = CGRectMake(self.durationEventsView.bounds.origin.x,
                                               originY,
                                               self.durationEventsView.bounds.size.width,
                                               HOUR_LINE_HEIGHT);
             
-            DDLogDebug(@"Hour Line Frame (%lu): %@", hourLine.hour, NSStringFromCGRect(hourLineFrame));
+            DDLogDebug(@"Hour Line Frame (%@): %@", hourLine.date, NSStringFromCGRect(hourLineFrame));
             hourLine.frame = hourLineFrame;
         }
         

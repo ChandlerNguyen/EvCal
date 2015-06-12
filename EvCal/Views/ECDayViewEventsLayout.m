@@ -135,9 +135,9 @@
         for (NSInteger j = 0; j < column.count; j++) {
             ECEventView* eventView = column[j];
             CGRect eventViewFrame = CGRectMake(bounds.origin.x + i * floorf(bounds.size.width / numGroups),
-                                               [eventView verticalPositionInRect:bounds forDate:displayDate],
+                                               [self verticalPositionForDate:eventView.event.startDate relativeToDate:displayDate inRect:bounds],
                                                floorf(bounds.size.width / numGroups),
-                                               [eventView heightInRect:bounds forDate:displayDate]);
+                                               [self heightOfEventWithStartDate:eventView.event.startDate endDate:eventView.event.endDate displayDate:displayDate bounds:bounds]);
             [mutableColumnFrames setObject:[NSValue valueWithCGRect:eventViewFrame] forKey:eventView.event.eventIdentifier];
         }
     }
@@ -154,6 +154,99 @@
     BOOL rightStartsAboveLeft = [left.event.endDate compare:right.event.startDate] == NSOrderedAscending;
     
     return leftStartsAboveRight || rightStartsAboveLeft;
+}
+
+
+#pragma mark Height and Positioning
+
+- (CGFloat)heightOfEventWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate displayDate:(NSDate *)displayDate bounds:(CGRect)bounds
+{
+    CGFloat height = 0;
+    
+    if (bounds.size.height > 0) {
+        NSArray* hours = [displayDate hoursOfDay];
+        float eventHoursInDay = [self hoursBetweenStartDate:startDate endDate:endDate relativeToDate:displayDate];
+        
+        height = floorf(bounds.size.height * (eventHoursInDay / hours.count));
+    }
+    
+    return height;
+}
+
+- (float)hoursBetweenStartDate:(NSDate*)startDate endDate:(NSDate*)endDate relativeToDate:(NSDate*)date
+{
+    NSDate* beginningOfDay = [date beginningOfDay];
+    NSDate* endOfDay = [date endOfDay];
+    
+    NSDate* start = nil;
+    NSDate* end = nil;
+    
+    if ([startDate compare:beginningOfDay] == NSOrderedAscending) { // event starts before the given day
+        start = beginningOfDay;
+    } else {
+        start = startDate;
+    }
+    
+    if ([endDate compare:endOfDay] == NSOrderedDescending) { // event begins after the given day
+        end = endOfDay;
+    } else {
+        end = endDate;
+    }
+    
+    return (float)[end timeIntervalSinceDate:start] / 3600.0f;
+}
+
+- (CGFloat)verticalPositionForDate:(NSDate *)date relativeToDate:(NSDate *)displayDate inRect:(CGRect)rect
+{
+    if (!date || !displayDate) {
+        return rect.origin.y;
+    }
+    
+    NSDate* beginningOfDay = [date beginningOfDay];
+    if ([date compare:beginningOfDay] == NSOrderedAscending) {
+        return rect.origin.y;
+    }
+    
+    NSDate* endOfDay = [date endOfDay];
+    if ([date compare:endOfDay] == NSOrderedDescending) {
+        return CGRectGetMaxY(rect);
+    }
+    
+    CGFloat position = rect.origin.y;
+    if (rect.size.height > 0) {
+        
+        NSArray* hours = [date hoursOfDay];
+        
+        float hoursAfterBeginningOfDay = ([date timeIntervalSinceDate:beginningOfDay] / (60 * 60));
+        
+        position += (rect.size.height / hours.count) * hoursAfterBeginningOfDay;
+    }
+    
+    return position;
+}
+
+- (NSDate*)closestDatePrecedingDate:(NSDate*)date inDates:(NSArray*)dates
+{
+    NSArray* sortedDates = [dates sortedArrayUsingSelector:@selector(compare:)];
+    for (NSDate* otherDate in sortedDates) {
+        NSComparisonResult result = [date compare:otherDate];
+        
+        switch (result) {
+            case NSOrderedSame:
+                return otherDate;
+                break;
+                
+            case NSOrderedAscending:
+                break;
+                
+            case NSOrderedDescending:
+                return otherDate;
+                break;
+        }
+    }
+    
+    DDLogError(@"Unable to determine which hour precedes the start date of an event while determining event view layout");
+    return nil;
 }
 
 

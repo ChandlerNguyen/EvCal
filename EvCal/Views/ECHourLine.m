@@ -17,22 +17,22 @@
 
 #pragma mark - Lifecycle and Properties
 
-- (instancetype)initWithHour:(NSInteger)hour
+- (instancetype)initWithDate:(NSDate *)date
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
-        self.hour = hour;
+        self.date = date;
         self.hourLineInset = 80.0f;
     }
     
     return self;
 }
 
-- (void)setHour:(NSInteger)hour
+- (void)setDate:(NSDate *)date
 {
-    _hour = hour;
+    _date = date;
     
-    [self updateHourLabel:hour];
+    [self updateHourLabel:date];
 }
 
 - (UILabel*)hourLabel
@@ -49,10 +49,8 @@
     return _hourLabel;
 }
 
-- (void)updateHourLabel:(NSInteger)hour
-{
-    NSDate* date = [[NSCalendar currentCalendar] dateWithEra:1 year:2000 month:1 day:1 hour:hour minute:0 second:0 nanosecond:0];
-    
+- (void)updateHourLabel:(NSDate*)date
+{    
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"j:mm" options:0 locale:[NSLocale currentLocale]];
     

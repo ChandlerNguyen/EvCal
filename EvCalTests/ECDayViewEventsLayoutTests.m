@@ -131,7 +131,7 @@
     return self.eventViews;
 }
 
-- (NSDate*)displayDateForLayout:(ECDayViewEventsLayout *)layout
+- (NSDate*)layout:(ECDayViewEventsLayout *)layout displayDateForEventViews:(NSArray *)eventViews
 {
     self.displayDateRequested = YES;
     return self.testStartDate;
@@ -231,6 +231,113 @@
 
 
 #pragma mark Testing event layouts
+#pragma mark Height
+- (void)testEventViewHeightForCGRectZero
+{
+    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
+    
+    XCTAssert([self.layout heightOfEventWithStartDate:eventView.event.startDate endDate:eventView.event.endDate displayDate:startDate bounds:CGRectZero] == 0);
+}
+
+- (void)testEventViewHeightForEventWithinDay
+{
+    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
+    
+    XCTAssert([self.layout heightOfEventWithStartDate:eventView.event.startDate endDate:eventView.event.endDate displayDate:startDate bounds:self.testBounds] == self.testBounds.size.height / 24);
+}
+
+- (void)testEventViewHeightForEventWithStartDateInPreviousDay
+{
+    // Start date is the the beginning of the previous day and end date is one
+    // hour into the day
+    NSDate* startDate = [[[NSDate date] yesterday] beginningOfDay];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:[[startDate tomorrow] beginningOfDay] options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
+    
+    XCTAssertEqualWithAccuracy([self.layout heightOfEventWithStartDate:eventView.event.startDate endDate:eventView.event.endDate displayDate:endDate bounds:self.testBounds], self.testBounds.size.height / 24, 1);
+}
+
+- (void)testEventViewHeightForEventWithEndDateInFollowingDay
+{
+    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:2 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
+    
+    XCTAssertEqualWithAccuracy([self.layout heightOfEventWithStartDate:eventView.event.startDate endDate:eventView.event.endDate displayDate:startDate bounds:self.testBounds], self.testBounds.size.height, 1);
+}
+
+#pragma mark Position
+
+- (void)testEventViewPositionForCGRectZeroIsZero
+{
+    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
+    
+    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:startDate inRect:CGRectZero] == 0);
+}
+
+- (void)testEventViewPositionForDateAtStartOfDay
+{
+    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
+    
+    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:startDate inRect:self.testBounds] == 0);
+}
+
+- (void)testEventViewPositionForDateLaterInDay
+{
+    NSDate* startDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:[[NSDate date] beginningOfDay] options:0];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
+    
+    XCTAssertEqualWithAccuracy([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:startDate inRect:self.testBounds], self.testBounds.origin.y + self.testBounds.size.height / 24, 1);
+}
+
+- (void)testEventViewPositionForRectWithNonZeroOrigin
+{
+    self.testBounds = CGRectMake(0, 100, self.testBounds.size.width, self.testBounds.size.height);
+    
+    NSDate* startDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:[[NSDate date] beginningOfDay] options:0];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
+    
+    XCTAssertEqualWithAccuracy([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:startDate inRect:self.testBounds], self.testBounds.origin.y + self.testBounds.size.height / 24, 1);
+}
+
+- (void)testEventViewPositionForStartDateBeforeDay
+{
+    NSDate* startDate = [[[NSDate date] yesterday] beginningOfDay];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
+    
+    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:[startDate tomorrow] inRect:self.testBounds] == 0);
+}
+
+- (void)testEventViewPositionForAllDayEvent
+{
+    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
+    
+    ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:YES];
+    
+    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:[startDate tomorrow] inRect:self.testBounds] == 0);
+}
+
 //  12:00 AM *+----------------------+
 //            | A                    |
 //   1:00 AM *+----------------------+
