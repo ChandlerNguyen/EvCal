@@ -17,7 +17,7 @@
 #import "ECEventStoreProxy.h"
 #import "ECDatePickerCell.h"
 
-@interface ECEditEventViewController() <UIActionSheetDelegate>
+@interface ECEditEventViewController() <ECDatePickerCellDelegate, UIActionSheetDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) NSIndexPath* selectedIndexPath;
 
@@ -43,6 +43,10 @@
 {
     [self setupNavigationBar];
     [self synchronizeFields];
+    
+    self.titleTextField.delegate = self;
+    self.startDatePickerCell.pickerDelegate = self;
+    self.endDatePickerCell.pickerDelegate = self;
 }
 
 - (void)setupNavigationBar
@@ -50,6 +54,7 @@
     UIBarButtonItem* saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonTapped:)];
     self.navigationItem.rightBarButtonItem = saveButton;
     self.saveButton = saveButton;
+    self.saveButton.enabled = [self eventIsValidWithTitle:self.event.title startDate:self.event.startDate endDate:self.event.endDate];
 }
 
 - (NSDate*)startDate
@@ -89,6 +94,19 @@
     self.startDatePickerCell.date = [self startDateForEvent:self.event];
     self.endDatePickerCell.date = [self endDateForEvent:self.event];
     self.notesView.text = self.event.notes;
+}
+
+- (BOOL)eventIsValidWithTitle:(NSString*)title startDate:(NSDate*)startDate endDate:(NSDate*)endDate
+{
+    if (!title || [title isEqualToString:@""]) {
+        return NO;
+    }
+    
+    if (!startDate || !endDate || [startDate compare:endDate] != NSOrderedAscending) {
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (NSDate*)startDateForEvent:(EKEvent*)event
@@ -238,6 +256,14 @@
 }
 
 
+#pragma mark - ECDatePicker Delegate
+
+- (void)datePickerCell:(ECDatePickerCell *)cell didChangeDate:(NSDate *)date
+{
+    self.saveButton.enabled = [self eventIsValidWithTitle:self.titleTextField.text startDate:self.startDatePickerCell.date endDate:self.endDatePickerCell.date];
+}
+
+
 #pragma mark - UITableView Delegate and Datasource
 
 #define DEFAULT_ROW_HEIGHT              44.0f
@@ -263,6 +289,16 @@
     
     [tableView beginUpdates];
     [tableView endUpdates];
+}
+
+#pragma mark - UITextField Delegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString* result = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    self.saveButton.enabled = [self eventIsValidWithTitle:result startDate:self.startDatePickerCell.date endDate:self.endDatePickerCell.date];
+    
+    return YES;
 }
 
 @end

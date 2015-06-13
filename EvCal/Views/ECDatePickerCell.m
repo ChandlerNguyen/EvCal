@@ -23,7 +23,7 @@
     [super awakeFromNib];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    [self.datePicker addTarget:self action:@selector(updateDateLabel:) forControlEvents:UIControlEventValueChanged];
+    [self.datePicker addTarget:self action:@selector(pickerValueChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)setDate:(NSDate *)date
@@ -42,6 +42,15 @@
     NSDateFormatter* dateFormatter = [NSDateFormatter ecEventDatesFormatter];
     
     self.dateLabel.text = [dateFormatter stringFromDate:datePicker.date];
+}
+
+- (void)pickerValueChanged:(UIDatePicker*)datePicker
+{
+    [self updateDateLabel:datePicker];
+    
+    if ([self.pickerDelegate respondsToSelector:@selector(datePickerCell:didChangeDate:)]) {
+        [self.pickerDelegate datePickerCell:self didChangeDate:datePicker.date];
+    }
 }
 
 @end
