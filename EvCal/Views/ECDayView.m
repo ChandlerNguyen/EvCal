@@ -164,7 +164,6 @@
 #pragma mark - Layout
 
 #define ALL_DAY_VIEW_HEIGHT 44.0f
-
 #define HOUR_LINE_HEIGHT    22.0f
 
 

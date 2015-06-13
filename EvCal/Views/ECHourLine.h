@@ -10,12 +10,19 @@
 
 @interface ECHourLine : UIView
 
+//------------------------------------------------------------------------------
+// @name Properties
+//------------------------------------------------------------------------------
+
+
 // The date displayed by the hour line (24 hour format)
 @property (nonatomic) NSDate* date;
 
 // The distance from the hour line's left origin that the actual line drawing
 // should begin. Default is 100
 @property (nonatomic) CGFloat hourLineInset;
+
+@property (nonatomic, strong) UIColor* color;
 
 //------------------------------------------------------------------------------
 // @name Creating Hour Lines

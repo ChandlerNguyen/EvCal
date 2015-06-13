@@ -50,7 +50,7 @@
 
         hourLabel.textAlignment = NSTextAlignmentRight;
         hourLabel.font = [UIFont systemFontOfSize:11.0f];
-        hourLabel.textColor = [UIColor lightGrayColor];
+        hourLabel.textColor = self.color;
         
         _hourLabel = hourLabel;
         
@@ -59,6 +59,29 @@
     
     return _hourLabel;
 }
+
+
+@synthesize color = _color;
+
+- (void)setColor:(UIColor *)color
+{
+    _color = color;
+    
+    self.hourLabel.textColor = color;
+    
+    [self setNeedsDisplay];
+}
+
+- (UIColor*)color
+{
+    if (!_color) {
+        _color = [UIColor lightGrayColor];
+    }
+    
+    return _color;
+}
+
+#pragma mark - Updating Views
 
 - (void)updateHourLabel:(NSDate*)date
 {    
@@ -111,8 +134,7 @@
 
 - (void)drawHourLine
 {
-    [[UIColor colorWithWhite:0.0f alpha:0.2f] setFill];
-    [[UIColor colorWithWhite:0.0f alpha:0.2f] setStroke];
+    [self.color setStroke];
     
     CGPoint lineOrigin = CGPointMake(CGRectGetMaxX(self.hourLabel.frame) + HOUR_LINE_LEFT_PADDING, CGRectGetMidY(self.hourLabel.frame));
     CGPoint lineTerminal = CGPointMake(CGRectGetMaxX(self.bounds), lineOrigin.y);
