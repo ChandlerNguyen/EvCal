@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		843535821B2D8F1F00A8E404 /* UIColor+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 843535811B2D8F1F00A8E404 /* UIColor+ECAdditions.m */; };
+		843535851B2DAFD000A8E404 /* ECEditEventCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843535841B2DAFD000A8E404 /* ECEditEventCalendarViewController.m */; };
 		84443EFF1B0DEBF900385E5A /* NSDate+ECTestAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443EFE1B0DEBF900385E5A /* NSDate+ECTestAdditions.m */; };
 		84443F021B0DFDF300385E5A /* ECTestsEventQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443F011B0DFDF300385E5A /* ECTestsEventQuery.m */; };
 		84443F0D1B1076B300385E5A /* ECEventViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443F0C1B1076B300385E5A /* ECEventViewTests.m */; };
@@ -60,6 +61,8 @@
 		5F3614751A065418C790A255 /* Pods-EvCalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvCalTests/Pods-EvCalTests.release.xcconfig"; sourceTree = "<group>"; };
 		843535801B2D8F1F00A8E404 /* UIColor+ECAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+ECAdditions.h"; path = "Support/UIColor+ECAdditions.h"; sourceTree = "<group>"; };
 		843535811B2D8F1F00A8E404 /* UIColor+ECAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+ECAdditions.m"; path = "Support/UIColor+ECAdditions.m"; sourceTree = "<group>"; };
+		843535831B2DAFD000A8E404 /* ECEditEventCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventCalendarViewController.h; path = Controllers/ECEditEventCalendarViewController.h; sourceTree = "<group>"; };
+		843535841B2DAFD000A8E404 /* ECEditEventCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEditEventCalendarViewController.m; path = Controllers/ECEditEventCalendarViewController.m; sourceTree = "<group>"; };
 		84443EFD1B0DEBF900385E5A /* NSDate+ECTestAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+ECTestAdditions.h"; path = "Support/NSDate+ECTestAdditions.h"; sourceTree = "<group>"; };
 		84443EFE1B0DEBF900385E5A /* NSDate+ECTestAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+ECTestAdditions.m"; path = "Support/NSDate+ECTestAdditions.m"; sourceTree = "<group>"; };
 		84443F001B0DFDF300385E5A /* ECTestsEventQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECTestsEventQuery.h; path = Classes/ECTestsEventQuery.h; sourceTree = "<group>"; };
@@ -253,6 +256,8 @@
 				84C4591D1B073DB90066B6A9 /* ECDayViewController.m */,
 				8478F7A11B1D8CFD0096F1B7 /* ECEditEventViewController.h */,
 				8478F7A21B1D8CFD0096F1B7 /* ECEditEventViewController.m */,
+				843535831B2DAFD000A8E404 /* ECEditEventCalendarViewController.h */,
+				843535841B2DAFD000A8E404 /* ECEditEventCalendarViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -540,6 +545,7 @@
 				8478F7951B1AB26E0096F1B7 /* ECDateView.m in Sources */,
 				8478F7B51B24519B0096F1B7 /* ECDatePickerCell.m in Sources */,
 				84C458FC1B073A860066B6A9 /* AppDelegate.m in Sources */,
+				843535851B2DAFD000A8E404 /* ECEditEventCalendarViewController.m in Sources */,
 				8478F78F1B19A29A0096F1B7 /* ECLogFormatter.m in Sources */,
 				84C4591E1B073DB90066B6A9 /* ECDayViewController.m in Sources */,
 				84B2E13E1B08E0A000CD0029 /* UIView+ECAdditions.m in Sources */,
