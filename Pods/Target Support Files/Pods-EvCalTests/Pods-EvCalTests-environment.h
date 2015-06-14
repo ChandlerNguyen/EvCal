@@ -36,15 +36,15 @@
 #define COCOAPODS_VERSION_MINOR_CupertinoYankee 0
 #define COCOAPODS_VERSION_PATCH_CupertinoYankee 2
 
+// EDColor
+#define COCOAPODS_POD_AVAILABLE_EDColor
+#define COCOAPODS_VERSION_MAJOR_EDColor 1
+#define COCOAPODS_VERSION_MINOR_EDColor 0
+#define COCOAPODS_VERSION_PATCH_EDColor 0
+
 // JPSimulatorHacks
 #define COCOAPODS_POD_AVAILABLE_JPSimulatorHacks
 #define COCOAPODS_VERSION_MAJOR_JPSimulatorHacks 1
 #define COCOAPODS_VERSION_MINOR_JPSimulatorHacks 2
 #define COCOAPODS_VERSION_PATCH_JPSimulatorHacks 0
-
-// ObjectiveSugar
-#define COCOAPODS_POD_AVAILABLE_ObjectiveSugar
-#define COCOAPODS_VERSION_MAJOR_ObjectiveSugar 1
-#define COCOAPODS_VERSION_MINOR_ObjectiveSugar 1
-#define COCOAPODS_VERSION_PATCH_ObjectiveSugar 0
 
