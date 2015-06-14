@@ -103,6 +103,7 @@
 #pragma mark - Layout
 
 #define HOUR_LABEL_HEIGHT       22.0f
+#define HOUR_LINE_LEFT_PADDING  6.0f
 
 - (void)layoutSubviews
 {
@@ -115,7 +116,7 @@
 {
     CGRect timeLabelFrame = CGRectMake(self.bounds.origin.x,
                                        self.bounds.origin.y,
-                                       self.timeLineInset,
+                                       self.timeLineInset - HOUR_LINE_LEFT_PADDING,
                                        self.bounds.size.height);
     
     DDLogDebug(@"Time Label Frame: %@", NSStringFromCGRect(timeLabelFrame));
@@ -124,7 +125,6 @@
 
 
 #pragma mark - Drawing
-#define HOUR_LINE_LEFT_PADDING  6.0f
 
 - (void)drawRect:(CGRect)rect
 {
@@ -145,7 +145,7 @@
 {
     [self.color setStroke];
     
-    CGPoint lineOrigin = CGPointMake(CGRectGetMaxX(self.timeLabel.frame) + HOUR_LINE_LEFT_PADDING, CGRectGetMidY(self.timeLabel.frame));
+    CGPoint lineOrigin = CGPointMake(self.timeLineInset, CGRectGetMidY(self.timeLabel.frame));
     CGPoint lineTerminal = CGPointMake(CGRectGetMaxX(self.bounds), lineOrigin.y);
     
     UIBezierPath* linePath = [UIBezierPath bezierPath];

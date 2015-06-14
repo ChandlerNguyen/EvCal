@@ -444,9 +444,9 @@
 
 - (CGRect)layout:(ECDayViewEventsLayout *)layout boundsForEventViews:(NSArray *)eventViews
 {
-    CGRect eventViewsBounds = CGRectMake(self.durationEventsView.bounds.origin.x + TIME_LINE_INSET + 6.0f,
+    CGRect eventViewsBounds = CGRectMake(self.durationEventsView.bounds.origin.x + TIME_LINE_INSET,
                                          self.durationEventsView.bounds.origin.y + HOUR_LINE_HEIGHT / 2.0f,
-                                         self.durationEventsView.bounds.size.width - (TIME_LINE_INSET + 6.0f),
+                                         self.durationEventsView.bounds.size.width - TIME_LINE_INSET,
                                          self.durationEventsView.bounds.size.height - HOUR_LINE_HEIGHT);
     
     return eventViewsBounds;
