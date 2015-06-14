@@ -63,6 +63,8 @@
     self.timeLabelsLayoutIsValid = NO;
     
     self.backgroundColor = [UIColor whiteColor];
+    
+    [self addCurrentTimeLineTimer];
 }
 
 - (NSArray*)eventViews
@@ -185,6 +187,14 @@
 }
 
 #pragma mark - Current Time Line
+
+- (void)addCurrentTimeLineTimer
+{
+    NSTimer* timer = [[NSTimer alloc] initWithFireDate:[[NSDate date] beginningOfMinute] interval:60 target:self selector:@selector(updateCurrentTimeLine) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+}
+
+
 
 - (void)updateCurrentTimeLine
 {

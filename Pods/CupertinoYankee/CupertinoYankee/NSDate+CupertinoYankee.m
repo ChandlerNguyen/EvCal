@@ -79,6 +79,25 @@
     return [mutableHoursOfDay copy];
 }
 
+#pragma mark -
+
+- (NSDate*)beginningOfMinute {
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents* components = [calendar components:(CYCalendarUnitYear | CYCalendarUnitMonth | CYCalendarUnitDay | CYCalendarUnitHour | CYCalendarUnitMinute) fromDate:self];
+    
+    return [calendar dateFromComponents:components];
+}
+
+- (NSDate*)endOfMinute {
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents* components = [[NSDateComponents alloc] init];
+    components.minute = 1;
+    
+    return [[calendar dateByAddingComponents:components toDate:self options:0] dateByAddingTimeInterval:-1];
+}
+
 #pragma mark - 
 
 - (NSDate*)beginningOfHour {

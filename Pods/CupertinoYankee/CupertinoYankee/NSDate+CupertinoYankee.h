@@ -52,6 +52,20 @@
 - (NSArray*)hoursOfDay;
 
 ///------------------------------------------------------------------------------
+/// @name Calculating Beginning / End of Minute
+///------------------------------------------------------------------------------
+
+/**
+ *  Returns a new date with the first second of the minute of the receiver
+ */
+- (NSDate*)beginningOfMinute;
+
+/**
+ *  Returns a new date with the last second of the minute of the receiver
+ */
+- (NSDate*)endOfMinute;
+
+///------------------------------------------------------------------------------
 /// @name Calculating Beginning / End of Hour
 ///------------------------------------------------------------------------------
 
