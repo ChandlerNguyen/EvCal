@@ -15,19 +15,20 @@
 // EvCal Classes
 #import "ECDayView.h"
 #import "ECEventView.h"
-#import "ECHourLine.h"
+#import "ECTimeLine.h"
 #import "ECDayViewEventsLayout.h"
 
 @interface ECDayView() <ECDayViewEventsLayoutDataSource>
 
 @property (nonatomic, strong) ECDayViewEventsLayout* eventsLayout;
 @property (nonatomic) BOOL eventViewsLayoutIsValid;
-@property (nonatomic) BOOL hourLabelsLayoutIsValid;
+@property (nonatomic) BOOL timeLabelsLayoutIsValid;
 
 @property (nonatomic, weak) UIView* allDayEventsView;
 @property (nonatomic, weak) UIView* durationEventsView;
 
-@property (nonatomic, strong) NSArray* hourLines;
+@property (nonatomic, weak) ECTimeLine* currentTimeLine;
+@property (nonatomic, strong) NSArray* timeLines;
 @property (nonatomic, strong, readwrite) NSArray* eventViews;
 @property (nonatomic, strong) NSMutableDictionary* eventViewFrames;
 
@@ -59,7 +60,7 @@
     self.showsVerticalScrollIndicator = NO;
     
     self.eventViewsLayoutIsValid = NO;
-    self.hourLabelsLayoutIsValid = NO;
+    self.timeLabelsLayoutIsValid = NO;
     
     self.backgroundColor = [UIColor whiteColor];
 }
@@ -101,46 +102,67 @@
     return _durationEventsView;
 }
 
-- (NSArray*)hourLines
+- (ECTimeLine*)currentTimeLine
 {
-    if (!_hourLines) {
-        _hourLines = [self createHourLines];
+    if (!_currentTimeLine) {
+        _currentTimeLine = [self createCurrentTimeLine];
     }
     
-    return _hourLines;
+    return _currentTimeLine;
+}
+
+- (NSArray*)timeLines
+{
+    if (!_timeLines) {
+        _timeLines = [self createTimeLines];
+    }
+    
+    return _timeLines;
 }
 
 - (void)setDisplayDate:(NSDate *)displayDate
 {
     _displayDate = displayDate;
     
+    [self updateCurrentTimeLine];
     [self setNeedsLayout];
 }
 
 - (void)setFrame:(CGRect)frame
 {
     self.eventViewsLayoutIsValid = NO;
-    self.hourLabelsLayoutIsValid = NO;
+    self.timeLabelsLayoutIsValid = NO;
     
     [super setFrame:frame];
 }
 
 #pragma mark - Creating Views
-#define HOUR_LINE_DOT_INSET 44.0f
+#define TIME_LINE_INSET 44.0f
 
-- (NSArray*)createHourLines
+- (NSArray*)createTimeLines
 {
-    NSMutableArray* mutableHourLines = [[NSMutableArray alloc] init];
+    NSMutableArray* mutableTimeLines = [[NSMutableArray alloc] init];
     
     for (NSDate* date in [self.displayDate hoursOfDay]) {
-        ECHourLine* line = [[ECHourLine alloc] initWithDate:date];
-        line.hourLineInset = HOUR_LINE_DOT_INSET;
+        ECTimeLine* line = [[ECTimeLine alloc] initWithDate:date];
+        line.timeLineInset = TIME_LINE_INSET;
         
-        [mutableHourLines addObject:line];
+        [mutableTimeLines addObject:line];
         [self.durationEventsView insertSubview:line atIndex:0];
     }
     
-    return [mutableHourLines copy];
+    return [mutableTimeLines copy];
+}
+
+- (ECTimeLine*)createCurrentTimeLine
+{
+    ECTimeLine* currentTimeLine = [[ECTimeLine alloc] initWithDate:[NSDate date]];
+    currentTimeLine.color = [UIColor redColor];
+    currentTimeLine.timeLineInset = TIME_LINE_INSET;
+    
+    [self.durationEventsView addSubview:currentTimeLine];
+    
+    return currentTimeLine;
 }
 
 - (UIView*)createallDayEventsView
@@ -159,6 +181,20 @@
     [self addSubview:durationEventsView];
     
     return durationEventsView;
+}
+
+#pragma mark - Current Time Line
+
+- (void)updateCurrentTimeLine
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    if ([calendar isDate:self.displayDate inSameDayAsDate:[NSDate date]]) {
+        self.currentTimeLine.date = [NSDate date];
+        self.currentTimeLine.hidden = NO;
+        [self changeCurrentTimeLinePosition];
+    } else {
+        self.currentTimeLine.hidden = YES;
+    }
 }
 
 #pragma mark - Layout
@@ -198,31 +234,50 @@
     
     DDLogDebug(@"Duration Events View Frame: %@", NSStringFromCGRect(durationEventsViewFrame));
     self.durationEventsView.frame = durationEventsViewFrame;
-    
-    [self layoutHourLines];
+
+    [self layoutCurrentTimeLine];
+    [self layoutTimeLines];
     [self layoutEventViews];
 }
 
-- (void)layoutHourLines
+- (void)layoutCurrentTimeLine
 {
-    if (!self.hourLabelsLayoutIsValid) {
-        CGRect adjustedBounds = CGRectMake(self.durationEventsView.bounds.origin.x,
-                                           self.durationEventsView.bounds.origin.y + HOUR_LINE_HEIGHT / 2.0f,
-                                           self.durationEventsView.bounds.size.width,
-                                           self.durationEventsView.bounds.size.height - HOUR_LINE_HEIGHT);
+    CGRect currentTimeLineFrame = CGRectMake(self.durationEventsView.bounds.origin.x,
+                                             self.durationEventsView.bounds.origin.y,
+                                             self.durationEventsView.bounds.size.width,
+                                             HOUR_LINE_HEIGHT);
+
+    self.currentTimeLine.frame = currentTimeLineFrame;
+    [self changeCurrentTimeLinePosition];
+}
+
+- (void)changeCurrentTimeLinePosition
+{
+    CGFloat currentTimeLineOriginY = [self.eventsLayout verticalPositionForDate:self.currentTimeLine.date relativeToDate:self.displayDate inRect:[self adjustedDurationEventsBounds]];
+    CGPoint currentTimeLineOrigin = CGPointMake(self.durationEventsView.bounds.origin.x, currentTimeLineOriginY);
     
-        for (ECHourLine* hourLine in self.hourLines) {
-            CGFloat originY = [self.eventsLayout verticalPositionForDate:hourLine.date relativeToDate:self.displayDate inRect:adjustedBounds] - HOUR_LINE_HEIGHT / 2.0f;
-            CGRect hourLineFrame = CGRectMake(self.durationEventsView.bounds.origin.x,
+    CGRect currentTimeLineFrame = self.currentTimeLine.frame;
+    currentTimeLineFrame.origin = currentTimeLineOrigin;
+    self.currentTimeLine.frame = currentTimeLineFrame;
+}
+
+- (void)layoutTimeLines
+{
+    if (!self.timeLabelsLayoutIsValid) {
+        CGRect adjustedBounds = [self adjustedDurationEventsBounds];
+    
+        for (ECTimeLine* timeLine in self.timeLines) {
+            CGFloat originY = [self.eventsLayout verticalPositionForDate:timeLine.date relativeToDate:self.displayDate inRect:adjustedBounds] - HOUR_LINE_HEIGHT / 2.0f;
+            CGRect timeLineFrame = CGRectMake(self.durationEventsView.bounds.origin.x,
                                               originY,
                                               self.durationEventsView.bounds.size.width,
                                               HOUR_LINE_HEIGHT);
             
-            DDLogDebug(@"Hour Line Frame (%@): %@", hourLine.date, NSStringFromCGRect(hourLineFrame));
-            hourLine.frame = hourLineFrame;
+            DDLogDebug(@"Hour Line Frame (%@): %@", timeLine.date, NSStringFromCGRect(timeLineFrame));
+            timeLine.frame = timeLineFrame;
         }
         
-        self.hourLabelsLayoutIsValid = YES;
+        self.timeLabelsLayoutIsValid = YES;
     }
 }
 
@@ -248,6 +303,14 @@
     }
     
     return NO;
+}
+
+- (CGRect)adjustedDurationEventsBounds
+{
+    return CGRectMake(self.durationEventsView.bounds.origin.x,
+                      self.durationEventsView.bounds.origin.y + HOUR_LINE_HEIGHT / 2.0f,
+                      self.durationEventsView.bounds.size.width,
+                      self.durationEventsView.bounds.size.height - HOUR_LINE_HEIGHT);
 }
 
 
@@ -357,9 +420,9 @@
 
 - (CGRect)layout:(ECDayViewEventsLayout *)layout boundsForEventViews:(NSArray *)eventViews
 {
-    CGRect eventViewsBounds = CGRectMake(self.durationEventsView.bounds.origin.x + HOUR_LINE_DOT_INSET + 6.0f,
+    CGRect eventViewsBounds = CGRectMake(self.durationEventsView.bounds.origin.x + TIME_LINE_INSET + 6.0f,
                                          self.durationEventsView.bounds.origin.y + HOUR_LINE_HEIGHT / 2.0f,
-                                         self.durationEventsView.bounds.size.width - (HOUR_LINE_DOT_INSET + 6.0f),
+                                         self.durationEventsView.bounds.size.width - (TIME_LINE_INSET + 6.0f),
                                          self.durationEventsView.bounds.size.height - HOUR_LINE_HEIGHT);
     
     return eventViewsBounds;
