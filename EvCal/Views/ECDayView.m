@@ -28,7 +28,7 @@
 @property (nonatomic, weak) UIView* durationEventsView;
 
 @property (nonatomic, weak) ECTimeLine* currentTimeLine;
-@property (nonatomic, strong) NSArray* timeLines;
+@property (nonatomic, strong) NSArray* hourLines;
 @property (nonatomic, strong, readwrite) NSArray* eventViews;
 @property (nonatomic, strong) NSMutableDictionary* eventViewFrames;
 
@@ -111,13 +111,13 @@
     return _currentTimeLine;
 }
 
-- (NSArray*)timeLines
+- (NSArray*)hourLines
 {
-    if (!_timeLines) {
-        _timeLines = [self createTimeLines];
+    if (!_hourLines) {
+        _hourLines = [self createHourLines];
     }
     
-    return _timeLines;
+    return _hourLines;
 }
 
 - (void)setDisplayDate:(NSDate *)displayDate
@@ -137,29 +137,30 @@
 }
 
 #pragma mark - Creating Views
-#define TIME_LINE_INSET 44.0f
+#define TIME_LINE_INSET 50.0f
 
-- (NSArray*)createTimeLines
+- (NSArray*)createHourLines
 {
-    NSMutableArray* mutableTimeLines = [[NSMutableArray alloc] init];
+    NSMutableArray* mutableHourLines = [[NSMutableArray alloc] init];
     
     for (NSDate* date in [self.displayDate hoursOfDay]) {
         ECTimeLine* line = [[ECTimeLine alloc] initWithDate:date];
         line.timeLineInset = TIME_LINE_INSET;
         
-        [mutableTimeLines addObject:line];
+        [mutableHourLines addObject:line];
         [self.durationEventsView insertSubview:line atIndex:0];
     }
     
-    return [mutableTimeLines copy];
+    return [mutableHourLines copy];
 }
 
 - (ECTimeLine*)createCurrentTimeLine
 {
     ECTimeLine* currentTimeLine = [[ECTimeLine alloc] initWithDate:[NSDate date]];
     currentTimeLine.color = [UIColor redColor];
+    currentTimeLine.backgroundColor = [UIColor clearColor];
     currentTimeLine.timeLineInset = TIME_LINE_INSET;
-    
+    currentTimeLine.dateFormatTemplate = @"j:mm";
     [self.durationEventsView addSubview:currentTimeLine];
     
     return currentTimeLine;
@@ -194,6 +195,19 @@
         [self changeCurrentTimeLinePosition];
     } else {
         self.currentTimeLine.hidden = YES;
+    }
+    
+    [self updateHourLinesVisibility];
+}
+
+- (void)updateHourLinesVisibility
+{
+    for (ECTimeLine* hourLine in self.hourLines) {
+        if (CGRectIntersectsRect(self.currentTimeLine.frame, hourLine.frame)) {
+            hourLine.hidden = YES;
+        } else {
+            hourLine.hidden = NO;
+        }
     }
 }
 
@@ -236,7 +250,7 @@
     self.durationEventsView.frame = durationEventsViewFrame;
 
     [self layoutCurrentTimeLine];
-    [self layoutTimeLines];
+    [self layoutHourLines];
     [self layoutEventViews];
 }
 
@@ -261,12 +275,12 @@
     self.currentTimeLine.frame = currentTimeLineFrame;
 }
 
-- (void)layoutTimeLines
+- (void)layoutHourLines
 {
     if (!self.timeLabelsLayoutIsValid) {
         CGRect adjustedBounds = [self adjustedDurationEventsBounds];
     
-        for (ECTimeLine* timeLine in self.timeLines) {
+        for (ECTimeLine* timeLine in self.hourLines) {
             CGFloat originY = [self.eventsLayout verticalPositionForDate:timeLine.date relativeToDate:self.displayDate inRect:adjustedBounds] - HOUR_LINE_HEIGHT / 2.0f;
             CGRect timeLineFrame = CGRectMake(self.durationEventsView.bounds.origin.x,
                                               originY,

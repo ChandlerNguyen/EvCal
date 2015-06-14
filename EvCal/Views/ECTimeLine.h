@@ -22,7 +22,11 @@
 // should begin. Default is 100
 @property (nonatomic) CGFloat timeLineInset;
 
+// The color of the time line
 @property (nonatomic, strong) UIColor* color;
+
+// The format for displaying time line's date object
+@property (nonatomic, strong) NSString* dateFormatTemplate; // default is "j"
 
 //------------------------------------------------------------------------------
 // @name Creating Hour Lines

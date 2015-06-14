@@ -81,12 +81,21 @@
     return _color;
 }
 
+- (NSString*)dateFormatTemplate
+{
+    if (!_dateFormatTemplate) {
+        _dateFormatTemplate = @"j";
+    }
+    
+    return _dateFormatTemplate;
+}
+
 #pragma mark - Updating Views
 
 - (void)updateTimeLabel:(NSDate*)date
 {    
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    formatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:self.dateFormatTemplate options:0 locale:[NSLocale currentLocale]];
     
     self.timeLabel.text = [formatter stringFromDate:date];
 }
