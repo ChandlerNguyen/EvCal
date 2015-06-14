@@ -12,11 +12,12 @@
 
 @implementation UIColor (ECAdditions)
 
+#define TEXT_LIGHTNESS_OFFSET   -45.0f
 + (UIColor*)textColorForCGColor:(CGColorRef)cgColor
 {
     UIColor* baseColor = [UIColor colorWithCGColor:cgColor];
     
-    return [baseColor offsetWithLightness:-45.0f a:0.0f b:0.0f alpha:0.0f];
+    return [baseColor offsetWithLightness:TEXT_LIGHTNESS_OFFSET a:0.0f b:0.0f alpha:0.0f];
 }
 
 @end

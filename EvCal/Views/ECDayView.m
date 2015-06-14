@@ -26,11 +26,12 @@
 
 @property (nonatomic, weak) UIView* allDayEventsView;
 @property (nonatomic, weak) UIView* durationEventsView;
-
-@property (nonatomic, weak) ECTimeLine* currentTimeLine;
-@property (nonatomic, strong) NSArray* hourLines;
 @property (nonatomic, strong, readwrite) NSArray* eventViews;
 @property (nonatomic, strong) NSMutableDictionary* eventViewFrames;
+
+@property (nonatomic) BOOL displayDateIsSameDayAsToday;
+@property (nonatomic, weak) ECTimeLine* currentTimeLine;
+@property (nonatomic, strong) NSArray* hourLines;
 
 @end
 
@@ -126,7 +127,7 @@
 {
     _displayDate = displayDate;
     
-    [self updateCurrentTimeLine];
+    [self updateCurrentTime];
     [self setNeedsLayout];
 }
 
@@ -187,16 +188,17 @@
 
 - (void)addCurrentTimeLineTimer
 {
-    NSTimer* timer = [[NSTimer alloc] initWithFireDate:[[NSDate date] beginningOfMinute] interval:60 target:self selector:@selector(updateCurrentTimeLine) userInfo:nil repeats:YES];
+    NSTimer* timer = [[NSTimer alloc] initWithFireDate:[[NSDate date] beginningOfMinute] interval:60 target:self selector:@selector(updateCurrentTime) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 }
 
 
 
-- (void)updateCurrentTimeLine
+- (void)updateCurrentTime
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    if ([calendar isDate:self.displayDate inSameDayAsDate:[NSDate date]]) {
+    self.displayDateIsSameDayAsToday = [calendar isDate:self.displayDate inSameDayAsDate:[NSDate date]];
+    if (self.displayDateIsSameDayAsToday) {
         self.currentTimeLine.date = [NSDate date];
         self.currentTimeLine.hidden = NO;
         [self changeCurrentTimeLinePosition];
@@ -211,7 +213,7 @@
 {
     for (ECTimeLine* hourLine in self.hourLines) {
         if (CGRectIntersectsRect(self.currentTimeLine.frame, hourLine.frame)) {
-            hourLine.timeHidden = YES;
+            hourLine.timeHidden = self.displayDateIsSameDayAsToday;
         } else {
             hourLine.timeHidden = NO;
         }
