@@ -16,6 +16,7 @@
 #import "ECEditEventViewController.h"
 #import "ECEventStoreProxy.h"
 #import "ECDatePickerCell.h"
+#import "ECEditEventCalendarViewController.h"
 
 @interface ECEditEventViewController() <ECDatePickerCellDelegate, UIActionSheetDelegate, UITextFieldDelegate>
 
@@ -299,6 +300,17 @@
     self.saveButton.enabled = [self eventIsValidWithTitle:result startDate:self.startDatePickerCell.date endDate:self.endDatePickerCell.date];
     
     return YES;
+}
+
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"calendar"]) {
+        ECEditEventCalendarViewController* eceecvc = (ECEditEventCalendarViewController*)segue.destinationViewController;
+        eceecvc.calendar = self.event.calendar;
+    }
 }
 
 @end
