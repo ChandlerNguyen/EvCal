@@ -36,7 +36,13 @@
                             <constraint firstAttribute="trailing" secondItem="XjS-3O-ccb" secondAttribute="trailing" id="jbt-yA-RJj"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Twq-eO-8SM"/>
+                    <navigationItem key="navigationItem" id="Twq-eO-8SM">
+                        <barButtonItem key="leftBarButtonItem" title="Today" id="U40-U2-b7U">
+                            <connections>
+                                <action selector="todayButtonTapped:" destination="qNj-KM-reM" id="Eq6-4Q-OLh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addEventButton" destination="1V5-CR-Gg8" id="ZiG-HR-jgM"/>
                         <outlet property="bottomToolbar" destination="XjS-3O-ccb" id="C3u-8k-8fx"/>

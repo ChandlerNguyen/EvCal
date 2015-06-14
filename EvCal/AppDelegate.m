@@ -10,6 +10,7 @@
 #import <CocoaLumberjack/CocoaLumberjack.h>
 #import "ECLogFormatter.h"
 #import "ECDayviewController.h"
+#import "UIColor+ECAdditions.h"
 
 @implementation AppDelegate
 
@@ -20,6 +21,8 @@
     
     [DDLog addLogger:[DDASLLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    
+    [self.window setTintColor:[UIColor ecPurpleColor]];
     
     return YES;
 }

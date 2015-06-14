@@ -245,6 +245,11 @@
     [self presentEditEventViewControllerWithEvent:nil];
 }
 
+- (IBAction)todayButtonTapped:(UIBarButtonItem *)sender
+{
+    [self.weekdayPicker setSelectedDate:[[NSDate date] beginningOfDay] animated:YES];
+}
+
 - (void)autoScrollDayView:(NSDate*)date
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
