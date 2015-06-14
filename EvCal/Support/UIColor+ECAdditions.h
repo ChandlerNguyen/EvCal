@@ -10,6 +10,7 @@
 
 @interface UIColor (ECAdditions)
 
++ (UIColor*)eventViewBackgroundColorForCGColor:(CGColorRef)cgColor;
 + (UIColor*)textColorForCGColor:(CGColorRef)cgColor;
 
 @end

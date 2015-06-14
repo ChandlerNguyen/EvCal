@@ -50,7 +50,8 @@
 {
     _event = event;
     
-    self.backgroundColor = [[UIColor colorWithCGColor:event.calendar.CGColor] colorWithAlphaComponent:EVENT_VIEW_ALPHA];
+    self.backgroundColor = [UIColor eventViewBackgroundColorForCGColor:event.calendar.CGColor];
+//    self.backgroundColor = [[UIColor colorWithCGColor:event.calendar.CGColor] colorWithAlphaComponent:EVENT_VIEW_ALPHA];
     [self updateLabelsWithEvent:event];
     [self setNeedsLayout];
 }
@@ -189,17 +190,20 @@ CG_INLINE CGSize ceilCGSize(CGSize size)
     self.locationLabel.frame = locationLabelFrame;
 }
 
+#define FORTY_MINUTES   60 * 40
 #define THIRTY_MINUTES  60 * 30
 #define FIFTEEN_MINUTES 60 * 15
 
 - (CGFloat)fontSizeForDuration:(NSTimeInterval)duration
 {
-    if (duration > THIRTY_MINUTES) {
+    if (duration > FORTY_MINUTES) {
         return 12.0f;
-    } else if (duration > FIFTEEN_MINUTES) {
+    } else if (duration > THIRTY_MINUTES) {
         return 10.0f;
+    } else if (duration > FIFTEEN_MINUTES) {
+        return 9.0f;
     } else {
-        return 7.0f;
+        return 8.0f;
     }
 }
 
