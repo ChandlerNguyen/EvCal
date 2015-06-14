@@ -9,8 +9,6 @@
 @class EKEvent;
 #import <UIKit/UIKit.h>
 
-#define EC_EVENT_VIEW_MINIMUM_HEIGHT    12.0f
-
 @interface ECEventView : UIControl
 
 //------------------------------------------------------------------------------
