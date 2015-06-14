@@ -19,11 +19,13 @@
 @property (nonatomic) NSDate* date;
 
 // The distance from the hour line's left origin that the actual line drawing
-// should begin. Default is 100
-@property (nonatomic) CGFloat timeLineInset;
+// should begin.
+@property (nonatomic) CGFloat timeLineInset; // default is 50
+
+@property (nonatomic) BOOL timeHidden; // default is no
 
 // The color of the time line
-@property (nonatomic, strong) UIColor* color;
+@property (nonatomic, strong) UIColor* color; // default is [UIColor lightGrayColor]
 
 // The format for displaying time line's date object
 @property (nonatomic, strong) NSString* dateFormatTemplate; // default is "j"

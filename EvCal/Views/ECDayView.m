@@ -201,10 +201,10 @@
     NSCalendar* calendar = [NSCalendar currentCalendar];
     if ([calendar isDate:self.displayDate inSameDayAsDate:[NSDate date]]) {
         self.currentTimeLine.date = [NSDate date];
-        self.currentTimeLine.hidden = NO;
+        self.currentTimeLine.timeHidden = NO;
         [self changeCurrentTimeLinePosition];
     } else {
-        self.currentTimeLine.hidden = YES;
+        self.currentTimeLine.timeHidden = YES;
     }
     
     [self updateHourLinesVisibility];
@@ -224,7 +224,7 @@
 #pragma mark - Layout
 
 #define ALL_DAY_VIEW_HEIGHT 44.0f
-#define HOUR_LINE_HEIGHT    22.0f
+#define HOUR_LINE_HEIGHT    15.0f
 
 
 - (void)layoutSubviews

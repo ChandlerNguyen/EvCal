@@ -90,6 +90,16 @@
     return _dateFormatTemplate;
 }
 
+- (BOOL)timeHidden
+{
+    return self.timeLabel.hidden;
+}
+
+- (void)setTimeHidden:(BOOL)timeHidden
+{
+    self.timeLabel.hidden = timeHidden;
+}
+
 #pragma mark - Updating Views
 
 - (void)updateTimeLabel:(NSDate*)date
