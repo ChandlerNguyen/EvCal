@@ -11,6 +11,7 @@
 
 // CocoaPods
 #import "NSDate+CupertinoYankee.h"
+#import "UIColor+ECAdditions.h"
 
 // EvCal Classes
 #import "ECDayView.h"
@@ -158,7 +159,7 @@
 - (ECTimeLine*)createCurrentTimeLine
 {
     ECTimeLine* currentTimeLine = [[ECTimeLine alloc] initWithDate:[NSDate date]];
-    currentTimeLine.color = [UIColor redColor];
+    currentTimeLine.color = [UIColor ecRedColor];
     currentTimeLine.backgroundColor = [UIColor clearColor];
     currentTimeLine.dateFormatTemplate = @"j:mm";
     [self.durationEventsView addSubview:currentTimeLine];

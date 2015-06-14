@@ -13,4 +13,8 @@
 + (UIColor*)eventViewBackgroundColorForCGColor:(CGColorRef)cgColor;
 + (UIColor*)textColorForCGColor:(CGColorRef)cgColor;
 
++ (UIColor*)ecPurpleColor;
++ (UIColor*)ecRedColor;
++ (UIColor*)ecGreenColor;
+
 @end

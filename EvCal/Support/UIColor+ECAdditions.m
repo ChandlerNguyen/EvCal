@@ -27,4 +27,19 @@
     return [baseColor offsetWithLightness:5.0f a:0.0 b:0.0 alpha:-0.25f];
 }
 
++ (UIColor*)ecPurpleColor
+{
+    return [UIColor colorWithHexString:@"#6F38B0"];
+}
+
++ (UIColor*)ecRedColor
+{
+    return [UIColor colorWithHexString:@"#FB414A"];
+}
+
++ (UIColor*)ecGreenColor
+{
+    return [UIColor colorWithHexString:@"#45D336"];
+}
+
 @end

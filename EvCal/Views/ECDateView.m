@@ -8,6 +8,7 @@
 
 // Helpers
 #import "UIView+ECAdditions.h"
+#import "UIColor+ECAdditions.h"
 
 // EvCal Classes
 #import "ECDateView.h"
@@ -111,9 +112,9 @@
     NSString* dateString = [instance stringFromDate:self.date];
     
     self.dateLabel.text = dateString;
-    if (self.isTodaysDate && !self.isSelectedDate) {
-        self.dateLabel.textColor = [UIColor blueColor];
-    } else if (self.isSelectedDate) {
+/*    if (self.isTodaysDate && !self.isSelectedDate) {
+        self.dateLabel.textColor = [UIColor ecGreenColor];
+    } else*/ if (self.isSelectedDate) {
         self.dateLabel.textColor = [UIColor whiteColor];
     } else {
         self.dateLabel.textColor = [UIColor blackColor];
@@ -204,8 +205,11 @@
 
 - (void)drawCircle
 {
-
-    [[UIColor colorWithRed:76.0f/255.0f green:0.0f/255.0f blue:179.0f/255.0f alpha:1.0f] setFill];
+    if (self.isTodaysDate) {
+        [[UIColor ecGreenColor] setFill];
+    } else {
+        [[UIColor ecPurpleColor] setFill];
+    }
     
     UIBezierPath* circlePath = [UIBezierPath bezierPathWithOvalInRect:[self circleFrame]];
     
