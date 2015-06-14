@@ -1,19 +1,19 @@
 //
-//  ECHourLine.m
+//  ECTimeLine.m
 //  EvCal
 //
 //  Created by Tom on 5/28/15.
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
-#import "ECHourLine.h"
-@interface ECHourLine()
+#import "ECTimeLine.h"
+@interface ECTimeLine()
 
-@property (nonatomic, weak) UILabel* hourLabel;
+@property (nonatomic, weak) UILabel* timeLabel;
 
 @end
 
-@implementation ECHourLine
+@implementation ECTimeLine
 
 #pragma mark - Lifecycle and Properties
 
@@ -22,7 +22,7 @@
     self = [super initWithFrame:CGRectZero];
     if (self) {
         self.date = date;
-        self.hourLineInset = 66.0f;
+        self.timeLineInset = 66.0f;
     }
     
     return self;
@@ -32,32 +32,32 @@
 {
     _date = date;
     
-    [self updateHourLabel:date];
+    [self updateTimeLabel:date];
 }
 
-- (void)setHourLineInset:(CGFloat)hourLineInset
+- (void)setTimeLineInset:(CGFloat)timeLineInset
 {
-    _hourLineInset = hourLineInset;
+    _timeLineInset = timeLineInset;
     
     [self setNeedsDisplay];
     [self setNeedsLayout];
 }
 
-- (UILabel*)hourLabel
+- (UILabel*)timeLabel
 {
-    if (!_hourLabel) {
-        UILabel* hourLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    if (!_timeLabel) {
+        UILabel* timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 
-        hourLabel.textAlignment = NSTextAlignmentRight;
-        hourLabel.font = [UIFont systemFontOfSize:11.0f];
-        hourLabel.textColor = self.color;
+        timeLabel.textAlignment = NSTextAlignmentRight;
+        timeLabel.font = [UIFont systemFontOfSize:11.0f];
+        timeLabel.textColor = self.color;
         
-        _hourLabel = hourLabel;
+        _timeLabel = timeLabel;
         
-        [self addSubview:_hourLabel];
+        [self addSubview:_timeLabel];
     }
     
-    return _hourLabel;
+    return _timeLabel;
 }
 
 
@@ -67,7 +67,7 @@
 {
     _color = color;
     
-    self.hourLabel.textColor = color;
+    self.timeLabel.textColor = color;
     
     [self setNeedsDisplay];
 }
@@ -83,12 +83,12 @@
 
 #pragma mark - Updating Views
 
-- (void)updateHourLabel:(NSDate*)date
+- (void)updateTimeLabel:(NSDate*)date
 {    
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
     
-    self.hourLabel.text = [formatter stringFromDate:date];
+    self.timeLabel.text = [formatter stringFromDate:date];
 }
 
 #pragma mark - Layout
@@ -99,18 +99,18 @@
 {
     [super layoutSubviews];
     
-    [self layoutHourLabel];
+    [self layoutTimeLabel];
 }
 
-- (void)layoutHourLabel
+- (void)layoutTimeLabel
 {
-    CGRect hourLabelFrame = CGRectMake(self.bounds.origin.x,
+    CGRect timeLabelFrame = CGRectMake(self.bounds.origin.x,
                                        self.bounds.origin.y,
-                                       self.hourLineInset,
+                                       self.timeLineInset,
                                        self.bounds.size.height);
     
-    DDLogDebug(@"Hour Label Frame: %@", NSStringFromCGRect(hourLabelFrame));
-    self.hourLabel.frame = hourLabelFrame;
+    DDLogDebug(@"Time Label Frame: %@", NSStringFromCGRect(timeLabelFrame));
+    self.timeLabel.frame = timeLabelFrame;
 }
 
 
@@ -122,7 +122,7 @@
     [super drawRect:rect];
     
     [self eraseLine];
-    [self drawHourLine];
+    [self drawTimeLine];
 }
 
 - (void)eraseLine
@@ -132,11 +132,11 @@
     [[UIBezierPath bezierPathWithRect:self.bounds] fill];
 }
 
-- (void)drawHourLine
+- (void)drawTimeLine
 {
     [self.color setStroke];
     
-    CGPoint lineOrigin = CGPointMake(CGRectGetMaxX(self.hourLabel.frame) + HOUR_LINE_LEFT_PADDING, CGRectGetMidY(self.hourLabel.frame));
+    CGPoint lineOrigin = CGPointMake(CGRectGetMaxX(self.timeLabel.frame) + HOUR_LINE_LEFT_PADDING, CGRectGetMidY(self.timeLabel.frame));
     CGPoint lineTerminal = CGPointMake(CGRectGetMaxX(self.bounds), lineOrigin.y);
     
     UIBezierPath* linePath = [UIBezierPath bezierPath];

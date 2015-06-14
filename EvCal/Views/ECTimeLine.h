@@ -1,5 +1,5 @@
 //
-//  ECHourLine.h
+//  ECTimeLine.h
 //  EvCal
 //
 //  Created by Tom on 5/28/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ECHourLine : UIView
+@interface ECTimeLine : UIView
 
 //------------------------------------------------------------------------------
 // @name Properties
@@ -20,7 +20,7 @@
 
 // The distance from the hour line's left origin that the actual line drawing
 // should begin. Default is 100
-@property (nonatomic) CGFloat hourLineInset;
+@property (nonatomic) CGFloat timeLineInset;
 
 @property (nonatomic, strong) UIColor* color;
 
