@@ -198,10 +198,10 @@
     NSCalendar* calendar = [NSCalendar currentCalendar];
     if ([calendar isDate:self.displayDate inSameDayAsDate:[NSDate date]]) {
         self.currentTimeLine.date = [NSDate date];
-        self.currentTimeLine.timeHidden = NO;
+        self.currentTimeLine.hidden = NO;
         [self changeCurrentTimeLinePosition];
     } else {
-        self.currentTimeLine.timeHidden = YES;
+        self.currentTimeLine.hidden = YES;
     }
     
     [self updateHourLinesVisibility];
@@ -211,9 +211,9 @@
 {
     for (ECTimeLine* hourLine in self.hourLines) {
         if (CGRectIntersectsRect(self.currentTimeLine.frame, hourLine.frame)) {
-            hourLine.hidden = YES;
+            hourLine.timeHidden = YES;
         } else {
-            hourLine.hidden = NO;
+            hourLine.timeHidden = NO;
         }
     }
 }
