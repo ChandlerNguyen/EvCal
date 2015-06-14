@@ -43,7 +43,7 @@
     return self;
 }
 
-#define EVENT_VIEW_ALPHA    0.85
+#define EVENT_VIEW_ALPHA    0.55
 
 - (void)setEvent:(EKEvent *)event animated:(BOOL)animated
 {
@@ -58,7 +58,7 @@
 {
     if (!_titleLabel) {
         _titleLabel = [self addLabel];
-        _titleLabel.font = [UIFont systemFontOfSize:11];
+        _titleLabel.font = [UIFont boldSystemFontOfSize:13];
     }
     
     return _titleLabel;
@@ -66,9 +66,9 @@
 
 - (UILabel*)locationLabel
 {
-    if (!_locationLabel) {
+    if (!_locationLabel && self.event.location) {
         _locationLabel = [self addLabel];
-        _locationLabel.font = [UIFont systemFontOfSize:11];
+        _locationLabel.font = [UIFont systemFontOfSize:12];
     }
     
     return _locationLabel;
