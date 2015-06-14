@@ -20,7 +20,7 @@
 
 // The distance from the hour line's left origin that the actual line drawing
 // should begin.
-@property (nonatomic) CGFloat timeLineInset; // default is 50
+@property (nonatomic, readonly) CGFloat timeLineInset; // default is 50
 
 @property (nonatomic) BOOL timeHidden; // default is no
 

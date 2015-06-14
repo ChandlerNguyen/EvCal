@@ -9,6 +9,7 @@
 #import "ECTimeLine.h"
 @interface ECTimeLine()
 
+@property (nonatomic, readwrite) CGFloat timeLineInset;
 @property (nonatomic, weak) UILabel* timeLabel;
 
 @end
@@ -22,7 +23,8 @@
     self = [super initWithFrame:CGRectZero];
     if (self) {
         self.date = date;
-        self.timeLineInset = 66.0f;
+        
+        self.timeLineInset = [self calculateTimeLineInset];
     }
     
     return self;
@@ -33,14 +35,6 @@
     _date = date;
     
     [self updateTimeLabel:date];
-}
-
-- (void)setTimeLineInset:(CGFloat)timeLineInset
-{
-    _timeLineInset = timeLineInset;
-    
-    [self setNeedsDisplay];
-    [self setNeedsLayout];
 }
 
 - (UILabel*)timeLabel
@@ -131,6 +125,16 @@
     
     DDLogDebug(@"Time Label Frame: %@", NSStringFromCGRect(timeLabelFrame));
     self.timeLabel.frame = timeLabelFrame;
+}
+
+- (CGFloat)calculateTimeLineInset
+{
+    NSString* maximumWidthTimeString = NSLocalizedString(@"12:59 PM", @"The longest possible time string in terms of total character width");
+    CGRect maximumTimeLabelFrame = [maximumWidthTimeString boundingRectWithSize:CGSizeMake(1000, 1000)
+                                                                        options:0
+                                                                     attributes:@{NSFontAttributeName : self.timeLabel.font}
+                                                                        context:nil];
+    return ceilf(maximumTimeLabelFrame.size.width) + HOUR_LINE_LEFT_PADDING;
 }
 
 

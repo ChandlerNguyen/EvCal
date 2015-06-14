@@ -139,7 +139,6 @@
 }
 
 #pragma mark - Creating Views
-#define TIME_LINE_INSET 50.0f
 
 - (NSArray*)createHourLines
 {
@@ -147,7 +146,6 @@
     
     for (NSDate* date in [self.displayDate hoursOfDay]) {
         ECTimeLine* line = [[ECTimeLine alloc] initWithDate:date];
-        line.timeLineInset = TIME_LINE_INSET;
         
         [mutableHourLines addObject:line];
         [self.durationEventsView insertSubview:line atIndex:0];
@@ -161,7 +159,6 @@
     ECTimeLine* currentTimeLine = [[ECTimeLine alloc] initWithDate:[NSDate date]];
     currentTimeLine.color = [UIColor redColor];
     currentTimeLine.backgroundColor = [UIColor clearColor];
-    currentTimeLine.timeLineInset = TIME_LINE_INSET;
     currentTimeLine.dateFormatTemplate = @"j:mm";
     [self.durationEventsView addSubview:currentTimeLine];
     
@@ -444,9 +441,9 @@
 
 - (CGRect)layout:(ECDayViewEventsLayout *)layout boundsForEventViews:(NSArray *)eventViews
 {
-    CGRect eventViewsBounds = CGRectMake(self.durationEventsView.bounds.origin.x + TIME_LINE_INSET,
+    CGRect eventViewsBounds = CGRectMake(self.durationEventsView.bounds.origin.x + self.currentTimeLine.timeLineInset,
                                          self.durationEventsView.bounds.origin.y + HOUR_LINE_HEIGHT / 2.0f,
-                                         self.durationEventsView.bounds.size.width - TIME_LINE_INSET,
+                                         self.durationEventsView.bounds.size.width - self.currentTimeLine.timeLineInset,
                                          self.durationEventsView.bounds.size.height - HOUR_LINE_HEIGHT);
     
     return eventViewsBounds;
