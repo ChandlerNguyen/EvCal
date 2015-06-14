@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		843535821B2D8F1F00A8E404 /* UIColor+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 843535811B2D8F1F00A8E404 /* UIColor+ECAdditions.m */; };
 		84443EFF1B0DEBF900385E5A /* NSDate+ECTestAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443EFE1B0DEBF900385E5A /* NSDate+ECTestAdditions.m */; };
 		84443F021B0DFDF300385E5A /* ECTestsEventQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443F011B0DFDF300385E5A /* ECTestsEventQuery.m */; };
 		84443F0D1B1076B300385E5A /* ECEventViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443F0C1B1076B300385E5A /* ECEventViewTests.m */; };
@@ -57,6 +58,8 @@
 		0CD2922DCA6CD50DC54BED4D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		26A52386135E7399D21E9C48 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		5F3614751A065418C790A255 /* Pods-EvCalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvCalTests/Pods-EvCalTests.release.xcconfig"; sourceTree = "<group>"; };
+		843535801B2D8F1F00A8E404 /* UIColor+ECAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+ECAdditions.h"; path = "Support/UIColor+ECAdditions.h"; sourceTree = "<group>"; };
+		843535811B2D8F1F00A8E404 /* UIColor+ECAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+ECAdditions.m"; path = "Support/UIColor+ECAdditions.m"; sourceTree = "<group>"; };
 		84443EFD1B0DEBF900385E5A /* NSDate+ECTestAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+ECTestAdditions.h"; path = "Support/NSDate+ECTestAdditions.h"; sourceTree = "<group>"; };
 		84443EFE1B0DEBF900385E5A /* NSDate+ECTestAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+ECTestAdditions.m"; path = "Support/NSDate+ECTestAdditions.m"; sourceTree = "<group>"; };
 		84443F001B0DFDF300385E5A /* ECTestsEventQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECTestsEventQuery.h; path = Classes/ECTestsEventQuery.h; sourceTree = "<group>"; };
@@ -323,6 +326,8 @@
 				8478F79F1B1B06700096F1B7 /* NSDateFormatter+ECAdditions.m */,
 				8478F7B01B244AF80096F1B7 /* NSDate+ECEventAdditions.h */,
 				8478F7B11B244AF80096F1B7 /* NSDate+ECEventAdditions.m */,
+				843535801B2D8F1F00A8E404 /* UIColor+ECAdditions.h */,
+				843535811B2D8F1F00A8E404 /* UIColor+ECAdditions.m */,
 			);
 			name = "Foundation Categories";
 			sourceTree = "<group>";
@@ -547,6 +552,7 @@
 				84D92C991B29A52E0050015D /* ECDayViewEventsLayout.m in Sources */,
 				84EF226C1B08D5BD003DA610 /* ECEventView.m in Sources */,
 				8478F78A1B1822AA0096F1B7 /* ECWeekdayPicker.m in Sources */,
+				843535821B2D8F1F00A8E404 /* UIColor+ECAdditions.m in Sources */,
 				8478F7981B1AB2D50096F1B7 /* ECDateViewFactory.m in Sources */,
 				8478F7A01B1B06700096F1B7 /* NSDateFormatter+ECAdditions.m in Sources */,
 				8478F79D1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.m in Sources */,

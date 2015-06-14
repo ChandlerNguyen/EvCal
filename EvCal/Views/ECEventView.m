@@ -16,6 +16,7 @@
 // EvCal Classes
 #import "ECEventView.h"
 #import "UIView+ECAdditions.h"
+#import "UIColor+ECAdditions.h"
 
 
 @interface ECEventView()
@@ -59,6 +60,7 @@
     if (!_titleLabel) {
         _titleLabel = [self addLabel];
         _titleLabel.font = [UIFont boldSystemFontOfSize:13];
+        _titleLabel.textColor = [UIColor textColorForCGColor:self.event.calendar.CGColor];
     }
     
     return _titleLabel;
@@ -69,6 +71,7 @@
     if (!_locationLabel && self.event.location) {
         _locationLabel = [self addLabel];
         _locationLabel.font = [UIFont systemFontOfSize:12];
+        _locationLabel.textColor = [UIColor textColorForCGColor:self.event.calendar.CGColor];
     }
     
     return _locationLabel;
