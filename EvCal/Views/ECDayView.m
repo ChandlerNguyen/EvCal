@@ -451,4 +451,27 @@
     
     return eventViewsBounds;
 }
+
+
+#pragma mark - Auto Scrolling
+
+- (void)scrollToCurrentTime:(BOOL)animated
+{
+    [self scrollToTime:[[NSDate date] beginningOfHour] animated:animated];
+}
+
+- (void)scrollToFirstEvent:(BOOL)animated
+{
+    ECEventView* firstEventView = [self.eventViews sortedArrayUsingSelector:@selector(compare:)].firstObject;
+    [self scrollToTime:firstEventView.event.startDate animated:animated];
+}
+
+- (void)scrollToTime:(NSDate*)time animated:(BOOL)animated
+{
+    CGFloat timeOffsetY = [self.eventsLayout verticalPositionForDate:time relativeToDate:self.displayDate inRect:self.durationEventsView.bounds] + self.allDayEventsView.frame.size.height;
+    timeOffsetY = MIN(timeOffsetY, self.contentSize.height - self.bounds.size.height) - HOUR_LINE_HEIGHT / 2.0f;
+    CGPoint timeOffset = CGPointMake(self.bounds.origin.x, timeOffsetY);
+    
+    [self setContentOffset:timeOffset animated:animated];
+}
 @end

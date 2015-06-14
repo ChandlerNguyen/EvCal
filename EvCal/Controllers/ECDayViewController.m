@@ -27,8 +27,8 @@
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* addEventButton;
 @property (weak, nonatomic) IBOutlet UIToolbar *bottomToolbar;
 
-@property (nonatomic, weak) IBOutlet ECWeekdayPicker* weekdayPicker;
-@property (nonatomic, weak) IBOutlet ECDayView* dayView;
+@property (nonatomic, weak) ECWeekdayPicker* weekdayPicker;
+@property (nonatomic, weak) ECDayView* dayView;
 
 @property (nonatomic, strong) NSDateFormatter* dateFormatter;
 
@@ -166,6 +166,7 @@
     self.dayView.displayDate = date;
     
     [self refreshEvents];
+    [self performSelector:@selector(autoScrollDayView:) withObject:date afterDelay:0.5f];
 }
 
 - (void)weekdayPicker:(ECWeekdayPicker *)picker didScrollFrom:(NSArray *)fromWeek to:(NSArray *)toWeek
@@ -242,6 +243,16 @@
 - (IBAction)addEventButtonTapped:(UIBarButtonItem *)sender
 {
     [self presentEditEventViewControllerWithEvent:nil];
+}
+
+- (void)autoScrollDayView:(NSDate*)date
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    if ([calendar isDate:date inSameDayAsDate:self.displayDate]) {
+        if ([calendar isDate:date inSameDayAsDate:[NSDate date]]) {
+            [self.dayView scrollToCurrentTime:YES];
+        }
+    }
 }
 
 @end
