@@ -112,9 +112,7 @@
     NSString* dateString = [instance stringFromDate:self.date];
     
     self.dateLabel.text = dateString;
-/*    if (self.isTodaysDate && !self.isSelectedDate) {
-        self.dateLabel.textColor = [UIColor ecGreenColor];
-    } else*/ if (self.isSelectedDate) {
+    if (self.isSelectedDate) {
         self.dateLabel.textColor = [UIColor whiteColor];
     } else {
         self.dateLabel.textColor = [UIColor blackColor];
@@ -147,8 +145,6 @@
 {
     CGRect weekdayLabelFrame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, WEEKDAY_LABEL_HEIGHT);
     self.weekdayLabel.frame = weekdayLabelFrame;
-    
-    DDLogDebug(@"Weekday Label Frame: %@", NSStringFromCGRect(weekdayLabelFrame));
 }
 
 - (void)layoutDateLabel
@@ -158,9 +154,6 @@
                                        self.bounds.size.width,
                                        self.bounds.size.height - WEEKDAY_LABEL_HEIGHT - ACCESSORY_VIEWS_HEIGHT);
     self.dateLabel.frame = dateLabelFrame;
-    
-    DDLogDebug(@"Date Label Frame: %@", NSStringFromCGRect(dateLabelFrame));
-
 }
 
 #define ACCESSORY_VIEW_WIDTH    8.0f

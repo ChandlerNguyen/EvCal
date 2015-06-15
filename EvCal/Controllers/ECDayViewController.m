@@ -36,6 +36,12 @@
 @property (nonatomic, weak) ECWeekdayPicker* weekdayPicker;
 @property (nonatomic, strong) NSDateFormatter* dateFormatter;
 
+// Touches
+@property (nonatomic) BOOL isDragginDayView;
+@property (nonatomic) CGPoint firstTouchPoint;
+@property (nonatomic) CGPoint previousTouchPoint;
+@property (nonatomic) CGFloat currentDelta;
+
 @end
 
 @implementation ECDayViewController
@@ -134,7 +140,7 @@
 #pragma mark - View setup
 
 #define WEEKDAY_PICKER_HEIGHT   74.0f
-
+#define DAY_VIEW_CONTENT_HEIGHT 1200.0f
 
 - (void)setupWeekdayPicker
 {
@@ -155,8 +161,6 @@
                                            self.view.bounds.size.width,
                                            WEEKDAY_PICKER_HEIGHT);
     
-    DDLogDebug(@"Weekday Picker Frame: %@", NSStringFromCGRect(weekdayPickerFrame));
-    
     self.weekdayPicker.frame = weekdayPickerFrame;
 }
 
@@ -167,24 +171,24 @@
                                      self.view.bounds.size.width,
                                      self.bottomToolbar.frame.origin.y - CGRectGetMaxY(self.weekdayPicker.frame) - 1); // -1 so toolbar separator will show
     
-    CGSize dayViewContentSize = CGSizeMake(self.view.bounds.size.width, 1200.0f);
-    
-    DDLogDebug(@"Day View Frame: %@", NSStringFromCGRect(dayViewFrame));
-    DDLogDebug(@"Day View Content Size: %@", NSStringFromCGSize(dayViewContentSize));
+    CGSize dayViewContentSize = CGSizeMake(self.view.bounds.size.width, DAY_VIEW_CONTENT_HEIGHT);
     
     self.dayView.frame = dayViewFrame;
     self.dayView.contentSize = dayViewContentSize;
 }
 
-//- (void)layoutNextDayView
-//{
-//    CGRect nextDayViewFrame = CGRectMake(self.view.bounds.origin.x + self.view.bounds.size.width, // moved one screen to the right
-//                                         CGRectGetMaxY(self.weekdayPicker.frame),
-//                                         self.view.bounds.size.width,
-//                                         self.bottomToolbar.frame.origin.y - CGRectGetMaxY(self.weekdayPicker.frame) - 1); // -1 so toolbar separator will show
-//    
-//    CGSize
-//}
+- (void)layoutNextDayView
+{
+    CGRect nextDayViewFrame = CGRectMake(self.view.bounds.origin.x + self.view.bounds.size.width, // moved one screen to the right
+                                         CGRectGetMaxY(self.weekdayPicker.frame),
+                                         self.view.bounds.size.width,
+                                         self.bottomToolbar.frame.origin.y - CGRectGetMaxY(self.weekdayPicker.frame) - 1); // -1 so toolbar separator will show
+    
+    CGSize nextDayViewContentSize = CGSizeMake(self.view.bounds.size.width, DAY_VIEW_CONTENT_HEIGHT);
+    
+    self.nextDayView.frame = nextDayViewFrame;
+    self.nextDayView.contentSize = nextDayViewContentSize;
+}
 
 #pragma mark - ECWeekdayPicker Delegate
 
@@ -269,24 +273,43 @@
 
 #pragma mark - UI Events
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-
-}
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
-{
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-
-}
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//    DDLogDebug(@"Touches: %@", touches);
+//    UITouch* firstTouch = [touches anyObject];
+//    self.firstTouchPoint = [firstTouch locationInView:self.view];
+//    self.currentDelta = 0;
+//    if (CGRectContainsPoint(self.dayView.frame, self.firstTouchPoint)) {
+//        self.isDragginDayView = YES;
+//    }
+//}
+//
+//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//    NSLog(@"Touches moved");
+//    UITouch* touch = [touches anyObject];
+//    self.previousTouchPoint = [touch locationInView:self.view];
+//    self.currentDelta = self.firstTouchPoint.x - self.previousTouchPoint.x;
+//    
+//    CGRect dayViewFrame = self.dayView.frame;
+//    CGRect nextDayViewFrame = self.nextDayView.frame;
+//    
+//    dayViewFrame.origin.x = dayViewFrame.origin.x - self.currentDelta;
+//    nextDayViewFrame.origin.x = nextDayViewFrame.origin.x - self.currentDelta;
+//    
+//    self.dayView.frame = dayViewFrame;
+//    self.nextDayView.frame = nextDayViewFrame;
+//}
+//
+//- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//    DDLogDebug(@"Touches: %@", touches);
+//}
+//
+//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//    DDLogDebug(@"Touches: %@", touches);
+//}
 
 - (IBAction)addEventButtonTapped:(UIBarButtonItem *)sender
 {

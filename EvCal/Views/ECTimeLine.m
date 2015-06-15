@@ -134,7 +134,6 @@
                                        self.timeLineInset - HOUR_LINE_LEFT_PADDING,
                                        self.bounds.size.height);
     
-    DDLogDebug(@"Time Label Frame: %@", NSStringFromCGRect(timeLabelFrame));
     self.timeLabel.frame = timeLabelFrame;
 }
 

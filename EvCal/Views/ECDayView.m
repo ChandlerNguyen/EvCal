@@ -58,6 +58,7 @@
 
 - (void)setup
 {
+    self.canCancelContentTouches = NO;
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
     
@@ -245,7 +246,6 @@
                                  ALL_DAY_VIEW_HEIGHT);
     }
     
-    DDLogDebug(@"All Day Events View Frame: %@", NSStringFromCGRect(allDayFrame));
     self.allDayEventsView.frame = allDayFrame;
 }
 
@@ -256,7 +256,6 @@
                                                 self.contentSize.width,
                                                 self.contentSize.height - self.allDayEventsView.frame.size.height);
     
-    DDLogDebug(@"Duration Events View Frame: %@", NSStringFromCGRect(durationEventsViewFrame));
     self.durationEventsView.frame = durationEventsViewFrame;
 
     [self layoutCurrentTimeLine];
@@ -270,7 +269,6 @@
                                              self.durationEventsView.bounds.origin.y,
                                              self.durationEventsView.bounds.size.width,
                                              HOUR_LINE_HEIGHT);
-
     self.currentTimeLine.frame = currentTimeLineFrame;
     [self changeCurrentTimeLinePosition];
 }
@@ -298,8 +296,6 @@
                                               originY,
                                               self.durationEventsView.bounds.size.width,
                                               HOUR_LINE_HEIGHT);
-            
-            DDLogDebug(@"Hour Line Frame (%@): %@", timeLine.date, NSStringFromCGRect(timeLineFrame));
             timeLine.frame = timeLineFrame;
         }
         

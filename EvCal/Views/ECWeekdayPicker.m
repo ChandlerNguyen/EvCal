@@ -256,8 +256,6 @@
                                                self.bounds.size.height);
     CGSize weekdayScrollViewContentSize = CGSizeMake(weekdayScrollViewFrame.size.width * 3, weekdayScrollViewFrame.size.height);
     
-    DDLogDebug(@"Weekday Scroll View Frame: %@", NSStringFromCGRect(weekdayScrollViewFrame));
-    DDLogDebug(@"Weekday Scroll View Content Size: %@", NSStringFromCGSize(weekdayScrollViewContentSize));
     self.weekdaysScrollView.frame = weekdayScrollViewFrame;
     self.weekdaysScrollView.contentSize = weekdayScrollViewContentSize;
     
@@ -272,21 +270,18 @@
                                             self.weekdaysScrollView.bounds.origin.y,
                                             self.bounds.size.width,
                                             self.weekdaysScrollView.bounds.size.height);
-    DDLogDebug(@"Left Date Views Bounds %@", NSStringFromCGRect(leftDateViewsBounds));
     [self layoutDateViews:self.leftDateViews inRect:leftDateViewsBounds];
     
     CGRect currentDateViewsBounds = CGRectMake(self.weekdaysScrollView.bounds.origin.x + self.bounds.size.width,
                                               self.weekdaysScrollView.bounds.origin.y,
                                               self.bounds.size.width,
                                               self.weekdaysScrollView.bounds.size.height);
-    DDLogDebug(@"Current Date View Bounds %@", NSStringFromCGRect(currentDateViewsBounds));
     [self layoutDateViews:self.currentDateViews inRect:currentDateViewsBounds];
     
     CGRect rightDateViewsBounds = CGRectMake(self.weekdaysScrollView.bounds.origin.x + 2 * self.bounds.size.width,
                                             self.weekdaysScrollView.bounds.origin.y,
                                             self.weekdaysScrollView.bounds.size.width,
                                             self.weekdaysScrollView.bounds.size.height);
-    DDLogDebug(@"Right Date Views Bounds %@", NSStringFromCGRect(rightDateViewsBounds));
     [self layoutDateViews:self.rightDateViews inRect:rightDateViewsBounds];
 
 }
@@ -301,7 +296,6 @@
                                           dateViewWidth,
                                           rect.size.height);
         
-        DDLogDebug(@"Date View Frame: %@", NSStringFromCGRect(dateViewFrame));
         ECDateView* dateView = dateViews[i];
         dateView.frame = dateViewFrame;
     }

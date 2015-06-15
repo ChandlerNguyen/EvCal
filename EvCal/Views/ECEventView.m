@@ -135,22 +135,6 @@ CG_INLINE CGSize ceilCGSize(CGSize size)
     } else {
         [self layoutLabelsVerticallyWithTitleSize:titleSize locationSize:locationSize];
     }
-    
-//    CGRect titleLabelFrame = CGRectMake(self.bounds.origin.x + LABEL_PADDING,
-//                                        self.bounds.origin.y + LABEL_PADDING,
-//                                        self.bounds.size.width,
-//                                        titleHeight);
-//    
-
-//    self.titleLabel.frame = titleLabelFrame;
-    
-//    CGRect locationLabelFrame = CGRectMake(titleLabelFrame.origin.x,
-//                                           CGRectGetMaxY(titleLabelFrame) + LABEL_PADDING,
-//                                           titleLabelFrame.size.width,
-//                                           titleLabelFrame.size.height);
-//    
-//    DDLogDebug(@"Location Label Frame: %@", NSStringFromCGRect(locationLabelFrame));
-//    self.locationLabel.frame = locationLabelFrame;
 }
 
 - (void)layoutLabelsVerticallyWithTitleSize:(CGSize)titleSize locationSize:(CGSize)locationSize
@@ -160,7 +144,6 @@ CG_INLINE CGSize ceilCGSize(CGSize size)
                                         titleSize.width,
                                         titleSize.height);
     
-    DDLogDebug(@"Title Label Frame: %@", NSStringFromCGRect(titleLabelFrame));    
     self.titleLabel.frame = titleLabelFrame;
     
     CGRect locationLabelFrame = CGRectMake(self.bounds.origin.x + LABEL_OUTER_PADDING,
