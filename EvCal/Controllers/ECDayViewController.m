@@ -27,10 +27,13 @@
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* addEventButton;
 @property (weak, nonatomic) IBOutlet UIToolbar *bottomToolbar;
 
+// Day views
 @property (nonatomic) BOOL userScrolledDayViewAfterSelectingDate;
 @property (nonatomic, weak) ECDayView* dayView;
-@property (nonatomic, weak) ECWeekdayPicker* weekdayPicker;
+@property (nonatomic, weak) ECDayView* nextDayView;
 
+// Date picker
+@property (nonatomic, weak) ECWeekdayPicker* weekdayPicker;
 @property (nonatomic, strong) NSDateFormatter* dateFormatter;
 
 @end
@@ -69,6 +72,18 @@
     }
     
     return _dayView;
+}
+
+- (ECDayView*)nextDayView
+{
+    if (!_nextDayView) {
+        ECDayView* nextDayView = [[ECDayView alloc] initWithFrame:CGRectZero];
+        _nextDayView = nextDayView;
+        nextDayView.displayDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:1 toDate:self.displayDate options:0];
+        [self.view addSubview:_nextDayView];
+    }
+    
+    return _nextDayView;
 }
 
 
@@ -242,6 +257,25 @@
 }
 
 #pragma mark - UI Events
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+
+}
 
 - (IBAction)addEventButtonTapped:(UIBarButtonItem *)sender
 {
