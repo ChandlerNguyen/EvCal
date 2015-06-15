@@ -223,9 +223,9 @@
 
 #pragma mark - Layout
 
-#define ALL_DAY_VIEW_HEIGHT         44.0f
-#define HOUR_LINE_HEIGHT            15.0f
-#define EVENT_VIEW_RIGHT_PADDING    6.0f
+#define ALL_DAY_VIEW_HEIGHT             44.0f
+#define HOUR_LINE_HEIGHT                15.0f
+#define EVENT_VIEW_HORIZONTAL_PADDING   4.0f
 
 - (void)layoutSubviews
 {
@@ -382,7 +382,7 @@
 - (void)addEventViewToView:(ECEventView*)eventView
 {
     if (!eventView.event.isAllDay) {
-        [self.durationEventsView addSubview:eventView];
+        [self.durationEventsView insertSubview:eventView belowSubview:self.currentTimeLine];
     } else {
         [self.allDayEventsView addSubview:eventView];
     }
@@ -444,9 +444,9 @@
 
 - (CGRect)layout:(ECDayViewEventsLayout *)layout boundsForEventViews:(NSArray *)eventViews
 {
-    CGRect eventViewsBounds = CGRectMake(self.durationEventsView.bounds.origin.x + self.currentTimeLine.timeLineInset,
+    CGRect eventViewsBounds = CGRectMake(self.durationEventsView.bounds.origin.x + self.currentTimeLine.timeLineInset + EVENT_VIEW_HORIZONTAL_PADDING,
                                          self.durationEventsView.bounds.origin.y + HOUR_LINE_HEIGHT / 2.0f,
-                                         self.durationEventsView.bounds.size.width - (self.currentTimeLine.timeLineInset + EVENT_VIEW_RIGHT_PADDING),
+                                         self.durationEventsView.bounds.size.width - (self.currentTimeLine.timeLineInset + 2 * EVENT_VIEW_HORIZONTAL_PADDING),
                                          self.durationEventsView.bounds.size.height - HOUR_LINE_HEIGHT);
     
     return eventViewsBounds;

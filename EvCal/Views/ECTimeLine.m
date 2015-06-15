@@ -24,10 +24,21 @@
     if (self) {
         self.date = date;
         
-        self.timeLineInset = [self calculateTimeLineInset];
+        [self setup];
     }
     
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [self setup];
+}
+
+- (void)setup
+{
+    self.backgroundColor = [UIColor clearColor];
+    self.timeLineInset = [self calculateTimeLineInset];
 }
 
 - (void)setDate:(NSDate *)date
@@ -140,6 +151,8 @@
 
 #pragma mark - Drawing
 
+#define TIME_LINE_STROKE_WIDTH  0.5f
+
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
@@ -150,7 +163,7 @@
 
 - (void)eraseLine
 {
-    [[UIColor whiteColor] setFill];
+    [[UIColor clearColor] setFill];
     
     [[UIBezierPath bezierPathWithRect:self.bounds] fill];
 }
@@ -166,7 +179,7 @@
     [linePath moveToPoint:lineOrigin];
     [linePath addLineToPoint:lineTerminal];
     
-    linePath.lineWidth = 1.0f;
+    linePath.lineWidth = TIME_LINE_STROKE_WIDTH;
     [linePath stroke];
 }
 
