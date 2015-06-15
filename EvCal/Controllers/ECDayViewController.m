@@ -61,6 +61,7 @@
     
     [self layoutWeekdayPicker];
     [self layoutDayView];
+    //[self layoutNextDayView];
 }
 
 - (ECDayView*)dayView {
@@ -166,7 +167,7 @@
                                      self.view.bounds.size.width,
                                      self.bottomToolbar.frame.origin.y - CGRectGetMaxY(self.weekdayPicker.frame) - 1); // -1 so toolbar separator will show
     
-    CGSize dayViewContentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 2);
+    CGSize dayViewContentSize = CGSizeMake(self.view.bounds.size.width, 1200.0f);
     
     DDLogDebug(@"Day View Frame: %@", NSStringFromCGRect(dayViewFrame));
     DDLogDebug(@"Day View Content Size: %@", NSStringFromCGSize(dayViewContentSize));
@@ -174,6 +175,16 @@
     self.dayView.frame = dayViewFrame;
     self.dayView.contentSize = dayViewContentSize;
 }
+
+//- (void)layoutNextDayView
+//{
+//    CGRect nextDayViewFrame = CGRectMake(self.view.bounds.origin.x + self.view.bounds.size.width, // moved one screen to the right
+//                                         CGRectGetMaxY(self.weekdayPicker.frame),
+//                                         self.view.bounds.size.width,
+//                                         self.bottomToolbar.frame.origin.y - CGRectGetMaxY(self.weekdayPicker.frame) - 1); // -1 so toolbar separator will show
+//    
+//    CGSize
+//}
 
 #pragma mark - ECWeekdayPicker Delegate
 

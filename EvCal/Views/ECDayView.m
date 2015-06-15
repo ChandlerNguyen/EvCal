@@ -277,7 +277,9 @@
 
 - (void)changeCurrentTimeLinePosition
 {
-    CGFloat currentTimeLineOriginY = [self.eventsLayout verticalPositionForDate:self.currentTimeLine.date relativeToDate:self.displayDate inRect:[self adjustedDurationEventsBounds]];
+    CGFloat currentTimeLineOriginY = [self.eventsLayout verticalPositionForDate:self.currentTimeLine.date
+                                                                 relativeToDate:self.displayDate
+                                                                         inRect:[self adjustedDurationEventsBounds]] - HOUR_LINE_HEIGHT / 2.0f;
     CGPoint currentTimeLineOrigin = CGPointMake(self.durationEventsView.bounds.origin.x, currentTimeLineOriginY);
     
     CGRect currentTimeLineFrame = self.currentTimeLine.frame;
