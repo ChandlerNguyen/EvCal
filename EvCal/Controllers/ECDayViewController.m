@@ -21,14 +21,15 @@
 #import "ECEventViewFactory.h"
 #import "ECWeekdayPicker.h"
 
-@interface ECDayViewController () <ECWeekdayPickerDelegate, ECEditEventViewControllerDelegate>
+@interface ECDayViewController () <ECWeekdayPickerDelegate, ECEditEventViewControllerDelegate, UIScrollViewDelegate>
 
 // Buttons
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* addEventButton;
 @property (weak, nonatomic) IBOutlet UIToolbar *bottomToolbar;
 
-@property (nonatomic, weak) ECWeekdayPicker* weekdayPicker;
+@property (nonatomic) BOOL userScrolledDayViewAfterSelectingDate;
 @property (nonatomic, weak) ECDayView* dayView;
+@property (nonatomic, weak) ECWeekdayPicker* weekdayPicker;
 
 @property (nonatomic, strong) NSDateFormatter* dateFormatter;
 
@@ -127,6 +128,7 @@
 
 - (void)setupDayView
 {
+    self.dayView.delegate = self;
     self.dayView.displayDate = self.displayDate;
 }
 
@@ -164,6 +166,7 @@
 {
     self.displayDate = date;
     self.dayView.displayDate = date;
+    self.userScrolledDayViewAfterSelectingDate = NO;
     
     [self refreshEvents];
     [self performSelector:@selector(autoScrollDayView:) withObject:date afterDelay:0.5f];
@@ -247,6 +250,7 @@
 
 - (IBAction)todayButtonTapped:(UIBarButtonItem *)sender
 {
+    self.userScrolledDayViewAfterSelectingDate = NO;
     [self.weekdayPicker setSelectedDate:[[NSDate date] beginningOfDay] animated:YES];
 }
 
@@ -254,9 +258,16 @@
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
     if ([calendar isDate:date inSameDayAsDate:self.displayDate]) {
-        if ([calendar isDate:date inSameDayAsDate:[NSDate date]]) {
+        if ([calendar isDate:date inSameDayAsDate:[NSDate date]] && !self.userScrolledDayViewAfterSelectingDate) {
             [self.dayView scrollToCurrentTime:YES];
         }
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([scrollView isKindOfClass:[ECDayView class]]) {
+        self.userScrolledDayViewAfterSelectingDate = YES;
     }
 }
 
