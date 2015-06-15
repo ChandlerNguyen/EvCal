@@ -66,6 +66,13 @@
 // @name Auto Scrolling
 //------------------------------------------------------------------------------
 
+/**
+ *  Scrolls the receiver's visible rect to a rect that contains the current
+ *  time in the top half of the view. If the rect already contains the current
+ *  time this method has no effect other than performing some layout math.
+ *
+ *  @param animated Determines whether the scroll action is animated.
+ */
 - (void)scrollToCurrentTime:(BOOL)animated;
 
 @end

@@ -457,7 +457,15 @@
 
 - (void)scrollToCurrentTime:(BOOL)animated
 {
-    [self scrollToTime:[[NSDate date] beginningOfHour] animated:animated];
+    CGRect topHalfOfVisibleRect = CGRectMake(self.contentOffset.x,
+                                             self.contentOffset.y,
+                                             self.bounds.size.width,
+                                             self.bounds.size.height / 2.0f);
+    CGRect convertedCurrentTimeLineFrame = [self convertRect:self.currentTimeLine.frame fromView:self.durationEventsView];
+    
+    if (!CGRectIntersectsRect(topHalfOfVisibleRect, convertedCurrentTimeLineFrame)) {
+        [self scrollToTime:[[NSDate date] beginningOfHour] animated:animated];
+    }
 }
 
 - (void)scrollToFirstEvent:(BOOL)animated
