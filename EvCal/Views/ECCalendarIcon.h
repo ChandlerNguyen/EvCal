@@ -1,5 +1,5 @@
 //
-//  ECDateViewAccessoryView.h
+//  ECCalendarIcon.h
 //  EvCal
 //
 //  Created by Tom on 5/31/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ECDateViewAccessoryView : UIView
+@interface ECCalendarIcon : UIView
 
 //------------------------------------------------------------------------------
 // @name Properties
@@ -28,7 +28,6 @@
  *                    view
  *  @return A newly created accessory view with the given color and event count
  */
-
 - (instancetype)initWithColor:(UIColor*)color;
 
 @end

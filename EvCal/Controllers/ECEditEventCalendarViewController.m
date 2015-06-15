@@ -7,6 +7,7 @@
 //
 
 #import "ECEventStoreProxy.h"
+#import "ECCalendarCell.h"
 #import "ECEditEventCalendarViewController.h"
 @interface ECEditEventCalendarViewController()
 
@@ -41,18 +42,25 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"calendarCell"];
+    return [self tableView:tableView calendarCellForIndexPath:indexPath];
+    
+}
+
+- (ECCalendarCell*)tableView:(UITableView*)tableView calendarCellForIndexPath:(NSIndexPath*)indexPath
+{
+    ECCalendarCell* calendarCell = [tableView dequeueReusableCellWithIdentifier:@"calendarCell"];
     
     EKCalendar* calendar = self.calendars[indexPath.row];
-    cell.textLabel.text = calendar.title;
+    calendarCell.calendar = calendar;
     
     if ([indexPath isEqual:[NSIndexPath indexPathForRow:[self.calendars indexOfObject:self.calendar] inSection:0]]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        calendarCell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        calendarCell.accessoryType = UITableViewCellAccessoryNone;
     }
     
-    return cell;
+    return calendarCell;
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

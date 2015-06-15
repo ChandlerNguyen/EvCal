@@ -217,31 +217,31 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UK6-Bm-Hog" id="5u8-Ls-LFa">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjk-ZS-RX5">
-                                                    <rect key="frame" x="8" y="11.5" width="69.5" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Cy-cV-JdM" customClass="ECDateViewAccessoryView">
-                                                    <rect key="frame" x="85" y="18" width="8" height="8"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Cy-cV-JdM" customClass="ECCalendarIcon">
+                                                    <rect key="frame" x="8" y="18" width="8" height="8"/>
                                                     <color key="backgroundColor" red="0.043137254899999998" green="0.37647058820000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="8" id="KxZ-Rv-FaQ"/>
                                                         <constraint firstAttribute="height" constant="8" id="LNz-2b-tPm"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjk-ZS-RX5">
+                                                    <rect key="frame" x="24" y="11" width="69.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="4Cy-cV-JdM" firstAttribute="leading" secondItem="cjk-ZS-RX5" secondAttribute="trailing" constant="8" id="Gle-4C-qwn"/>
-                                                <constraint firstItem="cjk-ZS-RX5" firstAttribute="leading" secondItem="5u8-Ls-LFa" secondAttribute="leading" constant="8" id="j6Y-FY-Jjg"/>
+                                                <constraint firstItem="4Cy-cV-JdM" firstAttribute="leading" secondItem="5u8-Ls-LFa" secondAttribute="leading" constant="8" id="052-c1-iIb"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cjk-ZS-RX5" secondAttribute="trailing" constant="20" symbolic="YES" id="adR-hY-F2v"/>
+                                                <constraint firstItem="cjk-ZS-RX5" firstAttribute="leading" secondItem="4Cy-cV-JdM" secondAttribute="trailing" constant="8" id="keF-Yb-zZ2"/>
                                                 <constraint firstAttribute="centerY" secondItem="cjk-ZS-RX5" secondAttribute="centerY" id="miU-5c-nqz"/>
                                                 <constraint firstAttribute="centerY" secondItem="4Cy-cV-JdM" secondAttribute="centerY" id="uEs-LR-1cD"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="cjk-ZS-RX5" secondAttribute="trailing" constant="16" id="vFs-nw-LyE"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="calendarAccessory" destination="4Cy-cV-JdM" id="5mc-y2-R7h"/>
+                                            <outlet property="calendarIcon" destination="4Cy-cV-JdM" id="QuI-xo-K9A"/>
                                             <outlet property="calendarLabel" destination="cjk-ZS-RX5" id="mO8-Wm-sgj"/>
                                             <segue destination="YIi-sg-40W" kind="push" identifier="calendar" id="9Af-Sc-10V"/>
                                         </connections>
@@ -301,11 +301,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="calendarCell" id="5mp-j7-mIO">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="calendarCell" id="YiG-F4-aXH" customClass="ECCalendarCell">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5mp-j7-mIO" id="DUj-07-eMi">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YiG-F4-aXH" id="khA-Lu-sdl">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pud-MI-sjT" customClass="ECCalendarIcon">
+                                            <rect key="frame" x="8" y="18" width="8" height="8"/>
+                                            <color key="backgroundColor" red="0.043137254899999998" green="0.37647058820000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="8" id="AC8-px-nDp"/>
+                                                <constraint firstAttribute="width" constant="8" id="O87-AK-aqb"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgY-8m-QjC">
+                                            <rect key="frame" x="24" y="11" width="69.5" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Pud-MI-sjT" firstAttribute="leading" secondItem="khA-Lu-sdl" secondAttribute="leading" constant="8" id="VfL-XY-qva"/>
+                                        <constraint firstItem="BgY-8m-QjC" firstAttribute="leading" secondItem="Pud-MI-sjT" secondAttribute="trailing" constant="8" id="aej-FX-7dt"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BgY-8m-QjC" secondAttribute="trailing" constant="20" symbolic="YES" id="cPE-UG-mZs"/>
+                                        <constraint firstAttribute="centerY" secondItem="Pud-MI-sjT" secondAttribute="centerY" id="mCt-Qn-oqA"/>
+                                        <constraint firstAttribute="centerY" secondItem="BgY-8m-QjC" secondAttribute="centerY" id="nAS-pn-YeC"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="calendarIcon" destination="Pud-MI-sjT" id="5r1-Or-Nfn"/>
+                                    <outlet property="calendarLabel" destination="BgY-8m-QjC" id="iQa-K1-wXJ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

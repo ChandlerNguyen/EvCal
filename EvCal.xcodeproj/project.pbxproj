@@ -25,7 +25,7 @@
 		8478F7951B1AB26E0096F1B7 /* ECDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F7941B1AB26E0096F1B7 /* ECDateView.m */; };
 		8478F7981B1AB2D50096F1B7 /* ECDateViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F7971B1AB2D50096F1B7 /* ECDateViewFactory.m */; };
 		8478F79A1B1AE8FF0096F1B7 /* ECDateViewFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F7991B1AE8FF0096F1B7 /* ECDateViewFactoryTests.m */; };
-		8478F79D1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F79C1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.m */; };
+		8478F79D1B1AEC5B0096F1B7 /* ECCalendarIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F79C1B1AEC5B0096F1B7 /* ECCalendarIcon.m */; };
 		8478F7A01B1B06700096F1B7 /* NSDateFormatter+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F79F1B1B06700096F1B7 /* NSDateFormatter+ECAdditions.m */; };
 		8478F7A31B1D8CFD0096F1B7 /* ECEditEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F7A21B1D8CFD0096F1B7 /* ECEditEventViewController.m */; };
 		8478F7A91B1DFF010096F1B7 /* iPhone_en.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8478F7A81B1DFF010096F1B7 /* iPhone_en.storyboard */; };
@@ -91,8 +91,8 @@
 		8478F7961B1AB2D50096F1B7 /* ECDateViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDateViewFactory.h; path = Views/ECDateViewFactory.h; sourceTree = "<group>"; };
 		8478F7971B1AB2D50096F1B7 /* ECDateViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDateViewFactory.m; path = Views/ECDateViewFactory.m; sourceTree = "<group>"; };
 		8478F7991B1AE8FF0096F1B7 /* ECDateViewFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDateViewFactoryTests.m; sourceTree = "<group>"; };
-		8478F79B1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDateViewAccessoryView.h; path = Views/ECDateViewAccessoryView.h; sourceTree = "<group>"; };
-		8478F79C1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDateViewAccessoryView.m; path = Views/ECDateViewAccessoryView.m; sourceTree = "<group>"; };
+		8478F79B1B1AEC5B0096F1B7 /* ECCalendarIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECCalendarIcon.h; path = Views/ECCalendarIcon.h; sourceTree = "<group>"; };
+		8478F79C1B1AEC5B0096F1B7 /* ECCalendarIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECCalendarIcon.m; path = Views/ECCalendarIcon.m; sourceTree = "<group>"; };
 		8478F79E1B1B06700096F1B7 /* NSDateFormatter+ECAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDateFormatter+ECAdditions.h"; path = "Support/NSDateFormatter+ECAdditions.h"; sourceTree = "<group>"; };
 		8478F79F1B1B06700096F1B7 /* NSDateFormatter+ECAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDateFormatter+ECAdditions.m"; path = "Support/NSDateFormatter+ECAdditions.m"; sourceTree = "<group>"; };
 		8478F7A11B1D8CFD0096F1B7 /* ECEditEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventViewController.h; path = Controllers/ECEditEventViewController.h; sourceTree = "<group>"; };
@@ -268,6 +268,8 @@
 		84C459231B074BE10066B6A9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8478F79B1B1AEC5B0096F1B7 /* ECCalendarIcon.h */,
+				8478F79C1B1AEC5B0096F1B7 /* ECCalendarIcon.m */,
 				84D92C941B2998820050015D /* Edit Event View */,
 				84D92C931B29986D0050015D /* Weekday Picker */,
 				84D92C921B2998490050015D /* Day View */,
@@ -310,8 +312,6 @@
 				8478F7941B1AB26E0096F1B7 /* ECDateView.m */,
 				8478F7961B1AB2D50096F1B7 /* ECDateViewFactory.h */,
 				8478F7971B1AB2D50096F1B7 /* ECDateViewFactory.m */,
-				8478F79B1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.h */,
-				8478F79C1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.m */,
 			);
 			name = "Weekday Picker";
 			sourceTree = "<group>";
@@ -567,7 +567,7 @@
 				843535821B2D8F1F00A8E404 /* UIColor+ECAdditions.m in Sources */,
 				8478F7981B1AB2D50096F1B7 /* ECDateViewFactory.m in Sources */,
 				8478F7A01B1B06700096F1B7 /* NSDateFormatter+ECAdditions.m in Sources */,
-				8478F79D1B1AEC5B0096F1B7 /* ECDateViewAccessoryView.m in Sources */,
+				8478F79D1B1AEC5B0096F1B7 /* ECCalendarIcon.m in Sources */,
 				84EF22611B08769A003DA610 /* ECEventStoreProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

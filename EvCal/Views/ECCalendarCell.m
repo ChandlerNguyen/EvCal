@@ -8,11 +8,11 @@
 
 @import EventKit;
 #import "ECCalendarCell.h"
-#import "ECDateViewAccessoryView.h"
+#import "ECCalendarIcon.h"
 @interface ECCalendarCell()
 
 @property (nonatomic, weak) IBOutlet UILabel* calendarLabel;
-@property (nonatomic, weak) IBOutlet ECDateViewAccessoryView* calendarAccessory;
+@property (nonatomic, weak) IBOutlet ECCalendarIcon* calendarIcon;
 
 @end
 
@@ -23,7 +23,7 @@
     _calendar = calendar;
     
     self.calendarLabel.text = calendar.title;
-    self.calendarAccessory.calendarColor = [UIColor colorWithCGColor:calendar.CGColor];
+    self.calendarIcon.calendarColor = [UIColor colorWithCGColor:calendar.CGColor];
 }
 
 @end

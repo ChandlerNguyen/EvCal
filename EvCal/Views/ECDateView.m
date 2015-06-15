@@ -13,7 +13,7 @@
 // EvCal Classes
 #import "ECDateView.h"
 #import "NSDateFormatter+ECAdditions.h"
-#import "ECDateViewAccessoryView.h"
+#import "ECCalendarIcon.h"
 
 @interface ECDateView()
 
@@ -56,12 +56,12 @@
 - (void)setEventAccessoryViews:(NSArray *)eventAccessoryViews
 {
     if (_eventAccessoryViews) {
-        for (ECDateViewAccessoryView* accessoryView in _eventAccessoryViews) {
+        for (ECCalendarIcon* accessoryView in _eventAccessoryViews) {
             [accessoryView removeFromSuperview];
         }
     }
     
-    for (ECDateViewAccessoryView* accessoryView in eventAccessoryViews) {
+    for (ECCalendarIcon* accessoryView in eventAccessoryViews) {
         [self addSubview:accessoryView];
     }
     
@@ -183,7 +183,7 @@
                                                ACCESSORY_VIEW_WIDTH,
                                                ACCESSORY_VIEW_HEIGHT);
         
-        ECDateViewAccessoryView* accessoryView = self.eventAccessoryViews[i];
+        ECCalendarIcon* accessoryView = self.eventAccessoryViews[i];
         accessoryView.frame = accessoryViewFrame;
     }
 }

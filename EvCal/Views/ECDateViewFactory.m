@@ -8,7 +8,7 @@
 
 #import "ECDateViewFactory.h"
 #import "ECDateView.h"
-#import "ECDateViewAccessoryView.h"
+#import "ECCalendarIcon.h"
 #import "ECEventStoreProxy.h"
 
 #import "NSDate+CupertinoYankee.h"
@@ -43,8 +43,8 @@
     for (EKCalendar* calendar in eventStoreProxy.calendars) {
         NSArray* events = [eventStoreProxy eventsFrom:[date beginningOfDay] to:[date endOfDay] in:@[calendar]];
         if (events.count > 0) {
-            ECDateViewAccessoryView* accessoryView = [[ECDateViewAccessoryView alloc] initWithColor:[UIColor colorWithCGColor:calendar.CGColor]];
-            [mutableAccessoryViews addObject:accessoryView];
+            ECCalendarIcon* calendarIcon = [[ECCalendarIcon alloc] initWithColor:[UIColor colorWithCGColor:calendar.CGColor]];
+            [mutableAccessoryViews addObject:calendarIcon];
         }
     }
     
