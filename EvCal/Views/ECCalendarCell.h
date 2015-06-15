@@ -11,6 +11,11 @@
 
 @interface ECCalendarCell : UITableViewCell
 
+//------------------------------------------------------------------------------
+// @name Properties
+//------------------------------------------------------------------------------
+
+// The calendar represented by the cell
 @property (nonatomic, strong) EKCalendar* calendar;
 
 @end

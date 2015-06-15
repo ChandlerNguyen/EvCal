@@ -30,6 +30,7 @@
 // The date displayed by the cell and in its picker
 @property (nonatomic, weak) NSDate* date;
 
+// The delegate that receives messages from the picker cell
 @property (nonatomic, weak) id<ECDatePickerCellDelegate> pickerDelegate;
 
 @end
