@@ -15,11 +15,26 @@
     self = [super initWithFrame:CGRectZero];
     if (self) {
         self.calendarColor = color;
-        self.backgroundColor = color;
-        self.layer.cornerRadius = 4.0f;
+        [self setup];
     }
     
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [self setup];
+}
+
+- (void)setup
+{
+    self.layer.cornerRadius = 4.0f;
+}
+
+- (void)setCalendarColor:(UIColor *)calendarColor
+{
+    _calendarColor = calendarColor;
+    self.backgroundColor = calendarColor;
 }
 
 @end

@@ -211,7 +211,7 @@
                                             <outlet property="datePicker" destination="r91-UA-2kz" id="TNn-7c-1Gx"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="calendarCell" id="UK6-Bm-Hog">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="calendarCell" id="UK6-Bm-Hog" customClass="ECCalendarCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UK6-Bm-Hog" id="5u8-Ls-LFa">
@@ -223,7 +223,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Cy-cV-JdM">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Cy-cV-JdM" customClass="ECDateViewAccessoryView">
                                                     <rect key="frame" x="85" y="18" width="8" height="8"/>
                                                     <color key="backgroundColor" red="0.043137254899999998" green="0.37647058820000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -241,6 +241,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="calendarAccessory" destination="4Cy-cV-JdM" id="5mc-y2-R7h"/>
+                                            <outlet property="calendarLabel" destination="cjk-ZS-RX5" id="mO8-Wm-sgj"/>
                                             <segue destination="YIi-sg-40W" kind="push" identifier="calendar" id="9Af-Sc-10V"/>
                                         </connections>
                                     </tableViewCell>
@@ -279,6 +281,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="calendarCell" destination="UK6-Bm-Hog" id="KAk-tH-cze"/>
                         <outlet property="endDatePickerCell" destination="RTT-Yv-f0Q" id="Bev-rC-VV5"/>
                         <outlet property="locationTextField" destination="7ys-z5-jS9" id="wjN-oD-JKO"/>
                         <outlet property="startDatePickerCell" destination="HJN-1E-Iad" id="5ce-ec-2kG"/>

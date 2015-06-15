@@ -14,6 +14,7 @@
 		84443F0D1B1076B300385E5A /* ECEventViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443F0C1B1076B300385E5A /* ECEventViewTests.m */; };
 		84443F101B10794700385E5A /* ECTestsEventFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443F0F1B10794700385E5A /* ECTestsEventFactory.m */; };
 		844989D81B0B62E100DCE38F /* NSArray+ECTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 844989D71B0B62E100DCE38F /* NSArray+ECTesting.m */; };
+		8474BF151B2EDEF000475846 /* ECCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8474BF141B2EDEF000475846 /* ECCalendarCell.m */; };
 		847571FF1B0AFF9B0019E393 /* ECEventStoreProxyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 847571FE1B0AFF9B0019E393 /* ECEventStoreProxyTests.m */; };
 		8478F7811B14890A0096F1B7 /* ECDayViewEventViewManagementTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F7801B14890A0096F1B7 /* ECDayViewEventViewManagementTests.m */; };
 		8478F7841B15953F0096F1B7 /* NSCalendar+ECTestSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F7831B15953F0096F1B7 /* NSCalendar+ECTestSwizzle.m */; };
@@ -72,6 +73,8 @@
 		84443F0F1B10794700385E5A /* ECTestsEventFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECTestsEventFactory.m; path = Classes/ECTestsEventFactory.m; sourceTree = "<group>"; };
 		844989D61B0B62E100DCE38F /* NSArray+ECTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ECTesting.h"; sourceTree = "<group>"; };
 		844989D71B0B62E100DCE38F /* NSArray+ECTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ECTesting.m"; sourceTree = "<group>"; };
+		8474BF131B2EDEF000475846 /* ECCalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECCalendarCell.h; path = Views/ECCalendarCell.h; sourceTree = "<group>"; };
+		8474BF141B2EDEF000475846 /* ECCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECCalendarCell.m; path = Views/ECCalendarCell.m; sourceTree = "<group>"; };
 		847571FE1B0AFF9B0019E393 /* ECEventStoreProxyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEventStoreProxyTests.m; sourceTree = "<group>"; };
 		8478F7801B14890A0096F1B7 /* ECDayViewEventViewManagementTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDayViewEventViewManagementTests.m; sourceTree = "<group>"; };
 		8478F7821B15953F0096F1B7 /* NSCalendar+ECTestSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSCalendar+ECTestSwizzle.h"; path = "Support/NSCalendar+ECTestSwizzle.h"; sourceTree = "<group>"; };
@@ -318,6 +321,8 @@
 			children = (
 				8478F7B31B24519B0096F1B7 /* ECDatePickerCell.h */,
 				8478F7B41B24519B0096F1B7 /* ECDatePickerCell.m */,
+				8474BF131B2EDEF000475846 /* ECCalendarCell.h */,
+				8474BF141B2EDEF000475846 /* ECCalendarCell.m */,
 			);
 			name = "Edit Event View";
 			sourceTree = "<group>";
@@ -545,6 +550,7 @@
 				8478F7951B1AB26E0096F1B7 /* ECDateView.m in Sources */,
 				8478F7B51B24519B0096F1B7 /* ECDatePickerCell.m in Sources */,
 				84C458FC1B073A860066B6A9 /* AppDelegate.m in Sources */,
+				8474BF151B2EDEF000475846 /* ECCalendarCell.m in Sources */,
 				843535851B2DAFD000A8E404 /* ECEditEventCalendarViewController.m in Sources */,
 				8478F78F1B19A29A0096F1B7 /* ECLogFormatter.m in Sources */,
 				84C4591E1B073DB90066B6A9 /* ECDayViewController.m in Sources */,
