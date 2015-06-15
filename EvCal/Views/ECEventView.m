@@ -37,8 +37,8 @@
         [self setEvent:event animated:NO];
         self.opaque = NO;
         self.layer.cornerRadius = 5.0;
-        self.layer.borderColor = [UIColor blackColor].CGColor;
-        self.layer.borderWidth = 1.0;
+        self.layer.borderColor = event.calendar.CGColor;
+        self.layer.borderWidth = 0.5;
     }
     
     return self;

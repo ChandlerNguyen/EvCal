@@ -224,11 +224,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Cy-cV-JdM">
-                                                    <rect key="frame" x="85.5" y="17" width="10" height="10"/>
+                                                    <rect key="frame" x="85" y="18" width="8" height="8"/>
                                                     <color key="backgroundColor" red="0.043137254899999998" green="0.37647058820000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="10" id="KxZ-Rv-FaQ"/>
-                                                        <constraint firstAttribute="height" constant="10" id="LNz-2b-tPm"/>
+                                                        <constraint firstAttribute="width" constant="8" id="KxZ-Rv-FaQ"/>
+                                                        <constraint firstAttribute="height" constant="8" id="LNz-2b-tPm"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -237,7 +237,7 @@
                                                 <constraint firstItem="cjk-ZS-RX5" firstAttribute="leading" secondItem="5u8-Ls-LFa" secondAttribute="leading" constant="8" id="j6Y-FY-Jjg"/>
                                                 <constraint firstAttribute="centerY" secondItem="cjk-ZS-RX5" secondAttribute="centerY" id="miU-5c-nqz"/>
                                                 <constraint firstAttribute="centerY" secondItem="4Cy-cV-JdM" secondAttribute="centerY" id="uEs-LR-1cD"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="cjk-ZS-RX5" secondAttribute="trailing" constant="18" id="vFs-nw-LyE"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="cjk-ZS-RX5" secondAttribute="trailing" constant="16" id="vFs-nw-LyE"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

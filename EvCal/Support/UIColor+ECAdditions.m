@@ -24,7 +24,7 @@
 {
     UIColor* baseColor = [UIColor colorWithCGColor:cgColor];
     
-    return [baseColor offsetWithLightness:5.0f a:0.0 b:0.0 alpha:-0.25f];
+    return [baseColor offsetWithLightness:15.0f a:0.0 b:0.0 alpha:-0.25f];
 }
 
 + (UIColor*)ecPurpleColor
