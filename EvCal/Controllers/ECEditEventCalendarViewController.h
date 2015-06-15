@@ -8,8 +8,17 @@
 
 #import <UIKit/UIKit.h>
 @class EKCalendar;
+@class ECEditEventCalendarViewController;
+@protocol ECEditEventCalendarViewControllerDelegate <NSObject>
+@optional
+
+- (void)viewController:(ECEditEventCalendarViewController*)vc didSelectCalendar:(EKCalendar*)calendar;
+
+@end
 
 @interface ECEditEventCalendarViewController : UITableViewController
+
+@property (nonatomic, weak) id<ECEditEventCalendarViewControllerDelegate> calendarDelegate;
 
 @property (nonatomic, strong) EKCalendar* calendar;
 

@@ -67,6 +67,10 @@
         
         oldCell.accessoryType = UITableViewCellAccessoryNone;
         newCell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
+        if ([self.calendarDelegate respondsToSelector:@selector(viewController:didSelectCalendar:)]) {
+            [self.calendarDelegate viewController:self didSelectCalendar:self.calendar];
+        }
     }
 }
 

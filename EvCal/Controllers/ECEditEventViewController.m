@@ -18,7 +18,7 @@
 #import "ECDatePickerCell.h"
 #import "ECEditEventCalendarViewController.h"
 
-@interface ECEditEventViewController() <ECDatePickerCellDelegate, UIActionSheetDelegate, UITextFieldDelegate>
+@interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, UIActionSheetDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) NSIndexPath* selectedIndexPath;
 
@@ -31,6 +31,8 @@
 
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* startDatePickerCell;
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* endDatePickerCell;
+
+@property (nonatomic, strong) EKCalendar* selectedCalendar;
 
 @property (nonatomic, weak) UITextView* notesView;
 
@@ -85,6 +87,7 @@
     self.event.location = self.locationTextField.text;
     self.event.startDate = self.startDatePickerCell.date;
     self.event.endDate = self.endDatePickerCell.date;
+    self.event.calendar = self.selectedCalendar;
     self.event.notes = self.notesView.text;
 }
 
@@ -94,6 +97,7 @@
     self.locationTextField.text = self.event.location;
     self.startDatePickerCell.date = [self startDateForEvent:self.event];
     self.endDatePickerCell.date = [self endDateForEvent:self.event];
+    self.selectedCalendar = (self.event) ? self.event.calendar : [ECEventStoreProxy sharedInstance].defaultCalendar;
     self.notesView.text = self.event.notes;
 }
 
@@ -264,6 +268,14 @@
     self.saveButton.enabled = [self eventIsValidWithTitle:self.titleTextField.text startDate:self.startDatePickerCell.date endDate:self.endDatePickerCell.date];
 }
 
+#pragma mark - ECEditEventCalendarViewController Delegate
+
+- (void)viewController:(ECEditEventCalendarViewController *)vc didSelectCalendar:(EKCalendar *)calendar
+{
+    self.selectedCalendar = calendar;
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 #pragma mark - UITableView Delegate and Datasource
 
@@ -287,6 +299,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.selectedIndexPath = indexPath;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [tableView beginUpdates];
     [tableView endUpdates];
@@ -309,7 +322,8 @@
 {
     if ([segue.identifier isEqualToString:@"calendar"]) {
         ECEditEventCalendarViewController* eceecvc = (ECEditEventCalendarViewController*)segue.destinationViewController;
-        eceecvc.calendar = self.event.calendar;
+        eceecvc.calendar = self.selectedCalendar;
+        eceecvc.calendarDelegate = self;
     }
 }
 

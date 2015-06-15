@@ -26,6 +26,9 @@ typedef NS_ENUM(NSUInteger, ECAuthorizationStatus) {
 // @name Calendars
 //------------------------------------------------------------------------------
 
+// The user's default calendar for new events
+@property (nonatomic, readonly) EKCalendar* defaultCalendar;
+
 // The user's event calendars
 @property (nonatomic, readonly) NSArray* calendars;
 

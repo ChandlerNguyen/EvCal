@@ -103,7 +103,7 @@
     return [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
 }
 
-- (EKCalendar*)defaultCalendarForNewEvents
+- (EKCalendar*)defaultCalendar
 {
     return self.eventStore.defaultCalendarForNewEvents;
 }
