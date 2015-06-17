@@ -6,61 +6,75 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
-@class EKEvent;
-@class ECEventView;
+
 #import <UIKit/UIKit.h>
+@class ECEventView;
+
+@class ECDayView;
+
+//------------------------------------------------------------------------------
+// @name ECDayView data source
+//------------------------------------------------------------------------------
+@protocol ECDayViewDatasource <NSObject>
+
+@required
+/**
+ *  Requests an array of event view objects to be displayed by the calling day 
+ *  view (which is passed as a parameter). Default is nil.
+ *
+ *  @param dayView The day view making the request
+ *  @param date    The date for which to provide event views
+ *
+ *  @return An array of event view objects
+ */
+- (NSArray*)dayView:(ECDayView*)dayView eventViewsForDate:(NSDate*)date;
+
+/**
+ *  Requests the size of the content to be displayed within a single day. 
+ *  Default is the day view bound's size.
+ *
+ *
+ *  @param dayView The day view making the request
+ *
+ *  @return The size of the day view's content
+ */
+- (CGSize)contentSizeForDayView:(ECDayView*)dayView;
+
+@end
 
 @interface ECDayView : UIScrollView
 
+
 //------------------------------------------------------------------------------
-// @name Date and Time
+// @name Properties
 //------------------------------------------------------------------------------
 
 // The date currently being displayed by the day view.
-// Changes to this date will not update which event views are displayed, but may
-// result in their layout being changed.
-@property (nonatomic, strong) NSDate* displayDate;
+@property (nonatomic, strong, readonly) NSDate* displayDate;
+
+/**
+ *  Sets the receiver's display date to the given value and can animate the
+ *  changes if needed.
+ *
+ *  @param displayDate The value to which to set display date
+ *  @param animated    Determines whether the change should be animated
+ */
+- (void)setDisplayDate:(NSDate *)displayDate animated:(BOOL)animated;
+
+
+// The data source for the day view's event views and content size
+@property (nonatomic, weak) id<ECDayViewDatasource> dayViewDataSource;
+
 
 //------------------------------------------------------------------------------
-// @name Manging Event Views
+// @name Refreshing event views
 //------------------------------------------------------------------------------
 
-// The day views current list of event views
-@property (nonatomic, readonly) NSArray* eventViews;
-
 /**
- *  Add an event view to the receiver. The view will be placed according to its
- *  start and end date time.
- *
- *  @param eventView The event view to be added.
+ *  Forces the day view to refetch and layout its event views. 
  */
-- (void)addEventView:(ECEventView*)eventView;
+- (void)refreshCalendarEvents;
 
-/**
- *  Add several event views to the receiver simultaneously.
- *
- *  @param eventViews The event views to be added.
- */
-- (void)addEventViews:(NSArray*)eventViews;
-
-/**
- *  Remove the given event from the receiver.
- *
- *  @param eventView The event view to be removed.
- */
-- (void)removeEventView:(ECEventView*)eventView;
-
-/**
- *  Remove several event views from the receiver simultaneously.
- *
- *  @param eventViews The event views to be removed.
- */
-- (void)removeEventViews:(NSArray*)eventViews;
-
-/**
- *  Remove all event views from the receiver.
- */
-- (void)clearEventViews;
 
 //------------------------------------------------------------------------------
 // @name Auto Scrolling

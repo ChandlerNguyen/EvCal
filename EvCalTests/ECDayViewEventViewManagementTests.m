@@ -1,5 +1,5 @@
 //
-//  ECDayViewEventViewManagementTests.m
+//  ECSinglesingleDayViewEventViewManagementTests.m
 //  EvCal
 //
 //  Created by Tom on 5/26/15.
@@ -18,26 +18,26 @@
 
 // EvCal Classes
 #import "ECEventStoreProxy.h"
-#import "ECDayView.h"
+#import "ECSingleDayView.h"
 #import "ECEventView.h"
 
-@interface ECDayViewEventViewManagementTests : XCTestCase
+@interface ECSingleDayViewEventViewManagementTests : XCTestCase
 
-@property (nonatomic, strong) ECDayView* dayView;
+@property (nonatomic, strong) ECSingleDayView* singleDayView;
 @property (nonatomic, strong) EKEventStore* eventStore;
 @property (nonatomic, strong) EKCalendar* testCalendar;
 @property (nonatomic, strong) NSDate* currentTestStartDate;
 
 @end
 
-@implementation ECDayViewEventViewManagementTests
+@implementation ECSingleDayViewEventViewManagementTests
 
 - (void)setUp {
     [super setUp];
     
     self.currentTestStartDate = [NSDate date];
     
-    self.dayView = [[ECDayView alloc] initWithFrame:CGRectZero];
+    self.singleDayView = [[ECSingleDayView alloc] initWithFrame:CGRectZero];
     self.eventStore = [[EKEventStore alloc] init];
     
     // Save events to this calendar for easier testing/removal
@@ -61,7 +61,7 @@
     
     [self.eventStore removeCalendar:self.testCalendar commit:YES error:nil];
     
-    self.dayView = nil;
+    self.singleDayView = nil;
     self.eventStore = nil;
 }
 
@@ -107,34 +107,34 @@
 
 - (void)testAddingNilAndEmptyEvents
 {
-    [self.dayView addEventView:nil];
-    XCTAssert(self.dayView.eventViews.count == 0);
+    [self.singleDayView addEventView:nil];
+    XCTAssert(self.singleDayView.eventViews.count == 0);
     
-    [self.dayView addEventViews:nil];
-    XCTAssert(self.dayView.eventViews.count == 0);
+    [self.singleDayView addEventViews:nil];
+    XCTAssert(self.singleDayView.eventViews.count == 0);
     
-    [self.dayView addEventViews:@[]];
-    XCTAssert(self.dayView.eventViews.count == 0);
+    [self.singleDayView addEventViews:@[]];
+    XCTAssert(self.singleDayView.eventViews.count == 0);
 }
 
 - (void)testAddingSingleEventView
 {
     ECEventView* eventView = [self createSingleEventView];
     
-    [self.dayView addEventView:eventView];
-    XCTAssert(self.dayView.eventViews.count == 1);
+    [self.singleDayView addEventView:eventView];
+    XCTAssert(self.singleDayView.eventViews.count == 1);
 }
 
 - (void)testRemovingSingleEventView
 {
     ECEventView* eventView = [self createSingleEventView];
     
-    [self.dayView addEventView:eventView];
-    [self.dayView removeEventView:eventView];
-    XCTAssertTrue(self.dayView.eventViews.count == 0);
+    [self.singleDayView addEventView:eventView];
+    [self.singleDayView removeEventView:eventView];
+    XCTAssertTrue(self.singleDayView.eventViews.count == 0);
 }
 
-- (void)testRemovingEventViewThatIsNotInDayView
+- (void)testRemovingEventViewThatIsNotInsingleDayView
 {
     NSInteger eventViewCount = 2;
     NSArray* eventViews = [self createMultipleEventViews:eventViewCount];
@@ -143,9 +143,9 @@
     NSInteger nextEventViewIndex = (eventViewIndex + 1) % eventViewCount;
     
     // Add random event view
-    [self.dayView addEventView:eventViews[eventViewIndex]];
-    [self.dayView removeEventView:eventViews[nextEventViewIndex]];
-    XCTAssertTrue(self.dayView.eventViews.count == 1);
+    [self.singleDayView addEventView:eventViews[eventViewIndex]];
+    [self.singleDayView removeEventView:eventViews[nextEventViewIndex]];
+    XCTAssertTrue(self.singleDayView.eventViews.count == 1);
 }
 
 - (void)testAddingMultipleEventViews
@@ -153,8 +153,8 @@
     NSInteger eventViewCount = 10;
     NSArray* eventViews = [self createMultipleEventViews:eventViewCount];
     
-    [self.dayView addEventViews:eventViews];
-    XCTAssert(self.dayView.eventViews.count == eventViewCount);
+    [self.singleDayView addEventViews:eventViews];
+    XCTAssert(self.singleDayView.eventViews.count == eventViewCount);
 }
 
 - (void)testRemovingMultipleEventViews
@@ -162,31 +162,31 @@
     NSInteger eventViewCount = 10;
     NSArray* eventViews = [self createMultipleEventViews:eventViewCount];
     
-    [self.dayView addEventViews:eventViews];
+    [self.singleDayView addEventViews:eventViews];
     
     NSArray* eventViewsSubset = [eventViews objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, eventViewCount / 2)]];
-    [self.dayView removeEventViews:eventViewsSubset];
+    [self.singleDayView removeEventViews:eventViewsSubset];
     
-    NSSet* dayViewEventViews = [NSSet setWithArray:self.dayView.eventViews];
+    NSSet* singleDayViewEventViews = [NSSet setWithArray:self.singleDayView.eventViews];
     NSSet* removedEventViews = [NSSet setWithArray:eventViewsSubset];
     
-    XCTAssert(self.dayView.eventViews.count == (eventViewCount - eventViewsSubset.count));
-    XCTAssertFalse([dayViewEventViews intersectsSet:removedEventViews]);
+    XCTAssert(self.singleDayView.eventViews.count == (eventViewCount - eventViewsSubset.count));
+    XCTAssertFalse([singleDayViewEventViews intersectsSet:removedEventViews]);
 }
 
-- (void)testRemovingEventViewsThatAreNotInDayView
+- (void)testRemovingEventViewsThatAreNotInsingleDayView
 {
     NSInteger eventViewCount = 10;
     NSArray* addedEventViews = [self createMultipleEventViews:eventViewCount];
     NSArray* notAddedEventViews = [self createMultipleEventViews:eventViewCount];
     
-    [self.dayView addEventViews:addedEventViews];
-    [self.dayView removeEventViews:notAddedEventViews];
+    [self.singleDayView addEventViews:addedEventViews];
+    [self.singleDayView removeEventViews:notAddedEventViews];
     
-    XCTAssert(self.dayView.eventViews.count == eventViewCount);
+    XCTAssert(self.singleDayView.eventViews.count == eventViewCount);
 }
 
-- (void)testRemovingEventViewsWithMixedDayViewMembership
+- (void)testRemovingEventViewsWithMixedsingleDayViewMembership
 {
     NSInteger eventViewCount = 10;
     NSArray* addedEventViews = [self createMultipleEventViews:eventViewCount];
@@ -195,10 +195,10 @@
     NSIndexSet* halfOfArrayIndexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, eventViewCount / 2)];
     NSArray* mixedEventViews = [[addedEventViews objectsAtIndexes:halfOfArrayIndexSet] arrayByAddingObjectsFromArray:[notAddedEventViews objectsAtIndexes:halfOfArrayIndexSet]];
     
-    [self.dayView addEventViews:addedEventViews];
-    [self.dayView removeEventViews:mixedEventViews];
+    [self.singleDayView addEventViews:addedEventViews];
+    [self.singleDayView removeEventViews:mixedEventViews];
     
-    XCTAssert(self.dayView.eventViews.count == eventViewCount / 2);
+    XCTAssert(self.singleDayView.eventViews.count == eventViewCount / 2);
 }
 
 - (void)testClearingEventViews
@@ -208,9 +208,9 @@
     
     NSInteger eventViewIndex = (NSInteger)arc4random_uniform((u_int32_t)eventViewCount);
     
-    [self.dayView addEventView:eventViews[eventViewIndex]];
-    [self.dayView clearEventViews];
-    XCTAssert(self.dayView.eventViews.count == 0);
+    [self.singleDayView addEventView:eventViews[eventViewIndex]];
+    [self.singleDayView clearEventViews];
+    XCTAssert(self.singleDayView.eventViews.count == 0);
 }
 
 @end

@@ -37,7 +37,6 @@
 		84C459041B073A860066B6A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84C459031B073A860066B6A9 /* Images.xcassets */; };
 		84C4591E1B073DB90066B6A9 /* ECDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C4591D1B073DB90066B6A9 /* ECDayViewController.m */; };
 		84C459221B074BDD0066B6A9 /* ECDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C459211B074BDD0066B6A9 /* ECDayView.m */; };
-		84CD51961B3124BC00902BDE /* ECDayViewContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CD51951B3124BC00902BDE /* ECDayViewContainer.m */; };
 		84CD51991B3124D500902BDE /* ECSingleDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CD51981B3124D500902BDE /* ECSingleDayView.m */; };
 		84D92C991B29A52E0050015D /* ECDayViewEventsLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D92C981B29A52E0050015D /* ECDayViewEventsLayout.m */; };
 		84D92C9B1B29AFD40050015D /* ECDayViewEventsLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D92C9A1B29AFD40050015D /* ECDayViewEventsLayoutTests.m */; };
@@ -119,8 +118,6 @@
 		84C4591D1B073DB90066B6A9 /* ECDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDayViewController.m; path = Controllers/ECDayViewController.m; sourceTree = "<group>"; };
 		84C459201B074BDD0066B6A9 /* ECDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDayView.h; path = Views/ECDayView.h; sourceTree = "<group>"; };
 		84C459211B074BDD0066B6A9 /* ECDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDayView.m; path = Views/ECDayView.m; sourceTree = "<group>"; };
-		84CD51941B3124BC00902BDE /* ECDayViewContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDayViewContainer.h; path = Views/ECDayViewContainer.h; sourceTree = "<group>"; };
-		84CD51951B3124BC00902BDE /* ECDayViewContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDayViewContainer.m; path = Views/ECDayViewContainer.m; sourceTree = "<group>"; };
 		84CD51971B3124D500902BDE /* ECSingleDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSingleDayView.h; path = Views/ECSingleDayView.h; sourceTree = "<group>"; };
 		84CD51981B3124D500902BDE /* ECSingleDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSingleDayView.m; path = Views/ECSingleDayView.m; sourceTree = "<group>"; };
 		84D92C971B29A52E0050015D /* ECDayViewEventsLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDayViewEventsLayout.h; path = Views/ECDayViewEventsLayout.h; sourceTree = "<group>"; };
@@ -305,8 +302,6 @@
 				84C459211B074BDD0066B6A9 /* ECDayView.m */,
 				84D92C971B29A52E0050015D /* ECDayViewEventsLayout.h */,
 				84D92C981B29A52E0050015D /* ECDayViewEventsLayout.m */,
-				84CD51941B3124BC00902BDE /* ECDayViewContainer.h */,
-				84CD51951B3124BC00902BDE /* ECDayViewContainer.m */,
 				84CD51971B3124D500902BDE /* ECSingleDayView.h */,
 				84CD51981B3124D500902BDE /* ECSingleDayView.m */,
 			);
@@ -558,7 +553,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8478F7951B1AB26E0096F1B7 /* ECDateView.m in Sources */,
-				84CD51961B3124BC00902BDE /* ECDayViewContainer.m in Sources */,
 				8478F7B51B24519B0096F1B7 /* ECDatePickerCell.m in Sources */,
 				84C458FC1B073A860066B6A9 /* AppDelegate.m in Sources */,
 				8474BF151B2EDEF000475846 /* ECCalendarCell.m in Sources */,
