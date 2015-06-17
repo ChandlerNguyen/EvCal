@@ -273,44 +273,6 @@
 
 #pragma mark - UI Events
 
-//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    DDLogDebug(@"Touches: %@", touches);
-//    UITouch* firstTouch = [touches anyObject];
-//    self.firstTouchPoint = [firstTouch locationInView:self.view];
-//    self.currentDelta = 0;
-//    if (CGRectContainsPoint(self.dayView.frame, self.firstTouchPoint)) {
-//        self.isDragginDayView = YES;
-//    }
-//}
-//
-//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    NSLog(@"Touches moved");
-//    UITouch* touch = [touches anyObject];
-//    self.previousTouchPoint = [touch locationInView:self.view];
-//    self.currentDelta = self.firstTouchPoint.x - self.previousTouchPoint.x;
-//    
-//    CGRect dayViewFrame = self.dayView.frame;
-//    CGRect nextDayViewFrame = self.nextDayView.frame;
-//    
-//    dayViewFrame.origin.x = dayViewFrame.origin.x - self.currentDelta;
-//    nextDayViewFrame.origin.x = nextDayViewFrame.origin.x - self.currentDelta;
-//    
-//    self.dayView.frame = dayViewFrame;
-//    self.nextDayView.frame = nextDayViewFrame;
-//}
-//
-//- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    DDLogDebug(@"Touches: %@", touches);
-//}
-//
-//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    DDLogDebug(@"Touches: %@", touches);
-//}
-
 - (IBAction)addEventButtonTapped:(UIBarButtonItem *)sender
 {
     [self presentEditEventViewControllerWithEvent:nil];
