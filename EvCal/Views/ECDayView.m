@@ -12,7 +12,7 @@
 #import "ECDayView.h"
 #import "ECSingleDayView.h"
 
-@interface ECDayView()
+@interface ECDayView() <UIScrollViewDelegate>
 
 @property (nonatomic, weak) UIScrollView* dayViewContainer;
 
@@ -50,10 +50,10 @@
 
 - (void)setupDayViewContainer
 {
-    self.dayViewContainer.pagingEnabled = YES;
+    self.dayViewContainer.decelerationRate = UIScrollViewDecelerationRateFast;
     self.dayViewContainer.showsHorizontalScrollIndicator = NO;
     self.dayViewContainer.showsVerticalScrollIndicator = NO;
-    self.dayViewContainer.contentSize = self.bounds.size;
+    self.dayViewContainer.delegate = self;
 }
 
 - (ECSingleDayView*)currentDayView
@@ -84,6 +84,21 @@
 }
 
 
+#pragma mark - Informing delegate
+
+- (void)informDelegateTimeScrolled
+{
+    if ([self.dayViewDelegate respondsToSelector:@selector(dayViewDidScrollTime:)]) {
+        [self.dayViewDelegate dayViewDidScrollTime:self];
+    }
+}
+
+- (void)informDelegateDateScrolled:(NSDate*)date
+{
+    
+}
+
+
 #pragma mark - Refreshing
 
 - (void)refreshCalendarEvents
@@ -104,6 +119,19 @@
 
 #pragma mark - Layout
 
+- (void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    
+    [self updateContentSizes];
+}
+
+- (void)updateContentSizes
+{
+    self.dayViewContainer.contentSize = CGSizeMake(self.dayViewContainer.bounds.size.width * 3, self.dayViewContainer.bounds.size.height);
+    self.currentDayView.contentSize = [self getDayViewContentSize];
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -115,14 +143,36 @@
 - (void)layoutDayViewContainer
 {
     self.dayViewContainer.frame = self.bounds;
+    self.dayViewContainer.contentOffset = CGPointMake(self.bounds.size.width, 0);
 }
 
 - (void)layoutCurrentDayView
 {
     CGRect currentDayViewFrame = self.dayViewContainer.bounds;
-    
     self.currentDayView.frame = currentDayViewFrame;
-    self.currentDayView.contentSize = [self getDayViewContentSize];
+}
+
+#pragma mark - UIScrollView delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([scrollView isEqual:self.currentDayView]) {
+        [self informDelegateTimeScrolled];
+    }
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    if ([scrollView isEqual:self.dayViewContainer]) {
+            
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if ([scrollView isEqual:self.dayViewContainer]) {
+        
+    }
 }
 
 @end

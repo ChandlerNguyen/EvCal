@@ -12,6 +12,28 @@
 
 @class ECDayView;
 
+@protocol ECDayViewDelegate <NSObject>
+
+@optional
+/**
+ *  Informs the receiver that a horizontal scroll to the given date has 
+ *  occurred.
+ *
+ *  @param dayView The day view that was scrolled
+ *  @param date    The date that was scrolled to
+ */
+- (void)dayView:(ECDayView*)dayView didScrollToDate:(NSDate*)date;
+
+/**
+ *  Informs the receiver that a vertical scroll has occurred within the day 
+ *  view.
+ *
+ *  @param dayView The day view that was scrolled.
+ */
+- (void)dayViewDidScrollTime:(ECDayView*)dayView;
+
+@end
+
 //------------------------------------------------------------------------------
 // @name ECDayView data source
 //------------------------------------------------------------------------------
@@ -65,6 +87,9 @@
 // The data source for the day view's event views and content size
 @property (nonatomic, weak) id<ECDayViewDatasource> dayViewDataSource;
 
+// The delegate for the day view's scroll events
+@property (nonatomic, weak) id<ECDayViewDelegate> dayViewDelegate;
+
 
 //------------------------------------------------------------------------------
 // @name Refreshing event views
@@ -85,8 +110,22 @@
  *  time in the top half of the view. If the rect already contains the current
  *  time this method has no effect other than performing some layout math.
  *
+ *  The day view's delegate will be informed of this change.
+ *
  *  @param animated Determines whether the scroll action is animated.
  */
 - (void)scrollToCurrentTime:(BOOL)animated;
+
+/**
+ *  Scrolls the receiver to display the given date. This results in the day view
+ *  displaying a list of events for the supplied date and its properties updated
+ *  to the given date.
+ *
+ *  The day view's delegate will be informed of this change.
+ *
+ *  @param date     The date to which to scroll
+ *  @param animated Determines whether the scroll action is animated.
+ */
+- (void)scrollToDate:(NSDate*)date animated:(BOOL)animated;
 
 @end

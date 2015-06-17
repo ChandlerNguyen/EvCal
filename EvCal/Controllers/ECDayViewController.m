@@ -21,13 +21,14 @@
 #import "ECEventViewFactory.h"
 #import "ECWeekdayPicker.h"
 
-@interface ECDayViewController () <ECDayViewDatasource, ECWeekdayPickerDelegate, ECEditEventViewControllerDelegate>
+@interface ECDayViewController () <ECDayViewDatasource, ECDayViewDelegate, ECWeekdayPickerDelegate, ECEditEventViewControllerDelegate>
 
 // Buttons
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* addEventButton;
 @property (weak, nonatomic) IBOutlet UIToolbar *bottomToolbar;
 
 // Day view
+@property (nonatomic) BOOL userDidScrollDayViewSinceDateChange;
 @property (nonatomic, weak) ECDayView* dayView;
 
 // Date picker
@@ -72,6 +73,7 @@
         ECDayView* dayView = [[ECDayView alloc] initWithFrame:CGRectZero];
         _dayView = dayView;
         dayView.dayViewDataSource = self;
+        dayView.dayViewDelegate = self;
         [dayView setDisplayDate:self.displayDate animated:NO];
         [self.view addSubview:_dayView];
     }
@@ -189,7 +191,7 @@
 }
 
 
-#pragma mark - ECDayView Data source
+#pragma mark - ECDayView Data source and delegate
 
 - (NSArray*)dayView:(ECDayView *)dayView eventViewsForDate:(NSDate *)date
 {
@@ -206,6 +208,16 @@
     CGSize dayViewContentSize = CGSizeMake(self.view.bounds.size.width, DAY_VIEW_CONTENT_HEIGHT);
     
     return dayViewContentSize;
+}
+
+- (void)dayView:(ECDayView *)dayView didScrollToDate:(NSDate *)date
+{
+    
+}
+
+- (void)dayViewDidScrollTime:(ECDayView *)dayView
+{
+    self.userDidScrollDayViewSinceDateChange = YES;
 }
 
 
