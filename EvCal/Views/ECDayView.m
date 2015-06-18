@@ -11,14 +11,11 @@
 // EvCal Classes
 #import "ECDayView.h"
 #import "ECSingleDayView.h"
+#import "ECInfiniteHorizontalDatePagingView.h"
 
-@interface ECDayView() <UIScrollViewDelegate>
+@interface ECDayView() <UIScrollViewDelegate, ECInfiniteHorizontalDatePagingViewDataSource, ECInfiniteHorizontalDatePagingViewDelegate>
 
-@property (nonatomic, weak) UIScrollView* dayViewContainer;
-
-@property (nonatomic, weak) ECSingleDayView* previousDayView;
-@property (nonatomic, weak) ECSingleDayView* currentDayView;
-@property (nonatomic, weak) ECSingleDayView* nextDayView;
+@property (nonatomic, weak) ECInfiniteHorizontalDatePagingView* dayViewContainer;
 
 @end
 
@@ -29,18 +26,22 @@
 - (void)setDisplayDate:(NSDate *)displayDate animated:(BOOL)animated
 {
     _displayDate = displayDate;
-    self.currentDayView.displayDate = displayDate;
+    
+    self.dayViewContainer.date = displayDate;
     
     [self refreshCalendarEvents];
 }
 
-- (UIScrollView*)dayViewContainer
+- (ECInfiniteHorizontalDatePagingView*)dayViewContainer
 {
     if (!_dayViewContainer) {
-        UIScrollView* dayViewContainer = [[UIScrollView alloc] initWithFrame:self.bounds];
+        ECSingleDayView* pageView = [[ECSingleDayView alloc] initWithFrame:CGRectZero];
+        ECInfiniteHorizontalDatePagingView* dVC = [[ECInfiniteHorizontalDatePagingView alloc] initWithFrame:self.bounds
+                                                                                                   pageView:pageView
+                                                                                                       date:self.displayDate];
         
-        _dayViewContainer = dayViewContainer;
-        [self addSubview:dayViewContainer];
+        _dayViewContainer = dVC;
+        [self addSubview:dVC];
         
         [self setupDayViewContainer];
     }
@@ -53,21 +54,9 @@
     self.dayViewContainer.decelerationRate = UIScrollViewDecelerationRateFast;
     self.dayViewContainer.showsHorizontalScrollIndicator = NO;
     self.dayViewContainer.showsVerticalScrollIndicator = NO;
-    self.dayViewContainer.delegate = self;
+    self.dayViewContainer.pageViewDelegate = self;
+    self.dayViewContainer.pageViewDataSource = self;
 }
-
-- (ECSingleDayView*)currentDayView
-{
-    if (!_currentDayView) {
-        ECSingleDayView* currentDayView = [[ECSingleDayView alloc] initWithFrame:self.dayViewContainer.bounds];
-        
-        _currentDayView = currentDayView;
-        [self.dayViewContainer addSubview:currentDayView];
-    }
-    
-    return _currentDayView;
-}
-
 
 #pragma mark - Data source requests
 
@@ -93,9 +82,11 @@
     }
 }
 
-- (void)informDelegateDateScrolled:(NSDate*)date
+- (void)informDelegateDateScrolledFromDate:(NSDate*)fromDate toDate:(NSDate*)toDate
 {
-    
+    if ([self.dayViewDelegate respondsToSelector:@selector(dayView:didScrollFromDate:toDate:)]) {
+        [self.dayViewDelegate dayView:self didScrollFromDate:fromDate toDate:toDate];
+    }
 }
 
 
@@ -103,10 +94,7 @@
 
 - (void)refreshCalendarEvents
 {
-    NSArray* eventViews = [self.dayViewDataSource dayView:self eventViewsForDate:self.displayDate];
-    
-    [self.currentDayView clearEventViews];
-    [self.currentDayView addEventViews:eventViews];
+    [self.dayViewContainer refreshPages];
 }
 
 
@@ -114,65 +102,42 @@
 
 - (void)scrollToCurrentTime:(BOOL)animated
 {
-    [self.currentDayView scrollToCurrentTime:animated];
+    ECSingleDayView* dayView = (ECSingleDayView*)self.dayViewContainer.pageView;
+    [dayView scrollToCurrentTime:animated];
 }
 
-#pragma mark - Layout
-
-- (void)setFrame:(CGRect)frame
+- (void)scrollToDate:(NSDate *)date animated:(BOOL)animated
 {
-    [super setFrame:frame];
-    
-    [self updateContentSizes];
+    [self.dayViewContainer scrollToDate:date animated:animated];
 }
-
-- (void)updateContentSizes
-{
-    self.dayViewContainer.contentSize = CGSizeMake(self.dayViewContainer.bounds.size.width * 3, self.dayViewContainer.bounds.size.height);
-    self.currentDayView.contentSize = [self getDayViewContentSize];
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-    [self layoutDayViewContainer];
-    [self layoutCurrentDayView];
-}
-
-- (void)layoutDayViewContainer
-{
-    self.dayViewContainer.frame = self.bounds;
-    self.dayViewContainer.contentOffset = CGPointMake(self.bounds.size.width, 0);
-}
-
-- (void)layoutCurrentDayView
-{
-    CGRect currentDayViewFrame = self.dayViewContainer.bounds;
-    self.currentDayView.frame = currentDayViewFrame;
-}
-
-#pragma mark - UIScrollView delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if ([scrollView isEqual:self.currentDayView]) {
+    if ([scrollView isKindOfClass:[ECSingleDayView class]]) {
         [self informDelegateTimeScrolled];
     }
 }
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
-    if ([scrollView isEqual:self.dayViewContainer]) {
-            
-    }
-}
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+#pragma mark - ECInfiniatePagingDateView data source and delegate
+
+- (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv preparePage:(UIView *)page forDate:(NSDate *)date
 {
-    if ([scrollView isEqual:self.dayViewContainer]) {
+    if ([page isKindOfClass:[ECSingleDayView class]]) {
+        ECSingleDayView* dayView = (ECSingleDayView*)page;
         
+        dayView.delegate = self;
+        
+        dayView.contentSize = [self getDayViewContentSize];
+        dayView.displayDate = date;
+        
+        [dayView clearEventViews];
+        [dayView addEventViews:[self.dayViewDataSource dayView:self eventViewsForDate:date]];
     }
 }
 
+- (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv dateChangedTo:(NSDate *)toDate from:(NSDate *)fromDate
+{
+    [self informDelegateDateScrolledFromDate:fromDate toDate:toDate];
+}
 @end

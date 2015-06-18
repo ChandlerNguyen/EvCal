@@ -17,17 +17,35 @@
 
 @implementation ECInfiniteHorizontalDatePagingView
 
-#pragma mark - Properties
+#pragma mark - Properties and Lifecycle
+
+- (instancetype)initWithFrame:(CGRect)frame pageView:(UIView *)pageView date:(NSDate *)date
+{
+    self = [super initWithFrame:frame];
+
+    if (self) {
+        self.calendarUnit = NSCalendarUnitDay;
+        [self.pageContainerView addSubview:pageView];
+        self.pageView = pageView;
+        self.date = date;
+    }
+    
+    return self;
+}
+
+
 #pragma mark Public
 - (void)setFrame:(CGRect)frame
 {
     [super setFrame:frame];
     
-    CGSize threePageContentSize = CGSizeMake(frame.size.width * 3, frame.size.height);
-    [super setContentSize:threePageContentSize];
-    
-    [self resetContainerFrame];
-    [self resetPageFrames];
+    if (self.pageView) {
+        CGSize threePageContentSize = CGSizeMake(frame.size.width * 3, frame.size.height);
+        [super setContentSize:threePageContentSize];
+        
+        [self resetContainerFrame];
+        [self resetPageFrames];
+    }
 }
 
 - (void)setPagingEnabled:(BOOL)pagingEnabled
@@ -195,6 +213,20 @@
     NSDate* centeredPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:centeredPageDateDelta toDate:self.date options:0];
     
     self.date = centeredPageDate;
+}
+
+
+#pragma mark - Refresh
+
+- (void)refreshPages
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate* leftPageDate = [calendar dateByAddingUnit:self.calendarUnit value:-1 toDate:self.date options:0];
+    NSDate* rightPageDate = [calendar dateByAddingUnit:self.calendarUnit value:1 toDate:self.date options:0];
+    
+    [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[LEFT_PAGE_INDEX] forDate:leftPageDate];
+    [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[CENTER_PAGE_INDEX] forDate:self.date];
+    [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[RIGHT_PAGE_INDEX] forDate:rightPageDate];
 }
 
 @end

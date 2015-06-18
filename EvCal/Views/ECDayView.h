@@ -20,9 +20,10 @@
  *  occurred.
  *
  *  @param dayView The day view that was scrolled
- *  @param date    The date that was scrolled to
+ *  @param fromDate The day view's previous date
+ *  @param toDate The day view's current date
  */
-- (void)dayView:(ECDayView*)dayView didScrollToDate:(NSDate*)date;
+- (void)dayView:(ECDayView*)dayView didScrollFromDate:(NSDate*)fromDate toDate:(NSDate*)toDate;
 
 /**
  *  Informs the receiver that a vertical scroll has occurred within the day 
@@ -64,7 +65,7 @@
 
 @end
 
-@interface ECDayView : UIScrollView
+@interface ECDayView : UIView
 
 
 //------------------------------------------------------------------------------

@@ -33,4 +33,8 @@
 
 - (instancetype)initWithFrame:(CGRect)frame pageView:(UIView*)pageView date:(NSDate*)date;
 
+- (void)refreshPages;
+
+- (void)scrollToDate:(NSDate*)date animated:(BOOL)animated;
+
 @end
