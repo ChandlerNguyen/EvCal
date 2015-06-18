@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8404E07C1B329B31009B1923 /* ECInfiniteHorizontalPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8404E07B1B329B31009B1923 /* ECInfiniteHorizontalPageView.m */; };
+		8404E07C1B329B31009B1923 /* ECInfiniteHorizontalDatePagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8404E07B1B329B31009B1923 /* ECInfiniteHorizontalDatePagingView.m */; };
 		843535821B2D8F1F00A8E404 /* UIColor+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 843535811B2D8F1F00A8E404 /* UIColor+ECAdditions.m */; };
 		843535851B2DAFD000A8E404 /* ECEditEventCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843535841B2DAFD000A8E404 /* ECEditEventCalendarViewController.m */; };
 		84443EFF1B0DEBF900385E5A /* NSDate+ECTestAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443EFE1B0DEBF900385E5A /* NSDate+ECTestAdditions.m */; };
@@ -62,8 +62,8 @@
 		0CD2922DCA6CD50DC54BED4D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		26A52386135E7399D21E9C48 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		5F3614751A065418C790A255 /* Pods-EvCalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvCalTests/Pods-EvCalTests.release.xcconfig"; sourceTree = "<group>"; };
-		8404E07A1B329B31009B1923 /* ECInfiniteHorizontalPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECInfiniteHorizontalPageView.h; path = Views/ECInfiniteHorizontalPageView.h; sourceTree = "<group>"; };
-		8404E07B1B329B31009B1923 /* ECInfiniteHorizontalPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECInfiniteHorizontalPageView.m; path = Views/ECInfiniteHorizontalPageView.m; sourceTree = "<group>"; };
+		8404E07A1B329B31009B1923 /* ECInfiniteHorizontalDatePagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECInfiniteHorizontalDatePagingView.h; path = Views/ECInfiniteHorizontalDatePagingView.h; sourceTree = "<group>"; };
+		8404E07B1B329B31009B1923 /* ECInfiniteHorizontalDatePagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECInfiniteHorizontalDatePagingView.m; path = Views/ECInfiniteHorizontalDatePagingView.m; sourceTree = "<group>"; };
 		843535801B2D8F1F00A8E404 /* UIColor+ECAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+ECAdditions.h"; path = "Support/UIColor+ECAdditions.h"; sourceTree = "<group>"; };
 		843535811B2D8F1F00A8E404 /* UIColor+ECAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+ECAdditions.m"; path = "Support/UIColor+ECAdditions.m"; sourceTree = "<group>"; };
 		843535831B2DAFD000A8E404 /* ECEditEventCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventCalendarViewController.h; path = Controllers/ECEditEventCalendarViewController.h; sourceTree = "<group>"; };
@@ -279,8 +279,8 @@
 				84D92C941B2998820050015D /* Edit Event View */,
 				84D92C931B29986D0050015D /* Weekday Picker */,
 				84D92C921B2998490050015D /* Day View */,
-				8404E07A1B329B31009B1923 /* ECInfiniteHorizontalPageView.h */,
-				8404E07B1B329B31009B1923 /* ECInfiniteHorizontalPageView.m */,
+				8404E07A1B329B31009B1923 /* ECInfiniteHorizontalDatePagingView.h */,
+				8404E07B1B329B31009B1923 /* ECInfiniteHorizontalDatePagingView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -558,7 +558,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8478F7951B1AB26E0096F1B7 /* ECDateView.m in Sources */,
-				8404E07C1B329B31009B1923 /* ECInfiniteHorizontalPageView.m in Sources */,
+				8404E07C1B329B31009B1923 /* ECInfiniteHorizontalDatePagingView.m in Sources */,
 				8478F7B51B24519B0096F1B7 /* ECDatePickerCell.m in Sources */,
 				84C458FC1B073A860066B6A9 /* AppDelegate.m in Sources */,
 				8474BF151B2EDEF000475846 /* ECCalendarCell.m in Sources */,
