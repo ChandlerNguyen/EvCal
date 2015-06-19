@@ -41,7 +41,9 @@
 @property (nonatomic, strong, readonly) NSDate* selectedDate;
 
 /**
- *  Change the selected date of the receiver with or without an animation
+ *  Change the selected date of the receiver with or without an animation. If
+ *  the date is not in the same day as any of the current weekdays a call will
+ *  be made to the receiver's scrollToWeekContainingDate: method.
  *
  *  @param selectedDate The new selected date value
  *  @param animated     Determines whether the change should be animated
@@ -71,9 +73,21 @@
 - (instancetype)initWithDate:(NSDate*)date;
 
 //------------------------------------------------------------------------------
-// @name Changing pickers displayed dates
+// @name Updating picker's displayed dates
 //------------------------------------------------------------------------------
 
+/**
+ *  Changes the receiver's weekdays to those of the week containing the given 
+ *  date.
+ *
+ *  @param date The date in the week that the receiver should display.
+ */
 - (void)scrollToWeekContainingDate:(NSDate*)date;
+
+/**
+ *  Refreshes the weekdays of the current selected date by reloading any date
+ *  based data.
+ */
+- (void)refreshWeekdays;
 
 @end

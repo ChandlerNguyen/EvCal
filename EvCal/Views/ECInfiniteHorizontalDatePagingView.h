@@ -21,13 +21,13 @@
 @protocol ECInfiniteHorizontalDatePagingViewDelegate <NSObject>
 
 @optional
-- (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView*)idv dateChangedTo:(NSDate*)toDate from:(NSDate*)fromDate;
+- (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView*)idv dateChangedFrom:(NSDate*)fromDate to:(NSDate*)toDate;
 
 @end
 
 @interface ECInfiniteHorizontalDatePagingView : UIScrollView
 
-@property (nonatomic, strong) NSDate* date;
+@property (nonatomic, strong, readonly) NSDate* date;
 @property (nonatomic) NSCalendarUnit calendarUnit;
 @property (nonatomic, weak) UIView* pageView;
 

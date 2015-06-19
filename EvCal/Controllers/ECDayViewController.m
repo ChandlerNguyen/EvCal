@@ -49,8 +49,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self setupWeekdayPicker];
     
     self.title = [self.dateFormatter stringFromDate:self.displayDate];
     
@@ -70,11 +68,11 @@
 
 - (ECDayView*)dayView {
     if (!_dayView) {
-        ECDayView* dayView = [[ECDayView alloc] initWithFrame:CGRectZero];
+        ECDayView* dayView = [[ECDayView alloc] initWithFrame:CGRectZero displayDate:self.displayDate];
         _dayView = dayView;
-        dayView.dayViewDataSource = self;
-        dayView.dayViewDelegate = self;
-        [dayView setDisplayDate:self.displayDate animated:NO];
+        
+        [self setupDayView:dayView];
+        
         [self.view addSubview:_dayView];
     }
     
@@ -87,6 +85,9 @@
         ECWeekdayPicker* weekdayPicker = [[ECWeekdayPicker alloc] initWithDate:self.displayDate];
         
         _weekdayPicker = weekdayPicker;
+        
+        [self setupWeekdayPicker:weekdayPicker];
+        
         [self.view addSubview:weekdayPicker];
     }
     
@@ -110,8 +111,6 @@
     _displayDate = displayDate;
     
     self.title = [self.dateFormatter stringFromDate:displayDate];
-    
-    [self refreshEvents];
 }
 
 - (NSDateFormatter*)dateFormatter
@@ -129,10 +128,17 @@
 #define WEEKDAY_PICKER_HEIGHT   74.0f
 #define DAY_VIEW_CONTENT_HEIGHT 1200.0f
 
-- (void)setupWeekdayPicker
+- (void)setupWeekdayPicker:(ECWeekdayPicker*)weekdayPicker
 {
-    self.weekdayPicker.pickerDelegate = self;
-    [self.weekdayPicker setSelectedDate:self.displayDate animated:NO];
+    weekdayPicker.pickerDelegate = self;
+    [weekdayPicker setSelectedDate:self.displayDate animated:NO];
+}
+
+- (void)setupDayView:(ECDayView*)dayView
+{
+    dayView.dayViewDataSource = self;
+    dayView.dayViewDelegate = self;
+    [dayView setDisplayDate:self.displayDate animated:NO];
 }
 
 - (void)layoutWeekdayPicker
@@ -161,9 +167,8 @@
 - (void)weekdayPicker:(ECWeekdayPicker *)picker didSelectDate:(NSDate *)date
 {
     self.displayDate = date;
-    [self.dayView setDisplayDate:date animated:YES];
     
-    [self refreshEvents];
+    [self.dayView scrollToDate:date animated:YES];
 }
 
 - (void)weekdayPicker:(ECWeekdayPicker *)picker didScrollFrom:(NSArray *)fromWeek to:(NSArray *)toWeek
@@ -212,7 +217,9 @@
 
 - (void)dayView:(ECDayView *)dayView didScrollToDate:(NSDate *)date
 {
+    self.displayDate = date;
     
+    [self.weekdayPicker setSelectedDate:date animated:NO];
 }
 
 - (void)dayViewDidScrollTime:(ECDayView *)dayView
@@ -245,7 +252,7 @@
 
 - (void)refreshEvents
 {
-    // refresh weekday picker here
+    [self.weekdayPicker refreshWeekdays];
     [self.dayView refreshCalendarEvents];
 }
 

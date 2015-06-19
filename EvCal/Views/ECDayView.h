@@ -92,6 +92,8 @@
 @property (nonatomic, weak) id<ECDayViewDelegate> dayViewDelegate;
 
 
+- (instancetype)initWithFrame:(CGRect)frame displayDate:(NSDate*)date;
+
 //------------------------------------------------------------------------------
 // @name Refreshing event views
 //------------------------------------------------------------------------------

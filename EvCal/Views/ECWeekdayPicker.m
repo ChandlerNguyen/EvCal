@@ -223,6 +223,15 @@
     [self informDelegatePickerScrolledFrom:oldWeekdays to:newWeekdays];
 }
 
+- (void)refreshWeekdays
+{
+    [self updateWeekdaysWithDate:self.selectedDate];
+    [ECWeekdayPicker updateDateViews:self.currentDateViews withDates:self.weekdays];
+    [ECWeekdayPicker updateDateViews:self.leftDateViews withDates:self.prevWeekdays];
+    [ECWeekdayPicker updateDateViews:self.rightDateViews withDates:self.nextWeekdays];
+}
+
+
 #pragma mark - UI Events
 
 - (void)dateViewTapped:(ECDateView*)dateView

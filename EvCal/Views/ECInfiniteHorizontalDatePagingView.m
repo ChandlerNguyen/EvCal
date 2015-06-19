@@ -13,6 +13,8 @@
 @property (nonatomic, strong) NSMutableArray* pages;
 @property (nonatomic, weak) UIView* pageContainerView;
 
+@property (nonatomic, strong) NSDate* scrollToDate;
+
 @end
 
 @implementation ECInfiniteHorizontalDatePagingView
@@ -61,11 +63,7 @@
     NSDate* oldDate = _date;
     _date = date;
     
-    [self refreshPages];
-    
-    if ([self.pageViewDelegate respondsToSelector:@selector(infiniteDateView:dateChangedTo:from:)]) {
-        [self.pageViewDelegate infiniteDateView:self dateChangedTo:date from:oldDate];
-    }
+    [self informDelegateDateChangedFromDate:oldDate toDate:date];
 }
 
 - (void)setPageViewDataSource:(id<ECInfiniteHorizontalDatePagingViewDataSource>)pageViewDataSource
@@ -171,6 +169,8 @@
 
     if (didRecenter) {
         [self changePageDates];
+    } else {
+        
     }
 }
 
@@ -217,15 +217,6 @@
 
 - (void)movePageAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
 {
-    DDLogDebug(@"Moving from index %d to index %d", (int)fromIndex, (int)toIndex);
-    // calculate new date for moved page
-    NSInteger movedPageDateDelta = toIndex - fromIndex;
-    NSDate* movedPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:movedPageDateDelta toDate:self.date options:0];
-    DDLogDebug(@"New date from moved page: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:movedPageDate]);
-    
-    // get updated page from data source
-    [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[fromIndex] forDate:movedPageDate];
-    
     UIView* movedPage = self.pages[fromIndex];
     [self.pages removeObject:movedPage];
     [self.pages insertObject:movedPage atIndex:toIndex];
@@ -236,12 +227,59 @@
                                        self.bounds.size.height);
     movedPage.frame = movedPageFrame;
     
-    // update current date
-    NSInteger centeredPageDateDelta = toIndex - CENTER_PAGE_INDEX;
-    NSDate* centeredPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:centeredPageDateDelta toDate:self.date options:0];
-    DDLogDebug(@"New centered page date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:centeredPageDate]);
+    if (self.scrollToDate) { // scrollToDate: called
+        self.date = self.scrollToDate;
+        self.scrollToDate = nil;
+        
+        NSDate* oldCenterPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:(CENTER_PAGE_INDEX - toIndex) toDate:self.date options:0];
+        NSDate* movedPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:(toIndex - CENTER_PAGE_INDEX) toDate:self.date options:0];
+        
+        [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[fromIndex] forDate:oldCenterPageDate]; // old center page
+        [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[toIndex] forDate:movedPageDate];
+    } else {
+        NSInteger movedPageDateDelta = toIndex - fromIndex;
+        NSDate* movedPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:movedPageDateDelta toDate:self.date options:0];
+        [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[fromIndex] forDate:movedPageDate];
+        
+        // update current date
+        NSInteger centeredPageDateDelta = toIndex - CENTER_PAGE_INDEX;
+        NSDate* centeredPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:centeredPageDateDelta toDate:self.date options:0];
+        DDLogDebug(@"New centered page date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:centeredPageDate]);
+        
+        _date = centeredPageDate;
+    }
+}
+
+- (void)scrollToDate:(NSDate *)date animated:(BOOL)animated
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    if (![calendar isDate:date inSameDayAsDate:self.date]) {
+        NSComparisonResult dateOrder = [date compare:self.date];
+        switch (dateOrder) {
+            case NSOrderedAscending: // scroll to date prior to current date
+                [self scrollToIndex:LEFT_PAGE_INDEX withDate:date animated:animated];
+                break;
+                
+            case NSOrderedDescending: // scroll to date following current date
+                [self scrollToIndex:RIGHT_PAGE_INDEX withDate:date animated:animated];
+                break;
+                
+            case NSOrderedSame:
+                break;
+        }
+    }
+}
+
+- (void)scrollToIndex:(NSInteger)index withDate:(NSDate*)date animated:(BOOL)animated
+{
+    CGRect visibleBounds = CGRectMake(self.bounds.origin.x - self.contentOffset.x + index * self.contentSize.width / 3.0f,
+                                      self.bounds.origin.y,
+                                      self.bounds.size.width,
+                                      self.bounds.size.height);
     
-    _date = centeredPageDate;
+    self.scrollToDate = date;
+    [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[index] forDate:date];
+    [self scrollRectToVisible:visibleBounds animated:YES];
 }
 
 
@@ -259,16 +297,20 @@
 - (void)refreshPages
 {
     if (self.date) {
+        for (NSInteger i = 0; i <= RIGHT_PAGE_INDEX; i++) {
+            [self refreshPageAtIndex:i];
+        }
+    }
+}
+
+- (void)refreshPageAtIndex:(NSInteger)index
+{
+    if (self.date) {
         NSCalendar* calendar = [NSCalendar currentCalendar];
-        NSDate* leftPageDate = [calendar dateByAddingUnit:self.calendarUnit value:-1 toDate:self.date options:0];
-        NSDate* rightPageDate = [calendar dateByAddingUnit:self.calendarUnit value:1 toDate:self.date options:0];
+        NSInteger dateDelta = index - CENTER_PAGE_INDEX;
+        NSDate* pageDate = [calendar dateByAddingUnit:self.calendarUnit value:dateDelta toDate:self.date options:0];
         
-        DDLogDebug(@"Left page date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:leftPageDate]);
-        DDLogDebug(@"Right page date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:rightPageDate]);
-        
-        [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[LEFT_PAGE_INDEX] forDate:leftPageDate];
-        [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[CENTER_PAGE_INDEX] forDate:self.date];
-        [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[RIGHT_PAGE_INDEX] forDate:rightPageDate];
+        [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[index] forDate:pageDate];
     }
 }
 
@@ -279,6 +321,16 @@
     }
     
     self.pages = nil;
+}
+
+
+#pragma mark - Delegate
+
+- (void)informDelegateDateChangedFromDate:(NSDate*)fromDate toDate:(NSDate*)toDate
+{
+    if ([self.pageViewDelegate respondsToSelector:@selector(infiniteDateView:dateChangedFrom:to:)]) {
+        [self.pageViewDelegate infiniteDateView:self dateChangedFrom:fromDate to:toDate];
+    }
 }
 
 @end

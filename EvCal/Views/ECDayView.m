@@ -23,11 +23,25 @@
 
 #pragma mark - Properties and Lifecycle
 
+- (instancetype)initWithFrame:(CGRect)frame displayDate:(NSDate *)date
+{
+    self = [super initWithFrame:frame];
+    
+    if (self) {
+        _displayDate = date;
+    }
+    
+    return self;
+}
+
 - (void)setFrame:(CGRect)frame
 {
+    CGRect oldFrame = self.frame;
     [super setFrame:frame];
     
-    self.dayViewContainer.frame = self.bounds;
+    if (self.displayDate && !CGRectEqualToRect(oldFrame, frame)) {
+        self.dayViewContainer.frame = self.bounds;
+    }
 }
 
 - (void)setDisplayDate:(NSDate *)displayDate animated:(BOOL)animated
@@ -35,7 +49,7 @@
     DDLogDebug(@"Changing display date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:displayDate]);
     _displayDate = displayDate;
     
-    self.dayViewContainer.date = displayDate;
+    [self.dayViewContainer scrollToDate:displayDate animated:animated];
     
     [self refreshCalendarEvents];
 }
