@@ -23,6 +23,13 @@
 
 #pragma mark - Properties and Lifecycle
 
+- (void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    
+    self.dayViewContainer.frame = self.bounds;
+}
+
 - (void)setDisplayDate:(NSDate *)displayDate animated:(BOOL)animated
 {
     _displayDate = displayDate;
@@ -35,9 +42,7 @@
 - (ECInfiniteHorizontalDatePagingView*)dayViewContainer
 {
     if (!_dayViewContainer) {
-        ECSingleDayView* pageView = [[ECSingleDayView alloc] initWithFrame:CGRectZero];
         ECInfiniteHorizontalDatePagingView* dVC = [[ECInfiniteHorizontalDatePagingView alloc] initWithFrame:self.bounds
-                                                                                                   pageView:pageView
                                                                                                        date:self.displayDate];
         
         _dayViewContainer = dVC;
@@ -120,6 +125,11 @@
 
 
 #pragma mark - ECInfiniatePagingDateView data source and delegate
+
+- (UIView*)pageViewForInfiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv
+{
+    return [[ECSingleDayView alloc] init];
+}
 
 - (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv preparePage:(UIView *)page forDate:(NSDate *)date
 {

@@ -19,15 +19,14 @@
 
 #pragma mark - Properties and Lifecycle
 
-- (instancetype)initWithFrame:(CGRect)frame pageView:(UIView *)pageView date:(NSDate *)date
+- (instancetype)initWithFrame:(CGRect)frame date:(NSDate *)date
 {
     self = [super initWithFrame:frame];
 
     if (self) {
         self.calendarUnit = NSCalendarUnitDay;
-        [self.pageContainerView addSubview:pageView];
-        self.pageView = pageView;
         self.date = date;
+        self.pagingEnabled = YES;
     }
     
     return self;
@@ -59,21 +58,42 @@
     NSDate* oldDate = _date;
     _date = date;
     
+    [self refreshPages];
+    
     if ([self.pageViewDelegate respondsToSelector:@selector(infiniteDateView:dateChangedTo:from:)]) {
         [self.pageViewDelegate infiniteDateView:self dateChangedTo:date from:oldDate];
     }
 }
 
+- (void)setPageViewDataSource:(id<ECInfiniteHorizontalDatePagingViewDataSource>)pageViewDataSource
+{
+    _pageViewDataSource = pageViewDataSource;
+    
+    [self clearPages];
+}
+
 - (UIView*)pageView
 {
     if (!_pageView) {
-        UIView* pageView = [[UIView alloc] initWithFrame:self.bounds];
-        
+        UIView* pageView = [self getPageView];
         _pageView = pageView;
         [self.pageContainerView addSubview:pageView];
     }
     
     return _pageView;
+}
+
+- (UIView*)pageContainerView
+{
+    if (!_pageContainerView) {
+        UIView* pageContainerView = [[UIView alloc] initWithFrame:CGRectZero];
+        
+        _pageContainerView = pageContainerView;
+        [self addSubview:pageContainerView];
+        [self resetContainerFrame];
+    }
+    
+    return _pageContainerView;
 }
 
 #pragma mark Private
@@ -216,7 +236,16 @@
 }
 
 
-#pragma mark - Refresh
+#pragma mark - Page Control
+
+- (UIView*)getPageView
+{
+    if (self.pageViewDataSource) {
+        return [self.pageViewDataSource pageViewForInfiniteDateView:self];
+    } else {
+        return [[UIView alloc] initWithFrame:self.bounds];
+    }
+}
 
 - (void)refreshPages
 {
@@ -227,6 +256,15 @@
     [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[LEFT_PAGE_INDEX] forDate:leftPageDate];
     [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[CENTER_PAGE_INDEX] forDate:self.date];
     [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[RIGHT_PAGE_INDEX] forDate:rightPageDate];
+}
+
+- (void)clearPages
+{
+    for (UIView* pageView in self.pages) {
+        [pageView removeFromSuperview];
+    }
+    
+    self.pages = nil;
 }
 
 @end

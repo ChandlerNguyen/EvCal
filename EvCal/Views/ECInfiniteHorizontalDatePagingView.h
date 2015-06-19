@@ -11,6 +11,9 @@
 @class ECInfiniteHorizontalDatePagingView;
 @protocol ECInfiniteHorizontalDatePagingViewDataSource <NSObject>
 @required
+
+- (UIView*)pageViewForInfiniteDateView:(ECInfiniteHorizontalDatePagingView*)idv;
+
 - (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView*)idv preparePage:(UIView*)page forDate:(NSDate*)date;
 
 @end
@@ -31,7 +34,7 @@
 @property (nonatomic, weak) id<ECInfiniteHorizontalDatePagingViewDataSource> pageViewDataSource;
 @property (nonatomic, weak) id<ECInfiniteHorizontalDatePagingViewDelegate> pageViewDelegate;
 
-- (instancetype)initWithFrame:(CGRect)frame pageView:(UIView*)pageView date:(NSDate*)date;
+- (instancetype)initWithFrame:(CGRect)frame date:(NSDate*)date;
 
 - (void)refreshPages;
 
