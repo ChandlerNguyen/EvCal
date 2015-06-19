@@ -195,7 +195,7 @@
 
 - (NSArray*)dayView:(ECDayView *)dayView eventViewsForDate:(NSDate *)date
 {
-    NSArray* events = [[ECEventStoreProxy sharedInstance] eventsFrom:[self.displayDate beginningOfDay] to:[self.displayDate endOfDay]];
+    NSArray* events = [[ECEventStoreProxy sharedInstance] eventsFrom:[date beginningOfDay] to:[date endOfDay]];
     
     NSArray* eventViews = [ECEventViewFactory eventViewsForEvents:events];
     [self addTapListenerToEventViews:eventViews];

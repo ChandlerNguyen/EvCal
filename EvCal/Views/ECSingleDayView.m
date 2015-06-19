@@ -129,8 +129,10 @@
     DDLogDebug(@"Display date changed: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:displayDate]);
     _displayDate = displayDate;
     
+    self.eventViewsLayoutIsValid = NO;
+    
+    [self.eventsLayout invalidateLayout];
     [self updateCurrentTime];
-    [self setNeedsLayout];
 }
 
 - (void)setFrame:(CGRect)frame
@@ -341,6 +343,7 @@
 - (void)setEventViewsNeedLayout
 {
     self.eventViewsLayoutIsValid = NO;
+    [self.eventsLayout invalidateLayout];
     [self setNeedsLayout];
 }
 

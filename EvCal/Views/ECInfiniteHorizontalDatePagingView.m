@@ -36,12 +36,14 @@
 #pragma mark Public
 - (void)setFrame:(CGRect)frame
 {
+    CGRect oldFrame = self.frame;
     [super setFrame:frame];
     
-    if (self.pageView) {
+    if (self.pageView && !CGRectEqualToRect(oldFrame, frame)) {
         CGSize threePageContentSize = CGSizeMake(frame.size.width * 3, frame.size.height);
         [super setContentSize:threePageContentSize];
         
+        self.contentOffset = CGPointMake(frame.size.width, self.bounds.origin.y);
         [self resetContainerFrame];
         [self resetPageFrames];
     }
@@ -71,6 +73,7 @@
     _pageViewDataSource = pageViewDataSource;
     
     [self clearPages];
+    [self refreshPages];
 }
 
 - (UIView*)pageView
@@ -136,7 +139,6 @@
 
 - (void)resetContainerFrame
 {
-    self.contentOffset = CGPointMake(self.contentSize.width / 3.0f, 0);
     CGRect pageContainerFrame = CGRectMake(self.bounds.origin.x - self.contentOffset.x,
                                            self.bounds.origin.y,
                                            self.contentSize.width,
@@ -239,7 +241,7 @@
     NSDate* centeredPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:centeredPageDateDelta toDate:self.date options:0];
     DDLogDebug(@"New centered page date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:centeredPageDate]);
     
-    self.date = centeredPageDate;
+    _date = centeredPageDate;
 }
 
 
