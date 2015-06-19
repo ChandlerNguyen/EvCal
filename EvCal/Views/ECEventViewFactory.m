@@ -30,4 +30,28 @@
     return [eventViews copy];
 }
 
++ (NSArray*)eventViewsForEvents:(NSArray *)events reusingViews:(NSArray *)reusableViews
+{
+    NSMutableArray* mutableEvents = [events mutableCopy];
+    NSMutableArray* mutableReusableViews = [reusableViews mutableCopy];
+    NSMutableArray* mutableEventViews = [[NSMutableArray alloc] init];
+    
+    while (mutableEvents.count > 0) {
+        EKEvent* event = [mutableEvents firstObject];
+        ECEventView* eventView = [mutableReusableViews firstObject];
+        
+        if (eventView) {
+            eventView.event = event;
+            [mutableReusableViews removeObject:eventView];
+        } else {
+            eventView = [self eventViewForEvent:event];
+        }
+        
+        [mutableEvents removeObject:event];
+        [mutableEventViews addObject:eventView];
+    }
+    
+    return [mutableEventViews copy];
+}
+
 @end

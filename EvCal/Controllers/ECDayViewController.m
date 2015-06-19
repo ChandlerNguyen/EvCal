@@ -198,11 +198,11 @@
 
 #pragma mark - ECDayView Data source and delegate
 
-- (NSArray*)dayView:(ECDayView *)dayView eventViewsForDate:(NSDate *)date
+- (NSArray*)dayView:(ECDayView *)dayView eventViewsForDate:(NSDate *)date reusingViews:(NSArray *)reusableViews
 {
     NSArray* events = [[ECEventStoreProxy sharedInstance] eventsFrom:[date beginningOfDay] to:[date endOfDay]];
     
-    NSArray* eventViews = [ECEventViewFactory eventViewsForEvents:events];
+    NSArray* eventViews = [ECEventViewFactory eventViewsForEvents:events reusingViews:reusableViews];
     [self addTapListenerToEventViews:eventViews];
 
     return eventViews;

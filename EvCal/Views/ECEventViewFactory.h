@@ -34,4 +34,15 @@
  */
 + (NSArray*)eventViewsForEvents:(NSArray*)events;
 
+/**
+ *  Reuses old event views when possible and creates new event views for the 
+ *  remaining events.
+ *
+ *  @param events     The events for which to create event views.
+ *  @param eventViews Reusable event views.
+ *
+ *  @return An array of event views matching the order events were passed.
+ */
++ (NSArray*)eventViewsForEvents:(NSArray *)events reusingViews:(NSArray*)eventViews;
+
 @end

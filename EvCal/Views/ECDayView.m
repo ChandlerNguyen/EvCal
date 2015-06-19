@@ -163,8 +163,9 @@
         dayView.contentSize = [self getDayViewContentSize];
         dayView.displayDate = date;
         
+        NSArray* eventViews = [self.dayViewDataSource dayView:self eventViewsForDate:date reusingViews:dayView.eventViews];
         [dayView clearEventViews];
-        [dayView addEventViews:[self.dayViewDataSource dayView:self eventViewsForDate:date]];
+        [dayView addEventViews:eventViews];
     }
 }
 

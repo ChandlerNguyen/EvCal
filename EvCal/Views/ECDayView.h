@@ -45,12 +45,13 @@
  *  Requests an array of event view objects to be displayed by the calling day 
  *  view (which is passed as a parameter). Default is nil.
  *
- *  @param dayView The day view making the request
- *  @param date    The date for which to provide event views
+ *  @param dayView          The day view making the request.
+ *  @param date             The date for which to provide event views.
+ *  @param reusableViews    The array of event views which can be reused.
  *
  *  @return An array of event view objects
  */
-- (NSArray*)dayView:(ECDayView*)dayView eventViewsForDate:(NSDate*)date;
+- (NSArray*)dayView:(ECDayView*)dayView eventViewsForDate:(NSDate*)date reusingViews:(NSArray*)reusableViews;
 
 /**
  *  Requests the size of the content to be displayed within a single day. 
