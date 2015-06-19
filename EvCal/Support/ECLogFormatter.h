@@ -25,4 +25,7 @@
  */
 - (NSString*)formatLogMessage:(DDLogMessage *)logMessage;
 
+
++ (NSDateFormatter*)logMessageDateFormatter;
+
 @end

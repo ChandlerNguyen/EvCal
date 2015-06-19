@@ -126,6 +126,7 @@
 
 - (void)setDisplayDate:(NSDate *)displayDate
 {
+    DDLogDebug(@"Display date changed: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:displayDate]);
     _displayDate = displayDate;
     
     [self updateCurrentTime];

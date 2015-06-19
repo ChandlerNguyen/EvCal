@@ -38,4 +38,17 @@
     return [NSString stringWithFormat:@"%@ %@ %@", levelPrefix, logMessage.function, logMessage.message];
 }
 
++ (NSDateFormatter*)logMessageDateFormatter
+{
+    static NSDateFormatter* formatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        formatter = [[NSDateFormatter alloc] init];
+        formatter.locale = [NSLocale autoupdatingCurrentLocale];
+        formatter.dateStyle = NSDateFormatterLongStyle;
+    });
+    
+    return formatter;
+}
+
 @end

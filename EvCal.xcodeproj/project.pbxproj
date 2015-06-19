@@ -276,11 +276,11 @@
 			children = (
 				8478F79B1B1AEC5B0096F1B7 /* ECCalendarIcon.h */,
 				8478F79C1B1AEC5B0096F1B7 /* ECCalendarIcon.m */,
-				84D92C941B2998820050015D /* Edit Event View */,
-				84D92C931B29986D0050015D /* Weekday Picker */,
-				84D92C921B2998490050015D /* Day View */,
 				8404E07A1B329B31009B1923 /* ECInfiniteHorizontalDatePagingView.h */,
 				8404E07B1B329B31009B1923 /* ECInfiniteHorizontalDatePagingView.m */,
+				84D92C921B2998490050015D /* Day View */,
+				84D92C941B2998820050015D /* Edit Event View */,
+				84D92C931B29986D0050015D /* Weekday Picker */,
 			);
 			name = Views;
 			sourceTree = "<group>";

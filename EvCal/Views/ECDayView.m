@@ -32,6 +32,7 @@
 
 - (void)setDisplayDate:(NSDate *)displayDate animated:(BOOL)animated
 {
+    DDLogDebug(@"Changing display date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:displayDate]);
     _displayDate = displayDate;
     
     self.dayViewContainer.date = displayDate;
@@ -42,6 +43,7 @@
 - (ECInfiniteHorizontalDatePagingView*)dayViewContainer
 {
     if (!_dayViewContainer) {
+        DDLogDebug(@"Creating container view with date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:self.displayDate]);
         ECInfiniteHorizontalDatePagingView* dVC = [[ECInfiniteHorizontalDatePagingView alloc] initWithFrame:self.bounds
                                                                                                        date:self.displayDate];
         
@@ -70,8 +72,10 @@
     CGSize contentSize = CGSizeZero;
     if (self.dayViewDataSource) {
         contentSize = [self.dayViewDataSource contentSizeForDayView:self];
+        DDLogDebug(@"Data source content size: %@", NSStringFromCGSize(contentSize));
     } else {
         contentSize = self.bounds.size;
+        DDLogDebug(@"Using bounds for content size");
     }
     
     return contentSize;
@@ -89,6 +93,8 @@
 
 - (void)informDelegateDateScrolledFromDate:(NSDate*)fromDate toDate:(NSDate*)toDate
 {
+    NSDateFormatter* formatter = [ECLogFormatter logMessageDateFormatter];
+    DDLogDebug(@"Scrolled from date: %@ to date: %@", [formatter stringFromDate:fromDate], [formatter stringFromDate:toDate]);
     if ([self.dayViewDelegate respondsToSelector:@selector(dayView:didScrollFromDate:toDate:)]) {
         [self.dayViewDelegate dayView:self didScrollFromDate:fromDate toDate:toDate];
     }
@@ -133,9 +139,11 @@
 
 - (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv preparePage:(UIView *)page forDate:(NSDate *)date
 {
+    DDLogDebug(@"Infinite day view requested page for date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     if ([page isKindOfClass:[ECSingleDayView class]]) {
         ECSingleDayView* dayView = (ECSingleDayView*)page;
         
+        DDLogDebug(@"Infinite day view passed single day view with display date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:dayView.displayDate]);
         dayView.delegate = self;
         
         dayView.contentSize = [self getDayViewContentSize];

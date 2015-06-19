@@ -55,6 +55,7 @@
 
 - (void)setDate:(NSDate *)date
 {
+    DDLogDebug(@"Changing date from: %@ to: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:_date], [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     NSDate* oldDate = _date;
     _date = date;
     
@@ -135,6 +136,7 @@
 
 - (void)resetContainerFrame
 {
+    self.contentOffset = CGPointMake(self.contentSize.width / 3.0f, 0);
     CGRect pageContainerFrame = CGRectMake(self.bounds.origin.x - self.contentOffset.x,
                                            self.bounds.origin.y,
                                            self.contentSize.width,
@@ -148,8 +150,8 @@
     for (NSInteger i = 0; i < self.pages.count; i++) {
         UIView* page = self.pages[i];
         
-        CGRect pageFrame = CGRectMake(self.pageContainerView.bounds.origin.x + i * (self.contentSize.width / 3.0f),
-                                      self.pageContainerView.bounds.origin.y,
+        CGRect pageFrame = CGRectMake(self.bounds.origin.x - self.contentOffset.x + i * (self.contentSize.width / 3.0f),
+                                      self.bounds.origin.y,
                                       self.bounds.size.width,
                                       self.bounds.size.height);
         
@@ -166,7 +168,7 @@
     BOOL didRecenter = [self recenterIfNecessary];
 
     if (didRecenter) {
-        [self layoutPages];
+        [self changePageDates];
     }
 }
 
@@ -196,24 +198,28 @@
     return recenter;
 }
 
-- (void)layoutPages
+- (void)changePageDates
 {
     UIView* leftPageView = self.pages[LEFT_PAGE_INDEX];
     UIView* rightPageView = self.pages[RIGHT_PAGE_INDEX];
     
     CGFloat pageWidth = self.contentSize.width / 3.0f;
     if (leftPageView.frame.origin.x < self.bounds.origin.x - pageWidth) {
+        DDLogDebug(@"Left page scrolled out of container");
         [self movePageAtIndex:LEFT_PAGE_INDEX toIndex:RIGHT_PAGE_INDEX];
     } else if (CGRectGetMaxX(rightPageView.frame) > CGRectGetMaxX(self.bounds) + pageWidth) {
+        DDLogDebug(@"Right page scrolled out of container");
         [self movePageAtIndex:RIGHT_PAGE_INDEX toIndex:LEFT_PAGE_INDEX];
     }
 }
 
 - (void)movePageAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
 {
+    DDLogDebug(@"Moving from index %d to index %d", (int)fromIndex, (int)toIndex);
     // calculate new date for moved page
     NSInteger movedPageDateDelta = toIndex - fromIndex;
     NSDate* movedPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:movedPageDateDelta toDate:self.date options:0];
+    DDLogDebug(@"New date from moved page: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:movedPageDate]);
     
     // get updated page from data source
     [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[fromIndex] forDate:movedPageDate];
@@ -231,6 +237,7 @@
     // update current date
     NSInteger centeredPageDateDelta = toIndex - CENTER_PAGE_INDEX;
     NSDate* centeredPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:centeredPageDateDelta toDate:self.date options:0];
+    DDLogDebug(@"New centered page date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:centeredPageDate]);
     
     self.date = centeredPageDate;
 }
@@ -249,13 +256,18 @@
 
 - (void)refreshPages
 {
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDate* leftPageDate = [calendar dateByAddingUnit:self.calendarUnit value:-1 toDate:self.date options:0];
-    NSDate* rightPageDate = [calendar dateByAddingUnit:self.calendarUnit value:1 toDate:self.date options:0];
-    
-    [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[LEFT_PAGE_INDEX] forDate:leftPageDate];
-    [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[CENTER_PAGE_INDEX] forDate:self.date];
-    [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[RIGHT_PAGE_INDEX] forDate:rightPageDate];
+    if (self.date) {
+        NSCalendar* calendar = [NSCalendar currentCalendar];
+        NSDate* leftPageDate = [calendar dateByAddingUnit:self.calendarUnit value:-1 toDate:self.date options:0];
+        NSDate* rightPageDate = [calendar dateByAddingUnit:self.calendarUnit value:1 toDate:self.date options:0];
+        
+        DDLogDebug(@"Left page date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:leftPageDate]);
+        DDLogDebug(@"Right page date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:rightPageDate]);
+        
+        [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[LEFT_PAGE_INDEX] forDate:leftPageDate];
+        [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[CENTER_PAGE_INDEX] forDate:self.date];
+        [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[RIGHT_PAGE_INDEX] forDate:rightPageDate];
+    }
 }
 
 - (void)clearPages
