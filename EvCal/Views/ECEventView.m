@@ -34,10 +34,9 @@
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
-        [self setEvent:event animated:NO];
+        self.event = event;
         self.opaque = NO;
         self.layer.cornerRadius = 5.0;
-        self.layer.borderColor = event.calendar.CGColor;
         self.layer.borderWidth = 0.5;
     }
     
@@ -46,12 +45,12 @@
 
 #define EVENT_VIEW_ALPHA    0.55
 
-- (void)setEvent:(EKEvent *)event animated:(BOOL)animated
+- (void)setEvent:(EKEvent *)event
 {
     _event = event;
     
     self.backgroundColor = [UIColor eventViewBackgroundColorForCGColor:event.calendar.CGColor];
-//    self.backgroundColor = [[UIColor colorWithCGColor:event.calendar.CGColor] colorWithAlphaComponent:EVENT_VIEW_ALPHA];
+    self.layer.borderColor = event.calendar.CGColor;
     [self updateLabelsWithEvent:event];
     [self setNeedsLayout];
 }
@@ -61,7 +60,6 @@
     if (!_titleLabel) {
         _titleLabel = [self addLabel];
         _titleLabel.font = [UIFont boldSystemFontOfSize:[self fontSizeForDuration:[self eventDuration:self.event]]];
-        _titleLabel.textColor = [UIColor textColorForCGColor:self.event.calendar.CGColor];
     }
     
     return _titleLabel;
@@ -72,7 +70,6 @@
     if (!_locationLabel && self.event.location) {
         _locationLabel = [self addLabel];
         _locationLabel.font = [UIFont systemFontOfSize:[self fontSizeForDuration:[self eventDuration:self.event]]];
-        _locationLabel.textColor = [UIColor textColorForCGColor:self.event.calendar.CGColor];
     }
     
     return _locationLabel;
@@ -98,6 +95,9 @@
 {
     self.titleLabel.text = event.title;
     self.locationLabel.text = event.location;
+    
+    self.titleLabel.textColor = [UIColor textColorForCGColor:self.event.calendar.CGColor];
+    self.locationLabel.textColor = [UIColor textColorForCGColor:self.event.calendar.CGColor];
 }
 
 

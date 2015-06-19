@@ -82,12 +82,6 @@
     NSMutableArray* columns = [[NSMutableArray alloc] init];
     
     for (ECEventView* eventView in sortedEventViews) {
-        
-        if (![[NSCalendar currentCalendar] isDate:eventView.event.startDate inSameDayAsDate:displayDate] &&
-            !eventView.event.isAllDay) {
-            NSDate* startDate = eventView.event.startDate;
-        }
-        
         if (eventView.event.isAllDay) {
             [mutableEventViewFrames setObject:[NSValue valueWithCGRect:CGRectZero] forKey:eventView.event.eventIdentifier];
         } else {
