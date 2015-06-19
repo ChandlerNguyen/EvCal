@@ -239,7 +239,7 @@
     } else {
         NSInteger movedPageDateDelta = toIndex - fromIndex;
         NSDate* movedPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:movedPageDateDelta toDate:self.date options:0];
-        [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[fromIndex] forDate:movedPageDate];
+        [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[toIndex] forDate:movedPageDate];
         
         // update current date
         NSInteger centeredPageDateDelta = toIndex - CENTER_PAGE_INDEX;
