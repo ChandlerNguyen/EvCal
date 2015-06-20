@@ -97,4 +97,10 @@
  */
 - (void)refreshWeekdays;
 
+/**
+ *  Refreshes the view representing the day of the date by reloading any date
+ *  based data.
+ */
+- (void)refreshWeekdayWithDate:(NSDate*)date;
+
 @end
