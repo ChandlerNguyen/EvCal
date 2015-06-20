@@ -173,7 +173,7 @@
 
 - (void)weekdayPicker:(ECWeekdayPicker *)picker didScrollFrom:(NSArray *)fromWeek to:(NSArray *)toWeek
 {
-    // pass
+    [self.dayView scrollToDate:picker.selectedDate animated:YES];
 }
 
 #pragma mark - ECEditEventViewController Delegate

@@ -72,9 +72,14 @@
 {
     DDLogDebug(@"Changing weekday picker selected date from %@ to %@", _selectedDate, selectedDate);
     _selectedDate = selectedDate;
-    [self updateWeekdaysWithDate:selectedDate];
+    
+    if (![self weekdays:self.weekdays containDayOfDate:selectedDate]) {
+        [self scrollToWeekContainingDate:selectedDate];
+        [self updateWeekdaysWithDate:selectedDate];
+        [self setNeedsLayout];
+    }
+    
     [self updateSelectedDateView:animated];
-    [self setNeedsLayout];
 }
 
 - (void)updateSelectedDateView:(BOOL)animated
@@ -88,6 +93,18 @@
             [self selectDateView:dateView animated:NO];
         }
     }
+}
+
+- (BOOL)weekdays:(NSArray*)weekdays containDayOfDate:(NSDate*)date
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    for (NSDate* weekday in weekdays) {
+        if ([calendar isDate:weekday inSameDayAsDate:date]) {
+            return YES;
+        }
+    }
+    
+    return false;
 }
 
 #pragma mark Views
@@ -356,7 +373,6 @@ typedef NS_ENUM(NSInteger, ECWeekdayPickerScrollDirection) {
     }
     
     NSArray* newWeekdays = [self.weekdays copy]; // pass a copy to keep weekdays readonly
-    [self informDelegatePickerScrolledFrom:oldWeekdays to:newWeekdays];
 
     BOOL selectedTodaysDate = NO;
     NSDate* today = [NSDate date];
@@ -371,6 +387,7 @@ typedef NS_ENUM(NSInteger, ECWeekdayPickerScrollDirection) {
     }
     
     [self layoutWeekdayScrollView];
+    [self informDelegatePickerScrolledFrom:oldWeekdays to:newWeekdays];
 }
 
 - (void)moveWeekdaysForwardsOneWeek
