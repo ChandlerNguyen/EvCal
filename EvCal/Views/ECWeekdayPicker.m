@@ -66,7 +66,6 @@
     _selectedDate = selectedDate;
     
     [self updateSelectedDateView:NO];
-    [self informDelegateSelectedDateChanged:selectedDate];
 }
 
 - (void)setSelectedDate:(NSDate *)selectedDate animated:(BOOL)animated
@@ -76,8 +75,6 @@
     [self updateWeekdaysWithDate:selectedDate];
     [self updateSelectedDateView:animated];
     [self setNeedsLayout];
-    
-    [self informDelegateSelectedDateChanged:selectedDate];
 }
 
 - (void)updateSelectedDateView:(BOOL)animated
@@ -239,6 +236,7 @@
     DDLogDebug(@"Date view tapped");
     if (!dateView.isSelectedDate) {
         [self setSelectedDate:dateView.date animated:YES];
+        [self informDelegateSelectedDateChanged:dateView.date];
     }
 }
 
