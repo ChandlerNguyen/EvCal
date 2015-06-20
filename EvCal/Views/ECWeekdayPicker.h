@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @class ECWeekdayPicker;
+
+@protocol ECWeekdayPickerDataSource <NSObject>
+
+- (NSArray*)calendarIconsForDate:(NSDate*)date reusingViews:(NSArray*)reusableIcons;
+
+@end
+
 @protocol ECWeekdayPickerDelegate <NSObject>
 
 @optional
