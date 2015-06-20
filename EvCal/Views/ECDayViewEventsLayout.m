@@ -19,6 +19,7 @@
 
 @interface ECDayViewEventsLayout()
 
+@property (nonatomic, strong) NSMutableDictionary* tempEventViewFrames;
 @property (nonatomic, strong) NSDictionary* eventViewFrames;
 
 @end
@@ -80,6 +81,7 @@
     
     // Columns is a jagged two dimensional array
     NSMutableArray* columns = [[NSMutableArray alloc] init];
+    [self prepareVerticalFramesForEventViews:eventViews bounds:bounds displayDate:displayDate];
     
     for (ECEventView* eventView in sortedEventViews) {
         if (eventView.event.isAllDay) {
@@ -123,7 +125,20 @@
         }
     }
     
+    self.tempEventViewFrames = nil;
     return [mutableEventViewFrames copy];
+}
+
+- (void)prepareVerticalFramesForEventViews:(NSArray*)eventViews bounds:(CGRect)bounds displayDate:(NSDate*)displayDate
+{
+    self.tempEventViewFrames = [[NSMutableDictionary alloc] init];
+    for (ECEventView* eventView in eventViews) {
+        CGRect tempEventViewFrame = CGRectMake(0,
+                                               [self verticalPositionForDate:eventView.event.startDate relativeToDate:displayDate inRect:bounds],
+                                               1,
+                                               [self heightOfEventWithStartDate:eventView.event.startDate endDate:eventView.event.endDate displayDate:displayDate bounds:bounds]);
+        [self.tempEventViewFrames setObject:[NSValue valueWithCGRect:tempEventViewFrame] forKey:eventView.event.eventIdentifier];
+    }
 }
 
 - (NSDictionary*)framesForColumns:(NSArray*)columns bounds:(CGRect)bounds displayDate:(NSDate*)displayDate
@@ -134,10 +149,19 @@
         NSArray* column = columns[i];
         for (NSInteger j = 0; j < column.count; j++) {
             ECEventView* eventView = column[j];
-            CGRect eventViewFrame = CGRectMake(bounds.origin.x + i * floorf(bounds.size.width / numGroups),
-                                               [self verticalPositionForDate:eventView.event.startDate relativeToDate:displayDate inRect:bounds],
-                                               floorf(bounds.size.width / numGroups),
-                                               [self heightOfEventWithStartDate:eventView.event.startDate endDate:eventView.event.endDate displayDate:displayDate bounds:bounds]);
+            NSValue* eventViewFrameValue = [self.tempEventViewFrames objectForKey:eventView.event.eventIdentifier];
+            CGRect eventViewFrame;
+            if (eventViewFrameValue) {
+                eventViewFrame = [eventViewFrameValue CGRectValue];
+                eventViewFrame.origin.x = bounds.origin.x + i * floorf(bounds.size.width / numGroups);
+                eventViewFrame.size.width = floorf(bounds.size.width / numGroups);
+            } else {
+                eventViewFrame = CGRectMake(bounds.origin.x + i * floorf(bounds.size.width / numGroups),
+                                            [self verticalPositionForDate:eventView.event.startDate relativeToDate:displayDate inRect:bounds],
+                                            floorf(bounds.size.width / numGroups),
+                                            [self heightOfEventWithStartDate:eventView.event.startDate endDate:eventView.event.endDate displayDate:displayDate bounds:bounds]);
+            }
+        
             [mutableColumnFrames setObject:[NSValue valueWithCGRect:eventViewFrame] forKey:eventView.event.eventIdentifier];
         }
     }
