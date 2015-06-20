@@ -215,11 +215,11 @@
     return dayViewContentSize;
 }
 
-- (void)dayView:(ECDayView *)dayView didScrollToDate:(NSDate *)date
+- (void)dayView:(ECDayView *)dayView didScrollFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate
 {
-    self.displayDate = date;
+    self.displayDate = toDate;
     
-    [self.weekdayPicker setSelectedDate:date animated:NO];
+    [self.weekdayPicker setSelectedDate:toDate animated:NO];
 }
 
 - (void)dayViewDidScrollTime:(ECDayView *)dayView

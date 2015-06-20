@@ -246,7 +246,7 @@
         NSDate* centeredPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:centeredPageDateDelta toDate:self.date options:0];
         DDLogDebug(@"New centered page date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:centeredPageDate]);
         
-        _date = centeredPageDate;
+        self.date = centeredPageDate;
     }
 }
 

@@ -169,7 +169,7 @@
     }
 }
 
-- (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv dateChangedTo:(NSDate *)toDate from:(NSDate *)fromDate
+- (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv dateChangedFrom:(NSDate *)fromDate to:(NSDate *)toDate
 {
     [self informDelegateDateScrolledFromDate:fromDate toDate:toDate];
 }
