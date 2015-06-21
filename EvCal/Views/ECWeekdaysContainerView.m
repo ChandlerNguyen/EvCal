@@ -45,6 +45,7 @@
 
 - (void)setSelectedDate:(NSDate *)selectedDate
 {
+    DDLogDebug(@"Selected date changed to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:selectedDate]);
     _selectedDate = selectedDate;
     
     [self updateSelecteDateView:selectedDate];

@@ -184,6 +184,7 @@
     DDLogDebug(@"Date view tapped");
     if (!dateView.isSelectedDate) {
         [self setSelectedDate:dateView.date animated:YES];
+        [self updateSelectedDateView:YES];
         [self informDelegateSelectedDateChanged:dateView.date];
     }
 }
@@ -229,12 +230,15 @@
         }
         
         weekdaysContainerView.dateViews = dateViews;
+        weekdaysContainerView.selectedDate = [weekdays firstObject];
     }
 }
 
 - (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv dateChangedFrom:(NSDate *)fromDate to:(NSDate *)toDate
 {
-    self.centerContainer.selectedDate = toDate;
+    self.selectedDate = toDate;
+    
+    [self informDelegatePickerScrolledFrom:[self weekdaysForDate:fromDate] to:[self weekdaysForDate:toDate]];
 }
 
 - (void)informDelegateSelectedDateChanged:(NSDate*)selectedDate
