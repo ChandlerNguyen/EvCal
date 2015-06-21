@@ -179,9 +179,12 @@
 - (NSArray*)calendarsForDate:(NSDate *)date
 {
     NSMutableArray* mutableCalendars = [[NSMutableArray alloc] init];
-    for (EKCalendar* calendar in [ECEventStoreProxy sharedInstance].calendars) {
-        if ([[ECEventStoreProxy sharedInstance] eventsFrom:[date beginningOfDay] to:[date endOfDay] in:@[calendar]].count > 0) {
-            [mutableCalendars addObject:calendar];
+    for (EKEvent* event in [[ECEventStoreProxy sharedInstance] eventsFrom:[date beginningOfDay] to:[date endOfDay]]) {
+//        if ([[ECEventStoreProxy sharedInstance] eventsFrom:[date beginningOfDay] to:[date endOfDay] in:@[calendar]].count > 0) {
+//            [mutableCalendars addObject:calendar];
+//        }
+        if (![mutableCalendars containsObject:event.calendar]) {
+            [mutableCalendars addObject:event.calendar];
         }
     }
     
