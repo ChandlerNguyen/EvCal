@@ -97,6 +97,10 @@
 
 - (UIView*)visiblePageView
 {
+    DDLogDebug(@"Left page date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:[[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:-1 toDate:self.date options:0]]);
+    DDLogDebug(@"Center page date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:self.date]);
+    DDLogDebug(@"Right page date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:[[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:1 toDate:self.date options:0]]);
+    
     return self.pages[CENTER_PAGE_INDEX];
 }
 

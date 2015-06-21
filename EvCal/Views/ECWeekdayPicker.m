@@ -23,7 +23,7 @@
 @property (nonatomic, strong, readwrite) NSArray* weekdays;
 
 // views
-@property (nonatomic, weak) ECWeekdaysContainerView* centerContainer;
+@property (nonatomic, weak, readonly) ECWeekdaysContainerView* centerContainer;
 @property (nonatomic, weak) ECInfiniteHorizontalDatePagingView* weekdayScroller;
 
 @property (nonatomic, weak) ECDateView* selectedDateView;
@@ -59,8 +59,6 @@
         self.weekdayScroller.frame = self.bounds;
     }
 }
-
-#define CENTER_WEEKDAY_CONTAINER_INDEX  1
 
 - (ECInfiniteHorizontalDatePagingView*)weekdayScroller
 {
@@ -127,7 +125,7 @@
 - (ECWeekdaysContainerView*)centerContainer
 {
     if ([self.weekdayScroller.pageView isKindOfClass:[ECWeekdaysContainerView class]]) {
-        return (ECWeekdaysContainerView*)self.weekdayScroller.pageView;
+        return (ECWeekdaysContainerView*)self.weekdayScroller.visiblePageView;
     } else {
         return nil;
     }
@@ -230,7 +228,6 @@
         }
         
         weekdaysContainerView.dateViews = dateViews;
-        weekdaysContainerView.selectedDate = [weekdays firstObject];
     }
 }
 

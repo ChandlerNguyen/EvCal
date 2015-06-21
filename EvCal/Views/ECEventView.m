@@ -35,7 +35,7 @@
     self = [super initWithFrame:CGRectZero];
     if (self) {
         self.event = event;
-        self.opaque = NO;
+        self.opaque = YES;
         self.layer.cornerRadius = 5.0;
         self.layer.borderWidth = 0.5;
     }

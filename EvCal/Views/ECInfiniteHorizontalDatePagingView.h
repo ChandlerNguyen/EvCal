@@ -31,7 +31,7 @@
 @property (nonatomic) NSCalendarUnit calendarUnit;
 @property (nonatomic) NSInteger pageDateDelta;
 @property (nonatomic, weak) UIView* pageView;
-@property (nonatomic, weak) UIView* visiblePageView;
+@property (nonatomic, weak, readonly) UIView* visiblePageView;
 
 @property (nonatomic, weak) id<ECInfiniteHorizontalDatePagingViewDataSource> pageViewDataSource;
 @property (nonatomic, weak) id<ECInfiniteHorizontalDatePagingViewDelegate> pageViewDelegate;
