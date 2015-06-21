@@ -36,7 +36,7 @@
 
 - (instancetype)initWithDate:(NSDate *)date
 {
-    DDLogDebug(@"Initializing weekday picker with date %@", date);
+    DDLogDebug(@"Initializing weekday picker with date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     self = [super initWithFrame:CGRectZero];
     if (self) {
         [self setSelectedDate:date animated:YES];
@@ -87,7 +87,7 @@
 
 - (void)setSelectedDate:(NSDate *)selectedDate
 {
-    DDLogDebug(@"Changing weekday picker selected date from %@ to %@", _selectedDate, selectedDate);
+    DDLogDebug(@"Changing weekday picker selected date from %@ to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:_selectedDate], [[ECLogFormatter logMessageDateFormatter] stringFromDate:selectedDate]);
     _selectedDate = selectedDate;
     
     [self updateSelectedDateView:NO];
@@ -95,7 +95,7 @@
 
 - (void)setSelectedDate:(NSDate *)selectedDate animated:(BOOL)animated
 {
-    DDLogDebug(@"Changing weekday picker selected date from %@ to %@", _selectedDate, selectedDate);
+    DDLogDebug(@"Changing weekday picker selected date from %@ to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:_selectedDate], [[ECLogFormatter logMessageDateFormatter] stringFromDate:selectedDate]);
     _selectedDate = selectedDate;
     
     if (![self weekdays:self.weekdays containDayOfDate:selectedDate]) {
@@ -138,7 +138,7 @@
 
 - (void)updateWeekdaysWithDate:(NSDate*)date
 {
-    DDLogDebug(@"Updating weekdays with date %@", date);
+    DDLogDebug(@"Updating weekdays with date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     self.weekdays = [self weekdaysForDate:date];
 }
 
@@ -146,7 +146,7 @@
 {
     NSDate* startOfWeek = [date beginningOfWeek];
     
-    DDLogDebug(@"Weekday Picker - Date: %@, First day of week: %@", date, startOfWeek);
+    DDLogDebug(@"Weekday Picker - Date: %@, First day of week: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date], [[ECLogFormatter logMessageDateFormatter] stringFromDate:startOfWeek]);
     
     NSCalendar* calendar = [NSCalendar currentCalendar];
     NSMutableArray* mutableWeekdays = [[NSMutableArray alloc] init];
@@ -161,7 +161,7 @@
 
 - (void)scrollToWeekContainingDate:(NSDate *)date
 {
-    DDLogDebug(@"Scrolling to week containing date %@", date);
+    DDLogDebug(@"Scrolling to week containing date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     NSArray* oldWeekdays = [self.weekdays copy];
     [self updateWeekdaysWithDate:date]; // alters current weekdays
     NSArray* newWeekdays = [self.weekdays copy];
@@ -214,6 +214,7 @@
 
 - (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv preparePage:(UIView *)page forDate:(NSDate *)date
 {
+    DDLogDebug(@"Infinite day view requested page for date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     if ([page isKindOfClass:[ECWeekdaysContainerView class]]) {
         ECWeekdaysContainerView* weekdaysContainerView = (ECWeekdaysContainerView*)page;
         NSArray* weekdays = [self weekdaysForDate:date];

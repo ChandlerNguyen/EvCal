@@ -57,7 +57,9 @@
 
 - (void)setPagingEnabled:(BOOL)pagingEnabled
 {
-    DDLogWarn(@"The infinite horizontal pager should always be in paging mode");
+    if (!pagingEnabled)
+        DDLogWarn(@"The infinite horizontal pager should always be in paging mode");
+
     [super setPagingEnabled:YES];
 }
 
@@ -320,7 +322,7 @@
 {
     if (self.date) {
         NSCalendar* calendar = [NSCalendar currentCalendar];
-        NSInteger dateDelta = index - CENTER_PAGE_INDEX;
+        NSInteger dateDelta = (index - CENTER_PAGE_INDEX) * self.pageDateDelta;
         NSDate* pageDate = [calendar dateByAddingUnit:self.calendarUnit value:dateDelta toDate:self.date options:0];
         
         [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[index] forDate:pageDate];

@@ -26,7 +26,6 @@
     static dispatch_once_t once;
     dispatch_once(&once, ^{
         _loader = [[ECEventStoreProxy alloc] init];
-        DDLogDebug(@"Shared ECEventStoreProxy created");
     });
     
     return _loader;
@@ -40,7 +39,6 @@
     self = [super init];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postCalendarChangedNotification) name:EKEventStoreChangedNotification object:nil];
-        DDLogDebug(@"Event store proxy is added to event store change observers");
     }
     return self;
 }
@@ -54,7 +52,6 @@
 {
     if (!_eventStore) {
         _eventStore = [[EKEventStore alloc] init];
-        DDLogDebug(@"EKEvent store created");
     }
     
     return _eventStore;
@@ -65,17 +62,14 @@
     EKAuthorizationStatus status = [EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent];
     switch (status) {
         case EKAuthorizationStatusNotDetermined:
-            DDLogDebug(@"Current Authorization Status: Not Determined");
             return ECAuthorizationStatusNotDetermined;
             
         // treat restricted and denied as the same
         case EKAuthorizationStatusDenied:
         case EKAuthorizationStatusRestricted:
-            DDLogDebug(@"Current Authorization Status: Denied");
             return ECAuthorizationStatusDenied;
             
         case EKAuthorizationStatusAuthorized:
-            DDLogDebug(@"Current Authorization Status: Authorized");
             return ECAuthorizationStatusAuthorized;
     } ;
 }
@@ -85,13 +79,11 @@
 
 - (void)postAuthorizationStatusChangedNotification
 {
-    DDLogDebug(@"Posting authorization status changed notification");
     [[NSNotificationCenter defaultCenter] postNotificationName:ECEventStoreProxyAuthorizationStatusChangedNotification object:nil];
 }
 
 - (void)postCalendarChangedNotification
 {
-    DDLogDebug(@"Posting calendar changed notification");
     [[NSNotificationCenter defaultCenter] postNotificationName:ECEventStoreProxyCalendarChangedNotification object:nil];
 }
 
@@ -111,7 +103,6 @@
 - (EKCalendar*)calendarWithIdentifier:(NSString *)identifier
 {
     EKCalendar* calendar = [self.eventStore calendarWithIdentifier:identifier];
-    DDLogDebug(@"Fetched calendar %@", calendar.title);
     return calendar;
 }
 
@@ -164,9 +155,6 @@
         return nil;
     }
     
-    NSString* calendarString = [self stringForCalendars:calendars];
-    DDLogDebug(@"Fetching events from %@ to %@ in %@", startDate, endDate, calendarString);
-    
     switch (self.authorizationStatus) {
         case ECAuthorizationStatusNotDetermined:
             [self requestAccessToEvents];
@@ -180,7 +168,6 @@
         case ECAuthorizationStatusAuthorized: {
             NSPredicate* dateRangePredicate = [self.eventStore predicateForEventsWithStartDate:startDate endDate:endDate calendars:calendars];
             NSArray* events = [self.eventStore eventsMatchingPredicate:dateRangePredicate];
-            DDLogDebug(@"Loaded %lu events", (unsigned long)events.count);
             return events;
         }
     }
