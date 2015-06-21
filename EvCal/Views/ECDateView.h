@@ -20,9 +20,8 @@
 @property (nonatomic, getter=isSelectedDate, readonly) BOOL selectedDate;
 // Determines whether the date view is the same day as the current date
 @property (nonatomic, getter=isTodaysDate) BOOL todaysDate;
-// Any additional views within the date view representing user events in the
-// view's date
-@property (nonatomic, strong) NSArray* eventAccessoryViews;
+// The calendars with events in the given date.
+@property (nonatomic, strong) NSArray* calendars;
 
 /**
  *  Sets the receiver's date to the given value.

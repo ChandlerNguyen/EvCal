@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
+// iOS Frameworks
+@import EventKit;
+
 // Helpers
 #import "UIView+ECAdditions.h"
 #import "UIColor+ECAdditions.h"
@@ -19,6 +22,9 @@
 
 @property (nonatomic, weak) UILabel* weekdayLabel;
 @property (nonatomic, weak) UILabel* dateLabel;
+
+//@property (nonatomic) BOOL shouldEraseCalendarDots;
+//@property (nonatomic) BOOL shouldDrawCalendarDots;
 
 @end
 
@@ -52,21 +58,6 @@
     return [calendar isDateInToday:self.date];
 }
 
-- (void)setEventAccessoryViews:(NSArray *)eventAccessoryViews
-{
-    if (_eventAccessoryViews) {
-        for (ECCalendarIcon* accessoryView in _eventAccessoryViews) {
-            [accessoryView removeFromSuperview];
-        }
-    }
-    
-    for (ECCalendarIcon* accessoryView in eventAccessoryViews) {
-        [self addSubview:accessoryView];
-    }
-    
-    _eventAccessoryViews = eventAccessoryViews;
-}
-
 - (void)setSelectedDate:(BOOL)selectedDate animated:(BOOL)animated
 {
     BOOL oldSelectedDate = self.isSelectedDate;
@@ -76,6 +67,18 @@
         [self updateLabels];
         [self setNeedsDisplay];
     }
+}
+
+- (void)setCalendars:(NSArray *)calendars
+{
+    BOOL calendarsChanged = ![_calendars isEqualToArray:calendars];
+    
+//    self.shouldEraseCalendarDots = calendarsChanged && _calendars.count > 0;
+//    self.shouldDrawCalendarDots = calendarsChanged && calendars.count > 0;
+    
+    _calendars = calendars;
+    
+    [self setNeedsDisplay];
 }
 
 - (UILabel*)dateLabel
@@ -140,7 +143,6 @@
     
     [self layoutWeekdayLabel];
     [self layoutDateLabel];
-    [self layoutAccessoryViews];
 }
 
 - (void)layoutWeekdayLabel
@@ -158,31 +160,6 @@
     self.dateLabel.frame = dateLabelFrame;
 }
 
-#define ACCESSORY_VIEW_WIDTH    8.0f
-#define ACCESSORY_VIEW_HEIGHT   8.0f
-#define ACCESSORY_VIEW_PADDING  4.0f
-
-- (void)layoutAccessoryViews
-{
-    CGFloat accessoryViewsWidth = self.eventAccessoryViews.count * ACCESSORY_VIEW_WIDTH + (self.eventAccessoryViews.count - 1) * ACCESSORY_VIEW_PADDING;
-    CGFloat accessoryViewsOriginX = floorf(self.bounds.origin.x + (self.bounds.size.width - accessoryViewsWidth) / 2.0f);
-    
-    CGRect circleFrame = [self circleFrame];
-    CGFloat distanceBetweenCircleAndBounds = CGRectGetMaxY(self.bounds) - CGRectGetMaxY(circleFrame);
-    CGFloat centeredAccessoryViewOffset = floorf((distanceBetweenCircleAndBounds - ACCESSORY_VIEW_HEIGHT) / 2.0f);
-    CGFloat accessoryViewsOriginY = CGRectGetMaxY(circleFrame) + centeredAccessoryViewOffset;
-    
-    for (NSInteger i = 0; i < self.eventAccessoryViews.count; i++) {
-        CGRect accessoryViewFrame = CGRectMake(accessoryViewsOriginX + i * (ACCESSORY_VIEW_PADDING + ACCESSORY_VIEW_WIDTH),
-                                               accessoryViewsOriginY,
-                                               ACCESSORY_VIEW_WIDTH,
-                                               ACCESSORY_VIEW_HEIGHT);
-        
-        ECCalendarIcon* accessoryView = self.eventAccessoryViews[i];
-        accessoryView.frame = accessoryViewFrame;
-    }
-}
-
 #pragma mark - Drawing
 
 #define CIRCLE_RADIUS   21.0f
@@ -196,6 +173,12 @@
     } else {
         [self eraseCircle];
     }
+    
+//    if (self.shouldEraseCalendarDots)
+        [self eraseCalendarDots];
+    
+//    if (self.shouldDrawCalendarDots)
+        [self drawCalendarDots];
 }
 
 - (void)drawCircle
@@ -213,7 +196,7 @@
 
 - (CGRect)circleFrame
 {
-    CGFloat circleRadius = ceilf(.35 * self.bounds.size.width);
+    CGFloat circleRadius = ceilf(.30 * self.bounds.size.width);
     CGPoint circleCenter = self.dateLabel.center;
     CGRect circleFrame = CGRectMake(circleCenter.x - circleRadius,
                                     circleCenter.y - circleRadius,
@@ -227,7 +210,51 @@
 {
     [self.backgroundColor setFill];
     
-    [[UIBezierPath bezierPathWithRect:self.bounds] fill];
+    [[UIBezierPath bezierPathWithRect:[self circleFrame]] fill];
+}
+
+#define ACCESSORY_VIEW_WIDTH    8.0f
+#define ACCESSORY_VIEW_HEIGHT   8.0f
+#define ACCESSORY_VIEW_PADDING  4.0f
+
+- (void)drawCalendarDots
+{
+    if (self.calendars.count > 0) {
+        CGFloat accessoryViewsWidth = self.calendars.count * ACCESSORY_VIEW_WIDTH + (self.calendars.count - 1) * ACCESSORY_VIEW_PADDING;
+        CGFloat accessoryViewsOriginX = floorf(self.bounds.origin.x + (self.bounds.size.width - accessoryViewsWidth) / 2.0f);
+
+        CGRect circleFrame = [self circleFrame];
+        CGFloat distanceBetweenCircleAndBounds = CGRectGetMaxY(self.bounds) - CGRectGetMaxY(circleFrame);
+        CGFloat centeredAccessoryViewOffset = floorf((distanceBetweenCircleAndBounds - ACCESSORY_VIEW_HEIGHT) / 2.0f);
+        CGFloat accessoryViewsOriginY = CGRectGetMaxY(circleFrame) + centeredAccessoryViewOffset;
+        
+        for (NSInteger i = 0; i < self.calendars.count; i++) {
+            EKCalendar* calendar = self.calendars[i];
+            [[UIColor colorWithCGColor:calendar.CGColor] setFill];
+            CGRect calendarDotFrame = CGRectMake(accessoryViewsOriginX + i * (ACCESSORY_VIEW_PADDING + ACCESSORY_VIEW_WIDTH),
+                                                 accessoryViewsOriginY,
+                                                 ACCESSORY_VIEW_WIDTH,
+                                                 ACCESSORY_VIEW_HEIGHT);
+            UIBezierPath* calendarDotPath = [UIBezierPath bezierPathWithOvalInRect:calendarDotFrame];
+            [calendarDotPath fill];
+        }
+    }
+    
+//    self.shouldDrawCalendarDots = NO;
+}
+
+- (void)eraseCalendarDots
+{
+    CGFloat calendarDotsBoundsOriginY = CGRectGetMaxY([self circleFrame]);
+    CGRect calendarDotsBounds = CGRectMake(self.bounds.origin.x,
+                                           calendarDotsBoundsOriginY,
+                                           self.bounds.size.width,
+                                           CGRectGetMaxY(self.bounds) - calendarDotsBoundsOriginY);
+    
+    [[UIColor whiteColor] setFill];
+    [[UIBezierPath bezierPathWithRect:calendarDotsBounds] fill];
+    
+//    self.shouldEraseCalendarDots = NO;
 }
 
 @end
