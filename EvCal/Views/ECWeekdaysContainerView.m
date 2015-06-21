@@ -9,6 +9,10 @@
 #import "ECDateView.h"
 #import "ECWeekdaysContainerView.h"
 
+@interface ECWeekdaysContainerView()
+
+@end
+
 @implementation ECWeekdaysContainerView
 
 #pragma mark - Properties and Lifecycle
@@ -18,8 +22,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.clipsToBounds = YES;
-        self.layer.borderWidth = 0.5;
-        self.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        self.backgroundColor = [UIColor whiteColor];
     }
     
     return self;
@@ -77,11 +80,13 @@
 {
     if (self.dateViews.count > 0) {
         CGFloat dateViewWidth = floorf(self.bounds.size.width / self.dateViews.count);
+        CGFloat leftPadding = (self.bounds.size.width - dateViewWidth * self.dateViews.count) / 2.0f;
+        CGFloat paddedOriginX = self.bounds.origin.x + leftPadding;
         for (NSInteger i = 0; i < self.dateViews.count; i++) {
-            CGRect dateViewFrame = CGRectMake(self.bounds.origin.x + (i + 1) * (dateViewWidth + DATE_VIEW_SPACING) - dateViewWidth,
+            CGRect dateViewFrame = CGRectMake(paddedOriginX + (i + 1) * (dateViewWidth + DATE_VIEW_SPACING) - dateViewWidth,
                                               self.bounds.origin.y,
                                               dateViewWidth,
-                                              self.bounds.size.height);
+                                              self.bounds.size.height - 1.0f);
             
             ECDateView* dateView = self.dateViews[i];
             dateView.frame = dateViewFrame;
@@ -97,28 +102,24 @@
     [super drawRect:rect];
     
     if (!CGRectEqualToRect(rect, CGRectZero)) {
-        [self drawDateViewOutlines];
+        [self drawSeparatorLine];
     }
 }
 
-- (void)drawDateViewOutlines
+static CGFloat kSeparatorLineWidth = 0.5f;
+
+- (void)drawSeparatorLine
 {
-    if (self.dateViews.count > 0) {
-        [[UIColor lightGrayColor] setStroke];
-        UIBezierPath* linePath = [UIBezierPath bezierPath];
-        
-        CGFloat pageWidth = self.bounds.size.width / self.dateViews.count;
-        CGFloat boundsMaxY = CGRectGetMaxY(self.bounds);
-        for (NSInteger i = 0; i < self.dateViews.count - 1; i++) {
-            CGPoint lineOrigin = CGPointMake(self.bounds.origin.x + (i + 1) * (pageWidth + 1), self.bounds.origin.y);
-            CGPoint lineTerminal = CGPointMake(lineOrigin.x, boundsMaxY);
-
-            [linePath moveToPoint:lineOrigin];
-            [linePath addLineToPoint:lineTerminal];
-        }
-        
-        [linePath stroke];
-    }
+    [[UIColor lightGrayColor] setStroke];
+    
+    CGPoint lineOrigin = CGPointMake(self.bounds.origin.x, CGRectGetMaxY(self.bounds) - kSeparatorLineWidth);
+    CGPoint lineTerminal = CGPointMake(CGRectGetMaxX(self.bounds), lineOrigin.y);
+    
+    UIBezierPath* linePath = [UIBezierPath bezierPath];
+    linePath.lineWidth = kSeparatorLineWidth;
+    [linePath moveToPoint:lineOrigin];
+    [linePath addLineToPoint:lineTerminal];
+    
+    [linePath stroke];
 }
-
 @end
