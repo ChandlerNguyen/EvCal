@@ -26,17 +26,29 @@
  */
 - (ECDateView*)dateViewForDate:(NSDate*)date;
 
+/**
+ *  Creates an array of date views for the given dates by reusing views where 
+ *  possible and creating new views when necessary.
+ *
+ *  @param dates         The dates for which to create date views
+ *  @param reusableViews An array of date views which can be reconfigured
+ *
+ *  @return An array of date views for the given dates
+ */
+- (NSArray*)dateViewsForDates:(NSArray*)dates reusingViews:(NSArray*)reusableViews;
+
 //------------------------------------------------------------------------------
-// @name Updating Date Views
+// @name Calendar Icons
 //------------------------------------------------------------------------------
 
 /**
- *  Updates the given date view to reflect the given date. This includes
- *  refreshing the accessory views.
+ *  Creates an array of calendar icons for the given EKCalendar objects by 
+ *  reusing icons when possible and creating new icons when necessary.
  *
- *  @param dateView The date view to be configured
- *  @param date     The date with which to configure the date view
+ *  @param calendars An array of EKCalendars to create icons for
+ *
+ *  @return An array of calendar icons representing the given calendars
  */
-- (void)configureDateView:(ECDateView*)dateView forDate:(NSDate*)date;
+- (NSArray*)calendarIconsForCalendars:(NSArray*)calendars reusingViews:(NSArray*)reusableViews;
 
 @end

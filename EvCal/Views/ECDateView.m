@@ -70,10 +70,13 @@
 
 - (void)setSelectedDate:(BOOL)selectedDate animated:(BOOL)animated
 {
+    BOOL oldSelectedDate = self.isSelectedDate;
     _selectedDate = selectedDate;
     
-    [self updateLabels];
-    [self setNeedsDisplay];
+    if (oldSelectedDate != selectedDate) {
+        [self updateLabels];
+        [self setNeedsDisplay];
+    }
 }
 
 - (UILabel*)dateLabel

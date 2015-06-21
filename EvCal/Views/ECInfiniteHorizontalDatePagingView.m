@@ -28,7 +28,11 @@
     if (self) {
         self.calendarUnit = NSCalendarUnitDay;
         self.date = date;
+        self.pageDateDelta = 1;
         self.pagingEnabled = YES;
+        self.decelerationRate = UIScrollViewDecelerationRateFast;
+        self.showsHorizontalScrollIndicator = NO;
+        self.showsVerticalScrollIndicator = NO;
     }
     
     return self;
@@ -85,6 +89,15 @@
     return _pageView;
 }
 
+#define LEFT_PAGE_INDEX     0
+#define CENTER_PAGE_INDEX   1
+#define RIGHT_PAGE_INDEX    2
+
+- (UIView*)visiblePageView
+{
+    return self.pages[CENTER_PAGE_INDEX];
+}
+
 - (UIView*)pageContainerView
 {
     if (!_pageContainerView) {
@@ -130,10 +143,6 @@
 
 
 #pragma mark - Layout
-
-#define LEFT_PAGE_INDEX     0
-#define CENTER_PAGE_INDEX   1
-#define RIGHT_PAGE_INDEX    2
 
 - (void)resetContainerFrame
 {
@@ -231,18 +240,21 @@
         self.date = self.scrollToDate;
         self.scrollToDate = nil;
         
-        NSDate* oldCenterPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:(CENTER_PAGE_INDEX - toIndex) toDate:self.date options:0];
-        NSDate* movedPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:(toIndex - CENTER_PAGE_INDEX) toDate:self.date options:0];
+        NSInteger oldCenterPageDelta = (CENTER_PAGE_INDEX - toIndex) * self.pageDateDelta;
+        NSInteger movedPageDelta = (toIndex - CENTER_PAGE_INDEX) * self.pageDateDelta;
+        
+        NSDate* oldCenterPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:oldCenterPageDelta toDate:self.date options:0];
+        NSDate* movedPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:movedPageDelta toDate:self.date options:0];
         
         [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[fromIndex] forDate:oldCenterPageDate]; // old center page
         [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[toIndex] forDate:movedPageDate];
     } else {
-        NSInteger movedPageDateDelta = toIndex - fromIndex;
+        NSInteger movedPageDateDelta = (toIndex - fromIndex) * self.pageDateDelta;
         NSDate* movedPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:movedPageDateDelta toDate:self.date options:0];
         [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[toIndex] forDate:movedPageDate];
         
         // update current date
-        NSInteger centeredPageDateDelta = toIndex - CENTER_PAGE_INDEX;
+        NSInteger centeredPageDateDelta = (toIndex - CENTER_PAGE_INDEX) * self.pageDateDelta;
         NSDate* centeredPageDate = [[NSCalendar currentCalendar] dateByAddingUnit:self.calendarUnit value:centeredPageDateDelta toDate:self.date options:0];
         DDLogDebug(@"New centered page date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:centeredPageDate]);
         
@@ -278,6 +290,7 @@
                                       self.bounds.size.height);
     
     self.scrollToDate = date;
+    self.scrollEnabled = NO;
     [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[index] forDate:date];
     [self scrollRectToVisible:visibleBounds animated:YES];
 }

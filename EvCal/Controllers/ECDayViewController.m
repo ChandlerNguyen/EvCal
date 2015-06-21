@@ -21,7 +21,7 @@
 #import "ECEventViewFactory.h"
 #import "ECWeekdayPicker.h"
 
-@interface ECDayViewController () <ECDayViewDatasource, ECDayViewDelegate, ECWeekdayPickerDelegate, ECEditEventViewControllerDelegate>
+@interface ECDayViewController () <ECDayViewDatasource, ECDayViewDelegate, ECWeekdayPickerDelegate, ECWeekdayPickerDataSource, ECEditEventViewControllerDelegate>
 
 // Buttons
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* addEventButton;
@@ -162,7 +162,7 @@
 }
 
 
-#pragma mark - ECWeekdayPicker Delegate
+#pragma mark - ECWeekdayPicker delegate and data source
 
 - (void)weekdayPicker:(ECWeekdayPicker *)picker didSelectDate:(NSDate *)date
 {
@@ -174,6 +174,18 @@
 - (void)weekdayPicker:(ECWeekdayPicker *)picker didScrollFrom:(NSArray *)fromWeek to:(NSArray *)toWeek
 {
     [self.dayView scrollToDate:picker.selectedDate animated:YES];
+}
+
+- (NSArray*)calendarsForDate:(NSDate *)date
+{
+    NSMutableArray* mutableCalendars = [[NSMutableArray alloc] init];
+    for (EKCalendar* calendar in [ECEventStoreProxy sharedInstance].calendars) {
+        if ([[ECEventStoreProxy sharedInstance] eventsFrom:[date beginningOfDay] to:[date endOfDay] in:@[calendar]].count > 0) {
+            [mutableCalendars addObject:calendar];
+        }
+    }
+    
+    return [mutableCalendars copy];
 }
 
 #pragma mark - ECEditEventViewController Delegate

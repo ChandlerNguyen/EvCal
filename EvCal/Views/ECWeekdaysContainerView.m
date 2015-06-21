@@ -11,6 +11,8 @@
 
 @implementation ECWeekdaysContainerView
 
+#pragma mark - Properties and Lifecycle
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -20,6 +22,43 @@
     }
     
     return self;
+}
+
+- (void)setDateViews:(NSArray *)dateViews
+{
+    if (_dateViews) {
+        for (ECDateView* dateView in _dateViews) {
+            [dateView removeFromSuperview];
+        }
+        
+        for (ECDateView* dateView in dateViews) {
+            [self addSubview:dateView];
+        }
+    }
+    
+    _dateViews = dateViews;
+}
+
+- (void)setSelectedDate:(NSDate *)selectedDate
+{
+    _selectedDate = selectedDate;
+    
+    [self updateSelecteDateView:selectedDate];
+}
+
+
+#pragma mark - Managing selected date view
+
+- (void)updateSelecteDateView:(NSDate*)selectedDate
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    for (ECDateView* dateView in self.dateViews) {
+        if ([calendar isDate:dateView.date inSameDayAsDate:selectedDate]) {
+            [dateView setSelectedDate:YES animated:YES];
+        } else {
+            [dateView setSelectedDate:NO animated:YES];
+        }
+    }
 }
 
 #pragma mark - Layout

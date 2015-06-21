@@ -23,31 +23,57 @@
 {
     ECDateView* dateView = [[ECDateView alloc] initWithDate:date];
     
-    [self addAccessoryViewsForDate:date toDateView:dateView];
-    
     return dateView;
 }
 
-- (void)configureDateView:(ECDateView *)dateView forDate:(NSDate *)date
+- (NSArray*)dateViewsForDates:(NSArray *)dates reusingViews:(NSArray *)reusableViews
 {
-    dateView.date = date;
+    NSMutableArray* mutableDates = [dates mutableCopy];
+    NSMutableArray* mutableReusableViews = [reusableViews mutableCopy];
+    NSMutableArray* mutableDateViews = [[NSMutableArray alloc] init];
     
-    [self addAccessoryViewsForDate:date toDateView:dateView];    
-}
-
-- (void)addAccessoryViewsForDate:(NSDate*)date toDateView:(ECDateView*)dateView
-{
-    ECEventStoreProxy* eventStoreProxy = [ECEventStoreProxy sharedInstance];
-    
-    NSMutableArray* mutableAccessoryViews = [[NSMutableArray alloc] init];
-    for (EKCalendar* calendar in eventStoreProxy.calendars) {
-        NSArray* events = [eventStoreProxy eventsFrom:[date beginningOfDay] to:[date endOfDay] in:@[calendar]];
-        if (events.count > 0) {
-            ECCalendarIcon* calendarIcon = [[ECCalendarIcon alloc] initWithColor:[UIColor colorWithCGColor:calendar.CGColor]];
-            [mutableAccessoryViews addObject:calendarIcon];
+    while (mutableDates.count > 0) {
+        NSDate* date = [mutableDates firstObject];
+        [mutableDates removeObject:date];
+        
+        ECDateView* dateView = [mutableReusableViews firstObject];
+        if (!dateView) {
+            dateView = [[ECDateView alloc] initWithDate:date];
+        } else {
+            dateView.date = date;
+            
+            [mutableReusableViews removeObject:dateView];
         }
+        
+        [mutableDateViews addObject:dateView];
     }
     
-    dateView.eventAccessoryViews = [mutableAccessoryViews copy];
+    return [mutableDateViews copy];
 }
+
+- (NSArray*)calendarIconsForCalendars:(NSArray *)calendars reusingViews:(NSArray *)reusableViews
+{
+    NSMutableArray* mutableCalendars = [calendars mutableCopy];
+    NSMutableArray* mutableReusableViews = [reusableViews mutableCopy];
+    NSMutableArray* mutableCalendarIcons = [[NSMutableArray alloc] init];
+    
+    while (mutableCalendars.count > 0) {
+        EKCalendar* calendar = [mutableCalendars firstObject];
+        [mutableCalendars removeObject:calendar];
+        
+        ECCalendarIcon* icon = [reusableViews firstObject];
+        if (!icon) {
+            icon = [[ECCalendarIcon alloc] initWithColor:[UIColor colorWithCGColor:calendar.CGColor]];
+        } else {
+            icon.calendarColor = [UIColor colorWithCGColor:calendar.CGColor];
+            
+            [mutableReusableViews removeObject:icon];
+        }
+        
+        [mutableCalendarIcons addObject:icon];
+    }
+    
+    return [mutableCalendarIcons copy];
+}
+
 @end

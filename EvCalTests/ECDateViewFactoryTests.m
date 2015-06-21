@@ -79,15 +79,15 @@
     XCTAssertEqual([calendar isDateInToday:dateView.date], dateView.isTodaysDate);
 }
 
-- (void)testDateViewIsTodaysDatePropertyChanges
-{
-    ECDateView* dateView = [self.dateViewFactory dateViewForDate:self.testStartDate];
-    
-    NSDate* yesterday = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:-1 toDate:self.testStartDate options:0];
-    
-    [self.dateViewFactory configureDateView:dateView forDate:yesterday];
-    XCTAssertFalse(dateView.isTodaysDate);
-}
+//- (void)testDateViewIsTodaysDatePropertyChanges
+//{
+//    ECDateView* dateView = [self.dateViewFactory dateViewForDate:self.testStartDate];
+//    
+//    NSDate* yesterday = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:-1 toDate:self.testStartDate options:0];
+//    
+//    [self.dateViewFactory configureDateView:dateView forDate:yesterday];
+//    XCTAssertFalse(dateView.isTodaysDate);
+//}
 
 - (void)testDateViewUnselectedByDefault
 {

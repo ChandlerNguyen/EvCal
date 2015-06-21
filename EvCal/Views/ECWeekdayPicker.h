@@ -10,11 +10,26 @@
 
 @class ECWeekdayPicker;
 
+//------------------------------------------------------------------------------
+// @name ECWeekdayPicker data source
+//------------------------------------------------------------------------------
+
 @protocol ECWeekdayPickerDataSource <NSObject>
 
-- (NSArray*)calendarIconsForDate:(NSDate*)date reusingViews:(NSArray*)reusableIcons;
+/**
+ *  Requests the calendars to present in a given date view.
+ *
+ *  @param date The date for which to provide calendars
+ *
+ *  @return The calendar icons for the given date.
+ */
+- (NSArray*)calendarsForDate:(NSDate*)date;
 
 @end
+
+//------------------------------------------------------------------------------
+// @name ECWeekdayPicker Delegate
+//------------------------------------------------------------------------------
 
 @protocol ECWeekdayPickerDelegate <NSObject>
 
@@ -62,6 +77,7 @@
 
 // The delegate that will receive updates about picker events
 @property (nonatomic, weak) id<ECWeekdayPickerDelegate> pickerDelegate;
+@property (nonatomic, weak) id<ECWeekdayPickerDataSource> pickerDataSource;
 
 
 //------------------------------------------------------------------------------
@@ -78,6 +94,7 @@
  *  @return A newly created ECWeekdayPicker with its weekdays set
  */
 - (instancetype)initWithDate:(NSDate*)date;
+
 
 //------------------------------------------------------------------------------
 // @name Updating picker's displayed dates

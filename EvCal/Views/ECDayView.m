@@ -72,9 +72,6 @@
 
 - (void)setupDayViewContainer
 {
-    self.dayViewContainer.decelerationRate = UIScrollViewDecelerationRateFast;
-    self.dayViewContainer.showsHorizontalScrollIndicator = NO;
-    self.dayViewContainer.showsVerticalScrollIndicator = NO;
     self.dayViewContainer.pageViewDelegate = self;
     self.dayViewContainer.pageViewDataSource = self;
 }

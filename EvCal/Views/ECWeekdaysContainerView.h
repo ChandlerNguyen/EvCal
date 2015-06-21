@@ -10,6 +10,7 @@
 
 @interface ECWeekdaysContainerView : UIView
 
+@property (nonatomic, strong) NSDate* selectedDate;
 @property (nonatomic, strong) NSArray* dateViews;
 
 @end
