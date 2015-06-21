@@ -187,7 +187,7 @@
 
 - (BOOL)recenterIfNecessary
 {
-    CGPoint currentOffset = [self contentOffset];
+    CGPoint currentOffset = self.contentOffset;
     CGFloat pageWidth = self.contentSize.width / 3.0f;
     
     BOOL recenter = fabs(currentOffset.x - pageWidth) > (pageWidth / 2.0f);
@@ -206,6 +206,8 @@
             pageFrame.origin.x += contentDelta;
             page.frame = pageFrame;
         }
+        
+        self.scrollEnabled = YES;
     }
     
     return recenter;

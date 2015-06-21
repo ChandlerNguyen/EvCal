@@ -191,6 +191,7 @@
 - (void)selectDateView:(ECDateView*)dateView animated:(BOOL)animated
 {
     self.selectedDateView = dateView;
+    [self updateSelectedDateView:YES];
     [dateView setSelectedDate:YES animated:animated];
 }
 
@@ -224,12 +225,16 @@
         
         for (ECDateView* dateView in dateViews) {
             [dateView addTarget:self action:@selector(dateViewTapped:) forControlEvents:UIControlEventTouchUpInside];
-            dateView.eventAccessoryViews = [dateViewFactory calendarIconsForCalendars:[self.pickerDataSource calendarsForDate:dateView.date]
-                                                                         reusingViews:dateView.eventAccessoryViews];
+            dateView.calendars = [self.pickerDataSource calendarsForDate:dateView.date];
         }
         
         weekdaysContainerView.dateViews = dateViews;
     }
+}
+
+- (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv dateChangedFrom:(NSDate *)fromDate to:(NSDate *)toDate
+{
+    self.centerContainer.selectedDate = toDate;
 }
 
 - (void)informDelegateSelectedDateChanged:(NSDate*)selectedDate

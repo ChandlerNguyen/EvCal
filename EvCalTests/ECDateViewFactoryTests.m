@@ -106,19 +106,19 @@
 
 #pragma mark Testing Date View Accessory Views
 
-- (void)testDateViewHasCorrectNumberOfAccessoryViews
-{
-    ECDateView* dateView = [self.dateViewFactory dateViewForDate:self.testStartDate];
-    
-    // Count calendars with events in them
-    NSInteger count = 0;
-    for (EKCalendar* calendar in self.eventStoreProxy.calendars) {
-        if ([self.eventStoreProxy eventsFrom:[self.testStartDate beginningOfDay] to:[self.testStartDate endOfDay] in:@[calendar]]) {
-            count++;
-        }
-    }
-    
-    XCTAssertEqual(count, dateView.eventAccessoryViews.count, @"Date view should have the same number of accessory views as the user has calendars with events");
-}
+//- (void)testDateViewHasCorrectNumberOfAccessoryViews
+//{
+//    ECDateView* dateView = [self.dateViewFactory dateViewForDate:self.testStartDate];
+//    
+//    // Count calendars with events in them
+//    NSInteger count = 0;
+//    for (EKCalendar* calendar in self.eventStoreProxy.calendars) {
+//        if ([self.eventStoreProxy eventsFrom:[self.testStartDate beginningOfDay] to:[self.testStartDate endOfDay] in:@[calendar]]) {
+//            count++;
+//        }
+//    }
+//    
+//    XCTAssertEqual(count, dateView.eventAccessoryViews.count, @"Date view should have the same number of accessory views as the user has calendars with events");
+//}
 
 @end
