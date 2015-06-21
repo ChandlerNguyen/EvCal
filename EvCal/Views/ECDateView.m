@@ -34,7 +34,6 @@
         _selectedDate = NO;
         
         self.backgroundColor = [UIColor whiteColor];
-        self.layer.borderWidth = 0.5f;
     }
     
     return self;

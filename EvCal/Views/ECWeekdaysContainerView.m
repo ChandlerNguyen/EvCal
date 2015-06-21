@@ -17,6 +17,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.clipsToBounds = YES;
         self.layer.borderWidth = 0.5;
         self.layer.borderColor = [UIColor lightGrayColor].CGColor;
     }
@@ -77,7 +78,7 @@
     if (self.dateViews.count > 0) {
         CGFloat dateViewWidth = floorf(self.bounds.size.width / self.dateViews.count);
         for (NSInteger i = 0; i < self.dateViews.count; i++) {
-            CGRect dateViewFrame = CGRectMake(self.bounds.origin.x + (i + 1) * (dateViewWidth + DATE_VIEW_SPACING) - DATE_VIEW_SPACING,
+            CGRect dateViewFrame = CGRectMake(self.bounds.origin.x + (i + 1) * (dateViewWidth + DATE_VIEW_SPACING) - dateViewWidth,
                                               self.bounds.origin.y,
                                               dateViewWidth,
                                               self.bounds.size.height);

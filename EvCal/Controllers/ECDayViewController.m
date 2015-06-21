@@ -61,7 +61,6 @@
 {
     [super viewDidLayoutSubviews];
     
-
     [self layoutWeekdayPicker];
     [self layoutDayView];
 }
@@ -131,6 +130,7 @@
 - (void)setupWeekdayPicker:(ECWeekdayPicker*)weekdayPicker
 {
     weekdayPicker.pickerDelegate = self;
+    weekdayPicker.pickerDataSource = self;
     [weekdayPicker setSelectedDate:self.displayDate animated:NO];
 }
 
