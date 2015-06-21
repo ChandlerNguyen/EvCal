@@ -225,7 +225,7 @@
         
         for (ECDateView* dateView in dateViews) {
             [dateView addTarget:self action:@selector(dateViewTapped:) forControlEvents:UIControlEventTouchUpInside];
-            dateView.calendars = [self.pickerDataSource calendarsForDate:dateView.date];
+        //    dateView.calendars = [self.pickerDataSource calendarsForDate:dateView.date];
         }
         
         weekdaysContainerView.dateViews = dateViews;
