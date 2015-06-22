@@ -1,41 +1,52 @@
 //
-//  ECInfiniteHorizontalDatePagingView.m
+//  ECInfiniteDatePagingView.m
 //  EvCal
 //
 //  Created by Tom on 6/18/15.
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
-#import "ECInfiniteHorizontalDatePagingView.h"
+#import "ECInfiniteDatePagingView.h"
 
-@interface ECInfiniteHorizontalDatePagingView()
+@interface ECInfiniteDatePagingView()
 
 @property (nonatomic, strong) NSMutableArray* pages;
 @property (nonatomic, weak) UIView* pageContainerView;
 
 @property (nonatomic, strong) NSDate* scrollToDate;
+@property (nonatomic, weak) UIView* pageView;
 
 @end
 
-@implementation ECInfiniteHorizontalDatePagingView
+@implementation ECInfiniteDatePagingView
 
 #pragma mark - Properties and Lifecycle
-
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    [self setup];
+}
 - (instancetype)initWithFrame:(CGRect)frame date:(NSDate *)date
 {
     self = [super initWithFrame:frame];
 
     if (self) {
-        self.calendarUnit = NSCalendarUnitDay;
         self.date = date;
-        self.pageDateDelta = 1;
-        self.pagingEnabled = YES;
-        self.decelerationRate = UIScrollViewDecelerationRateFast;
-        self.showsHorizontalScrollIndicator = NO;
-        self.showsVerticalScrollIndicator = NO;
+        [self setup];
     }
     
     return self;
+}
+
+- (void)setup
+{
+    self.calendarUnit = NSCalendarUnitDay;
+    self.pageDateDelta = 1;
+    self.pagingEnabled = YES;
+    self.decelerationRate = UIScrollViewDecelerationRateFast;
+    self.showsHorizontalScrollIndicator = NO;
+    self.showsVerticalScrollIndicator = NO;
 }
 
 
@@ -72,7 +83,7 @@
     [self informDelegateDateChangedFromDate:oldDate toDate:date];
 }
 
-- (void)setPageViewDataSource:(id<ECInfiniteHorizontalDatePagingViewDataSource>)pageViewDataSource
+- (void)setPageViewDataSource:(id<ECInfiniteDatePagingViewDataSource>)pageViewDataSource
 {
     _pageViewDataSource = pageViewDataSource;
     
