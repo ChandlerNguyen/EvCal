@@ -12,19 +12,19 @@
 #import "ECDateView.h"
 #import "ECDateViewFactory.h"
 #import "ECWeekdaysContainerView.h"
-#import "ECInfiniteHorizontalDatePagingView.h"
+#import "ECInfiniteDatePagingView.h"
 
 
 #define DATE_PICKER_CELL_REUSE_ID   @"DatePickerCell"
 
-@interface ECWeekdayPicker() <UIScrollViewDelegate, ECInfiniteHorizontalDatePagingViewDataSource, ECInfiniteHorizontalDatePagingViewDelegate>
+@interface ECWeekdayPicker() <UIScrollViewDelegate, ECInfiniteDatePagingViewDataSource, ECInfiniteDatePagingViewDelegate>
 
 @property (nonatomic, strong, readwrite) NSDate* selectedDate;
 @property (nonatomic, strong, readwrite) NSArray* weekdays;
 
 // views
 @property (nonatomic, weak, readonly) ECWeekdaysContainerView* centerContainer;
-@property (nonatomic, weak) ECInfiniteHorizontalDatePagingView* weekdayScroller;
+@property (nonatomic, weak) ECInfiniteDatePagingView* weekdayScroller;
 
 @property (nonatomic, weak) ECDateView* selectedDateView;
 
@@ -60,11 +60,11 @@
     }
 }
 
-- (ECInfiniteHorizontalDatePagingView*)weekdayScroller
+- (ECInfiniteDatePagingView*)weekdayScroller
 {
     if (!_weekdayScroller) {
         NSDate* scrollerDate = [self.weekdays firstObject];
-        ECInfiniteHorizontalDatePagingView* weekdayScroller = [[ECInfiniteHorizontalDatePagingView alloc] initWithFrame:self.bounds
+        ECInfiniteDatePagingView* weekdayScroller = [[ECInfiniteDatePagingView alloc] initWithFrame:self.bounds
                                                                                                                    date:scrollerDate];
         [self setupWeekdayScroller:weekdayScroller];
         
@@ -75,7 +75,7 @@
     return _weekdayScroller;
 }
 
-- (void)setupWeekdayScroller:(ECInfiniteHorizontalDatePagingView*)scroller
+- (void)setupWeekdayScroller:(ECInfiniteDatePagingView*)scroller
 {
     scroller.calendarUnit = NSCalendarUnitDay;
     scroller.pageDateDelta = [NSCalendar currentCalendar].weekdaySymbols.count;
@@ -124,7 +124,7 @@
 
 - (ECWeekdaysContainerView*)centerContainer
 {
-    if ([self.weekdayScroller.pageView isKindOfClass:[ECWeekdaysContainerView class]]) {
+    if ([self.weekdayScroller.visiblePageView isKindOfClass:[ECWeekdaysContainerView class]]) {
         return (ECWeekdaysContainerView*)self.weekdayScroller.visiblePageView;
     } else {
         return nil;
@@ -206,13 +206,13 @@
 
 #pragma mark - Delegate and data source
 
-- (UIView*)pageViewForInfiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv
+- (UIView*)pageViewForInfiniteDateView:(ECInfiniteDatePagingView *)idv
 {
     ECWeekdaysContainerView* containerView = [[ECWeekdaysContainerView alloc] init];
     return containerView;
 }
 
-- (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv preparePage:(UIView *)page forDate:(NSDate *)date
+- (void)infiniteDateView:(ECInfiniteDatePagingView *)idv preparePage:(UIView *)page forDate:(NSDate *)date
 {
     DDLogDebug(@"Infinite day view requested page for date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     if ([page isKindOfClass:[ECWeekdaysContainerView class]]) {
@@ -231,7 +231,7 @@
     }
 }
 
-- (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv dateChangedFrom:(NSDate *)fromDate to:(NSDate *)toDate
+- (void)infiniteDateView:(ECInfiniteDatePagingView *)idv dateChangedFrom:(NSDate *)fromDate to:(NSDate *)toDate
 {
     self.selectedDate = toDate;
     

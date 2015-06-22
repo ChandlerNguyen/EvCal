@@ -11,11 +11,11 @@
 // EvCal Classes
 #import "ECDayView.h"
 #import "ECSingleDayView.h"
-#import "ECInfiniteHorizontalDatePagingView.h"
+#import "ECInfiniteDatePagingView.h"
 
-@interface ECDayView() <UIScrollViewDelegate, ECInfiniteHorizontalDatePagingViewDataSource, ECInfiniteHorizontalDatePagingViewDelegate>
+@interface ECDayView() <UIScrollViewDelegate, ECInfiniteDatePagingViewDataSource, ECInfiniteDatePagingViewDelegate>
 
-@property (nonatomic, weak) ECInfiniteHorizontalDatePagingView* dayViewContainer;
+@property (nonatomic, weak) ECInfiniteDatePagingView* dayViewContainer;
 
 @end
 
@@ -54,11 +54,11 @@
     [self refreshCalendarEvents];
 }
 
-- (ECInfiniteHorizontalDatePagingView*)dayViewContainer
+- (ECInfiniteDatePagingView*)dayViewContainer
 {
     if (!_dayViewContainer) {
         DDLogDebug(@"Creating container view with date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:self.displayDate]);
-        ECInfiniteHorizontalDatePagingView* dVC = [[ECInfiniteHorizontalDatePagingView alloc] initWithFrame:self.bounds
+        ECInfiniteDatePagingView* dVC = [[ECInfiniteDatePagingView alloc] initWithFrame:self.bounds
                                                                                                        date:self.displayDate];
         
         _dayViewContainer = dVC;
@@ -124,7 +124,7 @@
 
 - (void)scrollToCurrentTime:(BOOL)animated
 {
-    ECSingleDayView* dayView = (ECSingleDayView*)self.dayViewContainer.pageView;
+    ECSingleDayView* dayView = (ECSingleDayView*)self.dayViewContainer.visiblePageView;
     [dayView scrollToCurrentTime:animated];
 }
 
@@ -143,12 +143,12 @@
 
 #pragma mark - ECInfiniatePagingDateView data source and delegate
 
-- (UIView*)pageViewForInfiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv
+- (UIView*)pageViewForInfiniteDateView:(ECInfiniteDatePagingView *)idv
 {
     return [[ECSingleDayView alloc] init];
 }
 
-- (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv preparePage:(UIView *)page forDate:(NSDate *)date
+- (void)infiniteDateView:(ECInfiniteDatePagingView *)idv preparePage:(UIView *)page forDate:(NSDate *)date
 {
 //    DDLogDebug(@"Infinite day view requested page for date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     if ([page isKindOfClass:[ECSingleDayView class]]) {
@@ -166,7 +166,7 @@
     }
 }
 
-- (void)infiniteDateView:(ECInfiniteHorizontalDatePagingView *)idv dateChangedFrom:(NSDate *)fromDate to:(NSDate *)toDate
+- (void)infiniteDateView:(ECInfiniteDatePagingView *)idv dateChangedFrom:(NSDate *)fromDate to:(NSDate *)toDate
 {
     [self informDelegateDateScrolledFromDate:fromDate toDate:toDate];
 }
