@@ -177,6 +177,11 @@
     [self.weekdayScroller refreshPages];
 }
 
+- (void)refreshWeekdayWithDate:(NSDate *)date
+{
+    [self.weekdayScroller refreshPages];
+}
+
 - (void)dateViewTapped:(ECDateView*)dateView
 {
     DDLogDebug(@"Date view tapped");
