@@ -106,8 +106,8 @@
 {
     NSDateFormatter* formatter = [ECLogFormatter logMessageDateFormatter];
     DDLogDebug(@"Scrolled from date: %@ to date: %@", [formatter stringFromDate:fromDate], [formatter stringFromDate:toDate]);
-    if ([self.dayViewDelegate respondsToSelector:@selector(dayView:didScrollFromDate:toDate:)]) {
-        [self.dayViewDelegate dayView:self didScrollFromDate:fromDate toDate:toDate];
+    if ([self.dayViewDelegate respondsToSelector:@selector(dayView:didScrollFrom:to:)]) {
+        [self.dayViewDelegate dayView:self didScrollFrom:fromDate to:toDate];
     }
 }
 

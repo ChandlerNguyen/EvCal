@@ -283,7 +283,7 @@
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
     
-    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:startDate inRect:CGRectZero] == 0);
+    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:startDate bounds:CGRectZero] == 0);
 }
 
 - (void)testEventViewPositionForDateAtStartOfDay
@@ -293,7 +293,7 @@
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
     
-    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:startDate inRect:self.testBounds] == 0);
+    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:startDate bounds:self.testBounds] == 0);
 }
 
 - (void)testEventViewPositionForDateLaterInDay
@@ -303,7 +303,7 @@
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
     
-    XCTAssertEqualWithAccuracy([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:startDate inRect:self.testBounds], self.testBounds.origin.y + self.testBounds.size.height / 24, 1);
+    XCTAssertEqualWithAccuracy([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:startDate bounds:self.testBounds], self.testBounds.origin.y + self.testBounds.size.height / 24, 1);
 }
 
 - (void)testEventViewPositionForRectWithNonZeroOrigin
@@ -315,7 +315,7 @@
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
     
-    XCTAssertEqualWithAccuracy([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:startDate inRect:self.testBounds], self.testBounds.origin.y + self.testBounds.size.height / 24, 1);
+    XCTAssertEqualWithAccuracy([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:startDate bounds:self.testBounds], self.testBounds.origin.y + self.testBounds.size.height / 24, 1);
 }
 
 - (void)testEventViewPositionForStartDateBeforeDay
@@ -325,7 +325,7 @@
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
     
-    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:[startDate tomorrow] inRect:self.testBounds] == 0);
+    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:[startDate tomorrow] bounds:self.testBounds] == 0);
 }
 
 - (void)testEventViewPositionForAllDayEvent
@@ -335,7 +335,7 @@
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:YES];
     
-    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:[startDate tomorrow] inRect:self.testBounds] == 0);
+    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:[startDate tomorrow] bounds:self.testBounds] == 0);
 }
 
 //  12:00 AM *+----------------------+

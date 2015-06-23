@@ -120,6 +120,6 @@
  *          rect or the maximum y value of the rect if the date follows
  *          after the day of the display date. 
  */
-- (CGFloat)verticalPositionForDate:(NSDate*)date relativeToDate:(NSDate*)displayDate inRect:(CGRect)rect;
+- (CGFloat)verticalPositionForDate:(NSDate*)date relativeToDate:(NSDate*)displayDate bounds:(CGRect)rect;
 
 @end

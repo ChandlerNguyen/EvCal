@@ -230,7 +230,7 @@
     return dayViewContentSize;
 }
 
-- (void)dayView:(ECDayView *)dayView didScrollFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate
+- (void)dayView:(ECDayView *)dayView didScrollFrom:(NSDate *)fromDate to:(NSDate *)toDate
 {
     self.displayDate = toDate;
     

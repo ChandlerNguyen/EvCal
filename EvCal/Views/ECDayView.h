@@ -23,7 +23,7 @@
  *  @param fromDate The day view's previous date
  *  @param toDate The day view's current date
  */
-- (void)dayView:(ECDayView*)dayView didScrollFromDate:(NSDate*)fromDate toDate:(NSDate*)toDate;
+- (void)dayView:(ECDayView*)dayView didScrollFrom:(NSDate*)fromDate to:(NSDate*)toDate;
 
 /**
  *  Informs the receiver that a vertical scroll has occurred within the day 

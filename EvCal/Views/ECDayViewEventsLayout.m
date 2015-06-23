@@ -134,7 +134,7 @@
     self.tempEventViewFrames = [[NSMutableDictionary alloc] init];
     for (ECEventView* eventView in eventViews) {
         CGRect tempEventViewFrame = CGRectMake(0,
-                                               [self verticalPositionForDate:eventView.event.startDate relativeToDate:displayDate inRect:bounds],
+                                               [self verticalPositionForDate:eventView.event.startDate relativeToDate:displayDate bounds:bounds],
                                                1,
                                                [self heightOfEventWithStartDate:eventView.event.startDate endDate:eventView.event.endDate displayDate:displayDate bounds:bounds]);
         [self.tempEventViewFrames setObject:[NSValue valueWithCGRect:tempEventViewFrame] forKey:eventView.event.eventIdentifier];
@@ -157,7 +157,7 @@
                 eventViewFrame.size.width = floorf(bounds.size.width / numGroups);
             } else {
                 eventViewFrame = CGRectMake(bounds.origin.x + i * floorf(bounds.size.width / numGroups),
-                                            [self verticalPositionForDate:eventView.event.startDate relativeToDate:displayDate inRect:bounds],
+                                            [self verticalPositionForDate:eventView.event.startDate relativeToDate:displayDate bounds:bounds],
                                             floorf(bounds.size.width / numGroups),
                                             [self heightOfEventWithStartDate:eventView.event.startDate endDate:eventView.event.endDate displayDate:displayDate bounds:bounds]);
             }
@@ -220,30 +220,30 @@
     return (float)[end timeIntervalSinceDate:start] / 3600.0f;
 }
 
-- (CGFloat)verticalPositionForDate:(NSDate *)date relativeToDate:(NSDate *)displayDate inRect:(CGRect)rect
+- (CGFloat)verticalPositionForDate:(NSDate *)date relativeToDate:(NSDate *)displayDate bounds:(CGRect)bounds
 {
     if (!date || !displayDate) {
-        return rect.origin.y;
+        return bounds.origin.y;
     }
     
     NSDate* beginningOfDay = [date beginningOfDay];
     if ([date compare:beginningOfDay] == NSOrderedAscending) {
-        return rect.origin.y;
+        return bounds.origin.y;
     }
     
     NSDate* endOfDay = [date endOfDay];
     if ([date compare:endOfDay] == NSOrderedDescending) {
-        return CGRectGetMaxY(rect);
+        return CGRectGetMaxY(bounds);
     }
     
-    CGFloat position = rect.origin.y;
-    if (rect.size.height > 0) {
+    CGFloat position = bounds.origin.y;
+    if (bounds.size.height > 0) {
         
         NSArray* hours = [date hoursOfDay];
         
         float hoursAfterBeginningOfDay = ([date timeIntervalSinceDate:beginningOfDay] / (60 * 60));
         
-        position += (rect.size.height / hours.count) * hoursAfterBeginningOfDay;
+        position += (bounds.size.height / hours.count) * hoursAfterBeginningOfDay;
     }
     
     return position;

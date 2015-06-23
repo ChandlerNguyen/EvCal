@@ -279,7 +279,7 @@
 {
     CGFloat currentTimeLineOriginY = [self.eventsLayout verticalPositionForDate:self.currentTimeLine.date
                                                                  relativeToDate:self.displayDate
-                                                                         inRect:[self adjustedDurationEventsBounds]] - HOUR_LINE_HEIGHT / 2.0f;
+                                                                         bounds:[self adjustedDurationEventsBounds]] - HOUR_LINE_HEIGHT / 2.0f;
     CGPoint currentTimeLineOrigin = CGPointMake(self.durationEventsView.bounds.origin.x, currentTimeLineOriginY);
     
     CGRect currentTimeLineFrame = self.currentTimeLine.frame;
@@ -293,7 +293,7 @@
         CGRect adjustedBounds = [self adjustedDurationEventsBounds];
         
         for (ECTimeLine* timeLine in self.hourLines) {
-            CGFloat originY = [self.eventsLayout verticalPositionForDate:timeLine.date relativeToDate:self.displayDate inRect:adjustedBounds] - HOUR_LINE_HEIGHT / 2.0f;
+            CGFloat originY = [self.eventsLayout verticalPositionForDate:timeLine.date relativeToDate:self.displayDate bounds:adjustedBounds] - HOUR_LINE_HEIGHT / 2.0f;
             CGRect timeLineFrame = CGRectMake(self.durationEventsView.bounds.origin.x,
                                               originY,
                                               self.durationEventsView.bounds.size.width,
@@ -477,7 +477,7 @@
 
 - (void)scrollToTime:(NSDate*)time animated:(BOOL)animated
 {
-    CGFloat timeOffsetY = [self.eventsLayout verticalPositionForDate:time relativeToDate:self.displayDate inRect:self.durationEventsView.bounds] + self.allDayEventsView.frame.size.height;
+    CGFloat timeOffsetY = [self.eventsLayout verticalPositionForDate:time relativeToDate:self.displayDate bounds:self.durationEventsView.bounds] + self.allDayEventsView.frame.size.height;
     timeOffsetY = MIN(timeOffsetY, self.contentSize.height - self.bounds.size.height) - HOUR_LINE_HEIGHT / 2.0f;
     CGPoint timeOffset = CGPointMake(self.bounds.origin.x, timeOffsetY);
     
