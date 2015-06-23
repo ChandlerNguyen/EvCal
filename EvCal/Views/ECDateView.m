@@ -23,9 +23,6 @@
 @property (nonatomic, weak) UILabel* weekdayLabel;
 @property (nonatomic, weak) UILabel* dateLabel;
 
-//@property (nonatomic) BOOL shouldEraseCalendarDots;
-//@property (nonatomic) BOOL shouldDrawCalendarDots;
-
 @end
 
 @implementation ECDateView
@@ -73,12 +70,11 @@
 {
     BOOL calendarsChanged = ![_calendars isEqualToArray:calendars];
     
-//    self.shouldEraseCalendarDots = calendarsChanged && _calendars.count > 0;
-//    self.shouldDrawCalendarDots = calendarsChanged && calendars.count > 0;
-    
     _calendars = calendars;
-    
-    [self setNeedsDisplay];
+
+    if (calendarsChanged) {
+        [self setNeedsDisplay];
+    }
 }
 
 - (UILabel*)dateLabel
@@ -170,15 +166,11 @@
     
     if (self.isSelectedDate) {
         [self drawCircle];
-    } else {
-        [self eraseCircle];
     }
     
-//    if (self.shouldEraseCalendarDots)
-        [self eraseCalendarDots];
-    
-//    if (self.shouldDrawCalendarDots)
+    if (self.calendars.count > 0) {
         [self drawCalendarDots];
+    }
 }
 
 - (void)drawCircle
@@ -204,13 +196,6 @@
                                     2 * circleRadius);
     
     return circleFrame;
-}
-
-- (void)eraseCircle
-{
-    [self.backgroundColor setFill];
-    
-    [[UIBezierPath bezierPathWithRect:[self circleFrame]] fill];
 }
 
 #define ACCESSORY_VIEW_WIDTH    8.0f
@@ -239,22 +224,6 @@
             [calendarDotPath fill];
         }
     }
-    
-//    self.shouldDrawCalendarDots = NO;
-}
-
-- (void)eraseCalendarDots
-{
-    CGFloat calendarDotsBoundsOriginY = CGRectGetMaxY([self circleFrame]);
-    CGRect calendarDotsBounds = CGRectMake(self.bounds.origin.x,
-                                           calendarDotsBoundsOriginY,
-                                           self.bounds.size.width,
-                                           CGRectGetMaxY(self.bounds) - calendarDotsBoundsOriginY);
-    
-    [[UIColor whiteColor] setFill];
-    [[UIBezierPath bezierPathWithRect:calendarDotsBounds] fill];
-    
-//    self.shouldEraseCalendarDots = NO;
 }
 
 @end
