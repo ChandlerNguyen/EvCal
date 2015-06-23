@@ -8,8 +8,7 @@
 
 
 #import <UIKit/UIKit.h>
-@class ECEventView;
-
+@class EKEvent;
 @class ECDayView;
 
 @protocol ECDayViewDelegate <NSObject>
@@ -33,12 +32,21 @@
  */
 - (void)dayViewDidScrollTime:(ECDayView*)dayView;
 
+/**
+ *  Informs the receiver that an event displayed within the event view was 
+ *  selected.
+ *
+ *  @param dayView The day view that is presenting the event
+ *  @param event   The event that was selected
+ */
+- (void)dayView:(ECDayView*)dayView eventWasSelected:(EKEvent*)event;
+
 @end
 
 //------------------------------------------------------------------------------
 // @name ECDayView data source
 //------------------------------------------------------------------------------
-@protocol ECDayViewDatasource <NSObject>
+@protocol ECDayViewDataSource <NSObject>
 
 @required
 /**
@@ -51,7 +59,7 @@
  *
  *  @return An array of event view objects
  */
-- (NSArray*)dayView:(ECDayView*)dayView eventViewsForDate:(NSDate*)date reusingViews:(NSArray*)reusableViews;
+- (NSArray*)dayView:(ECDayView*)dayView eventsForDate:(NSDate*)date;
 
 /**
  *  Requests the size of the content to be displayed within a single day. 
@@ -87,7 +95,7 @@
 
 
 // The data source for the day view's event views and content size
-@property (nonatomic, weak) id<ECDayViewDatasource> dayViewDataSource;
+@property (nonatomic, weak) id<ECDayViewDataSource> dayViewDataSource;
 
 // The delegate for the day view's scroll events
 @property (nonatomic, weak) id<ECDayViewDelegate> dayViewDelegate;

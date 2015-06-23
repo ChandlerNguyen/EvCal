@@ -18,10 +18,9 @@
 #import "ECEditEventViewController.h"
 #import "ECDayView.h"
 #import "ECEventStoreProxy.h"
-#import "ECEventViewFactory.h"
 #import "ECWeekdayPicker.h"
 
-@interface ECDayViewController () <ECDayViewDatasource, ECDayViewDelegate, ECWeekdayPickerDelegate, ECWeekdayPickerDataSource, ECEditEventViewControllerDelegate>
+@interface ECDayViewController () <ECDayViewDataSource, ECDayViewDelegate, ECWeekdayPickerDelegate, ECWeekdayPickerDataSource, ECEditEventViewControllerDelegate>
 
 // Buttons
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* addEventButton;
@@ -213,14 +212,11 @@
 
 #pragma mark - ECDayView Data source and delegate
 
-- (NSArray*)dayView:(ECDayView *)dayView eventViewsForDate:(NSDate *)date reusingViews:(NSArray *)reusableViews
+- (NSArray*)dayView:(ECDayView *)dayView eventsForDate:(NSDate *)date
 {
     NSArray* events = [[ECEventStoreProxy sharedInstance] eventsFrom:[date beginningOfDay] to:[date endOfDay]];
     
-    NSArray* eventViews = [ECEventViewFactory eventViewsForEvents:events reusingViews:reusableViews];
-    [self addTapListenerToEventViews:eventViews];
-
-    return eventViews;
+    return events;
 }
 
 - (CGSize)contentSizeForDayView:(ECDayView *)dayView
@@ -242,15 +238,13 @@
     self.userDidScrollDayViewSinceDateChange = YES;
 }
 
+- (void)dayView:(ECDayView *)dayView eventWasSelected:(EKEvent *)event
+{
+    [self presentEditEventViewControllerWithEvent:event];
+}
+
 
 #pragma mark - Editing Events
-
-- (void)eventViewWasTapped:(ECEventView*)eventView
-{
-    DDLogInfo(@"Event view tapped, Event Title: %@", eventView.event.title);
-    
-    [self presentEditEventViewControllerWithEvent:eventView.event];
-}
 
 - (void)presentEditEventViewControllerWithEvent:(EKEvent*)event
 {
@@ -269,13 +263,6 @@
 {
     [self.weekdayPicker refreshWeekdays];
     [self.dayView refreshCalendarEvents];
-}
-
-- (void)addTapListenerToEventViews:(NSArray*)eventViews
-{
-    for (ECEventView* eventView in eventViews) {
-        [eventView addTarget:self action:@selector(eventViewWasTapped:) forControlEvents:UIControlEventTouchUpInside];
-    }
 }
 
 #pragma mark - UI Events

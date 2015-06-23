@@ -12,6 +12,7 @@
 #import "ECDayView.h"
 #import "ECSingleDayView.h"
 #import "ECInfiniteDatePagingView.h"
+#import "ECEventViewFactory.h"
 
 @interface ECDayView() <UIScrollViewDelegate, ECInfiniteDatePagingViewDataSource, ECInfiniteDatePagingViewDelegate>
 
@@ -111,6 +112,12 @@
     }
 }
 
+- (void)informDelegateEventWasSelected:(EKEvent*)event
+{
+    if ([self.dayViewDelegate respondsToSelector:@selector(dayView:eventWasSelected:)]) {
+        [self.dayViewDelegate dayView:self eventWasSelected:event];
+    }
+}
 
 #pragma mark - Refreshing
 
@@ -140,7 +147,6 @@
     }
 }
 
-
 #pragma mark - ECInfiniatePagingDateView data source and delegate
 
 - (UIView*)pageViewForInfiniteDateView:(ECInfiniteDatePagingView *)idv
@@ -150,17 +156,21 @@
 
 - (void)infiniteDateView:(ECInfiniteDatePagingView *)idv preparePage:(UIView *)page forDate:(NSDate *)date
 {
-//    DDLogDebug(@"Infinite day view requested page for date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     if ([page isKindOfClass:[ECSingleDayView class]]) {
         ECSingleDayView* dayView = (ECSingleDayView*)page;
         
-//        DDLogDebug(@"Infinite day view passed single day view with display date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:dayView.displayDate]);
         dayView.delegate = self;
         
         dayView.contentSize = [self getDayViewContentSize];
         dayView.displayDate = date;
         
-        NSArray* eventViews = [self.dayViewDataSource dayView:self eventViewsForDate:date reusingViews:dayView.eventViews];
+        NSArray* events = [self.dayViewDataSource dayView:self eventsForDate:date];
+        NSArray* eventViews = [ECEventViewFactory eventViewsForEvents:events reusingViews:dayView.eventViews];
+        
+        for (ECEventView* eventView in eventViews) {
+            [eventView addTarget:self action:@selector(eventViewTapped:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        
         [dayView clearEventViews];
         [dayView addEventViews:eventViews];
     }
@@ -169,5 +179,12 @@
 - (void)infiniteDateView:(ECInfiniteDatePagingView *)idv dateChangedFrom:(NSDate *)fromDate to:(NSDate *)toDate
 {
     [self informDelegateDateScrolledFromDate:fromDate toDate:toDate];
+}
+
+#pragma mark - UI Events
+
+- (void)eventViewTapped:(ECEventView*)sender
+{
+    [self informDelegateEventWasSelected:sender.event];
 }
 @end
