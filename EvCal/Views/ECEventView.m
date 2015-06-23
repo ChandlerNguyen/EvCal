@@ -59,7 +59,7 @@
 {
     if (!_titleLabel) {
         _titleLabel = [self addLabel];
-        _titleLabel.font = [UIFont boldSystemFontOfSize:[self fontSizeForDuration:[self eventDuration:self.event]]];
+        _titleLabel.font = [self titleLabelFont];
     }
     
     return _titleLabel;
@@ -69,12 +69,21 @@
 {
     if (!_locationLabel && self.event.location) {
         _locationLabel = [self addLabel];
-        _locationLabel.font = [UIFont systemFontOfSize:[self fontSizeForDuration:[self eventDuration:self.event]]];
+        _locationLabel.font = [self locationLabelFont];
     }
     
     return _locationLabel;
 }
 
+- (UIFont*)titleLabelFont
+{
+    return [UIFont boldSystemFontOfSize:[self fontSizeForDuration:[self eventDuration:self.event]]];
+}
+
+- (UIFont*)locationLabelFont
+{
+    return [UIFont systemFontOfSize:[self fontSizeForDuration:[self eventDuration:self.event]]];
+}
 
 #pragma mark - Comparing Event Views
 
@@ -127,7 +136,7 @@ CG_INLINE CGSize ceilCGSize(CGSize size)
     
     CGSize locationSize = ceilCGSize([self.locationLabel.text boundingRectWithSize:self.bounds.size
                                                                            options:0
-                                                                        attributes:@{NSFontAttributeName : self.locationLabel.font}
+                                                                        attributes:@{NSFontAttributeName : [self locationLabelFont]}
                                                                            context:nil].size);
     
     if (titleSize.height + locationSize.height + LABEL_OUTER_PADDING > self.bounds.size.height) {
