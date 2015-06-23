@@ -16,6 +16,7 @@
 		84443F101B10794700385E5A /* ECTestsEventFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443F0F1B10794700385E5A /* ECTestsEventFactory.m */; };
 		844989D81B0B62E100DCE38F /* NSArray+ECTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 844989D71B0B62E100DCE38F /* NSArray+ECTesting.m */; };
 		846FDB471B39317F00910D4F /* ECInfiniteDatePagingViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 846FDB461B39317F00910D4F /* ECInfiniteDatePagingViewTests.m */; };
+		846FDB4A1B393FFD00910D4F /* ECTestsDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846FDB491B393FFD00910D4F /* ECTestsDateView.m */; };
 		8474BF151B2EDEF000475846 /* ECCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8474BF141B2EDEF000475846 /* ECCalendarCell.m */; };
 		847571FF1B0AFF9B0019E393 /* ECEventStoreProxyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 847571FE1B0AFF9B0019E393 /* ECEventStoreProxyTests.m */; };
 		8478F7811B14890A0096F1B7 /* ECDayViewEventViewManagementTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F7801B14890A0096F1B7 /* ECDayViewEventViewManagementTests.m */; };
@@ -80,6 +81,8 @@
 		844989D61B0B62E100DCE38F /* NSArray+ECTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ECTesting.h"; sourceTree = "<group>"; };
 		844989D71B0B62E100DCE38F /* NSArray+ECTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ECTesting.m"; sourceTree = "<group>"; };
 		846FDB461B39317F00910D4F /* ECInfiniteDatePagingViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECInfiniteDatePagingViewTests.m; sourceTree = "<group>"; };
+		846FDB481B393FFD00910D4F /* ECTestsDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECTestsDateView.h; path = Classes/ECTestsDateView.h; sourceTree = "<group>"; };
+		846FDB491B393FFD00910D4F /* ECTestsDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECTestsDateView.m; path = Classes/ECTestsDateView.m; sourceTree = "<group>"; };
 		8474BF131B2EDEF000475846 /* ECCalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECCalendarCell.h; path = Views/ECCalendarCell.h; sourceTree = "<group>"; };
 		8474BF141B2EDEF000475846 /* ECCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECCalendarCell.m; path = Views/ECCalendarCell.m; sourceTree = "<group>"; };
 		847571FE1B0AFF9B0019E393 /* ECEventStoreProxyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEventStoreProxyTests.m; sourceTree = "<group>"; };
@@ -169,6 +172,8 @@
 				84443F011B0DFDF300385E5A /* ECTestsEventQuery.m */,
 				84443F0E1B10794700385E5A /* ECTestsEventFactory.h */,
 				84443F0F1B10794700385E5A /* ECTestsEventFactory.m */,
+				846FDB481B393FFD00910D4F /* ECTestsDateView.h */,
+				846FDB491B393FFD00910D4F /* ECTestsDateView.m */,
 			);
 			name = "Test Objects";
 			sourceTree = "<group>";
@@ -608,6 +613,7 @@
 				847571FF1B0AFF9B0019E393 /* ECEventStoreProxyTests.m in Sources */,
 				844989D81B0B62E100DCE38F /* NSArray+ECTesting.m in Sources */,
 				84443F101B10794700385E5A /* ECTestsEventFactory.m in Sources */,
+				846FDB4A1B393FFD00910D4F /* ECTestsDateView.m in Sources */,
 				8478F79A1B1AE8FF0096F1B7 /* ECDateViewFactoryTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
