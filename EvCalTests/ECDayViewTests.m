@@ -111,6 +111,30 @@
     XCTAssertTrue(self.contentSizeRequested);
 }
 
+- (void)testDayViewSetDisplayDateChangesDisplayDate
+{
+    NSDate* tomorrow = [self.testStartDate tomorrow];
+    [self.dayView setDisplayDate:tomorrow animated:NO];
+    
+    XCTAssertTrue([[NSCalendar currentCalendar] isDate:tomorrow inSameDayAsDate:self.testStartDate]);
+}
+
+- (void)testDayViewSetDisplayDateDoesNotCallDelegateIfNotAnimated
+{
+    NSDate* tomorrow = [self.testStartDate tomorrow];
+    [self.dayView setDisplayDate:tomorrow animated:NO];
+    
+    XCTAssertFalse(self.dayViewScrolledCalled);
+}
+
+- (void)testDayViewSetDisplayDateDoesCallDelegateIfAnimated
+{
+    NSDate* tomorrow = [self.testStartDate tomorrow];
+    [self.dayView setDisplayDate:tomorrow animated:YES];
+    
+    XCTAssertTrue(self.dayViewScrolledCalled);
+}
+
 - (void)testDayViewScrollToDateChangesDisplayDate
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
@@ -118,6 +142,13 @@
     [self.dayView scrollToDate:scrollToDate animated:NO];
     
     XCTAssertTrue([calendar isDate:scrollToDate inSameDayAsDate:self.dayView.displayDate]);
+}
+
+- (void)testDayViewScrollToTimeCallsDelegate
+{
+    [self.dayView scrollToCurrentTime:YES];
+    
+    XCTAssertTrue(self.dayViewTimeScrolledCalled);
 }
 
 - (void)testDayViewRefreshCalendarEventsRequestsEvents
@@ -142,6 +173,7 @@
     
     XCTAssertTrue([[NSCalendar currentCalendar] isDate:self.testStartDate inSameDayAsDate:self.dayView.displayDate]);
 }
+
 
 
 @end
