@@ -26,6 +26,7 @@
 @property (nonatomic, strong) ECDayView* dayView;
 @property (nonatomic, strong) EKEventStore* eventStore;
 @property (nonatomic, strong) EKCalendar* testCalendar;
+@property (nonatomic, strong) NSDate* testStartDate;
 @property (nonatomic) CGRect testFrame;
 
 @end
@@ -37,6 +38,7 @@
 - (void)setUp {
     [super setUp];
     
+    self.testStartDate = [NSDate date];
     self.dayView = [[ECDayView alloc] initWithFrame:CGRectZero];
     self.eventStore = [[EKEventStore alloc] init];
     
@@ -71,7 +73,7 @@
 
 #pragma mark - Helpers
 
-- (ECEventView*)createEventViewWithStartDate:(NSDate*)startDate endDate:(NSDate*)endDate allDay:(BOOL)allDay
+- (EKEvent*)createEventWithStartDate:(NSDate*)startDate endDate:(NSDate*)endDate allDay:(BOOL)allDay
 {
     EKEvent* event = [EKEvent eventWithEventStore:self.eventStore];
     event.title = @"Test Event View Creation";
@@ -81,11 +83,155 @@
     event.allDay = allDay;
     event.calendar = self.testCalendar;
     
-    return [[ECEventView alloc] initWithEvent:event];
+    return event;
+}
+
+- (ECEventView*)createEventViewWithStartDate:(NSDate*)startDate endDate:(NSDate*)endDate allDay:(BOOL)allDay
+{
+    return [[ECEventView alloc] initWithEvent:[self createEventWithStartDate:startDate endDate:endDate allDay:allDay]];
 }
 
 #pragma mark - Tests
 
+- (void)testEventViewsCanBeCreated
+{
+    ECEventView* eventView = [self createEventViewWithStartDate:self.testStartDate endDate:[self.testStartDate endOfHour] allDay:NO];
+    
+    XCTAssertNotNil(eventView);
+}
+
+- (void)testEventViewCreatedWithCorrectEvent
+{
+    EKEvent* event = [EKEvent eventWithEventStore:self.eventStore];
+    event.title = @"Test Event View Creation";
+    event.location = @"Simulator/iOS Device";
+    event.startDate = self.testStartDate;
+    event.endDate = [self.testStartDate endOfHour];
+    event.allDay = NO;
+    event.calendar = self.testCalendar;
+    
+    ECEventView* eventView = [[ECEventView alloc] initWithEvent:event];
+    XCTAssertEqualObjects(eventView.event, event);
+}
+
+- (void)testEventViewCompareForEventsWithAscendingStartAndEndDates
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate* firstEventStartDate = [self.testStartDate beginningOfHour];
+    NSDate* firstEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventStartDate options:0];
+    NSDate* secondEventStartDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventEndDate options:0];
+    NSDate* secondEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:secondEventStartDate options:0];
+    
+    ECEventView* earlyEventView = [self createEventViewWithStartDate:firstEventStartDate endDate:firstEventEndDate allDay:NO];
+    ECEventView* laterEventView = [self createEventViewWithStartDate:secondEventStartDate endDate:secondEventEndDate  allDay:NO];
+    
+    XCTAssertTrue([earlyEventView compare:laterEventView] == NSOrderedAscending);
+}
+
+- (void)testEventViewCompareForEventsWithAscendingStartAndSameEndDates
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate* firstEventStartDate = [self.testStartDate beginningOfHour];
+    NSDate* secondEventStartDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventStartDate options:0];
+    NSDate* eventsEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:2 toDate:firstEventStartDate options:0];
+    
+    ECEventView* earlyEventView = [self createEventViewWithStartDate:firstEventStartDate endDate:eventsEndDate allDay:NO];
+    ECEventView* laterEventView = [self createEventViewWithStartDate:secondEventStartDate endDate:eventsEndDate allDay:NO];
+    
+    XCTAssertTrue([earlyEventView compare:laterEventView] == NSOrderedAscending);
+}
+
+- (void)testEventViewCompareForEventsWithAscendingStartAndDescendingEndDates
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate* firstEventStartDate = [self.testStartDate beginningOfHour];
+    NSDate* firstEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:3 toDate:firstEventStartDate options:0];
+    NSDate* secondEventStartDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventStartDate options:0];
+    NSDate* secondEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:secondEventStartDate options:0];
+    
+    ECEventView* earlyEventView = [self createEventViewWithStartDate:firstEventStartDate endDate:firstEventEndDate allDay:NO];
+    ECEventView* laterEventView = [self createEventViewWithStartDate:secondEventStartDate endDate:secondEventEndDate  allDay:NO];
+    
+    XCTAssertTrue([earlyEventView compare:laterEventView] == NSOrderedAscending);
+}
+
+- (void)testEventViewCompareWithSameStartAndAscendingEndDates
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate* eventsStartDate = [self.testStartDate beginningOfHour];
+    NSDate* firstEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:eventsStartDate options:0];
+    NSDate* secondEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:2 toDate:eventsStartDate options:0];
+    
+    ECEventView* earlyEventView = [self createEventViewWithStartDate:eventsStartDate endDate:firstEventEndDate allDay:NO];
+    ECEventView* laterEventView = [self createEventViewWithStartDate:eventsStartDate endDate:secondEventEndDate  allDay:NO];
+    
+    XCTAssertTrue([earlyEventView compare:laterEventView] == NSOrderedAscending);
+}
 
 
+- (void)testEventViewCompareWithSameStartAndEndDates
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate* eventsStartDate = [self.testStartDate beginningOfHour];
+    NSDate* eventsEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:eventsStartDate options:0];
+    
+    ECEventView* earlyEventView = [self createEventViewWithStartDate:eventsStartDate endDate:eventsEndDate allDay:NO];
+    ECEventView* laterEventView = [self createEventViewWithStartDate:eventsStartDate endDate:eventsEndDate  allDay:NO];
+    
+    XCTAssertTrue([earlyEventView compare:laterEventView] == NSOrderedSame);
+}
+
+- (void)testEventViewCompareWithSameStartAndDescendingEndDates
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate* eventsStartDate = [self.testStartDate beginningOfHour];
+    NSDate* firstEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:2 toDate:eventsStartDate options:0];
+    NSDate* secondEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:eventsStartDate options:0];
+    
+    ECEventView* earlyEventView = [self createEventViewWithStartDate:eventsStartDate endDate:firstEventEndDate allDay:NO];
+    ECEventView* laterEventView = [self createEventViewWithStartDate:eventsStartDate endDate:secondEventEndDate  allDay:NO];
+    
+    XCTAssertTrue([earlyEventView compare:laterEventView] == NSOrderedDescending);
+}
+
+- (void)testEventViewCompareWithDescendingStartAndAscendingEndDates
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate* firstEventStartDate = [self.testStartDate beginningOfHour];
+    NSDate* firstEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventStartDate options:0];
+    NSDate* secondEventStartDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:-1 toDate:firstEventStartDate options:0];
+    NSDate* secondEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventEndDate options:0];
+    
+    ECEventView* earlyEventView = [self createEventViewWithStartDate:firstEventStartDate endDate:firstEventEndDate allDay:NO];
+    ECEventView* laterEventView = [self createEventViewWithStartDate:secondEventStartDate endDate:secondEventEndDate  allDay:NO];
+    
+    XCTAssertTrue([earlyEventView compare:laterEventView] == NSOrderedDescending);
+}
+
+- (void)testEventViewCompareWithDescendingStartAndSameEndDates
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate* firstEventStartDate = [self.testStartDate beginningOfHour];
+    NSDate* secondEventStartDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:-1 toDate:firstEventStartDate options:0];
+    NSDate* eventsEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventStartDate options:0];
+    
+    ECEventView* earlyEventView = [self createEventViewWithStartDate:firstEventStartDate endDate:eventsEndDate allDay:NO];
+    ECEventView* laterEventView = [self createEventViewWithStartDate:secondEventStartDate endDate:eventsEndDate allDay:NO];
+    
+    XCTAssertTrue([earlyEventView compare:laterEventView] == NSOrderedDescending);
+}
+
+- (void)testEventViewCompareWithDescendingStartAndEndDates
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate* firstEventStartDate = [self.testStartDate beginningOfHour];
+    NSDate* firstEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventStartDate options:0];
+    NSDate* secondEventStartDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:-2 toDate:firstEventStartDate options:0];
+    NSDate* secondEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:secondEventStartDate options:0];
+    
+    ECEventView* earlyEventView = [self createEventViewWithStartDate:firstEventStartDate endDate:firstEventEndDate allDay:NO];
+    ECEventView* laterEventView = [self createEventViewWithStartDate:secondEventStartDate endDate:secondEventEndDate  allDay:NO];
+    
+    XCTAssertTrue([earlyEventView compare:laterEventView] == NSOrderedDescending);
+}
 @end
