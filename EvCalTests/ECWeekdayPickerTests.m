@@ -139,14 +139,24 @@
     [self assertWeekdays:self.picker.weekdays containCorrectDaysForDate:scrollToDate message:@"ECWeekdayPicker should change its weekdays when scrolled to a given date"];
 }
 
-- (void)testScrolledPickerSelectsFirstDayOfWeek
+- (void)testScrolledPickerSelectsScrolledToDate
 {
-    NSDate* scrollToDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate* scrollToDate = [calendar dateByAddingUnit:NSCalendarUnitDay
                                                                     value:14
                                                                    toDate:self.testStartDate options:0];
 
     [self.picker scrollToWeekContainingDate:scrollToDate];
-    XCTAssertTrue([self.picker.selectedDate isEqualToDate:self.picker.weekdays.firstObject]);
+    XCTAssertTrue([calendar isDate:self.picker.selectedDate inSameDayAsDate:scrollToDate]);
+}
+
+- (void)testScrolledPickerSelectsScrolledToDateInTheMiddleOfTheWeek
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate* scrollToDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:15 toDate:self.testStartDate options:0];
+    
+    [self.picker scrollToWeekContainingDate:scrollToDate];
+    XCTAssertTrue([calendar isDate:scrollToDate inSameDayAsDate:self.picker.selectedDate]);
 }
 
 
