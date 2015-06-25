@@ -52,7 +52,19 @@
 }
 
 #pragma mark - Testing
-#pragma mark Creating Date Views
+#pragma mark Creating single date view
+
+- (void)testDateViewFacotryCreated
+{
+    XCTAssertNotNil(self.dateViewFactory);
+}
+
+- (void)testDateViewFactoryReturnsNilIfDateNil
+{
+    ECDateView* dateView = [self.dateViewFactory dateViewForDate:nil];
+    
+    XCTAssertNil(dateView);
+}
 
 - (void)testDateViewFactoryCreatesDateView
 {
@@ -69,26 +81,6 @@
     XCTAssertTrue([calendar isDate:dateView.date inSameDayAsDate:self.testStartDate], @"ECDateViewFactory should create a view with a date in the same day as the given date");
 }
 
-#pragma mark Testing Date View Properties
-
-- (void)testDateViewIsTodaysDatePropertySet
-{
-    ECDateView* dateView = [self.dateViewFactory dateViewForDate:self.testStartDate];
-    
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    XCTAssertEqual([calendar isDateInToday:dateView.date], dateView.isTodaysDate);
-}
-
-//- (void)testDateViewIsTodaysDatePropertyChanges
-//{
-//    ECDateView* dateView = [self.dateViewFactory dateViewForDate:self.testStartDate];
-//    
-//    NSDate* yesterday = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:-1 toDate:self.testStartDate options:0];
-//    
-//    [self.dateViewFactory configureDateView:dateView forDate:yesterday];
-//    XCTAssertFalse(dateView.isTodaysDate);
-//}
-
 - (void)testDateViewUnselectedByDefault
 {
     ECDateView* dateView = [self.dateViewFactory dateViewForDate:self.testStartDate];
@@ -104,21 +96,60 @@
     XCTAssertTrue(dateView.isSelectedDate);
 }
 
-#pragma mark Testing Date View Accessory Views
+#pragma mark Creating multiple views
 
-//- (void)testDateViewHasCorrectNumberOfAccessoryViews
-//{
-//    ECDateView* dateView = [self.dateViewFactory dateViewForDate:self.testStartDate];
-//    
-//    // Count calendars with events in them
-//    NSInteger count = 0;
-//    for (EKCalendar* calendar in self.eventStoreProxy.calendars) {
-//        if ([self.eventStoreProxy eventsFrom:[self.testStartDate beginningOfDay] to:[self.testStartDate endOfDay] in:@[calendar]]) {
-//            count++;
-//        }
-//    }
-//    
-//    XCTAssertEqual(count, dateView.eventAccessoryViews.count, @"Date view should have the same number of accessory views as the user has calendars with events");
-//}
+- (void)testDateViewFactoryReturnsNilIfDatesNil
+{
+    NSArray* dateViews = [self.dateViewFactory dateViewsForDates:nil reusingViews:nil];
+    
+    XCTAssertNil(dateViews);
+}
+
+#define DATE_VIEWS_COUNT    5
+- (void)testDateViewFactoryCreatesDateViewsInCorrectOrder
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSMutableArray* mutableDates = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < DATE_VIEWS_COUNT; i++) {
+        NSDate* date = [calendar dateByAddingUnit:NSCalendarUnitDay value:i toDate:self.testStartDate options:0];
+        [mutableDates addObject:date];
+    }
+    
+    NSArray* dateViews = [self.dateViewFactory dateViewsForDates:mutableDates reusingViews:nil];
+    BOOL datesMismatched = NO;
+    for (NSInteger i = 0; i < dateViews.count; i++) {
+        NSDate* testDate = mutableDates[i];
+        NSDate* dateViewDate = ((ECDateView*)dateViews[i]).date;
+        
+        if (![[NSCalendar currentCalendar] isDate:testDate inSameDayAsDate:dateViewDate]) {
+            datesMismatched = YES;
+        }
+    }
+    
+    XCTAssertFalse(datesMismatched);
+}
+
+- (void)testDateViewFactoryCreatesMultipleDateViewsWithNoReusableViews
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSMutableArray* mutableDates = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < DATE_VIEWS_COUNT; i++) {
+        NSDate* date = [calendar dateByAddingUnit:NSCalendarUnitDay value:i toDate:self.testStartDate options:0];
+        [mutableDates addObject:date];
+    }
+    
+    NSArray* dateViews = [self.dateViewFactory dateViewsForDates:mutableDates reusingViews:nil];
+    XCTAssertEqual(dateViews.count, mutableDates.count);
+}
+
+- (void)testDateViewFactoryReusesDateView
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    ECDateView* dateView = [self.dateViewFactory dateViewForDate:self.testStartDate];
+    NSDate* testDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:self.testStartDate options:0];
+    
+    [self.dateViewFactory dateViewsForDates:@[testDate] reusingViews:@[dateView]];
+    XCTAssertTrue([calendar isDate:dateView.date inSameDayAsDate:testDate]); // event view should be updated
+}
 
 @end

@@ -37,18 +37,4 @@
  */
 - (NSArray*)dateViewsForDates:(NSArray*)dates reusingViews:(NSArray*)reusableViews;
 
-//------------------------------------------------------------------------------
-// @name Calendar Icons
-//------------------------------------------------------------------------------
-
-/**
- *  Creates an array of calendar icons for the given EKCalendar objects by 
- *  reusing icons when possible and creating new icons when necessary.
- *
- *  @param calendars An array of EKCalendars to create icons for
- *
- *  @return An array of calendar icons representing the given calendars
- */
-- (NSArray*)calendarIconsForCalendars:(NSArray*)calendars reusingViews:(NSArray*)reusableViews;
-
 @end
