@@ -101,22 +101,12 @@
     XCTAssertTrue([[NSCalendar currentCalendar] isDate:self.testStartDate inSameDayAsDate:self.dayView.displayDate]);
 }
 
-- (void)testDayViewRequestsPageView
-{
-    XCTAssertTrue(self.eventsRequested);
-}
-
-- (void)testDayViewRequestsContentSize
-{
-    XCTAssertTrue(self.contentSizeRequested);
-}
-
 - (void)testDayViewSetDisplayDateChangesDisplayDate
 {
     NSDate* tomorrow = [self.testStartDate tomorrow];
     [self.dayView setDisplayDate:tomorrow animated:NO];
     
-    XCTAssertTrue([[NSCalendar currentCalendar] isDate:tomorrow inSameDayAsDate:self.testStartDate]);
+    XCTAssertTrue([[NSCalendar currentCalendar] isDate:tomorrow inSameDayAsDate:self.dayView.displayDate]);
 }
 
 - (void)testDayViewSetDisplayDateDoesNotCallDelegateIfNotAnimated
