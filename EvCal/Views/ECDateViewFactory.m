@@ -21,34 +21,40 @@
 
 - (ECDateView*)dateViewForDate:(NSDate *)date
 {
-    ECDateView* dateView = [[ECDateView alloc] initWithDate:date];
-    
-    return dateView;
+    if (date) {
+        return [[ECDateView alloc] initWithDate:date];
+    } else {
+        return nil;
+    }
 }
 
 - (NSArray*)dateViewsForDates:(NSArray *)dates reusingViews:(NSArray *)reusableViews
 {
-    NSMutableArray* mutableDates = [dates mutableCopy];
-    NSMutableArray* mutableReusableViews = [reusableViews mutableCopy];
-    NSMutableArray* mutableDateViews = [[NSMutableArray alloc] init];
-    
-    while (mutableDates.count > 0) {
-        NSDate* date = [mutableDates firstObject];
-        [mutableDates removeObject:date];
+    if (dates) {
+        NSMutableArray* mutableDates = [dates mutableCopy];
+        NSMutableArray* mutableReusableViews = [reusableViews mutableCopy];
+        NSMutableArray* mutableDateViews = [[NSMutableArray alloc] init];
         
-        ECDateView* dateView = [mutableReusableViews firstObject];
-        if (!dateView) {
-            dateView = [[ECDateView alloc] initWithDate:date];
-        } else {
-            dateView.date = date;
+        while (mutableDates.count > 0) {
+            NSDate* date = [mutableDates firstObject];
+            [mutableDates removeObject:date];
             
-            [mutableReusableViews removeObject:dateView];
+            ECDateView* dateView = [mutableReusableViews firstObject];
+            if (!dateView) {
+                dateView = [[ECDateView alloc] initWithDate:date];
+            } else {
+                dateView.date = date;
+                
+                [mutableReusableViews removeObject:dateView];
+            }
+            
+            [mutableDateViews addObject:dateView];
         }
         
-        [mutableDateViews addObject:dateView];
+        return [mutableDateViews copy];
+    } else {
+        return nil;
     }
-    
-    return [mutableDateViews copy];
 }
 
 - (NSArray*)calendarIconsForCalendars:(NSArray *)calendars reusingViews:(NSArray *)reusableViews
