@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECDatePage.h"
 
-@interface ECTestsDateView : UIView
+@interface ECTestsDateView : ECDatePage
 
 @property (nonatomic, strong) NSDate* date;
 

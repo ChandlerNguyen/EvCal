@@ -154,7 +154,7 @@
     return [[ECSingleDayView alloc] init];
 }
 
-- (void)infiniteDateView:(ECInfiniteDatePagingView *)idv preparePage:(UIView *)page forDate:(NSDate *)date
+- (void)infiniteDateView:(ECInfiniteDatePagingView *)idv preparePage:(UIView *)page
 {
     if ([page isKindOfClass:[ECSingleDayView class]]) {
         ECSingleDayView* dayView = (ECSingleDayView*)page;
@@ -162,9 +162,8 @@
         dayView.dayScrollView.delegate = self;
         
         dayView.dayScrollView.contentSize = [self getDayViewContentSize];
-        dayView.date = date;
         
-        NSArray* events = [self.dayViewDataSource dayView:self eventsForDate:date];
+        NSArray* events = [self.dayViewDataSource dayView:self eventsForDate:dayView.date];
         NSArray* eventViews = [ECEventViewFactory eventViewsForEvents:events reusingViews:dayView.eventViews];
         
         for (ECEventView* eventView in eventViews) {

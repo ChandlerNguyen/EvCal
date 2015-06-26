@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECDatePage.h"
 
-@interface ECWeekdaysContainerView : UIView
+@interface ECWeekdaysContainerView : ECDatePage
 
 @property (nonatomic, strong) NSDate* selectedDate;
 @property (nonatomic, strong) NSArray* dateViews;

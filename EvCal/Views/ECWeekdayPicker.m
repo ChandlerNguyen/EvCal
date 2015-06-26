@@ -217,12 +217,11 @@
     return containerView;
 }
 
-- (void)infiniteDateView:(ECInfiniteDatePagingView *)idv preparePage:(UIView *)page forDate:(NSDate *)date
+- (void)infiniteDateView:(ECInfiniteDatePagingView *)idv preparePage:(UIView *)page
 {
-    DDLogDebug(@"Infinite day view requested page for date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     if ([page isKindOfClass:[ECWeekdaysContainerView class]]) {
         ECWeekdaysContainerView* weekdaysContainerView = (ECWeekdaysContainerView*)page;
-        NSArray* weekdays = [self weekdaysForDate:date];
+        NSArray* weekdays = [self weekdaysForDate:weekdaysContainerView.date];
         
         ECDateViewFactory* dateViewFactory = [[ECDateViewFactory alloc] init];
         NSArray* dateViews = [dateViewFactory dateViewsForDates:weekdays reusingViews:weekdaysContainerView.dateViews];

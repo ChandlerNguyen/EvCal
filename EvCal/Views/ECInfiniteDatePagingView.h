@@ -37,7 +37,7 @@
  *  @param page The page to be prepared for display
  *  @param date The date the given page represents
  */
-- (void)infiniteDateView:(ECInfiniteDatePagingView*)idv preparePage:(ECDatePage*)page forDate:(NSDate*)date;
+- (void)infiniteDateView:(ECInfiniteDatePagingView*)idv preparePage:(ECDatePage*)page;
 
 @end
 

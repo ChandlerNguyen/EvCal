@@ -55,13 +55,9 @@
     self.dateChangedCalled = YES;
 }
 // data source
-- (void)infiniteDateView:(ECInfiniteDatePagingView *)idv preparePage:(UIView *)page forDate:(NSDate *)date
+- (void)infiniteDateView:(ECInfiniteDatePagingView *)idv preparePage:(ECDatePage*)page
 {
     self.preparePageRequested = YES;
-    if ([page isKindOfClass:[ECTestsDateView class]]) {
-        ECTestsDateView* dateView = (ECTestsDateView*)page;
-        dateView.date = date;
-    }
 }
 
 - (UIView*)pageViewForInfiniteDateView:(ECInfiniteDatePagingView *)idv
