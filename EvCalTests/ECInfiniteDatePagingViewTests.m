@@ -98,17 +98,17 @@
 
 - (void)testInfiniteDatePagingViewHasVisiblePage
 {
-    XCTAssertNotNil(self.infiniteDatePagingView.visiblePageView);
+    XCTAssertNotNil(self.infiniteDatePagingView.visiblePage);
 }
 
 - (void)testInfiniteDatePagingViewVisiblePageIsKindOfECTestsDateView
 {
-    XCTAssertTrue([self.infiniteDatePagingView.visiblePageView isKindOfClass:[ECTestsDateView class]]);
+    XCTAssertTrue([self.infiniteDatePagingView.visiblePage isKindOfClass:[ECTestsDateView class]]);
 }
 
 - (void)testInfiniteDatePagingViewVisiblePageHasCorrectDate
 {
-    ECTestsDateView* dateView = (ECTestsDateView*)self.infiniteDatePagingView.visiblePageView;
+    ECTestsDateView* dateView = (ECTestsDateView*)self.infiniteDatePagingView.visiblePage;
     
     XCTAssertTrue([[NSCalendar currentCalendar] isDate:dateView.date inSameDayAsDate:self.testStartDate]);
 }
@@ -132,7 +132,7 @@
 {
     [self.infiniteDatePagingView refreshPages];
     
-    ECTestsDateView* dateView = (ECTestsDateView*)self.infiniteDatePagingView.visiblePageView;
+    ECTestsDateView* dateView = (ECTestsDateView*)self.infiniteDatePagingView.visiblePage;
     XCTAssertTrue([[NSCalendar currentCalendar] isDate:self.testStartDate inSameDayAsDate:dateView.date]);
 }
 

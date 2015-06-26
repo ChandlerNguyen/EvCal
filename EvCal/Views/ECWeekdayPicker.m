@@ -124,8 +124,8 @@
 
 - (ECWeekdaysContainerView*)centerContainer
 {
-    if ([self.weekdayScroller.visiblePageView isKindOfClass:[ECWeekdaysContainerView class]]) {
-        return (ECWeekdaysContainerView*)self.weekdayScroller.visiblePageView;
+    if ([self.weekdayScroller.visiblePage isKindOfClass:[ECWeekdaysContainerView class]]) {
+        return (ECWeekdaysContainerView*)self.weekdayScroller.visiblePage;
     } else {
         return nil;
     }

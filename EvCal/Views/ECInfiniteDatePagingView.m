@@ -14,7 +14,7 @@
 @property (nonatomic, weak) UIView* pageContainerView;
 
 @property (nonatomic, strong) NSDate* scrollToDate;
-@property (nonatomic, weak) UIView* pageView;
+@property (nonatomic, weak) ECDatePage* pageView;
 
 @end
 
@@ -91,10 +91,10 @@
     [self refreshPages];
 }
 
-- (UIView*)pageView
+- (ECDatePage*)pageView
 {
     if (!_pageView) {
-        UIView* pageView = [self getPageView];
+        ECDatePage* pageView = [self getPageView];
         _pageView = pageView;
         [self.pageContainerView addSubview:pageView];
     }
@@ -106,7 +106,7 @@
 #define CENTER_PAGE_INDEX   1
 #define RIGHT_PAGE_INDEX    2
 
-- (UIView*)visiblePageView
+- (UIView*)visiblePage
 {
     return self.pages[CENTER_PAGE_INDEX];
 }
@@ -142,8 +142,8 @@
     NSMutableArray* pages = [[NSMutableArray alloc] init];
     [pages addObject:self.pageView];
     
-    UIView* leftPageView = [[[self.pageView class] alloc] initWithFrame:self.bounds];
-    UIView* rightPageView = [[[self.pageView class] alloc] initWithFrame:self.bounds];
+    ECDatePage* leftPageView = [[[self.pageView class] alloc] initWithFrame:self.bounds];
+    ECDatePage* rightPageView = [[[self.pageView class] alloc] initWithFrame:self.bounds];
     
     [self.pageContainerView addSubview:leftPageView];
     [self.pageContainerView addSubview:rightPageView];
@@ -226,8 +226,8 @@
 
 - (void)changePageDates
 {
-    UIView* leftPageView = self.pages[LEFT_PAGE_INDEX];
-    UIView* rightPageView = self.pages[RIGHT_PAGE_INDEX];
+    ECDatePage* leftPageView = self.pages[LEFT_PAGE_INDEX];
+    ECDatePage* rightPageView = self.pages[RIGHT_PAGE_INDEX];
     
     CGFloat pageWidth = self.contentSize.width / 3.0f;
     if (leftPageView.frame.origin.x < self.bounds.origin.x - pageWidth) {
@@ -313,12 +313,12 @@
 
 #pragma mark - Page Control
 
-- (UIView*)getPageView
+- (ECDatePage*)getPageView
 {
     if (self.pageViewDataSource) {
         return [self.pageViewDataSource pageViewForInfiniteDateView:self];
     } else {
-        return [[UIView alloc] initWithFrame:self.bounds];
+        return [[ECDatePage alloc] initWithFrame:self.bounds];
     }
 }
 

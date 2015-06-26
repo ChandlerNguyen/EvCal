@@ -25,12 +25,13 @@
 @property (nonatomic) BOOL eventViewsLayoutIsValid;
 @property (nonatomic) BOOL timeLabelsLayoutIsValid;
 
+@property (nonatomic, weak, readwrite) UIScrollView* dayScrollView;
 @property (nonatomic, weak) UIView* allDayEventsView;
 @property (nonatomic, weak) UIView* durationEventsView;
 @property (nonatomic, strong, readwrite) NSArray* eventViews;
 @property (nonatomic, strong) NSMutableDictionary* eventViewFrames;
 
-@property (nonatomic) BOOL displayDateIsSameDayAsToday;
+@property (nonatomic) BOOL dateIsSameDayAsToday;
 @property (nonatomic, weak) ECTimeLine* currentTimeLine;
 @property (nonatomic, strong) NSArray* hourLines;
 
@@ -58,15 +59,27 @@
 
 - (void)setup
 {
-    self.showsHorizontalScrollIndicator = NO;
-    self.showsVerticalScrollIndicator = NO;
+    self.dayScrollView.showsHorizontalScrollIndicator = NO;
+    self.dayScrollView.showsVerticalScrollIndicator = NO;
     
     self.eventViewsLayoutIsValid = NO;
     self.timeLabelsLayoutIsValid = NO;
     
-    self.backgroundColor = [UIColor whiteColor];
-    
     [self addCurrentTimeLineTimer];
+}
+
+- (UIScrollView*)dayScrollView
+{
+    if (!_dayScrollView) {
+        UIScrollView* dayScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+        
+        dayScrollView.backgroundColor = [UIColor whiteColor];
+        
+        _dayScrollView = dayScrollView;
+        [self addSubview:dayScrollView];
+    }
+    
+    return _dayScrollView;
 }
 
 - (NSArray*)eventViews
@@ -124,10 +137,10 @@
     return _hourLines;
 }
 
-- (void)setDisplayDate:(NSDate *)displayDate
+- (void)setDate:(NSDate *)date
 {
-    DDLogDebug(@"Display date changed: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:displayDate]);
-    _displayDate = displayDate;
+    [super setDate:date];
+    DDLogDebug(@"Display date changed: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     
     self.eventViewsLayoutIsValid = NO;
     
@@ -139,8 +152,9 @@
 {
     self.eventViewsLayoutIsValid = NO;
     self.timeLabelsLayoutIsValid = NO;
-    
+    self.dayScrollView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
     [super setFrame:frame];
+
 }
 
 #pragma mark - Creating Views
@@ -149,7 +163,7 @@
 {
     NSMutableArray* mutableHourLines = [[NSMutableArray alloc] init];
     
-    for (NSDate* date in [self.displayDate hoursOfDay]) {
+    for (NSDate* date in [self.date hoursOfDay]) {
         ECTimeLine* line = [[ECTimeLine alloc] initWithDate:date];
         
         [mutableHourLines addObject:line];
@@ -174,7 +188,7 @@
 {
     UIView* allDayEventsView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    [self addSubview:allDayEventsView];
+    [self.dayScrollView addSubview:allDayEventsView];
     
     return allDayEventsView;
 }
@@ -183,7 +197,7 @@
 {
     UIView* durationEventsView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    [self addSubview:durationEventsView];
+    [self.dayScrollView addSubview:durationEventsView];
     
     return durationEventsView;
 }
@@ -201,8 +215,8 @@
 - (void)updateCurrentTime
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    self.displayDateIsSameDayAsToday = [calendar isDate:self.displayDate inSameDayAsDate:[NSDate date]];
-    if (self.displayDateIsSameDayAsToday) {
+    self.dateIsSameDayAsToday = [calendar isDate:self.date inSameDayAsDate:[NSDate date]];
+    if (self.dateIsSameDayAsToday) {
         self.currentTimeLine.date = [NSDate date];
         self.currentTimeLine.hidden = NO;
         [self changeCurrentTimeLinePosition];
@@ -217,7 +231,7 @@
 {
     for (ECTimeLine* hourLine in self.hourLines) {
         if (CGRectIntersectsRect(self.currentTimeLine.frame, hourLine.frame)) {
-            hourLine.timeHidden = self.displayDateIsSameDayAsToday;
+            hourLine.timeHidden = self.dateIsSameDayAsToday;
         } else {
             hourLine.timeHidden = NO;
         }
@@ -242,9 +256,9 @@
 {
     CGRect allDayFrame = CGRectZero;
     if ([self containsAllDayEventView]) {
-        allDayFrame = CGRectMake(self.bounds.origin.x,
-                                 self.bounds.origin.y - self.contentOffset.y,
-                                 self.contentSize.width,
+        allDayFrame = CGRectMake(self.dayScrollView.bounds.origin.x,
+                                 self.dayScrollView.bounds.origin.y - self.dayScrollView.contentOffset.y,
+                                 self.dayScrollView.contentSize.width,
                                  ALL_DAY_VIEW_HEIGHT);
     }
     
@@ -253,10 +267,10 @@
 
 - (void)layoutDurationEventsView
 {
-    CGRect durationEventsViewFrame = CGRectMake(self.bounds.origin.x,
+    CGRect durationEventsViewFrame = CGRectMake(self.dayScrollView.bounds.origin.x,
                                                 CGRectGetMaxY(self.allDayEventsView.frame),
-                                                self.contentSize.width,
-                                                self.contentSize.height - self.allDayEventsView.frame.size.height);
+                                                self.dayScrollView.contentSize.width,
+                                                self.dayScrollView.contentSize.height - self.allDayEventsView.frame.size.height);
     
     self.durationEventsView.frame = durationEventsViewFrame;
     
@@ -278,7 +292,7 @@
 - (void)changeCurrentTimeLinePosition
 {
     CGFloat currentTimeLineOriginY = [self.eventsLayout verticalPositionForDate:self.currentTimeLine.date
-                                                                 relativeToDate:self.displayDate
+                                                                 relativeToDate:self.date
                                                                          bounds:[self adjustedDurationEventsBounds]] - HOUR_LINE_HEIGHT / 2.0f;
     CGPoint currentTimeLineOrigin = CGPointMake(self.durationEventsView.bounds.origin.x, currentTimeLineOriginY);
     
@@ -293,7 +307,7 @@
         CGRect adjustedBounds = [self adjustedDurationEventsBounds];
         
         for (ECTimeLine* timeLine in self.hourLines) {
-            CGFloat originY = [self.eventsLayout verticalPositionForDate:timeLine.date relativeToDate:self.displayDate bounds:adjustedBounds] - HOUR_LINE_HEIGHT / 2.0f;
+            CGFloat originY = [self.eventsLayout verticalPositionForDate:timeLine.date relativeToDate:self.date bounds:adjustedBounds] - HOUR_LINE_HEIGHT / 2.0f;
             CGRect timeLineFrame = CGRectMake(self.durationEventsView.bounds.origin.x,
                                               originY,
                                               self.durationEventsView.bounds.size.width,
@@ -440,7 +454,7 @@
 
 - (NSDate*)layout:(ECDayViewEventsLayout*)layout displayDateForEventViews:(NSArray*)eventViews
 {
-    return self.displayDate;
+    return self.date;
 }
 
 - (CGRect)layout:(ECDayViewEventsLayout *)layout boundsForEventViews:(NSArray *)eventViews
@@ -458,10 +472,10 @@
 
 - (void)scrollToCurrentTime:(BOOL)animated
 {
-    CGRect topHalfOfVisibleRect = CGRectMake(self.contentOffset.x,
-                                             self.contentOffset.y,
-                                             self.bounds.size.width,
-                                             self.bounds.size.height / 2.0f);
+    CGRect topHalfOfVisibleRect = CGRectMake(self.dayScrollView.contentOffset.x,
+                                             self.dayScrollView.contentOffset.y,
+                                             self.dayScrollView.bounds.size.width,
+                                             self.dayScrollView.bounds.size.height / 2.0f);
     CGRect convertedCurrentTimeLineFrame = [self convertRect:self.currentTimeLine.frame fromView:self.durationEventsView];
     
     if (!CGRectIntersectsRect(topHalfOfVisibleRect, convertedCurrentTimeLineFrame)) {
@@ -477,10 +491,10 @@
 
 - (void)scrollToTime:(NSDate*)time animated:(BOOL)animated
 {
-    CGFloat timeOffsetY = [self.eventsLayout verticalPositionForDate:time relativeToDate:self.displayDate bounds:self.durationEventsView.bounds] + self.allDayEventsView.frame.size.height;
-    timeOffsetY = MIN(timeOffsetY, self.contentSize.height - self.bounds.size.height) - HOUR_LINE_HEIGHT / 2.0f;
+    CGFloat timeOffsetY = [self.eventsLayout verticalPositionForDate:time relativeToDate:self.date bounds:self.durationEventsView.bounds] + self.allDayEventsView.frame.size.height;
+    timeOffsetY = MIN(timeOffsetY, self.dayScrollView.contentSize.height - self.dayScrollView.bounds.size.height) - HOUR_LINE_HEIGHT / 2.0f;
     CGPoint timeOffset = CGPointMake(self.bounds.origin.x, timeOffsetY);
     
-    [self setContentOffset:timeOffset animated:animated];
+    [self.dayScrollView setContentOffset:timeOffset animated:animated];
 }
 @end

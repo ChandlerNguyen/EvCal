@@ -131,7 +131,7 @@
 
 - (void)scrollToCurrentTime:(BOOL)animated
 {
-    ECSingleDayView* dayView = (ECSingleDayView*)self.dayViewContainer.visiblePageView;
+    ECSingleDayView* dayView = (ECSingleDayView*)self.dayViewContainer.visiblePage;
     [dayView scrollToCurrentTime:animated];
 }
 
@@ -159,10 +159,10 @@
     if ([page isKindOfClass:[ECSingleDayView class]]) {
         ECSingleDayView* dayView = (ECSingleDayView*)page;
         
-        dayView.delegate = self;
+        dayView.dayScrollView.delegate = self;
         
-        dayView.contentSize = [self getDayViewContentSize];
-        dayView.displayDate = date;
+        dayView.dayScrollView.contentSize = [self getDayViewContentSize];
+        dayView.date = date;
         
         NSArray* events = [self.dayViewDataSource dayView:self eventsForDate:date];
         NSArray* eventViews = [ECEventViewFactory eventViewsForEvents:events reusingViews:dayView.eventViews];

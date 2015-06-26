@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ECDatePage.h"
 @class ECInfiniteDatePagingView;
 
 //------------------------------------------------------------------------------
@@ -25,7 +25,7 @@
  *
  *  @return THe view to be displayed by the infinite date paging view.
  */
-- (UIView*)pageViewForInfiniteDateView:(ECInfiniteDatePagingView*)idv;
+- (ECDatePage*)pageViewForInfiniteDateView:(ECInfiniteDatePagingView*)idv;
 
 /**
  *  Passes a page view to the data source allowing it to be updated before it is
@@ -37,7 +37,7 @@
  *  @param page The page to be prepared for display
  *  @param date The date the given page represents
  */
-- (void)infiniteDateView:(ECInfiniteDatePagingView*)idv preparePage:(UIView*)page forDate:(NSDate*)date;
+- (void)infiniteDateView:(ECInfiniteDatePagingView*)idv preparePage:(ECDatePage*)page forDate:(NSDate*)date;
 
 @end
 
@@ -75,7 +75,7 @@
 @property (nonatomic) NSInteger pageDateDelta; // default is 1
 
 // The currently visible page which represents the given date
-@property (nonatomic, weak, readonly) UIView* visiblePageView;
+@property (nonatomic, weak, readonly) ECDatePage* visiblePage;
 
 // The data source for page views
 @property (nonatomic, weak) id<ECInfiniteDatePagingViewDataSource> pageViewDataSource;

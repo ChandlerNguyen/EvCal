@@ -6,19 +6,21 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
+#import "ECDatePage.h"
 #import <UIKit/UIKit.h>
 @class ECEventView;
 
-@interface ECSingleDayView : UIScrollView
+@interface ECSingleDayView : ECDatePage
 
 //------------------------------------------------------------------------------
 // @name Properties
 //------------------------------------------------------------------------------
 
-@property (nonatomic, strong) NSDate* displayDate;
-
 // The day views current list of event views
 @property (nonatomic, strong, readonly) NSArray* eventViews;
+
+// The scroll view contained by the day view
+@property (nonatomic, weak, readonly) UIScrollView* dayScrollView;
 
 //------------------------------------------------------------------------------
 // @name Manging Event Views
