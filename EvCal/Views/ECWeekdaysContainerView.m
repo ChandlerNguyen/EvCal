@@ -56,8 +56,7 @@
 
 - (void)updateSelecteDateView:(NSDate*)selectedDate
 {
-    ECDateView* firstDateView = [self.dateViews firstObject];
-    DDLogDebug(@"First weekday %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:firstDateView.date]);
+    DDLogDebug(@"Updating selected date view with date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:selectedDate]);
     NSCalendar* calendar = [NSCalendar currentCalendar];
     for (ECDateView* dateView in self.dateViews) {
         if ([calendar isDate:dateView.date inSameDayAsDate:selectedDate]) {

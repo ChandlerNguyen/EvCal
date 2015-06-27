@@ -63,6 +63,7 @@
 - (ECInfiniteDatePagingView*)weekdayScroller
 {
     if (!_weekdayScroller) {
+        DDLogDebug(@"Creating weekday scroller with initial date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:self.weekdays.firstObject]);
         NSDate* scrollerDate = [self.weekdays firstObject];
         ECInfiniteDatePagingView* weekdayScroller = [[ECInfiniteDatePagingView alloc] initWithFrame:self.bounds
                                                                                                                    date:scrollerDate];
@@ -107,6 +108,7 @@
 
 - (void)updateSelectedDateView:(BOOL)animated
 {
+    DDLogDebug(@"Updating selected date view with date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:self.selectedDate]);
     [self.centerContainer setSelectedDate:self.selectedDate];
 }
 
@@ -160,13 +162,9 @@
 - (void)scrollToWeekContainingDate:(NSDate *)date
 {
     DDLogDebug(@"Scrolling to week containing date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
-    NSArray* oldWeekdays = [self.weekdays copy];
     [self updateWeekdaysWithDate:date]; // alters current weekdays
-    NSArray* newWeekdays = [self.weekdays copy];
     
     [self.weekdayScroller scrollToDate:[self.weekdays firstObject] animated:YES];
-    
-    [self informDelegatePickerScrolledFrom:oldWeekdays to:newWeekdays];
 }
 
 
@@ -174,11 +172,13 @@
 
 - (void)refreshWeekdays
 {
+    DDLogDebug(@"Refreshing weekdays");
     [self.weekdayScroller refreshPages];
 }
 
 - (void)refreshWeekdayWithDate:(NSDate *)date
 {
+    DDLogDebug(@"Refreshing weekday with date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     [self.weekdayScroller refreshPages];
 }
 
@@ -194,6 +194,7 @@
 
 - (void)selectDateView:(ECDateView*)dateView animated:(BOOL)animated
 {
+    DDLogDebug(@"Selecting date view with date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:dateView.date]);
     self.selectedDateView = dateView;
     [self updateSelectedDateView:YES];
     [dateView setSelectedDate:YES animated:animated];
@@ -202,6 +203,10 @@
 
 + (void)updateDateViews:(NSArray*)dateViews withDates:(NSArray*)dates
 {
+    DDLogDebug(@"Updating date views with dates:");
+    for (NSDate* date in dates) {
+        DDLogDebug(@"\t%@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
+    }
     for (NSInteger i = 0; i < dateViews.count; i++) {
         ECDateView* dateView = dateViews[i];
         NSDate* date = dates[i];
@@ -213,13 +218,15 @@
 
 - (UIView*)pageViewForInfiniteDateView:(ECInfiniteDatePagingView *)idv
 {
+    DDLogDebug(@"Creating base page view for infinite scroller");
     ECWeekdaysContainerView* containerView = [[ECWeekdaysContainerView alloc] init];
     return containerView;
 }
 
-- (void)infiniteDateView:(ECInfiniteDatePagingView *)idv preparePage:(UIView *)page
+- (void)infiniteDateView:(ECInfiniteDatePagingView *)idv preparePage:(ECDatePage*)page
 {
     if ([page isKindOfClass:[ECWeekdaysContainerView class]]) {
+        DDLogDebug(@"Preparing date view with date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:page.date]);
         ECWeekdaysContainerView* weekdaysContainerView = (ECWeekdaysContainerView*)page;
         NSArray* weekdays = [self weekdaysForDate:weekdaysContainerView.date];
         
@@ -237,22 +244,16 @@
 
 - (void)infiniteDateView:(ECInfiniteDatePagingView *)idv dateChangedFrom:(NSDate *)fromDate to:(NSDate *)toDate
 {
+    DDLogDebug(@"Infinite date view changed date from %@ to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:fromDate], [[ECLogFormatter logMessageDateFormatter] stringFromDate:toDate]);
     self.selectedDate = toDate;
-    
-    [self informDelegatePickerScrolledFrom:[self weekdaysForDate:fromDate] to:[self weekdaysForDate:toDate]];
 }
 
 - (void)informDelegateSelectedDateChanged:(NSDate*)selectedDate
 {
+    DDLogDebug(@"Informing delegate seleted date changed to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:selectedDate]);
     if ([self.pickerDelegate respondsToSelector:@selector(weekdayPicker:didSelectDate:)]) {
         [self.pickerDelegate weekdayPicker:self didSelectDate:selectedDate];
     }
 }
 
-- (void)informDelegatePickerScrolledFrom:(NSArray*)oldWeekdays to:(NSArray*)newWeekdays
-{
-    if ([self.pickerDelegate respondsToSelector:@selector(weekdayPicker:didScrollFrom:to:)]) {
-        [self.pickerDelegate weekdayPicker:self didScrollFrom:oldWeekdays to:newWeekdays];
-    }
-}
 @end

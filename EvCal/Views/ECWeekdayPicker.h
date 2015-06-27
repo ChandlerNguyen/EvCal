@@ -42,15 +42,6 @@
  */
 - (void)weekdayPicker:(ECWeekdayPicker*)picker didSelectDate:(NSDate*)date;
 
-/**
- *  Tells the delegate when a scroll event happened within the weekday picker.
- *
- *  @param picker   The picker in which the scroll occurred
- *  @param fromWeek The picker's weekdays prior to the scroll event
- *  @param toWeek   The picker's weekdays after the scroll event
- */
-- (void)weekdayPicker:(ECWeekdayPicker *)picker didScrollFrom:(NSArray*)fromWeek to:(NSArray*)toWeek;
-
 @end
 
 @interface ECWeekdayPicker : UIView

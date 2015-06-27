@@ -11,6 +11,4 @@
 
 @interface ECTestsDateView : ECDatePage
 
-@property (nonatomic, strong) NSDate* date;
-
 @end

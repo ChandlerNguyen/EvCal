@@ -80,6 +80,7 @@
 - (ECWeekdayPicker*)weekdayPicker
 {
     if (!_weekdayPicker) {
+        DDLogDebug(@"Creating weekday picker with date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:self.displayDate]);
         ECWeekdayPicker* weekdayPicker = [[ECWeekdayPicker alloc] initWithDate:self.displayDate];
         
         _weekdayPicker = weekdayPicker;
@@ -105,7 +106,7 @@
 
 - (void)setDisplayDate:(NSDate *)displayDate
 {
-    DDLogDebug(@"Day View display date changed OLD: %@, NEW: %@", _displayDate, displayDate);
+    DDLogDebug(@"Day View display date changed to %@", displayDate);
     _displayDate = displayDate;
     
     self.title = [self.dateFormatter stringFromDate:displayDate];
@@ -165,23 +166,17 @@
 
 - (void)weekdayPicker:(ECWeekdayPicker *)picker didSelectDate:(NSDate *)date
 {
+    DDLogDebug(@"Weekday picker changed selected date to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     self.displayDate = date;
     
     [self.dayView scrollToDate:date animated:YES];
 }
 
-- (void)weekdayPicker:(ECWeekdayPicker *)picker didScrollFrom:(NSArray *)fromWeek to:(NSArray *)toWeek
-{
-    [self.dayView scrollToDate:picker.selectedDate animated:YES];
-}
-
 - (NSArray*)calendarsForDate:(NSDate *)date
 {
+    DDLogDebug(@"Weekday picker requeseted calendars for date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     NSMutableArray* mutableCalendars = [[NSMutableArray alloc] init];
     for (EKEvent* event in [[ECEventStoreProxy sharedInstance] eventsFrom:[date beginningOfDay] to:[date endOfDay]]) {
-//        if ([[ECEventStoreProxy sharedInstance] eventsFrom:[date beginningOfDay] to:[date endOfDay] in:@[calendar]].count > 0) {
-//            [mutableCalendars addObject:calendar];
-//        }
         if (![mutableCalendars containsObject:event.calendar]) {
             [mutableCalendars addObject:event.calendar];
         }

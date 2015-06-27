@@ -35,6 +35,7 @@
     self = [super initWithFrame:frame];
 
     if (self) {
+        DDLogDebug(@"Initalized with date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
         self.date = date;
         [self setup];
     }
@@ -80,7 +81,7 @@
 
 - (void)setDate:(NSDate *)date
 {
-    DDLogDebug(@"Changing date from: %@ to: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:_date], [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
+    DDLogDebug(@"Changing date to: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     NSDate* oldDate = _date;
     _date = date;
     
@@ -155,6 +156,7 @@
 
 - (NSMutableArray*)createPages
 {
+    DDLogDebug(@"Creating pages");
     NSMutableArray* pages = [[NSMutableArray alloc] init];
     [pages addObject:self.pageView];
     
@@ -246,12 +248,6 @@
     return recenter;
 }
 
-//CGRect movedPageFrame = CGRectMake(self.pageContainerView.bounds.origin.x + toIndex * self.contentSize.width / 3.0f,
-//                                   self.pageContainerView.bounds.origin.y,
-//                                   self.bounds.size.width,
-//                                   self.bounds.size.height);
-//movedPage.frame = movedPageFrame;
-
 - (void)updatePageIndices
 {
     ECDatePage* leftPageView = self.pages[kPageLeftIndex];
@@ -261,11 +257,13 @@
     if (leftPageView.frame.origin.x < self.bounds.origin.x - pageWidth) {
         DDLogDebug(@"Left page scrolled out of container");
         [self movePageAtIndex:kPageLeftIndex toIndex:kPageRightIndex];
+        DDLogDebug(@"Changing date to center date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:self.centerPageDate]);
         self.date = self.centerPageDate;
         [self updatePageAtIndex:kPageRightIndex];
     } else if (CGRectGetMaxX(rightPageView.frame) > CGRectGetMaxX(self.bounds) + pageWidth) {
         DDLogDebug(@"Right page scrolled out of container");
         [self movePageAtIndex:kPageRightIndex toIndex:kPageLeftIndex];
+        DDLogDebug(@"Changing date to center date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:self.centerPageDate]);
         self.date = self.centerPageDate;
         [self updatePageAtIndex:kPageLeftIndex];
     }
@@ -278,6 +276,7 @@ static NSInteger kPageRightIndex = 2;
 
 - (void)movePageAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
 {
+    DDLogDebug(@"Moving page from index %lu to index %lu", fromIndex, toIndex);
     UIView* movedPage = self.pages[fromIndex];
     [self.pages removeObject:movedPage];
     [self.pages insertObject:movedPage atIndex:toIndex];
@@ -285,8 +284,10 @@ static NSInteger kPageRightIndex = 2;
 
 - (void)updatePageAtIndex:(NSInteger)index
 {
+    DDLogDebug(@"Updating page at index %lu", index);
     ECDatePage* changeDatePage = self.pages[index];
     changeDatePage.date = [self.calendar dateByAddingUnit:self.calendarUnit value:(index - kPageCenterIndex) * self.pageDateDelta toDate:self.date options:0];
+    DDLogDebug(@"Page date changed to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:changeDatePage.date]);
     [self.pageViewDataSource infiniteDateView:self preparePage:changeDatePage];
 }
 
@@ -295,12 +296,14 @@ static NSInteger kPageRightIndex = 2;
     for (NSInteger i = 0; i < self.pages.count; i++) {
         ECDatePage* page = self.pages[i];
         page.date = [self.calendar dateByAddingUnit:self.calendarUnit value:(i - kPageCenterIndex) * self.pageDateDelta toDate:self.date options:0];
+        DDLogDebug(@"Page at index %lu date changed to %@", i, [[ECLogFormatter logMessageDateFormatter] stringFromDate:page.date]);
     }
 }
 
 - (void)scrollToDate:(NSDate *)date animated:(BOOL)animated
 {
-    if (date) {
+    if (date && ![self.calendar isDate:date equalToDate:self.date toUnitGranularity:self.calendarUnit]) {
+        DDLogDebug(@"Scrolling to date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
         self.date = date;
         if (animated) {
             if (![self.calendar isDate:date equalToDate:self.centerPageDate toUnitGranularity:self.calendarUnit]) {
@@ -349,7 +352,6 @@ static NSInteger kPageRightIndex = 2;
 
 - (NSInteger)indexOfPageWithDate:(NSDate*)date
 {
-    
     for (NSInteger i = 0; i < self.pages.count; i++) {
         ECDatePage* page = self.pages[i];
         if ([self.calendar isDate:date equalToDate:page.date toUnitGranularity:self.calendarUnit]) {
@@ -363,6 +365,7 @@ static NSInteger kPageRightIndex = 2;
 - (ECDatePage*)getPageView
 {
     if (self.pageViewDataSource) {
+        DDLogDebug(@"Requesting page view from data source");
         return [self.pageViewDataSource pageViewForInfiniteDateView:self];
     } else {
         return [[ECDatePage alloc] initWithFrame:self.bounds];
@@ -372,6 +375,7 @@ static NSInteger kPageRightIndex = 2;
 - (void)refreshPages
 {
     if (self.date) {
+        DDLogDebug(@"Refreshing pages");
         for (NSInteger i = 0; i <= kPageRightIndex; i++) {
             [self refreshPageAtIndex:i];
         }
@@ -380,6 +384,7 @@ static NSInteger kPageRightIndex = 2;
 
 - (void)refreshPageAtIndex:(NSInteger)index
 {
+    DDLogDebug(@"Refreshing page at index %lu", index);
     [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[index]];
 }
 
@@ -397,6 +402,7 @@ static NSInteger kPageRightIndex = 2;
 
 - (void)informDelegateDateChangedFromDate:(NSDate*)fromDate toDate:(NSDate*)toDate
 {
+    DDLogDebug(@"Informing delegate date changed from %@ to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:fromDate], [[ECLogFormatter logMessageDateFormatter] stringFromDate:toDate]);
     if ([self.pageViewDelegate respondsToSelector:@selector(infiniteDateView:dateChangedFrom:to:)]) {
         [self.pageViewDelegate infiniteDateView:self dateChangedFrom:fromDate to:toDate];
     }

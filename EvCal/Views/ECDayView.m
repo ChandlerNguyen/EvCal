@@ -84,10 +84,8 @@
     CGSize contentSize = CGSizeZero;
     if (self.dayViewDataSource) {
         contentSize = [self.dayViewDataSource contentSizeForDayView:self];
-        DDLogDebug(@"Data source content size: %@", NSStringFromCGSize(contentSize));
     } else {
         contentSize = self.bounds.size;
-        DDLogDebug(@"Using bounds for content size");
     }
     
     return contentSize;
