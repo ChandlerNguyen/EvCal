@@ -131,6 +131,7 @@
 {
     weekdayPicker.pickerDelegate = self;
     weekdayPicker.pickerDataSource = self;
+    DDLogDebug(@"Setting weekday picker selected date to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:self.displayDate]);
     [weekdayPicker setSelectedDate:self.displayDate animated:NO];
 }
 
@@ -225,6 +226,7 @@
 {
     self.displayDate = toDate;
     
+    DDLogDebug(@"Setting weekday picker selected date to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:toDate]);
     [self.weekdayPicker setSelectedDate:toDate animated:NO];
 }
 
@@ -269,6 +271,8 @@
 
 - (IBAction)todayButtonTapped:(UIBarButtonItem *)sender
 {
-    [self.weekdayPicker setSelectedDate:[[NSDate date] beginningOfDay] animated:YES];
+    NSDate* todayDate = [[NSDate date] beginningOfDay];
+    DDLogDebug(@"Setting weekday picker date to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:todayDate]);
+    [self.weekdayPicker setSelectedDate:todayDate animated:YES];
 }
 @end

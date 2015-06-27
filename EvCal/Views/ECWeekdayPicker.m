@@ -90,6 +90,7 @@
     _selectedDate = selectedDate;
     
     [self updateSelectedDateView:NO];
+    [self informDelegateSelectedDateChanged:selectedDate];
 }
 
 - (void)setSelectedDate:(NSDate *)selectedDate animated:(BOOL)animated
@@ -104,6 +105,7 @@
     }
     
     [self updateSelectedDateView:animated];
+    [self informDelegateSelectedDateChanged:selectedDate];
 }
 
 - (void)updateSelectedDateView:(BOOL)animated
@@ -164,7 +166,7 @@
     DDLogDebug(@"Scrolling to week containing date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
     [self updateWeekdaysWithDate:date]; // alters current weekdays
     
-    [self.weekdayScroller scrollToDate:[self.weekdays firstObject] animated:YES];
+    [self.weekdayScroller scrollToDate:date animated:YES];
 }
 
 

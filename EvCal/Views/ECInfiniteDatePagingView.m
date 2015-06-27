@@ -60,6 +60,7 @@
 {
     CGRect oldFrame = self.frame;
     [super setFrame:frame];
+    self.scrollingToDate = NO;
     
     if (self.pageView && !CGRectEqualToRect(oldFrame, frame)) {
         CGSize threePageContentSize = CGSizeMake(frame.size.width * 3, frame.size.height);
@@ -416,7 +417,6 @@ static NSInteger kPageRightIndex = 2;
         [self refreshPageAtIndex:kPageLeftIndex];
         [self refreshPageAtIndex:kPageRightIndex];
     }
-    self.scrollingToDate = NO;
 }
 
 @end

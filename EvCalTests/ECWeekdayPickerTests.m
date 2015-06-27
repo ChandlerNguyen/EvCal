@@ -19,7 +19,6 @@
 @interface ECWeekdayPickerTests : XCTestCase <ECWeekdayPickerDelegate, ECWeekdayPickerDataSource>
 
 @property (nonatomic) BOOL didSelectDateCalled;
-@property (nonatomic) BOOL didScrollFromWeekToWeekCalled;
 @property (nonatomic) BOOL calendarsRequested;
 
 @property (nonatomic, strong) NSDate* testStartDate;
@@ -36,7 +35,6 @@
     [super setUp];
 
     self.didSelectDateCalled = NO;
-    self.didScrollFromWeekToWeekCalled = NO;
     self.calendarsRequested = NO;
 
     self.testStartDate = [NSDate date];
@@ -72,11 +70,6 @@
 
 #pragma mark Data source and delegate
 
-- (void)weekdayPicker:(ECWeekdayPicker *)picker didScrollFrom:(NSArray *)fromWeek to:(NSArray *)toWeek
-{
-    self.didScrollFromWeekToWeekCalled = YES;
-}
-
 - (void)weekdayPicker:(ECWeekdayPicker *)picker didSelectDate:(NSDate *)date
 {
     self.didSelectDateCalled = YES;
@@ -89,14 +82,6 @@
     
     return [eventStore calendarsForEntityType:EKEntityTypeEvent];
 }
-
-- (void)testScrolledPickerCallsDelegateMethod
-{
-    [self.picker scrollToWeekContainingDate:[NSDate date]];
-    
-    XCTAssertTrue(self.didScrollFromWeekToWeekCalled, @"ECWeekdayPicker should alert its delegate when it was scrolled");
-}
-
 
 #pragma mark Creating and Initialization
 
@@ -116,17 +101,6 @@
 }
 
 #pragma mark Scrolling and Delegation
-
-- (void)testScrolledPickerInformsDelegate
-{
-    self.didScrollFromWeekToWeekCalled = NO;
-    NSDate* scrollToDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay
-                                                                    value:7
-                                                                   toDate:self.testStartDate options:0];
-
-    [self.picker scrollToWeekContainingDate:scrollToDate];
-    XCTAssertTrue(self.didScrollFromWeekToWeekCalled);
-}
 
 - (void)testScrolledPickerWeekdaysContainScrolledToDate
 {
