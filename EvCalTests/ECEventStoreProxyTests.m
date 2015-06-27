@@ -12,7 +12,9 @@
 #import <XCTest/XCTest.h>
 
 // Pods
-#import <JPSimulatorHacks/JPSimulatorHacks.h>
+#if !(TARGET_IPHONE_SIMULATOR)
+    #import <JPSimulatorHacks/JPSimulatorHacks.h>
+#endif
 #import <CocoaLumberjack/CocoaLumberjack.h>
 static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaLumberjack
 
