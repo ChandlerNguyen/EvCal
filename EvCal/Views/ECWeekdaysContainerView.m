@@ -8,8 +8,13 @@
 
 #import "ECDateView.h"
 #import "ECWeekdaysContainerView.h"
+#import "ECDateViewFactory.h"
+#import "NSdate+CupertinoYankee.h"
 
 @interface ECWeekdaysContainerView()
+
+@property (nonatomic, strong, readwrite) NSArray* weekdays;
+@property (nonatomic, strong, readwrite) NSArray* dateViews;
 
 @end
 
@@ -17,10 +22,11 @@
 
 #pragma mark - Properties and Lifecycle
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithDate:(NSDate *)date
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:CGRectZero];
     if (self) {
+        self.date = date;
         self.clipsToBounds = YES;
         self.backgroundColor = [UIColor whiteColor];
     }
@@ -28,31 +34,56 @@
     return self;
 }
 
-- (void)setDateViews:(NSArray *)dateViews
+- (NSArray*)dateViews
 {
-    if (_dateViews) {
-        for (ECDateView* dateView in _dateViews) {
-            [dateView removeFromSuperview];
-        }
+    if (!_dateViews) {
+        _dateViews = [[[ECDateViewFactory alloc] init] dateViewsForDates:self.weekdays reusingViews:_dateViews];
         
-        for (ECDateView* dateView in dateViews) {
+        for (ECDateView* dateView in _dateViews) {
             [self addSubview:dateView];
         }
     }
-    
-    _dateViews = dateViews;
+    return _dateViews;
+}
+
+- (void)setDate:(NSDate *)date
+{
+    [super setDate:date];
+    self.weekdays = [self weekdaysForDate:date];
+    [self updateDateViewsWithWeekdays:self.weekdays];
 }
 
 - (void)setSelectedDate:(NSDate *)selectedDate
 {
     DDLogDebug(@"Selected date changed to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:selectedDate]);
+    NSDate* oldSelectedDate = _selectedDate;
     _selectedDate = selectedDate;
-    
-    [self updateSelecteDateView:selectedDate];
+   
+    if (!oldSelectedDate ||
+        ![[NSCalendar currentCalendar] isDate:selectedDate inSameDayAsDate:oldSelectedDate]) {
+        [self updateSelecteDateView:selectedDate];
+    }
 }
 
 
-#pragma mark - Managing selected date view
+- (NSArray*)weekdaysForDate:(NSDate*)date
+{
+    NSDate* startOfWeek = [date beginningOfWeek];
+
+    DDLogDebug(@"Date: %@, First day of week: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date], [[ECLogFormatter logMessageDateFormatter] stringFromDate:startOfWeek]);
+
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSMutableArray* mutableWeekdays = [[NSMutableArray alloc] init];
+    for (NSUInteger i = 0; i < 7; i++) {
+        NSDate* date = [calendar dateByAddingUnit:NSCalendarUnitDay value:i toDate:startOfWeek options:0];
+
+        [mutableWeekdays addObject:date];
+    }
+
+    return [mutableWeekdays copy];
+}
+
+#pragma mark - Managing date views
 
 - (void)updateSelecteDateView:(NSDate*)selectedDate
 {
@@ -66,6 +97,18 @@
         }
     }
 }
+
+- (void)updateDateViewsWithWeekdays:(NSArray*)weekdays
+{
+    if (weekdays) {
+        for (NSInteger i = 0; i < self.dateViews.count; i++) {
+            ECDateView* dateView = self.dateViews[i];
+            NSDate* date = weekdays[i];
+            dateView.date = date;
+        }
+    }
+}
+
 
 #pragma mark - Layout
 

@@ -25,6 +25,16 @@
  */
 - (NSArray*)calendarsForDate:(NSDate*)date;
 
+@optional
+/**
+ *  Requests the selected date for a set of weekdays.
+ *
+ *  @param weekdays The weekdays from which to select a date
+ *
+ *  @return The date that should be selected.
+ */
+- (NSDate*)selectedDateForWeekdays:(NSArray*)weekdays;
+
 @end
 
 //------------------------------------------------------------------------------
@@ -44,24 +54,14 @@
 
 @end
 
-@interface ECWeekdayPicker : UIView
+@interface ECWeekdayPicker : UIControl
 
 //------------------------------------------------------------------------------
 // @name Properties
 //------------------------------------------------------------------------------
 
 // The picker's currently selected date
-@property (nonatomic, strong, readonly) NSDate* selectedDate;
-
-/**
- *  Change the selected date of the receiver with or without an animation. If
- *  the date is not in the same day as any of the current weekdays a call will
- *  be made to the receiver's scrollToWeekContainingDate: method.
- *
- *  @param selectedDate The new selected date value
- *  @param animated     Determines whether the change should be animated
- */
-- (void)setSelectedDate:(NSDate *)selectedDate animated:(BOOL)animated;
+@property (nonatomic, strong) NSDate* selectedDate;
 
 // An ordered week of dates
 @property (nonatomic, strong, readonly) NSArray* weekdays;
@@ -92,10 +92,11 @@
 //------------------------------------------------------------------------------
 
 /**
- *  Changes the receiver's weekdays to those of the week containing the given 
- *  date.
+ *  Scrolls the weekday picker to the week containing the given date. This will
+ *  cause the picker to request the appropriate selected date for the given
+ *  weekdays.
  *
- *  @param date The date in the week that the receiver should display.
+ *  @param date The date to which to scroll;
  */
 - (void)scrollToWeekContainingDate:(NSDate*)date;
 
