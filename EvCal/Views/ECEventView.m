@@ -107,6 +107,9 @@
     
     self.titleLabel.textColor = [UIColor textColorForCGColor:self.event.calendar.CGColor];
     self.locationLabel.textColor = [UIColor textColorForCGColor:self.event.calendar.CGColor];
+    
+    self.titleLabel.font = [self titleLabelFont];
+    self.locationLabel.font = [self locationLabelFont];
 }
 
 
