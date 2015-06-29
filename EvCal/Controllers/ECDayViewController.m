@@ -167,16 +167,24 @@
 
 - (void)weekdayPicker:(ECWeekdayPicker *)picker didSelectDate:(NSDate *)date
 {
-    DDLogDebug(@"Weekday picker changed selected date to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
-    self.displayDate = date;
-    
-    [self.dayView scrollToDate:date animated:YES];
+    if (![[NSCalendar currentCalendar] isDate:self.displayDate inSameDayAsDate:date]) {
+        DDLogDebug(@"Weekday picker changed selected date to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
+        self.displayDate = date;
+        
+        [self.dayView scrollToDate:date animated:YES];
+    }
 }
 
 - (NSDate*)selectedDateForWeekdays:(NSArray *)weekdays
 {
-    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate* firstDayOfWeek = [weekdays firstObject];
+    NSDate* lastDayOfWeek = [weekdays lastObject];
+    if ([self.displayDate compare:[firstDayOfWeek beginningOfDay]] == NSOrderedDescending &&
+        [self.displayDate compare:[lastDayOfWeek endOfDay]] == NSOrderedAscending) {
+        return self.displayDate;
+    }
     
+    NSCalendar* calendar = [NSCalendar currentCalendar];
     for (NSDate* date in weekdays) {
         if ([calendar isDateInToday:date]) {
             return date;
@@ -238,10 +246,12 @@
 
 - (void)dayView:(ECDayView *)dayView didScrollFrom:(NSDate *)fromDate to:(NSDate *)toDate
 {
-    self.displayDate = toDate;
-    
-    DDLogDebug(@"Setting weekday picker selected date to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:toDate]);
-    [self.weekdayPicker scrollToWeekContainingDate:toDate];
+    if (![[NSCalendar currentCalendar] isDate:toDate inSameDayAsDate:self.displayDate]){
+        self.displayDate = toDate;
+        
+        DDLogDebug(@"Setting weekday picker selected date to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:toDate]);
+        self.weekdayPicker.selectedDate = toDate;
+    }
 }
 
 - (void)dayViewDidScrollTime:(ECDayView *)dayView

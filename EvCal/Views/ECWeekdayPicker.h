@@ -25,16 +25,6 @@
  */
 - (NSArray*)calendarsForDate:(NSDate*)date;
 
-@optional
-/**
- *  Requests the selected date for a set of weekdays.
- *
- *  @param weekdays The weekdays from which to select a date
- *
- *  @return The date that should be selected.
- */
-- (NSDate*)selectedDateForWeekdays:(NSArray*)weekdays;
-
 @end
 
 //------------------------------------------------------------------------------
@@ -90,15 +80,6 @@
 //------------------------------------------------------------------------------
 // @name Updating picker's displayed dates
 //------------------------------------------------------------------------------
-
-/**
- *  Scrolls the weekday picker to the week containing the given date. This will
- *  cause the picker to request the appropriate selected date for the given
- *  weekdays.
- *
- *  @param date The date to which to scroll;
- */
-- (void)scrollToWeekContainingDate:(NSDate*)date;
 
 /**
  *  Refreshes the weekdays of the current selected date by reloading any date

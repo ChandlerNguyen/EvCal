@@ -281,6 +281,7 @@ static NSInteger kPageRightIndex = 2;
     UIView* movedPage = self.pages[fromIndex];
     [self.pages removeObject:movedPage];
     [self.pages insertObject:movedPage atIndex:toIndex];
+    [self informDelegateVisiblePageChangedTo:self.pages[kPageCenterIndex]];
 }
 
 - (void)updatePageAtIndex:(NSInteger)index
@@ -409,6 +410,14 @@ static NSInteger kPageRightIndex = 2;
     }
 }
 
+- (void)informDelegateVisiblePageChangedTo:(ECDatePage*)page
+{
+    DDLogDebug(@"Informing delgate visible page changed to page with date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:page.date]);
+    if ([self.pageViewDelegate respondsToSelector:@selector(infiniteDateView:didChangeVisiblePage:)]) {
+        [self.pageViewDelegate infiniteDateView:self didChangeVisiblePage:page];
+    }
+}
+
 #pragma mark - Scroll View Delegate
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
@@ -416,6 +425,7 @@ static NSInteger kPageRightIndex = 2;
     if (self.scrollingToDate) {
         [self refreshPageAtIndex:kPageLeftIndex];
         [self refreshPageAtIndex:kPageRightIndex];
+        self.scrollingToDate = NO;
     }
 }
 

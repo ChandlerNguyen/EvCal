@@ -57,6 +57,15 @@
  */
 - (void)infiniteDateView:(ECInfiniteDatePagingView*)idv dateChangedFrom:(NSDate*)fromDate to:(NSDate*)toDate;
 
+/**
+ *  Informs the delegate that the infinite paging view has changed its visible
+ *  page.
+ *
+ *  @param idv  The infinite date paging view which changed its page.
+ *  @param page The new visible page.
+ */
+- (void)infiniteDateView:(ECInfiniteDatePagingView*)idv didChangeVisiblePage:(ECDatePage*)page;
+
 @end
 
 @interface ECInfiniteDatePagingView : UIScrollView

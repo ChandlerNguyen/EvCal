@@ -85,18 +85,44 @@
     return self.centerContainer.weekdays;
 }
 
+@synthesize selectedDate = _selectedDate;
+
 - (NSDate*)selectedDate
 {
-    return self.centerContainer.selectedDate;
+    if (!_selectedDate) {
+        _selectedDate = [[NSDate date] beginningOfDay];
+    }
+    
+    return _selectedDate;
 }
 
 - (void)setSelectedDate:(NSDate *)selectedDate
 {
-    self.centerContainer.selectedDate = selectedDate;
+    _selectedDate = selectedDate;
+    
+    if (![self weekdaysContainDayOfDate:selectedDate]) {
+        [self scrollToWeekContainingDate:selectedDate];
+    } else {
+        self.centerContainer.selectedDate = selectedDate;
+    }
+    
+    [self informDelegateDateWasSelected:selectedDate];
 }
 
 #pragma mark - Date math
 
+- (BOOL)weekdaysContainDayOfDate:(NSDate*)date
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSArray* weekdays = self.centerContainer.weekdays;
+    for (NSDate* weekday in weekdays) {
+        if ([calendar isDate:weekday inSameDayAsDate:date]) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
 
 #pragma mark - ECInfiniteDatePagingView Data source and delegate
 
@@ -112,9 +138,6 @@
     if ([page isKindOfClass:[ECWeekdaysContainerView class]]) {
         ECWeekdaysContainerView* weekdayContainer = (ECWeekdaysContainerView*)page;
         
-        self.centerContainer.selectedDate = [self selectedDateForWeekdays:self.centerContainer.weekdays];
-        [self informDelegateDateWasSelected:self.selectedDate];
-        
         for (ECDateView* dateView in weekdayContainer.dateViews) {
             dateView.calendars = [self.pickerDataSource calendarsForDate:dateView.date];
             [dateView addTarget:self action:@selector(dateViewTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -122,15 +145,13 @@
     }
 }
 
-- (NSDate*)selectedDateForWeekdays:(NSArray*)weekdays
+- (void)infiniteDateView:(ECInfiniteDatePagingView *)idv didChangeVisiblePage:(ECDatePage *)page
 {
-    if ([self.pickerDataSource respondsToSelector:@selector(selectedDateForWeekdays:)]) {
-        return [self.pickerDataSource selectedDateForWeekdays:weekdays];
-    } else {
-        return weekdays.firstObject;
+    if ([page isKindOfClass:[ECWeekdaysContainerView class]]) {
+        ECWeekdaysContainerView* weekdayContainerView = (ECWeekdaysContainerView*)page;
+        weekdayContainerView.selectedDate = self.selectedDate;
     }
 }
-
 
 - (void)informDelegateDateWasSelected:(NSDate*)date
 {
@@ -150,9 +171,7 @@
 
 - (void)dateViewTapped:(ECDateView*)dateView
 {
-    self.centerContainer.selectedDate = dateView.date;
-    
-    [self informDelegateDateWasSelected:dateView.date];
+    self.selectedDate = dateView.date;
 }
 
 - (void)refreshWeekdays
