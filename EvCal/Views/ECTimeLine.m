@@ -37,6 +37,7 @@
 
 - (void)setup
 {
+    self.userInteractionEnabled = NO;
     self.backgroundColor = [UIColor clearColor];
     self.timeLineInset = [self calculateTimeLineInset];
 }
