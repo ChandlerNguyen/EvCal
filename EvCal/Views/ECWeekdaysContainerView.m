@@ -22,16 +22,31 @@
 
 #pragma mark - Properties and Lifecycle
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setup];
+    }
+    
+    return self;
+}
+
 - (instancetype)initWithDate:(NSDate *)date
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         self.date = date;
-        self.clipsToBounds = YES;
-        self.backgroundColor = [UIColor whiteColor];
+        [self setup];
     }
     
     return self;
+}
+
+- (void)setup
+{
+        self.clipsToBounds = YES;
+        self.backgroundColor = [UIColor whiteColor];
 }
 
 - (NSArray*)dateViews
@@ -119,8 +134,6 @@
     [self layoutDateViews];
 }
 
-#define DATE_VIEW_SPACING   1.0f
-
 - (void)layoutDateViews
 {
     if (self.dateViews.count > 0) {
@@ -128,7 +141,7 @@
         CGFloat leftPadding = (self.bounds.size.width - dateViewWidth * self.dateViews.count) / 2.0f;
         CGFloat paddedOriginX = self.bounds.origin.x + leftPadding;
         for (NSInteger i = 0; i < self.dateViews.count; i++) {
-            CGRect dateViewFrame = CGRectMake(paddedOriginX + (i + 1) * (dateViewWidth + DATE_VIEW_SPACING) - dateViewWidth,
+            CGRect dateViewFrame = CGRectMake(paddedOriginX + (i * dateViewWidth),
                                               self.bounds.origin.y,
                                               dateViewWidth,
                                               self.bounds.size.height - 1.0f);

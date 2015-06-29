@@ -36,6 +36,7 @@
     self = [super initWithFrame:CGRectZero];
     if (self) {
         [self initWeekdayScrollerWithDate:date];
+        self.backgroundColor = [UIColor whiteColor];
     }
     
     return self;
