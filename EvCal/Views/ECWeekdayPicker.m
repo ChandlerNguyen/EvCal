@@ -100,7 +100,7 @@
 {
     _selectedDate = selectedDate;
     
-    if (![self weekdaysContainDayOfDate:selectedDate]) {
+    if (![self weekdays:self.centerContainer.weekdays containDayOfDate:selectedDate]) {
         [self scrollToWeekContainingDate:selectedDate];
     } else {
         self.centerContainer.selectedDate = selectedDate;
@@ -111,10 +111,9 @@
 
 #pragma mark - Date math
 
-- (BOOL)weekdaysContainDayOfDate:(NSDate*)date
+- (BOOL)weekdays:(NSArray*)weekdays containDayOfDate:(NSDate*)date
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSArray* weekdays = self.centerContainer.weekdays;
     for (NSDate* weekday in weekdays) {
         if ([calendar isDate:weekday inSameDayAsDate:date]) {
             return YES;
@@ -149,8 +148,31 @@
 {
     if ([page isKindOfClass:[ECWeekdaysContainerView class]]) {
         ECWeekdaysContainerView* weekdayContainerView = (ECWeekdaysContainerView*)page;
-        weekdayContainerView.selectedDate = self.selectedDate;
+        if ([self weekdays:weekdayContainerView.weekdays containDayOfDate:self.selectedDate]) {
+            weekdayContainerView.selectedDate = self.selectedDate;
+        } else {
+            weekdayContainerView.selectedDate = [self selectedDateForWeekdays:weekdayContainerView.weekdays];
+            self.selectedDate = weekdayContainerView.selectedDate;
+        }
     }
+}
+
+- (NSDate*)selectedDateForWeekdays:(NSArray*)weekdays
+{
+    NSDate* selectedDate = nil;
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    for (NSDate* date in weekdays) {
+        if ([calendar isDateInToday:date]) {
+            selectedDate = date;
+        }
+    }
+    
+    if (!selectedDate) {
+        NSInteger weekdayIndex = [calendar components:(NSCalendarUnitWeekday) fromDate:self.selectedDate].weekday - 1;
+        selectedDate = weekdays[weekdayIndex];
+    }
+    
+    return selectedDate;
 }
 
 - (void)informDelegateDateWasSelected:(NSDate*)date
