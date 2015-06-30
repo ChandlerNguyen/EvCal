@@ -46,6 +46,7 @@
 		84CD51991B3124D500902BDE /* ECSingleDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CD51981B3124D500902BDE /* ECSingleDayView.m */; };
 		84D168F51B3D6AAD00DBCF17 /* ECDatePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D168F41B3D6AAD00DBCF17 /* ECDatePage.m */; };
 		84D168FB1B42A49300DBCF17 /* ECEventCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D168FA1B42A49300DBCF17 /* ECEventCache.m */; };
+		84D168FD1B42AACB00DBCF17 /* ECEventCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D168FC1B42AACB00DBCF17 /* ECEventCacheTests.m */; };
 		84D92C991B29A52E0050015D /* ECDayViewEventsLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D92C981B29A52E0050015D /* ECDayViewEventsLayout.m */; };
 		84D92C9B1B29AFD40050015D /* ECDayViewEventsLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D92C9A1B29AFD40050015D /* ECDayViewEventsLayoutTests.m */; };
 		84EF22611B08769A003DA610 /* ECEventStoreProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EF22601B08769A003DA610 /* ECEventStoreProxy.m */; };
@@ -141,6 +142,7 @@
 		84D168F41B3D6AAD00DBCF17 /* ECDatePage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDatePage.m; path = Views/ECDatePage.m; sourceTree = "<group>"; };
 		84D168F91B42A49300DBCF17 /* ECEventCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEventCache.h; path = Model/ECEventCache.h; sourceTree = "<group>"; };
 		84D168FA1B42A49300DBCF17 /* ECEventCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEventCache.m; path = Model/ECEventCache.m; sourceTree = "<group>"; };
+		84D168FC1B42AACB00DBCF17 /* ECEventCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEventCacheTests.m; sourceTree = "<group>"; };
 		84D92C971B29A52E0050015D /* ECDayViewEventsLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDayViewEventsLayout.h; path = Views/ECDayViewEventsLayout.h; sourceTree = "<group>"; };
 		84D92C981B29A52E0050015D /* ECDayViewEventsLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDayViewEventsLayout.m; path = Views/ECDayViewEventsLayout.m; sourceTree = "<group>"; };
 		84D92C9A1B29AFD40050015D /* ECDayViewEventsLayoutTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDayViewEventsLayoutTests.m; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 		84443EF91B0DE6E800385E5A /* Test Suites */ = {
 			isa = PBXGroup;
 			children = (
+				84D168FC1B42AACB00DBCF17 /* ECEventCacheTests.m */,
 				849773F11B3C09710097259F /* ECDateViewTests.m */,
 				846FDB4B1B39A98000910D4F /* ECDayViewTests.m */,
 				846FDB461B39317F00910D4F /* ECInfiniteDatePagingViewTests.m */,
@@ -635,6 +638,7 @@
 				84443F101B10794700385E5A /* ECTestsEventFactory.m in Sources */,
 				846FDB4A1B393FFD00910D4F /* ECTestsDateView.m in Sources */,
 				8478F79A1B1AE8FF0096F1B7 /* ECDateViewFactoryTests.m in Sources */,
+				84D168FD1B42AACB00DBCF17 /* ECEventCacheTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
