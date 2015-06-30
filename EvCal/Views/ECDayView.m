@@ -48,11 +48,15 @@
 - (void)setDisplayDate:(NSDate *)displayDate animated:(BOOL)animated
 {
     DDLogDebug(@"Changing display date: %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:displayDate]);
+    NSDate* oldDisplayDate = _displayDate;
     _displayDate = displayDate;
     
-    [self.dayViewContainer scrollToDate:displayDate animated:animated];
+    if (![[NSCalendar currentCalendar] isDate:oldDisplayDate inSameDayAsDate:displayDate]) {
+        [self.dayViewContainer scrollToDate:displayDate animated:animated];
+        [self refreshCalendarEvents];
+        [self informDelegateDateScrolledFromDate:oldDisplayDate toDate:displayDate];
+    }
     
-    [self refreshCalendarEvents];
 }
 
 - (ECInfiniteDatePagingView*)dayViewContainer
@@ -131,6 +135,7 @@
 {
     ECSingleDayView* dayView = (ECSingleDayView*)self.dayViewContainer.visiblePage;
     [dayView scrollToCurrentTime:animated];
+    [self informDelegateTimeScrolled];
 }
 
 - (void)scrollToDate:(NSDate *)date animated:(BOOL)animated
@@ -151,6 +156,7 @@
 {
     return [[ECSingleDayView alloc] init];
 }
+
 
 - (void)infiniteDateView:(ECInfiniteDatePagingView *)idv preparePage:(UIView *)page
 {
@@ -175,7 +181,10 @@
 
 - (void)infiniteDateView:(ECInfiniteDatePagingView *)idv dateChangedFrom:(NSDate *)fromDate to:(NSDate *)toDate
 {
-    [self informDelegateDateScrolledFromDate:fromDate toDate:toDate];
+    if (![[NSCalendar currentCalendar] isDate:toDate inSameDayAsDate:self.displayDate]) {
+        _displayDate = toDate;
+        [self informDelegateDateScrolledFromDate:fromDate toDate:toDate];
+    }
 }
 
 #pragma mark - UI Events

@@ -149,14 +149,6 @@
     XCTAssertTrue(self.eventsRequested);
 }
 
-- (void)testDayViewRefreshCalendarEventsDoesNotRequestContentSize
-{
-    self.contentSizeRequested = NO;
-    [self.dayView refreshCalendarEvents];
-   
-    XCTAssertFalse(self.contentSizeRequested);
-}
-
 - (void)testDayViewRefreshCalendarEventsDoesNotChangeDisplayDate
 {
     [self.dayView refreshCalendarEvents];
