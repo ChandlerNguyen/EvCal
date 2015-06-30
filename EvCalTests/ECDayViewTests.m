@@ -109,14 +109,6 @@
     XCTAssertTrue([[NSCalendar currentCalendar] isDate:tomorrow inSameDayAsDate:self.dayView.displayDate]);
 }
 
-- (void)testDayViewSetDisplayDateDoesNotCallDelegateIfNotAnimated
-{
-    NSDate* tomorrow = [self.testStartDate tomorrow];
-    [self.dayView setDisplayDate:tomorrow animated:NO];
-    
-    XCTAssertFalse(self.dayViewScrolledCalled);
-}
-
 - (void)testDayViewSetDisplayDateDoesCallDelegateIfAnimated
 {
     NSDate* tomorrow = [self.testStartDate tomorrow];
