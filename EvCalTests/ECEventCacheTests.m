@@ -12,6 +12,7 @@
 
 // Helpers
 #import "NSDate+CupertinoYankee.h"
+#import "EKEvent+ECAdditions.h"
 
 // EvCal Classes
 #import "ECEventCache.h"
@@ -79,12 +80,12 @@
 
 - (void)testCacheCanBeCreated
 {
-    XCTAssertNotNil(self.eventCache);
+    XCTAssertNotNil(self.eventCache, @"Event cache should be initialized");
 }
 
 - (void)testCacheDataSourceSetCorrectly
 {
-    XCTAssertEqualObjects(self, self.eventCache.cacheDataSource);
+    XCTAssertEqualObjects(self, self.eventCache.cacheDataSource, @"Event cache data source should be set");
 }
 
 - (void)testCacheReturnsSameEventsAsEventStore
@@ -110,13 +111,9 @@
     NSArray* cacheEvents = [self.eventCache eventsFrom:startOfYear to:endOfYear in:@[self.testCalendar]];
     
     NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:startOfYear endDate:endOfYear calendars:@[self.testCalendar]];
-    NSArray* eventStoreEvents = [self.eventStore eventsMatchingPredicate:eventsPredicate];
+    NSArray* storeEvents = [[self.eventStore eventsMatchingPredicate:eventsPredicate] sortedArrayUsingSelector:@selector(compareStartAndEndDateWithEvent:)];
     
-    XCTAssertEqual(cacheEvents.count, eventStoreEvents.count, @"Event cache should return the same number of events as the event store");
-    for (EKEvent* event in eventStoreEvents) {
-        // check each event because no guarantee is made about the order of events from EKEventStore
-        XCTAssertTrue([cacheEvents containsObject:event], @"Event cache should load all the events from the given calendar");
-    }
+    XCTAssertEqualObjects(cacheEvents, storeEvents, @"Event cache should return the same events as the event store");
 }
 
 - (void)testCacheReturnsSameEventsAsEventStoreForDatePrecedingPreviousDateRange
@@ -129,14 +126,155 @@
     [self.eventCache eventsFrom:startOfMonth to:endOfMonth in:nil];
     
     // grab events for month preceding intialized month
-    NSArray* previousMonthCacheEvents = [self.eventCache eventsFrom:startOfPreviousMonth to:startOfMonth in:nil];
+    NSArray* cacheEvents = [self.eventCache eventsFrom:startOfPreviousMonth to:startOfMonth in:nil];
     
     NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:startOfPreviousMonth endDate:startOfMonth calendars:nil];
-    NSArray* previousMonthStoreEvents = [self.eventStore eventsMatchingPredicate:eventsPredicate];
+    NSArray* storeEvents = [[self.eventStore eventsMatchingPredicate:eventsPredicate] sortedArrayUsingSelector:@selector(compareStartAndEndDateWithEvent:)];
     
-    XCTAssertEqual(previousMonthCacheEvents.count, previousMonthStoreEvents.count, @"Event cache should contain the same number of events as the event store");
-    for (EKEvent* event in previousMonthStoreEvents) {
-        XCTAssertTrue([previousMonthCacheEvents containsObject:event], @"Event cache should contain all the events in the event store return");
+    XCTAssertEqual(cacheEvents.count, storeEvents.count, @"Event cache should return the same events as the event store");
+    for (EKEvent* event in storeEvents) {
+        XCTAssertTrue([cacheEvents containsObject:event], @"Event cache should return the same events as the event store");
+    }
+}
+
+- (void)testCacheReturnsSameEventsAsEventStoreForEndDateFollowingPreviousDateRange
+{
+    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
+    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* endOfNextMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:1 toDate:endOfMonth options:0];
+    
+    // initialize cache with a month of events
+    [self.eventCache eventsFrom:startOfMonth to:endOfMonth in:nil];
+    
+    // grab events for month following initalized month
+    NSArray* cacheEvents = [self.eventCache eventsFrom:endOfMonth to:endOfNextMonth in:nil];
+    
+    NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:endOfMonth endDate:endOfNextMonth calendars:nil];
+    NSArray* storeEvents = [[self.eventStore eventsMatchingPredicate:eventsPredicate] sortedArrayUsingSelector:@selector(compareStartAndEndDateWithEvent:)];
+    
+    XCTAssertEqual(cacheEvents.count, storeEvents.count, @"Event cache should return the same events as the event store");
+    for (EKEvent* event in storeEvents) {
+        XCTAssertTrue([cacheEvents containsObject:event], @"Event cache should return the same events as the event store");
+    }
+}
+
+- (void)testCacheReturnsSameEventsAsEventStoreForStartAndEndDateThatPrecedePreviousDateRange
+{
+    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
+    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* startOfTwoMonthsAgo = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:-2 toDate:startOfMonth options:0];
+    NSDate* endOfTwoMonthsAgo = [startOfTwoMonthsAgo endOfMonth];
+    
+    [self.eventCache eventsFrom:startOfMonth to:endOfMonth in:nil];
+    
+    NSArray* cacheEvents = [self.eventCache eventsFrom:startOfTwoMonthsAgo to:endOfTwoMonthsAgo in:nil];
+    
+    NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:startOfTwoMonthsAgo endDate:endOfTwoMonthsAgo calendars:nil];
+    NSArray* storeEvents = [[self.eventStore eventsMatchingPredicate:eventsPredicate] sortedArrayUsingSelector:@selector(compareStartAndEndDateWithEvent:)];
+    
+    XCTAssertEqual(cacheEvents.count, storeEvents.count, @"Event cache should return the same events as the event store");
+    for (EKEvent* event in storeEvents) {
+        XCTAssertTrue([cacheEvents containsObject:event], @"Event cache should return the same events as the event store");
+    }
+}
+
+- (void)testCacheReturnsSameEventsAsEventStoreForStartDatePrecedingAndEndDateWithinPreviousDateRange
+{
+    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
+    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* previousMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:-1 toDate:startOfMonth options:0];
+    NSDate* twoDaysIntoMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:2 toDate:startOfMonth options:0];
+    
+    [self.eventCache eventsFrom:startOfMonth to:endOfMonth in:nil];
+    
+    NSArray* cacheEvents = [self.eventCache eventsFrom:previousMonth to:twoDaysIntoMonth in:nil];
+    
+    NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:previousMonth endDate:twoDaysIntoMonth calendars:nil];
+    NSArray* storeEvents = [[self.eventStore eventsMatchingPredicate:eventsPredicate] sortedArrayUsingSelector:@selector(compareStartAndEndDateWithEvent:)];
+    
+    XCTAssertEqual(cacheEvents.count, storeEvents.count, @"Event cache should return the same events as the event store");
+    for (EKEvent* event in storeEvents) {
+        XCTAssertTrue([cacheEvents containsObject:event], @"Event cache should return the same events as the event store");
+    }
+}
+
+- (void)testCacheReturnsSameEventAsEventStoreForStartAndEndDateWithinPreviousDateRange
+{
+    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
+    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* twoDaysIntoMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:2 toDate:startOfMonth options:0];
+    NSDate* tenDaysIntoMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:10 toDate:startOfMonth options:0];
+    
+    [self.eventCache eventsFrom:startOfMonth to:endOfMonth in:nil];
+    
+    NSArray* cacheEvents = [self.eventCache eventsFrom:twoDaysIntoMonth to:tenDaysIntoMonth in:nil];
+    
+    NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:startOfMonth endDate:endOfMonth calendars:nil];
+    NSArray* storeEvents = [[self.eventStore eventsMatchingPredicate:eventsPredicate] sortedArrayUsingSelector:@selector(compareStartAndEndDateWithEvent:)];
+    
+    XCTAssertEqual(cacheEvents.count, storeEvents.count, @"Event cache should return the same events as the event store");
+    for (EKEvent* event in storeEvents) {
+        XCTAssertTrue([cacheEvents containsObject:event], @"Event cache should return the same events as the event store");
+    }
+}
+
+- (void)testCacheReturnsSameEventAsEventStoreForStartDateWithinAndEndDateFollowingPreviousDateRange
+{
+    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
+    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* twoDaysBeforeEndOfMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:-2 toDate:endOfMonth options:0];
+    NSDate* endOfNextMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:1 toDate:endOfMonth options:0];
+    
+    [self.eventCache eventsFrom:startOfMonth to:endOfMonth in:nil];
+    
+    NSArray* cacheEvents = [self.eventCache eventsFrom:twoDaysBeforeEndOfMonth to:endOfNextMonth in:nil];
+    
+    NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:twoDaysBeforeEndOfMonth endDate:endOfNextMonth calendars:nil];
+    NSArray* storeEvents = [[self.eventStore eventsMatchingPredicate:eventsPredicate] sortedArrayUsingSelector:@selector(compareStartAndEndDateWithEvent:)];
+    
+    XCTAssertEqual(cacheEvents.count, storeEvents.count, @"Event cache should return the same events as the event store");
+    for (EKEvent* event in storeEvents) {
+        XCTAssertTrue([cacheEvents containsObject:event], @"Event cache should return the same events as the event store");
+    }
+}
+
+- (void)testcacheReturnsSameEventAsEventStoreForStartAndDateFollowingPreviousDateRange
+{
+    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
+    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* startOfNextMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:2 toDate:endOfMonth options:0];
+    NSDate* endOfNextMonth = [startOfNextMonth endOfMonth];
+    
+    [self.eventCache eventsFrom:startOfMonth to:endOfMonth in:nil];
+    
+    NSArray* cacheEvents = [self.eventCache eventsFrom:startOfNextMonth to:endOfNextMonth in:nil];
+    
+    NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:startOfNextMonth endDate:endOfNextMonth calendars:nil];
+    NSArray* storeEvents = [[self.eventStore eventsMatchingPredicate:eventsPredicate] sortedArrayUsingSelector:@selector(compareStartAndEndDateWithEvent:)];
+    
+    XCTAssertEqual(cacheEvents.count, storeEvents.count, @"Event cache should return the same events as the event store");
+    for (EKEvent* event in storeEvents) {
+        XCTAssertTrue([cacheEvents containsObject:event], @"Event cache should return the same events as the event store");
+    }
+}
+
+- (void)testCacheReturnsSameEventAsEventStoreForStartDatePrecedingAndEndDateFollowingPreviousDateRange
+{
+    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
+    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* startOfPreviousMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:-1 toDate:startOfMonth options:0];
+    NSDate* endOfNextMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:1 toDate:endOfMonth options:0];
+    
+    [self.eventCache eventsFrom:startOfMonth to:endOfMonth in:nil];
+    
+    NSArray* cacheEvents = [self.eventCache eventsFrom:startOfPreviousMonth to:endOfNextMonth in:nil];
+    
+    NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:startOfPreviousMonth endDate:endOfNextMonth calendars:nil];
+    NSArray* storeEvents = [[self.eventStore eventsMatchingPredicate:eventsPredicate] sortedArrayUsingSelector:@selector(compareStartAndEndDateWithEvent:)];
+    
+    XCTAssertEqual(cacheEvents.count, storeEvents.count, @"Event cache should return the same events as the event store");
+    for (EKEvent* event in storeEvents) {
+        XCTAssertTrue([cacheEvents containsObject:event], @"Event cache should return the same events as the event store");
     }
 }
 

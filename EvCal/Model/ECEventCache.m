@@ -9,6 +9,7 @@
 @import EventKit;
 #import "ECEventCache.h"
 #import "NSDate+CupertinoYankee.h"
+#import "EKEvent+ECAdditions.h"
 
 @interface ECEventCache()
 
@@ -63,6 +64,9 @@
     NSDate* expandEndDate = [endDate endOfMonth];
     
     if (!self.cacheEndDate) {
+        // if cacheEndDate is nil then cacheStartDate should be considered invalid
+        // set both to the current expand date so the first call to add events
+        // resets the cache to a valid state
         self.events = nil;
         self.cacheStartDate = expandEndDate;
         self.cacheEndDate = expandEndDate;
@@ -93,16 +97,6 @@
     }
 }
 
-- (NSComparisonResult)compareEvent:(EKEvent*)event1 startAndEndDateWithEvent:(EKEvent*)event2
-{
-    NSComparisonResult startDateComparisonResult = [event1.startDate compare:event2.startDate];
-    if (startDateComparisonResult != NSOrderedSame) {
-        return [event1.endDate compare:event2.endDate];
-    } else {
-        return startDateComparisonResult;
-    }
-}
-
 static NSInteger kEventsInRangeNotFound = -1;
 
 - (NSArray*)cachedEventsFrom:(NSDate*)startDate to:(NSDate*)endDate in:(NSArray*)calendars
@@ -115,11 +109,13 @@ static NSInteger kEventsInRangeNotFound = -1;
         if (calendars) {
             NSMutableArray* eventsInCalendars = [[NSMutableArray alloc] init];
             for (EKEvent* event in eventsInRange) {
+                // filter the events by calendar
                 if ([calendars containsObject:event.calendar]) {
                     [eventsInCalendars addObject:event];
                 }
             }
-            return (eventsInCalendars.count > 0) ? [eventsInCalendars copy] : nil; // match event store return scheme
+            // match EKEventStore return scheme of nil when no events are found
+            return (eventsInCalendars.count > 0) ? [eventsInCalendars copy] : nil;
         } else {
             return eventsInRange;
         }
@@ -173,6 +169,8 @@ static NSInteger kEventsInRangeNotFound = -1;
 - (void)flush
 {
     self.events = nil;
+    self.cacheStartDate = nil;
+    self.cacheEndDate = nil;
 }
 
 #pragma mark - Data source
@@ -180,7 +178,7 @@ static NSInteger kEventsInRangeNotFound = -1;
 - (NSArray*)requestEventsFrom:(NSDate*)startDate to:(NSDate*)endDate
 {
     NSArray* events = [self.cacheDataSource storedEventsFrom:startDate to:endDate];
-    return events;
+    return [events sortedArrayUsingSelector:@selector(compareStartAndEndDateWithEvent:)];
 }
 
 @end
