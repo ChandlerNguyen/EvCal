@@ -31,11 +31,14 @@
 - (void)setUp {
     [super setUp];
     
+    self.testStartDate = [NSDate date];
+    
     self.eventCache = [[ECEventCache alloc] init];
     self.eventCache.cacheDataSource = self;
     
     self.eventStore = [[EKEventStore alloc] init];
     
+    self.testCalendar = [EKCalendar calendarForEntityType:EKEntityTypeEvent eventStore:self.eventStore];
     EKSource* local = nil;
     for (EKSource* source in self.eventStore.sources) {
         if (source.sourceType == EKSourceTypeLocal) {
@@ -50,6 +53,9 @@
 
 
 - (void)tearDown {
+    
+    self.testStartDate = nil;
+    
     [self.eventStore removeCalendar:self.testCalendar commit:YES error:nil];
     self.testCalendar = nil;
     self.eventCache = nil;
@@ -108,7 +114,29 @@
     
     XCTAssertEqual(cacheEvents.count, eventStoreEvents.count, @"Event cache should return the same number of events as the event store");
     for (EKEvent* event in eventStoreEvents) {
+        // check each event because no guarantee is made about the order of events from EKEventStore
         XCTAssertTrue([cacheEvents containsObject:event], @"Event cache should load all the events from the given calendar");
+    }
+}
+
+- (void)testCacheReturnsSameEventsAsEventStoreForDatePrecedingPreviousDateRange
+{
+    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
+    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* startOfPreviousMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:-1 toDate:startOfMonth options:0];
+    
+    // initializes cache with a month of events
+    [self.eventCache eventsFrom:startOfMonth to:endOfMonth in:nil];
+    
+    // grab events for month preceding intialized month
+    NSArray* previousMonthCacheEvents = [self.eventCache eventsFrom:startOfPreviousMonth to:startOfMonth in:nil];
+    
+    NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:startOfPreviousMonth endDate:startOfMonth calendars:nil];
+    NSArray* previousMonthStoreEvents = [self.eventStore eventsMatchingPredicate:eventsPredicate];
+    
+    XCTAssertEqual(previousMonthCacheEvents.count, previousMonthStoreEvents.count, @"Event cache should contain the same number of events as the event store");
+    for (EKEvent* event in previousMonthStoreEvents) {
+        XCTAssertTrue([previousMonthCacheEvents containsObject:event], @"Event cache should contain all the events in the event store return");
     }
 }
 
@@ -119,6 +147,23 @@
     self.eventCache.cacheDataSource = nil;
     
     XCTAssertNil([self.eventCache eventsFrom:startOfYear to:endOfYear in:nil], @"Event cache should always return nil if data source is not set");
+}
+
+- (void)testCacheReturnsNilIfStartDateNotProvided
+{
+    XCTAssertNil([self.eventCache eventsFrom:nil to:self.testStartDate in:nil]);
+}
+
+- (void)testCacheReturnsNilIfEndDateNotProvided
+{
+    XCTAssertNil([self.eventCache eventsFrom:self.testStartDate to:nil in:nil]);
+}
+
+- (void)testCacheReturnsNilIfStartDateFollowsEndDate
+{
+    NSDate* dayBeforeTestStart = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:-1 toDate:self.testStartDate options:0];
+    
+    XCTAssertNil([self.eventCache eventsFrom:dayBeforeTestStart to:self.testStartDate in:nil]);
 }
 
 - (void)testCacheCanBeFlushed
