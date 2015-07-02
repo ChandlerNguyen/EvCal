@@ -7,12 +7,14 @@
 //
 
 #import "ECEventStoreProxy.h"
+#import "ECEventCache.h"
 
-@interface ECEventStoreProxy()
+@interface ECEventStoreProxy() <ECEventCacheDataSource>
 
 @property (nonatomic, readwrite) ECAuthorizationStatus authorizationStatus;
 
 @property (nonatomic, strong) EKEventStore* eventStore;
+@property (nonatomic, strong) ECEventCache* eventCache;
 
 @end
 
@@ -72,6 +74,16 @@
         case EKAuthorizationStatusAuthorized:
             return ECAuthorizationStatusAuthorized;
     } ;
+}
+
+- (ECEventCache*)eventCache
+{
+    if (!_eventCache) {
+        _eventCache = [[ECEventCache alloc] init];
+        _eventCache.cacheDataSource = self;
+    }
+    
+    return _eventCache;
 }
 
 #pragma mark - Posting notifications
@@ -146,7 +158,7 @@
 
 - (NSArray*)eventsFrom:(NSDate *)startDate to:(NSDate *)endDate
 {
-    return [self eventsFrom:startDate to:endDate in:nil];
+    return [self.eventCache eventsFrom:startDate to:endDate in:nil];
 }
 
 - (NSArray*)eventsFrom:(NSDate *)startDate to:(NSDate *)endDate in:(NSArray *)calendars
@@ -166,8 +178,7 @@
             return nil;
         
         case ECAuthorizationStatusAuthorized: {
-            NSPredicate* dateRangePredicate = [self.eventStore predicateForEventsWithStartDate:startDate endDate:endDate calendars:calendars];
-            NSArray* events = [self.eventStore eventsMatchingPredicate:dateRangePredicate];
+            NSArray* events = [self.eventCache eventsFrom:startDate to:endDate in:calendars];
             return events;
         }
     }
@@ -236,6 +247,14 @@
             DDLogError(@"Error requesting calendar authorization: %@", err);
         }
     }];
+}
+
+#pragma mark - ECEventCache data source
+
+- (NSArray*)storedEventsFrom:(NSDate *)startDate to:(NSDate *)endDate
+{
+    NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:startDate endDate:endDate calendars:nil];
+    return [self.eventStore eventsMatchingPredicate:eventsPredicate];
 }
 
 

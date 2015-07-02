@@ -37,7 +37,7 @@
         return nil;
     }
     
-    if (![self verifyStartDate:startDate endDate:endDate]) {
+    if (![self validateStartDate:startDate endDate:endDate]) {
         return nil;
     }
     
@@ -48,10 +48,26 @@
     return [self cachedEventsFrom:startDate to:endDate in:calendars];
 }
 
-- (BOOL)verifyStartDate:(NSDate*)startDate endDate:(NSDate*)endDate
+- (BOOL)validateStartDate:(NSDate*)startDate endDate:(NSDate*)endDate
 {
-    return (startDate && endDate && [startDate compare:endDate] == NSOrderedAscending);
+    if (!startDate) {
+        DDLogError(@"Invalid Event Dates: Start date is nil");
+        return NO;
+    }
+    
+    if (!endDate) {
+        DDLogError(@"Invalid Event Dates: End date is nil");
+        return NO;
+    }
+    
+    if ([startDate compare:endDate] != NSOrderedAscending) {
+        DDLogError(@"Invalid Event Dates: Start date must be prior to end date");
+        return NO;
+    }
+    
+    return YES;
 }
+
 
 - (BOOL)cacheContainsStartDate:(NSDate*)startDate endDate:(NSDate*)endDate
 {
