@@ -209,7 +209,7 @@
     
     NSArray* cacheEvents = [self.eventCache eventsFrom:twoDaysIntoMonth to:tenDaysIntoMonth in:nil];
     
-    NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:startOfMonth endDate:endOfMonth calendars:nil];
+    NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:twoDaysIntoMonth endDate:tenDaysIntoMonth calendars:nil];
     NSArray* storeEvents = [[self.eventStore eventsMatchingPredicate:eventsPredicate] sortedArrayUsingSelector:@selector(compareStartAndEndDateWithEvent:)];
     
     XCTAssertEqual(cacheEvents.count, storeEvents.count, @"Event cache should return the same events as the event store");
@@ -301,7 +301,7 @@
 {
     NSDate* dayBeforeTestStart = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:-1 toDate:self.testStartDate options:0];
     
-    XCTAssertNil([self.eventCache eventsFrom:dayBeforeTestStart to:self.testStartDate in:nil]);
+    XCTAssertNil([self.eventCache eventsFrom:self.testStartDate to:dayBeforeTestStart in:nil]);
 }
 
 - (void)testCacheCanBeFlushed

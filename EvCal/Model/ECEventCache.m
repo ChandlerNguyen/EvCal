@@ -79,7 +79,7 @@
         self.cacheStartDate = expandStartDate;
     }
     
-    BOOL appendEventsToCache = !self.cacheEndDate || ([self.cacheEndDate compare:expandEndDate] == NSOrderedDescending);
+    BOOL appendEventsToCache = ([expandEndDate compare:self.cacheEndDate] == NSOrderedDescending);
     if (appendEventsToCache) {
         NSDate* appendStartDate = (self.cacheEndDate) ? self.cacheEndDate : expandStartDate;
         [self addEventsFromStartDate:appendStartDate endDate:expandEndDate locationInCache:self.events.count];
