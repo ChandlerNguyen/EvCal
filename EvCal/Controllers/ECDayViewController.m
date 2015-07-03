@@ -64,6 +64,11 @@
     [self layoutDayView];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.dayView updateCurrentTime];
+}
+
 - (ECDayView*)dayView {
     if (!_dayView) {
         ECDayView* dayView = [[ECDayView alloc] initWithFrame:CGRectZero displayDate:self.displayDate];

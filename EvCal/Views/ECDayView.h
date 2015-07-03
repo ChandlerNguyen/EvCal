@@ -104,13 +104,18 @@
 - (instancetype)initWithFrame:(CGRect)frame displayDate:(NSDate*)date;
 
 //------------------------------------------------------------------------------
-// @name Refreshing event views
+// @name Refreshing day view
 //------------------------------------------------------------------------------
 
 /**
  *  Forces the day view to refetch and layout its event views. 
  */
 - (void)refreshCalendarEvents;
+
+/**
+ *  Updates the location and visibility of the current time line.
+ */
+- (void)updateCurrentTime;
 
 
 //------------------------------------------------------------------------------

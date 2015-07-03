@@ -61,7 +61,7 @@
 - (void)clearEventViews;
 
 //------------------------------------------------------------------------------
-// @name Auto Scrolling
+// @name Current time
 //------------------------------------------------------------------------------
 
 /**
@@ -71,5 +71,7 @@
  *  @param animated Determines whether the scroll will be animated.
  */
 - (void)scrollToCurrentTime:(BOOL)animated;
+
+- (void)updateCurrentTime;
 
 @end

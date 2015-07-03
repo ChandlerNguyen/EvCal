@@ -128,6 +128,14 @@
     [self.dayViewContainer refreshPages];
 }
 
+- (void)updateCurrentTime
+{
+    if ([self.dayViewContainer.visiblePage isKindOfClass:[ECSingleDayView class]]) {
+        ECSingleDayView* currentDayView = (ECSingleDayView*)self.dayViewContainer.visiblePage;
+        [currentDayView updateCurrentTime];
+    }
+}
+
 
 #pragma mark - Scrolling
 
