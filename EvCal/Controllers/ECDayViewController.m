@@ -222,13 +222,13 @@
 
 - (void)editEventViewControllerDidSave:(ECEditEventViewController *)controller
 {
-    [self refreshEvents];
+    //[self refreshEvents];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)editEventViewControllerDidDelete:(ECEditEventViewController *)controller
 {
-    [self refreshEvents];
+    //[self refreshEvents];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

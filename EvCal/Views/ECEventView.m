@@ -18,6 +18,11 @@
 #import "UIView+ECAdditions.h"
 #import "UIColor+ECAdditions.h"
 
+typedef NS_ENUM(NSInteger, ECEventViewLayoutType) {
+    ECEventViewLayoutTypeFixedVerticalOffset,
+    ECEventViewLayoutTypeVerticallyCentered,
+    ECEventViewLayoutTypeHorizontal,
+};
 
 @interface ECEventView()
 
@@ -142,10 +147,31 @@ CG_INLINE CGSize ceilCGSize(CGSize size)
                                                                         attributes:@{NSFontAttributeName : [self locationLabelFont]}
                                                                            context:nil].size);
     
-    if (titleSize.height + locationSize.height + LABEL_OUTER_PADDING > self.bounds.size.height) {
-        [self layoutLabelsHorizontallyWithTitleSize:titleSize locationSize:locationSize];
+    ECEventViewLayoutType layoutType = [self eventViewLayoutTypeForTitleSize:titleSize locationSize:locationSize];
+    switch (layoutType) {
+        case ECEventViewLayoutTypeFixedVerticalOffset:
+            [self layoutLabelsVerticallyWithTitleSize:titleSize locationSize:locationSize];
+            break;
+            
+        case ECEventViewLayoutTypeVerticallyCentered:
+            [self layoutLabelsVerticallyCenteredWithTitleSize:titleSize locationSize:locationSize];
+            break;
+            
+        case ECEventViewLayoutTypeHorizontal:
+            [self layoutLabelsHorizontallyWithTitleSize:titleSize locationSize:locationSize];
+            break;
+    }
+}
+
+- (ECEventViewLayoutType)eventViewLayoutTypeForTitleSize:(CGSize)titleSize locationSize:(CGSize)locationSize
+{
+    CGFloat totalLabelHeight = titleSize.height + locationSize.height;
+    if (totalLabelHeight + 2 * LABEL_OUTER_PADDING < self.bounds.size.height) {
+        return ECEventViewLayoutTypeFixedVerticalOffset;
+    } else if (totalLabelHeight + LABEL_OUTER_PADDING <= self.bounds.size.height) {
+        return ECEventViewLayoutTypeVerticallyCentered;
     } else {
-        [self layoutLabelsVerticallyWithTitleSize:titleSize locationSize:locationSize];
+        return ECEventViewLayoutTypeHorizontal;
     }
 }
 
@@ -163,6 +189,23 @@ CG_INLINE CGSize ceilCGSize(CGSize size)
                                            locationSize.width,
                                            locationSize.height);
     
+    self.locationLabel.frame = locationLabelFrame;
+}
+
+- (void)layoutLabelsVerticallyCenteredWithTitleSize:(CGSize)titleSize locationSize:(CGSize)locationSize
+{
+    CGFloat verticallyCenteredOffset = floorf((self.bounds.size.height - titleSize.height - locationSize.height) / 2.0f);
+    CGRect titleLabelFrame = CGRectMake(self.bounds.origin.x + LABEL_OUTER_PADDING,
+                                        self.bounds.origin.y + verticallyCenteredOffset,
+                                        titleSize.width,
+                                        titleSize.height);
+    
+    CGRect locationLabelFrame = CGRectMake(self.bounds.origin.x + LABEL_OUTER_PADDING,
+                                 CGRectGetMaxY(titleLabelFrame),
+                                 locationSize.width,
+                                 locationSize.height);
+    
+    self.titleLabel.frame = titleLabelFrame;
     self.locationLabel.frame = locationLabelFrame;
 }
 
