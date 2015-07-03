@@ -49,7 +49,6 @@
     self.pageDateDelta = 1;
     self.delegate = self;
     self.pagingEnabled = YES;
-    self.decelerationRate = UIScrollViewDecelerationRateFast;
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
 }
@@ -277,7 +276,7 @@ static NSInteger kPageRightIndex = 2;
 
 - (void)movePageAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
 {
-    DDLogDebug(@"Moving page from index %lu to index %lu", fromIndex, toIndex);
+    DDLogDebug(@"Moving page from index %lu to index %lu", (long)fromIndex, (long)toIndex);
     UIView* movedPage = self.pages[fromIndex];
     [self.pages removeObject:movedPage];
     [self.pages insertObject:movedPage atIndex:toIndex];
@@ -286,7 +285,7 @@ static NSInteger kPageRightIndex = 2;
 
 - (void)updatePageAtIndex:(NSInteger)index
 {
-    DDLogDebug(@"Updating page at index %lu", index);
+    DDLogDebug(@"Updating page at index %lu", (long)index);
     ECDatePage* changeDatePage = self.pages[index];
     changeDatePage.date = [self.calendar dateByAddingUnit:self.calendarUnit value:(index - kPageCenterIndex) * self.pageDateDelta toDate:self.date options:0];
     DDLogDebug(@"Page date changed to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:changeDatePage.date]);
@@ -298,7 +297,7 @@ static NSInteger kPageRightIndex = 2;
     for (NSInteger i = 0; i < self.pages.count; i++) {
         ECDatePage* page = self.pages[i];
         page.date = [self.calendar dateByAddingUnit:self.calendarUnit value:(i - kPageCenterIndex) * self.pageDateDelta toDate:self.date options:0];
-        DDLogDebug(@"Page at index %lu date changed to %@", i, [[ECLogFormatter logMessageDateFormatter] stringFromDate:page.date]);
+        DDLogDebug(@"Page at index %lu date changed to %@", (long)i, [[ECLogFormatter logMessageDateFormatter] stringFromDate:page.date]);
     }
 }
 
