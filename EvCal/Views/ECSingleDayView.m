@@ -178,6 +178,7 @@
     ECTimeLine* currentTimeLine = [[ECTimeLine alloc] initWithDate:[NSDate date]];
     currentTimeLine.color = [UIColor ecRedColor];
     currentTimeLine.backgroundColor = [UIColor clearColor];
+    currentTimeLine.lineThickness = ECTimeLineThicknessBold;
     currentTimeLine.dateFormatTemplate = @"j:mm";
     [self.durationEventsView addSubview:currentTimeLine];
     

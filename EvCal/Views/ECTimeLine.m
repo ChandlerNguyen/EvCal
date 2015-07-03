@@ -40,6 +40,7 @@
     self.userInteractionEnabled = NO;
     self.backgroundColor = [UIColor clearColor];
     self.timeLineInset = [self calculateTimeLineInset];
+    _lineThickness = ECTimeLineThicknessNormal;
 }
 
 - (void)setDate:(NSDate *)date
@@ -55,7 +56,7 @@
         UILabel* timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 
         timeLabel.textAlignment = NSTextAlignmentRight;
-        timeLabel.font = [UIFont systemFontOfSize:11.0f];
+        timeLabel.font = [UIFont boldSystemFontOfSize:11.0f];
         timeLabel.textColor = self.color;
         
         _timeLabel = timeLabel;
@@ -64,6 +65,13 @@
     }
     
     return _timeLabel;
+}
+
+- (void)setLineThickness:(CGFloat)lineThickness
+{
+    _lineThickness = lineThickness;
+    
+    [self setNeedsDisplay];
 }
 
 
@@ -151,8 +159,6 @@
 
 #pragma mark - Drawing
 
-#define TIME_LINE_STROKE_WIDTH  0.5f
-
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
@@ -179,7 +185,7 @@
     [linePath moveToPoint:lineOrigin];
     [linePath addLineToPoint:lineTerminal];
     
-    linePath.lineWidth = TIME_LINE_STROKE_WIDTH;
+    linePath.lineWidth = self.lineThickness;
     [linePath stroke];
 }
 

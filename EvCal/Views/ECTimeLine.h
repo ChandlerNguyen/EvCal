@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+static CGFloat ECTimeLineThicknessNormal = 0.5f;
+static CGFloat ECTimeLineThicknessBold = 1.0f;
+
 @interface ECTimeLine : UIView
 
 //------------------------------------------------------------------------------
@@ -22,10 +25,15 @@
 // should begin.
 @property (nonatomic, readonly) CGFloat timeLineInset; // default is 50
 
+// if YES the time line will not display its time. The time line will still
+// consider the time during layout
 @property (nonatomic) BOOL timeHidden; // default is no
 
 // The color of the time line
 @property (nonatomic, strong) UIColor* color; // default is [UIColor lightGrayColor]
+
+// The thickness of the time line's horizontal line
+@property (nonatomic) CGFloat lineThickness; // default is ECTimeLineThicknessNormal;
 
 // The format for displaying time line's date object
 @property (nonatomic, strong) NSString* dateFormatTemplate; // default is "j"
