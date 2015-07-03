@@ -86,18 +86,13 @@ typedef NS_ENUM(NSUInteger, ECAuthorizationStatus) {
 
 
 //------------------------------------------------------------------------------
-// @name Creating events
+// @name Editing events
 //------------------------------------------------------------------------------
 
 /**
  *  Returns a newly created event with its calendar and event store set
  */
 - (EKEvent*)createEvent;
-
-
-//------------------------------------------------------------------------------
-// @name Updating events
-//------------------------------------------------------------------------------
 
 /**
  *  Saves changes made to the event or to multiple occurrences of the event.
@@ -110,10 +105,6 @@ typedef NS_ENUM(NSUInteger, ECAuthorizationStatus) {
  *  @return YES if the event was successfully saved or NO otherwise.
  */
 - (BOOL)saveEvent:(EKEvent*)event span:(EKSpan)span;
-
-//------------------------------------------------------------------------------
-// @name Removing events
-//------------------------------------------------------------------------------
 
 /**
  *  Removes the event from the user's calendar.
@@ -128,6 +119,10 @@ typedef NS_ENUM(NSUInteger, ECAuthorizationStatus) {
  */
 - (BOOL)removeEvent:(EKEvent*)event span:(EKSpan)span;
 
-
+/**
+ *  Clears the receiver's event cache (if any). This event is often called when
+ *  memory is constrained.
+ */
+- (void)flushCache;
 
 @end

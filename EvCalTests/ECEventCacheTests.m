@@ -304,7 +304,7 @@
     XCTAssertNil([self.eventCache eventsFrom:self.testStartDate to:dayBeforeTestStart in:nil]);
 }
 
-- (void)testCacheCanBeFlushed
+- (void)testCacheReturnsCorrectEventsAfterInvalidation
 {
     // Ensure that cache loads events
     NSDate* startOfYear = [self.testStartDate beginningOfYear];
@@ -312,10 +312,12 @@
     [self.eventCache eventsFrom:startOfYear to:endOfYear in:nil];
     
     // Ensure data source method returns nil
-    self.eventStore = nil;
-    [self.eventCache flush];
+    [self.eventCache invalidateCache];
     
-    XCTAssertNil([self.eventCache eventsFrom:startOfYear to:endOfYear in:nil], @"Event cache should return nil after flushing with no data source");
+    NSArray* cacheEvents = [self.eventCache eventsFrom:startOfYear to:endOfYear in:nil];
+    NSArray* storeEvents = [self.eventStore eventsMatchingPredicate:[self.eventStore predicateForEventsWithStartDate:startOfYear endDate:endOfYear calendars:nil]];
+    
+    XCTAssertEqualObjects(cacheEvents, storeEvents, @"Cache should return same events as event store after being invalidated");
 }
 
 @end

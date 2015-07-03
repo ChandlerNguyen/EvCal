@@ -21,6 +21,13 @@
 
 @implementation ECEventCache
 
+#pragma mark - Constants
+
+static NSInteger kEventsInRangeNotFound = -1;
+
+
+#pragma mark - Lifecycle and Properties
+
 - (NSMutableArray*)events
 {
     if (!_events) {
@@ -30,6 +37,8 @@
     return _events;
 }
 
+
+#pragma mark - Retreiving events
 
 - (NSArray*)eventsFrom:(NSDate *)startDate to:(NSDate *)endDate in:(NSArray *)calendars
 {
@@ -41,9 +50,8 @@
         return nil;
     }
     
-    
-    [self expandCacheToIncludeStartDate:startDate endDate:endDate];
-    
+    // cache will only
+    [self expandCacheIfNeededForStartDate:startDate endDate:endDate];
     
     return [self cachedEventsFrom:startDate to:endDate in:calendars];
 }
@@ -69,73 +77,14 @@
 }
 
 
-- (BOOL)cacheContainsStartDate:(NSDate*)startDate endDate:(NSDate*)endDate
-{
-    return ([startDate compare:self.cacheStartDate] != NSOrderedAscending);
-}
-
-- (void)expandCacheToIncludeStartDate:(NSDate*)startDate endDate:(NSDate*)endDate
-{
-    NSDate* expandStartDate = [startDate beginningOfMonth];
-    NSDate* expandEndDate = [endDate endOfMonth];
-    
-    if (!self.cacheEndDate) {
-        // if cacheEndDate is nil then cacheStartDate should be considered invalid
-        // set both to the current expand date so the first call to add events
-        // resets the cache to a valid state
-        self.events = nil;
-        self.cacheStartDate = expandEndDate;
-        self.cacheEndDate = expandEndDate;
-    }
-    
-    BOOL prependEventsToCache = ([expandStartDate compare:self.cacheStartDate] == NSOrderedAscending);
-    if (prependEventsToCache) {
-        NSDate* prependEndDate = (self.cacheStartDate) ? self.cacheStartDate : expandEndDate;
-        [self addEventsFromStartDate:expandStartDate endDate:prependEndDate locationInCache:0];
-        self.cacheStartDate = expandStartDate;
-    }
-    
-    BOOL appendEventsToCache = ([expandEndDate compare:self.cacheEndDate] == NSOrderedDescending);
-    if (appendEventsToCache) {
-        NSDate* appendStartDate = (self.cacheEndDate) ? self.cacheEndDate : expandStartDate;
-        [self addEventsFromStartDate:appendStartDate endDate:expandEndDate locationInCache:self.events.count];
-        self.cacheEndDate = expandEndDate;
-    }
-}
-
-- (void)addEventsFromStartDate:(NSDate*)startDate endDate:(NSDate*)endDate locationInCache:(NSInteger)loc
-{
-    NSArray* storedEvents = [self.cacheDataSource storedEventsFrom:startDate to:endDate];
-   
-    if (storedEvents) {
-        NSIndexSet* eventsIndices = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(loc, storedEvents.count)];
-        [self.events insertObjects:storedEvents atIndexes:eventsIndices];
-    }
-}
-
-static NSInteger kEventsInRangeNotFound = -1;
-
 - (NSArray*)cachedEventsFrom:(NSDate*)startDate to:(NSDate*)endDate in:(NSArray*)calendars
 {
     NSRange eventsRange = [self rangeOfEventsFrom:startDate to:endDate];
     
     if (eventsRange.location != kEventsInRangeNotFound) {
         NSArray* eventsInRange = [self.events objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:eventsRange]];
-    
-        if (calendars) {
-            NSMutableArray* eventsInCalendars = [[NSMutableArray alloc] init];
-            for (EKEvent* event in eventsInRange) {
-                // filter the events by calendar
-                if ([calendars containsObject:event.calendar]) {
-                    [eventsInCalendars addObject:event];
-                }
-            }
-            // match EKEventStore return scheme of nil when no events are found
-            return (eventsInCalendars.count > 0) ? [eventsInCalendars copy] : nil;
-        } else {
-            return eventsInRange;
-        }
-    } else {
+        return [self filterEvents:eventsInRange inCalendars:calendars];
+    } else { // no events found within the given date range
         return nil;
     }
 }
@@ -172,6 +121,23 @@ static NSInteger kEventsInRangeNotFound = -1;
     }
 }
 
+- (NSArray*)filterEvents:(NSArray*)events inCalendars:(NSArray*)calendars
+{
+    if (calendars) {
+        NSMutableArray* eventsInCalendars = [[NSMutableArray alloc] init];
+        for (EKEvent* event in events) {
+            // filter the events by calendar
+            if ([calendars containsObject:event.calendar]) {
+                [eventsInCalendars addObject:event];
+            }
+        }
+        // match EKEventStore return scheme of nil when no events are found
+        return (eventsInCalendars.count > 0) ? [eventsInCalendars copy] : nil;
+    } else {
+        return events;
+    }
+}
+
 - (BOOL)event:(EKEvent*)event isInDateRangeFrom:(NSDate*)startDate to:(NSDate*)endDate
 {
     BOOL startDateInRange = [event.startDate compare:startDate] != NSOrderedAscending &&
@@ -182,19 +148,56 @@ static NSInteger kEventsInRangeNotFound = -1;
     return startDateInRange && endDateInRange;
 }
 
-- (void)flush
+- (void)invalidateCache
 {
     self.events = nil;
     self.cacheStartDate = nil;
     self.cacheEndDate = nil;
 }
 
-#pragma mark - Data source
+#pragma mark - Expanding cache
 
 - (NSArray*)requestEventsFrom:(NSDate*)startDate to:(NSDate*)endDate
 {
     NSArray* events = [self.cacheDataSource storedEventsFrom:startDate to:endDate];
     return [events sortedArrayUsingSelector:@selector(compareStartAndEndDateWithEvent:)];
+}
+
+- (void)expandCacheIfNeededForStartDate:(NSDate*)startDate endDate:(NSDate*)endDate
+{
+    NSDate* expandStartDate = [startDate beginningOfMonth];
+    NSDate* expandEndDate = [endDate endOfMonth];
+    
+    if (!self.cacheStartDate || !self.cacheEndDate) {
+        // if either cache date is nil then cached events should be considered
+        // invalid set both to the current expand date so the first call to add
+        // events resets the cache to a valid state
+        self.events = nil;
+        self.cacheStartDate = expandEndDate;
+        self.cacheEndDate = expandEndDate;
+    }
+  
+    // the expanded start date is prior to current cache start date
+    if ([expandStartDate compare:self.cacheStartDate] == NSOrderedAscending) {
+        [self addEventsFromStartDate:expandStartDate endDate:self.cacheStartDate locationInCache:0];
+        self.cacheStartDate = expandStartDate;
+    }
+    
+    // the expanded end date is after the current cache end date
+    if ([expandEndDate compare:self.cacheEndDate] == NSOrderedDescending) {
+        [self addEventsFromStartDate:self.cacheEndDate endDate:expandEndDate locationInCache:self.events.count];
+        self.cacheEndDate = expandEndDate;
+    }
+}
+
+- (void)addEventsFromStartDate:(NSDate*)startDate endDate:(NSDate*)endDate locationInCache:(NSInteger)loc
+{
+    NSArray* storedEvents = [self.cacheDataSource storedEventsFrom:startDate to:endDate];
+   
+    if (storedEvents) { // don't insert nil elements
+        NSIndexSet* eventsIndices = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(loc, storedEvents.count)];
+        [self.events insertObjects:storedEvents atIndexes:eventsIndices];
+    }
 }
 
 @end

@@ -91,11 +91,17 @@
 
 - (void)postAuthorizationStatusChangedNotification
 {
+    // free cache memory if user has not authorized access
+    if (self.authorizationStatus != ECAuthorizationStatusAuthorized) {
+        [self.eventCache invalidateCache];
+    }
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:ECEventStoreProxyAuthorizationStatusChangedNotification object:nil];
 }
 
 - (void)postCalendarChangedNotification
 {
+    [self.eventCache invalidateCache];
     [[NSNotificationCenter defaultCenter] postNotificationName:ECEventStoreProxyCalendarChangedNotification object:nil];
 }
 
@@ -119,22 +125,6 @@
 }
 
 #pragma mark - Loading User Events
-
-- (NSString*)stringForCalendars:(NSArray*)calendars
-{
-    NSMutableString* calendarString = [[NSMutableString alloc] init];
-    if (!calendars) {
-        [calendarString appendString:@"all calendars"];
-    } else {
-        NSString* separator = @"";
-        for (EKCalendar* calendar in calendars) {
-            [calendarString appendFormat:@"%@%@", separator, calendar.title];
-            separator = @", ";
-        }
-    }
-    
-    return [calendarString copy];
-}
 
 - (BOOL)validateStartDate:(NSDate*)startDate endDate:(NSDate*)endDate
 {
@@ -184,18 +174,15 @@
     }
 }
 
-#pragma mark - Creating Events
+#pragma mark - Editing Events
 
 - (EKEvent*)createEvent
 {
     EKEvent* event = [EKEvent eventWithEventStore:self.eventStore];
-    event.calendar = self.eventStore.defaultCalendarForNewEvents;
+    event.calendar = self.defaultCalendar;
     
     return event;
 }
-
-
-#pragma mark - Saving Events
 
 - (BOOL)saveEvent:(EKEvent *)event span:(EKSpan)span
 {
@@ -213,9 +200,6 @@
     
     return result;
 }
-
-
-#pragma mark - Removing Events
 
 - (BOOL)removeEvent:(EKEvent *)event span:(EKSpan)span
 {
@@ -249,12 +233,18 @@
     }];
 }
 
-#pragma mark - ECEventCache data source
+
+#pragma mark - Event caching
 
 - (NSArray*)storedEventsFrom:(NSDate *)startDate to:(NSDate *)endDate
 {
     NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:startDate endDate:endDate calendars:nil];
     return [self.eventStore eventsMatchingPredicate:eventsPredicate];
+}
+
+- (void)flushCache
+{
+    self.eventCache = nil;
 }
 
 

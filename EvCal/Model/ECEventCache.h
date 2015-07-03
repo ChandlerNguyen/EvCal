@@ -44,8 +44,8 @@
 - (NSArray*)eventsFrom:(NSDate*)startDate to:(NSDate*)endDate in:(NSArray*)calendars;
 
 /**
- *  Clears the cache's stored events.
+ * Tells the cache that it must reload events from the long term store
  */
-- (void)flush;
+- (void)invalidateCache;
 
 @end
