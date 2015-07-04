@@ -17,7 +17,7 @@
     dispatch_once(&onceToken, ^{
         dateViewFormatter = [[NSDateFormatter alloc] init];
         
-        dateViewFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"dd" options:0 locale:[NSLocale currentLocale]];
+        dateViewFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"d" options:0 locale:[NSLocale currentLocale]];
     });
     
     return dateViewFormatter;
