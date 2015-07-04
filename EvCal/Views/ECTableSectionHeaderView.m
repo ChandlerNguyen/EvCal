@@ -37,7 +37,7 @@ const static CGFloat kSeparatorThickness = 0.5;
     CGPoint upperSeparatorOrigin = self.bounds.origin;
     CGPoint upperSeparatorTerminal = CGPointMake(CGRectGetMaxX(self.bounds), upperSeparatorOrigin.y);
     
-    CGPoint lowerSeparatorOrigin = CGPointMake(self.bounds.origin.x, CGRectGetMaxY(self.bounds) - kSeparatorThickness);
+    CGPoint lowerSeparatorOrigin = CGPointMake(self.bounds.origin.x, CGRectGetMaxY(self.bounds));
     CGPoint lowerSeparatorTerminal = CGPointMake(CGRectGetMaxX(self.bounds), lowerSeparatorOrigin.y);
     
     UIBezierPath* upperSeparatorPath = [UIBezierPath bezierPath];

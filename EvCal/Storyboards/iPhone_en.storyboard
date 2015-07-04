@@ -71,8 +71,8 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="67" translatesAutoresizingMaskIntoConstraints="NO" id="9Rx-Rd-Rsg">
                                                     <rect key="frame" x="16" y="4" width="67" height="18"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="height" constant="18" id="AJN-J7-0Pc"/>
                                                         <constraint firstAttribute="width" constant="67" id="ENC-X7-air"/>
-                                                        <constraint firstAttribute="height" constant="18" id="Q5f-ym-2Cf"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -80,6 +80,9 @@
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZM3-jQ-Alx">
                                                     <rect key="frame" x="16" y="22" width="296" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="4PU-TH-Jvh"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
                                                 </textField>
@@ -90,7 +93,6 @@
                                                 <constraint firstItem="9Rx-Rd-Rsg" firstAttribute="leading" secondItem="8Wb-NL-56b" secondAttribute="leading" constant="16" id="Cn7-dN-YzD"/>
                                                 <constraint firstAttribute="trailing" secondItem="ZM3-jQ-Alx" secondAttribute="trailing" constant="8" id="KWx-qX-y17"/>
                                                 <constraint firstItem="ZM3-jQ-Alx" firstAttribute="top" secondItem="9Rx-Rd-Rsg" secondAttribute="bottom" id="TZE-pk-1LG"/>
-                                                <constraint firstItem="9Rx-Rd-Rsg" firstAttribute="top" secondItem="8Wb-NL-56b" secondAttribute="topMargin" constant="-4" id="gB6-nb-WUc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -115,6 +117,9 @@
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c9g-V8-sXG">
                                                     <rect key="frame" x="16" y="22" width="296" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="QrL-7t-RL0"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
                                                 </textField>
@@ -124,7 +129,6 @@
                                                 <constraint firstItem="pBg-sC-c5G" firstAttribute="leading" secondItem="f8K-Ug-O5r" secondAttribute="leading" constant="16" id="JjV-dS-eVM"/>
                                                 <constraint firstItem="c9g-V8-sXG" firstAttribute="top" secondItem="pBg-sC-c5G" secondAttribute="bottom" id="MqZ-xW-JFt"/>
                                                 <constraint firstItem="pBg-sC-c5G" firstAttribute="leading" secondItem="c9g-V8-sXG" secondAttribute="leading" id="f4H-La-Si6"/>
-                                                <constraint firstItem="pBg-sC-c5G" firstAttribute="top" secondItem="f8K-Ug-O5r" secondAttribute="topMargin" constant="-4" id="oHG-uU-4Mw"/>
                                                 <constraint firstAttribute="trailing" secondItem="c9g-V8-sXG" secondAttribute="trailing" constant="8" id="tbS-Qb-OXI"/>
                                             </constraints>
                                         </tableViewCellContentView>

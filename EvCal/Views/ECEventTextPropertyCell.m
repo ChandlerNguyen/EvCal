@@ -10,6 +10,7 @@
 #import "UIView+ECAdditions.h"
 @interface ECEventTextPropertyCell() <UITextFieldDelegate>
 
+@property (nonatomic, readwrite) BOOL propertyNameVisible;
 @property (nonatomic, weak) IBOutlet UILabel* propertyNameLabel;
 @property (nonatomic, weak) IBOutlet UITextField* propertyValueTextField;
 
@@ -37,10 +38,10 @@
    
     if (!oldEditing && editingProperty) {
         [self.propertyValueTextField becomeFirstResponder];
-        [self informDelegatePropertyFieldBeganEditing];
+        [self informDelegatePropertyCellBeganEditing];
     } else if (oldEditing && !editingProperty) {
         [self.propertyValueTextField resignFirstResponder];
-        [self informDelegatePropertyFieldEndedEditing];
+        [self informDelegatePropertyCellEndedEditing];
     }
 }
 
@@ -112,54 +113,78 @@ static CGFloat kPropertyNameLabelAnimationDuration = 0.3f;
 {
     if (!newValue || [newValue isEqualToString:@""]) {
         if (animated) {
-            [UIView animateWithDuration:kPropertyNameLabelAnimationDuration animations:^{
-                [self hidePropertyNameLabel];
-            }];
-        } else {
-            [self hidePropertyNameLabel];
+            [self hidePropertyNameLabel:animated];
         }
     } else if (![newValue isEqualToString:@""]){
         if (animated) {
-            [UIView animateWithDuration:kPropertyNameLabelAnimationDuration animations:^{
-                [self showPropertyNameLabel];
-            }];
-        } else {
-            [self showPropertyNameLabel];
+            [self showPropertyNameLabel:animated];
         }
     }
 }
 
-- (void)hidePropertyNameLabel
+- (void)hidePropertyNameLabel:(BOOL)animated
 {
-    self.propertyNameLabel.alpha = 0.0f;
+    self.propertyNameVisible = NO;
+    [self informDelegatePropertyNameWillHide];
+    
+    if (animated) {
+        [UIView animateWithDuration:kPropertyNameLabelAnimationDuration animations:^{
+            self.propertyNameLabel.alpha = 0.0f;
+        }];
+    } else {
+        self.propertyNameLabel.alpha = 0.0f;
+    }
 }
 
-- (void)showPropertyNameLabel
+- (void)showPropertyNameLabel:(BOOL)animated
 {
-    self.propertyNameLabel.alpha = 1.0f;
+    self.propertyNameVisible = YES;
+    [self informDelegatePropertyNameWillShow];
+    
+    if (animated) {
+        [UIView animateWithDuration:kPropertyNameLabelAnimationDuration animations:^{
+            self.propertyNameLabel.alpha = 1.0f;
+        }];
+    } else {
+        self.propertyNameLabel.alpha = 1.0f;
+    }
 }
 
 
 #pragma mark - Property field delegate
 
-- (void)informDelegatePropertyFieldBeganEditing
+- (void)informDelegatePropertyCellBeganEditing
 {
-    if ([self.propertyFieldDelegate respondsToSelector:@selector(propertyFieldDidBeginEditing:)]) {
-        [self.propertyFieldDelegate propertyFieldDidBeginEditing:self];
+    if ([self.propertyCellDelegate respondsToSelector:@selector(propertyCellDidBeginEditing:)]) {
+        [self.propertyCellDelegate propertyCellDidBeginEditing:self];
     }
 }
 
-- (void)informDelegatePropertyFieldEndedEditing
+- (void)informDelegatePropertyCellEndedEditing
 {
-    if ([self.propertyFieldDelegate respondsToSelector:@selector(propertyFieldDidEndEditing:)]) {
-        [self.propertyFieldDelegate propertyFieldDidEndEditing:self];
+    if ([self.propertyCellDelegate respondsToSelector:@selector(propertyCellDidEndEditing:)]) {
+        [self.propertyCellDelegate propertyCellDidEndEditing:self];
+    }
+}
+
+- (void)informDelegatePropertyNameWillHide
+{
+    if ([self.propertyCellDelegate respondsToSelector:@selector(propertyCellWillHidePropertyName:)]) {
+        [self.propertyCellDelegate propertyCellWillHidePropertyName:self];
+    }
+}
+
+- (void)informDelegatePropertyNameWillShow
+{
+    if ([self.propertyCellDelegate respondsToSelector:@selector(propertyCellWillShowPropertyName:)]) {
+        [self.propertyCellDelegate propertyCellWillShowPropertyName:self];
     }
 }
 
 - (BOOL)getShouldChangePropertyValue:(NSString*)newValue
 {
-    if ([self.propertyFieldDelegate respondsToSelector:@selector(propertyField:shouldChangePropertyValue:)]) {
-        return [self.propertyFieldDelegate propertyField:self shouldChangePropertyValue:newValue];
+    if ([self.propertyCellDelegate respondsToSelector:@selector(propertyCell:shouldChangePropertyValue:)]) {
+        return [self.propertyCellDelegate propertyCell:self shouldChangePropertyValue:newValue];
     } else {
         return YES;
     }
@@ -169,11 +194,13 @@ static CGFloat kPropertyNameLabelAnimationDuration = 0.3f;
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    [self showPropertyNameLabel:YES];
     self.editingProperty = YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    [self updatePropertyNameLabelVisibilityForString:textField.text animated:YES];
     self.editingProperty = NO;
 }
 

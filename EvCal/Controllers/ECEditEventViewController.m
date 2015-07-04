@@ -54,6 +54,7 @@
     [self synchronizeFields];
     [self setupTextPropertyCells];
     
+    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.startDatePickerCell.pickerDelegate = self;
     self.endDatePickerCell.pickerDelegate = self;
@@ -72,7 +73,8 @@
     self.titleCell.color = [UIColor ecPurpleColor];
     self.locationCell.color = [UIColor ecPurpleColor];
     
-    self.titleCell.propertyFieldDelegate = self;
+    self.titleCell.propertyCellDelegate = self;
+    self.locationCell.propertyCellDelegate = self;
 }
 
 - (NSDate*)startDate
@@ -286,15 +288,33 @@
 
 #pragma mark - ECTextPropertyCell delegate
 
-- (BOOL)propertyField:(ECEventTextPropertyCell *)field shouldChangePropertyValue:(NSString *)newValue
+- (BOOL)propertyCell:(ECEventTextPropertyCell *)cell shouldChangePropertyValue:(NSString *)newValue
 {
-    if ([self eventIsValidWithTitle:newValue startDate:self.startDatePickerCell.date endDate:self.endDatePickerCell.date]) {
-        self.saveButton.enabled = YES;
-    } else {
-        self.saveButton.enabled = NO;
+    if ([cell isEqual:self.titleCell]) {
+        if ([self eventIsValidWithTitle:newValue startDate:self.startDatePickerCell.date endDate:self.endDatePickerCell.date]) {
+            self.saveButton.enabled = YES;
+        } else {
+            self.saveButton.enabled = NO;
+        }
     }
     
     return YES;
+}
+
+- (void)propertyCellWillShowPropertyName:(ECEventTextPropertyCell *)cell
+{
+    [self updateCellHeights];
+}
+
+- (void)propertyCellWillHidePropertyName:(ECEventTextPropertyCell *)cell
+{
+    [self updateCellHeights];
+}
+
+- (void)propertyCellDidBeginEditing:(ECEventTextPropertyCell *)cell
+{
+    self.selectedIndexPath = [self.tableView indexPathForCell:cell];
+    [self updateCellHeights];
 }
 
 
@@ -309,28 +329,32 @@
 
 #pragma mark - UITableView Delegate and Datasource
 
-const static CGFloat kHeaderHeight =              33.0f;
-const static CGFloat kDefaultRowHeight =          44.0f;
-const static CGFloat kTextPropertyCellHeight =    52.0f;
-const static CGFloat kExpandedDatePickerHeight =  214.0f;
+const static CGFloat kHeaderHeight =                    33.0f;
+const static CGFloat kDefaultRowHeight =                44.0f;
+const static CGFloat kTextPropertyHiddenNameHeight =    33.0f;
+const static CGFloat kTextPropertyVisibleNameHeight =   52.0f;
+const static CGFloat kExpandedDatePickerHeight =        214.0f;
 
-const static NSInteger kTitleLocationSectionIndex =     0;
-const static NSInteger kDateAndRepeatSectionIndex =     1;
-const static NSInteger kCalendarAndRecurrenceSectionIndex =   2;
+const static NSInteger kTitleLocationSection =          0;
+const static NSInteger kDateAndRepeatSection =          1;
+const static NSInteger kCalendarAndRecurrenceSection =  2;
+
+const static NSInteger kTitleCellRow =                  0;
+//const static NSInteger kLocationCellRow =               1;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case kTitleLocationSectionIndex:
-            return kTextPropertyCellHeight;
+        case kTitleLocationSection:
+            return [self heightForCellInTitleLocationSectionAtIndexPath:indexPath];
             break;
-        case kDateAndRepeatSectionIndex:
+        case kDateAndRepeatSection:
             if ([indexPath isEqual:self.selectedIndexPath]) {
                 return kExpandedDatePickerHeight;
             } else {
                 return kDefaultRowHeight;
             }
-        case kCalendarAndRecurrenceSectionIndex:
+        case kCalendarAndRecurrenceSection:
             return kDefaultRowHeight;
             
         default:
@@ -339,8 +363,22 @@ const static NSInteger kCalendarAndRecurrenceSectionIndex =   2;
     }
 }
 
+- (CGFloat)heightForCellInTitleLocationSectionAtIndexPath:(NSIndexPath*)indexPath
+{
+    if (indexPath.row == kTitleCellRow) {
+        return self.titleCell.propertyNameVisible ? kTextPropertyVisibleNameHeight : kTextPropertyHiddenNameHeight;
+    } else {
+        return self.locationCell.propertyNameVisible ? kTextPropertyVisibleNameHeight : kTextPropertyHiddenNameHeight;
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section != kTitleLocationSection) {
+        self.titleCell.editingProperty = NO;
+        self.locationCell.editingProperty = NO;
+    }
+    
     if ([self.selectedIndexPath isEqual:indexPath]) {
         self.selectedIndexPath = nil;
     } else {
@@ -355,7 +393,7 @@ const static NSInteger kCalendarAndRecurrenceSectionIndex =   2;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == kTitleLocationSectionIndex) {
+    if (section == kTitleLocationSection) {
         return 0.0f;
     } else {
         return kHeaderHeight;
@@ -367,7 +405,11 @@ const static NSInteger kCalendarAndRecurrenceSectionIndex =   2;
     return [[ECTableSectionHeaderView alloc] initWithFrame:CGRectZero];
 }
 
-
+- (void)updateCellHeights
+{
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+}
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
