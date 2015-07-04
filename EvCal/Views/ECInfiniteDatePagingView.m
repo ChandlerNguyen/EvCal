@@ -385,7 +385,7 @@ static NSInteger kPageRightIndex = 2;
 
 - (void)refreshPageAtIndex:(NSInteger)index
 {
-    DDLogDebug(@"Refreshing page at index %lu", index);
+    DDLogDebug(@"Refreshing page at index %lu", (long)index);
     [self.pageViewDataSource infiniteDateView:self preparePage:self.pages[index]];
 }
 

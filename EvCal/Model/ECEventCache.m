@@ -92,7 +92,6 @@ static NSInteger kEventsInRangeNotFound = -1;
 - (NSRange)rangeOfEventsFrom:(NSDate*)startDate to:(NSDate*)endDate
 {
     NSInteger startIndex = kEventsInRangeNotFound;
-    NSInteger endIndex = kEventsInRangeNotFound;
     
     for (int i = 0; i < self.events.count; i++) {
         EKEvent* current = self.events[i];
@@ -103,7 +102,7 @@ static NSInteger kEventsInRangeNotFound = -1;
     }
     
     if (startIndex >= 0) {
-        endIndex = startIndex;
+        NSInteger endIndex = startIndex;
         for (NSInteger i = startIndex; i < self.events.count; i++) {
             EKEvent* current = self.events[i];
             if ([self event:current isInDateRangeFrom:startDate to:endDate]) {
