@@ -8,11 +8,10 @@
 
 @import EventKit;
 #import "ECCalendarCell.h"
-#import "ECCalendarIcon.h"
+
 @interface ECCalendarCell()
 
 @property (nonatomic, weak) IBOutlet UILabel* calendarLabel;
-@property (nonatomic, weak) IBOutlet ECCalendarIcon* calendarIcon;
 
 @end
 
@@ -23,7 +22,30 @@
     _calendar = calendar;
     
     self.calendarLabel.text = calendar.title;
-    self.calendarIcon.calendarColor = [UIColor colorWithCGColor:calendar.CGColor];
+    
+    [self setNeedsDisplay];
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    
+    [self drawCalendarDot];
+}
+
+static CGFloat kCalendarDotRadius = 4.0f;
+static CGFloat kCalendarDotInset = 9.0f;
+
+- (void)drawCalendarDot
+{
+    if (self.calendar) {
+        CGFloat dotCenterY = (self.bounds.size.height - (2 * kCalendarDotRadius)) / 2.0f;
+        CGRect dotFrame = CGRectMake(self.bounds.origin.x + kCalendarDotInset, dotCenterY, 2 * kCalendarDotRadius, 2 * kCalendarDotRadius);
+        
+        [[UIColor colorWithCGColor:self.calendar.CGColor] setFill];
+        
+        [[UIBezierPath bezierPathWithOvalInRect:dotFrame] fill];
+    }
 }
 
 @end

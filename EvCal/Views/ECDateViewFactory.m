@@ -8,7 +8,6 @@
 
 #import "ECDateViewFactory.h"
 #import "ECDateView.h"
-#import "ECCalendarIcon.h"
 #import "ECEventStoreProxy.h"
 
 #import "NSDate+CupertinoYankee.h"
@@ -55,31 +54,6 @@
     } else {
         return nil;
     }
-}
-
-- (NSArray*)calendarIconsForCalendars:(NSArray *)calendars reusingViews:(NSArray *)reusableViews
-{
-    NSMutableArray* mutableCalendars = [calendars mutableCopy];
-    NSMutableArray* mutableReusableViews = [reusableViews mutableCopy];
-    NSMutableArray* mutableCalendarIcons = [[NSMutableArray alloc] init];
-    
-    while (mutableCalendars.count > 0) {
-        EKCalendar* calendar = [mutableCalendars firstObject];
-        [mutableCalendars removeObject:calendar];
-        
-        ECCalendarIcon* icon = [reusableViews firstObject];
-        if (!icon) {
-            icon = [[ECCalendarIcon alloc] initWithColor:[UIColor colorWithCGColor:calendar.CGColor]];
-        } else {
-            icon.calendarColor = [UIColor colorWithCGColor:calendar.CGColor];
-            
-            [mutableReusableViews removeObject:icon];
-        }
-        
-        [mutableCalendarIcons addObject:icon];
-    }
-    
-    return [mutableCalendarIcons copy];
 }
 
 @end

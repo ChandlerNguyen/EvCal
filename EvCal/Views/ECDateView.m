@@ -16,7 +16,6 @@
 // EvCal Classes
 #import "ECDateView.h"
 #import "NSDateFormatter+ECAdditions.h"
-#import "ECCalendarIcon.h"
 
 @interface ECDateView()
 

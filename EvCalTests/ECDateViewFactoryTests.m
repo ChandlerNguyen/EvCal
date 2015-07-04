@@ -16,7 +16,6 @@
 #import "ECEventStoreProxy.h"
 #import "ECDateView.h"
 #import "ECDateViewFactory.h"
-#import "ECCalendarIcon.h"
 
 
 @interface ECDateViewFactoryTests : XCTestCase
