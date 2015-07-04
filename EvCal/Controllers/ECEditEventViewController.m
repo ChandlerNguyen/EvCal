@@ -50,6 +50,7 @@
     [self setupNavigationBar];
     [self synchronizeFields];
     
+    self.tableView.tableFooterView = [[UIView alloc] init];
     self.titleTextField.delegate = self;
     self.startDatePickerCell.pickerDelegate = self;
     self.endDatePickerCell.pickerDelegate = self;
@@ -282,30 +283,46 @@
 
 #pragma mark - UITableView Delegate and Datasource
 
-#define DEFAULT_ROW_HEIGHT              44.0f
-#define EXPANDED_DATE_PICKER_ROW_HEIGHT 214.0f
+static CGFloat kHeaderHeight =              33.0f;
+static CGFloat kDefaultRowHeight =          44.0f;
+static CGFloat kExpandedDatePickerHeight =  214.0f;
 
-#define START_DATE_PICKER_ROW           2
-#define END_DATE_PICKER_ROW             3
+static NSInteger kTitleLocationSectionIndex =           0;
+static NSInteger kDateAndRepeatSectionIndex =           1;
+static NSInteger kCalendarAndRecurrenceSectionIndex =   2;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == START_DATE_PICKER_ROW || indexPath.row == END_DATE_PICKER_ROW) {
+    if (indexPath.section == kDateAndRepeatSectionIndex) {
         if ([indexPath isEqual:self.selectedIndexPath]) {
-            return EXPANDED_DATE_PICKER_ROW_HEIGHT;
+            return kExpandedDatePickerHeight;
         }
     }
     
-    return DEFAULT_ROW_HEIGHT;
+    return kDefaultRowHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.selectedIndexPath = indexPath;
+    if ([self.selectedIndexPath isEqual:indexPath]) {
+        self.selectedIndexPath = nil;
+    } else {
+        self.selectedIndexPath = indexPath;
+    }
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [tableView beginUpdates];
     [tableView endUpdates];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == kTitleLocationSectionIndex) {
+        return 0.0f;
+    } else {
+        return kHeaderHeight;
+    }
 }
 
 #pragma mark - UITextField Delegate
