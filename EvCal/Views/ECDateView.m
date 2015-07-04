@@ -8,6 +8,7 @@
 
 // iOS Frameworks
 @import EventKit;
+@import QuartzCore;
 
 // Helpers
 #import "UIView+ECAdditions.h"
@@ -62,6 +63,14 @@
     if (oldSelectedDate != selectedDate) {
         [self updateLabels];
         [self setNeedsDisplay];
+    }
+    
+    if (selectedDate) {
+        self.layer.shadowOpacity = 0.25f;
+        //self.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+        self.layer.shadowRadius = 2.0f;
+    } else {
+        self.layer.shadowRadius = 0.0f;
     }
 }
 

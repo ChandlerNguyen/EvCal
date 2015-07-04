@@ -107,6 +107,7 @@
     for (ECDateView* dateView in self.dateViews) {
         if ([calendar isDate:dateView.date inSameDayAsDate:selectedDate]) {
             [dateView setSelectedDate:YES animated:YES];
+            [self bringSubviewToFront:dateView];
         } else {
             [dateView setSelectedDate:NO animated:YES];
         }
