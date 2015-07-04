@@ -27,6 +27,7 @@
 
 - (void)setup
 {
+    self.clipsToBounds = YES;
     self.propertyValueTextField.delegate = self;
     [self updatePropertyNameLabelVisibilityForString:self.propertyValue animated:NO];
 }

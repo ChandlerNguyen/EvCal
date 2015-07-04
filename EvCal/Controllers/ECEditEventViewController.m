@@ -20,7 +20,6 @@
 #import "ECCalendarCell.h"
 #import "ECEditEventCalendarViewController.h"
 #import "ECEventTextPropertyCell.h"
-#import "ECTableSectionHeaderView.h"
 
 @interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, ECEventTextPropertyCellDelegate, UIActionSheetDelegate, UITextFieldDelegate>
 
@@ -389,20 +388,6 @@ const static NSInteger kTitleCellRow =                  0;
     
     [tableView beginUpdates];
     [tableView endUpdates];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section == kTitleLocationSection) {
-        return 0.0f;
-    } else {
-        return kHeaderHeight;
-    }
-}
-
-- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return [[ECTableSectionHeaderView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)updateCellHeights
