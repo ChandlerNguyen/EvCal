@@ -144,7 +144,7 @@ static NSInteger kEventsInRangeNotFound = -1;
     BOOL endDateInRange = [event.endDate compare:startDate] == NSOrderedDescending &&
                           [event.endDate compare:endDate] != NSOrderedDescending;
     
-    return startDateInRange && endDateInRange;
+    return startDateInRange || endDateInRange;
 }
 
 - (void)invalidateCache

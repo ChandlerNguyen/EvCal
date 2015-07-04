@@ -50,19 +50,50 @@
     self.testCalendar.source = local;
     self.testCalendar.title = @"Test Calendar";
     [self.eventStore saveCalendar:self.testCalendar commit:YES error:nil];
+    [self addEventsToTestCalendar];
 }
 
 
 - (void)tearDown {
     
-    self.testStartDate = nil;
     
+    [self removeEventsFromTestCalendar];
     [self.eventStore removeCalendar:self.testCalendar commit:YES error:nil];
+    self.testStartDate = nil;
     self.testCalendar = nil;
     self.eventCache = nil;
     self.eventStore = nil;
     
     [super tearDown];
+}
+
+- (void)addEventsToTestCalendar
+{
+//    EKEvent* eventWithinDay = [EKEvent eventWithEventStore:self.eventStore];
+//    eventWithinDay.title = @"Event Within Day";
+//    eventWithinDay.startDate = [self.testStartDate beginningOfDay];
+//    eventWithinDay.endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:eventWithinDay.startDate options:0];
+//    eventWithinDay.calendar = self.testCalendar;
+    
+    EKEvent* eventSpanningMultipleDays = [EKEvent eventWithEventStore:self.eventStore];
+    eventSpanningMultipleDays.title = @"Event Spanning Multiple Days";
+    eventSpanningMultipleDays.startDate = [self.testStartDate beginningOfDay];
+    eventSpanningMultipleDays.endDate = [[self.testStartDate tomorrow] endOfDay];
+    eventSpanningMultipleDays.calendar = self.testCalendar;
+    
+    //[self.eventStore saveEvent:eventWithinDay span:EKSpanThisEvent commit:NO error:nil];
+    [self.eventStore saveEvent:eventSpanningMultipleDays span:EKSpanThisEvent commit:NO error:nil];
+    [self.eventStore commit:nil];
+}
+
+- (void)removeEventsFromTestCalendar
+{
+    NSArray* testEvents = [self.eventStore eventsMatchingPredicate:[self.eventStore predicateForEventsWithStartDate:[self.testStartDate beginningOfDay] endDate:[[self.testStartDate tomorrow] endOfDay] calendars:@[self.testCalendar]]];
+    
+    for (EKEvent* event in testEvents) {
+        [self.eventStore removeEvent:event span:EKSpanThisEvent commit:NO error:nil];
+    }
+    [self.eventStore commit:nil];
 }
 
 
@@ -114,6 +145,22 @@
     NSArray* storeEvents = [[self.eventStore eventsMatchingPredicate:eventsPredicate] sortedArrayUsingSelector:@selector(compareStartAndEndDateWithEvent:)];
     
     XCTAssertEqualObjects(cacheEvents, storeEvents, @"Event cache should return the same events as the event store");
+}
+
+- (void)testCacheReturnsSameEventsAsEventStoreWhenEventSpansMultipleDaysOutsideOfDateRange
+{
+    // test calendar contains a multiple day event that starts in the day of
+    // test start date and continues into the next day
+    NSDate* startOfDay = [self.testStartDate beginningOfDay];
+    NSDate* endOfDay = [self.testStartDate endOfDay];
+    
+    NSArray* cacheEvents = [self.eventCache eventsFrom:startOfDay to:endOfDay in:@[self.testCalendar]];
+    
+    NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:startOfDay endDate:endOfDay calendars:@[self.testCalendar]];
+    NSArray* storeEvents = [self.eventStore eventsMatchingPredicate:eventsPredicate];
+    
+    XCTAssertEqualObjects(cacheEvents, storeEvents, @"Event cache should return the same events as the event store");
+    
 }
 
 - (void)testCacheReturnsSameEventsAsEventStoreForDatePrecedingPreviousDateRange
