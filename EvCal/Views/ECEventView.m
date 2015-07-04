@@ -137,17 +137,18 @@ CG_INLINE CGSize ceilCGSize(CGSize size)
 
 - (void)layoutLabels
 {
-    CGRect bounds = self.bounds;
-    CGSize titleSize =  ceilCGSize([self.titleLabel.text boundingRectWithSize:self.bounds.size
+    CGSize adjustedBoundsSize = CGSizeMake(self.bounds.size.width - 2 * LABEL_HORIZONTAL_PADDING, self.bounds.size.height);
+    CGSize titleSize =  ceilCGSize([self.titleLabel.text boundingRectWithSize:adjustedBoundsSize
                                                            options:NSStringDrawingUsesLineFragmentOrigin
                                                         attributes:@{NSFontAttributeName : self.titleLabel.font}
                                                            context:nil].size);
     
-    CGSize locationSize = ceilCGSize([self.locationLabel.text boundingRectWithSize:self.bounds.size
+    CGSize locationSize = ceilCGSize([self.locationLabel.text boundingRectWithSize:adjustedBoundsSize
                                                                            options:NSStringDrawingUsesLineFragmentOrigin
                                                                         attributes:@{NSFontAttributeName : [self locationLabelFont]}
                                                                            context:nil].size);
-    titleSize.width = MAX(titleSize.width, self.bounds.size.width - 2 * LABEL_HORIZONTAL_PADDING);
+    titleSize.width = MAX(titleSize.width, adjustedBoundsSize.width);
+    locationSize.width = MAX(locationSize.width, adjustedBoundsSize.width);
     
     ECEventViewLayoutType layoutType = [self eventViewLayoutTypeForTitleSize:titleSize locationSize:locationSize];
     switch (layoutType) {
