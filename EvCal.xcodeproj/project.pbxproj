@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8404E07C1B329B31009B1923 /* ECInfiniteDatePagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8404E07B1B329B31009B1923 /* ECInfiniteDatePagingView.m */; };
+		842DA8FA1B47E5D7007DC027 /* ECEventTextPropertyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 842DA8F91B47E5D7007DC027 /* ECEventTextPropertyCell.m */; };
+		842DA8FD1B483AA1007DC027 /* ECTableSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 842DA8FC1B483AA1007DC027 /* ECTableSectionHeaderView.m */; };
 		843535821B2D8F1F00A8E404 /* UIColor+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 843535811B2D8F1F00A8E404 /* UIColor+ECAdditions.m */; };
 		843535851B2DAFD000A8E404 /* ECEditEventCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843535841B2DAFD000A8E404 /* ECEditEventCalendarViewController.m */; };
 		84443EFF1B0DEBF900385E5A /* NSDate+ECTestAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443EFE1B0DEBF900385E5A /* NSDate+ECTestAdditions.m */; };
@@ -72,6 +74,10 @@
 		5F3614751A065418C790A255 /* Pods-EvCalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvCalTests/Pods-EvCalTests.release.xcconfig"; sourceTree = "<group>"; };
 		8404E07A1B329B31009B1923 /* ECInfiniteDatePagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECInfiniteDatePagingView.h; path = Views/ECInfiniteDatePagingView.h; sourceTree = "<group>"; };
 		8404E07B1B329B31009B1923 /* ECInfiniteDatePagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECInfiniteDatePagingView.m; path = Views/ECInfiniteDatePagingView.m; sourceTree = "<group>"; };
+		842DA8F81B47E5D7007DC027 /* ECEventTextPropertyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEventTextPropertyCell.h; path = Views/ECEventTextPropertyCell.h; sourceTree = "<group>"; };
+		842DA8F91B47E5D7007DC027 /* ECEventTextPropertyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEventTextPropertyCell.m; path = Views/ECEventTextPropertyCell.m; sourceTree = "<group>"; };
+		842DA8FB1B483AA1007DC027 /* ECTableSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECTableSectionHeaderView.h; path = Views/ECTableSectionHeaderView.h; sourceTree = "<group>"; };
+		842DA8FC1B483AA1007DC027 /* ECTableSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECTableSectionHeaderView.m; path = Views/ECTableSectionHeaderView.m; sourceTree = "<group>"; };
 		843535801B2D8F1F00A8E404 /* UIColor+ECAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+ECAdditions.h"; path = "Support/UIColor+ECAdditions.h"; sourceTree = "<group>"; };
 		843535811B2D8F1F00A8E404 /* UIColor+ECAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+ECAdditions.m"; path = "Support/UIColor+ECAdditions.m"; sourceTree = "<group>"; };
 		843535831B2DAFD000A8E404 /* ECEditEventCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventCalendarViewController.h; path = Controllers/ECEditEventCalendarViewController.h; sourceTree = "<group>"; };
@@ -311,10 +317,12 @@
 		84C459231B074BE10066B6A9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				842DA8FB1B483AA1007DC027 /* ECTableSectionHeaderView.h */,
+				842DA8FC1B483AA1007DC027 /* ECTableSectionHeaderView.m */,
 				842DA8F71B47ABFD007DC027 /* Infinite Date Paging View */,
 				84D92C921B2998490050015D /* Day View */,
-				84D92C941B2998820050015D /* Edit Event View */,
 				84D92C931B29986D0050015D /* Weekday Picker */,
+				84D92C941B2998820050015D /* Edit Event View */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -369,6 +377,8 @@
 				8478F7B41B24519B0096F1B7 /* ECDatePickerCell.m */,
 				8474BF131B2EDEF000475846 /* ECCalendarCell.h */,
 				8474BF141B2EDEF000475846 /* ECCalendarCell.m */,
+				842DA8F81B47E5D7007DC027 /* ECEventTextPropertyCell.h */,
+				842DA8F91B47E5D7007DC027 /* ECEventTextPropertyCell.m */,
 			);
 			name = "Edit Event View";
 			sourceTree = "<group>";
@@ -615,6 +625,7 @@
 				8478F7B21B244AF80096F1B7 /* NSDate+ECEventAdditions.m in Sources */,
 				848628421B45976A007E0AA2 /* EKEvent+ECAdditions.m in Sources */,
 				84C459221B074BDD0066B6A9 /* ECDayView.m in Sources */,
+				842DA8FA1B47E5D7007DC027 /* ECEventTextPropertyCell.m in Sources */,
 				84CD51991B3124D500902BDE /* ECSingleDayView.m in Sources */,
 				84D92C991B29A52E0050015D /* ECDayViewEventsLayout.m in Sources */,
 				84EF226C1B08D5BD003DA610 /* ECEventView.m in Sources */,
@@ -622,6 +633,7 @@
 				843535821B2D8F1F00A8E404 /* UIColor+ECAdditions.m in Sources */,
 				8478F7981B1AB2D50096F1B7 /* ECDateViewFactory.m in Sources */,
 				84D168F51B3D6AAD00DBCF17 /* ECDatePage.m in Sources */,
+				842DA8FD1B483AA1007DC027 /* ECTableSectionHeaderView.m in Sources */,
 				8478F7A01B1B06700096F1B7 /* NSDateFormatter+ECAdditions.m in Sources */,
 				84EF22611B08769A003DA610 /* ECEventStoreProxy.m in Sources */,
 			);

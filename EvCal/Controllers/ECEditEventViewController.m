@@ -11,6 +11,7 @@
 
 // Helpers
 #import "NSDate+CupertinoYankee.h"
+#import "UIColor+ECAdditions.h"
 
 // EvCal Classes
 #import "ECEditEventViewController.h"
@@ -18,8 +19,10 @@
 #import "ECDatePickerCell.h"
 #import "ECCalendarCell.h"
 #import "ECEditEventCalendarViewController.h"
+#import "ECEventTextPropertyCell.h"
+#import "ECTableSectionHeaderView.h"
 
-@interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, UIActionSheetDelegate, UITextFieldDelegate>
+@interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, ECEventTextPropertyCellDelegate, UIActionSheetDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) NSIndexPath* selectedIndexPath;
 
@@ -27,8 +30,8 @@
 @property (nonatomic, weak) UIBarButtonItem* saveButton;
 
 // Event Data Fields
-@property (weak, nonatomic) IBOutlet UITextField *titleTextField;
-@property (nonatomic, weak) IBOutlet UITextField* locationTextField;
+@property (weak, nonatomic) IBOutlet ECEventTextPropertyCell *titleCell;
+@property (weak, nonatomic) IBOutlet ECEventTextPropertyCell *locationCell;
 
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* startDatePickerCell;
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* endDatePickerCell;
@@ -49,9 +52,9 @@
     
     [self setupNavigationBar];
     [self synchronizeFields];
+    [self setupTextPropertyCells];
     
     self.tableView.tableFooterView = [[UIView alloc] init];
-    self.titleTextField.delegate = self;
     self.startDatePickerCell.pickerDelegate = self;
     self.endDatePickerCell.pickerDelegate = self;
 }
@@ -62,6 +65,14 @@
     self.navigationItem.rightBarButtonItem = saveButton;
     self.saveButton = saveButton;
     self.saveButton.enabled = [self eventIsValidWithTitle:self.event.title startDate:self.event.startDate endDate:self.event.endDate];
+}
+
+- (void)setupTextPropertyCells
+{
+    self.titleCell.color = [UIColor ecPurpleColor];
+    self.locationCell.color = [UIColor ecPurpleColor];
+    
+    self.titleCell.propertyFieldDelegate = self;
 }
 
 - (NSDate*)startDate
@@ -87,8 +98,8 @@
 
 - (void)synchronizeEvent
 {
-    self.event.title = self.titleTextField.text;
-    self.event.location = self.locationTextField.text;
+    self.event.title = self.titleCell.propertyValue;
+    self.event.location = self.locationCell.propertyValue;
     self.event.startDate = self.startDatePickerCell.date;
     self.event.endDate = self.endDatePickerCell.date;
     self.event.calendar = self.calendarCell.calendar;
@@ -97,8 +108,8 @@
 
 - (void)synchronizeFields
 {
-    self.titleTextField.text = self.event.title;
-    self.locationTextField.text = self.event.location;
+    self.titleCell.propertyValue = self.event.title;
+    self.locationCell.propertyValue = self.event.location;
     self.startDatePickerCell.date = [self startDateForEvent:self.event];
     self.endDatePickerCell.date = [self endDateForEvent:self.event];
     self.calendarCell.calendar = (self.event) ? self.event.calendar : [ECEventStoreProxy sharedInstance].defaultCalendar;
@@ -269,8 +280,23 @@
 
 - (void)datePickerCell:(ECDatePickerCell *)cell didChangeDate:(NSDate *)date
 {
-    self.saveButton.enabled = [self eventIsValidWithTitle:self.titleTextField.text startDate:self.startDatePickerCell.date endDate:self.endDatePickerCell.date];
+    self.saveButton.enabled = [self eventIsValidWithTitle:self.titleCell.propertyValue startDate:self.startDatePickerCell.date endDate:self.endDatePickerCell.date];
 }
+
+
+#pragma mark - ECTextPropertyCell delegate
+
+- (BOOL)propertyField:(ECEventTextPropertyCell *)field shouldChangePropertyValue:(NSString *)newValue
+{
+    if ([self eventIsValidWithTitle:newValue startDate:self.startDatePickerCell.date endDate:self.endDatePickerCell.date]) {
+        self.saveButton.enabled = YES;
+    } else {
+        self.saveButton.enabled = NO;
+    }
+    
+    return YES;
+}
+
 
 #pragma mark - ECEditEventCalendarViewController Delegate
 
@@ -283,23 +309,34 @@
 
 #pragma mark - UITableView Delegate and Datasource
 
-static CGFloat kHeaderHeight =              33.0f;
-static CGFloat kDefaultRowHeight =          44.0f;
-static CGFloat kExpandedDatePickerHeight =  214.0f;
+const static CGFloat kHeaderHeight =              33.0f;
+const static CGFloat kDefaultRowHeight =          44.0f;
+const static CGFloat kTextPropertyCellHeight =    52.0f;
+const static CGFloat kExpandedDatePickerHeight =  214.0f;
 
-static NSInteger kTitleLocationSectionIndex =           0;
-static NSInteger kDateAndRepeatSectionIndex =           1;
-static NSInteger kCalendarAndRecurrenceSectionIndex =   2;
+const static NSInteger kTitleLocationSectionIndex =     0;
+const static NSInteger kDateAndRepeatSectionIndex =     1;
+const static NSInteger kCalendarAndRecurrenceSectionIndex =   2;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == kDateAndRepeatSectionIndex) {
-        if ([indexPath isEqual:self.selectedIndexPath]) {
-            return kExpandedDatePickerHeight;
-        }
+    switch (indexPath.section) {
+        case kTitleLocationSectionIndex:
+            return kTextPropertyCellHeight;
+            break;
+        case kDateAndRepeatSectionIndex:
+            if ([indexPath isEqual:self.selectedIndexPath]) {
+                return kExpandedDatePickerHeight;
+            } else {
+                return kDefaultRowHeight;
+            }
+        case kCalendarAndRecurrenceSectionIndex:
+            return kDefaultRowHeight;
+            
+        default:
+            return kDefaultRowHeight;
+            break;
     }
-    
-    return kDefaultRowHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -325,14 +362,9 @@ static NSInteger kCalendarAndRecurrenceSectionIndex =   2;
     }
 }
 
-#pragma mark - UITextField Delegate
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    NSString* result = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    self.saveButton.enabled = [self eventIsValidWithTitle:result startDate:self.startDatePickerCell.date endDate:self.endDatePickerCell.date];
-    
-    return YES;
+    return [[ECTableSectionHeaderView alloc] initWithFrame:CGRectZero];
 }
 
 
