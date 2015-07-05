@@ -27,10 +27,13 @@
 // @name Properties
 //------------------------------------------------------------------------------
 
-// The date displayed by the cell and in its picker
+// The date displayed by the cell and in its picker.
 @property (nonatomic, weak) NSDate* date;
 
-// The delegate that receives messages from the picker cell
+// The cell's date picker mode.
+@property (nonatomic) UIDatePickerMode datePickerMode; // default is UIDatePickerModeDateAndTime
+
+// The delegate that receives messages from the picker cell.
 @property (nonatomic, weak) id<ECDatePickerCellDelegate> pickerDelegate;
 
 @end

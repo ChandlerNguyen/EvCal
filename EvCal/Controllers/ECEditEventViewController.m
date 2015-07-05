@@ -37,6 +37,7 @@
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* endDatePickerCell;
 
 @property (nonatomic, weak) IBOutlet ECCalendarCell* calendarCell;
+@property (weak, nonatomic) IBOutlet UISwitch *allDaySwitch;
 
 @property (nonatomic, weak) UITextView* notesView;
 
@@ -59,6 +60,7 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.startDatePickerCell.pickerDelegate = self;
     self.endDatePickerCell.pickerDelegate = self;
+    [self.allDaySwitch addTarget:self action:@selector(allDaySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)setupNavigationBar
@@ -103,6 +105,7 @@
 {
     self.event.title = self.titleCell.propertyValue;
     self.event.location = self.locationCell.propertyValue;
+    self.event.allDay = self.allDaySwitch.isOn;
     self.event.startDate = self.startDatePickerCell.date;
     self.event.endDate = self.endDatePickerCell.date;
     self.event.calendar = self.calendarCell.calendar;
@@ -119,8 +122,17 @@
     self.locationCell.propertyValue = self.event.location;
     self.startDatePickerCell.date = [self startDateForEvent:self.event];
     self.endDatePickerCell.date = [self endDateForEvent:self.event];
+    self.allDaySwitch.on = self.event.isAllDay;
+    [self updateDatePickersForAllDayStatus:self.allDaySwitch.on];
     self.calendarCell.calendar = (self.event) ? self.event.calendar : [ECEventStoreProxy sharedInstance].defaultCalendar;
     self.notesView.text = self.event.notes;
+}
+
+- (void)updateDatePickersForAllDayStatus:(BOOL)allDay
+{
+    UIDatePickerMode datePickerMode = (allDay) ? UIDatePickerModeDate : UIDatePickerModeDateAndTime;
+    self.startDatePickerCell.datePickerMode = datePickerMode;
+    self.endDatePickerCell.datePickerMode = datePickerMode;
 }
 
 - (BOOL)eventIsValidWithTitle:(NSString*)title startDate:(NSDate*)startDate endDate:(NSDate*)endDate
@@ -282,6 +294,11 @@
     }
 }
 
+- (void)allDaySwitchValueChanged:(UISwitch*)sender
+{
+    [self updateDatePickersForAllDayStatus:sender.isOn];
+}
+
 
 #pragma mark - ECDatePicker Delegate
 
@@ -339,12 +356,14 @@ const static CGFloat kDatesAndAlarmsRowHeight =         52.0f;
 const static CGFloat kTextPropertyHiddenNameHeight =    33.0f;
 const static CGFloat kTextPropertyVisibleNameHeight =   52.0f;
 const static CGFloat kExpandedDatePickerHeight =        214.0f;
+const static CGFloat kAllDayCellHeight =                44.0f;
 
 const static NSInteger kTitleLocationSection =          0;
-const static NSInteger kDateAndRepeatSection =          1;
+const static NSInteger kDateAndAllDaySection =          1;
 const static NSInteger kCalendarAndRecurrenceSection =  2;
 
 const static NSInteger kTitleCellRow =                  0;
+const static NSInteger kAllDayCellRow =                 2;
 //const static NSInteger kLocationCellRow =               1;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -352,19 +371,15 @@ const static NSInteger kTitleCellRow =                  0;
     switch (indexPath.section) {
         case kTitleLocationSection:
             return [self heightForCellInTitleLocationSectionAtIndexPath:indexPath];
-            break;
-        case kDateAndRepeatSection:
-            if ([indexPath isEqual:self.selectedIndexPath]) {
-                return kExpandedDatePickerHeight;
-            } else {
-                return kDatesAndAlarmsRowHeight;
-            }
+            
+        case kDateAndAllDaySection:
+            return [self heightForCellInDateAndAllDaySectionAtIndexPath:indexPath];
+            
         case kCalendarAndRecurrenceSection:
             return kCalendarAndRecurrenceRowHeight;
             
         default:
             return 0.0f;
-            break;
     }
 }
 
@@ -374,6 +389,21 @@ const static NSInteger kTitleCellRow =                  0;
         return self.titleCell.propertyNameVisible ? kTextPropertyVisibleNameHeight : kTextPropertyHiddenNameHeight;
     } else {
         return self.locationCell.propertyNameVisible ? kTextPropertyVisibleNameHeight : kTextPropertyHiddenNameHeight;
+    }
+}
+
+- (CGFloat)heightForCellInDateAndAllDaySectionAtIndexPath:(NSIndexPath*)indexPath
+{
+    // all day cell
+    if (indexPath.row == kAllDayCellRow) {
+        return kAllDayCellHeight;
+    } else {
+        // if the date picker cell is highlighted it should be taller
+        if ([indexPath isEqual:self.selectedIndexPath]) {
+            return kExpandedDatePickerHeight;
+        } else {
+            return kDatesAndAlarmsRowHeight;
+        }
     }
 }
 

@@ -14,6 +14,8 @@
 @property (nonatomic, weak) IBOutlet UILabel* dateLabel;
 @property (nonatomic, weak) IBOutlet UIDatePicker* datePicker;
 
+@property (nonatomic, strong) NSDateFormatter* dateFormatter;
+
 @end
 
 @implementation ECDatePickerCell
@@ -24,6 +26,29 @@
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self.datePicker addTarget:self action:@selector(pickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+}
+
+- (NSDateFormatter*)dateFormatter
+{
+    if (!_dateFormatter) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        
+        _dateFormatter.dateFormat = [self dateFormatForDatePickerMode:self.datePickerMode];
+    }
+    
+    return _dateFormatter;
+}
+
+- (void)setDatePickerMode:(UIDatePickerMode)datePickerMode
+{
+    self.datePicker.datePickerMode = datePickerMode;
+    self.dateFormatter.dateFormat = [self dateFormatForDatePickerMode:datePickerMode];
+    [self updateDateLabel:self.datePicker];
+}
+
+- (UIDatePickerMode)datePickerMode
+{
+    return self.datePicker.datePickerMode;
 }
 
 - (void)setDate:(NSDate *)date
@@ -39,9 +64,23 @@
 
 - (void)updateDateLabel:(UIDatePicker*)datePicker
 {
-    NSDateFormatter* dateFormatter = [NSDateFormatter ecEventDatesFormatter];
-    
-    self.dateLabel.text = [dateFormatter stringFromDate:datePicker.date];
+    self.dateLabel.text = [self.dateFormatter stringFromDate:datePicker.date];
+}
+
+- (NSString*)dateFormatForDatePickerMode:(UIDatePickerMode)datePickerMode
+{
+    switch (datePickerMode) {
+        case UIDatePickerModeDateAndTime:
+            return [NSDateFormatter dateFormatFromTemplate:@"j:mm MMMM d, YYYY" options:0 locale:[NSLocale autoupdatingCurrentLocale]];
+        
+        case UIDatePickerModeDate:
+            return [NSDateFormatter dateFormatFromTemplate:@"MMMM d, YYYY" options:0 locale:[NSLocale autoupdatingCurrentLocale]];
+            
+        case UIDatePickerModeCountDownTimer:
+        case UIDatePickerModeTime:
+            DDLogWarn(@"Date picker cell mode is invalid value");
+            return @"";
+    }
 }
 
 - (void)pickerValueChanged:(UIDatePicker*)datePicker

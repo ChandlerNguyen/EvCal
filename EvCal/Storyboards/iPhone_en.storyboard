@@ -230,6 +230,33 @@
                                             <outlet property="datePicker" destination="cX1-mu-4d1" id="Nb7-Vl-ArW"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="allDayCell" id="KgX-lD-yLQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KgX-lD-yLQ" id="cgX-DW-aSq">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Day" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ht-38-hhW">
+                                                    <rect key="frame" x="16" y="11" width="54" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dhu-KP-7eP">
+                                                    <rect key="frame" x="263" y="6" width="51" height="31"/>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="2ht-38-hhW" secondAttribute="bottom" constant="11.5" id="E0J-3n-u3V"/>
+                                                <constraint firstItem="dhu-KP-7eP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2ht-38-hhW" secondAttribute="trailing" constant="4" id="PMg-qR-BhZ"/>
+                                                <constraint firstItem="2ht-38-hhW" firstAttribute="leading" secondItem="cgX-DW-aSq" secondAttribute="leading" constant="16" id="Y7W-8O-BJA"/>
+                                                <constraint firstAttribute="trailing" secondItem="dhu-KP-7eP" secondAttribute="trailing" constant="8" id="cPf-Sj-ntq"/>
+                                                <constraint firstAttribute="bottom" secondItem="dhu-KP-7eP" secondAttribute="bottom" constant="6.5" id="dby-LJ-hxm"/>
+                                                <constraint firstItem="2ht-38-hhW" firstAttribute="top" secondItem="cgX-DW-aSq" secondAttribute="top" constant="11" id="kjr-Di-gwF"/>
+                                                <constraint firstItem="dhu-KP-7eP" firstAttribute="top" secondItem="cgX-DW-aSq" secondAttribute="top" constant="6" id="qt9-CF-nBi"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle=" " id="zJI-IB-TQh">
@@ -282,6 +309,7 @@
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="allDaySwitch" destination="dhu-KP-7eP" id="npf-qp-WMj"/>
                         <outlet property="calendarCell" destination="UK6-Bm-Hog" id="KAk-tH-cze"/>
                         <outlet property="deleteButton" destination="hFa-LO-3xv" id="OgV-Xl-C3O"/>
                         <outlet property="endDatePickerCell" destination="9xP-KB-6Ka" id="Iqo-EC-292"/>
