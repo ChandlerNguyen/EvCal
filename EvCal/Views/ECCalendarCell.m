@@ -34,7 +34,7 @@
 }
 
 static CGFloat kCalendarDotRadius = 4.0f;
-static CGFloat kCalendarDotInset = 9.0f;
+static CGFloat kCalendarDotInset = 16.0f;
 
 - (void)drawCalendarDot
 {

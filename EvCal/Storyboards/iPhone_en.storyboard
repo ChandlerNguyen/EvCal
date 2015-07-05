@@ -237,9 +237,12 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Day" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ht-38-hhW">
-                                                    <rect key="frame" x="16" y="11" width="54" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <rect key="frame" x="16" y="11" width="51" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="51" id="vNR-Iq-7o3"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <color key="textColor" red="0.43529411759999997" green="0.21960784310000001" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dhu-KP-7eP">
@@ -248,7 +251,6 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="2ht-38-hhW" secondAttribute="bottom" constant="11.5" id="E0J-3n-u3V"/>
-                                                <constraint firstItem="dhu-KP-7eP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2ht-38-hhW" secondAttribute="trailing" constant="4" id="PMg-qR-BhZ"/>
                                                 <constraint firstItem="2ht-38-hhW" firstAttribute="leading" secondItem="cgX-DW-aSq" secondAttribute="leading" constant="16" id="Y7W-8O-BJA"/>
                                                 <constraint firstAttribute="trailing" secondItem="dhu-KP-7eP" secondAttribute="trailing" constant="8" id="cPf-Sj-ntq"/>
                                                 <constraint firstAttribute="bottom" secondItem="dhu-KP-7eP" secondAttribute="bottom" constant="6.5" id="dby-LJ-hxm"/>
@@ -268,7 +270,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjk-ZS-RX5">
-                                                    <rect key="frame" x="24" y="11" width="69.5" height="20.5"/>
+                                                    <rect key="frame" x="28" y="11" width="69.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -276,7 +278,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cjk-ZS-RX5" secondAttribute="trailing" constant="20" symbolic="YES" id="adR-hY-F2v"/>
-                                                <constraint firstItem="cjk-ZS-RX5" firstAttribute="leading" secondItem="5u8-Ls-LFa" secondAttribute="leading" constant="24" id="cOm-VT-aj3"/>
+                                                <constraint firstItem="cjk-ZS-RX5" firstAttribute="leading" secondItem="5u8-Ls-LFa" secondAttribute="leading" constant="28" id="cOm-VT-aj3"/>
                                                 <constraint firstAttribute="centerY" secondItem="cjk-ZS-RX5" secondAttribute="centerY" id="miU-5c-nqz"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -338,14 +340,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgY-8m-QjC">
-                                            <rect key="frame" x="24" y="11" width="69.5" height="20.5"/>
+                                            <rect key="frame" x="28" y="11" width="69.5" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="BgY-8m-QjC" firstAttribute="leading" secondItem="khA-Lu-sdl" secondAttribute="leading" constant="24" id="bSF-ks-IQ4"/>
+                                        <constraint firstItem="BgY-8m-QjC" firstAttribute="leading" secondItem="khA-Lu-sdl" secondAttribute="leading" constant="28" id="bSF-ks-IQ4"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BgY-8m-QjC" secondAttribute="trailing" constant="20" symbolic="YES" id="cPE-UG-mZs"/>
                                         <constraint firstAttribute="centerY" secondItem="BgY-8m-QjC" secondAttribute="centerY" id="nAS-pn-YeC"/>
                                     </constraints>
