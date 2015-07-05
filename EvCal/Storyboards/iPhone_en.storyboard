@@ -236,26 +236,25 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KgX-lD-yLQ" id="cgX-DW-aSq">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dhu-KP-7eP">
+                                                    <rect key="frame" x="263" y="6" width="51" height="31"/>
+                                                </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Day" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ht-38-hhW">
                                                     <rect key="frame" x="16" y="11" width="59" height="21"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Bx3-ma-qaT"/>
                                                         <constraint firstAttribute="width" constant="59" id="REQ-Ro-7Gg"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="black" pointSize="15"/>
                                                     <color key="textColor" red="0.43529411759999997" green="0.21960784310000001" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dhu-KP-7eP">
-                                                    <rect key="frame" x="263" y="6" width="51" height="31"/>
-                                                </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="2ht-38-hhW" secondAttribute="bottom" constant="11.5" id="E0J-3n-u3V"/>
+                                                <constraint firstAttribute="centerY" secondItem="2ht-38-hhW" secondAttribute="centerY" id="Nv6-DT-RDg"/>
                                                 <constraint firstItem="2ht-38-hhW" firstAttribute="leading" secondItem="cgX-DW-aSq" secondAttribute="leading" constant="16" id="Y7W-8O-BJA"/>
                                                 <constraint firstAttribute="trailing" secondItem="dhu-KP-7eP" secondAttribute="trailing" constant="8" id="cPf-Sj-ntq"/>
-                                                <constraint firstAttribute="bottom" secondItem="dhu-KP-7eP" secondAttribute="bottom" constant="6.5" id="dby-LJ-hxm"/>
-                                                <constraint firstItem="2ht-38-hhW" firstAttribute="top" secondItem="cgX-DW-aSq" secondAttribute="top" constant="11" id="kjr-Di-gwF"/>
-                                                <constraint firstItem="dhu-KP-7eP" firstAttribute="top" secondItem="cgX-DW-aSq" secondAttribute="top" constant="6" id="qt9-CF-nBi"/>
+                                                <constraint firstAttribute="centerY" secondItem="dhu-KP-7eP" secondAttribute="centerY" id="uXb-Yn-bn5"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
