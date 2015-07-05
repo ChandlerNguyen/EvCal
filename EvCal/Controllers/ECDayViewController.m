@@ -24,7 +24,6 @@
 
 // Buttons
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* addEventButton;
-@property (weak, nonatomic) IBOutlet UIToolbar *bottomToolbar;
 
 // Day view
 @property (nonatomic) BOOL userDidScrollDayViewSinceDateChange;
@@ -46,6 +45,7 @@
     [super viewDidLoad];
     
     self.title = [self.dateFormatter stringFromDate:self.displayDate];
+    self.navigationController.toolbarHidden = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEvents) name:ECEventStoreProxyAuthorizationStatusChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEvents) name:ECEventStoreProxyCalendarChangedNotification object:nil];
@@ -167,7 +167,7 @@
     CGRect dayViewFrame = CGRectMake(self.view.bounds.origin.x,
                                      CGRectGetMaxY(self.weekdayPicker.frame),
                                      self.view.bounds.size.width,
-                                     self.bottomToolbar.frame.origin.y - CGRectGetMaxY(self.weekdayPicker.frame) - 1); // -1 so toolbar separator will show
+                                     self.navigationController.toolbar.frame.origin.y - CGRectGetMaxY(self.weekdayPicker.frame) - 1); // -1 so toolbar separator will show
     
     self.dayView.frame = dayViewFrame;
 }

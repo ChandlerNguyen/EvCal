@@ -65,7 +65,7 @@
         CGSize threePageContentSize = CGSizeMake(frame.size.width * 3, frame.size.height);
         [super setContentSize:threePageContentSize];
         
-        self.contentOffset = CGPointMake(frame.size.width, self.bounds.origin.y);
+        self.contentOffset = CGPointMake(frame.size.width, 0.0f);
         [self resetContainerFrame];
         [self resetPageFrames];
     }

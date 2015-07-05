@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="f92-S2-hBJ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Day View Controller-->
@@ -16,26 +15,16 @@
                     <view key="view" contentMode="scaleToFill" id="wde-oB-yac">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XjS-3O-ccb">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="9xL-rs-OuV"/>
-                                    <barButtonItem title="+" id="1V5-CR-Gg8">
-                                        <connections>
-                                            <action selector="addEventButtonTapped:" destination="qNj-KM-reM" id="T1S-55-fbA"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="XjS-3O-ccb" firstAttribute="bottom" secondItem="HQi-PI-mQN" secondAttribute="top" id="48b-Bb-WY8"/>
-                            <constraint firstItem="XjS-3O-ccb" firstAttribute="leading" secondItem="wde-oB-yac" secondAttribute="leading" id="aPp-Wl-pxe"/>
-                            <constraint firstAttribute="trailing" secondItem="XjS-3O-ccb" secondAttribute="trailing" id="jbt-yA-RJj"/>
-                        </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Axr-Nd-4sa"/>
+                        <barButtonItem title="+" id="d84-A1-Dgy">
+                            <connections>
+                                <action selector="addEventButtonTapped:" destination="qNj-KM-reM" id="AdT-e1-1JE"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="Twq-eO-8SM">
                         <barButtonItem key="leftBarButtonItem" title="Today" id="U40-U2-b7U">
                             <connections>
@@ -43,9 +32,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="addEventButton" destination="1V5-CR-Gg8" id="ZiG-HR-jgM"/>
-                        <outlet property="bottomToolbar" destination="XjS-3O-ccb" id="C3u-8k-8fx"/>
+                        <outlet property="addEventButton" destination="d84-A1-Dgy" id="5Qo-BL-6th"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7z-dO-wZi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -57,7 +46,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="ECEditEventViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="61o-ly-PSA" customClass="ECEditEventViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="oEo-ae-nxj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -264,34 +253,7 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle=" " id="uH3-UF-trb">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jxq-3i-nG4">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jxq-3i-nG4" id="ItO-ZR-Qa0">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vid-Gk-UJp">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <state key="normal" title="Delete Event">
-                                                        <color key="titleColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="deleteButtonTapped:" destination="61o-ly-PSA" eventType="touchUpInside" id="isV-3M-1in"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="vid-Gk-UJp" secondAttribute="bottom" constant="-8.5" id="Hnh-d8-HE1"/>
-                                                <constraint firstItem="vid-Gk-UJp" firstAttribute="top" secondItem="ItO-ZR-Qa0" secondAttribute="top" id="YR8-bL-F8p"/>
-                                                <constraint firstItem="vid-Gk-UJp" firstAttribute="leading" secondItem="ItO-ZR-Qa0" secondAttribute="leading" id="jrx-W1-5dm"/>
-                                                <constraint firstAttribute="trailing" secondItem="vid-Gk-UJp" secondAttribute="trailing" id="wmM-Ah-lty"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
+                                <cells/>
                             </tableViewSection>
                         </sections>
                         <connections>
@@ -299,6 +261,18 @@
                             <outlet property="delegate" destination="61o-ly-PSA" id="KSk-83-gyN"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="TZn-81-rsg"/>
+                        <barButtonItem title="Delete Event" id="hFa-LO-3xv">
+                            <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deleteButtonTapped:" destination="61o-ly-PSA" id="c2O-7X-Qe5"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="BsR-c7-QWX"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="calendarCell" destination="UK6-Bm-Hog" id="KAk-tH-cze"/>
                         <outlet property="endDatePickerCell" destination="pPD-JJ-B7R" id="H8S-eS-Ok8"/>

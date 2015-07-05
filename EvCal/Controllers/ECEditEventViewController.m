@@ -53,6 +53,7 @@
     [self synchronizeFields];
     [self setupTextPropertyCells];
     
+    self.navigationController.toolbarHidden = NO;
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.startDatePickerCell.pickerDelegate = self;
@@ -268,7 +269,7 @@
     }
 }
 
-- (IBAction)deleteButtonTapped:(UIButton *)sender {
+- (IBAction)deleteButtonTapped:(UIBarButtonItem *)sender {
     if (self.event.recurrenceRules.count > 0) {
         [self presentDeleteSpanActionSheet];
     } else {
