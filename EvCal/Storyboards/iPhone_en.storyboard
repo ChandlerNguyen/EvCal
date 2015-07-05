@@ -7,7 +7,7 @@
         <!--Day View Controller-->
         <scene sceneID="8hV-0p-mmH">
             <objects>
-                <viewController id="qNj-KM-reM" customClass="ECDayViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="qNj-KM-reM" customClass="ECDayViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="556-VY-LXQ"/>
                         <viewControllerLayoutGuide type="bottom" id="HQi-PI-mQN"/>
@@ -275,6 +275,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="calendarCell" destination="UK6-Bm-Hog" id="KAk-tH-cze"/>
+                        <outlet property="deleteButton" destination="hFa-LO-3xv" id="OgV-Xl-C3O"/>
                         <outlet property="endDatePickerCell" destination="pPD-JJ-B7R" id="H8S-eS-Ok8"/>
                         <outlet property="locationCell" destination="MAz-Oe-62N" id="gnq-Cf-jV4"/>
                         <outlet property="startDatePickerCell" destination="HJN-1E-Iad" id="5ce-ec-2kG"/>

@@ -27,6 +27,7 @@
 
 // Navigation Elements
 @property (nonatomic, weak) UIBarButtonItem* saveButton;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem* deleteButton;
 
 // Event Data Fields
 @property (weak, nonatomic) IBOutlet ECEventTextPropertyCell *titleCell;
@@ -110,6 +111,10 @@
 
 - (void)synchronizeFields
 {
+    if (!self.event) {
+        self.deleteButton.enabled = NO;
+    }
+    
     self.titleCell.propertyValue = self.event.title;
     self.locationCell.propertyValue = self.event.location;
     self.startDatePickerCell.date = [self startDateForEvent:self.event];

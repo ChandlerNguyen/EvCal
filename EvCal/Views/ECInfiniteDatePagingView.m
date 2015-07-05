@@ -63,9 +63,9 @@
     
     if (self.pageView && !CGRectEqualToRect(oldFrame, frame)) {
         CGSize threePageContentSize = CGSizeMake(frame.size.width * 3, frame.size.height);
-        [super setContentSize:threePageContentSize];
+        self.contentSize = threePageContentSize;
+        self.contentOffset = CGPointMake(frame.size.width, self.bounds.origin.y);
         
-        self.contentOffset = CGPointMake(frame.size.width, 0.0f);
         [self resetContainerFrame];
         [self resetPageFrames];
     }
@@ -181,7 +181,7 @@
 - (void)resetContainerFrame
 {
     CGRect pageContainerFrame = CGRectMake(self.bounds.origin.x - self.contentOffset.x,
-                                           self.bounds.origin.y,
+                                           0.0f,
                                            self.contentSize.width,
                                            self.contentSize.height);
     
@@ -194,7 +194,7 @@
         UIView* page = self.pages[i];
         
         CGRect pageFrame = CGRectMake(self.bounds.origin.x - self.contentOffset.x + i * (self.contentSize.width / 3.0f),
-                                      self.bounds.origin.y,
+                                      0.0f,
                                       self.bounds.size.width,
                                       self.bounds.size.height);
         
