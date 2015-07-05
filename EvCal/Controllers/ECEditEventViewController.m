@@ -334,8 +334,8 @@
 
 #pragma mark - UITableView Delegate and Datasource
 
-const static CGFloat kHeaderHeight =                    33.0f;
-const static CGFloat kDefaultRowHeight =                44.0f;
+const static CGFloat kCalendarAndRecurrenceRowHeight =  44.0f;
+const static CGFloat kDatesAndAlarmsRowHeight =         52.0f;
 const static CGFloat kTextPropertyHiddenNameHeight =    33.0f;
 const static CGFloat kTextPropertyVisibleNameHeight =   52.0f;
 const static CGFloat kExpandedDatePickerHeight =        214.0f;
@@ -357,13 +357,13 @@ const static NSInteger kTitleCellRow =                  0;
             if ([indexPath isEqual:self.selectedIndexPath]) {
                 return kExpandedDatePickerHeight;
             } else {
-                return kDefaultRowHeight;
+                return kDatesAndAlarmsRowHeight;
             }
         case kCalendarAndRecurrenceSection:
-            return kDefaultRowHeight;
+            return kCalendarAndRecurrenceRowHeight;
             
         default:
-            return kDefaultRowHeight;
+            return 0.0f;
             break;
     }
 }
