@@ -34,11 +34,7 @@
 @property (nonatomic, weak) ECWeekdayPicker* weekdayPicker;
 @property (nonatomic, strong) NSDateFormatter* dateFormatter;
 
-// Touches
-@property (nonatomic) BOOL isDragginDayView;
-@property (nonatomic) CGPoint firstTouchPoint;
-@property (nonatomic) CGPoint previousTouchPoint;
-@property (nonatomic) CGFloat currentDelta;
+// State
 
 @end
 
@@ -224,13 +220,13 @@
 
 - (void)editEventViewControllerDidSave:(ECEditEventViewController *)controller
 {
-    //[self refreshEvents];
+    [self refreshEvents];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)editEventViewControllerDidDelete:(ECEditEventViewController *)controller
 {
-    //[self refreshEvents];
+    [self refreshEvents];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

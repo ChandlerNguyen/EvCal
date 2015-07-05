@@ -26,8 +26,17 @@
 
 @interface ECEventCache : NSObject
 
+//------------------------------------------------------------------------------
+// @name Properties
+//------------------------------------------------------------------------------
+
 // The data source is responsible for providing events from the permamant store.
 @property (nonatomic, weak) id<ECEventCacheDataSource> cacheDataSource;
+
+
+//------------------------------------------------------------------------------
+// @name Fetching events
+//------------------------------------------------------------------------------
 
 /**
  *  Returns an array of events within the given date range in the given
@@ -42,6 +51,27 @@
  *          source is not set.
  */
 - (NSArray*)eventsFrom:(NSDate*)startDate to:(NSDate*)endDate in:(NSArray*)calendars;
+
+
+//------------------------------------------------------------------------------
+// @name Managing cache
+//------------------------------------------------------------------------------
+
+/**
+ *  Adds the given event to the cache.
+ *
+ *  @param event The event to be added to the cache.
+ */
+- (void)addEvent:(EKEvent*)event;
+
+/**
+ *  Removes the given event from the cache.
+ *
+ *  @param event The event to be removed.
+ *
+ *  @return YES if the event was found and removed, NO otherwise.
+ */
+- (BOOL)removeEvent:(EKEvent*)event;
 
 /**
  * Tells the cache that it must reload events from the long term store

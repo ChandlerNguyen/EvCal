@@ -194,7 +194,10 @@
     NSError* err;
     BOOL result = [self.eventStore saveEvent:event span:span commit:YES error:&err];
     
-    if (!result && err) {
+    // event identifiers cannot be relied upon after removal so cache should be reset
+    [self.eventCache invalidateCache];
+    
+    if (err) {
         DDLogError(@"Failed to save event with error: %@", err);
     }
     
@@ -211,7 +214,10 @@
     NSError* err;
     BOOL result = [self.eventStore removeEvent:event span:span commit:YES error:&err];
     
-    if (!result && err) {
+    // event identifiers cannot be relied upon after removal so cache should be reset
+    [self.eventCache invalidateCache];
+    
+    if (err) {
         DDLogError(@"Failed to remove event with error: %@", err);
     }
     

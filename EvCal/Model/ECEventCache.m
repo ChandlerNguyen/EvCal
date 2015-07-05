@@ -147,6 +147,26 @@ static NSInteger kEventsInRangeNotFound = -1;
     return startDateInRange || endDateInRange;
 }
 
+
+#pragma mark - Managing events
+
+- (void)addEvent:(EKEvent *)event
+{
+    [self.events addObject:event];
+    self.events = [[self.events sortedArrayUsingSelector:@selector(compareStartAndEndDateWithEvent:)] mutableCopy];
+}
+
+- (BOOL)removeEvent:(EKEvent *)event
+{
+    if ([self.events containsObject:event]) {
+        [self.events removeObject:event];
+        return YES;
+    } else {
+        DDLogWarn(@"Attempting to remove event that is not in cache");
+        return NO;
+    }
+}
+
 - (void)invalidateCache
 {
     self.events = nil;
