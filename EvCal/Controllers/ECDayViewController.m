@@ -67,6 +67,13 @@
     [self.dayView updateCurrentTime];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    if ([[NSCalendar currentCalendar] isDateInToday:self.displayDate]) {
+        [self.dayView scrollToCurrentTime:YES];
+    }
+}
+
 - (ECDayView*)dayView {
     if (!_dayView) {
         ECDayView* dayView = [[ECDayView alloc] initWithFrame:CGRectZero displayDate:self.displayDate];
@@ -298,8 +305,13 @@
 
 - (IBAction)todayButtonTapped:(UIBarButtonItem *)sender
 {
-    NSDate* todayDate = [[NSDate date] beginningOfDay];
-    DDLogDebug(@"Setting weekday picker date to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:todayDate]);
-    [self.weekdayPicker setSelectedDate:todayDate];
+    if ([[NSCalendar currentCalendar] isDateInToday:self.displayDate]) {
+        [self.dayView scrollToCurrentTime:YES];
+    } else {
+        NSDate* todayDate = [[NSDate date] beginningOfDay];
+        DDLogDebug(@"Setting weekday picker date to %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:todayDate]);
+        // weekday picker will call delegate method that syncs the dates
+        [self.weekdayPicker setSelectedDate:todayDate];
+    }
 }
 @end
