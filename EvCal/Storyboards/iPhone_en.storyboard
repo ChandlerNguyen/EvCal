@@ -258,6 +258,40 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="recurrenceRuleCell" id="plX-eI-YlQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="plX-eI-YlQ" id="4kZ-Fq-WJ6">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repeats" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5v-QF-to4">
+                                                    <rect key="frame" x="16" y="11" width="64" height="20.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20.5" id="Doy-S9-q90"/>
+                                                        <constraint firstAttribute="width" constant="64" id="g4Q-Ig-aZc"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="black" pointSize="15"/>
+                                                    <color key="textColor" red="0.43529411759999997" green="0.21960784310000001" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGI-Fk-6dD">
+                                                    <rect key="frame" x="245" y="11" width="42" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="OGI-Fk-6dD" secondAttribute="trailing" id="5Tq-b7-vyL"/>
+                                                <constraint firstItem="W5v-QF-to4" firstAttribute="leading" secondItem="4kZ-Fq-WJ6" secondAttribute="leading" constant="16" id="BAN-hv-XB1"/>
+                                                <constraint firstAttribute="centerY" secondItem="OGI-Fk-6dD" secondAttribute="centerY" id="Lpl-oT-XAF"/>
+                                                <constraint firstAttribute="centerY" secondItem="W5v-QF-to4" secondAttribute="centerY" id="Mpp-lx-IdE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="oSd-sI-5dS" kind="push" id="Fu6-aV-TSf"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle=" " id="zJI-IB-TQh">
@@ -327,10 +361,10 @@
         <scene sceneID="6dK-XI-4jm">
             <objects>
                 <tableViewController id="YIi-sg-40W" customClass="ECEditEventCalendarViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="O2W-pJ-Oxa">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="O2W-pJ-Oxa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="calendarCell" id="YiG-F4-aXH" customClass="ECCalendarCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -365,7 +399,34 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T7t-si-d38" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1665" y="314"/>
+            <point key="canvasLocation" x="1666" y="28"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="rE1-aV-cGw">
+            <objects>
+                <tableViewController id="oSd-sI-5dS" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="PeE-VG-L9C">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="8Xh-uA-KLP">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Xh-uA-KLP" id="VEt-8Y-Atb">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="oSd-sI-5dS" id="AkW-GN-qz8"/>
+                            <outlet property="delegate" destination="oSd-sI-5dS" id="27E-1c-QSs"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="UR3-tI-tTB"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ofS-Hg-2gb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1666" y="628"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Qfz-Gk-nUb">
