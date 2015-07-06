@@ -26,10 +26,6 @@ typedef NS_ENUM(NSInteger, ECRecurrenceRuleType){
      */
     ECRecurrenceRuleTypeWeekly, // @"Weekly"
     /**
-     *  Event repeats every other week
-     */
-    ECRecurrenceRuleTypeBiweekly, // @"Every 2 Weeks"
-    /**
      *  Event repeats every month
      */
     ECRecurrenceRuleTypeMonthly, // @"Monthly"
@@ -52,13 +48,31 @@ typedef NS_ENUM(NSInteger, ECRecurrenceRuleType){
 /**
  *  Returns an EKRecurrenceRule for the given recurrence type. All recurrence 
  *  types return a predefined recurrence rule except for 
- *  ECRecurrenceRuleTypeCustom.
+ *  ECRecurrenceRuleTypeCustom. Custom rules should be created using the 
+ *  customRuleWithFrequency:interval: method.
  *
  *  @param type The type of recurrence to be created.
  *
- *  @return A newly created EKRecurrenceRule.
+ *  @return A newly created EKRecurrenceRule or nil if the ECRecurrenceRuleType
+ *          is not a valid value.
  */
 - (EKRecurrenceRule*)recurrenceRuleForRecurrenceType:(ECRecurrenceRuleType)type;
+
+/**
+ *  Creates a custom recurrence rule with the given frequency and interval.
+ *  If the frequency and interval of the custom recurrence rule match those of
+ *  the predefined types the formatter will return strings and types for those
+ *  predefined recurrences.
+ *
+ *  @param frequency The frequency of the recurrence rule. Check Apple's
+ *                   EKRecurrenceFrequency documentation for possible values.
+ *  @param interval  The interval when the event should be repeated. For example
+ *                   a frequency of daily and an interval of 2 would occur every
+ *                   other day.
+ *
+ *  @return The newly created recurrence rule.
+ */
+- (EKRecurrenceRule*)customRecurrenceRuleWithFrequency:(EKRecurrenceFrequency)frequency interval:(NSInteger)interval;
 
 /**
  *  Returns the type of the recurrence rule.
