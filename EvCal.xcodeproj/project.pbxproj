@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8404E07C1B329B31009B1923 /* ECInfiniteDatePagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8404E07B1B329B31009B1923 /* ECInfiniteDatePagingView.m */; };
 		842DA8FA1B47E5D7007DC027 /* ECEventTextPropertyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 842DA8F91B47E5D7007DC027 /* ECEventTextPropertyCell.m */; };
+		842DA8FF1B4A3DEE007DC027 /* ECRecurrenceRuleFormatterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 842DA8FE1B4A3DEE007DC027 /* ECRecurrenceRuleFormatterTests.m */; };
 		843535821B2D8F1F00A8E404 /* UIColor+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 843535811B2D8F1F00A8E404 /* UIColor+ECAdditions.m */; };
 		843535851B2DAFD000A8E404 /* ECEditEventCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843535841B2DAFD000A8E404 /* ECEditEventCalendarViewController.m */; };
 		84443EFF1B0DEBF900385E5A /* NSDate+ECTestAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443EFE1B0DEBF900385E5A /* NSDate+ECTestAdditions.m */; };
@@ -75,6 +76,7 @@
 		8404E07B1B329B31009B1923 /* ECInfiniteDatePagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECInfiniteDatePagingView.m; path = Views/ECInfiniteDatePagingView.m; sourceTree = "<group>"; };
 		842DA8F81B47E5D7007DC027 /* ECEventTextPropertyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEventTextPropertyCell.h; path = Views/ECEventTextPropertyCell.h; sourceTree = "<group>"; };
 		842DA8F91B47E5D7007DC027 /* ECEventTextPropertyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEventTextPropertyCell.m; path = Views/ECEventTextPropertyCell.m; sourceTree = "<group>"; };
+		842DA8FE1B4A3DEE007DC027 /* ECRecurrenceRuleFormatterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECRecurrenceRuleFormatterTests.m; sourceTree = "<group>"; };
 		843535801B2D8F1F00A8E404 /* UIColor+ECAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+ECAdditions.h"; path = "Support/UIColor+ECAdditions.h"; sourceTree = "<group>"; };
 		843535811B2D8F1F00A8E404 /* UIColor+ECAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+ECAdditions.m"; path = "Support/UIColor+ECAdditions.m"; sourceTree = "<group>"; };
 		843535831B2DAFD000A8E404 /* ECEditEventCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventCalendarViewController.h; path = Controllers/ECEditEventCalendarViewController.h; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 		84443EF91B0DE6E800385E5A /* Test Suites */ = {
 			isa = PBXGroup;
 			children = (
+				842DA8FE1B4A3DEE007DC027 /* ECRecurrenceRuleFormatterTests.m */,
 				84D168FC1B42AACB00DBCF17 /* ECEventCacheTests.m */,
 				849773F11B3C09710097259F /* ECDateViewTests.m */,
 				846FDB4B1B39A98000910D4F /* ECDayViewTests.m */,
@@ -638,6 +641,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84443EFF1B0DEBF900385E5A /* NSDate+ECTestAdditions.m in Sources */,
+				842DA8FF1B4A3DEE007DC027 /* ECRecurrenceRuleFormatterTests.m in Sources */,
 				846FDB4C1B39A98000910D4F /* ECDayViewTests.m in Sources */,
 				84D92C9B1B29AFD40050015D /* ECDayViewEventsLayoutTests.m in Sources */,
 				84443F0D1B1076B300385E5A /* ECEventViewTests.m in Sources */,
