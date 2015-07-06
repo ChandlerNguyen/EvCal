@@ -44,9 +44,32 @@
     XCTAssertNotNil(self.recurrenceRuleFormatter);
 }
 
-- (void)testRecurrenceRuleFormatterCreatesDailyRecurrenceRuleFromString
+- (void)testRecurrenceRuleCreatesRecurrenceRuleForDailyRecurrenceType
 {
+    EKRecurrenceRule* dailyRecurrenceRule = [self.recurrenceRuleFormatter recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeDaily];
     
+    XCTAssertNotNil(dailyRecurrenceRule);
+}
+
+- (void)testRecurrenceRuleFormatterCreatesRecurrenceRuleForDailyRecurrenceTypeWithDailyFrequency
+{
+    EKRecurrenceRule* dailyRecurrenceRule = [self.recurrenceRuleFormatter recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeDaily];
+    
+    XCTAssertEqual(dailyRecurrenceRule.frequency, EKRecurrenceFrequencyDaily);
+}
+
+- (void)testRecurrenceRuleFormatterCreatesRecurrenceRuleForDailyRecurrenceTypeWithIntervalOfOne
+{
+    EKRecurrenceRule* dailyRecurrenceRule = [self.recurrenceRuleFormatter recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeDaily];
+    
+    XCTAssertEqual(dailyRecurrenceRule.interval, 1);
+}
+
+- (void)testRecurrenceRuleFormatterCreatesRecurrenceRuleForDailyRecurrenceTypeWithNilRecurrenceEnd
+{
+    EKRecurrenceRule* dailyRecurrenceRule = [self.recurrenceRuleFormatter recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeDaily];
+    
+    XCTAssertNil(dailyRecurrenceRule.recurrenceEnd);
 }
 
 @end
