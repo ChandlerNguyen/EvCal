@@ -30,15 +30,16 @@
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* deleteButton;
 
 // Event Data Fields
-@property (weak, nonatomic) IBOutlet ECEventTextPropertyCell *titleCell;
-@property (weak, nonatomic) IBOutlet ECEventTextPropertyCell *locationCell;
+@property (nonatomic, weak) IBOutlet ECEventTextPropertyCell *titleCell;
+@property (nonatomic, weak) IBOutlet ECEventTextPropertyCell *locationCell;
 
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* startDatePickerCell;
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* endDatePickerCell;
 
-@property (nonatomic, weak) IBOutlet ECCalendarCell* calendarCell;
-@property (weak, nonatomic) IBOutlet UISwitch *allDaySwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *allDaySwitch;
+@property (nonatomic, weak) IBOutlet UILabel* recurrenceRuleLabel;
 
+@property (nonatomic, weak) IBOutlet ECCalendarCell* calendarCell;
 @property (nonatomic, weak) UITextView* notesView;
 
 @end
@@ -364,6 +365,7 @@ const static NSInteger kCalendarAndRecurrenceSection =  2;
 
 const static NSInteger kTitleCellRow =                  0;
 const static NSInteger kAllDayCellRow =                 2;
+const static NSInteger kRecurrenceRuleCellRow =         kAllDayCellRow + 1;
 //const static NSInteger kLocationCellRow =               1;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -395,7 +397,7 @@ const static NSInteger kAllDayCellRow =                 2;
 - (CGFloat)heightForCellInDateAndAllDaySectionAtIndexPath:(NSIndexPath*)indexPath
 {
     // all day cell
-    if (indexPath.row == kAllDayCellRow) {
+    if (indexPath.row == kAllDayCellRow || indexPath.row == kRecurrenceRuleCellRow) {
         return kAllDayCellHeight;
     } else {
         // if the date picker cell is highlighted it should be taller

@@ -349,6 +349,7 @@
                         <outlet property="deleteButton" destination="hFa-LO-3xv" id="OgV-Xl-C3O"/>
                         <outlet property="endDatePickerCell" destination="9xP-KB-6Ka" id="Iqo-EC-292"/>
                         <outlet property="locationCell" destination="MAz-Oe-62N" id="gnq-Cf-jV4"/>
+                        <outlet property="recurrenceRuleLabel" destination="OGI-Fk-6dD" id="tx4-Mh-gxV"/>
                         <outlet property="startDatePickerCell" destination="HJN-1E-Iad" id="5ce-ec-2kG"/>
                         <outlet property="titleCell" destination="qC9-n0-Ekw" id="1lN-HK-MEX"/>
                     </connections>
@@ -405,15 +406,27 @@
         <scene sceneID="rE1-aV-cGw">
             <objects>
                 <tableViewController id="oSd-sI-5dS" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="PeE-VG-L9C">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="PeE-VG-L9C">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="8Xh-uA-KLP">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recurrenceRuleCell" id="8Xh-uA-KLP">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Xh-uA-KLP" id="VEt-8Y-Atb">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npA-Pe-Ghr">
+                                            <rect key="frame" x="16" y="11" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="npA-Pe-Ghr" secondAttribute="centerY" id="OHo-qG-uxh"/>
+                                        <constraint firstItem="npA-Pe-Ghr" firstAttribute="leading" secondItem="VEt-8Y-Atb" secondAttribute="leading" constant="16" id="ule-yI-ssg"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
