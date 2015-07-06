@@ -104,11 +104,26 @@
 
 - (void)synchronizeEvent
 {
+    [self synchronizeEventTitleAndLocation];
+    [self synchronizeEventDates];
+    [self synchronizeEventCalendarAndNotes];
+}
+
+- (void)synchronizeEventTitleAndLocation
+{
     self.event.title = self.titleCell.propertyValue;
     self.event.location = self.locationCell.propertyValue;
+}
+
+- (void)synchronizeEventDates
+{
     self.event.allDay = self.allDaySwitch.isOn;
     self.event.startDate = self.startDatePickerCell.date;
     self.event.endDate = self.endDatePickerCell.date;
+}
+
+- (void)synchronizeEventCalendarAndNotes
+{
     self.event.calendar = self.calendarCell.calendar;
     self.event.notes = self.notesView.text;
 }
@@ -118,13 +133,28 @@
     if (!self.event) {
         self.deleteButton.enabled = NO;
     }
-    
+
+    [self synchronizeTitleAndLocationSectionFields];
+    [self synchronizeDateSectionFields];
+    [self synchronizeCalendarAndNotesSectionFields];
+}
+
+- (void)synchronizeTitleAndLocationSectionFields
+{
     self.titleCell.propertyValue = self.event.title;
     self.locationCell.propertyValue = self.event.location;
+}
+
+- (void)synchronizeDateSectionFields
+{
     self.startDatePickerCell.date = [self startDateForEvent:self.event];
     self.endDatePickerCell.date = [self endDateForEvent:self.event];
     self.allDaySwitch.on = self.event.isAllDay;
     [self updateDatePickersForAllDayStatus:self.allDaySwitch.on];
+}
+
+- (void)synchronizeCalendarAndNotesSectionFields
+{
     self.calendarCell.calendar = (self.event) ? self.event.calendar : [ECEventStoreProxy sharedInstance].defaultCalendar;
     self.notesView.text = self.event.notes;
 }
@@ -166,6 +196,9 @@
         return self.endDate;
     }
 }
+
+
+#pragma mark - Commiting event changes
 
 - (void)saveEventChanges:(EKSpan)span
 {
