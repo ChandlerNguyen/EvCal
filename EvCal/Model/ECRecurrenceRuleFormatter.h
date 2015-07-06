@@ -18,6 +18,10 @@ typedef NS_ENUM(NSInteger, ECRecurrenceRuleType){
      */
     ECRecurrenceRuleTypeDaily, // @"Daily"
     /**
+     *  Event repeats every weekday (excluding weekends).
+     */
+    ECRecurrenceRuleTypeWeekdays, // @"Every Weekday"
+    /**
      *  Event repeats every week
      */
     ECRecurrenceRuleTypeWeekly, // @"Weekly"
@@ -41,6 +45,10 @@ typedef NS_ENUM(NSInteger, ECRecurrenceRuleType){
 
 @interface ECRecurrenceRuleFormatter : NSObject
 
+//------------------------------------------------------------------------------
+// @name Creating recurrence rules
+//------------------------------------------------------------------------------
+
 /**
  *  Returns an EKRecurrenceRule for the given recurrence type. All recurrence 
  *  types return a predefined recurrence rule except for 
@@ -60,6 +68,11 @@ typedef NS_ENUM(NSInteger, ECRecurrenceRuleType){
  *  @return The type of the recurrence rule.
  */
 - (ECRecurrenceRuleType)typeForRecurrenceRule:(EKRecurrenceRule*)rule;
+
+
+//------------------------------------------------------------------------------
+// @name Creating strings
+//------------------------------------------------------------------------------
 
 /**
  *  Creates and returns a string based on the recurrence rule. The string will 
