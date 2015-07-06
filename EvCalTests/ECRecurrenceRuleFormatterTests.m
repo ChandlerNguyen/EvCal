@@ -44,4 +44,9 @@
     XCTAssertNotNil(self.recurrenceRuleFormatter);
 }
 
+- (void)testRecurrenceRuleFormatterCreatesDailyRecurrenceRuleFromString
+{
+    
+}
+
 @end
