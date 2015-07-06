@@ -6,34 +6,42 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
+// Frameworks
+@import EventKit;
 #import <XCTest/XCTest.h>
 
+// EvCal Classes
+#import "ECRecurrenceRuleFormatter.h"
+
 @interface ECRecurrenceRuleFormatterTests : XCTestCase
+
+@property (nonatomic, strong) ECRecurrenceRuleFormatter* recurrenceRuleFormatter;
 
 @end
 
 @implementation ECRecurrenceRuleFormatterTests
 
+#pragma mark - Setup & tear down
+
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+
+    self.recurrenceRuleFormatter = [[ECRecurrenceRuleFormatter alloc] init];
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    self.recurrenceRuleFormatter = nil;
+    
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
-}
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+#pragma mark - Tests
+
+- (void)testRecurrenceRuleFormatterCanBeCreated
+{
+    XCTAssertNotNil(self.recurrenceRuleFormatter);
 }
 
 @end
