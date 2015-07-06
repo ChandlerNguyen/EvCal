@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, ECRecurrenceRuleType){
  *  @return A newly created EKRecurrenceRule or nil if the ECRecurrenceRuleType
  *          is not a valid value.
  */
-- (EKRecurrenceRule*)recurrenceRuleForRecurrenceType:(ECRecurrenceRuleType)type;
+- (nullable EKRecurrenceRule*)recurrenceRuleForRecurrenceType:(ECRecurrenceRuleType)type;
 
 /**
  *  Creates a custom recurrence rule with the given frequency and interval.
@@ -72,7 +72,7 @@ typedef NS_ENUM(NSInteger, ECRecurrenceRuleType){
  *
  *  @return The newly created recurrence rule.
  */
-- (EKRecurrenceRule*)customRecurrenceRuleWithFrequency:(EKRecurrenceFrequency)frequency interval:(NSInteger)interval;
+- (nullable EKRecurrenceRule*)customRecurrenceRuleWithFrequency:(EKRecurrenceFrequency)frequency interval:(NSInteger)interval;
 
 /**
  *  Returns the type of the recurrence rule.
@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger, ECRecurrenceRuleType){
  *
  *  @return The type of the recurrence rule.
  */
-- (ECRecurrenceRuleType)typeForRecurrenceRule:(EKRecurrenceRule*)rule;
+- (ECRecurrenceRuleType)typeForRecurrenceRule:(nonnull EKRecurrenceRule*)rule;
 
 
 //------------------------------------------------------------------------------
@@ -97,7 +97,7 @@ typedef NS_ENUM(NSInteger, ECRecurrenceRuleType){
  *
  *  @return A newly created string representation of the rule.
  */
-- (NSString*)stringFromRecurrenceRule:(EKRecurrenceRule*)rule;
+- (nullable NSString*)stringFromRecurrenceRule:(nullable EKRecurrenceRule*)rule;
 
 /**
  *  Creates and returns a string based on the recurrence type. The strings will
@@ -108,6 +108,6 @@ typedef NS_ENUM(NSInteger, ECRecurrenceRuleType){
  *
  *  @return A newly created string representation of the type.
  */
-- (NSString*)stringFromRecurrenceType:(ECRecurrenceRuleType)type;
+- (nullable NSString*)stringFromRecurrenceType:(ECRecurrenceRuleType)type;
 
 @end

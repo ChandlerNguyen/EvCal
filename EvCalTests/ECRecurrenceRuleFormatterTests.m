@@ -209,7 +209,6 @@
     XCTAssertNil(yearlyRecurrenceRule.recurrenceEnd);
 }
 
-
 #pragma mark Creating custom rules
 
 - (void)testRecurrenceRuleFormatterReturnsNilForCustomRecurrenceType
@@ -249,4 +248,53 @@
     XCTAssertNil(customRecurrenceRule.recurrenceEnd);
 }
 
+#pragma mark Determining recurrence type
+- (void)testRecurrenceRuleFormatterReturnsDailyTypeForDailyRecurrenceRule
+{
+    EKRecurrenceRule* dailyRecurrenceRule = [self.recurrenceRuleFormatter recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeDaily];
+    
+    XCTAssertEqual([self.recurrenceRuleFormatter typeForRecurrenceRule:dailyRecurrenceRule], ECRecurrenceRuleTypeDaily);
+}
+
+- (void)testRecurrenceRuleFormatterReturnsWeekdaysTypeForWeekdaysRecurrenceRule
+{
+    EKRecurrenceRule* weekdayRecurrenceRule = [self.recurrenceRuleFormatter recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeWeekdays];
+    
+    XCTAssertEqual([self.recurrenceRuleFormatter typeForRecurrenceRule:weekdayRecurrenceRule], ECRecurrenceRuleTypeWeekdays);
+}
+
+- (void)testRecurrenceRuleFormatterReturnsWeeklyTypeForWeeklyRecurrenceRule
+{
+    EKRecurrenceRule* weeklyRecurrenceRule = [self.recurrenceRuleFormatter recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeWeekly];
+    
+    XCTAssertEqual([self.recurrenceRuleFormatter typeForRecurrenceRule:weeklyRecurrenceRule], ECRecurrenceRuleTypeWeekly);
+}
+
+- (void)testRecurrenceRuleFormatterReturnsMonthlyTypeForMonthlyRecurrenceRule
+{
+    EKRecurrenceRule* monthlyRecurrenceRule = [self.recurrenceRuleFormatter recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeMonthly];
+    
+    XCTAssertEqual([self.recurrenceRuleFormatter typeForRecurrenceRule:monthlyRecurrenceRule], ECRecurrenceRuleTypeMonthly);
+}
+
+- (void)testRecurrenceRuleFormatterReturnsYearlyTypeForYearlyRecurrenceRule
+{
+    EKRecurrenceRule* yearlyRecurrenceRule = [self.recurrenceRuleFormatter recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeYearly];
+    
+    XCTAssertEqual([self.recurrenceRuleFormatter typeForRecurrenceRule:yearlyRecurrenceRule], ECRecurrenceRuleTypeYearly);
+}
+
+- (void)testRecurrenceRuleFormatterReturnsCustomTypeForCustomRecurrenceRule
+{
+    EKRecurrenceRule* customRecurrenceRule = [self.recurrenceRuleFormatter customRecurrenceRuleWithFrequency:EKRecurrenceFrequencyDaily interval:2];
+    
+    XCTAssertEqual([self.recurrenceRuleFormatter typeForRecurrenceRule:customRecurrenceRule], ECRecurrenceRuleTypeCustom);
+}
+
+- (void)testRecurrenceRuleFormatterRaisesExceptionForNilRecurrenceRule
+{
+    EKRecurrenceRule* nilRule = nil;
+    
+    XCTAssertThrowsSpecificNamed([self.recurrenceRuleFormatter typeForRecurrenceRule:nilRule], NSException, NSInvalidArgumentException);
+}
 @end
