@@ -148,7 +148,7 @@
 
 - (NSArray*)eventsFrom:(NSDate *)startDate to:(NSDate *)endDate
 {
-    return [self.eventCache eventsFrom:startDate to:endDate in:nil];
+    return [self eventsFrom:startDate to:endDate in:nil];
 }
 
 - (NSArray*)eventsFrom:(NSDate *)startDate to:(NSDate *)endDate in:(NSArray *)calendars
