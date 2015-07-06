@@ -49,4 +49,9 @@
     }
 }
 
+- (EKRecurrenceRule*)customRecurrenceRuleWithFrequency:(EKRecurrenceFrequency)frequency interval:(NSInteger)interval
+{
+    return [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:frequency interval:interval end:nil];
+}
+
 @end

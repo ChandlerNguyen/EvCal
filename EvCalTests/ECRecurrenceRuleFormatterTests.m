@@ -209,6 +209,9 @@
     XCTAssertNil(yearlyRecurrenceRule.recurrenceEnd);
 }
 
+
+#pragma mark Creating custom rules
+
 - (void)testRecurrenceRuleFormatterReturnsNilForCustomRecurrenceType
 {
     EKRecurrenceRule* customRecurrenceRule = [self.recurrenceRuleFormatter recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeCustom];
@@ -216,5 +219,34 @@
     XCTAssertNil(customRecurrenceRule);
 }
 
+- (void)testRecurrenceRuleFormatterCreatesCustomRule
+{
+    EKRecurrenceRule* customRecurrenceRule = [self.recurrenceRuleFormatter customRecurrenceRuleWithFrequency:EKRecurrenceFrequencyDaily interval:2];
+    
+    XCTAssertNotNil(customRecurrenceRule);
+}
+
+- (void)testRecurrenceRuleFormatterCreatesCustomRuleWithCorrectFrequency
+{
+    EKRecurrenceFrequency testFrequency = EKRecurrenceFrequencyDaily;
+    EKRecurrenceRule* customRecurrenceRule = [self.recurrenceRuleFormatter customRecurrenceRuleWithFrequency:testFrequency interval:2];
+    
+    XCTAssertEqual(customRecurrenceRule.frequency, testFrequency);
+}
+
+- (void)testRecurrenceRuleFormatterCreatesCustomRuleWithCorrectInterval
+{
+    NSInteger testInterval = 2;
+    EKRecurrenceRule* customRecurrenceRule = [self.recurrenceRuleFormatter customRecurrenceRuleWithFrequency:EKRecurrenceFrequencyDaily interval:testInterval];
+    
+    XCTAssertEqual(customRecurrenceRule.interval, testInterval);
+}
+
+- (void)testRecurrenceRuleFormatterCreatesCustomRuleWithNilRecurrenceEnd
+{
+    EKRecurrenceRule* customRecurrenceRule = [self.recurrenceRuleFormatter customRecurrenceRuleWithFrequency:EKRecurrenceFrequencyDaily interval:2];
+    
+    XCTAssertNil(customRecurrenceRule.recurrenceEnd);
+}
 
 @end
