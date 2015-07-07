@@ -8,15 +8,141 @@
 
 @import EventKit;
 #import "ECRecurrenceRuleFormatter.h"
+@interface ECRecurrenceRuleFormatter()
+
+@property (nonatomic, strong, readwrite) NSString* dailyRuleName;
+@property (nonatomic, strong, readwrite) NSString* weekdaysRuleName;
+@property (nonatomic, strong, readwrite) NSString* weeklyRuleName;
+@property (nonatomic, strong, readwrite) NSString* monthlyRuleName;
+@property (nonatomic, strong, readwrite) NSString* yearlyRuleName;
+@property (nonatomic, strong, readwrite) NSString* customRuleName;
+
+@end
 
 
 @implementation ECRecurrenceRuleFormatter
-NSString* const __nonnull ECRecurrenceRuleNameDaily =       @"ECRecurrenceRule.Daily";
-NSString* const __nonnull ECRecurrenceRuleNameWeekdays =    @"ECRecurrenceRule.Weekdays";
-NSString* const __nonnull ECRecurrenceRuleNameWeekly =      @"ECRecurrenceRule.Weekly";
-NSString* const __nonnull ECRecurrenceRuleNameMonthly =     @"ECRecurrenceRule.Monthly";
-NSString* const __nonnull ECRecurrenceRuleNameYearly =      @"ECRecurrenceRule.Yearly";
-NSString* const __nonnull ECRecurrenceRuleNameCustom =      @"ECRecurrenceRule.Custom";
+
+#pragma mark - Initializing formatters
+
+- (instancetype)initUsingLocalization:(BOOL)localizeStrings
+{
+    self = [super init];
+    if (self) {
+        self.localizeStrings = localizeStrings;
+    }
+    
+    return self;
+}
+
++ (instancetype)defaultFormatter
+{
+    static ECRecurrenceRuleFormatter* defaultFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        defaultFormatter = [[ECRecurrenceRuleFormatter alloc] initUsingLocalization:YES];
+    });
+    
+    return defaultFormatter;
+}
+
+#pragma mark - Recurrence rule strings
+
+- (void)setLocalizeStrings:(BOOL)localizeStrings
+{
+    _localizeStrings = localizeStrings;
+    [self nullifyStrings];
+}
+
+- (void)nullifyStrings
+{
+    _dailyRuleName = nil;
+    _weekdaysRuleName = nil;
+    _weeklyRuleName = nil;
+    _monthlyRuleName = nil;
+    _yearlyRuleName = nil;
+    _customRuleName = nil;
+}
+
+- (NSString*)dailyRuleName
+{
+    if (!_dailyRuleName) {
+        if (self.localizeStrings) {
+            _dailyRuleName = NSLocalizedString(@"ECRecurrenceRule.Daily", @"The event repeats every day");
+        } else {
+            _dailyRuleName = @"ECRecurrenceRule.Daily";
+        }
+    }
+    
+    return _dailyRuleName;
+}
+
+- (NSString*)weekdaysRuleName
+{
+    if (!_weekdaysRuleName) {
+        if (self.localizeStrings) {
+            _weekdaysRuleName = NSLocalizedString(@"ECRecurrenceRule.Weekdays", @"The event repeats every weekday (not weekends)");
+        } else {
+            _weekdaysRuleName = @"ECRecurrenceRule.Weekdays";
+        }
+    }
+    
+    return _weekdaysRuleName;
+}
+
+- (NSString*)weeklyRuleName
+{
+    if (!_weeklyRuleName) {
+        if (self.localizeStrings) {
+            _weeklyRuleName = NSLocalizedString(@"ECRecurrenceRule.Weekly", @"The event repeats on the same day every week");
+        } else {
+            _weeklyRuleName = @"ECRecurrenceRule.Weekly";
+        }
+    }
+    
+    return _weeklyRuleName;
+}
+
+- (NSString*)monthlyRuleName
+{
+    if (!_monthlyRuleName) {
+        if (self.localizeStrings) {
+            _monthlyRuleName = NSLocalizedString(@"ECRecurrenceRule.Monthly", @"The event repeats on the same date every month");
+        } else {
+            _monthlyRuleName = @"ECRecurrenceRule.Monthly";
+        }
+    }
+    
+    return _monthlyRuleName;
+}
+
+- (NSString*)yearlyRuleName
+{
+    if (!_yearlyRuleName) {
+        if (self.localizeStrings) {
+            _yearlyRuleName = NSLocalizedString(@"ECRecurrenceRule.Yearly", @"The event repeats on the same date every year");
+        } else {
+            _yearlyRuleName = @"ECRecurrenceRule.Monthly";
+        }
+    }
+    
+    return _yearlyRuleName;
+}
+
+- (NSString*)customRuleName
+{
+    if (!_customRuleName) {
+        if (self.localizeStrings) {
+            _customRuleName = NSLocalizedString(@"ECRecurrenceRule.Custom", @"The event repeats on a custom schedule defined by the user");
+        } else {
+            _customRuleName = @"ECRecurrenceRule.Monthly";
+        }
+    }
+    
+    return _customRuleName;
+}
+
+
+#pragma mark - Creating recurrence rules
 
 static NSArray* weekdays = nil;
 + (NSArray*)weekdays
@@ -77,7 +203,6 @@ static NSArray* weekdays = nil;
         NSException* invalidArgumentException = [NSException exceptionWithName:NSInvalidArgumentException reason:@"Recurrence rule should not be nil" userInfo:nil];
         [invalidArgumentException raise];
     }
-    
     
     switch (rule.frequency) {
         case EKRecurrenceFrequencyDaily:
@@ -153,28 +278,27 @@ static NSArray* weekdays = nil;
 {
     switch (type) {
         case ECRecurrenceRuleTypeDaily:
-            return NSLocalizedString(ECRecurrenceRuleNameDaily, @"The event repeats every day");
+            return self.dailyRuleName;
             
         case ECRecurrenceRuleTypeWeekdays:
-            return NSLocalizedString(ECRecurrenceRuleNameWeekdays, @"The event repeats only on weekdays");
+            return self.weekdaysRuleName;
             
         case ECRecurrenceRuleTypeWeekly:
-            return NSLocalizedString(ECRecurrenceRuleNameWeekly, @"The event repeats on the same day every week");
+            return self.weeklyRuleName;
         
         case ECRecurrenceRuleTypeMonthly:
-            return NSLocalizedString(ECRecurrenceRuleNameMonthly, @"The event repeats on the same date every month");
+            return self.monthlyRuleName;
             
         case ECRecurrenceRuleTypeYearly:
-            return NSLocalizedString(ECRecurrenceRuleNameYearly, @"The event repeats on the same date every year");
+            return self.yearlyRuleName;
             
         case ECRecurrenceRuleTypeCustom:
-            return NSLocalizedString(ECRecurrenceRuleNameCustom, @"The event repeats on a schedule that is not defined above");
+            return self.customRuleName;
             
         default: {
             NSException* invalidArugmentException = [NSException exceptionWithName:NSInvalidArgumentException reason:@"The recurrence type is not recognized" userInfo:nil];
             [invalidArugmentException raise];
         }
-            
     }
 }
 
