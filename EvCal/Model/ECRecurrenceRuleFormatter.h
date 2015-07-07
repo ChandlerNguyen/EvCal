@@ -9,6 +9,14 @@
 #import <Foundation/Foundation.h>
 @class EKRecurrenceRule;
 
+// A set of nonlocalized strings
+extern NSString* const __nonnull ECRecurrenceRuleNameDaily;
+extern NSString* const __nonnull ECRecurrenceRuleNameWeekdays;
+extern NSString* const __nonnull ECRecurrenceRuleNameWeekly;
+extern NSString* const __nonnull ECRecurrenceRuleNameMonthly;
+extern NSString* const __nonnull ECRecurrenceRuleNameYearly;
+extern NSString* const __nonnull ECRecurrenceRuleNameCustom;
+
 /**
  *  The recurrence rules defined by ECRecurrenceRuleFormatter
  */

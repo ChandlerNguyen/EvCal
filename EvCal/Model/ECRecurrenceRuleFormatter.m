@@ -11,6 +11,12 @@
 
 
 @implementation ECRecurrenceRuleFormatter
+NSString* const __nonnull ECRecurrenceRuleNameDaily =       @"ECRecurrenceRule.Daily";
+NSString* const __nonnull ECRecurrenceRuleNameWeekdays =    @"ECRecurrenceRule.Weekdays";
+NSString* const __nonnull ECRecurrenceRuleNameWeekly =      @"ECRecurrenceRule.Weekly";
+NSString* const __nonnull ECRecurrenceRuleNameMonthly =     @"ECRecurrenceRule.Monthly";
+NSString* const __nonnull ECRecurrenceRuleNameYearly =      @"ECRecurrenceRule.Yearly";
+NSString* const __nonnull ECRecurrenceRuleNameCustom =      @"ECRecurrenceRule.Custom";
 
 static NSArray* weekdays = nil;
 + (NSArray*)weekdays
@@ -141,6 +147,40 @@ static NSArray* weekdays = nil;
 - (BOOL)recurrenceRuleHasSpecificDays:(EKRecurrenceRule*)rule
 {
     return rule.daysOfTheWeek || rule.daysOfTheMonth || rule.daysOfTheYear;
+}
+
+- (NSString*)stringFromRecurrenceType:(ECRecurrenceRuleType)type
+{
+    switch (type) {
+        case ECRecurrenceRuleTypeDaily:
+            return NSLocalizedString(ECRecurrenceRuleNameDaily, @"The event repeats every day");
+            
+        case ECRecurrenceRuleTypeWeekdays:
+            return NSLocalizedString(ECRecurrenceRuleNameWeekdays, @"The event repeats only on weekdays");
+            
+        case ECRecurrenceRuleTypeWeekly:
+            return NSLocalizedString(ECRecurrenceRuleNameWeekly, @"The event repeats on the same day every week");
+        
+        case ECRecurrenceRuleTypeMonthly:
+            return NSLocalizedString(ECRecurrenceRuleNameMonthly, @"The event repeats on the same date every month");
+            
+        case ECRecurrenceRuleTypeYearly:
+            return NSLocalizedString(ECRecurrenceRuleNameYearly, @"The event repeats on the same date every year");
+            
+        case ECRecurrenceRuleTypeCustom:
+            return NSLocalizedString(ECRecurrenceRuleNameCustom, @"The event repeats on a schedule that is not defined above");
+            
+        default: {
+            NSException* invalidArugmentException = [NSException exceptionWithName:NSInvalidArgumentException reason:@"The recurrence type is not recognized" userInfo:nil];
+            [invalidArugmentException raise];
+        }
+            
+    }
+}
+
+- (NSString*)stringFromRecurrenceRule:(nullable EKRecurrenceRule *)rule
+{
+    return [self stringFromRecurrenceType:[self typeForRecurrenceRule:rule]];
 }
 
 @end

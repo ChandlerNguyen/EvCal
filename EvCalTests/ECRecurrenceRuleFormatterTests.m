@@ -297,4 +297,84 @@
     
     XCTAssertThrowsSpecificNamed([self.recurrenceRuleFormatter typeForRecurrenceRule:nilRule], NSException, NSInvalidArgumentException);
 }
+
+#pragma mark Creating strings
+
+- (void)testRecurrenceRuleFormatterRaisesInvalidArgumentExceptionForUnrecognizedRecurrenceType
+{
+    XCTAssertThrowsSpecificNamed([self.recurrenceRuleFormatter stringFromRecurrenceType:(ECRecurrenceRuleType)-1], NSException, NSInvalidArgumentException);
+}
+
+- (void)testRecurrenceRuleFormatterReturnsLocalizedStringForDailyType
+{
+    XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceType:ECRecurrenceRuleTypeDaily], NSLocalizedString(ECRecurrenceRuleNameDaily, nil));
+}
+
+- (void)testRecurrenceRuleFormatterReturnsLocalizedStringForDailyRule
+{
+    EKRecurrenceRule* dailyRecurrenceRule = [self.recurrenceRuleFormatter recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeDaily];
+    
+    XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceRule:dailyRecurrenceRule], NSLocalizedString(ECRecurrenceRuleNameDaily, nil));
+}
+
+- (void)testRecurrenceRuleFormatterReturnsLocalizedStringForWeekdaysType
+{
+    XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceType:ECRecurrenceRuleTypeWeekdays], NSLocalizedString(ECRecurrenceRuleNameWeekdays, nil));
+}
+
+- (void)testRecurrenceRuleFormatterReturnsLocalizedStringForWeekdaysRule
+{
+    EKRecurrenceRule* weekdaysRecurrenceRule = [self.recurrenceRuleFormatter recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeWeekdays];
+    
+    XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceRule:weekdaysRecurrenceRule], NSLocalizedString(ECRecurrenceRuleNameWeekdays, nil));
+}
+
+- (void)testRecurrenceRuleFormatterReturnsLocalizedStringForWeeklyType
+{
+    XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceType:ECRecurrenceRuleTypeWeekly], NSLocalizedString(ECRecurrenceRuleNameWeekly, nil));
+}
+
+- (void)testRecurrenceRuleFormatterReturnsLocalizedStringForWeeklyRule
+{
+    EKRecurrenceRule* weeklyRecurrenceRule = [self.recurrenceRuleFormatter recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeWeekly];
+    
+    XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceRule:weeklyRecurrenceRule], NSLocalizedString(ECRecurrenceRuleNameWeekly, nil));
+}
+
+- (void)testRecurrenceRuleFormatterReturnsLocalizedStringForMonthlyType
+{
+    XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceType:ECRecurrenceRuleTypeMonthly], NSLocalizedString(ECRecurrenceRuleNameMonthly, nil));
+}
+
+- (void)testRecurrenceRuleFormatterReturnsLocalizedStringForMonthlyRule
+{
+    EKRecurrenceRule* monthlyRecurrenceRule = [self.recurrenceRuleFormatter recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeMonthly];
+    
+    XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceRule:monthlyRecurrenceRule], NSLocalizedString(ECRecurrenceRuleNameMonthly, nil));
+}
+
+- (void)testRecurrenceRuleFormatterReturnsLocalizedStringForYearlyType
+{
+    XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceType:ECRecurrenceRuleTypeYearly], NSLocalizedString(ECRecurrenceRuleNameYearly, nil));
+}
+
+- (void)testRecurrenceRuleFormatterReturnsLocalizedStringForYearlyRule
+{
+    EKRecurrenceRule* yearlyRecurrenceRule = [self.recurrenceRuleFormatter recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeYearly];
+    
+    XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceRule:yearlyRecurrenceRule], NSLocalizedString(ECRecurrenceRuleNameYearly, nil));
+}
+
+- (void)testRecurrenceRuleFormatterReturnsLocalizedStringForCustomType
+{
+    XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceType:ECRecurrenceRuleTypeCustom], NSLocalizedString(ECRecurrenceRuleNameCustom, nil));
+}
+
+- (void)testRecurrenceRuleFormatterReturnsLocalizedStringForCustomRule
+{
+    EKRecurrenceRule* customRecurrenceRule = [self.recurrenceRuleFormatter customRecurrenceRuleWithFrequency:EKRecurrenceFrequencyDaily interval:2];
+    
+    XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceRule:customRecurrenceRule], NSLocalizedString(ECRecurrenceRuleNameCustom, nil));
+}
+
 @end
