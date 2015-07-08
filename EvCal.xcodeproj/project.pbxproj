@@ -49,6 +49,7 @@
 		84CAC3B71B4C271000B191B6 /* ECRecurrenceRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC3B61B4C271000B191B6 /* ECRecurrenceRule.m */; };
 		84CAC3B91B4C2B9A00B191B6 /* ECRecurrenceRuleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC3B81B4C2B9A00B191B6 /* ECRecurrenceRuleTests.m */; };
 		84CAC3BF1B4CF9DF00B191B6 /* ECEditEventRecurrenceRuleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC3BE1B4CF9DF00B191B6 /* ECEditEventRecurrenceRuleTableViewController.m */; };
+		84CAC3C21B4D3E1700B191B6 /* ECEventCustomRecurrenceRuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC3C11B4D3E1700B191B6 /* ECEventCustomRecurrenceRuleCell.m */; };
 		84CD51991B3124D500902BDE /* ECSingleDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CD51981B3124D500902BDE /* ECSingleDayView.m */; };
 		84D168F51B3D6AAD00DBCF17 /* ECDatePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D168F41B3D6AAD00DBCF17 /* ECDatePage.m */; };
 		84D168FB1B42A49300DBCF17 /* ECEventCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D168FA1B42A49300DBCF17 /* ECEventCache.m */; };
@@ -152,6 +153,8 @@
 		84CAC3B81B4C2B9A00B191B6 /* ECRecurrenceRuleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECRecurrenceRuleTests.m; sourceTree = "<group>"; };
 		84CAC3BD1B4CF9DF00B191B6 /* ECEditEventRecurrenceRuleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventRecurrenceRuleTableViewController.h; path = Controllers/ECEditEventRecurrenceRuleTableViewController.h; sourceTree = "<group>"; };
 		84CAC3BE1B4CF9DF00B191B6 /* ECEditEventRecurrenceRuleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEditEventRecurrenceRuleTableViewController.m; path = Controllers/ECEditEventRecurrenceRuleTableViewController.m; sourceTree = "<group>"; };
+		84CAC3C01B4D3E1700B191B6 /* ECEventCustomRecurrenceRuleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEventCustomRecurrenceRuleCell.h; path = Views/ECEventCustomRecurrenceRuleCell.h; sourceTree = "<group>"; };
+		84CAC3C11B4D3E1700B191B6 /* ECEventCustomRecurrenceRuleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEventCustomRecurrenceRuleCell.m; path = Views/ECEventCustomRecurrenceRuleCell.m; sourceTree = "<group>"; };
 		84CD51971B3124D500902BDE /* ECSingleDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSingleDayView.h; path = Views/ECSingleDayView.h; sourceTree = "<group>"; };
 		84CD51981B3124D500902BDE /* ECSingleDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSingleDayView.m; path = Views/ECSingleDayView.m; sourceTree = "<group>"; };
 		84D168F31B3D6AAD00DBCF17 /* ECDatePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDatePage.h; path = Views/ECDatePage.h; sourceTree = "<group>"; };
@@ -391,6 +394,8 @@
 				8474BF141B2EDEF000475846 /* ECCalendarCell.m */,
 				842DA8F81B47E5D7007DC027 /* ECEventTextPropertyCell.h */,
 				842DA8F91B47E5D7007DC027 /* ECEventTextPropertyCell.m */,
+				84CAC3C01B4D3E1700B191B6 /* ECEventCustomRecurrenceRuleCell.h */,
+				84CAC3C11B4D3E1700B191B6 /* ECEventCustomRecurrenceRuleCell.m */,
 			);
 			name = "Edit Event View";
 			sourceTree = "<group>";
@@ -644,6 +649,7 @@
 				8478F7B21B244AF80096F1B7 /* NSDate+ECEventAdditions.m in Sources */,
 				848628421B45976A007E0AA2 /* EKEvent+ECAdditions.m in Sources */,
 				84C459221B074BDD0066B6A9 /* ECDayView.m in Sources */,
+				84CAC3C21B4D3E1700B191B6 /* ECEventCustomRecurrenceRuleCell.m in Sources */,
 				842DA8FA1B47E5D7007DC027 /* ECEventTextPropertyCell.m in Sources */,
 				84CD51991B3124D500902BDE /* ECSingleDayView.m in Sources */,
 				84D92C991B29A52E0050015D /* ECDayViewEventsLayout.m in Sources */,
