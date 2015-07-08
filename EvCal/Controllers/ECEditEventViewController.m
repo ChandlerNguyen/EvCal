@@ -19,9 +19,11 @@
 #import "ECDatePickerCell.h"
 #import "ECCalendarCell.h"
 #import "ECEditEventCalendarViewController.h"
+#import "ECRecurrenceRule.h"
+#import "ECEditEventRecurrenceRuleTableViewController.h"
 #import "ECEventTextPropertyCell.h"
 
-@interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, ECEventTextPropertyCellDelegate, UIActionSheetDelegate, UITextFieldDelegate>
+@interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, ECEditEventRecurrenceRuleViewControllerDelegate, ECEventTextPropertyCellDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSIndexPath* selectedIndexPath;
 
@@ -37,6 +39,7 @@
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* endDatePickerCell;
 
 @property (nonatomic, weak) IBOutlet UISwitch *allDaySwitch;
+@property (nonatomic, strong) ECRecurrenceRule* recurrenceRule;
 @property (nonatomic, weak) IBOutlet UILabel* recurrenceRuleLabel;
 
 @property (nonatomic, weak) IBOutlet ECCalendarCell* calendarCell;
@@ -107,6 +110,7 @@
     [self synchronizeEventTitleAndLocation];
     [self synchronizeEventDates];
     [self synchronizeEventCalendarAndNotes];
+    [self synchronizeEventRecurrenceRule];
 }
 
 - (void)synchronizeEventTitleAndLocation
@@ -128,6 +132,11 @@
     self.event.notes = self.notesView.text;
 }
 
+- (void)synchronizeEventRecurrenceRule
+{
+    
+}
+
 - (void)synchronizeFields
 {
     if (!self.event) {
@@ -137,6 +146,7 @@
     [self synchronizeTitleAndLocationSectionFields];
     [self synchronizeDateSectionFields];
     [self synchronizeCalendarAndNotesSectionFields];
+    [self synchronizeRecurrenceRule];
 }
 
 - (void)synchronizeTitleAndLocationSectionFields
@@ -157,6 +167,12 @@
 {
     self.calendarCell.calendar = (self.event) ? self.event.calendar : [ECEventStoreProxy sharedInstance].defaultCalendar;
     self.notesView.text = self.event.notes;
+}
+
+- (void)synchronizeRecurrenceRule
+{
+    self.recurrenceRule = [[ECRecurrenceRule alloc] initWithRecurrenceRule:[self.event.recurrenceRules firstObject]];
+    self.recurrenceRuleLabel.text = self.recurrenceRule.localizedName;
 }
 
 - (void)updateDatePickersForAllDayStatus:(BOOL)allDay
@@ -373,6 +389,13 @@
     [self updateCellHeights];
 }
 
+#pragma mark - ECEditEventRecurrenceRuleViewController delegate
+
+- (void)viewController:(ECEditEventRecurrenceRuleTableViewController *)vc didSelectRecurrenceRule:(ECRecurrenceRule *)rule
+{
+    self.recurrenceRule = rule;
+    self.recurrenceRuleLabel.text = rule.localizedName;
+}
 
 #pragma mark - ECEditEventCalendarViewController Delegate
 
@@ -474,6 +497,10 @@ const static NSInteger kRecurrenceRuleCellRow =         kAllDayCellRow + 1;
         ECEditEventCalendarViewController* eceecvc = (ECEditEventCalendarViewController*)segue.destinationViewController;
         eceecvc.calendar = self.calendarCell.calendar;
         eceecvc.calendarDelegate = self;
+    } else if ([segue.identifier isEqualToString:@"recurrenceRule"]) {
+        ECEditEventRecurrenceRuleTableViewController* ecerrtvc = (ECEditEventRecurrenceRuleTableViewController*)segue.destinationViewController;
+        ecerrtvc.recurrenceRule = self.recurrenceRule;
+        ecerrtvc.recurrenceRuleDelegate = self;
     }
 }
 

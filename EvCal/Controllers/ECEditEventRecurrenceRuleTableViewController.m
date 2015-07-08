@@ -12,7 +12,6 @@
 
 @interface ECEditEventRecurrenceRuleTableViewController ()
 
-@property (nonatomic, strong) ECRecurrenceRule* ecRecurrenceRule;
 @property (nonatomic, strong) NSArray* specificReccurenceRules;
 @property (nonatomic, strong) ECRecurrenceRule* customRecurrenceRule;
 
@@ -20,24 +19,13 @@
 
 @implementation ECEditEventRecurrenceRuleTableViewController
 
-- (void)viewDidLoad
-{
-    if (!self.ecRecurrenceRule) {
-        self.ecRecurrenceRule = [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeNone];
-    }
-}
+@synthesize recurrenceRule = _recurrenceRule;
 
-- (void)setRecurrenceRule:(EKRecurrenceRule *)recurrenceRule
+- (void)setRecurrenceRule:(ECRecurrenceRule *)recurrenceRule
 {
-    self.ecRecurrenceRule = [[ECRecurrenceRule alloc] initWithRecurrenceRule:recurrenceRule];
+    _recurrenceRule = recurrenceRule;
     [self.tableView reloadData];
 }
-
-- (EKRecurrenceRule*)recurrenceRule
-{
-    return self.ecRecurrenceRule.rule;
-}
-
 
 - (ECRecurrenceRule*)customRecurrenceRule
 {
@@ -71,10 +59,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSIndexPath* oldIndexPath = [self indexPathForECRecurrenceRule:self.ecRecurrenceRule];
+    NSIndexPath* oldIndexPath = [self indexPathForECRecurrenceRule:self.recurrenceRule];
     if (![oldIndexPath isEqual:indexPath]) {
-        self.ecRecurrenceRule = [self ecRecurrenceRuleForIndexPath:indexPath];
+        self.recurrenceRule = [self ecRecurrenceRuleForIndexPath:indexPath];
         [self informDelegateThatRecurrenceRuleWasSelected];
         
         [tableView reloadData];
@@ -150,7 +137,7 @@ const static NSInteger kCustomRecurrenceRuleSection =   1;
     ECRecurrenceRule* rule = self.specificReccurenceRules[indexPath.row];
     cell.textLabel.text = rule.localizedName;
     
-    if (rule.type == self.ecRecurrenceRule.type) {
+    if (rule.type == self.recurrenceRule.type) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -165,7 +152,7 @@ const static NSInteger kCustomRecurrenceRuleSection =   1;
     
     cell.ruleLabel.text = self.customRecurrenceRule.localizedName;
     
-    cell.checkmarkHidden = (self.ecRecurrenceRule.type != ECRecurrenceRuleTypeCustom);
+    cell.checkmarkHidden = (self.recurrenceRule.type != ECRecurrenceRuleTypeCustom);
     
     return cell;
 }

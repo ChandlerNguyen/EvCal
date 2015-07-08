@@ -290,7 +290,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="oSd-sI-5dS" kind="push" id="Fu6-aV-TSf"/>
+                                            <segue destination="oSd-sI-5dS" kind="push" identifier="recurrenceRule" id="Fu6-aV-TSf"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -304,7 +304,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjk-ZS-RX5">
-                                                    <rect key="frame" x="28" y="11" width="69.5" height="20.5"/>
+                                                    <rect key="frame" x="30" y="11" width="69.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -312,7 +312,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cjk-ZS-RX5" secondAttribute="trailing" constant="20" symbolic="YES" id="adR-hY-F2v"/>
-                                                <constraint firstItem="cjk-ZS-RX5" firstAttribute="leading" secondItem="5u8-Ls-LFa" secondAttribute="leading" constant="28" id="cOm-VT-aj3"/>
+                                                <constraint firstItem="cjk-ZS-RX5" firstAttribute="leading" secondItem="5u8-Ls-LFa" secondAttribute="leading" constant="30" id="cOm-VT-aj3"/>
                                                 <constraint firstAttribute="centerY" secondItem="cjk-ZS-RX5" secondAttribute="centerY" id="miU-5c-nqz"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -375,14 +375,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgY-8m-QjC">
-                                            <rect key="frame" x="28" y="11" width="69.5" height="20.5"/>
+                                            <rect key="frame" x="30" y="11" width="69.5" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="BgY-8m-QjC" firstAttribute="leading" secondItem="khA-Lu-sdl" secondAttribute="leading" constant="28" id="bSF-ks-IQ4"/>
+                                        <constraint firstItem="BgY-8m-QjC" firstAttribute="leading" secondItem="khA-Lu-sdl" secondAttribute="leading" constant="30" id="bSF-ks-IQ4"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BgY-8m-QjC" secondAttribute="trailing" constant="20" symbolic="YES" id="cPE-UG-mZs"/>
                                         <constraint firstAttribute="centerY" secondItem="BgY-8m-QjC" secondAttribute="centerY" id="nAS-pn-YeC"/>
                                     </constraints>
