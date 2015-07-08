@@ -8,14 +8,44 @@
 
 #import "ECEditEventRecurrenceRuleTableViewController.h"
 #import "ECRecurrenceRule.h"
+#import "ECEventCustomRecurrenceRuleCell.h"
 
 @interface ECEditEventRecurrenceRuleTableViewController ()
 
-@property (nonatomic, strong) NSIndexPath* selectedIndexPath;
+@property (nonatomic, strong) NSArray* specificReccurenceRules;
+@property (nonatomic, strong) ECRecurrenceRule* customRecurrenceRule;
 
 @end
 
 @implementation ECEditEventRecurrenceRuleTableViewController
+
+- (ECRecurrenceRule*)customRecurrenceRule
+{
+    if (!_customRecurrenceRule) {
+        _customRecurrenceRule = [ECRecurrenceRule customRecurrenceRuleWithFrequency:EKRecurrenceFrequencyDaily interval:2];
+    }
+    
+    return _customRecurrenceRule;
+}
+
+- (NSArray*)specificReccurenceRules
+{
+    if (!_specificReccurenceRules) {
+        _specificReccurenceRules = [self createSpecificRecurrenceRules];
+    }
+    
+    return _specificReccurenceRules;
+}
+
+- (NSArray*)createSpecificRecurrenceRules
+{
+    return @[[ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeNone],
+             [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeDaily],
+             [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeWeekdays],
+             [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeWeekly],
+             [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeMonthly],
+             [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeYearly]];
+}
 
 #pragma mark - Table view data source
 
@@ -26,7 +56,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case kSpecificRecurrenceRuleSection:
-            return kSpecificRuleTypeCount;
+            return self.specificReccurenceRules.count;
             
         case kCustomRecurrenceRuleSection:
             return 1;
@@ -66,7 +96,7 @@ static NSInteger kSpecificRuleTypeCount =               6;
 {
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kSpecificRecurrenceRuleCellID];
     
-    ECRecurrenceRule* rule = [self recurrenceRuleForIndexPath:indexPath];
+    ECRecurrenceRule* rule = self.specificReccurenceRules[indexPath.row];
     cell.textLabel.text = rule.localizedName;
     
     if (rule.type == self.recurrenceRule.type) {
@@ -78,64 +108,19 @@ static NSInteger kSpecificRuleTypeCount =               6;
     return cell;
 }
 
-- (UITableViewCell*)customRecurrenceRuleCellForTableView:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath
+- (ECEventCustomRecurrenceRuleCell*)customRecurrenceRuleCellForTableView:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath
 {
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kCustomRecurrenceRuleCellID];
+    ECEventCustomRecurrenceRuleCell* cell = [tableView dequeueReusableCellWithIdentifier:kCustomRecurrenceRuleCellID];
     
-    ECRecurrenceRule* rule = [self recurrenceRuleForIndexPath:indexPath];
-    cell.textLabel.text = rule.localizedName;
+    cell.ruleLabel.text = self.customRecurrenceRule.localizedName;
     
-    if (rule.type == self.recurrenceRule.type) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    if (self.recurrenceRule.type == ECRecurrenceRuleTypeCustom) {
+        cell.checkmarkView.backgroundColor = [UIColor purpleColor];
     } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.checkmarkView.backgroundColor = [UIColor whiteColor];
     }
     
     return cell;
-}
-
-- (ECRecurrenceRule*)recurrenceRuleForIndexPath:(NSIndexPath*)indexPath
-{
-    switch (indexPath.section) {
-        case kSpecificRecurrenceRuleSection:
-            return [self specificRecurrenceRuleForIndexPath:indexPath];
-            
-        case kCustomRecurrenceRuleSection:
-            if (self.recurrenceRule.type == ECRecurrenceRuleTypeCustom) {
-                return self.recurrenceRule;
-            } else {
-                return [ECRecurrenceRule customRecurrenceRuleWithFrequency:EKRecurrenceFrequencyDaily interval:2];
-            }
-            
-        default:
-            return nil;
-    }
-}
-
-- (ECRecurrenceRule*)specificRecurrenceRuleForIndexPath:(NSIndexPath*)indexPath
-{
-    switch (indexPath.row) {
-        case kNoneRecurrenceRuleRow:
-            return [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeNone];
-            
-        case kDailyRecurrenceRuleRow:
-            return [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeDaily];
-            
-        case kWeekdaysRecurrenceRuleRow:
-            return [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeWeekdays];
-            
-        case kWeeklyRecurrenceRuleRow:
-            return [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeWeekly];
-            
-        case kMonthlyRecurrenceRuleRow:
-            return [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeMonthly];
-            
-        case kYearlyRecurrenceRuleRow:
-            return [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeYearly];
-            
-        default:
-            return nil;
-    }
 }
 
 @end

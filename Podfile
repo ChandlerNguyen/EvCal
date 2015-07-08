@@ -2,6 +2,7 @@
 pod 'CupertinoYankee', '1.0.2'
 pod 'CocoaLumberjack'
 pod 'EDColor'
+pod 'MSCellAccessory'
 
 target :EvCalTests do
 	pod 'JPSimulatorHacks', '1.2.0'

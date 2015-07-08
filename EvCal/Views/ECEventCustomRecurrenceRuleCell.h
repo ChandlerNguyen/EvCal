@@ -10,6 +10,7 @@
 
 @interface ECEventCustomRecurrenceRuleCell : UITableViewCell
 
-@property (nonatomic, weak) UIView* checkmarkView;
+@property (nonatomic, weak) IBOutlet UILabel* ruleLabel;
+@property (nonatomic, weak) IBOutlet UIView* checkmarkView;
 
 @end

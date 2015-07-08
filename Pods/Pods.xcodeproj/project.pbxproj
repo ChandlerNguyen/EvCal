@@ -7,720 +7,829 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		069BB0E6CB4722B0D24A1DFD /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 428411DA392843C7D567A9AB /* DDMultiFormatter.h */; };
-		09662FA6AD4E8AF95C2E2B4D /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 31607468F0299A690FC055F1 /* DDFileLogger.h */; };
-		0CA6C903EB20687F683AB6F9 /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = E45BA4E85AE92C452FF5C704 /* DDLog+LOGV.h */; };
-		0F0704664C47189913C7AF00 /* NSDate+CupertinoYankee.h in Headers */ = {isa = PBXBuildFile; fileRef = 79A4B263F2ACB0492835B535 /* NSDate+CupertinoYankee.h */; };
-		0FACD7BCB9FBB4A0D95A3BA3 /* UIColor+Crayola.h in Headers */ = {isa = PBXBuildFile; fileRef = 798F743BA8CA296616B4F5B2 /* UIColor+Crayola.h */; };
-		1084DC31D44DB04D186A6BB2 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC31D440688B128985841BB /* UIColor+Hex.m */; };
-		126FA96702C69074F3D042CB /* Pods-EvCalTests-CupertinoYankee-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BF8954736FDAB82FD01CD922 /* Pods-EvCalTests-CupertinoYankee-dummy.m */; };
-		146122E79BD83C2463F2C0AB /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0038E9D5157AF6449E2CBDE2 /* DDContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		14969F07A5AD82101601A153 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49ADD8E4E4D2EC5BBB61DC57 /* UIKit.framework */; };
-		17E7B976756A3805DFC7314A /* EDColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 72E5AF4389BE87DB15BC1F1B /* EDColor.h */; };
-		18B6ADDB6F6EEC737BC709F0 /* UIColor+Hex.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F917CBFB39FDD1BFCCE89C /* UIColor+Hex.h */; };
-		1B4944B227D98D28F35B36B8 /* UIColor+HSB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B3636393A0573841F4D2A /* UIColor+HSB.m */; };
-		1B801BCAFA363ADBED35DD99 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = FAC76D09AF3F4FB41466E0A3 /* DDASLLogger.h */; };
-		1FC8F0879F991B799C6AC783 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC31D440688B128985841BB /* UIColor+Hex.m */; };
-		2238F059D1F97D86551FE4A7 /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = EB3A438F642434F52041F3D5 /* DDASLLogCapture.h */; };
-		2476032D11A063D87B9F85C5 /* UIColor+CIELAB.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E811C1F9733CC160491F67 /* UIColor+CIELAB.m */; };
-		27DDCC84F685A2679206BAC7 /* JPSimulatorHacksDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 008BD7B60BDD4BFF7145DC50 /* JPSimulatorHacksDB.h */; };
-		28D328F58BC40E9E69003F5F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808C0BBD2639031A081F90F1 /* Foundation.framework */; };
-		299171112E856E0424450101 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA51827E387DDAA6147845B /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		2A08B42692E9A153F0403EBC /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B2F7D04EF192BFF0A7A548 /* DDDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		2BD742BDA3116E6CF54E821D /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 8921E403A3CD282B8FC531CE /* DDLegacyMacros.h */; };
-		2CF64D873DC0B2C1C2F0E5D6 /* UIColor+HSB.h in Headers */ = {isa = PBXBuildFile; fileRef = 1131E4CE8D46CF7F6A34B514 /* UIColor+HSB.h */; };
-		308598C6AE54901111D29E31 /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 63D7EC1FDF5229809C20E172 /* DDAssertMacros.h */; };
-		359E64C217990FB664CB4EC0 /* Pods-CupertinoYankee-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CB342A6F08EE9BBE6801AA /* Pods-CupertinoYankee-dummy.m */; };
-		37A59AD2FD7045AA072A17E9 /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 89E594380FF07E5F3E795038 /* DDTTYLogger.h */; };
-		39836C285B5DD1CC6DD60D15 /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B2F7D04EF192BFF0A7A548 /* DDDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		3B20D409B66032902AACAFCA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808C0BBD2639031A081F90F1 /* Foundation.framework */; };
-		3D9CDE05E340BE89A8D1BABD /* NSDate+CupertinoYankee.m in Sources */ = {isa = PBXBuildFile; fileRef = 2890DEE739017E44EEB3FED7 /* NSDate+CupertinoYankee.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		3ED68B762AD7146D18569F1A /* Pods-EvCalTests-CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 857B3D556F41D16D5750D0D9 /* Pods-EvCalTests-CocoaLumberjack-dummy.m */; };
-		4396A0D21694A6280DCB31A8 /* UIColor+HSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 0310529D739E3B28DD3932D3 /* UIColor+HSL.m */; };
-		443D43C7AF81E25011D4DE73 /* UIColor+CIELAB.h in Headers */ = {isa = PBXBuildFile; fileRef = C4A1D47FF42A4DCEB62389D8 /* UIColor+CIELAB.h */; };
-		4764C4AA3C994EBA448B3F0B /* NSDate+CupertinoYankee.m in Sources */ = {isa = PBXBuildFile; fileRef = 2890DEE739017E44EEB3FED7 /* NSDate+CupertinoYankee.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		49943B529A12111CD419AB9C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49ADD8E4E4D2EC5BBB61DC57 /* UIKit.framework */; };
-		5049058D508B9222EFFF5EF6 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 092356FE546C680CB1B80E8C /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		5058343AA82952B66125B6EF /* JPSimulatorHacks.h in Headers */ = {isa = PBXBuildFile; fileRef = F6B90D1C31D07ED8A88D0F61 /* JPSimulatorHacks.h */; };
-		53EDA292461A3004668A4036 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F73A1B02CD15E98C208322ED /* Pods-dummy.m */; };
-		5AAAE3640AA4A05F0AC4BB56 /* UIColor+CIELAB.h in Headers */ = {isa = PBXBuildFile; fileRef = C4A1D47FF42A4DCEB62389D8 /* UIColor+CIELAB.h */; };
-		5BAB0BB1F5F4BA6BA35BAF6B /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 2713122F9DFB37DD2614DDB5 /* DDLogMacros.h */; };
-		5BF2B45A73EE24F88D3B2410 /* UIColor+Hex.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F917CBFB39FDD1BFCCE89C /* UIColor+Hex.h */; };
-		5C2DD18E91BEA6DC79712176 /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 2713122F9DFB37DD2614DDB5 /* DDLogMacros.h */; };
-		6016EC5947F523C86C7ABE61 /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = EB3A438F642434F52041F3D5 /* DDASLLogCapture.h */; };
-		63B30AFA3D5EF97363741FAC /* UIColor+HSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 0310529D739E3B28DD3932D3 /* UIColor+HSL.m */; };
-		63F526A8E81E507C7B943015 /* UIColor+iOS7.h in Headers */ = {isa = PBXBuildFile; fileRef = EC522E0273AD8A55C05E8D40 /* UIColor+iOS7.h */; };
-		64998BA30E6EFC4D799A4CFC /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C82C8D45DF14BE5D7EA1DBB /* DDAbstractDatabaseLogger.h */; };
-		660AC2DBF370025064E0055B /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 243D6DA20177FF6F8E4210BF /* DDLog.h */; };
-		68630E9569FBB0D80653FD2C /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 243D6DA20177FF6F8E4210BF /* DDLog.h */; };
-		6DFA95A5F29BB23FD06751DA /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 63D7EC1FDF5229809C20E172 /* DDAssertMacros.h */; };
-		7224AE8703F2E79478905AED /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAAAC09D338D30BBB3A4563 /* DDASLLogCapture.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		746A4584F9161D8653718084 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808C0BBD2639031A081F90F1 /* Foundation.framework */; };
-		7B3CDAD4F4C99903FE0CB627 /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = E45BA4E85AE92C452FF5C704 /* DDLog+LOGV.h */; };
-		7B95DEB384961F3303054544 /* UIColor+Crayola.h in Headers */ = {isa = PBXBuildFile; fileRef = 798F743BA8CA296616B4F5B2 /* UIColor+Crayola.h */; };
-		8081A7A013604DAEB1E83B89 /* NSDate+CupertinoYankee.h in Headers */ = {isa = PBXBuildFile; fileRef = 79A4B263F2ACB0492835B535 /* NSDate+CupertinoYankee.h */; };
-		83F4FCC0AE9BDBC31FDF42E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808C0BBD2639031A081F90F1 /* Foundation.framework */; };
-		85E75CD805D6DAD6D329BA6E /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA51827E387DDAA6147845B /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		887CC86E0324CE34FFF5CE51 /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 8921E403A3CD282B8FC531CE /* DDLegacyMacros.h */; };
-		89185470F9D41610C5633BBD /* UIColor+HSB.h in Headers */ = {isa = PBXBuildFile; fileRef = 1131E4CE8D46CF7F6A34B514 /* UIColor+HSB.h */; };
-		8A5CC73DD3AA8D3DB38EC0BA /* JPSimulatorHacks.m in Sources */ = {isa = PBXBuildFile; fileRef = E74D6FAEA10F34136E7B9266 /* JPSimulatorHacks.m */; };
-		8B019EF9588E6427499111E4 /* Pods-EvCalTests-JPSimulatorHacks-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D9D24F504900CA14A7473F /* Pods-EvCalTests-JPSimulatorHacks-dummy.m */; };
-		8E021AA03CA639EE17C92063 /* Pods-EvCalTests-EDColor-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C7EF2851B23F34C99AEDCD /* Pods-EvCalTests-EDColor-dummy.m */; };
-		8E965A144824C27952D7C1FB /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 428411DA392843C7D567A9AB /* DDMultiFormatter.h */; };
-		8F0E70836C01B773EACC635D /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CA846C77B6DAD2B7C4B89E /* DDMultiFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		8FC1071197D40C3045622B2D /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 89E594380FF07E5F3E795038 /* DDTTYLogger.h */; };
-		90955C376850306899BE1006 /* UIColor+CIELAB.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E811C1F9733CC160491F67 /* UIColor+CIELAB.m */; };
-		96773E38B4778110D38A4A84 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 91955206389FC642A6FB608F /* DDLog.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		9801C430176C86A6A2A3D0A1 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 092356FE546C680CB1B80E8C /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		9A9CC146288E3D1BBA4AC1EF /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C82C8D45DF14BE5D7EA1DBB /* DDAbstractDatabaseLogger.h */; };
-		A48549D75158DB0B7B3F8F1F /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC2C7B97307B3B0CB9D6980 /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		AB7A73CB3EC44C7A487B2967 /* JPSimulatorHacksDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 80E5B7716098D82FCAE63C0D /* JPSimulatorHacksDB.m */; };
-		AD19905656D859BB58100F8B /* Pods-CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D6CC7A3071EE628527CE98A /* Pods-CocoaLumberjack-dummy.m */; };
-		AEB0205CF0D7D56BB35C9FCC /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 31607468F0299A690FC055F1 /* DDFileLogger.h */; };
-		AEBD99DE25918416DE80DE25 /* Pods-EvCalTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A45E4CB0F39040777505BC /* Pods-EvCalTests-dummy.m */; };
-		AF04F6D20FECD118AAC93024 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808C0BBD2639031A081F90F1 /* Foundation.framework */; };
-		B74707EED42E787A5196C670 /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0038E9D5157AF6449E2CBDE2 /* DDContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		B76F9F01654521CEE284B9C5 /* UIColor+HSL.h in Headers */ = {isa = PBXBuildFile; fileRef = B4847CF89F7F2EAB7AC5A4AD /* UIColor+HSL.h */; };
-		BA523F2C2BCAF829A2093CCD /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D8438D391E7EC7EA0A4FD66C /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		BB5B46B75EE387FF5F43A161 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808C0BBD2639031A081F90F1 /* Foundation.framework */; };
-		BD2BF3B5115A196FD2581300 /* UIColor+iOS7.h in Headers */ = {isa = PBXBuildFile; fileRef = EC522E0273AD8A55C05E8D40 /* UIColor+iOS7.h */; };
-		BD91EE1E6B27D7BBF703810D /* UIColor+Crayola.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA7C679D48827D0054BD1A8 /* UIColor+Crayola.m */; };
-		C077A1F10AB0D5404902FB8A /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAAAC09D338D30BBB3A4563 /* DDASLLogCapture.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		C08703BC7706176B4B932DC7 /* UIColor+HSB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B3636393A0573841F4D2A /* UIColor+HSB.m */; };
-		C09F3CBD2CAF8E0F9B933888 /* UIColor+Crayola.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA7C679D48827D0054BD1A8 /* UIColor+Crayola.m */; };
-		C0AE2902AE17718A4F82D234 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808C0BBD2639031A081F90F1 /* Foundation.framework */; };
-		C5BB978DEC4149114DF95A9A /* UIColor+iOS7.m in Sources */ = {isa = PBXBuildFile; fileRef = 882683722D526563B085289B /* UIColor+iOS7.m */; };
-		C9DAF9B9205E25A1E6CBF04C /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC2C7B97307B3B0CB9D6980 /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		CD75CF37781B5BC89A1D0CB1 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 91955206389FC642A6FB608F /* DDLog.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		D83A809F0B062A17EBC76B67 /* UIColor+HSL.h in Headers */ = {isa = PBXBuildFile; fileRef = B4847CF89F7F2EAB7AC5A4AD /* UIColor+HSL.h */; };
-		D9594BC2AB9070C523F27B70 /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DAB36A3254C9D3ABB2C956E /* DDDispatchQueueLogFormatter.h */; };
-		D96C59D99CCBBD64C207F402 /* Crayola.h in Headers */ = {isa = PBXBuildFile; fileRef = 36CD006E2BF02298EF4FA02E /* Crayola.h */; };
-		E41DAACF65445F1A22E0B412 /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CA846C77B6DAD2B7C4B89E /* DDMultiFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E9EB2357C1839309075FD44E /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D8438D391E7EC7EA0A4FD66C /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E9F17B0287E697A620E12E2E /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B2E24905107FBF430B595 /* CocoaLumberjack.h */; };
-		ED64F1A6A9BEEF8037182D1F /* Crayola.h in Headers */ = {isa = PBXBuildFile; fileRef = 36CD006E2BF02298EF4FA02E /* Crayola.h */; };
-		F189848002A96F469DCA72F8 /* UIColor+iOS7.m in Sources */ = {isa = PBXBuildFile; fileRef = 882683722D526563B085289B /* UIColor+iOS7.m */; };
-		F2722B08EA9CDE667B51A713 /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DAB36A3254C9D3ABB2C956E /* DDDispatchQueueLogFormatter.h */; };
-		F3347A5DE566120DED9A49E2 /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = A284BC6BF88D6CA575547492 /* DDContextFilterLogFormatter.h */; };
-		F6242C4609E695C43F2A2383 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = FAC76D09AF3F4FB41466E0A3 /* DDASLLogger.h */; };
-		F86025EA76FFBD4874EFF7F3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808C0BBD2639031A081F90F1 /* Foundation.framework */; };
-		FABF4E9A030AE33C058AB511 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808C0BBD2639031A081F90F1 /* Foundation.framework */; };
-		FC4C1052E21EB6AF657CFFA2 /* Pods-EDColor-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2241E3FD64DE810D8E51C2D7 /* Pods-EDColor-dummy.m */; };
-		FD7B6C5D90AF08F28268A887 /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = A284BC6BF88D6CA575547492 /* DDContextFilterLogFormatter.h */; };
-		FE2B4B064AEE7EAC3B3D5A3B /* EDColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 72E5AF4389BE87DB15BC1F1B /* EDColor.h */; };
-		FEBC1CCC4BC1A503B434A296 /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B2E24905107FBF430B595 /* CocoaLumberjack.h */; };
+		015C3369F08E2E19CB00C75D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D526DC594EE0F9536299C586 /* Foundation.framework */; };
+		02153874BD4F1EA7BFAF8F67 /* Pods-EvCalTests-CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 56DDFF65789FD1FDDE3F88F2 /* Pods-EvCalTests-CocoaLumberjack-dummy.m */; };
+		02AF58B269FFBA5938B9FBA2 /* Pods-EDColor-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A9317B6B506F7ED6C6074E /* Pods-EDColor-dummy.m */; };
+		03D17939EEAB4F58C8E20CDA /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AA0446CA53FA889DB847FCD /* DDTTYLogger.h */; };
+		042B422FEF1B4B104BF712F2 /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = D43F415F93E46363E929A160 /* DDContextFilterLogFormatter.h */; };
+		0759E099B1B0AB4EA72005B6 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA756E50960CA6762FB394 /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		0781FFBCEBA45822F5EC61EB /* Pods-EvCalTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D9312715086E7BE4FB26A3 /* Pods-EvCalTests-dummy.m */; };
+		0977A0006B24FCB5CB3DAD63 /* UIView+AccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B77092B1E7953B2C68DAFB /* UIView+AccessViewController.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		0991405BE128D430F3BF9D9E /* UIColor+CIELAB.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F590EE0866B824E5BE3E42 /* UIColor+CIELAB.h */; };
+		0A6C91DC630EC3E8F72FF406 /* Pods-CupertinoYankee-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C260DC74F108CD450983503F /* Pods-CupertinoYankee-dummy.m */; };
+		0C8FECBA2424E6267A52E433 /* JPSimulatorHacksDB.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E061ABBC1B4D73BD6C6D0E /* JPSimulatorHacksDB.h */; };
+		0CEDA750A1165D4D22B6D701 /* UIColor+CIELAB.m in Sources */ = {isa = PBXBuildFile; fileRef = C12019408F07451EB334E8C7 /* UIColor+CIELAB.m */; };
+		0DDC023FC5895B0B271A59F5 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 967835CEA69BC6CDD5700B3A /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		0E7C97D19DA8001DA85900E2 /* MSCellAccessory.h in Headers */ = {isa = PBXBuildFile; fileRef = C93A485523D21A2E6EF20E53 /* MSCellAccessory.h */; };
+		1093F9CEEEC54DDF00B4667E /* NSDate+CupertinoYankee.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FED05CD8DD660E1EA6FA3B /* NSDate+CupertinoYankee.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		110DD20BA2723FEF6DF72058 /* UIColor+Crayola.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA689929A685343EEE715E4 /* UIColor+Crayola.m */; };
+		11FCBF97F85230C698CBB5D6 /* Pods-EvCalTests-JPSimulatorHacks-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1004A0901E61F63E22648A9F /* Pods-EvCalTests-JPSimulatorHacks-dummy.m */; };
+		12B3EDBD8EFE407F885BACAF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D526DC594EE0F9536299C586 /* Foundation.framework */; };
+		12FDB38CEA44A66214820650 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F42CD972C06AEEC08016477 /* DDAbstractDatabaseLogger.h */; };
+		1EA54184E1CAD6C71DB6151E /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE4D310190242822260BE48 /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2198AB1F3DE4543FD6887657 /* UIColor+HSB.h in Headers */ = {isa = PBXBuildFile; fileRef = 7253DBBAF5AD5FD702F64E12 /* UIColor+HSB.h */; };
+		24C9C67C2B40E9761AE662B7 /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E35CB66703DF0DB86946273 /* DDDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		27CC47E1078C90F94AD46BD5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D526DC594EE0F9536299C586 /* Foundation.framework */; };
+		28A79463CE44FA1DB5352841 /* UIColor+Hex.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AFB20B5360BCA1458D4DE36 /* UIColor+Hex.h */; };
+		28CB723DBA1D6FE1F4CD2489 /* MSCellAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = B04D9F764723847134422910 /* MSCellAccessory.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2A299CE9CB7807F768639418 /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = D43F415F93E46363E929A160 /* DDContextFilterLogFormatter.h */; };
+		2C53ABF1F93BAF56D81A7AC5 /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFE8D2BB99A8DF4EE0B4496 /* DDMultiFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2EA46C104B563D8114FEE088 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D526DC594EE0F9536299C586 /* Foundation.framework */; };
+		2FA1A0B11AEA7B0EEED98A2A /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = C161F5CCF2A41762CE678E9A /* DDASLLogCapture.h */; };
+		31D3B5F30651176F1F4D3055 /* UIColor+HSB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5FFEA76037DDE45BA114A2 /* UIColor+HSB.m */; };
+		3285901F3582FFA840E2F196 /* Crayola.h in Headers */ = {isa = PBXBuildFile; fileRef = B02463DCA9ACA8EFF8D22A61 /* Crayola.h */; };
+		357B859DC3A3018DC839EEB6 /* UIView+AccessViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 391F0C66210A1B4304A6F5F5 /* UIView+AccessViewController.h */; };
+		3B1DC8C8B2584EB1D7FF288F /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 966D2655EACFFD8B6B7E5BCD /* DDContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		3D03657C4545AE6E3ED4ABCE /* UIColor+HSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C83ADBEC16D8DB912A0BC2A /* UIColor+HSL.m */; };
+		4028CFF7FEDFBC78F3149E19 /* UIColor+Crayola.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FEA74BAE1F001FE1B471FD7 /* UIColor+Crayola.h */; };
+		402EF0335F2F043F2469E927 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F28D37DABBDCB009BC97E3 /* UIKit.framework */; };
+		40438063821CA1BA5095B96A /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = C9764A84855BD5C86AA34D78 /* DDLogMacros.h */; };
+		41F14EBDDDD656F6916388BD /* UIColor+iOS7.h in Headers */ = {isa = PBXBuildFile; fileRef = F2612F91BD6563F09B373D36 /* UIColor+iOS7.h */; };
+		451BF50A0BE2A1C3564D4118 /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = EC51B05B1938FD3238DB5940 /* DDLog+LOGV.h */; };
+		468EF8701F1EAB9470C4C386 /* UIColor+Hex.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AFB20B5360BCA1458D4DE36 /* UIColor+Hex.h */; };
+		49F34D5A7DFB31129DBE9EA1 /* NSDate+CupertinoYankee.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FED05CD8DD660E1EA6FA3B /* NSDate+CupertinoYankee.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		4A4322A57FFD16E2870FBD6D /* JPSimulatorHacks.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AB89AE6C305C1AC47EA8A1 /* JPSimulatorHacks.m */; };
+		4B706E9E4454DA870BF666F5 /* JPSimulatorHacks.h in Headers */ = {isa = PBXBuildFile; fileRef = 20F87EECB9AD52219B3BC17A /* JPSimulatorHacks.h */; };
+		4C63C64BA0738C8DF0E0CC86 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA756E50960CA6762FB394 /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		4C7407FBE21832F8FD3F362F /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = C135C0C1D5A103A7E3C747DE /* DDDispatchQueueLogFormatter.h */; };
+		50870501AF19F533562115EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D526DC594EE0F9536299C586 /* Foundation.framework */; };
+		50DA8FEF0E9E546C7F05B430 /* MSCellAccessory.h in Headers */ = {isa = PBXBuildFile; fileRef = C93A485523D21A2E6EF20E53 /* MSCellAccessory.h */; };
+		592D58F20FFD6C133ECD07CD /* UIColor+HSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 186E38EF0855EEC86278B50F /* UIColor+HSL.h */; };
+		5B6CCD732787DB0A7644C5ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D526DC594EE0F9536299C586 /* Foundation.framework */; };
+		5B91C094D023CED96724B7BE /* UIColor+iOS7.m in Sources */ = {isa = PBXBuildFile; fileRef = FF01990FF9879FBBF48CE47D /* UIColor+iOS7.m */; };
+		5CF1F1C9C7ACFE5250B480B2 /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = FD83D600C010078B4374D140 /* DDMultiFormatter.h */; };
+		6097DDEB7D39535367303F63 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 967835CEA69BC6CDD5700B3A /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		641AEFD3029637476ADC8565 /* UIColor+HSB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5FFEA76037DDE45BA114A2 /* UIColor+HSB.m */; };
+		69869132D08300C7D786A5E8 /* UIColor+iOS7.h in Headers */ = {isa = PBXBuildFile; fileRef = F2612F91BD6563F09B373D36 /* UIColor+iOS7.h */; };
+		6AD58C16928941C06CBF53D0 /* UIColor+HSB.h in Headers */ = {isa = PBXBuildFile; fileRef = 7253DBBAF5AD5FD702F64E12 /* UIColor+HSB.h */; };
+		6ADAC2578CC0124DA94F896C /* Crayola.h in Headers */ = {isa = PBXBuildFile; fileRef = B02463DCA9ACA8EFF8D22A61 /* Crayola.h */; };
+		6BA03D1EE14F5A3B28B61CE0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D526DC594EE0F9536299C586 /* Foundation.framework */; };
+		6CC2D11DCE01866753D64487 /* EDColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B0DD479DFC1C6C302BA0818 /* EDColor.h */; };
+		6D389A1C3B0E6F29D2BA9BEB /* UIColor+HSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C83ADBEC16D8DB912A0BC2A /* UIColor+HSL.m */; };
+		6E61B864FD7BE865EEE14AF1 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B43C5F60735D338A0019AED5 /* DDLog.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		6FB50E57AA16B916E48C5F34 /* UIColor+Crayola.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA689929A685343EEE715E4 /* UIColor+Crayola.m */; };
+		6FBE8B266BBDFA7ACE7DB4AD /* UIColor+HSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 186E38EF0855EEC86278B50F /* UIColor+HSL.h */; };
+		75484586CFC90B452A624A16 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 4573F8A62C87A52DAFA4167B /* UIColor+Hex.m */; };
+		79A2536910B44D53A76AB6BE /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 68AC50BD455EA56BFF8DCBFD /* DDLegacyMacros.h */; };
+		815CD6D809FCFAAC07F4F9B9 /* UIColor+Crayola.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FEA74BAE1F001FE1B471FD7 /* UIColor+Crayola.h */; };
+		8546E3D1C550BFE671AD85E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D526DC594EE0F9536299C586 /* Foundation.framework */; };
+		8EC6075C026FA9D35A91301D /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 04E3EF1BEC6CBEE850E4CE87 /* DDASLLogger.h */; };
+		91E51D54FF9BB6141F2FF88E /* Pods-EvCalTests-EDColor-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 175CC34D031C22AAAA700B05 /* Pods-EvCalTests-EDColor-dummy.m */; };
+		920C271E9FE9EC178C27D19F /* UIView+AccessViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 391F0C66210A1B4304A6F5F5 /* UIView+AccessViewController.h */; };
+		928357EB48D220D9D2F07AFD /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 3884774B7354A6A64B8844A7 /* DDLog.h */; };
+		93201C8AE0C3676DFABEA6B0 /* UIColor+CIELAB.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F590EE0866B824E5BE3E42 /* UIColor+CIELAB.h */; };
+		94D41DA0BAB83A5037DD4CA0 /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = C135C0C1D5A103A7E3C747DE /* DDDispatchQueueLogFormatter.h */; };
+		9980BA59AE267AF54A7D0EEC /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = AD537CE716C81EF0A38BFE0C /* DDAssertMacros.h */; };
+		A38D6DA24A162254DA3326FA /* NSDate+CupertinoYankee.h in Headers */ = {isa = PBXBuildFile; fileRef = 68F7FF5992A1DAD2B40A5BC7 /* NSDate+CupertinoYankee.h */; };
+		AA3780E1348DE082D2B48EC1 /* Pods-EvCalTests-MSCellAccessory-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB45D94344981FD4FBC95BF /* Pods-EvCalTests-MSCellAccessory-dummy.m */; };
+		AE078B4D2CE025BFBB4780B6 /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E35CB66703DF0DB86946273 /* DDDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		AF2CAB7F1872A99209765BCC /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 12C3EEAE59806BE578B7F856 /* DDFileLogger.h */; };
+		AF5892DBB8EDB0DB3B91C983 /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 68AC50BD455EA56BFF8DCBFD /* DDLegacyMacros.h */; };
+		B0A24C3ED134A81C6D73244E /* UIColor+iOS7.m in Sources */ = {isa = PBXBuildFile; fileRef = FF01990FF9879FBBF48CE47D /* UIColor+iOS7.m */; };
+		B3F7502BC3BA813DE0B0A4D0 /* UIColor+CIELAB.m in Sources */ = {isa = PBXBuildFile; fileRef = C12019408F07451EB334E8C7 /* UIColor+CIELAB.m */; };
+		BED9A952655E6443A2551F2C /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 81E870B2FAF27F608D700853 /* CocoaLumberjack.h */; };
+		BFA7CBAAF92CE83DB65077D0 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = A83D263B5999E681BDEE1160 /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		C0214413663A17A4CB0592FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D526DC594EE0F9536299C586 /* Foundation.framework */; };
+		C09E2532FD8245B56BE020E0 /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFE8D2BB99A8DF4EE0B4496 /* DDMultiFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		CAEDAE3C8BE82E1ED52037C0 /* NSDate+CupertinoYankee.h in Headers */ = {isa = PBXBuildFile; fileRef = 68F7FF5992A1DAD2B40A5BC7 /* NSDate+CupertinoYankee.h */; };
+		CC5ADE565004489520039BED /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = A83D263B5999E681BDEE1160 /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		CD78091B21BA8C6494828290 /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 12C3EEAE59806BE578B7F856 /* DDFileLogger.h */; };
+		CEE5A7115C65F0090B5C8C13 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 849B1B533D9E7749763BB614 /* Pods-dummy.m */; };
+		CF57F2BFC832D66F7B878EBE /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AA0446CA53FA889DB847FCD /* DDTTYLogger.h */; };
+		D0CFE75E738C41E7D52399EB /* Pods-CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD8AEB0463D6AF8EEBB780E /* Pods-CocoaLumberjack-dummy.m */; };
+		D3461C078D9FD596B2EF2FAC /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF18EABB5BB110AE9172815 /* DDASLLogCapture.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		D5AD2AEE68105AE9B2052A59 /* MSCellAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = B04D9F764723847134422910 /* MSCellAccessory.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		D5BB6776C52EDB67F10C271D /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F42CD972C06AEEC08016477 /* DDAbstractDatabaseLogger.h */; };
+		D60F241158E1503A5E048080 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 4573F8A62C87A52DAFA4167B /* UIColor+Hex.m */; };
+		D91363C4303B8F9DAEDE3943 /* JPSimulatorHacksDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B32F4BBC78F995C2BDA91A0 /* JPSimulatorHacksDB.m */; };
+		D93E3842302A6C7C2326FA7E /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = EC51B05B1938FD3238DB5940 /* DDLog+LOGV.h */; };
+		DB36683F24557BAA6F16BC31 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE4D310190242822260BE48 /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		DC810B0AC348DBE51509DE8D /* EDColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B0DD479DFC1C6C302BA0818 /* EDColor.h */; };
+		DD9353EE83CE63D02E4FB255 /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = FD83D600C010078B4374D140 /* DDMultiFormatter.h */; };
+		DF7E6D768C72069E31C4379F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D526DC594EE0F9536299C586 /* Foundation.framework */; };
+		E3CFCEC806C8C516BFD707ED /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 81E870B2FAF27F608D700853 /* CocoaLumberjack.h */; };
+		E5EF4AE98FD460FD8777A731 /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = AD537CE716C81EF0A38BFE0C /* DDAssertMacros.h */; };
+		E692B7B4756C1C978A7FDD4C /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 3884774B7354A6A64B8844A7 /* DDLog.h */; };
+		E7DE93F719795785F28AF4B8 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 04E3EF1BEC6CBEE850E4CE87 /* DDASLLogger.h */; };
+		E8085C619FE3B8734E30958B /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF18EABB5BB110AE9172815 /* DDASLLogCapture.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		EE2225A19A97794BFE77CE31 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B43C5F60735D338A0019AED5 /* DDLog.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		F129896A4C4AB2558A088298 /* UIView+AccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B77092B1E7953B2C68DAFB /* UIView+AccessViewController.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		F250052C1A731C9853EE3D08 /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 966D2655EACFFD8B6B7E5BCD /* DDContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		F2DF658AEACFF88E3B6BAB5B /* Pods-MSCellAccessory-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B451192EA74D5D74AC3B933 /* Pods-MSCellAccessory-dummy.m */; };
+		F5124366FD73BDA62145CEB6 /* Pods-EvCalTests-CupertinoYankee-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 084407D11B79B902CE469401 /* Pods-EvCalTests-CupertinoYankee-dummy.m */; };
+		F693DBFE3A4C40D56DD81E9D /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = C161F5CCF2A41762CE678E9A /* DDASLLogCapture.h */; };
+		F6A76EFBC3B8D1BE47271DE4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F28D37DABBDCB009BC97E3 /* UIKit.framework */; };
+		F78CC5A17CC1D973A40D1A7C /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = C9764A84855BD5C86AA34D78 /* DDLogMacros.h */; };
+		FFB07D57B50571E705E09468 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D526DC594EE0F9536299C586 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		00425BEA6F54393DC84DA1BA /* PBXContainerItemProxy */ = {
+		0689588A7DA73DB62627466F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A95799DF0274894DEF4EA54A /* Project object */;
+			containerPortal = 179F6A55D2603CFFC861CA78 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 622CC4B12A395E68DE5ED9E5;
-			remoteInfo = "Pods-EvCalTests-JPSimulatorHacks";
-		};
-		0302D9CC8DFE8A8A9D699FA4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A95799DF0274894DEF4EA54A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0BE776340D7AAFA887210A7E;
-			remoteInfo = "Pods-EvCalTests-CupertinoYankee";
-		};
-		1381B874EFE90B32ED3FBF95 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A95799DF0274894DEF4EA54A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 64B6809D2EE539DF8A6EAA06;
-			remoteInfo = "Pods-CupertinoYankee";
-		};
-		6B9957B4CDA08A596675CBFB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A95799DF0274894DEF4EA54A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2014C01C85D6EE7F8F748839;
-			remoteInfo = "Pods-EvCalTests-EDColor";
-		};
-		7ED454A32112F71A6037BBEB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A95799DF0274894DEF4EA54A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7E3D85501B076CC1E0783E71;
+			remoteGlobalIDString = DCAC5F5629FE38B5CFD37CAD;
 			remoteInfo = "Pods-CocoaLumberjack";
 		};
-		DF0CB4B951FE34648D556482 /* PBXContainerItemProxy */ = {
+		50DC9AA240278F50D070B084 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A95799DF0274894DEF4EA54A /* Project object */;
+			containerPortal = 179F6A55D2603CFFC861CA78 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 74AF347CC4E4F5177CDBC5E3;
+			remoteGlobalIDString = 5447C528F3D0D12B6B8098EB;
+			remoteInfo = "Pods-EvCalTests-MSCellAccessory";
+		};
+		56923C85729CA98A313400AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 179F6A55D2603CFFC861CA78 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4646F45619DD4B817E180D9;
 			remoteInfo = "Pods-EvCalTests-CocoaLumberjack";
 		};
-		F21F9CFD42DF454C3560EA32 /* PBXContainerItemProxy */ = {
+		65F2DA8C3EC929DBAD96FF03 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A95799DF0274894DEF4EA54A /* Project object */;
+			containerPortal = 179F6A55D2603CFFC861CA78 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8E0BB1935061427314070BB7;
+			remoteGlobalIDString = 48E46C7F77F1389C69A4DEA5;
+			remoteInfo = "Pods-EvCalTests-EDColor";
+		};
+		7A6D62D00DB2EAEB2D0607CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 179F6A55D2603CFFC861CA78 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8432B257CAB84473A211B17D;
+			remoteInfo = "Pods-EvCalTests-JPSimulatorHacks";
+		};
+		7FA4FC893090162EE25A24E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 179F6A55D2603CFFC861CA78 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B797A86BA7B9217D2AE108C2;
 			remoteInfo = "Pods-EDColor";
+		};
+		CA692E99EE14C5642ED532D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 179F6A55D2603CFFC861CA78 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F88D34E46A82EB41AB4E3DEA;
+			remoteInfo = "Pods-CupertinoYankee";
+		};
+		E427121E898B753DFA276ED0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 179F6A55D2603CFFC861CA78 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C15A7D83E1709F7E01844891;
+			remoteInfo = "Pods-EvCalTests-CupertinoYankee";
+		};
+		F75B07622162BD6AB094E61C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 179F6A55D2603CFFC861CA78 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E60B9298A9A913C45C5DF079;
+			remoteInfo = "Pods-MSCellAccessory";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0038E9D5157AF6449E2CBDE2 /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDContextFilterLogFormatter.m; path = Classes/Extensions/DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
-		008BD7B60BDD4BFF7145DC50 /* JPSimulatorHacksDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JPSimulatorHacksDB.h; path = JPSimulatorHacks/JPSimulatorHacksDB.h; sourceTree = "<group>"; };
-		01A2C1E64544A29C41AD6FCA /* Pods-EvCalTests-CupertinoYankee.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests-CupertinoYankee.xcconfig"; path = "../Pods-EvCalTests-CupertinoYankee/Pods-EvCalTests-CupertinoYankee.xcconfig"; sourceTree = "<group>"; };
-		0247E0CC39BCEA120947797D /* libPods-EvCalTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EvCalTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0310529D739E3B28DD3932D3 /* UIColor+HSL.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+HSL.m"; path = "EDColor/UIColor+HSL.m"; sourceTree = "<group>"; };
-		03A696F7800BE7B4869D4C82 /* Pods-EDColor-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EDColor-Private.xcconfig"; sourceTree = "<group>"; };
-		069B0B37DD73A2392BDC4A60 /* Pods-CocoaLumberjack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CocoaLumberjack.xcconfig"; sourceTree = "<group>"; };
-		092356FE546C680CB1B80E8C /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
-		10A86CADEA17861F27D60567 /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
-		10D9DD96CEDEF95F8D3AF8D3 /* Pods-EvCalTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-EvCalTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		1131E4CE8D46CF7F6A34B514 /* UIColor+HSB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+HSB.h"; path = "EDColor/UIColor+HSB.h"; sourceTree = "<group>"; };
-		137024485F1403D7ECB64244 /* libPods-EvCalTests-EDColor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EvCalTests-EDColor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		141CB0DE13B2D326D45DB2FF /* Pods-EvCalTests-EDColor-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-EvCalTests-EDColor-prefix.pch"; path = "../Pods-EvCalTests-EDColor/Pods-EvCalTests-EDColor-prefix.pch"; sourceTree = "<group>"; };
-		17FA78B6B183CC0D6C5545AF /* Pods-EvCalTests-CocoaLumberjack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests-CocoaLumberjack.xcconfig"; path = "../Pods-EvCalTests-CocoaLumberjack/Pods-EvCalTests-CocoaLumberjack.xcconfig"; sourceTree = "<group>"; };
-		2241E3FD64DE810D8E51C2D7 /* Pods-EDColor-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EDColor-dummy.m"; sourceTree = "<group>"; };
-		243D6DA20177FF6F8E4210BF /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Classes/DDLog.h; sourceTree = "<group>"; };
-		2713122F9DFB37DD2614DDB5 /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
-		271B2E24905107FBF430B595 /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
-		27F917CBFB39FDD1BFCCE89C /* UIColor+Hex.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+Hex.h"; path = "EDColor/UIColor+Hex.h"; sourceTree = "<group>"; };
-		2890DEE739017E44EEB3FED7 /* NSDate+CupertinoYankee.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDate+CupertinoYankee.m"; path = "CupertinoYankee/NSDate+CupertinoYankee.m"; sourceTree = "<group>"; };
-		2A6B6695A967A4778F87642F /* Pods-EvCalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EvCalTests.release.xcconfig"; sourceTree = "<group>"; };
-		2B4B54EA071B3A852C0692C5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
-		2C82C8D45DF14BE5D7EA1DBB /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Classes/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
-		31607468F0299A690FC055F1 /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Classes/DDFileLogger.h; sourceTree = "<group>"; };
-		36CD006E2BF02298EF4FA02E /* Crayola.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Crayola.h; path = EDColor/Crayola.h; sourceTree = "<group>"; };
-		36DD48BB35818D35449188A1 /* Pods-EvCalTests-JPSimulatorHacks-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EvCalTests-JPSimulatorHacks-prefix.pch"; sourceTree = "<group>"; };
-		428411DA392843C7D567A9AB /* DDMultiFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDMultiFormatter.h; path = Classes/Extensions/DDMultiFormatter.h; sourceTree = "<group>"; };
-		460EB26630B4F1DD71152068 /* Pods-CupertinoYankee-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CupertinoYankee-prefix.pch"; sourceTree = "<group>"; };
-		46DCE416F2D3B18D95E165F5 /* Pods-EvCalTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EvCalTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		49ADD8E4E4D2EC5BBB61DC57 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		4C6B3636393A0573841F4D2A /* UIColor+HSB.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+HSB.m"; path = "EDColor/UIColor+HSB.m"; sourceTree = "<group>"; };
-		4CA51827E387DDAA6147845B /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Classes/DDFileLogger.m; sourceTree = "<group>"; };
-		4CC2C7B97307B3B0CB9D6980 /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Classes/DDTTYLogger.m; sourceTree = "<group>"; };
-		4E7C3B011EB69A484BFF3CE7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F0853836C8143A2955F142E /* libPods-EDColor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EDColor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		525E37A1146D21FA1ADC31A1 /* libPods-EvCalTests-CupertinoYankee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EvCalTests-CupertinoYankee.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		56EEA2E2D67329535B125F41 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		58BED777D101DF2F45901D3D /* Pods-CupertinoYankee-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CupertinoYankee-Private.xcconfig"; sourceTree = "<group>"; };
-		5933303375191795ACB74000 /* Pods-EvCalTests-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EvCalTests-environment.h"; sourceTree = "<group>"; };
-		59A45E4CB0F39040777505BC /* Pods-EvCalTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EvCalTests-dummy.m"; sourceTree = "<group>"; };
-		5A268D931D52CF1BB0320C99 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
-		5D6CC7A3071EE628527CE98A /* Pods-CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
-		5E829C44CA8D26B46B0339EE /* libPods-CupertinoYankee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CupertinoYankee.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5FC31D440688B128985841BB /* UIColor+Hex.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Hex.m"; path = "EDColor/UIColor+Hex.m"; sourceTree = "<group>"; };
-		63D7EC1FDF5229809C20E172 /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Classes/DDAssertMacros.h; sourceTree = "<group>"; };
-		72E5AF4389BE87DB15BC1F1B /* EDColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EDColor.h; path = EDColor/EDColor.h; sourceTree = "<group>"; };
-		76B2F7D04EF192BFF0A7A548 /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDDispatchQueueLogFormatter.m; path = Classes/Extensions/DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
-		76D123893CE95019FEACAA97 /* Pods-CupertinoYankee.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CupertinoYankee.xcconfig"; sourceTree = "<group>"; };
-		780D8394A97DC98EBC2E1929 /* Pods-EvCalTests-CocoaLumberjack-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests-CocoaLumberjack-Private.xcconfig"; path = "../Pods-EvCalTests-CocoaLumberjack/Pods-EvCalTests-CocoaLumberjack-Private.xcconfig"; sourceTree = "<group>"; };
-		798F743BA8CA296616B4F5B2 /* UIColor+Crayola.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+Crayola.h"; path = "EDColor/UIColor+Crayola.h"; sourceTree = "<group>"; };
-		79A4B263F2ACB0492835B535 /* NSDate+CupertinoYankee.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDate+CupertinoYankee.h"; path = "CupertinoYankee/NSDate+CupertinoYankee.h"; sourceTree = "<group>"; };
-		7A9F3901CBD65CD02A7D7302 /* Pods-EvCalTests-EDColor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests-EDColor.xcconfig"; path = "../Pods-EvCalTests-EDColor/Pods-EvCalTests-EDColor.xcconfig"; sourceTree = "<group>"; };
-		7BA954382B2D6645227685FB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
-		7FC92DED60A30CBF2DA9795B /* Pods-EvCalTests-EDColor-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests-EDColor-Private.xcconfig"; path = "../Pods-EvCalTests-EDColor/Pods-EvCalTests-EDColor-Private.xcconfig"; sourceTree = "<group>"; };
-		808C0BBD2639031A081F90F1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		80E5B7716098D82FCAE63C0D /* JPSimulatorHacksDB.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JPSimulatorHacksDB.m; path = JPSimulatorHacks/JPSimulatorHacksDB.m; sourceTree = "<group>"; };
-		8467E3209AC95E868B2C6B8F /* Pods-EDColor-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EDColor-prefix.pch"; sourceTree = "<group>"; };
-		857B3D556F41D16D5750D0D9 /* Pods-EvCalTests-CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-EvCalTests-CocoaLumberjack-dummy.m"; path = "../Pods-EvCalTests-CocoaLumberjack/Pods-EvCalTests-CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
-		882683722D526563B085289B /* UIColor+iOS7.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+iOS7.m"; path = "EDColor/UIColor+iOS7.m"; sourceTree = "<group>"; };
-		8921E403A3CD282B8FC531CE /* DDLegacyMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLegacyMacros.h; path = Classes/DDLegacyMacros.h; sourceTree = "<group>"; };
-		89E594380FF07E5F3E795038 /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Classes/DDTTYLogger.h; sourceTree = "<group>"; };
-		8DAB36A3254C9D3ABB2C956E /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDDispatchQueueLogFormatter.h; path = Classes/Extensions/DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
-		9185A01126DAEB67D888D8CB /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
-		91955206389FC642A6FB608F /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = Classes/DDLog.m; sourceTree = "<group>"; };
-		94CA846C77B6DAD2B7C4B89E /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Classes/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
-		95CB342A6F08EE9BBE6801AA /* Pods-CupertinoYankee-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CupertinoYankee-dummy.m"; sourceTree = "<group>"; };
-		9E94975967091C5E096512B1 /* Pods-EvCalTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EvCalTests-resources.sh"; sourceTree = "<group>"; };
-		A284BC6BF88D6CA575547492 /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
-		A6D5FC6D798382D223C1CF14 /* Pods-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-environment.h"; sourceTree = "<group>"; };
-		B4847CF89F7F2EAB7AC5A4AD /* UIColor+HSL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+HSL.h"; path = "EDColor/UIColor+HSL.h"; sourceTree = "<group>"; };
-		B502B69CA5629B78334DD85B /* libPods-CocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CocoaLumberjack.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B59555999DDF62BA9A6F0843 /* Pods-CocoaLumberjack-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CocoaLumberjack-Private.xcconfig"; sourceTree = "<group>"; };
-		B6E811C1F9733CC160491F67 /* UIColor+CIELAB.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+CIELAB.m"; path = "EDColor/UIColor+CIELAB.m"; sourceTree = "<group>"; };
-		B803744938856E30C5C148D0 /* Pods-EDColor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EDColor.xcconfig"; sourceTree = "<group>"; };
-		BF8954736FDAB82FD01CD922 /* Pods-EvCalTests-CupertinoYankee-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-EvCalTests-CupertinoYankee-dummy.m"; path = "../Pods-EvCalTests-CupertinoYankee/Pods-EvCalTests-CupertinoYankee-dummy.m"; sourceTree = "<group>"; };
-		C023B8E8D25259DBB1CFC641 /* Pods-EvCalTests-JPSimulatorHacks-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EvCalTests-JPSimulatorHacks-Private.xcconfig"; sourceTree = "<group>"; };
-		C0E5DEF1459D713B757C2C26 /* Pods-EvCalTests-JPSimulatorHacks.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EvCalTests-JPSimulatorHacks.xcconfig"; sourceTree = "<group>"; };
-		C4A1D47FF42A4DCEB62389D8 /* UIColor+CIELAB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+CIELAB.h"; path = "EDColor/UIColor+CIELAB.h"; sourceTree = "<group>"; };
-		CBAAAC09D338D30BBB3A4563 /* DDASLLogCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogCapture.m; path = Classes/DDASLLogCapture.m; sourceTree = "<group>"; };
-		CEA7C679D48827D0054BD1A8 /* UIColor+Crayola.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Crayola.m"; path = "EDColor/UIColor+Crayola.m"; sourceTree = "<group>"; };
-		D0433D43325776CFDACBFCB2 /* libPods-EvCalTests-CocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EvCalTests-CocoaLumberjack.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8438D391E7EC7EA0A4FD66C /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
-		E45BA4E85AE92C452FF5C704 /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Classes/DDLog+LOGV.h"; sourceTree = "<group>"; };
-		E4BCCE993E37C561483C6515 /* Pods-EvCalTests-CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-EvCalTests-CocoaLumberjack-prefix.pch"; path = "../Pods-EvCalTests-CocoaLumberjack/Pods-EvCalTests-CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
-		E4C7EF2851B23F34C99AEDCD /* Pods-EvCalTests-EDColor-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-EvCalTests-EDColor-dummy.m"; path = "../Pods-EvCalTests-EDColor/Pods-EvCalTests-EDColor-dummy.m"; sourceTree = "<group>"; };
-		E74D6FAEA10F34136E7B9266 /* JPSimulatorHacks.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JPSimulatorHacks.m; path = JPSimulatorHacks/JPSimulatorHacks.m; sourceTree = "<group>"; };
-		E901337F1152BDFAC7611C73 /* Pods-EvCalTests-CupertinoYankee-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-EvCalTests-CupertinoYankee-prefix.pch"; path = "../Pods-EvCalTests-CupertinoYankee/Pods-EvCalTests-CupertinoYankee-prefix.pch"; sourceTree = "<group>"; };
-		E9D9D24F504900CA14A7473F /* Pods-EvCalTests-JPSimulatorHacks-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EvCalTests-JPSimulatorHacks-dummy.m"; sourceTree = "<group>"; };
-		EA3EB1554AE831AF4399BDEC /* Pods-EvCalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EvCalTests.debug.xcconfig"; sourceTree = "<group>"; };
-		EB3A438F642434F52041F3D5 /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Classes/DDASLLogCapture.h; sourceTree = "<group>"; };
-		EC522E0273AD8A55C05E8D40 /* UIColor+iOS7.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+iOS7.h"; path = "EDColor/UIColor+iOS7.h"; sourceTree = "<group>"; };
-		F37945A1B69DFEED6428430B /* libPods-EvCalTests-JPSimulatorHacks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EvCalTests-JPSimulatorHacks.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F526874589D590A4364D1910 /* Pods-CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
-		F5EF640266856EC945D21B7E /* Pods-EvCalTests-CupertinoYankee-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests-CupertinoYankee-Private.xcconfig"; path = "../Pods-EvCalTests-CupertinoYankee/Pods-EvCalTests-CupertinoYankee-Private.xcconfig"; sourceTree = "<group>"; };
-		F6B90D1C31D07ED8A88D0F61 /* JPSimulatorHacks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JPSimulatorHacks.h; path = JPSimulatorHacks/JPSimulatorHacks.h; sourceTree = "<group>"; };
-		F73A1B02CD15E98C208322ED /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
-		FAC76D09AF3F4FB41466E0A3 /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = Classes/DDASLLogger.h; sourceTree = "<group>"; };
+		01B0C4FB0EFDE71B6D5F0C17 /* Pods-CupertinoYankee-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CupertinoYankee-prefix.pch"; sourceTree = "<group>"; };
+		03C2467ECFF50FD9DE3769B7 /* Pods-EvCalTests-JPSimulatorHacks.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EvCalTests-JPSimulatorHacks.xcconfig"; sourceTree = "<group>"; };
+		0455AB50B6C8B646B646C8EA /* Pods-EvCalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EvCalTests.release.xcconfig"; sourceTree = "<group>"; };
+		04E3EF1BEC6CBEE850E4CE87 /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = Classes/DDASLLogger.h; sourceTree = "<group>"; };
+		06A9317B6B506F7ED6C6074E /* Pods-EDColor-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EDColor-dummy.m"; sourceTree = "<group>"; };
+		084407D11B79B902CE469401 /* Pods-EvCalTests-CupertinoYankee-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-EvCalTests-CupertinoYankee-dummy.m"; path = "../Pods-EvCalTests-CupertinoYankee/Pods-EvCalTests-CupertinoYankee-dummy.m"; sourceTree = "<group>"; };
+		0AD15E5B3EB0F02948A8117C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
+		0C83ADBEC16D8DB912A0BC2A /* UIColor+HSL.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+HSL.m"; path = "EDColor/UIColor+HSL.m"; sourceTree = "<group>"; };
+		0F2A56F15838EA00D231A3C1 /* Pods-EvCalTests-CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-EvCalTests-CocoaLumberjack-prefix.pch"; path = "../Pods-EvCalTests-CocoaLumberjack/Pods-EvCalTests-CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
+		1004A0901E61F63E22648A9F /* Pods-EvCalTests-JPSimulatorHacks-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EvCalTests-JPSimulatorHacks-dummy.m"; sourceTree = "<group>"; };
+		121652D01CB9918B680670DE /* libPods-EvCalTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EvCalTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		12C3EEAE59806BE578B7F856 /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Classes/DDFileLogger.h; sourceTree = "<group>"; };
+		175CC34D031C22AAAA700B05 /* Pods-EvCalTests-EDColor-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-EvCalTests-EDColor-dummy.m"; path = "../Pods-EvCalTests-EDColor/Pods-EvCalTests-EDColor-dummy.m"; sourceTree = "<group>"; };
+		186E38EF0855EEC86278B50F /* UIColor+HSL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+HSL.h"; path = "EDColor/UIColor+HSL.h"; sourceTree = "<group>"; };
+		18FA756E50960CA6762FB394 /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Classes/DDFileLogger.m; sourceTree = "<group>"; };
+		1B451192EA74D5D74AC3B933 /* Pods-MSCellAccessory-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-MSCellAccessory-dummy.m"; path = "../Pods-MSCellAccessory/Pods-MSCellAccessory-dummy.m"; sourceTree = "<group>"; };
+		1DD8AEB0463D6AF8EEBB780E /* Pods-CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
+		1E7EAE7C8BE6504B85AAE65B /* Pods-EvCalTests-MSCellAccessory.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EvCalTests-MSCellAccessory.xcconfig"; sourceTree = "<group>"; };
+		20F87EECB9AD52219B3BC17A /* JPSimulatorHacks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JPSimulatorHacks.h; path = JPSimulatorHacks/JPSimulatorHacks.h; sourceTree = "<group>"; };
+		21C4BE2C89960D43BE2DA35B /* libPods-MSCellAccessory.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MSCellAccessory.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		231BA5E3DD7ECEE5FAE12277 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
+		25FED05CD8DD660E1EA6FA3B /* NSDate+CupertinoYankee.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDate+CupertinoYankee.m"; path = "CupertinoYankee/NSDate+CupertinoYankee.m"; sourceTree = "<group>"; };
+		27D5F523F610372752E835D3 /* libPods-EvCalTests-MSCellAccessory.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EvCalTests-MSCellAccessory.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		27F28D37DABBDCB009BC97E3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		29AB89AE6C305C1AC47EA8A1 /* JPSimulatorHacks.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JPSimulatorHacks.m; path = JPSimulatorHacks/JPSimulatorHacks.m; sourceTree = "<group>"; };
+		2CA56B5A0E6EC4A97A1ECC3F /* Pods-EDColor-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EDColor-Private.xcconfig"; sourceTree = "<group>"; };
+		2F42CD972C06AEEC08016477 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Classes/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		2FEA74BAE1F001FE1B471FD7 /* UIColor+Crayola.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+Crayola.h"; path = "EDColor/UIColor+Crayola.h"; sourceTree = "<group>"; };
+		335156DB3919B99F35DDE3A2 /* libPods-CupertinoYankee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CupertinoYankee.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3884774B7354A6A64B8844A7 /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Classes/DDLog.h; sourceTree = "<group>"; };
+		391F0C66210A1B4304A6F5F5 /* UIView+AccessViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+AccessViewController.h"; path = "MSCellAccessory/UIView+AccessViewController.h"; sourceTree = "<group>"; };
+		4277A8C7291AE1FC851FC73B /* libPods-EvCalTests-CupertinoYankee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EvCalTests-CupertinoYankee.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		44A776851EB80FE842520F1B /* Pods-CupertinoYankee.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CupertinoYankee.xcconfig"; sourceTree = "<group>"; };
+		4573F8A62C87A52DAFA4167B /* UIColor+Hex.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Hex.m"; path = "EDColor/UIColor+Hex.m"; sourceTree = "<group>"; };
+		4603D49B4F07A507131B4BF7 /* Pods-EvCalTests-CupertinoYankee-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-EvCalTests-CupertinoYankee-prefix.pch"; path = "../Pods-EvCalTests-CupertinoYankee/Pods-EvCalTests-CupertinoYankee-prefix.pch"; sourceTree = "<group>"; };
+		47ABB4E066F7AD629E8A664B /* Pods-CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
+		4AE8184F1E5A66F1F5235EA1 /* Pods-EvCalTests-CocoaLumberjack-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests-CocoaLumberjack-Private.xcconfig"; path = "../Pods-EvCalTests-CocoaLumberjack/Pods-EvCalTests-CocoaLumberjack-Private.xcconfig"; sourceTree = "<group>"; };
+		4B6CF3632E596571BF081482 /* Pods-EvCalTests-EDColor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests-EDColor.xcconfig"; path = "../Pods-EvCalTests-EDColor/Pods-EvCalTests-EDColor.xcconfig"; sourceTree = "<group>"; };
+		4C5FFEA76037DDE45BA114A2 /* UIColor+HSB.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+HSB.m"; path = "EDColor/UIColor+HSB.m"; sourceTree = "<group>"; };
+		533354AD8C775B95801E3D84 /* Pods-EvCalTests-MSCellAccessory-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EvCalTests-MSCellAccessory-Private.xcconfig"; sourceTree = "<group>"; };
+		53DECC3D154F1DD40D1CD582 /* Pods-EvCalTests-MSCellAccessory-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EvCalTests-MSCellAccessory-prefix.pch"; sourceTree = "<group>"; };
+		56DDFF65789FD1FDDE3F88F2 /* Pods-EvCalTests-CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-EvCalTests-CocoaLumberjack-dummy.m"; path = "../Pods-EvCalTests-CocoaLumberjack/Pods-EvCalTests-CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
+		5AA0446CA53FA889DB847FCD /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Classes/DDTTYLogger.h; sourceTree = "<group>"; };
+		5AFB20B5360BCA1458D4DE36 /* UIColor+Hex.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+Hex.h"; path = "EDColor/UIColor+Hex.h"; sourceTree = "<group>"; };
+		5B32F4BBC78F995C2BDA91A0 /* JPSimulatorHacksDB.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JPSimulatorHacksDB.m; path = JPSimulatorHacks/JPSimulatorHacksDB.m; sourceTree = "<group>"; };
+		5CB9D5CA0436749C6E248D4A /* Pods-EvCalTests-JPSimulatorHacks-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EvCalTests-JPSimulatorHacks-Private.xcconfig"; sourceTree = "<group>"; };
+		5D812B06E6783F0442411D76 /* libPods-EvCalTests-EDColor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EvCalTests-EDColor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E35CB66703DF0DB86946273 /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDDispatchQueueLogFormatter.m; path = Classes/Extensions/DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		610A57944EAEE00B48FCEF65 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		65299DC86F5219E53A3E760C /* Pods-EvCalTests-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EvCalTests-environment.h"; sourceTree = "<group>"; };
+		68AC50BD455EA56BFF8DCBFD /* DDLegacyMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLegacyMacros.h; path = Classes/DDLegacyMacros.h; sourceTree = "<group>"; };
+		68F7FF5992A1DAD2B40A5BC7 /* NSDate+CupertinoYankee.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDate+CupertinoYankee.h"; path = "CupertinoYankee/NSDate+CupertinoYankee.h"; sourceTree = "<group>"; };
+		6CC1B3E247C83FBEEC46AD60 /* Pods-MSCellAccessory-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MSCellAccessory-Private.xcconfig"; path = "../Pods-MSCellAccessory/Pods-MSCellAccessory-Private.xcconfig"; sourceTree = "<group>"; };
+		71D9312715086E7BE4FB26A3 /* Pods-EvCalTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EvCalTests-dummy.m"; sourceTree = "<group>"; };
+		7253DBBAF5AD5FD702F64E12 /* UIColor+HSB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+HSB.h"; path = "EDColor/UIColor+HSB.h"; sourceTree = "<group>"; };
+		796FD3D3001D70680950B56E /* libPods-EvCalTests-CocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EvCalTests-CocoaLumberjack.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7ABC4EBCF6DDB2E82B11787C /* Pods-CocoaLumberjack-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CocoaLumberjack-Private.xcconfig"; sourceTree = "<group>"; };
+		7CF18EABB5BB110AE9172815 /* DDASLLogCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogCapture.m; path = Classes/DDASLLogCapture.m; sourceTree = "<group>"; };
+		8053B093BCA17EA4D32053A8 /* Pods-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-environment.h"; sourceTree = "<group>"; };
+		81E870B2FAF27F608D700853 /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
+		849B1B533D9E7749763BB614 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		8792F3B1CF634806C80FFB9D /* Pods-MSCellAccessory.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MSCellAccessory.xcconfig"; path = "../Pods-MSCellAccessory/Pods-MSCellAccessory.xcconfig"; sourceTree = "<group>"; };
+		8B0DD479DFC1C6C302BA0818 /* EDColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EDColor.h; path = EDColor/EDColor.h; sourceTree = "<group>"; };
+		8D84296ECD0D6E8F62D35F9D /* Pods-EvCalTests-CupertinoYankee-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests-CupertinoYankee-Private.xcconfig"; path = "../Pods-EvCalTests-CupertinoYankee/Pods-EvCalTests-CupertinoYankee-Private.xcconfig"; sourceTree = "<group>"; };
+		931A7562103EE89432F1157F /* libPods-EvCalTests-JPSimulatorHacks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EvCalTests-JPSimulatorHacks.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9321ACCBB69065AA5271FA88 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9373DB8B4C962A2A60189071 /* Pods-EvCalTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EvCalTests-resources.sh"; sourceTree = "<group>"; };
+		966D2655EACFFD8B6B7E5BCD /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDContextFilterLogFormatter.m; path = Classes/Extensions/DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		967835CEA69BC6CDD5700B3A /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		A5BDD61AD4039ADB7D5334D6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		A83D263B5999E681BDEE1160 /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
+		ABB460720CE9C2C5ADB4A4B5 /* Pods-EvCalTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EvCalTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		AD537CE716C81EF0A38BFE0C /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Classes/DDAssertMacros.h; sourceTree = "<group>"; };
+		ADAE818F5DFE3D6ADF21D0D7 /* Pods-MSCellAccessory-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-MSCellAccessory-prefix.pch"; path = "../Pods-MSCellAccessory/Pods-MSCellAccessory-prefix.pch"; sourceTree = "<group>"; };
+		AE5B5A1BFB32E678E0DE1FC4 /* Pods-CocoaLumberjack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CocoaLumberjack.xcconfig"; sourceTree = "<group>"; };
+		AFA689929A685343EEE715E4 /* UIColor+Crayola.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Crayola.m"; path = "EDColor/UIColor+Crayola.m"; sourceTree = "<group>"; };
+		B02463DCA9ACA8EFF8D22A61 /* Crayola.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Crayola.h; path = EDColor/Crayola.h; sourceTree = "<group>"; };
+		B027389B401C99A66DF3FA44 /* Pods-EvCalTests-EDColor-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests-EDColor-Private.xcconfig"; path = "../Pods-EvCalTests-EDColor/Pods-EvCalTests-EDColor-Private.xcconfig"; sourceTree = "<group>"; };
+		B04D9F764723847134422910 /* MSCellAccessory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MSCellAccessory.m; path = MSCellAccessory/MSCellAccessory.m; sourceTree = "<group>"; };
+		B1F590EE0866B824E5BE3E42 /* UIColor+CIELAB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+CIELAB.h"; path = "EDColor/UIColor+CIELAB.h"; sourceTree = "<group>"; };
+		B43C5F60735D338A0019AED5 /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = Classes/DDLog.m; sourceTree = "<group>"; };
+		B4E061ABBC1B4D73BD6C6D0E /* JPSimulatorHacksDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JPSimulatorHacksDB.h; path = JPSimulatorHacks/JPSimulatorHacksDB.h; sourceTree = "<group>"; };
+		BAB45D94344981FD4FBC95BF /* Pods-EvCalTests-MSCellAccessory-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EvCalTests-MSCellAccessory-dummy.m"; sourceTree = "<group>"; };
+		BCBD84B1040E91F7324CFB5C /* Pods-EvCalTests-CocoaLumberjack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests-CocoaLumberjack.xcconfig"; path = "../Pods-EvCalTests-CocoaLumberjack/Pods-EvCalTests-CocoaLumberjack.xcconfig"; sourceTree = "<group>"; };
+		BF87AEB80C6C8EEC1BE13F37 /* Pods-EvCalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EvCalTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C12019408F07451EB334E8C7 /* UIColor+CIELAB.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+CIELAB.m"; path = "EDColor/UIColor+CIELAB.m"; sourceTree = "<group>"; };
+		C135C0C1D5A103A7E3C747DE /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDDispatchQueueLogFormatter.h; path = Classes/Extensions/DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		C161F5CCF2A41762CE678E9A /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Classes/DDASLLogCapture.h; sourceTree = "<group>"; };
+		C260DC74F108CD450983503F /* Pods-CupertinoYankee-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CupertinoYankee-dummy.m"; sourceTree = "<group>"; };
+		C64EF8C5F313EF06B0631138 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		C93A485523D21A2E6EF20E53 /* MSCellAccessory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MSCellAccessory.h; path = MSCellAccessory/MSCellAccessory.h; sourceTree = "<group>"; };
+		C9764A84855BD5C86AA34D78 /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
+		D02DF9F41E0ADF219187BE84 /* Pods-EvCalTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-EvCalTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		D43F415F93E46363E929A160 /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		D526DC594EE0F9536299C586 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		D5B77092B1E7953B2C68DAFB /* UIView+AccessViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+AccessViewController.m"; path = "MSCellAccessory/UIView+AccessViewController.m"; sourceTree = "<group>"; };
+		DAEE630F3D777C1C7984B618 /* Pods-EvCalTests-EDColor-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-EvCalTests-EDColor-prefix.pch"; path = "../Pods-EvCalTests-EDColor/Pods-EvCalTests-EDColor-prefix.pch"; sourceTree = "<group>"; };
+		DB7C8E858C60D5FFCD99926D /* Pods-EvCalTests-CupertinoYankee.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests-CupertinoYankee.xcconfig"; path = "../Pods-EvCalTests-CupertinoYankee/Pods-EvCalTests-CupertinoYankee.xcconfig"; sourceTree = "<group>"; };
+		DBFE8D2BB99A8DF4EE0B4496 /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Classes/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
+		DC550D8B9D2D353D9947377B /* Pods-CupertinoYankee-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CupertinoYankee-Private.xcconfig"; sourceTree = "<group>"; };
+		E4B8EFEB2998F44087EDB770 /* Pods-EDColor-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EDColor-prefix.pch"; sourceTree = "<group>"; };
+		E4C90C78B9F26E0E3852275A /* Pods-EvCalTests-JPSimulatorHacks-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EvCalTests-JPSimulatorHacks-prefix.pch"; sourceTree = "<group>"; };
+		E7E11C4BB0FCE2F5396490A7 /* libPods-CocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CocoaLumberjack.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC51B05B1938FD3238DB5940 /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Classes/DDLog+LOGV.h"; sourceTree = "<group>"; };
+		F1E335393D2583BD1A9A3926 /* Pods-EDColor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EDColor.xcconfig"; sourceTree = "<group>"; };
+		F2612F91BD6563F09B373D36 /* UIColor+iOS7.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+iOS7.h"; path = "EDColor/UIColor+iOS7.h"; sourceTree = "<group>"; };
+		F938701D07A1ED5269EE0669 /* libPods-EDColor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EDColor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB6268105E0F333147AFB206 /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		FD83D600C010078B4374D140 /* DDMultiFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDMultiFormatter.h; path = Classes/Extensions/DDMultiFormatter.h; sourceTree = "<group>"; };
+		FEE4D310190242822260BE48 /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Classes/DDTTYLogger.m; sourceTree = "<group>"; };
+		FF01990FF9879FBBF48CE47D /* UIColor+iOS7.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+iOS7.m"; path = "EDColor/UIColor+iOS7.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		046CDB5944A171B669B4F9C2 /* Frameworks */ = {
+		131A073D5BAFF09E3D5F5BE4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83F4FCC0AE9BDBC31FDF42E9 /* Foundation.framework in Frameworks */,
+				27CC47E1078C90F94AD46BD5 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		43165A765F3832EB125BECBD /* Frameworks */ = {
+		219C4382121FB365C8A8E960 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F86025EA76FFBD4874EFF7F3 /* Foundation.framework in Frameworks */,
-				14969F07A5AD82101601A153 /* UIKit.framework in Frameworks */,
+				6BA03D1EE14F5A3B28B61CE0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5C6BFBF0CD1226504174428B /* Frameworks */ = {
+		24473F9F3ED7F6000E6A3DF9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF04F6D20FECD118AAC93024 /* Foundation.framework in Frameworks */,
+				2EA46C104B563D8114FEE088 /* Foundation.framework in Frameworks */,
+				F6A76EFBC3B8D1BE47271DE4 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6241BEE5C70C4553B0F90750 /* Frameworks */ = {
+		923A9A0878A9FD19C8F2E08E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FABF4E9A030AE33C058AB511 /* Foundation.framework in Frameworks */,
+				015C3369F08E2E19CB00C75D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		62936C079C0AEF4D3F8200DA /* Frameworks */ = {
+		99E0602BF17FE3CA9B80A90E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28D328F58BC40E9E69003F5F /* Foundation.framework in Frameworks */,
+				C0214413663A17A4CB0592FD /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		70EC60FE572B5DD4E5669E58 /* Frameworks */ = {
+		AF6423A9D6D6546581243396 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B20D409B66032902AACAFCA /* Foundation.framework in Frameworks */,
-				49943B529A12111CD419AB9C /* UIKit.framework in Frameworks */,
+				DF7E6D768C72069E31C4379F /* Foundation.framework in Frameworks */,
+				402EF0335F2F043F2469E927 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9319451A071701E5EB5DAD10 /* Frameworks */ = {
+		B58FBDD3446B5B5D67A863ED /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0AE2902AE17718A4F82D234 /* Foundation.framework in Frameworks */,
+				12B3EDBD8EFE407F885BACAF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AEBD173C63D2920D035EF422 /* Frameworks */ = {
+		CF93AB940F2CFBEC58094116 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB5B46B75EE387FF5F43A161 /* Foundation.framework in Frameworks */,
+				8546E3D1C550BFE671AD85E9 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AFC0445E12477B0B2A87551F /* Frameworks */ = {
+		E368BEB84B1C0E58F1B6878E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				746A4584F9161D8653718084 /* Foundation.framework in Frameworks */,
+				50870501AF19F533562115EE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5C6EF093B6EB0AC376BBE06 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B6CCD732787DB0A7644C5ED /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1B3396350B219A4361E140F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFB07D57B50571E705E09468 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1D58827B2994A9AF47078D42 /* iOS */ = {
+		06B505C2878D2B27C5D3B95B /* Default */ = {
 			isa = PBXGroup;
 			children = (
-				808C0BBD2639031A081F90F1 /* Foundation.framework */,
-				49ADD8E4E4D2EC5BBB61DC57 /* UIKit.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		23F921E71546443125B0C9B6 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				069B0B37DD73A2392BDC4A60 /* Pods-CocoaLumberjack.xcconfig */,
-				B59555999DDF62BA9A6F0843 /* Pods-CocoaLumberjack-Private.xcconfig */,
-				5D6CC7A3071EE628527CE98A /* Pods-CocoaLumberjack-dummy.m */,
-				F526874589D590A4364D1910 /* Pods-CocoaLumberjack-prefix.pch */,
-				17FA78B6B183CC0D6C5545AF /* Pods-EvCalTests-CocoaLumberjack.xcconfig */,
-				780D8394A97DC98EBC2E1929 /* Pods-EvCalTests-CocoaLumberjack-Private.xcconfig */,
-				857B3D556F41D16D5750D0D9 /* Pods-EvCalTests-CocoaLumberjack-dummy.m */,
-				E4BCCE993E37C561483C6515 /* Pods-EvCalTests-CocoaLumberjack-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Pods-CocoaLumberjack";
-			sourceTree = "<group>";
-		};
-		4CD20B389B5832F4E971222F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4E7C3B011EB69A484BFF3CE7 /* libPods.a */,
-				B502B69CA5629B78334DD85B /* libPods-CocoaLumberjack.a */,
-				5E829C44CA8D26B46B0339EE /* libPods-CupertinoYankee.a */,
-				4F0853836C8143A2955F142E /* libPods-EDColor.a */,
-				0247E0CC39BCEA120947797D /* libPods-EvCalTests.a */,
-				D0433D43325776CFDACBFCB2 /* libPods-EvCalTests-CocoaLumberjack.a */,
-				525E37A1146D21FA1ADC31A1 /* libPods-EvCalTests-CupertinoYankee.a */,
-				137024485F1403D7ECB64244 /* libPods-EvCalTests-EDColor.a */,
-				F37945A1B69DFEED6428430B /* libPods-EvCalTests-JPSimulatorHacks.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		4DAEBB1D9158B95C84A0C485 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				10A86CADEA17861F27D60567 /* Pods-acknowledgements.markdown */,
-				5A268D931D52CF1BB0320C99 /* Pods-acknowledgements.plist */,
-				F73A1B02CD15E98C208322ED /* Pods-dummy.m */,
-				A6D5FC6D798382D223C1CF14 /* Pods-environment.h */,
-				9185A01126DAEB67D888D8CB /* Pods-resources.sh */,
-				7BA954382B2D6645227685FB /* Pods.debug.xcconfig */,
-				2B4B54EA071B3A852C0692C5 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			path = "Target Support Files/Pods";
-			sourceTree = "<group>";
-		};
-		5513346CD37911B5E20ACF5E /* CocoaLumberjack */ = {
-			isa = PBXGroup;
-			children = (
-				CB0C7E7DFC90C2FAED13EDB4 /* Core */,
-				5551D7F1CC1D87A8E911EE18 /* Default */,
-				DFD431B158BE7EE65507AC2A /* Extensions */,
-				23F921E71546443125B0C9B6 /* Support Files */,
-			);
-			path = CocoaLumberjack;
-			sourceTree = "<group>";
-		};
-		5551D7F1CC1D87A8E911EE18 /* Default */ = {
-			isa = PBXGroup;
-			children = (
-				271B2E24905107FBF430B595 /* CocoaLumberjack.h */,
+				81E870B2FAF27F608D700853 /* CocoaLumberjack.h */,
 			);
 			name = Default;
 			sourceTree = "<group>";
 		};
-		6E662EBF6BD46868599A7365 /* JPSimulatorHacks */ = {
+		1915B3B6DDB9783BAFD8F6FB /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				F6B90D1C31D07ED8A88D0F61 /* JPSimulatorHacks.h */,
-				E74D6FAEA10F34136E7B9266 /* JPSimulatorHacks.m */,
-				008BD7B60BDD4BFF7145DC50 /* JPSimulatorHacksDB.h */,
-				80E5B7716098D82FCAE63C0D /* JPSimulatorHacksDB.m */,
-				70C8C1C4532B70A59976116C /* Support Files */,
-			);
-			path = JPSimulatorHacks;
-			sourceTree = "<group>";
-		};
-		70C8C1C4532B70A59976116C /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				C0E5DEF1459D713B757C2C26 /* Pods-EvCalTests-JPSimulatorHacks.xcconfig */,
-				C023B8E8D25259DBB1CFC641 /* Pods-EvCalTests-JPSimulatorHacks-Private.xcconfig */,
-				E9D9D24F504900CA14A7473F /* Pods-EvCalTests-JPSimulatorHacks-dummy.m */,
-				36DD48BB35818D35449188A1 /* Pods-EvCalTests-JPSimulatorHacks-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Pods-EvCalTests-JPSimulatorHacks";
-			sourceTree = "<group>";
-		};
-		71AF0B5F4675573AD49AADB1 /* EDColor */ = {
-			isa = PBXGroup;
-			children = (
-				36CD006E2BF02298EF4FA02E /* Crayola.h */,
-				72E5AF4389BE87DB15BC1F1B /* EDColor.h */,
-				C4A1D47FF42A4DCEB62389D8 /* UIColor+CIELAB.h */,
-				B6E811C1F9733CC160491F67 /* UIColor+CIELAB.m */,
-				798F743BA8CA296616B4F5B2 /* UIColor+Crayola.h */,
-				CEA7C679D48827D0054BD1A8 /* UIColor+Crayola.m */,
-				1131E4CE8D46CF7F6A34B514 /* UIColor+HSB.h */,
-				4C6B3636393A0573841F4D2A /* UIColor+HSB.m */,
-				B4847CF89F7F2EAB7AC5A4AD /* UIColor+HSL.h */,
-				0310529D739E3B28DD3932D3 /* UIColor+HSL.m */,
-				27F917CBFB39FDD1BFCCE89C /* UIColor+Hex.h */,
-				5FC31D440688B128985841BB /* UIColor+Hex.m */,
-				EC522E0273AD8A55C05E8D40 /* UIColor+iOS7.h */,
-				882683722D526563B085289B /* UIColor+iOS7.m */,
-				EF9117FBB9E8BBC6D30B005A /* Support Files */,
-			);
-			path = EDColor;
-			sourceTree = "<group>";
-		};
-		738D0FCE5560F94DCC803851 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				4DAEBB1D9158B95C84A0C485 /* Pods */,
-				7FE8E8CEC7507C420D7A9B6C /* Pods-EvCalTests */,
+				F2EE376B07466B5007789B03 /* Pods */,
+				95DD62FEA183711442F30A4F /* Pods-EvCalTests */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		7FE8E8CEC7507C420D7A9B6C /* Pods-EvCalTests */ = {
+		2B47CA7A35378EBCFD24877C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				10D9DD96CEDEF95F8D3AF8D3 /* Pods-EvCalTests-acknowledgements.markdown */,
-				46DCE416F2D3B18D95E165F5 /* Pods-EvCalTests-acknowledgements.plist */,
-				59A45E4CB0F39040777505BC /* Pods-EvCalTests-dummy.m */,
-				5933303375191795ACB74000 /* Pods-EvCalTests-environment.h */,
-				9E94975967091C5E096512B1 /* Pods-EvCalTests-resources.sh */,
-				EA3EB1554AE831AF4399BDEC /* Pods-EvCalTests.debug.xcconfig */,
-				2A6B6695A967A4778F87642F /* Pods-EvCalTests.release.xcconfig */,
-			);
-			name = "Pods-EvCalTests";
-			path = "Target Support Files/Pods-EvCalTests";
-			sourceTree = "<group>";
-		};
-		88D4BC5A714913C99DA3A52A /* CupertinoYankee */ = {
-			isa = PBXGroup;
-			children = (
-				79A4B263F2ACB0492835B535 /* NSDate+CupertinoYankee.h */,
-				2890DEE739017E44EEB3FED7 /* NSDate+CupertinoYankee.m */,
-				EEFBF805DE8F2E237EF7B265 /* Support Files */,
-			);
-			path = CupertinoYankee;
-			sourceTree = "<group>";
-		};
-		B25A706CF3BF88CA5A685E5A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5513346CD37911B5E20ACF5E /* CocoaLumberjack */,
-				88D4BC5A714913C99DA3A52A /* CupertinoYankee */,
-				71AF0B5F4675573AD49AADB1 /* EDColor */,
-				6E662EBF6BD46868599A7365 /* JPSimulatorHacks */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		C1F82046090AF17DA31DCEB0 = {
-			isa = PBXGroup;
-			children = (
-				56EEA2E2D67329535B125F41 /* Podfile */,
-				D7F9933E9FBB95268F0CA9E5 /* Frameworks */,
-				B25A706CF3BF88CA5A685E5A /* Pods */,
-				4CD20B389B5832F4E971222F /* Products */,
-				738D0FCE5560F94DCC803851 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		CB0C7E7DFC90C2FAED13EDB4 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				EB3A438F642434F52041F3D5 /* DDASLLogCapture.h */,
-				CBAAAC09D338D30BBB3A4563 /* DDASLLogCapture.m */,
-				FAC76D09AF3F4FB41466E0A3 /* DDASLLogger.h */,
-				D8438D391E7EC7EA0A4FD66C /* DDASLLogger.m */,
-				2C82C8D45DF14BE5D7EA1DBB /* DDAbstractDatabaseLogger.h */,
-				092356FE546C680CB1B80E8C /* DDAbstractDatabaseLogger.m */,
-				63D7EC1FDF5229809C20E172 /* DDAssertMacros.h */,
-				31607468F0299A690FC055F1 /* DDFileLogger.h */,
-				4CA51827E387DDAA6147845B /* DDFileLogger.m */,
-				8921E403A3CD282B8FC531CE /* DDLegacyMacros.h */,
-				243D6DA20177FF6F8E4210BF /* DDLog.h */,
-				91955206389FC642A6FB608F /* DDLog.m */,
-				E45BA4E85AE92C452FF5C704 /* DDLog+LOGV.h */,
-				2713122F9DFB37DD2614DDB5 /* DDLogMacros.h */,
-				89E594380FF07E5F3E795038 /* DDTTYLogger.h */,
-				4CC2C7B97307B3B0CB9D6980 /* DDTTYLogger.m */,
-			);
-			name = Core;
-			sourceTree = "<group>";
-		};
-		D7F9933E9FBB95268F0CA9E5 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1D58827B2994A9AF47078D42 /* iOS */,
+				982525DB15C7E52080FA1377 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DFD431B158BE7EE65507AC2A /* Extensions */ = {
+		31A65C6AC944AE371D907FB2 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				A284BC6BF88D6CA575547492 /* DDContextFilterLogFormatter.h */,
-				0038E9D5157AF6449E2CBDE2 /* DDContextFilterLogFormatter.m */,
-				8DAB36A3254C9D3ABB2C956E /* DDDispatchQueueLogFormatter.h */,
-				76B2F7D04EF192BFF0A7A548 /* DDDispatchQueueLogFormatter.m */,
-				428411DA392843C7D567A9AB /* DDMultiFormatter.h */,
-				94CA846C77B6DAD2B7C4B89E /* DDMultiFormatter.m */,
-			);
-			name = Extensions;
-			sourceTree = "<group>";
-		};
-		EEFBF805DE8F2E237EF7B265 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				76D123893CE95019FEACAA97 /* Pods-CupertinoYankee.xcconfig */,
-				58BED777D101DF2F45901D3D /* Pods-CupertinoYankee-Private.xcconfig */,
-				95CB342A6F08EE9BBE6801AA /* Pods-CupertinoYankee-dummy.m */,
-				460EB26630B4F1DD71152068 /* Pods-CupertinoYankee-prefix.pch */,
-				01A2C1E64544A29C41AD6FCA /* Pods-EvCalTests-CupertinoYankee.xcconfig */,
-				F5EF640266856EC945D21B7E /* Pods-EvCalTests-CupertinoYankee-Private.xcconfig */,
-				BF8954736FDAB82FD01CD922 /* Pods-EvCalTests-CupertinoYankee-dummy.m */,
-				E901337F1152BDFAC7611C73 /* Pods-EvCalTests-CupertinoYankee-prefix.pch */,
+				44A776851EB80FE842520F1B /* Pods-CupertinoYankee.xcconfig */,
+				DC550D8B9D2D353D9947377B /* Pods-CupertinoYankee-Private.xcconfig */,
+				C260DC74F108CD450983503F /* Pods-CupertinoYankee-dummy.m */,
+				01B0C4FB0EFDE71B6D5F0C17 /* Pods-CupertinoYankee-prefix.pch */,
+				DB7C8E858C60D5FFCD99926D /* Pods-EvCalTests-CupertinoYankee.xcconfig */,
+				8D84296ECD0D6E8F62D35F9D /* Pods-EvCalTests-CupertinoYankee-Private.xcconfig */,
+				084407D11B79B902CE469401 /* Pods-EvCalTests-CupertinoYankee-dummy.m */,
+				4603D49B4F07A507131B4BF7 /* Pods-EvCalTests-CupertinoYankee-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Pods-CupertinoYankee";
 			sourceTree = "<group>";
 		};
-		EF9117FBB9E8BBC6D30B005A /* Support Files */ = {
+		40247A3920FA06CB1BC11E52 = {
 			isa = PBXGroup;
 			children = (
-				B803744938856E30C5C148D0 /* Pods-EDColor.xcconfig */,
-				03A696F7800BE7B4869D4C82 /* Pods-EDColor-Private.xcconfig */,
-				2241E3FD64DE810D8E51C2D7 /* Pods-EDColor-dummy.m */,
-				8467E3209AC95E868B2C6B8F /* Pods-EDColor-prefix.pch */,
-				7A9F3901CBD65CD02A7D7302 /* Pods-EvCalTests-EDColor.xcconfig */,
-				7FC92DED60A30CBF2DA9795B /* Pods-EvCalTests-EDColor-Private.xcconfig */,
-				E4C7EF2851B23F34C99AEDCD /* Pods-EvCalTests-EDColor-dummy.m */,
-				141CB0DE13B2D326D45DB2FF /* Pods-EvCalTests-EDColor-prefix.pch */,
+				C64EF8C5F313EF06B0631138 /* Podfile */,
+				2B47CA7A35378EBCFD24877C /* Frameworks */,
+				A740F9F20E40E35226E53EF6 /* Pods */,
+				443042C34F67AE1AE5215DEA /* Products */,
+				1915B3B6DDB9783BAFD8F6FB /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		434A42C31D837457B0109CF9 /* CupertinoYankee */ = {
+			isa = PBXGroup;
+			children = (
+				68F7FF5992A1DAD2B40A5BC7 /* NSDate+CupertinoYankee.h */,
+				25FED05CD8DD660E1EA6FA3B /* NSDate+CupertinoYankee.m */,
+				31A65C6AC944AE371D907FB2 /* Support Files */,
+			);
+			path = CupertinoYankee;
+			sourceTree = "<group>";
+		};
+		443042C34F67AE1AE5215DEA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9321ACCBB69065AA5271FA88 /* libPods.a */,
+				E7E11C4BB0FCE2F5396490A7 /* libPods-CocoaLumberjack.a */,
+				335156DB3919B99F35DDE3A2 /* libPods-CupertinoYankee.a */,
+				F938701D07A1ED5269EE0669 /* libPods-EDColor.a */,
+				121652D01CB9918B680670DE /* libPods-EvCalTests.a */,
+				796FD3D3001D70680950B56E /* libPods-EvCalTests-CocoaLumberjack.a */,
+				4277A8C7291AE1FC851FC73B /* libPods-EvCalTests-CupertinoYankee.a */,
+				5D812B06E6783F0442411D76 /* libPods-EvCalTests-EDColor.a */,
+				931A7562103EE89432F1157F /* libPods-EvCalTests-JPSimulatorHacks.a */,
+				27D5F523F610372752E835D3 /* libPods-EvCalTests-MSCellAccessory.a */,
+				21C4BE2C89960D43BE2DA35B /* libPods-MSCellAccessory.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5689D585DD5C590BAB6EB02A /* CocoaLumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				5F81982C3AE820DB1861139D /* Core */,
+				06B505C2878D2B27C5D3B95B /* Default */,
+				DB2B9D133808C66FE0453E60 /* Extensions */,
+				9DC236EE89F66EAC41D68DD2 /* Support Files */,
+			);
+			path = CocoaLumberjack;
+			sourceTree = "<group>";
+		};
+		5897F2C57C5B8488AC07876D /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				03C2467ECFF50FD9DE3769B7 /* Pods-EvCalTests-JPSimulatorHacks.xcconfig */,
+				5CB9D5CA0436749C6E248D4A /* Pods-EvCalTests-JPSimulatorHacks-Private.xcconfig */,
+				1004A0901E61F63E22648A9F /* Pods-EvCalTests-JPSimulatorHacks-dummy.m */,
+				E4C90C78B9F26E0E3852275A /* Pods-EvCalTests-JPSimulatorHacks-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-EvCalTests-JPSimulatorHacks";
+			sourceTree = "<group>";
+		};
+		5F81982C3AE820DB1861139D /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				C161F5CCF2A41762CE678E9A /* DDASLLogCapture.h */,
+				7CF18EABB5BB110AE9172815 /* DDASLLogCapture.m */,
+				04E3EF1BEC6CBEE850E4CE87 /* DDASLLogger.h */,
+				A83D263B5999E681BDEE1160 /* DDASLLogger.m */,
+				2F42CD972C06AEEC08016477 /* DDAbstractDatabaseLogger.h */,
+				967835CEA69BC6CDD5700B3A /* DDAbstractDatabaseLogger.m */,
+				AD537CE716C81EF0A38BFE0C /* DDAssertMacros.h */,
+				12C3EEAE59806BE578B7F856 /* DDFileLogger.h */,
+				18FA756E50960CA6762FB394 /* DDFileLogger.m */,
+				68AC50BD455EA56BFF8DCBFD /* DDLegacyMacros.h */,
+				3884774B7354A6A64B8844A7 /* DDLog.h */,
+				B43C5F60735D338A0019AED5 /* DDLog.m */,
+				EC51B05B1938FD3238DB5940 /* DDLog+LOGV.h */,
+				C9764A84855BD5C86AA34D78 /* DDLogMacros.h */,
+				5AA0446CA53FA889DB847FCD /* DDTTYLogger.h */,
+				FEE4D310190242822260BE48 /* DDTTYLogger.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		771022447B772CCBF77189CD /* MSCellAccessory */ = {
+			isa = PBXGroup;
+			children = (
+				C93A485523D21A2E6EF20E53 /* MSCellAccessory.h */,
+				B04D9F764723847134422910 /* MSCellAccessory.m */,
+				391F0C66210A1B4304A6F5F5 /* UIView+AccessViewController.h */,
+				D5B77092B1E7953B2C68DAFB /* UIView+AccessViewController.m */,
+				CD2453AC463DC76E73AD8DA6 /* Support Files */,
+			);
+			path = MSCellAccessory;
+			sourceTree = "<group>";
+		};
+		95DD62FEA183711442F30A4F /* Pods-EvCalTests */ = {
+			isa = PBXGroup;
+			children = (
+				D02DF9F41E0ADF219187BE84 /* Pods-EvCalTests-acknowledgements.markdown */,
+				ABB460720CE9C2C5ADB4A4B5 /* Pods-EvCalTests-acknowledgements.plist */,
+				71D9312715086E7BE4FB26A3 /* Pods-EvCalTests-dummy.m */,
+				65299DC86F5219E53A3E760C /* Pods-EvCalTests-environment.h */,
+				9373DB8B4C962A2A60189071 /* Pods-EvCalTests-resources.sh */,
+				BF87AEB80C6C8EEC1BE13F37 /* Pods-EvCalTests.debug.xcconfig */,
+				0455AB50B6C8B646B646C8EA /* Pods-EvCalTests.release.xcconfig */,
+			);
+			name = "Pods-EvCalTests";
+			path = "Target Support Files/Pods-EvCalTests";
+			sourceTree = "<group>";
+		};
+		982525DB15C7E52080FA1377 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D526DC594EE0F9536299C586 /* Foundation.framework */,
+				27F28D37DABBDCB009BC97E3 /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		9C51FB1307F154FEF9B3208F /* JPSimulatorHacks */ = {
+			isa = PBXGroup;
+			children = (
+				20F87EECB9AD52219B3BC17A /* JPSimulatorHacks.h */,
+				29AB89AE6C305C1AC47EA8A1 /* JPSimulatorHacks.m */,
+				B4E061ABBC1B4D73BD6C6D0E /* JPSimulatorHacksDB.h */,
+				5B32F4BBC78F995C2BDA91A0 /* JPSimulatorHacksDB.m */,
+				5897F2C57C5B8488AC07876D /* Support Files */,
+			);
+			path = JPSimulatorHacks;
+			sourceTree = "<group>";
+		};
+		9DC236EE89F66EAC41D68DD2 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				AE5B5A1BFB32E678E0DE1FC4 /* Pods-CocoaLumberjack.xcconfig */,
+				7ABC4EBCF6DDB2E82B11787C /* Pods-CocoaLumberjack-Private.xcconfig */,
+				1DD8AEB0463D6AF8EEBB780E /* Pods-CocoaLumberjack-dummy.m */,
+				47ABB4E066F7AD629E8A664B /* Pods-CocoaLumberjack-prefix.pch */,
+				BCBD84B1040E91F7324CFB5C /* Pods-EvCalTests-CocoaLumberjack.xcconfig */,
+				4AE8184F1E5A66F1F5235EA1 /* Pods-EvCalTests-CocoaLumberjack-Private.xcconfig */,
+				56DDFF65789FD1FDDE3F88F2 /* Pods-EvCalTests-CocoaLumberjack-dummy.m */,
+				0F2A56F15838EA00D231A3C1 /* Pods-EvCalTests-CocoaLumberjack-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-CocoaLumberjack";
+			sourceTree = "<group>";
+		};
+		A740F9F20E40E35226E53EF6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5689D585DD5C590BAB6EB02A /* CocoaLumberjack */,
+				434A42C31D837457B0109CF9 /* CupertinoYankee */,
+				AD74BA6A068D58AC16C75384 /* EDColor */,
+				9C51FB1307F154FEF9B3208F /* JPSimulatorHacks */,
+				771022447B772CCBF77189CD /* MSCellAccessory */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AD74BA6A068D58AC16C75384 /* EDColor */ = {
+			isa = PBXGroup;
+			children = (
+				B02463DCA9ACA8EFF8D22A61 /* Crayola.h */,
+				8B0DD479DFC1C6C302BA0818 /* EDColor.h */,
+				B1F590EE0866B824E5BE3E42 /* UIColor+CIELAB.h */,
+				C12019408F07451EB334E8C7 /* UIColor+CIELAB.m */,
+				2FEA74BAE1F001FE1B471FD7 /* UIColor+Crayola.h */,
+				AFA689929A685343EEE715E4 /* UIColor+Crayola.m */,
+				7253DBBAF5AD5FD702F64E12 /* UIColor+HSB.h */,
+				4C5FFEA76037DDE45BA114A2 /* UIColor+HSB.m */,
+				186E38EF0855EEC86278B50F /* UIColor+HSL.h */,
+				0C83ADBEC16D8DB912A0BC2A /* UIColor+HSL.m */,
+				5AFB20B5360BCA1458D4DE36 /* UIColor+Hex.h */,
+				4573F8A62C87A52DAFA4167B /* UIColor+Hex.m */,
+				F2612F91BD6563F09B373D36 /* UIColor+iOS7.h */,
+				FF01990FF9879FBBF48CE47D /* UIColor+iOS7.m */,
+				BB26E7530EC989C234D7F278 /* Support Files */,
+			);
+			path = EDColor;
+			sourceTree = "<group>";
+		};
+		BB26E7530EC989C234D7F278 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				F1E335393D2583BD1A9A3926 /* Pods-EDColor.xcconfig */,
+				2CA56B5A0E6EC4A97A1ECC3F /* Pods-EDColor-Private.xcconfig */,
+				06A9317B6B506F7ED6C6074E /* Pods-EDColor-dummy.m */,
+				E4B8EFEB2998F44087EDB770 /* Pods-EDColor-prefix.pch */,
+				4B6CF3632E596571BF081482 /* Pods-EvCalTests-EDColor.xcconfig */,
+				B027389B401C99A66DF3FA44 /* Pods-EvCalTests-EDColor-Private.xcconfig */,
+				175CC34D031C22AAAA700B05 /* Pods-EvCalTests-EDColor-dummy.m */,
+				DAEE630F3D777C1C7984B618 /* Pods-EvCalTests-EDColor-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Pods-EDColor";
 			sourceTree = "<group>";
 		};
+		CD2453AC463DC76E73AD8DA6 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1E7EAE7C8BE6504B85AAE65B /* Pods-EvCalTests-MSCellAccessory.xcconfig */,
+				533354AD8C775B95801E3D84 /* Pods-EvCalTests-MSCellAccessory-Private.xcconfig */,
+				BAB45D94344981FD4FBC95BF /* Pods-EvCalTests-MSCellAccessory-dummy.m */,
+				53DECC3D154F1DD40D1CD582 /* Pods-EvCalTests-MSCellAccessory-prefix.pch */,
+				8792F3B1CF634806C80FFB9D /* Pods-MSCellAccessory.xcconfig */,
+				6CC1B3E247C83FBEEC46AD60 /* Pods-MSCellAccessory-Private.xcconfig */,
+				1B451192EA74D5D74AC3B933 /* Pods-MSCellAccessory-dummy.m */,
+				ADAE818F5DFE3D6ADF21D0D7 /* Pods-MSCellAccessory-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-EvCalTests-MSCellAccessory";
+			sourceTree = "<group>";
+		};
+		DB2B9D133808C66FE0453E60 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D43F415F93E46363E929A160 /* DDContextFilterLogFormatter.h */,
+				966D2655EACFFD8B6B7E5BCD /* DDContextFilterLogFormatter.m */,
+				C135C0C1D5A103A7E3C747DE /* DDDispatchQueueLogFormatter.h */,
+				5E35CB66703DF0DB86946273 /* DDDispatchQueueLogFormatter.m */,
+				FD83D600C010078B4374D140 /* DDMultiFormatter.h */,
+				DBFE8D2BB99A8DF4EE0B4496 /* DDMultiFormatter.m */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		F2EE376B07466B5007789B03 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FB6268105E0F333147AFB206 /* Pods-acknowledgements.markdown */,
+				231BA5E3DD7ECEE5FAE12277 /* Pods-acknowledgements.plist */,
+				849B1B533D9E7749763BB614 /* Pods-dummy.m */,
+				8053B093BCA17EA4D32053A8 /* Pods-environment.h */,
+				610A57944EAEE00B48FCEF65 /* Pods-resources.sh */,
+				A5BDD61AD4039ADB7D5334D6 /* Pods.debug.xcconfig */,
+				0AD15E5B3EB0F02948A8117C /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			path = "Target Support Files/Pods";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		6684125BD2BAE3AD300ABBF3 /* Headers */ = {
+		4505880C39D1EBFD2B80C195 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8081A7A013604DAEB1E83B89 /* NSDate+CupertinoYankee.h in Headers */,
+				CAEDAE3C8BE82E1ED52037C0 /* NSDate+CupertinoYankee.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		91A47BDBBAF032652AD82EBA /* Headers */ = {
+		49A40940661D837AE05F4021 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED64F1A6A9BEEF8037182D1F /* Crayola.h in Headers */,
-				FE2B4B064AEE7EAC3B3D5A3B /* EDColor.h in Headers */,
-				5AAAE3640AA4A05F0AC4BB56 /* UIColor+CIELAB.h in Headers */,
-				0FACD7BCB9FBB4A0D95A3BA3 /* UIColor+Crayola.h in Headers */,
-				89185470F9D41610C5633BBD /* UIColor+HSB.h in Headers */,
-				D83A809F0B062A17EBC76B67 /* UIColor+HSL.h in Headers */,
-				5BF2B45A73EE24F88D3B2410 /* UIColor+Hex.h in Headers */,
-				BD2BF3B5115A196FD2581300 /* UIColor+iOS7.h in Headers */,
+				E3CFCEC806C8C516BFD707ED /* CocoaLumberjack.h in Headers */,
+				F693DBFE3A4C40D56DD81E9D /* DDASLLogCapture.h in Headers */,
+				8EC6075C026FA9D35A91301D /* DDASLLogger.h in Headers */,
+				12FDB38CEA44A66214820650 /* DDAbstractDatabaseLogger.h in Headers */,
+				E5EF4AE98FD460FD8777A731 /* DDAssertMacros.h in Headers */,
+				2A299CE9CB7807F768639418 /* DDContextFilterLogFormatter.h in Headers */,
+				94D41DA0BAB83A5037DD4CA0 /* DDDispatchQueueLogFormatter.h in Headers */,
+				AF2CAB7F1872A99209765BCC /* DDFileLogger.h in Headers */,
+				79A2536910B44D53A76AB6BE /* DDLegacyMacros.h in Headers */,
+				451BF50A0BE2A1C3564D4118 /* DDLog+LOGV.h in Headers */,
+				E692B7B4756C1C978A7FDD4C /* DDLog.h in Headers */,
+				F78CC5A17CC1D973A40D1A7C /* DDLogMacros.h in Headers */,
+				5CF1F1C9C7ACFE5250B480B2 /* DDMultiFormatter.h in Headers */,
+				03D17939EEAB4F58C8E20CDA /* DDTTYLogger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9A2726D32D8C4C80D1129AD7 /* Headers */ = {
+		6353F002C7C75A680C4EB281 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D96C59D99CCBBD64C207F402 /* Crayola.h in Headers */,
-				17E7B976756A3805DFC7314A /* EDColor.h in Headers */,
-				443D43C7AF81E25011D4DE73 /* UIColor+CIELAB.h in Headers */,
-				7B95DEB384961F3303054544 /* UIColor+Crayola.h in Headers */,
-				2CF64D873DC0B2C1C2F0E5D6 /* UIColor+HSB.h in Headers */,
-				B76F9F01654521CEE284B9C5 /* UIColor+HSL.h in Headers */,
-				18B6ADDB6F6EEC737BC709F0 /* UIColor+Hex.h in Headers */,
-				63F526A8E81E507C7B943015 /* UIColor+iOS7.h in Headers */,
+				4B706E9E4454DA870BF666F5 /* JPSimulatorHacks.h in Headers */,
+				0C8FECBA2424E6267A52E433 /* JPSimulatorHacksDB.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A1A350D77A6F4160239E1435 /* Headers */ = {
+		861100B0DBF717F79BC7FC5D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9F17B0287E697A620E12E2E /* CocoaLumberjack.h in Headers */,
-				6016EC5947F523C86C7ABE61 /* DDASLLogCapture.h in Headers */,
-				F6242C4609E695C43F2A2383 /* DDASLLogger.h in Headers */,
-				9A9CC146288E3D1BBA4AC1EF /* DDAbstractDatabaseLogger.h in Headers */,
-				308598C6AE54901111D29E31 /* DDAssertMacros.h in Headers */,
-				F3347A5DE566120DED9A49E2 /* DDContextFilterLogFormatter.h in Headers */,
-				D9594BC2AB9070C523F27B70 /* DDDispatchQueueLogFormatter.h in Headers */,
-				09662FA6AD4E8AF95C2E2B4D /* DDFileLogger.h in Headers */,
-				887CC86E0324CE34FFF5CE51 /* DDLegacyMacros.h in Headers */,
-				7B3CDAD4F4C99903FE0CB627 /* DDLog+LOGV.h in Headers */,
-				660AC2DBF370025064E0055B /* DDLog.h in Headers */,
-				5BAB0BB1F5F4BA6BA35BAF6B /* DDLogMacros.h in Headers */,
-				069BB0E6CB4722B0D24A1DFD /* DDMultiFormatter.h in Headers */,
-				37A59AD2FD7045AA072A17E9 /* DDTTYLogger.h in Headers */,
+				A38D6DA24A162254DA3326FA /* NSDate+CupertinoYankee.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CFAC3873DBF2A663499B1755 /* Headers */ = {
+		9193EE790FC96F81CD70E35C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEBC1CCC4BC1A503B434A296 /* CocoaLumberjack.h in Headers */,
-				2238F059D1F97D86551FE4A7 /* DDASLLogCapture.h in Headers */,
-				1B801BCAFA363ADBED35DD99 /* DDASLLogger.h in Headers */,
-				64998BA30E6EFC4D799A4CFC /* DDAbstractDatabaseLogger.h in Headers */,
-				6DFA95A5F29BB23FD06751DA /* DDAssertMacros.h in Headers */,
-				FD7B6C5D90AF08F28268A887 /* DDContextFilterLogFormatter.h in Headers */,
-				F2722B08EA9CDE667B51A713 /* DDDispatchQueueLogFormatter.h in Headers */,
-				AEB0205CF0D7D56BB35C9FCC /* DDFileLogger.h in Headers */,
-				2BD742BDA3116E6CF54E821D /* DDLegacyMacros.h in Headers */,
-				0CA6C903EB20687F683AB6F9 /* DDLog+LOGV.h in Headers */,
-				68630E9569FBB0D80653FD2C /* DDLog.h in Headers */,
-				5C2DD18E91BEA6DC79712176 /* DDLogMacros.h in Headers */,
-				8E965A144824C27952D7C1FB /* DDMultiFormatter.h in Headers */,
-				8FC1071197D40C3045622B2D /* DDTTYLogger.h in Headers */,
+				3285901F3582FFA840E2F196 /* Crayola.h in Headers */,
+				DC810B0AC348DBE51509DE8D /* EDColor.h in Headers */,
+				0991405BE128D430F3BF9D9E /* UIColor+CIELAB.h in Headers */,
+				4028CFF7FEDFBC78F3149E19 /* UIColor+Crayola.h in Headers */,
+				2198AB1F3DE4543FD6887657 /* UIColor+HSB.h in Headers */,
+				592D58F20FFD6C133ECD07CD /* UIColor+HSL.h in Headers */,
+				28A79463CE44FA1DB5352841 /* UIColor+Hex.h in Headers */,
+				69869132D08300C7D786A5E8 /* UIColor+iOS7.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E844EDD1B3BBD1D80F33ED91 /* Headers */ = {
+		9502EDE76177A2A76B7EBFE2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5058343AA82952B66125B6EF /* JPSimulatorHacks.h in Headers */,
-				27DDCC84F685A2679206BAC7 /* JPSimulatorHacksDB.h in Headers */,
+				6ADAC2578CC0124DA94F896C /* Crayola.h in Headers */,
+				6CC2D11DCE01866753D64487 /* EDColor.h in Headers */,
+				93201C8AE0C3676DFABEA6B0 /* UIColor+CIELAB.h in Headers */,
+				815CD6D809FCFAAC07F4F9B9 /* UIColor+Crayola.h in Headers */,
+				6AD58C16928941C06CBF53D0 /* UIColor+HSB.h in Headers */,
+				6FBE8B266BBDFA7ACE7DB4AD /* UIColor+HSL.h in Headers */,
+				468EF8701F1EAB9470C4C386 /* UIColor+Hex.h in Headers */,
+				41F14EBDDDD656F6916388BD /* UIColor+iOS7.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F0764B9CFF8DD7852109906B /* Headers */ = {
+		9DC9CD5AAC1EF34BA558A938 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F0704664C47189913C7AF00 /* NSDate+CupertinoYankee.h in Headers */,
+				BED9A952655E6443A2551F2C /* CocoaLumberjack.h in Headers */,
+				2FA1A0B11AEA7B0EEED98A2A /* DDASLLogCapture.h in Headers */,
+				E7DE93F719795785F28AF4B8 /* DDASLLogger.h in Headers */,
+				D5BB6776C52EDB67F10C271D /* DDAbstractDatabaseLogger.h in Headers */,
+				9980BA59AE267AF54A7D0EEC /* DDAssertMacros.h in Headers */,
+				042B422FEF1B4B104BF712F2 /* DDContextFilterLogFormatter.h in Headers */,
+				4C7407FBE21832F8FD3F362F /* DDDispatchQueueLogFormatter.h in Headers */,
+				CD78091B21BA8C6494828290 /* DDFileLogger.h in Headers */,
+				AF5892DBB8EDB0DB3B91C983 /* DDLegacyMacros.h in Headers */,
+				D93E3842302A6C7C2326FA7E /* DDLog+LOGV.h in Headers */,
+				928357EB48D220D9D2F07AFD /* DDLog.h in Headers */,
+				40438063821CA1BA5095B96A /* DDLogMacros.h in Headers */,
+				DD9353EE83CE63D02E4FB255 /* DDMultiFormatter.h in Headers */,
+				CF57F2BFC832D66F7B878EBE /* DDTTYLogger.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3083210948B16FECAA934EE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E7C97D19DA8001DA85900E2 /* MSCellAccessory.h in Headers */,
+				920C271E9FE9EC178C27D19F /* UIView+AccessViewController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E30B905A04702A1ACDFDF4D3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50DA8FEF0E9E546C7F05B430 /* MSCellAccessory.h in Headers */,
+				357B859DC3A3018DC839EEB6 /* UIView+AccessViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0BE776340D7AAFA887210A7E /* Pods-EvCalTests-CupertinoYankee */ = {
+		1E6FC760C577F67EC1B8458F /* Pods-EvCalTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4F8B1FF75E46CC2F7343DA4E /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-CupertinoYankee" */;
+			buildConfigurationList = 5FB3E063064C335D9DD2B5BA /* Build configuration list for PBXNativeTarget "Pods-EvCalTests" */;
 			buildPhases = (
-				CCB4EB2774B10FE444746F68 /* Sources */,
-				62936C079C0AEF4D3F8200DA /* Frameworks */,
-				F0764B9CFF8DD7852109906B /* Headers */,
+				3D029AF1AF642B8667162B5A /* Sources */,
+				B58FBDD3446B5B5D67A863ED /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				5670ABD55FAC1EA61E239283 /* PBXTargetDependency */,
+				D1361EB8A8B3F47F6C4AE0EF /* PBXTargetDependency */,
+				A13FBA2E46D3C85CF2C5EDF2 /* PBXTargetDependency */,
+				4E2E0C461576B24DA3521642 /* PBXTargetDependency */,
+				398550BC6DD9BA6346D46359 /* PBXTargetDependency */,
 			);
-			name = "Pods-EvCalTests-CupertinoYankee";
-			productName = "Pods-EvCalTests-CupertinoYankee";
-			productReference = 525E37A1146D21FA1ADC31A1 /* libPods-EvCalTests-CupertinoYankee.a */;
+			name = "Pods-EvCalTests";
+			productName = "Pods-EvCalTests";
+			productReference = 121652D01CB9918B680670DE /* libPods-EvCalTests.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		2014C01C85D6EE7F8F748839 /* Pods-EvCalTests-EDColor */ = {
+		48E46C7F77F1389C69A4DEA5 /* Pods-EvCalTests-EDColor */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22A93CEAA613406052E34BDD /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-EDColor" */;
+			buildConfigurationList = 9F8C204FA6E351A6AAAC9FEB /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-EDColor" */;
 			buildPhases = (
-				14B76E1BE4FE86DE85AD321F /* Sources */,
-				70EC60FE572B5DD4E5669E58 /* Frameworks */,
-				91A47BDBBAF032652AD82EBA /* Headers */,
+				DDBF468E4D6F4882B74C9B14 /* Sources */,
+				AF6423A9D6D6546581243396 /* Frameworks */,
+				9193EE790FC96F81CD70E35C /* Headers */,
 			);
 			buildRules = (
 			);
@@ -728,35 +837,33 @@
 			);
 			name = "Pods-EvCalTests-EDColor";
 			productName = "Pods-EvCalTests-EDColor";
-			productReference = 137024485F1403D7ECB64244 /* libPods-EvCalTests-EDColor.a */;
+			productReference = 5D812B06E6783F0442411D76 /* libPods-EvCalTests-EDColor.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		218DD95676A917B55956B773 /* Pods */ = {
+		5447C528F3D0D12B6B8098EB /* Pods-EvCalTests-MSCellAccessory */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C10409CA3D7E6CAE82B83EA5 /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildConfigurationList = B36727E65D2CC84265988E11 /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-MSCellAccessory" */;
 			buildPhases = (
-				9289B9894A1670C92F032B7B /* Sources */,
-				AFC0445E12477B0B2A87551F /* Frameworks */,
+				B13CAFE2B4F47BAD0F9E07B5 /* Sources */,
+				99E0602BF17FE3CA9B80A90E /* Frameworks */,
+				E30B905A04702A1ACDFDF4D3 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1CC43BFEBF5B06B51BBE9BCA /* PBXTargetDependency */,
-				1357B0CA813958A3EA511DD1 /* PBXTargetDependency */,
-				9810C8C632819CC4713B2F15 /* PBXTargetDependency */,
 			);
-			name = Pods;
-			productName = Pods;
-			productReference = 4E7C3B011EB69A484BFF3CE7 /* libPods.a */;
+			name = "Pods-EvCalTests-MSCellAccessory";
+			productName = "Pods-EvCalTests-MSCellAccessory";
+			productReference = 27D5F523F610372752E835D3 /* libPods-EvCalTests-MSCellAccessory.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		622CC4B12A395E68DE5ED9E5 /* Pods-EvCalTests-JPSimulatorHacks */ = {
+		8432B257CAB84473A211B17D /* Pods-EvCalTests-JPSimulatorHacks */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2BAB2D5F7578BFAD8B9C962B /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-JPSimulatorHacks" */;
+			buildConfigurationList = F364E3A97A3B57875BFCD66D /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-JPSimulatorHacks" */;
 			buildPhases = (
-				8E04C78FC2924072BCD153DB /* Sources */,
-				6241BEE5C70C4553B0F90750 /* Frameworks */,
-				E844EDD1B3BBD1D80F33ED91 /* Headers */,
+				FBF56F9C508380EE3602683E /* Sources */,
+				131A073D5BAFF09E3D5F5BE4 /* Frameworks */,
+				6353F002C7C75A680C4EB281 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -764,67 +871,16 @@
 			);
 			name = "Pods-EvCalTests-JPSimulatorHacks";
 			productName = "Pods-EvCalTests-JPSimulatorHacks";
-			productReference = F37945A1B69DFEED6428430B /* libPods-EvCalTests-JPSimulatorHacks.a */;
+			productReference = 931A7562103EE89432F1157F /* libPods-EvCalTests-JPSimulatorHacks.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		64B6809D2EE539DF8A6EAA06 /* Pods-CupertinoYankee */ = {
+		B797A86BA7B9217D2AE108C2 /* Pods-EDColor */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6320B5D7EDEEE469DCF4F261 /* Build configuration list for PBXNativeTarget "Pods-CupertinoYankee" */;
+			buildConfigurationList = 8FBF7EA30F957C5D51111548 /* Build configuration list for PBXNativeTarget "Pods-EDColor" */;
 			buildPhases = (
-				F8244D035A5D8C6004B157ED /* Sources */,
-				046CDB5944A171B669B4F9C2 /* Frameworks */,
-				6684125BD2BAE3AD300ABBF3 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-CupertinoYankee";
-			productName = "Pods-CupertinoYankee";
-			productReference = 5E829C44CA8D26B46B0339EE /* libPods-CupertinoYankee.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		74AF347CC4E4F5177CDBC5E3 /* Pods-EvCalTests-CocoaLumberjack */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6DDE7477BCAA3C41F644981B /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-CocoaLumberjack" */;
-			buildPhases = (
-				A20A55293FCEA90553264D75 /* Sources */,
-				AEBD173C63D2920D035EF422 /* Frameworks */,
-				CFAC3873DBF2A663499B1755 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-EvCalTests-CocoaLumberjack";
-			productName = "Pods-EvCalTests-CocoaLumberjack";
-			productReference = D0433D43325776CFDACBFCB2 /* libPods-EvCalTests-CocoaLumberjack.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		7E3D85501B076CC1E0783E71 /* Pods-CocoaLumberjack */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 500B012DFBB4F69A465F138E /* Build configuration list for PBXNativeTarget "Pods-CocoaLumberjack" */;
-			buildPhases = (
-				FCD9CF18D3D4C7F8C76FBF54 /* Sources */,
-				9319451A071701E5EB5DAD10 /* Frameworks */,
-				A1A350D77A6F4160239E1435 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-CocoaLumberjack";
-			productName = "Pods-CocoaLumberjack";
-			productReference = B502B69CA5629B78334DD85B /* libPods-CocoaLumberjack.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		8E0BB1935061427314070BB7 /* Pods-EDColor */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = EFC631711DA3B635111130A8 /* Build configuration list for PBXNativeTarget "Pods-EDColor" */;
-			buildPhases = (
-				B59590BA50A78888C213A12F /* Sources */,
-				43165A765F3832EB125BECBD /* Frameworks */,
-				9A2726D32D8C4C80D1129AD7 /* Headers */,
+				4ED8D185549430C9CF6E160C /* Sources */,
+				24473F9F3ED7F6000E6A3DF9 /* Frameworks */,
+				9502EDE76177A2A76B7EBFE2 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -832,220 +888,355 @@
 			);
 			name = "Pods-EDColor";
 			productName = "Pods-EDColor";
-			productReference = 4F0853836C8143A2955F142E /* libPods-EDColor.a */;
+			productReference = F938701D07A1ED5269EE0669 /* libPods-EDColor.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		F100CDBCCBED5D9E69DB1F96 /* Pods-EvCalTests */ = {
+		C15A7D83E1709F7E01844891 /* Pods-EvCalTests-CupertinoYankee */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E1A1168718FE4F20115C88F4 /* Build configuration list for PBXNativeTarget "Pods-EvCalTests" */;
+			buildConfigurationList = 1A321F1029B230B43CDF75C4 /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-CupertinoYankee" */;
 			buildPhases = (
-				39B6ACB0077DA371BA468DD9 /* Sources */,
-				5C6BFBF0CD1226504174428B /* Frameworks */,
+				74901E35B03FCE64E6E7469F /* Sources */,
+				219C4382121FB365C8A8E960 /* Frameworks */,
+				4505880C39D1EBFD2B80C195 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				699E19FC48F0989E8601B9C3 /* PBXTargetDependency */,
-				BB1FF5CE89A860F4F7B659C9 /* PBXTargetDependency */,
-				26A6EFD0B3C7AD34CBB921CC /* PBXTargetDependency */,
-				D12A01DDF13E793726A4A9D4 /* PBXTargetDependency */,
 			);
-			name = "Pods-EvCalTests";
-			productName = "Pods-EvCalTests";
-			productReference = 0247E0CC39BCEA120947797D /* libPods-EvCalTests.a */;
+			name = "Pods-EvCalTests-CupertinoYankee";
+			productName = "Pods-EvCalTests-CupertinoYankee";
+			productReference = 4277A8C7291AE1FC851FC73B /* libPods-EvCalTests-CupertinoYankee.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D4646F45619DD4B817E180D9 /* Pods-EvCalTests-CocoaLumberjack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C8D3795D4E6069ABAD968195 /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-CocoaLumberjack" */;
+			buildPhases = (
+				56B9FBF3D17AFB59192FF8E0 /* Sources */,
+				CF93AB940F2CFBEC58094116 /* Frameworks */,
+				49A40940661D837AE05F4021 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-EvCalTests-CocoaLumberjack";
+			productName = "Pods-EvCalTests-CocoaLumberjack";
+			productReference = 796FD3D3001D70680950B56E /* libPods-EvCalTests-CocoaLumberjack.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		DCAC5F5629FE38B5CFD37CAD /* Pods-CocoaLumberjack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7C62E8E7D16023D4E824B882 /* Build configuration list for PBXNativeTarget "Pods-CocoaLumberjack" */;
+			buildPhases = (
+				BED9367A48165ACE7D9C1940 /* Sources */,
+				923A9A0878A9FD19C8F2E08E /* Frameworks */,
+				9DC9CD5AAC1EF34BA558A938 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-CocoaLumberjack";
+			productName = "Pods-CocoaLumberjack";
+			productReference = E7E11C4BB0FCE2F5396490A7 /* libPods-CocoaLumberjack.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		E5CA13A4A9531A53D886E00F /* Pods */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B6ED199C9D62CB4A6D55575 /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildPhases = (
+				A948EF0C08E3D49B9E439E1A /* Sources */,
+				F1B3396350B219A4361E140F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B38E19A5E36FA1207F6A6AA9 /* PBXTargetDependency */,
+				567765B40FC669982B9F348B /* PBXTargetDependency */,
+				C8B4C55BF10F7C2031DB0FDF /* PBXTargetDependency */,
+				357A42CBE8DE1A9CC2DF5793 /* PBXTargetDependency */,
+			);
+			name = Pods;
+			productName = Pods;
+			productReference = 9321ACCBB69065AA5271FA88 /* libPods.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		E60B9298A9A913C45C5DF079 /* Pods-MSCellAccessory */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFD1E2FA642CA8704968C6DE /* Build configuration list for PBXNativeTarget "Pods-MSCellAccessory" */;
+			buildPhases = (
+				684BEBDC5FF9326CD6D268EB /* Sources */,
+				E368BEB84B1C0E58F1B6878E /* Frameworks */,
+				A3083210948B16FECAA934EE /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-MSCellAccessory";
+			productName = "Pods-MSCellAccessory";
+			productReference = 21C4BE2C89960D43BE2DA35B /* libPods-MSCellAccessory.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		F88D34E46A82EB41AB4E3DEA /* Pods-CupertinoYankee */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4465D065F8B52137DF57ECE9 /* Build configuration list for PBXNativeTarget "Pods-CupertinoYankee" */;
+			buildPhases = (
+				4A00BEEF7D116F2CB03276C3 /* Sources */,
+				E5C6EF093B6EB0AC376BBE06 /* Frameworks */,
+				861100B0DBF717F79BC7FC5D /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-CupertinoYankee";
+			productName = "Pods-CupertinoYankee";
+			productReference = 335156DB3919B99F35DDE3A2 /* libPods-CupertinoYankee.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A95799DF0274894DEF4EA54A /* Project object */ = {
+		179F6A55D2603CFFC861CA78 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0640;
 			};
-			buildConfigurationList = A782C8964C774C47B35DCD2A /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 1169BF50B2B7F86A257AC2EC /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = C1F82046090AF17DA31DCEB0;
-			productRefGroup = 4CD20B389B5832F4E971222F /* Products */;
+			mainGroup = 40247A3920FA06CB1BC11E52;
+			productRefGroup = 443042C34F67AE1AE5215DEA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				218DD95676A917B55956B773 /* Pods */,
-				7E3D85501B076CC1E0783E71 /* Pods-CocoaLumberjack */,
-				64B6809D2EE539DF8A6EAA06 /* Pods-CupertinoYankee */,
-				8E0BB1935061427314070BB7 /* Pods-EDColor */,
-				F100CDBCCBED5D9E69DB1F96 /* Pods-EvCalTests */,
-				74AF347CC4E4F5177CDBC5E3 /* Pods-EvCalTests-CocoaLumberjack */,
-				0BE776340D7AAFA887210A7E /* Pods-EvCalTests-CupertinoYankee */,
-				2014C01C85D6EE7F8F748839 /* Pods-EvCalTests-EDColor */,
-				622CC4B12A395E68DE5ED9E5 /* Pods-EvCalTests-JPSimulatorHacks */,
+				E5CA13A4A9531A53D886E00F /* Pods */,
+				DCAC5F5629FE38B5CFD37CAD /* Pods-CocoaLumberjack */,
+				F88D34E46A82EB41AB4E3DEA /* Pods-CupertinoYankee */,
+				B797A86BA7B9217D2AE108C2 /* Pods-EDColor */,
+				1E6FC760C577F67EC1B8458F /* Pods-EvCalTests */,
+				D4646F45619DD4B817E180D9 /* Pods-EvCalTests-CocoaLumberjack */,
+				C15A7D83E1709F7E01844891 /* Pods-EvCalTests-CupertinoYankee */,
+				48E46C7F77F1389C69A4DEA5 /* Pods-EvCalTests-EDColor */,
+				8432B257CAB84473A211B17D /* Pods-EvCalTests-JPSimulatorHacks */,
+				5447C528F3D0D12B6B8098EB /* Pods-EvCalTests-MSCellAccessory */,
+				E60B9298A9A913C45C5DF079 /* Pods-MSCellAccessory */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		14B76E1BE4FE86DE85AD321F /* Sources */ = {
+		3D029AF1AF642B8667162B5A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E021AA03CA639EE17C92063 /* Pods-EvCalTests-EDColor-dummy.m in Sources */,
-				90955C376850306899BE1006 /* UIColor+CIELAB.m in Sources */,
-				BD91EE1E6B27D7BBF703810D /* UIColor+Crayola.m in Sources */,
-				1B4944B227D98D28F35B36B8 /* UIColor+HSB.m in Sources */,
-				63B30AFA3D5EF97363741FAC /* UIColor+HSL.m in Sources */,
-				1084DC31D44DB04D186A6BB2 /* UIColor+Hex.m in Sources */,
-				C5BB978DEC4149114DF95A9A /* UIColor+iOS7.m in Sources */,
+				0781FFBCEBA45822F5EC61EB /* Pods-EvCalTests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		39B6ACB0077DA371BA468DD9 /* Sources */ = {
+		4A00BEEF7D116F2CB03276C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEBD99DE25918416DE80DE25 /* Pods-EvCalTests-dummy.m in Sources */,
+				1093F9CEEEC54DDF00B4667E /* NSDate+CupertinoYankee.m in Sources */,
+				0A6C91DC630EC3E8F72FF406 /* Pods-CupertinoYankee-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E04C78FC2924072BCD153DB /* Sources */ = {
+		4ED8D185549430C9CF6E160C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A5CC73DD3AA8D3DB38EC0BA /* JPSimulatorHacks.m in Sources */,
-				AB7A73CB3EC44C7A487B2967 /* JPSimulatorHacksDB.m in Sources */,
-				8B019EF9588E6427499111E4 /* Pods-EvCalTests-JPSimulatorHacks-dummy.m in Sources */,
+				02AF58B269FFBA5938B9FBA2 /* Pods-EDColor-dummy.m in Sources */,
+				0CEDA750A1165D4D22B6D701 /* UIColor+CIELAB.m in Sources */,
+				6FB50E57AA16B916E48C5F34 /* UIColor+Crayola.m in Sources */,
+				641AEFD3029637476ADC8565 /* UIColor+HSB.m in Sources */,
+				6D389A1C3B0E6F29D2BA9BEB /* UIColor+HSL.m in Sources */,
+				D60F241158E1503A5E048080 /* UIColor+Hex.m in Sources */,
+				B0A24C3ED134A81C6D73244E /* UIColor+iOS7.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9289B9894A1670C92F032B7B /* Sources */ = {
+		56B9FBF3D17AFB59192FF8E0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53EDA292461A3004668A4036 /* Pods-dummy.m in Sources */,
+				E8085C619FE3B8734E30958B /* DDASLLogCapture.m in Sources */,
+				BFA7CBAAF92CE83DB65077D0 /* DDASLLogger.m in Sources */,
+				6097DDEB7D39535367303F63 /* DDAbstractDatabaseLogger.m in Sources */,
+				F250052C1A731C9853EE3D08 /* DDContextFilterLogFormatter.m in Sources */,
+				24C9C67C2B40E9761AE662B7 /* DDDispatchQueueLogFormatter.m in Sources */,
+				4C63C64BA0738C8DF0E0CC86 /* DDFileLogger.m in Sources */,
+				EE2225A19A97794BFE77CE31 /* DDLog.m in Sources */,
+				C09E2532FD8245B56BE020E0 /* DDMultiFormatter.m in Sources */,
+				DB36683F24557BAA6F16BC31 /* DDTTYLogger.m in Sources */,
+				02153874BD4F1EA7BFAF8F67 /* Pods-EvCalTests-CocoaLumberjack-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A20A55293FCEA90553264D75 /* Sources */ = {
+		684BEBDC5FF9326CD6D268EB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C077A1F10AB0D5404902FB8A /* DDASLLogCapture.m in Sources */,
-				E9EB2357C1839309075FD44E /* DDASLLogger.m in Sources */,
-				5049058D508B9222EFFF5EF6 /* DDAbstractDatabaseLogger.m in Sources */,
-				146122E79BD83C2463F2C0AB /* DDContextFilterLogFormatter.m in Sources */,
-				2A08B42692E9A153F0403EBC /* DDDispatchQueueLogFormatter.m in Sources */,
-				299171112E856E0424450101 /* DDFileLogger.m in Sources */,
-				CD75CF37781B5BC89A1D0CB1 /* DDLog.m in Sources */,
-				8F0E70836C01B773EACC635D /* DDMultiFormatter.m in Sources */,
-				A48549D75158DB0B7B3F8F1F /* DDTTYLogger.m in Sources */,
-				3ED68B762AD7146D18569F1A /* Pods-EvCalTests-CocoaLumberjack-dummy.m in Sources */,
+				28CB723DBA1D6FE1F4CD2489 /* MSCellAccessory.m in Sources */,
+				F2DF658AEACFF88E3B6BAB5B /* Pods-MSCellAccessory-dummy.m in Sources */,
+				0977A0006B24FCB5CB3DAD63 /* UIView+AccessViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B59590BA50A78888C213A12F /* Sources */ = {
+		74901E35B03FCE64E6E7469F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC4C1052E21EB6AF657CFFA2 /* Pods-EDColor-dummy.m in Sources */,
-				2476032D11A063D87B9F85C5 /* UIColor+CIELAB.m in Sources */,
-				C09F3CBD2CAF8E0F9B933888 /* UIColor+Crayola.m in Sources */,
-				C08703BC7706176B4B932DC7 /* UIColor+HSB.m in Sources */,
-				4396A0D21694A6280DCB31A8 /* UIColor+HSL.m in Sources */,
-				1FC8F0879F991B799C6AC783 /* UIColor+Hex.m in Sources */,
-				F189848002A96F469DCA72F8 /* UIColor+iOS7.m in Sources */,
+				49F34D5A7DFB31129DBE9EA1 /* NSDate+CupertinoYankee.m in Sources */,
+				F5124366FD73BDA62145CEB6 /* Pods-EvCalTests-CupertinoYankee-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CCB4EB2774B10FE444746F68 /* Sources */ = {
+		A948EF0C08E3D49B9E439E1A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4764C4AA3C994EBA448B3F0B /* NSDate+CupertinoYankee.m in Sources */,
-				126FA96702C69074F3D042CB /* Pods-EvCalTests-CupertinoYankee-dummy.m in Sources */,
+				CEE5A7115C65F0090B5C8C13 /* Pods-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8244D035A5D8C6004B157ED /* Sources */ = {
+		B13CAFE2B4F47BAD0F9E07B5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D9CDE05E340BE89A8D1BABD /* NSDate+CupertinoYankee.m in Sources */,
-				359E64C217990FB664CB4EC0 /* Pods-CupertinoYankee-dummy.m in Sources */,
+				D5AD2AEE68105AE9B2052A59 /* MSCellAccessory.m in Sources */,
+				AA3780E1348DE082D2B48EC1 /* Pods-EvCalTests-MSCellAccessory-dummy.m in Sources */,
+				F129896A4C4AB2558A088298 /* UIView+AccessViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FCD9CF18D3D4C7F8C76FBF54 /* Sources */ = {
+		BED9367A48165ACE7D9C1940 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7224AE8703F2E79478905AED /* DDASLLogCapture.m in Sources */,
-				BA523F2C2BCAF829A2093CCD /* DDASLLogger.m in Sources */,
-				9801C430176C86A6A2A3D0A1 /* DDAbstractDatabaseLogger.m in Sources */,
-				B74707EED42E787A5196C670 /* DDContextFilterLogFormatter.m in Sources */,
-				39836C285B5DD1CC6DD60D15 /* DDDispatchQueueLogFormatter.m in Sources */,
-				85E75CD805D6DAD6D329BA6E /* DDFileLogger.m in Sources */,
-				96773E38B4778110D38A4A84 /* DDLog.m in Sources */,
-				E41DAACF65445F1A22E0B412 /* DDMultiFormatter.m in Sources */,
-				C9DAF9B9205E25A1E6CBF04C /* DDTTYLogger.m in Sources */,
-				AD19905656D859BB58100F8B /* Pods-CocoaLumberjack-dummy.m in Sources */,
+				D3461C078D9FD596B2EF2FAC /* DDASLLogCapture.m in Sources */,
+				CC5ADE565004489520039BED /* DDASLLogger.m in Sources */,
+				0DDC023FC5895B0B271A59F5 /* DDAbstractDatabaseLogger.m in Sources */,
+				3B1DC8C8B2584EB1D7FF288F /* DDContextFilterLogFormatter.m in Sources */,
+				AE078B4D2CE025BFBB4780B6 /* DDDispatchQueueLogFormatter.m in Sources */,
+				0759E099B1B0AB4EA72005B6 /* DDFileLogger.m in Sources */,
+				6E61B864FD7BE865EEE14AF1 /* DDLog.m in Sources */,
+				2C53ABF1F93BAF56D81A7AC5 /* DDMultiFormatter.m in Sources */,
+				1EA54184E1CAD6C71DB6151E /* DDTTYLogger.m in Sources */,
+				D0CFE75E738C41E7D52399EB /* Pods-CocoaLumberjack-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDBF468E4D6F4882B74C9B14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				91E51D54FF9BB6141F2FF88E /* Pods-EvCalTests-EDColor-dummy.m in Sources */,
+				B3F7502BC3BA813DE0B0A4D0 /* UIColor+CIELAB.m in Sources */,
+				110DD20BA2723FEF6DF72058 /* UIColor+Crayola.m in Sources */,
+				31D3B5F30651176F1F4D3055 /* UIColor+HSB.m in Sources */,
+				3D03657C4545AE6E3ED4ABCE /* UIColor+HSL.m in Sources */,
+				75484586CFC90B452A624A16 /* UIColor+Hex.m in Sources */,
+				5B91C094D023CED96724B7BE /* UIColor+iOS7.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBF56F9C508380EE3602683E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A4322A57FFD16E2870FBD6D /* JPSimulatorHacks.m in Sources */,
+				D91363C4303B8F9DAEDE3943 /* JPSimulatorHacksDB.m in Sources */,
+				11FCBF97F85230C698CBB5D6 /* Pods-EvCalTests-JPSimulatorHacks-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1357B0CA813958A3EA511DD1 /* PBXTargetDependency */ = {
+		357A42CBE8DE1A9CC2DF5793 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-CupertinoYankee";
-			target = 64B6809D2EE539DF8A6EAA06 /* Pods-CupertinoYankee */;
-			targetProxy = 1381B874EFE90B32ED3FBF95 /* PBXContainerItemProxy */;
+			name = "Pods-MSCellAccessory";
+			target = E60B9298A9A913C45C5DF079 /* Pods-MSCellAccessory */;
+			targetProxy = F75B07622162BD6AB094E61C /* PBXContainerItemProxy */;
 		};
-		1CC43BFEBF5B06B51BBE9BCA /* PBXTargetDependency */ = {
+		398550BC6DD9BA6346D46359 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-CocoaLumberjack";
-			target = 7E3D85501B076CC1E0783E71 /* Pods-CocoaLumberjack */;
-			targetProxy = 7ED454A32112F71A6037BBEB /* PBXContainerItemProxy */;
+			name = "Pods-EvCalTests-MSCellAccessory";
+			target = 5447C528F3D0D12B6B8098EB /* Pods-EvCalTests-MSCellAccessory */;
+			targetProxy = 50DC9AA240278F50D070B084 /* PBXContainerItemProxy */;
 		};
-		26A6EFD0B3C7AD34CBB921CC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-EvCalTests-EDColor";
-			target = 2014C01C85D6EE7F8F748839 /* Pods-EvCalTests-EDColor */;
-			targetProxy = 6B9957B4CDA08A596675CBFB /* PBXContainerItemProxy */;
-		};
-		699E19FC48F0989E8601B9C3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-EvCalTests-CocoaLumberjack";
-			target = 74AF347CC4E4F5177CDBC5E3 /* Pods-EvCalTests-CocoaLumberjack */;
-			targetProxy = DF0CB4B951FE34648D556482 /* PBXContainerItemProxy */;
-		};
-		9810C8C632819CC4713B2F15 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-EDColor";
-			target = 8E0BB1935061427314070BB7 /* Pods-EDColor */;
-			targetProxy = F21F9CFD42DF454C3560EA32 /* PBXContainerItemProxy */;
-		};
-		BB1FF5CE89A860F4F7B659C9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-EvCalTests-CupertinoYankee";
-			target = 0BE776340D7AAFA887210A7E /* Pods-EvCalTests-CupertinoYankee */;
-			targetProxy = 0302D9CC8DFE8A8A9D699FA4 /* PBXContainerItemProxy */;
-		};
-		D12A01DDF13E793726A4A9D4 /* PBXTargetDependency */ = {
+		4E2E0C461576B24DA3521642 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-EvCalTests-JPSimulatorHacks";
-			target = 622CC4B12A395E68DE5ED9E5 /* Pods-EvCalTests-JPSimulatorHacks */;
-			targetProxy = 00425BEA6F54393DC84DA1BA /* PBXContainerItemProxy */;
+			target = 8432B257CAB84473A211B17D /* Pods-EvCalTests-JPSimulatorHacks */;
+			targetProxy = 7A6D62D00DB2EAEB2D0607CD /* PBXContainerItemProxy */;
+		};
+		5670ABD55FAC1EA61E239283 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-EvCalTests-CocoaLumberjack";
+			target = D4646F45619DD4B817E180D9 /* Pods-EvCalTests-CocoaLumberjack */;
+			targetProxy = 56923C85729CA98A313400AB /* PBXContainerItemProxy */;
+		};
+		567765B40FC669982B9F348B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-CupertinoYankee";
+			target = F88D34E46A82EB41AB4E3DEA /* Pods-CupertinoYankee */;
+			targetProxy = CA692E99EE14C5642ED532D1 /* PBXContainerItemProxy */;
+		};
+		A13FBA2E46D3C85CF2C5EDF2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-EvCalTests-EDColor";
+			target = 48E46C7F77F1389C69A4DEA5 /* Pods-EvCalTests-EDColor */;
+			targetProxy = 65F2DA8C3EC929DBAD96FF03 /* PBXContainerItemProxy */;
+		};
+		B38E19A5E36FA1207F6A6AA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-CocoaLumberjack";
+			target = DCAC5F5629FE38B5CFD37CAD /* Pods-CocoaLumberjack */;
+			targetProxy = 0689588A7DA73DB62627466F /* PBXContainerItemProxy */;
+		};
+		C8B4C55BF10F7C2031DB0FDF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-EDColor";
+			target = B797A86BA7B9217D2AE108C2 /* Pods-EDColor */;
+			targetProxy = 7FA4FC893090162EE25A24E4 /* PBXContainerItemProxy */;
+		};
+		D1361EB8A8B3F47F6C4AE0EF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-EvCalTests-CupertinoYankee";
+			target = C15A7D83E1709F7E01844891 /* Pods-EvCalTests-CupertinoYankee */;
+			targetProxy = E427121E898B753DFA276ED0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		05F28B7ADD961763EEB3CD56 /* Debug */ = {
+		0A3C696421C17D438839F0F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA3EB1554AE831AF4399BDEC /* Pods-EvCalTests.debug.xcconfig */;
+			baseConfigurationReference = B027389B401C99A66DF3FA44 /* Pods-EvCalTests-EDColor-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-EDColor/Pods-EvCalTests-EDColor-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		17C3C5148478A0ED4835C152 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5BDD61AD4039ADB7D5334D6 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -1059,25 +1250,25 @@
 			};
 			name = Debug;
 		};
-		12CD4B34CEBC893AEDAB4A2F /* Debug */ = {
+		1C441AC5BCC12588AFE4D13E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 780D8394A97DC98EBC2E1929 /* Pods-EvCalTests-CocoaLumberjack-Private.xcconfig */;
+			baseConfigurationReference = DC550D8B9D2D353D9947377B /* Pods-CupertinoYankee-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-CocoaLumberjack/Pods-EvCalTests-CocoaLumberjack-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-CupertinoYankee/Pods-CupertinoYankee-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
-			name = Debug;
+			name = Release;
 		};
-		13B8162DE7528032CCE3586E /* Debug */ = {
+		39BB2F9D56AFBA09D3C94F31 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 58BED777D101DF2F45901D3D /* Pods-CupertinoYankee-Private.xcconfig */;
+			baseConfigurationReference = DC550D8B9D2D353D9947377B /* Pods-CupertinoYankee-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-CupertinoYankee/Pods-CupertinoYankee-prefix.pch";
@@ -1091,25 +1282,57 @@
 			};
 			name = Debug;
 		};
-		1A8B76DE94F221A45DDC5BC6 /* Release */ = {
+		4D1164AF2890F1C01CB4E9C8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B4B54EA071B3A852C0692C5 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 6CC1B3E247C83FBEEC46AD60 /* Pods-MSCellAccessory-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-MSCellAccessory/Pods-MSCellAccessory-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		1C89F75680C31E5CADEA6FF4 /* Debug */ = {
+		69C65205332E54EA660D37C5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B59555999DDF62BA9A6F0843 /* Pods-CocoaLumberjack-Private.xcconfig */;
+			baseConfigurationReference = B027389B401C99A66DF3FA44 /* Pods-EvCalTests-EDColor-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-EDColor/Pods-EvCalTests-EDColor-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		6E0B12CC169750B48BCCFC3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5CB9D5CA0436749C6E248D4A /* Pods-EvCalTests-JPSimulatorHacks-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-JPSimulatorHacks/Pods-EvCalTests-JPSimulatorHacks-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		866A41A6111D42ECE84FCC3A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7ABC4EBCF6DDB2E82B11787C /* Pods-CocoaLumberjack-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-CocoaLumberjack/Pods-CocoaLumberjack-prefix.pch";
@@ -1123,12 +1346,44 @@
 			};
 			name = Debug;
 		};
-		20D46D27412FC1D52C0A0931 /* Release */ = {
+		8DF95FD52E20B75DB9C93564 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03A696F7800BE7B4869D4C82 /* Pods-EDColor-Private.xcconfig */;
+			baseConfigurationReference = 8D84296ECD0D6E8F62D35F9D /* Pods-EvCalTests-CupertinoYankee-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-CupertinoYankee/Pods-EvCalTests-CupertinoYankee-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		8F9FD8526C5441A8BF783C0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2CA56B5A0E6EC4A97A1ECC3F /* Pods-EDColor-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-EDColor/Pods-EDColor-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		963E8D57C2831F3AD45DD147 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D84296ECD0D6E8F62D35F9D /* Pods-EvCalTests-CupertinoYankee-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-CupertinoYankee/Pods-EvCalTests-CupertinoYankee-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
@@ -1139,7 +1394,23 @@
 			};
 			name = Release;
 		};
-		2421DEFBA4192EC81EEDEBDD /* Debug */ = {
+		A491C3B99607F6C60B7BDDD0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0455AB50B6C8B646B646C8EA /* Pods-EvCalTests.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		AD64F78017E21D5101E1813D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1178,7 +1449,39 @@
 			};
 			name = Debug;
 		};
-		40D8DFBEF1647C890D035DF2 /* Release */ = {
+		B04A876F37B88F14A832269A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF87AEB80C6C8EEC1BE13F37 /* Pods-EvCalTests.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B14D1CFBB3DE93D7FD3586E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 533354AD8C775B95801E3D84 /* Pods-EvCalTests-MSCellAccessory-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-MSCellAccessory/Pods-EvCalTests-MSCellAccessory-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D3652B00781EF3827A297272 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1212,13 +1515,29 @@
 			};
 			name = Release;
 		};
-		63BEEF8ED45CB58B05805CB2 /* Debug */ = {
+		D9424C0694D95FF042FBD37B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7BA954382B2D6645227685FB /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 533354AD8C775B95801E3D84 /* Pods-EvCalTests-MSCellAccessory-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-MSCellAccessory/Pods-EvCalTests-MSCellAccessory-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		DE0DD839D66919CC02C3271A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AD15E5B3EB0F02948A8117C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -1226,27 +1545,11 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
-			name = Debug;
+			name = Release;
 		};
-		724762EF9E1849720AE321FF /* Debug */ = {
+		DFA995D45A3577CC5579F1D9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03A696F7800BE7B4869D4C82 /* Pods-EDColor-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-EDColor/Pods-EDColor-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		79AA31DCFA11037A49B66DA3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 780D8394A97DC98EBC2E1929 /* Pods-EvCalTests-CocoaLumberjack-Private.xcconfig */;
+			baseConfigurationReference = 4AE8184F1E5A66F1F5235EA1 /* Pods-EvCalTests-CocoaLumberjack-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-CocoaLumberjack/Pods-EvCalTests-CocoaLumberjack-prefix.pch";
@@ -1260,9 +1563,9 @@
 			};
 			name = Release;
 		};
-		812B62E13A2363CBFE7B9255 /* Release */ = {
+		E2ADD99407AF296C2EBBBA92 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B59555999DDF62BA9A6F0843 /* Pods-CocoaLumberjack-Private.xcconfig */;
+			baseConfigurationReference = 7ABC4EBCF6DDB2E82B11787C /* Pods-CocoaLumberjack-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-CocoaLumberjack/Pods-CocoaLumberjack-prefix.pch";
@@ -1276,28 +1579,12 @@
 			};
 			name = Release;
 		};
-		AD4FC6502E0148C231BEFE76 /* Release */ = {
+		F99E73C4BB7062E20A84FC19 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7FC92DED60A30CBF2DA9795B /* Pods-EvCalTests-EDColor-Private.xcconfig */;
+			baseConfigurationReference = 4AE8184F1E5A66F1F5235EA1 /* Pods-EvCalTests-CocoaLumberjack-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-EDColor/Pods-EvCalTests-EDColor-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		DAA9765F171D12DCDAE140E5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7FC92DED60A30CBF2DA9795B /* Pods-EvCalTests-EDColor-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-EDColor/Pods-EvCalTests-EDColor-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-CocoaLumberjack/Pods-EvCalTests-CocoaLumberjack-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
@@ -1308,12 +1595,12 @@
 			};
 			name = Debug;
 		};
-		E499C579942BC6D2F0D82F12 /* Release */ = {
+		F9E65FAB59D0FA0AF81C5F59 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 58BED777D101DF2F45901D3D /* Pods-CupertinoYankee-Private.xcconfig */;
+			baseConfigurationReference = 2CA56B5A0E6EC4A97A1ECC3F /* Pods-EDColor-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-CupertinoYankee/Pods-CupertinoYankee-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-EDColor/Pods-EDColor-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
@@ -1324,57 +1611,9 @@
 			};
 			name = Release;
 		};
-		E837AF2B3768AC70542C4526 /* Debug */ = {
+		FBA20332429B4C3757B04BD8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5EF640266856EC945D21B7E /* Pods-EvCalTests-CupertinoYankee-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-CupertinoYankee/Pods-EvCalTests-CupertinoYankee-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		EBA0BD1683D3E9060F3B433F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A6B6695A967A4778F87642F /* Pods-EvCalTests.release.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		EC86E3DB478C6E06698F680B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C023B8E8D25259DBB1CFC641 /* Pods-EvCalTests-JPSimulatorHacks-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-JPSimulatorHacks/Pods-EvCalTests-JPSimulatorHacks-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		FB3EDE504EAD213F63E4FDAB /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C023B8E8D25259DBB1CFC641 /* Pods-EvCalTests-JPSimulatorHacks-Private.xcconfig */;
+			baseConfigurationReference = 5CB9D5CA0436749C6E248D4A /* Pods-EvCalTests-JPSimulatorHacks-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-JPSimulatorHacks/Pods-EvCalTests-JPSimulatorHacks-prefix.pch";
@@ -1388,116 +1627,134 @@
 			};
 			name = Release;
 		};
-		FDD63CB5C78DC27A2BF0FF54 /* Release */ = {
+		FFD1ABC2472603C31404D173 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5EF640266856EC945D21B7E /* Pods-EvCalTests-CupertinoYankee-Private.xcconfig */;
+			baseConfigurationReference = 6CC1B3E247C83FBEEC46AD60 /* Pods-MSCellAccessory-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-EvCalTests-CupertinoYankee/Pods-EvCalTests-CupertinoYankee-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-MSCellAccessory/Pods-MSCellAccessory-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		22A93CEAA613406052E34BDD /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-EDColor" */ = {
+		1169BF50B2B7F86A257AC2EC /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DAA9765F171D12DCDAE140E5 /* Debug */,
-				AD4FC6502E0148C231BEFE76 /* Release */,
+				AD64F78017E21D5101E1813D /* Debug */,
+				D3652B00781EF3827A297272 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2BAB2D5F7578BFAD8B9C962B /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-JPSimulatorHacks" */ = {
+		1A321F1029B230B43CDF75C4 /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-CupertinoYankee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EC86E3DB478C6E06698F680B /* Debug */,
-				FB3EDE504EAD213F63E4FDAB /* Release */,
+				8DF95FD52E20B75DB9C93564 /* Debug */,
+				963E8D57C2831F3AD45DD147 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4F8B1FF75E46CC2F7343DA4E /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-CupertinoYankee" */ = {
+		4465D065F8B52137DF57ECE9 /* Build configuration list for PBXNativeTarget "Pods-CupertinoYankee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E837AF2B3768AC70542C4526 /* Debug */,
-				FDD63CB5C78DC27A2BF0FF54 /* Release */,
+				39BB2F9D56AFBA09D3C94F31 /* Debug */,
+				1C441AC5BCC12588AFE4D13E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		500B012DFBB4F69A465F138E /* Build configuration list for PBXNativeTarget "Pods-CocoaLumberjack" */ = {
+		5FB3E063064C335D9DD2B5BA /* Build configuration list for PBXNativeTarget "Pods-EvCalTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1C89F75680C31E5CADEA6FF4 /* Debug */,
-				812B62E13A2363CBFE7B9255 /* Release */,
+				B04A876F37B88F14A832269A /* Debug */,
+				A491C3B99607F6C60B7BDDD0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6320B5D7EDEEE469DCF4F261 /* Build configuration list for PBXNativeTarget "Pods-CupertinoYankee" */ = {
+		7B6ED199C9D62CB4A6D55575 /* Build configuration list for PBXNativeTarget "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				13B8162DE7528032CCE3586E /* Debug */,
-				E499C579942BC6D2F0D82F12 /* Release */,
+				17C3C5148478A0ED4835C152 /* Debug */,
+				DE0DD839D66919CC02C3271A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6DDE7477BCAA3C41F644981B /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-CocoaLumberjack" */ = {
+		7C62E8E7D16023D4E824B882 /* Build configuration list for PBXNativeTarget "Pods-CocoaLumberjack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				12CD4B34CEBC893AEDAB4A2F /* Debug */,
-				79AA31DCFA11037A49B66DA3 /* Release */,
+				866A41A6111D42ECE84FCC3A /* Debug */,
+				E2ADD99407AF296C2EBBBA92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A782C8964C774C47B35DCD2A /* Build configuration list for PBXProject "Pods" */ = {
+		8FBF7EA30F957C5D51111548 /* Build configuration list for PBXNativeTarget "Pods-EDColor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2421DEFBA4192EC81EEDEBDD /* Debug */,
-				40D8DFBEF1647C890D035DF2 /* Release */,
+				8F9FD8526C5441A8BF783C0E /* Debug */,
+				F9E65FAB59D0FA0AF81C5F59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C10409CA3D7E6CAE82B83EA5 /* Build configuration list for PBXNativeTarget "Pods" */ = {
+		9F8C204FA6E351A6AAAC9FEB /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-EDColor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				63BEEF8ED45CB58B05805CB2 /* Debug */,
-				1A8B76DE94F221A45DDC5BC6 /* Release */,
+				0A3C696421C17D438839F0F5 /* Debug */,
+				69C65205332E54EA660D37C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E1A1168718FE4F20115C88F4 /* Build configuration list for PBXNativeTarget "Pods-EvCalTests" */ = {
+		B36727E65D2CC84265988E11 /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-MSCellAccessory" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				05F28B7ADD961763EEB3CD56 /* Debug */,
-				EBA0BD1683D3E9060F3B433F /* Release */,
+				B14D1CFBB3DE93D7FD3586E0 /* Debug */,
+				D9424C0694D95FF042FBD37B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EFC631711DA3B635111130A8 /* Build configuration list for PBXNativeTarget "Pods-EDColor" */ = {
+		BFD1E2FA642CA8704968C6DE /* Build configuration list for PBXNativeTarget "Pods-MSCellAccessory" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				724762EF9E1849720AE321FF /* Debug */,
-				20D46D27412FC1D52C0A0931 /* Release */,
+				FFD1ABC2472603C31404D173 /* Debug */,
+				4D1164AF2890F1C01CB4E9C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C8D3795D4E6069ABAD968195 /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-CocoaLumberjack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F99E73C4BB7062E20A84FC19 /* Debug */,
+				DFA995D45A3577CC5579F1D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F364E3A97A3B57875BFCD66D /* Build configuration list for PBXNativeTarget "Pods-EvCalTests-JPSimulatorHacks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E0B12CC169750B48BCCFC3C /* Debug */,
+				FBA20332429B4C3757B04BD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = A95799DF0274894DEF4EA54A /* Project object */;
+	rootObject = 179F6A55D2603CFFC861CA78 /* Project object */;
 }

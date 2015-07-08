@@ -1,6 +1,6 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/CupertinoYankee" "${PODS_ROOT}/Headers/Public/EDColor" "${PODS_ROOT}/Headers/Public/JPSimulatorHacks"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/CocoaLumberjack" -isystem "${PODS_ROOT}/Headers/Public/CupertinoYankee" -isystem "${PODS_ROOT}/Headers/Public/EDColor" -isystem "${PODS_ROOT}/Headers/Public/JPSimulatorHacks"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-EvCalTests-CocoaLumberjack" -l"Pods-EvCalTests-CupertinoYankee" -l"Pods-EvCalTests-EDColor" -l"Pods-EvCalTests-JPSimulatorHacks" -l"sqlite3" -framework "UIKit"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/CupertinoYankee" "${PODS_ROOT}/Headers/Public/EDColor" "${PODS_ROOT}/Headers/Public/JPSimulatorHacks" "${PODS_ROOT}/Headers/Public/MSCellAccessory"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/CocoaLumberjack" -isystem "${PODS_ROOT}/Headers/Public/CupertinoYankee" -isystem "${PODS_ROOT}/Headers/Public/EDColor" -isystem "${PODS_ROOT}/Headers/Public/JPSimulatorHacks" -isystem "${PODS_ROOT}/Headers/Public/MSCellAccessory"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-EvCalTests-CocoaLumberjack" -l"Pods-EvCalTests-CupertinoYankee" -l"Pods-EvCalTests-EDColor" -l"Pods-EvCalTests-JPSimulatorHacks" -l"Pods-EvCalTests-MSCellAccessory" -l"sqlite3" -framework "UIKit"
 OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
 PODS_ROOT = ${SRCROOT}/Pods

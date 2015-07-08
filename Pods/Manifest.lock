@@ -1,26 +1,29 @@
 PODS:
-  - CocoaLumberjack (2.0.0):
-    - CocoaLumberjack/Default (= 2.0.0)
-    - CocoaLumberjack/Extensions (= 2.0.0)
-  - CocoaLumberjack/Core (2.0.0)
-  - CocoaLumberjack/Default (2.0.0):
+  - CocoaLumberjack (2.0.1):
+    - CocoaLumberjack/Default (= 2.0.1)
+    - CocoaLumberjack/Extensions (= 2.0.1)
+  - CocoaLumberjack/Core (2.0.1)
+  - CocoaLumberjack/Default (2.0.1):
     - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.0.0):
+  - CocoaLumberjack/Extensions (2.0.1):
     - CocoaLumberjack/Default
   - CupertinoYankee (1.0.2)
   - EDColor (1.0.0)
   - JPSimulatorHacks (1.2.0)
+  - MSCellAccessory (1.1.2)
 
 DEPENDENCIES:
   - CocoaLumberjack
   - CupertinoYankee (= 1.0.2)
   - EDColor
   - JPSimulatorHacks (= 1.2.0)
+  - MSCellAccessory
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: a6f77d987d65dc7ba86b0f84db7d0b9084f77bcb
+  CocoaLumberjack: 019d1361244274a6138c788c6cb80baabc13fb8f
   CupertinoYankee: c288994087c791657fce35a43d2a604e64eef23e
   EDColor: c83f9a61f9f9b3c23d541f1feb561558e29cb088
   JPSimulatorHacks: 022d7dbd8e503fde4be274bf374a54f36f6ebc10
+  MSCellAccessory: 8265f3cd2386c1f372da00232472605ab11426e4
 
 COCOAPODS: 0.37.1
