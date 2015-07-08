@@ -44,6 +44,57 @@
     XCTAssertNotNil(self.recurrenceRuleFormatter);
 }
 
+- (void)testRecurrenceRuleLocalizeStringsPropertyDefaultsToYES
+{
+    XCTAssertTrue(self.recurrenceRuleFormatter.localizeStrings);
+}
+
+- (void)testRecurrenceRuleDefaultFormatterCanBeCreated
+{
+    XCTAssertNotNil([ECRecurrenceRuleFormatter defaultFormatter]);
+}
+
+- (void)testRecurrenceRuleDefaultFormatterLocalizeStringsPropertyDefaultsToYES
+{
+    XCTAssertTrue([ECRecurrenceRuleFormatter defaultFormatter].localizeStrings);
+}
+
+- (void)testRecurrenceRuleFormatterCanBeInitializedWithLocalizeStringsNO
+{
+    ECRecurrenceRuleFormatter* nonLocalizedFormatter = [[ECRecurrenceRuleFormatter alloc] initUsingLocalization:NO];
+    
+    XCTAssertFalse(nonLocalizedFormatter.localizeStrings);
+}
+
+- (void)testRecurrenceRuleFormatterDailyRuleNameIsNotNil
+{
+    XCTAssertNotNil(self.recurrenceRuleFormatter.dailyRuleName);
+}
+
+- (void)testRecurrenceRuleFormatterWeekdaysRuleNameIsNotNil
+{
+    XCTAssertNotNil(self.recurrenceRuleFormatter.weekdaysRuleName);
+}
+
+- (void)testRecurrenceRuleFormatterWeeklyRuleNameIsNotNil
+{
+    XCTAssertNotNil(self.recurrenceRuleFormatter.weeklyRuleName);
+}
+
+- (void)testRecurrenceRuleFormatterMonthlyRuleNameIsNotNil
+{
+    XCTAssertNotNil(self.recurrenceRuleFormatter.monthlyRuleName);
+}
+
+- (void)testRecurrenceRuleFormatterYearlyRuleNameIsNotNil
+{
+    XCTAssertNotNil(self.recurrenceRuleFormatter.yearlyRuleName);
+}
+
+- (void)testRecurrenceRuleFormatterCustomRuleNameIsNotNil
+{
+    XCTAssertNotNil(self.recurrenceRuleFormatter.customRuleName);
+}
 
 #pragma mark Creating strings
 

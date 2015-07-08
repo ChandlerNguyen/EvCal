@@ -24,6 +24,11 @@
 
 #pragma mark - Initializing formatters
 
+- (instancetype)init
+{
+    return [self initUsingLocalization:YES];
+}
+
 - (instancetype)initUsingLocalization:(BOOL)localizeStrings
 {
     self = [super init];
