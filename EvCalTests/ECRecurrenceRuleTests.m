@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "ECRecurrenceRule.h"
+#import "ECRecurrenceRuleFormatter.h"
 
 @interface ECRecurrenceRuleTests : XCTestCase
 
@@ -23,6 +24,41 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+}
+
+
+#pragma mark - Tests
+
+#pragma mark Properties
+
+- (void)testRecurrenceRuleHasCorrectEKRecurrenceRule
+{
+    EKRecurrenceRule* rule = [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:EKRecurrenceFrequencyDaily interval:1 end:nil];
+    ECRecurrenceRule* ecRule = [[ECRecurrenceRule alloc] initWithRecurrenceRule:rule];
+    
+    XCTAssertEqualObjects(ecRule.rule, rule);
+}
+
+- (void)testRecurrenceRuleHasCorrectlyDeterminesRuleType
+{
+    EKRecurrenceRule* rule = [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:EKRecurrenceFrequencyDaily interval:1 end:nil];
+    ECRecurrenceRule* ecRule = [[ECRecurrenceRule alloc] initWithRecurrenceRule:rule];
+    
+    XCTAssertEqual(ecRule.type, ECRecurrenceRuleTypeDaily);
+}
+
+- (void)testRecurrenceRuleReturnsLocalizedString
+{
+    ECRecurrenceRule* rule = [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeDaily];
+    
+    XCTAssertNotNil(rule.localizedName);
+}
+
+- (void)testRecurrenceRuleReturnsCorrectName
+{
+    ECRecurrenceRule* rule = [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeDaily];
+    
+    XCTAssertEqualObjects(rule.localizedName, [ECRecurrenceRuleFormatter defaultFormatter].dailyRuleName);
 }
 
 - (void)testRecurrenceRuleFormatterReturnsNilForUnrecognizedType
