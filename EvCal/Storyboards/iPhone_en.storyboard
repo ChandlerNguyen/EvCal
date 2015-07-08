@@ -402,10 +402,10 @@
             </objects>
             <point key="canvasLocation" x="1666" y="28"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Edit Event Recurrence Rule Table View Controller-->
         <scene sceneID="rE1-aV-cGw">
             <objects>
-                <tableViewController id="oSd-sI-5dS" sceneMemberID="viewController">
+                <tableViewController id="oSd-sI-5dS" customClass="ECEditEventRecurrenceRuleTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="PeE-VG-L9C">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

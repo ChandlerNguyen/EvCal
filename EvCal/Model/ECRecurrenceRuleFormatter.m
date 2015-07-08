@@ -10,6 +10,7 @@
 #import "ECRecurrenceRuleFormatter.h"
 @interface ECRecurrenceRuleFormatter()
 
+@property (nonatomic, strong, readwrite) NSString* noneRuleName;
 @property (nonatomic, strong, readwrite) NSString* dailyRuleName;
 @property (nonatomic, strong, readwrite) NSString* weekdaysRuleName;
 @property (nonatomic, strong, readwrite) NSString* weeklyRuleName;
@@ -60,12 +61,26 @@
 
 - (void)nullifyStrings
 {
+    _noneRuleName = nil;
     _dailyRuleName = nil;
     _weekdaysRuleName = nil;
     _weeklyRuleName = nil;
     _monthlyRuleName = nil;
     _yearlyRuleName = nil;
     _customRuleName = nil;
+}
+
+- (NSString*)noneRuleName
+{
+    if (!_noneRuleName) {
+        if (self.localizeStrings) {
+            _noneRuleName = NSLocalizedString(@"ECRecurrenceRule.None", @"The event never repeats");
+        } else {
+            _noneRuleName = @"ECRecurrenceRule.None";
+        }
+    }
+    
+    return _noneRuleName;
 }
 
 - (NSString*)dailyRuleName
@@ -149,6 +164,9 @@
 - (NSString*)stringFromRecurrenceType:(ECRecurrenceRuleType)type
 {
     switch (type) {
+        case ECRecurrenceRuleTypeNone:
+            return self.noneRuleName;
+            
         case ECRecurrenceRuleTypeDaily:
             return self.dailyRuleName;
             

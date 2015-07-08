@@ -103,6 +103,18 @@
     XCTAssertThrowsSpecificNamed([self.recurrenceRuleFormatter stringFromRecurrenceType:(ECRecurrenceRuleType)-1], NSException, NSInvalidArgumentException);
 }
 
+- (void)testRecurrenceRuleFormatterReturnsLocalizedStringForNoneType
+{
+    XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceType:ECRecurrenceRuleTypeNone], self.recurrenceRuleFormatter.noneRuleName);
+}
+
+- (void)testRecurrenceRuleFormatterReturnsLocalizedStringForNoneRule
+{
+    ECRecurrenceRule* noneRecurrenceRule = [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeNone];
+    
+    XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceRule:noneRecurrenceRule], self.recurrenceRuleFormatter.noneRuleName);
+}
+
 - (void)testRecurrenceRuleFormatterReturnsLocalizedStringForDailyType
 {
     XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceType:ECRecurrenceRuleTypeDaily], self.recurrenceRuleFormatter.dailyRuleName);

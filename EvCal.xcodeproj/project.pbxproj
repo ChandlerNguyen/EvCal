@@ -48,6 +48,7 @@
 		84C459221B074BDD0066B6A9 /* ECDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C459211B074BDD0066B6A9 /* ECDayView.m */; };
 		84CAC3B71B4C271000B191B6 /* ECRecurrenceRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC3B61B4C271000B191B6 /* ECRecurrenceRule.m */; };
 		84CAC3B91B4C2B9A00B191B6 /* ECRecurrenceRuleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC3B81B4C2B9A00B191B6 /* ECRecurrenceRuleTests.m */; };
+		84CAC3BF1B4CF9DF00B191B6 /* ECEditEventRecurrenceRuleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC3BE1B4CF9DF00B191B6 /* ECEditEventRecurrenceRuleTableViewController.m */; };
 		84CD51991B3124D500902BDE /* ECSingleDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CD51981B3124D500902BDE /* ECSingleDayView.m */; };
 		84D168F51B3D6AAD00DBCF17 /* ECDatePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D168F41B3D6AAD00DBCF17 /* ECDatePage.m */; };
 		84D168FB1B42A49300DBCF17 /* ECEventCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D168FA1B42A49300DBCF17 /* ECEventCache.m */; };
@@ -149,6 +150,8 @@
 		84CAC3B51B4C271000B191B6 /* ECRecurrenceRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECRecurrenceRule.h; path = Model/ECRecurrenceRule.h; sourceTree = "<group>"; };
 		84CAC3B61B4C271000B191B6 /* ECRecurrenceRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECRecurrenceRule.m; path = Model/ECRecurrenceRule.m; sourceTree = "<group>"; };
 		84CAC3B81B4C2B9A00B191B6 /* ECRecurrenceRuleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECRecurrenceRuleTests.m; sourceTree = "<group>"; };
+		84CAC3BD1B4CF9DF00B191B6 /* ECEditEventRecurrenceRuleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventRecurrenceRuleTableViewController.h; path = Controllers/ECEditEventRecurrenceRuleTableViewController.h; sourceTree = "<group>"; };
+		84CAC3BE1B4CF9DF00B191B6 /* ECEditEventRecurrenceRuleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEditEventRecurrenceRuleTableViewController.m; path = Controllers/ECEditEventRecurrenceRuleTableViewController.m; sourceTree = "<group>"; };
 		84CD51971B3124D500902BDE /* ECSingleDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSingleDayView.h; path = Views/ECSingleDayView.h; sourceTree = "<group>"; };
 		84CD51981B3124D500902BDE /* ECSingleDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSingleDayView.m; path = Views/ECSingleDayView.m; sourceTree = "<group>"; };
 		84D168F31B3D6AAD00DBCF17 /* ECDatePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDatePage.h; path = Views/ECDatePage.h; sourceTree = "<group>"; };
@@ -319,6 +322,8 @@
 				8478F7A21B1D8CFD0096F1B7 /* ECEditEventViewController.m */,
 				843535831B2DAFD000A8E404 /* ECEditEventCalendarViewController.h */,
 				843535841B2DAFD000A8E404 /* ECEditEventCalendarViewController.m */,
+				84CAC3BD1B4CF9DF00B191B6 /* ECEditEventRecurrenceRuleTableViewController.h */,
+				84CAC3BE1B4CF9DF00B191B6 /* ECEditEventRecurrenceRuleTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -622,6 +627,7 @@
 				84CAC3B71B4C271000B191B6 /* ECRecurrenceRule.m in Sources */,
 				8404E07C1B329B31009B1923 /* ECInfiniteDatePagingView.m in Sources */,
 				842DA9021B4A3E33007DC027 /* ECRecurrenceRuleFormatter.m in Sources */,
+				84CAC3BF1B4CF9DF00B191B6 /* ECEditEventRecurrenceRuleTableViewController.m in Sources */,
 				8478F7B51B24519B0096F1B7 /* ECDatePickerCell.m in Sources */,
 				84C458FC1B073A860066B6A9 /* AppDelegate.m in Sources */,
 				8474BF151B2EDEF000475846 /* ECCalendarCell.m in Sources */,

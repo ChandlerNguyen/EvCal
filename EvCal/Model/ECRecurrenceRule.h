@@ -14,13 +14,17 @@
  */
 typedef NS_ENUM(NSInteger, ECRecurrenceRuleType){
     /**
+     * Event never repeats
+     */
+    ECRecurrenceRuleTypeNone, // @"None"
+    /**
      *  Event repeats every day.
      */
     ECRecurrenceRuleTypeDaily, // @"Daily"
     /**
      *  Event repeats every weekday (excluding weekends).
      */
-    ECRecurrenceRuleTypeWeekdays, // @"Every Weekday"
+    ECRecurrenceRuleTypeWeekdays, // @"Weekdays"
     /**
      *  Event repeats every week
      */
@@ -42,17 +46,17 @@ typedef NS_ENUM(NSInteger, ECRecurrenceRuleType){
 @interface ECRecurrenceRule : NSObject
 
 // The underlying recurrence rule
-@property (nonatomic, strong, readonly) EKRecurrenceRule* __nonnull rule;
+@property (nonatomic, strong, readonly) EKRecurrenceRule* __nullable rule;
 // The defined type of the recurrence rule
 @property (nonatomic, readonly) ECRecurrenceRuleType type;
 // The localized name of the recurrence rule
-@property (nonatomic, strong, readonly) NSString* __nonnull localizedName;
+@property (nonatomic, strong, readonly) NSString* __nullable localizedName;
 
 //------------------------------------------------------------------------------
 // @name Creating recurrence rules
 //------------------------------------------------------------------------------
 
-- (nonnull instancetype)initWithRecurrenceRule:(nonnull EKRecurrenceRule*)rule;
+- (nonnull instancetype)initWithRecurrenceRule:(nullable EKRecurrenceRule*)rule;
 
 /**
  *  Returns an EKRecurrenceRule for the given recurrence type. All recurrence
@@ -82,6 +86,5 @@ typedef NS_ENUM(NSInteger, ECRecurrenceRuleType){
  *  @return The newly created recurrence rule.
  */
 + (nullable ECRecurrenceRule*)customRecurrenceRuleWithFrequency:(EKRecurrenceFrequency)frequency interval:(NSInteger)interval;
-
 
 @end

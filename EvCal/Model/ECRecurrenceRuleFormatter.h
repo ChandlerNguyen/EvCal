@@ -50,6 +50,7 @@
 // The following strings are defined for each instance of a formatter. If the
 // localizeStrings property is set to YES these strings will be localized. The
 // unlocalized strings are listed next to each property.
+@property (nonatomic, strong, readonly) NSString* __nonnull noneRuleName;
 @property (nonatomic, strong, readonly) NSString* __nonnull dailyRuleName;
 @property (nonatomic, strong, readonly) NSString* __nonnull weekdaysRuleName;
 @property (nonatomic, strong, readonly) NSString* __nonnull weeklyRuleName;

@@ -20,11 +20,6 @@
 
 - (instancetype)initWithRecurrenceRule:(EKRecurrenceRule *)rule
 {
-    if (!rule) {
-        NSException* invalidArgumentException = [NSException exceptionWithName:NSInvalidArgumentException reason:@"ECRecurrenceRules must have EKRecurrenceRules" userInfo:nil];
-        [invalidArgumentException raise];
-    }
-    
     self = [super init];
     if (self ) {
         _rule = rule;
@@ -38,6 +33,10 @@ static NSArray* weekdays = nil;
 {
     EKRecurrenceRule* recurrenceRule = nil;
     switch (type) {
+        case ECRecurrenceRuleTypeNone:
+            recurrenceRule = nil;
+            break;
+            
         case ECRecurrenceRuleTypeDaily:
             recurrenceRule = [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:EKRecurrenceFrequencyDaily interval:1 end:nil];
             break;
@@ -86,8 +85,7 @@ static NSArray* weekdays = nil;
 - (ECRecurrenceRuleType)type
 {
     if (!self.rule) {
-        NSException* internalInconsistencyException = [NSException exceptionWithName:NSInternalInconsistencyException reason:@"ECRecurrenceRule's recurrence rule should not be nil" userInfo:nil];
-        [internalInconsistencyException raise];
+        return ECRecurrenceRuleTypeNone;
     }
     
     switch (self.rule.frequency) {

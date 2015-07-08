@@ -39,6 +39,13 @@
     XCTAssertEqualObjects(ecRule.rule, rule);
 }
 
+- (void)testRecurrenceRuleCanBeCreatedWithNilEKRule
+{
+    ECRecurrenceRule* ecRule = [[ECRecurrenceRule alloc] initWithRecurrenceRule:nil];
+    
+    XCTAssertNil(ecRule.rule);
+}
+
 - (void)testRecurrenceRuleHasCorrectlyDeterminesRuleType
 {
     EKRecurrenceRule* rule = [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:EKRecurrenceFrequencyDaily interval:1 end:nil];
@@ -69,6 +76,28 @@
 }
 
 #pragma mark Creating daily rule
+
+- (void)testRecurrenceRuleCreatesRecurrenceRuleForNoneRecurrenceType
+{
+    ECRecurrenceRule* noneRecurrenceRule = [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeNone];
+    
+    XCTAssertNotNil(noneRecurrenceRule);
+}
+
+- (void)testRecurrenceRuleCreatesNilECRuleForNoneRecurrenceType
+{
+    ECRecurrenceRule* noneRecurrenceRule = [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeNone];
+    
+    XCTAssertNotNil(noneRecurrenceRule);
+}
+
+- (void)testRecurrenceRuleCorrectlySetsNoneType
+{
+    ECRecurrenceRule* noneRecurrenceRule = [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeNone];
+    
+    XCTAssertEqual(noneRecurrenceRule.type, ECRecurrenceRuleTypeNone);
+}
+
 - (void)testRecurrenceRuleCreatesRecurrenceRuleForDailyRecurrenceType
 {
     ECRecurrenceRule* dailyRecurrenceRule = [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeDaily];
@@ -306,12 +335,6 @@
     ECRecurrenceRule* customRecurrenceRule = [ECRecurrenceRule customRecurrenceRuleWithFrequency:EKRecurrenceFrequencyDaily interval:2];
     
     XCTAssertEqual(customRecurrenceRule.type, ECRecurrenceRuleTypeCustom);
-}
-
-- (void)testRecurrenceRuleFormatterRaisesExceptionForNilRecurrenceRule
-{
-    EKRecurrenceRule* nilRule = nil;
-    XCTAssertThrowsSpecificNamed([[ECRecurrenceRule alloc] initWithRecurrenceRule:nilRule], NSException, NSInvalidArgumentException);
 }
 
 @end
