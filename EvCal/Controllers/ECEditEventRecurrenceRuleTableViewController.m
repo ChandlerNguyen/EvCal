@@ -12,12 +12,32 @@
 
 @interface ECEditEventRecurrenceRuleTableViewController ()
 
+@property (nonatomic, strong) ECRecurrenceRule* ecRecurrenceRule;
 @property (nonatomic, strong) NSArray* specificReccurenceRules;
 @property (nonatomic, strong) ECRecurrenceRule* customRecurrenceRule;
 
 @end
 
 @implementation ECEditEventRecurrenceRuleTableViewController
+
+- (void)viewDidLoad
+{
+    if (!self.ecRecurrenceRule) {
+        self.ecRecurrenceRule = [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeNone];
+    }
+}
+
+- (void)setRecurrenceRule:(EKRecurrenceRule *)recurrenceRule
+{
+    self.ecRecurrenceRule = [[ECRecurrenceRule alloc] initWithRecurrenceRule:recurrenceRule];
+    [self.tableView reloadData];
+}
+
+- (EKRecurrenceRule*)recurrenceRule
+{
+    return self.ecRecurrenceRule.rule;
+}
+
 
 - (ECRecurrenceRule*)customRecurrenceRule
 {
@@ -47,6 +67,46 @@
              [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeYearly]];
 }
 
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSIndexPath* oldIndexPath = [self indexPathForECRecurrenceRule:self.ecRecurrenceRule];
+    if (![oldIndexPath isEqual:indexPath]) {
+        self.ecRecurrenceRule = [self ecRecurrenceRuleForIndexPath:indexPath];
+        [self informDelegateThatRecurrenceRuleWasSelected];
+        
+        [tableView reloadData];
+    }
+}
+
+- (NSIndexPath*)indexPathForECRecurrenceRule:(ECRecurrenceRule*)rule
+{
+    if (rule.type == ECRecurrenceRuleTypeCustom) {
+        return [NSIndexPath indexPathForRow:0 inSection:kCustomRecurrenceRuleSection];
+    } else {
+        for (NSInteger i = 0; i < self.specificReccurenceRules.count; i++) {
+            ECRecurrenceRule* specificRule = self.specificReccurenceRules[i];
+            if (specificRule.type == rule.type) {
+                return [NSIndexPath indexPathForRow:i inSection:kSpecificRecurrenceRuleSection];
+            }
+        }
+    }
+    
+    // Code should not reach this point
+    return nil;
+}
+
+- (ECRecurrenceRule*)ecRecurrenceRuleForIndexPath:(NSIndexPath*)indexPath
+{
+    if (indexPath.section == kCustomRecurrenceRuleSection) {
+        return self.customRecurrenceRule;
+    } else {
+        return self.specificReccurenceRules[indexPath.row];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -72,15 +132,6 @@ static NSString* kCustomRecurrenceRuleCellID =          @"customRecurrenceRuleCe
 const static NSInteger kSpecificRecurrenceRuleSection = 0;
 const static NSInteger kCustomRecurrenceRuleSection =   1;
 
-const static NSInteger kNoneRecurrenceRuleRow =         0;
-const static NSInteger kDailyRecurrenceRuleRow =        1;
-const static NSInteger kWeekdaysRecurrenceRuleRow =     2;
-const static NSInteger kWeeklyRecurrenceRuleRow =       3;
-const static NSInteger kMonthlyRecurrenceRuleRow =      4;
-const static NSInteger kYearlyRecurrenceRuleRow =       5;
-
-static NSInteger kSpecificRuleTypeCount =               6;
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case kSpecificRecurrenceRuleSection:
@@ -99,7 +150,7 @@ static NSInteger kSpecificRuleTypeCount =               6;
     ECRecurrenceRule* rule = self.specificReccurenceRules[indexPath.row];
     cell.textLabel.text = rule.localizedName;
     
-    if (rule.type == self.recurrenceRule.type) {
+    if (rule.type == self.ecRecurrenceRule.type) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -114,13 +165,19 @@ static NSInteger kSpecificRuleTypeCount =               6;
     
     cell.ruleLabel.text = self.customRecurrenceRule.localizedName;
     
-    if (self.recurrenceRule.type == ECRecurrenceRuleTypeCustom) {
-        cell.checkmarkView.backgroundColor = [UIColor purpleColor];
-    } else {
-        cell.checkmarkView.backgroundColor = [UIColor whiteColor];
-    }
+    cell.checkmarkHidden = (self.ecRecurrenceRule.type != ECRecurrenceRuleTypeCustom);
     
     return cell;
+}
+
+
+#pragma mark - Recurrence Rule delegate
+
+- (void)informDelegateThatRecurrenceRuleWasSelected
+{
+    if ([self.recurrenceRuleDelegate respondsToSelector:@selector(viewController:didSelectRecurrenceRule:)]) {
+        [self.recurrenceRuleDelegate viewController:self didSelectRecurrenceRule:self.recurrenceRule];
+    }
 }
 
 @end

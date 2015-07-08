@@ -7,18 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ECRecurrenceRule;
+@class EKRecurrenceRule;
 @class ECEditEventRecurrenceRuleTableViewController;
 @protocol ECEditEventRecurrenceRuleViewControllerDelegate <NSObject>
 
 @optional
-- (void)viewController:(ECEditEventRecurrenceRuleTableViewController*)vc didSelectRecurrenceRule:(ECRecurrenceRule*)rule;
+- (void)viewController:(ECEditEventRecurrenceRuleTableViewController*)vc didSelectRecurrenceRule:(EKRecurrenceRule*)rule;
 
 @end
 
 @interface ECEditEventRecurrenceRuleTableViewController : UITableViewController
 
 @property (nonatomic, weak) id<ECEditEventRecurrenceRuleViewControllerDelegate> recurrenceRuleDelegate;
-@property (nonatomic, strong) ECRecurrenceRule* recurrenceRule;
+@property (nonatomic, strong) EKRecurrenceRule* recurrenceRule;
 
 @end

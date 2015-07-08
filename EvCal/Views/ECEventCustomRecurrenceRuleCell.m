@@ -7,17 +7,42 @@
 //
 
 #import "ECEventCustomRecurrenceRuleCell.h"
+#import "MSCellAccessory.h"
+
+@interface ECEventCustomRecurrenceRuleCell()
+
+@property (nonatomic, weak) UIView* checkmarkView;
+@property (nonatomic, weak) IBOutlet UIView* checkmarkViewContainer;
+
+@end
 
 @implementation ECEventCustomRecurrenceRuleCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    self.checkmarkViewContainer.backgroundColor = self.backgroundColor;
+    self.checkmarkHidden = YES;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (UIView*)checkmarkView
+{
+    if (!_checkmarkView) {
+        UIView* checkmarkView = [MSCellAccessory accessoryWithType:FLAT_CHECKMARK color:[UIApplication sharedApplication].delegate.window.tintColor];
+        _checkmarkView = checkmarkView;
+        [self.checkmarkViewContainer addSubview:_checkmarkView];
+    }
+    
+    return _checkmarkView;
 }
+
+- (void)setCheckmarkHidden:(BOOL)checkmarkHidden
+{
+    self.checkmarkView.hidden = checkmarkHidden;
+}
+
+- (BOOL)checkmarkHidden
+{
+    return self.checkmarkView.hidden;
+}
+
 
 @end

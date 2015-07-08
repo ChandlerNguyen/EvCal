@@ -412,13 +412,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="specificRecurrenceRuleCell" id="8Xh-uA-KLP">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="specificRecurrenceRuleCell" id="8Xh-uA-KLP">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Xh-uA-KLP" id="VEt-8Y-Atb">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="customRecurrenceRuleCell" id="Pwb-OU-d2t" customClass="ECEventCustomRecurrenceRuleCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="customRecurrenceRuleCell" id="Pwb-OU-d2t" customClass="ECEventCustomRecurrenceRuleCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pwb-OU-d2t" id="aK3-lD-C3O">
@@ -448,7 +448,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="checkmarkView" destination="UXE-L0-Ay0" id="ds2-C8-vhO"/>
+                                    <outlet property="checkmarkViewContainer" destination="UXE-L0-Ay0" id="fqb-GW-R4L"/>
                                     <outlet property="ruleLabel" destination="8Tl-W2-BWo" id="3Nm-lv-stP"/>
                                     <segue destination="icV-y6-BV4" kind="push" id="OOi-Wh-aN7"/>
                                 </connections>
