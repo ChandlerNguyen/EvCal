@@ -10,6 +10,7 @@
 #import "ECRecurrenceRuleFormatter.h"
 @interface ECRecurrenceRuleFormatter()
 
+@property (nonatomic, strong, readwrite) NSArray* ruleNames;
 @property (nonatomic, strong, readwrite) NSString* noneRuleName;
 @property (nonatomic, strong, readwrite) NSString* dailyRuleName;
 @property (nonatomic, strong, readwrite) NSString* weekdaysRuleName;
@@ -59,8 +60,24 @@
     [self nullifyStrings];
 }
 
+- (NSArray*)ruleNames
+{
+    if (!_ruleNames) {
+        _ruleNames = @[self.noneRuleName,
+                       self.dailyRuleName,
+                       self.weekdaysRuleName,
+                       self.weeklyRuleName,
+                       self.monthlyRuleName,
+                       self.yearlyRuleName,
+                       self.customRuleName];
+    }
+    
+    return _ruleNames;
+}
+
 - (void)nullifyStrings
 {
+    _ruleNames = nil;
     _noneRuleName = nil;
     _dailyRuleName = nil;
     _weekdaysRuleName = nil;

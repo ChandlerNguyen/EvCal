@@ -593,10 +593,10 @@
             </objects>
             <point key="canvasLocation" x="1666" y="314"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Edit Event Recurrence Custom Rule View Controller-->
         <scene sceneID="hOc-rJ-txl">
             <objects>
-                <tableViewController id="icV-y6-BV4" sceneMemberID="viewController">
+                <tableViewController id="icV-y6-BV4" customClass="ECEditEventRecurrenceCustomRuleViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Zkm-ai-FvY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -620,6 +620,9 @@
                                                 </label>
                                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Tw-dw-jTr">
                                                     <rect key="frame" x="0.0" y="37" width="320" height="162"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="162" id="69N-WX-jTR"/>
+                                                    </constraints>
                                                 </pickerView>
                                             </subviews>
                                             <constraints>
@@ -639,6 +642,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="5zv-BA-sUs"/>
+                    <connections>
+                        <outlet property="recurrenceRulePicker" destination="3Tw-dw-jTr" id="7e5-k5-t1T"/>
+                        <outlet property="repeatLabel" destination="d7O-7I-9iP" id="FOD-kT-6Ea"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rkl-f9-L2I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

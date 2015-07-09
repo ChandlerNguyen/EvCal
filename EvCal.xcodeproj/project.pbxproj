@@ -40,6 +40,7 @@
 		848628421B45976A007E0AA2 /* EKEvent+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 848628411B45976A007E0AA2 /* EKEvent+ECAdditions.m */; };
 		849773F21B3C09710097259F /* ECDateViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 849773F11B3C09710097259F /* ECDateViewTests.m */; };
 		849EA5951B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849EA5941B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m */; };
+		849EA5981B4E3BD80053549C /* ECEditEventRecurrenceCustomRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849EA5971B4E3BD80053549C /* ECEditEventRecurrenceCustomRuleViewController.m */; };
 		84B2E13E1B08E0A000CD0029 /* UIView+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B2E13D1B08E0A000CD0029 /* UIView+ECAdditions.m */; };
 		84B7ED1D1B35BB9400A6384E /* ECWeekdaysContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7ED1C1B35BB9400A6384E /* ECWeekdaysContainerView.m */; };
 		84C458F91B073A860066B6A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C458F81B073A860066B6A9 /* main.m */; };
@@ -135,6 +136,8 @@
 		849773F11B3C09710097259F /* ECDateViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDateViewTests.m; sourceTree = "<group>"; };
 		849EA5931B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventRecurrenceEndViewController.h; path = Controllers/ECEditEventRecurrenceEndViewController.h; sourceTree = "<group>"; };
 		849EA5941B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEditEventRecurrenceEndViewController.m; path = Controllers/ECEditEventRecurrenceEndViewController.m; sourceTree = "<group>"; };
+		849EA5961B4E3BD80053549C /* ECEditEventRecurrenceCustomRuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventRecurrenceCustomRuleViewController.h; path = Controllers/ECEditEventRecurrenceCustomRuleViewController.h; sourceTree = "<group>"; };
+		849EA5971B4E3BD80053549C /* ECEditEventRecurrenceCustomRuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEditEventRecurrenceCustomRuleViewController.m; path = Controllers/ECEditEventRecurrenceCustomRuleViewController.m; sourceTree = "<group>"; };
 		84B2E13C1B08E0A000CD0029 /* UIView+ECAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+ECAdditions.h"; path = "Support/UIView+ECAdditions.h"; sourceTree = "<group>"; };
 		84B2E13D1B08E0A000CD0029 /* UIView+ECAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+ECAdditions.m"; path = "Support/UIView+ECAdditions.m"; sourceTree = "<group>"; };
 		84B7ED1B1B35BB9400A6384E /* ECWeekdaysContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECWeekdaysContainerView.h; path = Views/ECWeekdaysContainerView.h; sourceTree = "<group>"; };
@@ -332,6 +335,8 @@
 				84CAC3BE1B4CF9DF00B191B6 /* ECEditEventRecurrenceRuleTableViewController.m */,
 				849EA5931B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.h */,
 				849EA5941B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m */,
+				849EA5961B4E3BD80053549C /* ECEditEventRecurrenceCustomRuleViewController.h */,
+				849EA5971B4E3BD80053549C /* ECEditEventRecurrenceCustomRuleViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -651,6 +656,7 @@
 				84EF22691B08D59E003DA610 /* ECEventViewFactory.m in Sources */,
 				84C458F91B073A860066B6A9 /* main.m in Sources */,
 				84D168FB1B42A49300DBCF17 /* ECEventCache.m in Sources */,
+				849EA5981B4E3BD80053549C /* ECEditEventRecurrenceCustomRuleViewController.m in Sources */,
 				849EA5951B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m in Sources */,
 				8478F7B21B244AF80096F1B7 /* NSDate+ECEventAdditions.m in Sources */,
 				848628421B45976A007E0AA2 /* EKEvent+ECAdditions.m in Sources */,

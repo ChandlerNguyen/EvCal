@@ -58,6 +58,9 @@
 @property (nonatomic, strong, readonly) NSString* __nonnull yearlyRuleName;
 @property (nonatomic, strong, readonly) NSString* __nonnull customRuleName;
 
+// All of the recurrence rule names
+@property (nonatomic, strong, readonly) NSArray* __nonnull ruleNames;
+
 /**
  *  Creates and returns a string based on the recurrence rule. The string will 
  *  be localized versions of the strings defined for the different recurrence
