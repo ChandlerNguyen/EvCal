@@ -469,7 +469,7 @@ const static NSInteger kRecurrenceSection =             2;
 
 const static NSInteger kTitleCellRow =                  0;
 const static NSInteger kCalendarCellRow =               2;
-const static NSInteger kRecurrenceEndCellRow =          1;
+const static NSInteger kRecurrenceEndCellRow =          2;
 const static NSInteger kAllDayCellRow =                 2;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
