@@ -37,10 +37,12 @@
 
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* startDatePickerCell;
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* endDatePickerCell;
-
 @property (nonatomic, weak) IBOutlet UISwitch *allDaySwitch;
+
 @property (nonatomic, strong) ECRecurrenceRule* recurrenceRule;
 @property (nonatomic, weak) IBOutlet UILabel* recurrenceRuleLabel;
+@property (nonatomic, weak) IBOutlet UILabel* recurrenceEndLabel;
+@property (nonatomic, strong) NSDate* recurrenceEndDate;
 
 @property (nonatomic, weak) IBOutlet ECCalendarCell* calendarCell;
 @property (nonatomic, weak) UITextView* notesView;
