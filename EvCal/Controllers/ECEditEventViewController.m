@@ -16,12 +16,14 @@
 // EvCal Classes
 #import "ECEditEventViewController.h"
 #import "ECEventStoreProxy.h"
+#import "ECRecurrenceRule.h"
+
 #import "ECDatePickerCell.h"
 #import "ECCalendarCell.h"
-#import "ECEditEventCalendarViewController.h"
-#import "ECRecurrenceRule.h"
-#import "ECEditEventRecurrenceRuleTableViewController.h"
 #import "ECEventTextPropertyCell.h"
+
+#import "ECEditEventCalendarViewController.h"
+#import "ECEditEventRecurrenceRuleTableViewController.h"
 
 @interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, ECEditEventRecurrenceRuleViewControllerDelegate, ECEventTextPropertyCellDelegate, UIActionSheetDelegate>
 
@@ -31,20 +33,25 @@
 @property (nonatomic, weak) UIBarButtonItem* saveButton;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* deleteButton;
 
-// Event Data Fields
+// Event Title and Location
 @property (nonatomic, weak) IBOutlet ECEventTextPropertyCell *titleCell;
 @property (nonatomic, weak) IBOutlet ECEventTextPropertyCell *locationCell;
 
+// Event Calendar
+@property (nonatomic, weak) IBOutlet ECCalendarCell* calendarCell;
+
+// Event Start and End dates
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* startDatePickerCell;
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* endDatePickerCell;
 @property (nonatomic, weak) IBOutlet UISwitch *allDaySwitch;
 
+// Event Recurrence rules
 @property (nonatomic, strong) ECRecurrenceRule* recurrenceRule;
 @property (nonatomic, weak) IBOutlet UILabel* recurrenceRuleLabel;
 @property (nonatomic, weak) IBOutlet UILabel* recurrenceEndLabel;
 @property (nonatomic, strong) NSDate* recurrenceEndDate;
 
-@property (nonatomic, weak) IBOutlet ECCalendarCell* calendarCell;
+// Notes
 @property (nonatomic, weak) UITextView* notesView;
 
 @end
@@ -52,6 +59,13 @@
 @implementation ECEditEventViewController
 
 #pragma mark - Lifecycle and Properties
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.selectedIndexPath = nil;
+}
 
 - (void)viewDidLoad
 {
@@ -427,7 +441,7 @@
 
 
 #pragma mark - UITableView Delegate and Datasource
-
+#pragma mark Cell Heights
 const static CGFloat kRecurrenceRowHeight =             44.0f;
 const static CGFloat kCalendarCellHeight =              44.0f;
 const static CGFloat kDatesAndAlarmsRowHeight =         52.0f;
@@ -498,6 +512,13 @@ const static NSInteger kAllDayCellRow =                 2;
     }
 }
 
+- (void)updateCellHeights
+{
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+}
+
+#pragma mark Cell selection
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // short circuiting the || operator
@@ -519,11 +540,6 @@ const static NSInteger kAllDayCellRow =                 2;
     [tableView endUpdates];
 }
 
-- (void)updateCellHeights
-{
-    [self.tableView beginUpdates];
-    [self.tableView endUpdates];
-}
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
