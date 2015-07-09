@@ -29,6 +29,10 @@
     self.recurrenceEndDateCell.pickerDelegate = self;
     self.recurrenceEndDateCellCheckmarkContainer.backgroundColor = [UIColor whiteColor];
     [self.recurrenceEndDateCellCheckmarkContainer addSubview:[MSCellAccessory accessoryWithType:FLAT_CHECKMARK color:[UIApplication sharedApplication].delegate.window.tintColor]];
+    
+    if (self.recurrenceEndDate) {
+        self.recurrenceEndDateCell.date = self.recurrenceEndDate;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -37,15 +41,6 @@
     
     [self updateCellAppearanceForRecurrenceEndDate:self.recurrenceEndDate];
 }
-
-- (void)setRecurrenceEndDate:(NSDate * __nullable)recurrenceEndDate
-{
-    _recurrenceEndDate = recurrenceEndDate;
-    
-    [self informDelegateRecurrenceEndDateWasSelected];
-}
-
-
 
 - (void)updateCellAppearanceForRecurrenceEndDate:(NSDate*)recurrenceEndDate
 {
@@ -78,6 +73,7 @@
 {
     self.recurrenceEndDate = date;
     [self updateCellAppearanceForRecurrenceEndDate:date];
+    [self informDelegateRecurrenceEndDateWasSelected];
 }
 
 #pragma mark - Tableview delegate and datasource
@@ -105,11 +101,12 @@ const static CGFloat kRecurrenceEndDatePickerCellSelectedHeight =   206.0f;
 {
     if ([indexPath isEqual:[tableView indexPathForCell:self.neverRecurrenceEndCell]]) {
         self.recurrenceEndDate = nil;
-        [self updateCellAppearanceForRecurrenceEndDate:self.recurrenceEndDate];
     } else {
         self.recurrenceEndDate = self.recurrenceEndDateCell.date;
-        [self updateCellAppearanceForRecurrenceEndDate:self.recurrenceEndDate];
     }
+    
+    [self updateCellAppearanceForRecurrenceEndDate:self.recurrenceEndDate];
+    [self informDelegateRecurrenceEndDateWasSelected];
 }
 
 @end

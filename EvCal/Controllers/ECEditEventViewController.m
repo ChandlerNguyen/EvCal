@@ -24,8 +24,9 @@
 
 #import "ECEditEventCalendarViewController.h"
 #import "ECEditEventRecurrenceRuleTableViewController.h"
+#import "ECEditEventRecurrenceEndViewController.h"
 
-@interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, ECEditEventRecurrenceRuleViewControllerDelegate, ECEventTextPropertyCellDelegate, UIActionSheetDelegate>
+@interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, ECEditEventRecurrenceRuleViewControllerDelegate, ECEditEventRecurrenceEndDelegate, ECEventTextPropertyCellDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSIndexPath* selectedIndexPath;
 
@@ -439,6 +440,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - ECEditEventRecurrenceEnd Delegate
+
+- (void)viewController:(nonnull ECEditEventRecurrenceEndViewController *)vc didSelectRecurrenceEndDate:(nullable NSDate *)endDate
+{
+    self.recurrenceEndDate = endDate;
+    self.recurrenceEndLabel.text = [self recurrenceEndTextForRecurrenceEndDate:endDate];
+}
 
 #pragma mark - UITableView Delegate and Datasource
 #pragma mark Cell Heights
@@ -552,6 +560,10 @@ const static NSInteger kAllDayCellRow =                 2;
         ECEditEventRecurrenceRuleTableViewController* ecerrtvc = (ECEditEventRecurrenceRuleTableViewController*)segue.destinationViewController;
         ecerrtvc.recurrenceRule = self.recurrenceRule;
         ecerrtvc.recurrenceRuleDelegate = self;
+    } else if ([segue.identifier isEqualToString:@"recurrenceEnd"]) {
+        ECEditEventRecurrenceEndViewController* eceerevc = (ECEditEventRecurrenceEndViewController*)segue.destinationViewController;
+        eceerevc.recurrenceEndDelegate = self;
+        eceerevc.recurrenceEndDate = self.recurrenceEndDate;
     }
 }
 
