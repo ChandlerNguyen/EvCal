@@ -500,7 +500,7 @@
         <!--End Repeat-->
         <scene sceneID="igu-Kr-ZNW">
             <objects>
-                <tableViewController title="End Repeat" id="ebq-QD-tVJ" sceneMemberID="viewController">
+                <tableViewController title="End Repeat" id="ebq-QD-tVJ" customClass="ECEditEventRecurrenceEndViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="UfS-Zb-4kv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -526,7 +526,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="206" id="TC8-9B-X4r">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="206" id="TC8-9B-X4r" customClass="ECDatePickerCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TC8-9B-X4r" id="HAa-R6-H3v">
@@ -557,6 +557,9 @@
                                                 <constraint firstItem="KS0-fZ-5HC" firstAttribute="leading" secondItem="HAa-R6-H3v" secondAttribute="leading" constant="16" id="svw-R5-4pY"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="datePicker" destination="SIA-Va-kWp" id="Qho-xq-3qy"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -567,6 +570,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="q8J-t0-1Oq"/>
+                    <connections>
+                        <outlet property="neverRecurrenceEndCell" destination="tv6-Mk-ojv" id="wD0-cv-bv5"/>
+                        <outlet property="recurrenceEndDateCell" destination="TC8-9B-X4r" id="XUv-sS-UeV"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0bu-1f-c37" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
