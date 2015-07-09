@@ -73,6 +73,17 @@
 - (nonnull NSString*)stringFromRecurrenceRule:(nonnull ECRecurrenceRule*)rule;
 
 /**
+ *  Creates and returns a string explaning the given recurrence rule. For
+ *  a recurrence rule with an interval of 2 and a frequency of daily would
+ *  return a value of "Repeats every 2 days" for an English localization.
+ *
+ *  @param rule The rule to be described by the string.
+ *
+ *  @return A newly created string describing the given rule.
+ */
+- (nonnull NSString*)detailStringFromRecurrenceRule:(nonnull ECRecurrenceRule*)rule;
+
+/**
  *  Creates and returns a string based on the recurrence type. The strings are 
  *  localized upon creation.
  *

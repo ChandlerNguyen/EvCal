@@ -214,4 +214,48 @@
     return [self stringFromRecurrenceType:rule.type];
 }
 
+- (NSString*)detailStringFromRecurrenceRule:(nonnull ECRecurrenceRule *)rule
+{
+    switch (rule.type) {
+        case ECRecurrenceRuleTypeNone:
+            return NSLocalizedString(@"ECRecurrenceRule.Never repeats", @"The event does not repeat");
+            
+        case ECRecurrenceRuleTypeDaily:
+            return NSLocalizedString(@"ECRecurrenceRule.Repeats every day", @"The event repeats every day");
+            
+        case ECRecurrenceRuleTypeWeekdays:
+            return NSLocalizedString(@"ECRecurrenceRule.Repeats every weekday", @"The event repeats every weekday");
+            
+        case ECRecurrenceRuleTypeWeekly:
+            return NSLocalizedString(@"ECRecurrenceRule.Repeats every week", @"The event repeats every week");
+            
+        case ECRecurrenceRuleTypeMonthly:
+            return NSLocalizedString(@"ECRecurrenceRule.Repeats every month", @"The event repeats every month");
+            
+        case ECRecurrenceRuleTypeYearly:
+            return NSLocalizedString(@"ECRecurrenceRule.Repeats every year", @"The event repeats every year");
+            
+        case ECRecurrenceRuleTypeCustom:
+            return [self detailStringFromCustomRecurrenceRule:rule];
+    }
+}
+
+- (NSString*)detailStringFromCustomRecurrenceRule:(ECRecurrenceRule*)customRule
+{
+    EKRecurrenceRule* rule = customRule.rule;
+    switch (rule.frequency) {
+        case EKRecurrenceFrequencyDaily:
+            return [NSString stringWithFormat:NSLocalizedString(@"ECRecurrenceRule.Repeats every %lu days", @"The event repeats every [interval] days"), rule.interval];
+            
+        case EKRecurrenceFrequencyWeekly:
+            return [NSString stringWithFormat:NSLocalizedString(@"ECRecurrenceRule.Repeats every %lu weeks", @"The event repeats every [interval] weeks"), rule.interval];
+            
+        case EKRecurrenceFrequencyMonthly:
+            return [NSString stringWithFormat:NSLocalizedString(@"ECRecurrenceRule.Repeats every %lu months", @"The event repeats every [interval] months"), rule.interval];
+            
+        case EKRecurrenceFrequencyYearly:
+            return [NSString stringWithFormat:NSLocalizedString(@"ECRecurrenceRule.Repeats every %lu years", @"The event repeats every [interval] years"), rule.interval];
+    }
+}
+
 @end
