@@ -482,7 +482,7 @@
                                 <connections>
                                     <outlet property="checkmarkViewContainer" destination="UXE-L0-Ay0" id="fqb-GW-R4L"/>
                                     <outlet property="ruleLabel" destination="8Tl-W2-BWo" id="3Nm-lv-stP"/>
-                                    <segue destination="icV-y6-BV4" kind="push" id="OOi-Wh-aN7"/>
+                                    <segue destination="icV-y6-BV4" kind="push" identifier="customRule" id="OOi-Wh-aN7"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

@@ -7,10 +7,11 @@
 //
 
 #import "ECEditEventRecurrenceRuleTableViewController.h"
+#import "ECEditEventRecurrenceCustomRuleViewController.h"
 #import "ECRecurrenceRule.h"
 #import "ECEventCustomRecurrenceRuleCell.h"
 
-@interface ECEditEventRecurrenceRuleTableViewController ()
+@interface ECEditEventRecurrenceRuleTableViewController () <ECEditEventRecurrenceCustomRuleDelegate>
 
 @property (nonatomic, strong) NSArray* specificReccurenceRules;
 @property (nonatomic, strong) ECRecurrenceRule* customRecurrenceRule;
@@ -158,12 +159,37 @@ const static NSInteger kCustomRecurrenceRuleSection =   1;
 }
 
 
+#pragma mark - ECEditEventRecurrenceCustomRuleView Delegate
+
+- (void)viewController:(ECEditEventRecurrenceCustomRuleViewController *)vc didSelectCustomRule:(ECRecurrenceRule *)rule
+{
+    self.recurrenceRule = rule;
+    [self informDelegateThatRecurrenceRuleWasSelected];
+}
+
+
 #pragma mark - Recurrence Rule delegate
 
 - (void)informDelegateThatRecurrenceRuleWasSelected
 {
     if ([self.recurrenceRuleDelegate respondsToSelector:@selector(viewController:didSelectRecurrenceRule:)]) {
         [self.recurrenceRuleDelegate viewController:self didSelectRecurrenceRule:self.recurrenceRule];
+    }
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"customRule"]) {
+        ECEditEventRecurrenceCustomRuleViewController* eceercrvc = (ECEditEventRecurrenceCustomRuleViewController*)segue.destinationViewController;
+        eceercrvc.customRuleDelegate = self;
+
+        if (self.recurrenceRule.type == ECRecurrenceRuleTypeCustom) {
+            eceercrvc.recurrenceRule = self.recurrenceRule;
+        } else {
+            eceercrvc.recurrenceRule = self.customRecurrenceRule;
+        }
     }
 }
 
