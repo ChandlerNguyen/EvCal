@@ -508,7 +508,7 @@
                         <sections>
                             <tableViewSection id="81X-5Y-PzR">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="tv6-Mk-ojv">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" id="tv6-Mk-ojv">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tv6-Mk-ojv" id="i78-ff-LER">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -526,14 +526,14 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="206" id="TC8-9B-X4r" customClass="ECDatePickerCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="206" id="TC8-9B-X4r" customClass="ECDatePickerCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TC8-9B-X4r" id="HAa-R6-H3v">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KS0-fZ-5HC">
-                                                    <rect key="frame" x="16" y="11" width="64" height="21"/>
+                                                    <rect key="frame" x="16" y="11" width="63.5" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Tmc-pc-HvC"/>
                                                     </constraints>
@@ -541,19 +541,32 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="SIA-Va-kWp">
-                                                    <rect key="frame" x="0.0" y="44" width="320" height="162"/>
+                                                <datePicker clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="SIA-Va-kWp">
+                                                    <rect key="frame" x="0.0" y="43" width="320" height="162"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="162" id="H9h-dQ-Wmi"/>
+                                                    </constraints>
                                                     <date key="date" timeIntervalSinceReferenceDate="458102868.63691503">
                                                         <!--2015-07-09 02:47:48 +0000-->
                                                     </date>
                                                 </datePicker>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7C-Z9-lLW">
+                                                    <rect key="frame" x="264" y="6" width="32" height="32"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="32" id="OPN-Sm-6Ru"/>
+                                                        <constraint firstAttribute="height" constant="32" id="Uwr-Kr-Jls"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="SIA-Va-kWp" secondAttribute="bottom" constant="0.5" id="GWQ-LT-vv4"/>
+                                                <constraint firstAttribute="trailing" secondItem="S7C-Z9-lLW" secondAttribute="trailing" constant="24" id="Nci-Pb-nwX"/>
                                                 <constraint firstItem="KS0-fZ-5HC" firstAttribute="top" secondItem="HAa-R6-H3v" secondAttribute="top" constant="11" id="akh-Ud-79R"/>
                                                 <constraint firstItem="SIA-Va-kWp" firstAttribute="leading" secondItem="HAa-R6-H3v" secondAttribute="leading" id="cuu-oG-AOG"/>
                                                 <constraint firstAttribute="trailing" secondItem="SIA-Va-kWp" secondAttribute="trailing" id="dTN-0b-jAl"/>
-                                                <constraint firstItem="SIA-Va-kWp" firstAttribute="top" secondItem="KS0-fZ-5HC" secondAttribute="bottom" constant="12" id="hwJ-PR-U3W"/>
+                                                <constraint firstItem="KS0-fZ-5HC" firstAttribute="centerY" secondItem="S7C-Z9-lLW" secondAttribute="centerY" constant="-0.5" id="eRd-J9-6NC"/>
+                                                <constraint firstItem="SIA-Va-kWp" firstAttribute="top" secondItem="HAa-R6-H3v" secondAttribute="top" constant="43" id="qUF-Nf-HPS"/>
+                                                <constraint firstItem="S7C-Z9-lLW" firstAttribute="top" secondItem="HAa-R6-H3v" secondAttribute="top" constant="6" id="qwt-lz-8cP"/>
                                                 <constraint firstItem="KS0-fZ-5HC" firstAttribute="leading" secondItem="HAa-R6-H3v" secondAttribute="leading" constant="16" id="svw-R5-4pY"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -573,6 +586,7 @@
                     <connections>
                         <outlet property="neverRecurrenceEndCell" destination="tv6-Mk-ojv" id="wD0-cv-bv5"/>
                         <outlet property="recurrenceEndDateCell" destination="TC8-9B-X4r" id="XUv-sS-UeV"/>
+                        <outlet property="recurrenceEndDateCellCheckmarkContainer" destination="S7C-Z9-lLW" id="M3S-ng-GR6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0bu-1f-c37" userLabel="First Responder" sceneMemberID="firstResponder"/>
