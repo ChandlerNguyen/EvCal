@@ -44,26 +44,9 @@
     XCTAssertNotNil(self.recurrenceRuleFormatter);
 }
 
-- (void)testRecurrenceRuleLocalizeStringsPropertyDefaultsToYES
-{
-    XCTAssertTrue(self.recurrenceRuleFormatter.localizeStrings);
-}
-
 - (void)testRecurrenceRuleDefaultFormatterCanBeCreated
 {
     XCTAssertNotNil([ECRecurrenceRuleFormatter defaultFormatter]);
-}
-
-- (void)testRecurrenceRuleDefaultFormatterLocalizeStringsPropertyDefaultsToYES
-{
-    XCTAssertTrue([ECRecurrenceRuleFormatter defaultFormatter].localizeStrings);
-}
-
-- (void)testRecurrenceRuleFormatterCanBeInitializedWithLocalizeStringsNO
-{
-    ECRecurrenceRuleFormatter* nonLocalizedFormatter = [[ECRecurrenceRuleFormatter alloc] initUsingLocalization:NO];
-    
-    XCTAssertFalse(nonLocalizedFormatter.localizeStrings);
 }
 
 - (void)testRecurrenceRuleFormatterDailyRuleNameIsNotNil
@@ -185,6 +168,60 @@
     ECRecurrenceRule* customRecurrenceRule = [ECRecurrenceRule customRecurrenceRuleWithFrequency:EKRecurrenceFrequencyDaily interval:2];
     
     XCTAssertEqualObjects([self.recurrenceRuleFormatter stringFromRecurrenceRule:customRecurrenceRule], self.recurrenceRuleFormatter.customRuleName);
+}
+
+- (void)testRecurrenceRuleFormatterHasRuleNames
+{
+    XCTAssertNotNil(self.recurrenceRuleFormatter.ruleNames);
+}
+
+- (void)testRecurrenceRuleFormatterRuleNamesContainsNoneRuleName
+{
+    XCTAssertTrue([self.recurrenceRuleFormatter.ruleNames containsObject:self.recurrenceRuleFormatter.noneRuleName]);
+}
+
+- (void)testRecurrenceRuleFormatterRuleNamesContainsDailyRuleName
+{
+    XCTAssertTrue([self.recurrenceRuleFormatter.ruleNames containsObject:self.recurrenceRuleFormatter.dailyRuleName]);
+}
+
+- (void)testRecurrenceRuleFormatterRuleNamesContainsWeekdaysRuleName
+{
+    XCTAssertTrue([self.recurrenceRuleFormatter.ruleNames containsObject:self.recurrenceRuleFormatter.weekdaysRuleName]);
+}
+
+- (void)testRecurrenceRuleFormatterRuleNamesContainsWeeklyRuleName
+{
+    XCTAssertTrue([self.recurrenceRuleFormatter.ruleNames containsObject:self.recurrenceRuleFormatter.weeklyRuleName]);
+}
+
+- (void)testRecurrenceRuleFormatterRuleNamesContainsMonthlyRuleName
+{
+    XCTAssertTrue([self.recurrenceRuleFormatter.ruleNames containsObject:self.recurrenceRuleFormatter.monthlyRuleName]);
+}
+
+- (void)testRecurrenceRuleFormatterRuleNamesContainsYearlyRuleName
+{
+    XCTAssertTrue([self.recurrenceRuleFormatter.ruleNames containsObject:self.recurrenceRuleFormatter.yearlyRuleName]);
+}
+
+- (void)testRecurrenceRuleFormatterRuleNamesContainsCustomRuleName
+{
+    XCTAssertTrue([self.recurrenceRuleFormatter.ruleNames containsObject:self.recurrenceRuleFormatter.customRuleName]);
+}
+
+- (void)testRecurrenceRuleFormatterRuleNamesContainsNoOtherStrings
+{
+    NSMutableArray* mutableRuleNames = [self.recurrenceRuleFormatter.ruleNames mutableCopy];
+    [mutableRuleNames removeObject:self.recurrenceRuleFormatter.noneRuleName];
+    [mutableRuleNames removeObject:self.recurrenceRuleFormatter.dailyRuleName];
+    [mutableRuleNames removeObject:self.recurrenceRuleFormatter.weekdaysRuleName];
+    [mutableRuleNames removeObject:self.recurrenceRuleFormatter.weeklyRuleName];
+    [mutableRuleNames removeObject:self.recurrenceRuleFormatter.monthlyRuleName];
+    [mutableRuleNames removeObject:self.recurrenceRuleFormatter.yearlyRuleName];
+    [mutableRuleNames removeObject:self.recurrenceRuleFormatter.customRuleName];
+    
+    XCTAssertTrue(mutableRuleNames.count == 0);
 }
 
 @end
