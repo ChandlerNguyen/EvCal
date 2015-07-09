@@ -32,6 +32,13 @@
     
     [self.recurrenceRulePicker selectRow:[self rowForInterval:self.recurrenceRule.rule.interval] inComponent:kRecurrencePickerIntervalComponent animated:NO];
     [self.recurrenceRulePicker selectRow:[self rowForFrequency:self.recurrenceRule.rule.frequency] inComponent:kRecurrencePickerFrequencyComponent animated:NO];
+    
+    [self updateRecurrenceLabelWithRule:self.recurrenceRule];
+}
+
+- (void)updateRecurrenceLabelWithRule:(ECRecurrenceRule*)rule
+{
+    self.repeatLabel.text = [[ECRecurrenceRuleFormatter defaultFormatter] detailStringFromRecurrenceRule:rule];
 }
 
 - (NSArray*)frequencyNames
@@ -103,6 +110,7 @@ const static NSInteger kRecurrencePickerFrequencyComponent =    1;
     NSInteger frequencyRow = [self.recurrenceRulePicker selectedRowInComponent:kRecurrencePickerFrequencyComponent];
     
     self.recurrenceRule = [ECRecurrenceRule customRecurrenceRuleWithFrequency:[self frequencyForPickerRow:frequencyRow] interval:[self intervalForPickerRow:intervalRow]];
+    [self updateRecurrenceLabelWithRule:self.recurrenceRule];
     [self informDelegateRecurrenceRuleWasSelected];
 }
 
