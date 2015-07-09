@@ -127,6 +127,30 @@
                                             <outlet property="propertyValueTextField" destination="c9g-V8-sXG" id="4fg-8m-hhO"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="calendarCell" id="UK6-Bm-Hog" customClass="ECCalendarCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UK6-Bm-Hog" id="5u8-Ls-LFa">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjk-ZS-RX5">
+                                                    <rect key="frame" x="30" y="11" width="69.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cjk-ZS-RX5" secondAttribute="trailing" constant="20" symbolic="YES" id="adR-hY-F2v"/>
+                                                <constraint firstItem="cjk-ZS-RX5" firstAttribute="leading" secondItem="5u8-Ls-LFa" secondAttribute="leading" constant="30" id="cOm-VT-aj3"/>
+                                                <constraint firstAttribute="centerY" secondItem="cjk-ZS-RX5" secondAttribute="centerY" id="miU-5c-nqz"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="calendarLabel" destination="cjk-ZS-RX5" id="mO8-Wm-sgj"/>
+                                            <segue destination="YIi-sg-40W" kind="push" identifier="calendar" id="9Af-Sc-10V"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle=" " id="bBj-U7-X5A">
@@ -297,7 +321,7 @@
                                             <segue destination="oSd-sI-5dS" kind="push" identifier="recurrenceRule" id="Fu6-aV-TSf"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="mOI-jB-JMZ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="mOI-jB-JMZ">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mOI-jB-JMZ" id="4DC-Xg-998">
@@ -313,7 +337,7 @@
                                                     <color key="textColor" red="0.43529411759999997" green="0.21960784310000001" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkt-3e-oI4">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkt-3e-oI4">
                                                     <rect key="frame" x="245" y="11" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -329,34 +353,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="ebq-QD-tVJ" kind="push" identifier="recurrenceEnd" id="WY8-fy-T66"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle=" " id="0x0-fw-piz">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="calendarCell" id="UK6-Bm-Hog" customClass="ECCalendarCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UK6-Bm-Hog" id="5u8-Ls-LFa">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjk-ZS-RX5">
-                                                    <rect key="frame" x="30" y="11" width="69.5" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cjk-ZS-RX5" secondAttribute="trailing" constant="20" symbolic="YES" id="adR-hY-F2v"/>
-                                                <constraint firstItem="cjk-ZS-RX5" firstAttribute="leading" secondItem="5u8-Ls-LFa" secondAttribute="leading" constant="30" id="cOm-VT-aj3"/>
-                                                <constraint firstAttribute="centerY" secondItem="cjk-ZS-RX5" secondAttribute="centerY" id="miU-5c-nqz"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="calendarLabel" destination="cjk-ZS-RX5" id="mO8-Wm-sgj"/>
-                                            <segue destination="YIi-sg-40W" kind="push" identifier="calendar" id="9Af-Sc-10V"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>

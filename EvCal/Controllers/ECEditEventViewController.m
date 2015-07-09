@@ -136,7 +136,10 @@
 
 - (void)synchronizeEventRecurrenceRule
 {
-    
+    if (self.recurrenceEndDate) {
+        self.recurrenceRule.rule.recurrenceEnd = [EKRecurrenceEnd recurrenceEndWithEndDate:self.recurrenceEndDate];
+    }
+    self.event.recurrenceRules = @[self.recurrenceRule.rule];
 }
 
 - (void)synchronizeFields
@@ -175,6 +178,19 @@
 {
     self.recurrenceRule = [[ECRecurrenceRule alloc] initWithRecurrenceRule:[self.event.recurrenceRules firstObject]];
     self.recurrenceRuleLabel.text = self.recurrenceRule.localizedName;
+    self.recurrenceEndDate = self.recurrenceRule.rule.recurrenceEnd.endDate;
+    self.recurrenceEndLabel.text = [self recurrenceEndTextForRecurrenceEndDate:self.recurrenceEndDate];
+}
+
+- (NSString*)recurrenceEndTextForRecurrenceEndDate:(NSDate*)endDate
+{
+    if (!endDate) {
+        return NSLocalizedString(@"ECEditEventViewController.RecurrenceEnd.Never", @"The event never stops repeating");
+    } else {
+        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"MMMM d, YYYY" options:0 locale:[NSLocale autoupdatingCurrentLocale]];
+        return [formatter stringFromDate:endDate];
+    }
 }
 
 - (void)updateDatePickersForAllDayStatus:(BOOL)allDay
@@ -397,6 +413,8 @@
 {
     self.recurrenceRule = rule;
     self.recurrenceRuleLabel.text = rule.localizedName;
+    
+    [self updateCellHeights];
 }
 
 #pragma mark - ECEditEventCalendarViewController Delegate
@@ -410,33 +428,34 @@
 
 #pragma mark - UITableView Delegate and Datasource
 
-const static CGFloat kCalendarAndRecurrenceRowHeight =  44.0f;
+const static CGFloat kRecurrenceRowHeight =             44.0f;
+const static CGFloat kCalendarCellHeight =              44.0f;
 const static CGFloat kDatesAndAlarmsRowHeight =         52.0f;
 const static CGFloat kTextPropertyHiddenNameHeight =    33.0f;
 const static CGFloat kTextPropertyVisibleNameHeight =   52.0f;
 const static CGFloat kExpandedDatePickerHeight =        214.0f;
 const static CGFloat kAllDayCellHeight =                44.0f;
 
-const static NSInteger kTitleLocationSection =          0;
+const static NSInteger kTitleLocationCalendarSection =  0;
 const static NSInteger kDateAndAllDaySection =          1;
-const static NSInteger kCalendarAndRecurrenceSection =  2;
+const static NSInteger kRecurrenceSection =             2;
 
 const static NSInteger kTitleCellRow =                  0;
+const static NSInteger kCalendarCellRow =               2;
+const static NSInteger kRecurrenceEndCellRow =          1;
 const static NSInteger kAllDayCellRow =                 2;
-const static NSInteger kRecurrenceRuleCellRow =         kAllDayCellRow + 1;
-//const static NSInteger kLocationCellRow =               1;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case kTitleLocationSection:
+        case kTitleLocationCalendarSection:
             return [self heightForCellInTitleLocationSectionAtIndexPath:indexPath];
             
         case kDateAndAllDaySection:
             return [self heightForCellInDateAndAllDaySectionAtIndexPath:indexPath];
             
-        case kCalendarAndRecurrenceSection:
-            return kCalendarAndRecurrenceRowHeight;
+        case kRecurrenceSection:
+            return [self heightForCellInRecurrenceSectionAtIndexPath:indexPath];
             
         default:
             return 0.0f;
@@ -447,6 +466,8 @@ const static NSInteger kRecurrenceRuleCellRow =         kAllDayCellRow + 1;
 {
     if (indexPath.row == kTitleCellRow) {
         return self.titleCell.propertyNameVisible ? kTextPropertyVisibleNameHeight : kTextPropertyHiddenNameHeight;
+    } else if (indexPath.row == kCalendarCellRow) {
+        return kCalendarCellHeight;
     } else {
         return self.locationCell.propertyNameVisible ? kTextPropertyVisibleNameHeight : kTextPropertyHiddenNameHeight;
     }
@@ -455,7 +476,7 @@ const static NSInteger kRecurrenceRuleCellRow =         kAllDayCellRow + 1;
 - (CGFloat)heightForCellInDateAndAllDaySectionAtIndexPath:(NSIndexPath*)indexPath
 {
     // all day cell
-    if (indexPath.row == kAllDayCellRow || indexPath.row == kRecurrenceRuleCellRow) {
+    if (indexPath.row == kAllDayCellRow) {
         return kAllDayCellHeight;
     } else {
         // if the date picker cell is highlighted it should be taller
@@ -467,9 +488,21 @@ const static NSInteger kRecurrenceRuleCellRow =         kAllDayCellRow + 1;
     }
 }
 
+- (CGFloat)heightForCellInRecurrenceSectionAtIndexPath:(NSIndexPath*)indexPath
+{
+    if (indexPath.row == kRecurrenceEndCellRow &&
+        self.recurrenceRule.type == ECRecurrenceRuleTypeNone) {
+        return 0.0f;
+    } else {
+        return kRecurrenceRowHeight;
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section != kTitleLocationSection) {
+    // short circuiting the || operator
+    if (indexPath.section != kTitleLocationCalendarSection ||
+        indexPath.row == kCalendarCellRow) {
         self.titleCell.editingProperty = NO;
         self.locationCell.editingProperty = NO;
     }
