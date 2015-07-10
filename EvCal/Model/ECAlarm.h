@@ -18,7 +18,8 @@ typedef NS_ENUM(NSInteger, ECAlarmType) {
     ECAlarmTypeOffsetSixHours,
     ECAlarmTypeOffsetOneDay,
     ECAlarmTypeOffsetTwoDays,
-    ECAlarmTypeOffsetAbsoluteDate,
+    ECAlarmTypeOffsetCustom,
+    ECAlarmTypeAbsoluteDate,
 };
 
 @interface ECAlarm : NSObject
@@ -27,6 +28,8 @@ typedef NS_ENUM(NSInteger, ECAlarmType) {
 @property (nonatomic, strong) EKAlarm* __nullable ekAlarm;
 @property (nonatomic, strong, readonly) NSString* __nonnull localizedName;
 
-- (nonnull instancetype)initWithEKAlarm:(nonnull EKAlarm*)ekAlarm;
+- (nonnull instancetype)initWithEKAlarm:(nullable EKAlarm*)ekAlarm;
++ (nonnull instancetype)alarmWithType:(ECAlarmType)type;
++ (nonnull instancetype)alarmWithDate:(nonnull NSDate*)date;
 
 @end
