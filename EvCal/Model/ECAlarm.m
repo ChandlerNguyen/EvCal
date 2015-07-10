@@ -41,6 +41,15 @@ const static NSTimeInterval kTwoDayTimeInterval =       60 * 60 * 24 * 2;
     return alarm;
 }
 
+- (ECAlarmType)type
+{
+    ECAlarmType type = [ECAlarm alarmTypeForEKAlarm:self.ekAlarm];
+    return type;
+}
+
+
+#pragma mark EKAlarm Creation and Typing
+
 + (nullable EKAlarm*)ekAlarmForType:(ECAlarmType)type
 {
     switch (type) {
@@ -80,6 +89,26 @@ const static NSTimeInterval kTwoDayTimeInterval =       60 * 60 * 24 * 2;
                                                                           userInfo:nil];
             @throw invalidArgumentException;
         }
+    }
+}
+
++ (ECAlarmType)alarmTypeForEKAlarm:(nullable EKAlarm*)ekAlarm
+{
+    if (!ekAlarm) {
+        return ECAlarmTypeNone;
+    } else if (ekAlarm.absoluteDate) {
+        return ECAlarmTypeAbsoluteDate;
+    } else {
+        // NSTimeIntervals are doubles, so case statements cannot be used
+        if (ekAlarm.relativeOffset == kQuarterHourTimeInterval) return ECAlarmTypeOffsetQuarterHour;
+        if (ekAlarm.relativeOffset == kHalfHourTimeInterval) return ECAlarmTypeOffsetHalfHour;
+        if (ekAlarm.relativeOffset == kHourTimeInterval) return ECAlarmTypeOffsetHour;
+        if (ekAlarm.relativeOffset == kTwoHourTimeInterval) return ECAlarmTypeOffsetTwoHours;
+        if (ekAlarm.relativeOffset == kSixHourTimeInterval) return ECAlarmTypeOffsetSixHours;
+        if (ekAlarm.relativeOffset == kOneDayTimeInterval) return ECAlarmTypeOffsetOneDay;
+        if (ekAlarm.relativeOffset == kTwoDayTimeInterval) return ECAlarmTypeOffsetTwoDays;
+        // All other types exhausted, alarm ahs custom offset
+        return ECAlarmTypeOffsetCustom;
     }
 }
 
