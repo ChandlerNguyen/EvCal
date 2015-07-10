@@ -154,7 +154,12 @@
     if (self.recurrenceEndDate) {
         self.recurrenceRule.rule.recurrenceEnd = [EKRecurrenceEnd recurrenceEndWithEndDate:self.recurrenceEndDate];
     }
-    self.event.recurrenceRules = @[self.recurrenceRule.rule];
+    
+    if (self.recurrenceRule.type == ECRecurrenceRuleTypeNone) {
+        self.event.recurrenceRules = nil;
+    } else {
+        self.event.recurrenceRules = @[self.recurrenceRule.rule];
+    }
 }
 
 - (void)synchronizeFields
