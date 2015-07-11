@@ -12,6 +12,7 @@
 
 // EvCal Classes
 #import "ECAlarm.h"
+#import "ECAlarmFormatter.h"
 
 @interface ECAlarmTests : XCTestCase
 
@@ -35,8 +36,11 @@
 }
 
 const static NSTimeInterval kQuarterHourTimeInterval = 15 * 60;
+const static NSTimeInterval kHalfHourTimeInterval = 30 * 60;
+const static NSTimeInterval kOneHourTimeInterval = 60 * 60;
 
 #pragma mark - Tests
+#pragma mark Test alarm creation
 
 - (void)testAlarmCanBeCreatedWithNilEKAlarm
 {
@@ -64,8 +68,14 @@ const static NSTimeInterval kQuarterHourTimeInterval = 15 * 60;
     XCTAssertEqualObjects(alarm.ekAlarm, ekAlarm);
 }
 
+- (void)testAlarmCreatedWithEKAlarmChangesTypeOnEKAlarmChange
+{
+    EKAlarm* ekAlarm = [EKAlarm alarmWithRelativeOffset:kQuarterHourTimeInterval];
+    ECAlarm* alarm = [[ECAlarm alloc] initWithEKAlarm:ekAlarm];
+    alarm.ekAlarm = [EKAlarm alarmWithRelativeOffset:kHalfHourTimeInterval];
+    XCTAssertEqual(alarm.type, ECAlarmTypeOffsetHalfHour);
+}
 
-#pragma mark Testing Types
 - (void)testAlarmCreatedWithCustomTypeThrowsInvalidArgumentException
 {
     XCTAssertThrowsSpecificNamed([ECAlarm alarmWithType:ECAlarmTypeOffsetCustom], NSException, NSInvalidArgumentException);
@@ -75,6 +85,9 @@ const static NSTimeInterval kQuarterHourTimeInterval = 15 * 60;
 {
     XCTAssertThrowsSpecificNamed([ECAlarm alarmWithType:ECAlarmTypeAbsoluteDate], NSException, NSInvalidArgumentException);
 }
+
+
+#pragma mark None Type
 
 - (void)testAlarmCanBeCreatedWithNoneType
 {
@@ -93,7 +106,14 @@ const static NSTimeInterval kQuarterHourTimeInterval = 15 * 60;
     XCTAssertNil(alarm.ekAlarm);
 }
 
+- (void)testAlarmCreatedWithNoneTypeHasCorrectLocalizedName
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeNone];
+    XCTAssertEqualObjects(alarm.localizedName,[ECAlarmFormatter defaultFormatter].noneAlarmLocalizedName);
+}
 
+
+#pragma mark Quarter Hour
 - (void)testAlarmCenBeCreatedWithQuarterHourType
 {
     XCTAssertNotNil([ECAlarm alarmWithType:ECAlarmTypeOffsetQuarterHour]);
@@ -101,8 +121,8 @@ const static NSTimeInterval kQuarterHourTimeInterval = 15 * 60;
 
 - (void)testAlarmCreatedWithQuarterHourTypeHasCorrectTypeProperty
 {
-    ECAlarm* quarterHourAlarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetQuarterHour];
-    XCTAssertEqual(quarterHourAlarm.type, ECAlarmTypeOffsetQuarterHour);
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetQuarterHour];
+    XCTAssertEqual(alarm.type, ECAlarmTypeOffsetQuarterHour);
 }
 
 - (void)testAlarmCreatedWithQuarterHourEKAlarmHasCorrectTypeProperty
@@ -114,7 +134,79 @@ const static NSTimeInterval kQuarterHourTimeInterval = 15 * 60;
 
 - (void)testAlarmCreatedWithQuarterHourTypeHasEKAlarmWithQuarterHourRelativeOffset
 {
-    ECAlarm* quarterHourAlarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetQuarterHour];
-    XCTAssertEqual(quarterHourAlarm.ekAlarm.relativeOffset, 15 * 60);
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetQuarterHour];
+    XCTAssertEqual(alarm.ekAlarm.relativeOffset, 15 * 60);
 }
+
+- (void)testAlarmCreatedWithQuarterHourTypeHasCorrectLocalizedName
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetQuarterHour];
+    XCTAssertEqualObjects(alarm.localizedName, [ECAlarmFormatter defaultFormatter].quarterHourAlarmLocalizedName);
+}
+
+#pragma mark Half Hour
+
+- (void)testAlarmCanBeCreatedWithHalfHourType
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetHalfHour];
+    XCTAssertNotNil(alarm);
+}
+
+- (void)testAlarmCreatedWithHalfHourTypeHasCorrectTypeProperty
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetHalfHour];
+    XCTAssertEqual(alarm.type, ECAlarmTypeOffsetHalfHour);
+}
+
+- (void)testAlarmCreatedWithHalfHourTypeHasEKAlarmWithHalfHourRelativeOffset
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetHalfHour];
+    XCTAssertEqual(alarm.ekAlarm.relativeOffset, kHalfHourTimeInterval);
+}
+
+- (void)testAlarmCreatedWithHalfHourTypeHasCorrectLocalizedName
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetHalfHour];
+    XCTAssertEqualObjects(alarm.localizedName, [ECAlarmFormatter defaultFormatter].quarterHourAlarmLocalizedName);
+}
+
+
+#pragma mark One Hour
+- (void)testAlarmCanBeCreatedWithOneHourType
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetHour];
+    XCTAssertNotNil(alarm);
+}
+
+- (void)testAlarmCreatedWithOneHourTypeHasCorrectTypeProperty
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetHour];
+    XCTAssertEqual(alarm.type, ECAlarmTypeOffsetHour);
+}
+
+- (void)testAlarmCreatedWithOneHourTypeHasEKAlarmWithOneHourRelativeOffset
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetHour];
+    XCTAssertEqual(alarm.ekAlarm.relativeOffset, kOneHourTimeInterval);
+}
+
+- (void)testAlarmCreatedWithOneHourTypeHasCorrectLocalizedName
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetHour];
+    XCTAssertEqualObjects(alarm.localizedName, [ECAlarmFormatter defaultFormatter].oneHourLocalizedName);
+}
+
+#pragma mark Two Hours
+- (void)testAlarmCanBeCreatedWithTwoHoursType
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetTwoHours];
+    XCTAssertNotNil(alarm);
+}
+
+- (void)testAlarmCreatedWithTwoHoursTypeHasCorrectTypeProperty
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetTwoHours];
+    XCTAssertEqual(alarm.type, ECAlarmTypeOffsetTwoHours);
+}
+
 @end
