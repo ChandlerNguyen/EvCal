@@ -101,7 +101,8 @@ typedef NS_ENUM(NSInteger, ECAlarmType){
 
 /**
  *  Creates a new ECAlarm with the given date. The alarm's EKAlarm will be
- *  automatically created.
+ *  automatically created. Throws an invalid arugment exception on nil date 
+ *  input.
  *
  *  @param date The date with which to create the alarm.
  *

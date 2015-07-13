@@ -92,6 +92,13 @@ const static NSTimeInterval kTwoDayTimeInterval = 2 * 24 * 60 * 60;
     XCTAssertThrowsSpecificNamed([ECAlarm alarmWithType:ECAlarmTypeAbsoluteDate], NSException, NSInvalidArgumentException);
 }
 
+- (void)testAlarmCreatedWithNilAbsoluteDateThrowsInvalidArgumentException
+{
+    // This variable is added to avoid compiler warnings about passing nil date
+    NSDate* nilDate = nil;
+    XCTAssertThrowsSpecificNamed([ECAlarm alarmWithDate:nilDate], NSException, NSInvalidArgumentException);
+}
+
 
 #pragma mark None Type
 

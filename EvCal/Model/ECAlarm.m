@@ -32,6 +32,19 @@ const static NSTimeInterval kTwoDayTimeInterval =       60 * 60 * 24 * 2;
     return self;
 }
 
++ (nonnull instancetype)alarmWithDate:(nonnull NSDate *)date
+{
+    if (!date) {
+        NSException* invalidArgumentException = [NSException exceptionWithName:NSInvalidArgumentException reason:@"Alarm cannot be created with a nil date" userInfo:nil];
+        @throw invalidArgumentException;
+    }
+    
+    EKAlarm* ekAlarm = [EKAlarm alarmWithAbsoluteDate:date];
+    ECAlarm* alarm = [[ECAlarm alloc] initWithEKAlarm:ekAlarm];
+    
+    return alarm;
+}
+
 + (nonnull instancetype)alarmWithType:(ECAlarmType)type
 {
     EKAlarm* ekAlarm = [self ekAlarmForType:type];
