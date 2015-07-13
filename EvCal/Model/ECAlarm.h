@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, ECAlarmType){
     /**
      *  The event has an alarm one hour prior to its start date.
      */
-    ECAlarmTypeOffsetHour,
+    ECAlarmTypeOffsetOneHour,
     /**
      *  The event has an alarm two hours prior to its start date.
      */

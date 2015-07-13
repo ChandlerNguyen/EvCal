@@ -61,6 +61,7 @@
 		84D168FD1B42AACB00DBCF17 /* ECEventCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D168FC1B42AACB00DBCF17 /* ECEventCacheTests.m */; };
 		84D92C991B29A52E0050015D /* ECDayViewEventsLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D92C981B29A52E0050015D /* ECDayViewEventsLayout.m */; };
 		84D92C9B1B29AFD40050015D /* ECDayViewEventsLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D92C9A1B29AFD40050015D /* ECDayViewEventsLayoutTests.m */; };
+		84E5B9961B54383B00522B20 /* ECAlarmFormatterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E5B9951B54383B00522B20 /* ECAlarmFormatterTests.m */; };
 		84EF22611B08769A003DA610 /* ECEventStoreProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EF22601B08769A003DA610 /* ECEventStoreProxy.m */; };
 		84EF22691B08D59E003DA610 /* ECEventViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EF22681B08D59E003DA610 /* ECEventViewFactory.m */; };
 		84EF226C1B08D5BD003DA610 /* ECEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EF226B1B08D5BD003DA610 /* ECEventView.m */; };
@@ -179,6 +180,7 @@
 		84D92C971B29A52E0050015D /* ECDayViewEventsLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDayViewEventsLayout.h; path = Views/ECDayViewEventsLayout.h; sourceTree = "<group>"; };
 		84D92C981B29A52E0050015D /* ECDayViewEventsLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDayViewEventsLayout.m; path = Views/ECDayViewEventsLayout.m; sourceTree = "<group>"; };
 		84D92C9A1B29AFD40050015D /* ECDayViewEventsLayoutTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDayViewEventsLayoutTests.m; sourceTree = "<group>"; };
+		84E5B9951B54383B00522B20 /* ECAlarmFormatterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECAlarmFormatterTests.m; sourceTree = "<group>"; };
 		84EF225F1B08769A003DA610 /* ECEventStoreProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEventStoreProxy.h; path = Model/ECEventStoreProxy.h; sourceTree = "<group>"; };
 		84EF22601B08769A003DA610 /* ECEventStoreProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEventStoreProxy.m; path = Model/ECEventStoreProxy.m; sourceTree = "<group>"; };
 		84EF22671B08D59E003DA610 /* ECEventViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEventViewFactory.h; path = Views/ECEventViewFactory.h; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 		84443EF91B0DE6E800385E5A /* Test Suites */ = {
 			isa = PBXGroup;
 			children = (
+				84E5B9951B54383B00522B20 /* ECAlarmFormatterTests.m */,
 				849EA59F1B4FCFE90053549C /* ECAlarmTests.m */,
 				84CAC3B81B4C2B9A00B191B6 /* ECRecurrenceRuleTests.m */,
 				842DA8FE1B4A3DEE007DC027 /* ECRecurrenceRuleFormatterTests.m */,
@@ -704,6 +707,7 @@
 				84443F021B0DFDF300385E5A /* ECTestsEventQuery.m in Sources */,
 				8478F7841B15953F0096F1B7 /* NSCalendar+ECTestSwizzle.m in Sources */,
 				846FDB471B39317F00910D4F /* ECInfiniteDatePagingViewTests.m in Sources */,
+				84E5B9961B54383B00522B20 /* ECAlarmFormatterTests.m in Sources */,
 				8478F7811B14890A0096F1B7 /* ECDayViewEventViewManagementTests.m in Sources */,
 				849773F21B3C09710097259F /* ECDateViewTests.m in Sources */,
 				847571FF1B0AFF9B0019E393 /* ECEventStoreProxyTests.m in Sources */,
