@@ -5,10 +5,10 @@
 //  Created by Tom on 7/9/15.
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
-
-#import "ECAlarm.h"
 @import EventKit;
 
+#import "ECAlarm.h"
+#import "ECAlarmFormatter.h";
 
 @implementation ECAlarm
 
@@ -30,6 +30,11 @@ const static NSTimeInterval kTwoDayTimeInterval =       60 * 60 * 24 * 2;
     }
     
     return self;
+}
+
+- (NSString*)localizedName
+{
+    return [[ECAlarmFormatter defaultFormatter] localizedStringFromAlarm:self];
 }
 
 + (nonnull instancetype)alarmWithDate:(nonnull NSDate *)date

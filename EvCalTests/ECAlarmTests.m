@@ -180,7 +180,7 @@ const static NSTimeInterval kTwoDayTimeInterval = 2 * 24 * 60 * 60;
 - (void)testAlarmCreatedWithHalfHourTypeHasCorrectLocalizedName
 {
     ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetHalfHour];
-    XCTAssertEqualObjects(alarm.localizedName, [ECAlarmFormatter defaultFormatter].quarterHourAlarmLocalizedName);
+    XCTAssertEqualObjects(alarm.localizedName, [ECAlarmFormatter defaultFormatter].halfHourLocalizedName);
 }
 
 
@@ -309,7 +309,7 @@ const static NSTimeInterval kTwoDayTimeInterval = 2 * 24 * 60 * 60;
 - (void)testAlarmCreatedWithTwoDaysTypeHasCorrectLocalizedName
 {
     ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetTwoDays];
-    XCTAssertEqualObjects(alarm.localizedName, [ECAlarmFormatter defaultFormatter].localizedNames);
+    XCTAssertEqualObjects(alarm.localizedName, [ECAlarmFormatter defaultFormatter].twoDaysLocalizedName);
 }
 
 

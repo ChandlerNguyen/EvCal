@@ -45,10 +45,7 @@
 @property (nonatomic, strong, readonly) NSString* __nonnull oneDayLocalizedName; // One Day Before
 // The localized name for an alarm two days prior to an event.
 @property (nonatomic, strong, readonly) NSString* __nonnull twoDaysLocalizedName; // Two Days Before
-// The localized name for an alarm with a custom offset prior to an event.
-@property (nonatomic, strong, readonly) NSString* __nonnull customOffsetLocalizedName; // [Offset] Before
-// The localized name for an alarm with an absolute fire date.
-@property (nonatomic, strong, readonly) NSString* __nonnull absoluteDateLocalizedName; // July 4th, 2015, 10:00PM
+
 // An array of all the formatter's localized names.
 @property (nonatomic, strong, readonly) NSArray* __nonnull localizedNames;
 
@@ -64,14 +61,5 @@
  *  @return The newly created string.
  */
 - (nonnull NSString*)localizedStringFromAlarm:(nonnull ECAlarm*)alarm;
-
-/**
- *  Creates and returns a new localized string for the given alarm type.
- *
- *  @param alarmType The alarm type for which to create a string.
- *
- *  @return The newly created string.
- */
-- (nonnull NSString*)localizedAlarmNameForType:(ECAlarmType)alarmType;
 
 @end
