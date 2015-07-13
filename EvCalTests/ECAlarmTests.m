@@ -38,6 +38,12 @@
 const static NSTimeInterval kQuarterHourTimeInterval = 15 * 60;
 const static NSTimeInterval kHalfHourTimeInterval = 30 * 60;
 const static NSTimeInterval kOneHourTimeInterval = 60 * 60;
+const static NSTimeInterval KTwoHourTimeInterval = 2 * 60 * 60;
+const static NSTimeInterval kSixHourTimeInterval = 6 * 60 * 60;
+const static NSTimeInterval kOneDayTimeInterval = 24 * 60 * 60;
+const static NSTimeInterval kTwoDayTimeInterval = 2 * 24 * 60 * 60;
+
+
 
 #pragma mark - Tests
 #pragma mark Test alarm creation
@@ -208,5 +214,117 @@ const static NSTimeInterval kOneHourTimeInterval = 60 * 60;
     ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetTwoHours];
     XCTAssertEqual(alarm.type, ECAlarmTypeOffsetTwoHours);
 }
+
+- (void)testAlarmCreatedWithTwoHoursTypeHasEKAlarmWithTwoHourRelativeOffset
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetTwoHours];
+    XCTAssertEqual(alarm.ekAlarm.relativeOffset, KTwoHourTimeInterval);
+}
+
+- (void)testAlarmCreatedWithTwoHoursTypeHasCorrectLocalizedName
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetTwoHours];
+    XCTAssertEqualObjects(alarm.localizedName, [ECAlarmFormatter defaultFormatter].twoHoursLocalizedName);
+}
+
+#pragma mark Six Hours
+
+- (void)testAlarmCanBeCreatedWithSixHoursType
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetSixHours];
+    XCTAssertNotNil(alarm);
+}
+
+- (void)testAlarmCreatedWithSixHoursTypeHasCorrectTypeProperty
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetSixHours];
+    XCTAssertEqual(alarm.type, ECAlarmTypeOffsetSixHours);
+}
+
+- (void)testAlarmCreatedWithSixHoursTypeHasEKAlarmWithSixHourRelativeOffset
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetSixHours];
+    XCTAssertEqual(alarm.ekAlarm.relativeOffset, kSixHourTimeInterval);
+}
+
+- (void)testAlarmCreatedWithSixHoursTypeHasCorrectLocalizedName
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetSixHours];
+    XCTAssertEqualObjects(alarm.localizedName, [ECAlarmFormatter defaultFormatter].sixHoursLocalizedName);
+}
+
+#pragma mark One Day
+
+- (void)testAlarmCanBeCreatedWithOneDayType
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetOneDay];
+    XCTAssertNotNil(alarm);
+}
+
+- (void)testAlarmCreatedWithOneDayTypeHasCorrectTypePropertySet
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetOneDay];
+    XCTAssertEqual(alarm.type, ECAlarmTypeOffsetOneDay);
+}
+
+- (void)testALarmCreatedWithOneDayTypeHasEKAlarmWithOneDayRelativeOffset
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetOneDay];
+    XCTAssertEqual(alarm.ekAlarm.relativeOffset, kOneDayTimeInterval);
+}
+
+- (void)testAlarmCreatedWithOneDayTypeHasCorrectLocalizedName
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetOneDay];
+    XCTAssertEqualObjects(alarm.localizedName, [ECAlarmFormatter defaultFormatter].oneDayLocalizedName);
+}
+
+#pragma mark Two Days
+
+- (void)testAlarmCanBeCreatedWithTwoDaysType
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetTwoDays];
+    XCTAssertNotNil(alarm);
+}
+
+- (void)testAlarmCreatedWithTwoDaysTypeHasCorrectyTypeProperty
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetTwoDays];
+    XCTAssertEqual(alarm.type, ECAlarmTypeOffsetTwoDays);
+}
+
+- (void)testAlarmCreatedWithTwoDaysTypeHasEKAlarmWithTwoDaysRelativeOffset
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetTwoDays];
+    XCTAssertEqual(alarm.ekAlarm.relativeOffset, kTwoDayTimeInterval);
+}
+
+- (void)testAlarmCreatedWithTwoDaysTypeHasCorrectLocalizedName
+{
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetTwoDays];
+    XCTAssertEqualObjects(alarm.localizedName, [ECAlarmFormatter defaultFormatter].localizedNames);
+}
+
+
+#pragma mark Absolute Date
+
+- (void)testAlarmCanBeCreatedWithAbsoluteDate
+{
+    ECAlarm* alarm = [ECAlarm alarmWithDate:self.testStartDate];
+    XCTAssertNotNil(alarm);
+}
+
+- (void)testAlarmCreatedWithAbsoluteDateHasCorrectTypeProperty
+{
+    ECAlarm* alarm = [ECAlarm alarmWithDate:self.testStartDate];
+    XCTAssertEqual(alarm.type, ECAlarmTypeAbsoluteDate);
+}
+
+- (void)testAlarmCreatedWithAbsoluteDateHasEKAlarmWithSameAbsoluteDate
+{
+    ECAlarm* alarm = [ECAlarm alarmWithDate:self.testStartDate];
+    XCTAssertEqualObjects(alarm.ekAlarm.absoluteDate, self.testStartDate);
+}
+
 
 @end
