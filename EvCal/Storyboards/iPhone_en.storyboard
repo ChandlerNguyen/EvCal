@@ -373,6 +373,9 @@
                                                     <state key="normal" title="Custom">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="switchPickerButtonTapped:" destination="41q-Pc-RAt" eventType="touchUpInside" id="hTd-xZ-XDO"/>
+                                                    </connections>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VsC-yn-v1k" userLabel="Picker Container View">
                                                     <rect key="frame" x="0.0" y="51" width="320" height="162"/>
@@ -393,6 +396,11 @@
                                                 <constraint firstItem="VsC-yn-v1k" firstAttribute="top" secondItem="swW-KC-1W7" secondAttribute="bottom" constant="8.5" id="rDg-AL-DUP"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="infoLabel" destination="swW-KC-1W7" id="BsU-NV-u36"/>
+                                            <outlet property="switchPickerButton" destination="Up0-LS-7BY" id="VPQ-0e-62H"/>
+                                            <outlet property="titleLabel" destination="dRS-wx-yxc" id="VKW-CB-G1d"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="mOI-jB-JMZ">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

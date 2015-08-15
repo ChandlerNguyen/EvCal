@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ECEditEventMultiPickerCell : UITableViewCell
+@interface ECEditEventMultiPickerCell : UITableViewCell <UIPickerViewDataSource, UIPickerViewDelegate>
+
+@property (nonatomic, weak, readonly) UIPickerView* primaryPickerView;
+@property (nonatomic, weak, readonly) UIPickerView* secondaryPickerView;
 
 @end

@@ -7,15 +7,66 @@
 //
 
 #import "ECEditEventMultiPickerCell.h"
+@interface ECEditEventMultiPickerCell()
+
+@property (nonatomic, weak) IBOutlet UILabel* titleLabel;
+@property (nonatomic, weak) IBOutlet UILabel* infoLabel;
+
+@property (nonatomic, weak) IBOutlet UIButton* switchPickerButton;
+
+@property (nonatomic, weak) IBOutlet UIView* pickerContainerView;
+@property (nonatomic, weak, readwrite) UIPickerView* primaryPickerView;
+@property (nonatomic, weak, readwrite) UIPickerView* secondaryPickerView;
+
+@end
 
 @implementation ECEditEventMultiPickerCell
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (UIPickerView*)addPickerView
+{
+    UIPickerView* pickerView = [[UIPickerView alloc] init];
+    
+    pickerView.delegate = self;
+    pickerView.dataSource = self;
+    
+    [self.pickerContainerView addSubview:pickerView];
+    
+    return pickerView;
 }
-*/
+
+- (UIPickerView*)primaryPickerView
+{
+    if (!_primaryPickerView) {
+        _primaryPickerView = [self addPickerView];
+    }
+    
+    return _primaryPickerView;
+}
+
+- (UIPickerView*)secondaryPickerView
+{
+    if (!_secondaryPickerView) {
+        _secondaryPickerView = [self addPickerView];
+    }
+    
+    return _secondaryPickerView;
+}
+
+- (IBAction)switchPickerButtonTapped:(UIButton*)sender
+{
+    
+}
+
+#pragma mark - UIPickerView Delegate and Data Source
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 0;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return 0;
+}
 
 @end
