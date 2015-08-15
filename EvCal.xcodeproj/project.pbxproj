@@ -38,6 +38,7 @@
 		8478F7B21B244AF80096F1B7 /* NSDate+ECEventAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F7B11B244AF80096F1B7 /* NSDate+ECEventAdditions.m */; };
 		8478F7B51B24519B0096F1B7 /* ECDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478F7B41B24519B0096F1B7 /* ECDatePickerCell.m */; };
 		848628421B45976A007E0AA2 /* EKEvent+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 848628411B45976A007E0AA2 /* EKEvent+ECAdditions.m */; };
+		849539391B7FFC7300B7873E /* ECEditEventMultiPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849539381B7FFC7300B7873E /* ECEditEventMultiPickerCell.m */; };
 		849773F21B3C09710097259F /* ECDateViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 849773F11B3C09710097259F /* ECDateViewTests.m */; };
 		849EA5951B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849EA5941B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m */; };
 		849EA5981B4E3BD80053549C /* ECEditEventRecurrenceCustomRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849EA5971B4E3BD80053549C /* ECEditEventRecurrenceCustomRuleViewController.m */; };
@@ -137,6 +138,8 @@
 		847A81661B09B18B008F5168 /* ECLogging.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ECLogging.pch; path = Application/ECLogging.pch; sourceTree = "<group>"; };
 		848628401B45976A007E0AA2 /* EKEvent+ECAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "EKEvent+ECAdditions.h"; path = "Support/EKEvent+ECAdditions.h"; sourceTree = "<group>"; };
 		848628411B45976A007E0AA2 /* EKEvent+ECAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "EKEvent+ECAdditions.m"; path = "Support/EKEvent+ECAdditions.m"; sourceTree = "<group>"; };
+		849539371B7FFC7300B7873E /* ECEditEventMultiPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventMultiPickerCell.h; path = Views/ECEditEventMultiPickerCell.h; sourceTree = "<group>"; };
+		849539381B7FFC7300B7873E /* ECEditEventMultiPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEditEventMultiPickerCell.m; path = Views/ECEditEventMultiPickerCell.m; sourceTree = "<group>"; };
 		849773F11B3C09710097259F /* ECDateViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDateViewTests.m; sourceTree = "<group>"; };
 		849EA5931B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventRecurrenceEndViewController.h; path = Controllers/ECEditEventRecurrenceEndViewController.h; sourceTree = "<group>"; };
 		849EA5941B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEditEventRecurrenceEndViewController.m; path = Controllers/ECEditEventRecurrenceEndViewController.m; sourceTree = "<group>"; };
@@ -418,6 +421,8 @@
 				842DA8F91B47E5D7007DC027 /* ECEventTextPropertyCell.m */,
 				84CAC3C01B4D3E1700B191B6 /* ECEventCustomRecurrenceRuleCell.h */,
 				84CAC3C11B4D3E1700B191B6 /* ECEventCustomRecurrenceRuleCell.m */,
+				849539371B7FFC7300B7873E /* ECEditEventMultiPickerCell.h */,
+				849539381B7FFC7300B7873E /* ECEditEventMultiPickerCell.m */,
 			);
 			name = "Edit Event View";
 			sourceTree = "<group>";
@@ -664,6 +669,7 @@
 				8474BF151B2EDEF000475846 /* ECCalendarCell.m in Sources */,
 				84B7ED1D1B35BB9400A6384E /* ECWeekdaysContainerView.m in Sources */,
 				843535851B2DAFD000A8E404 /* ECEditEventCalendarViewController.m in Sources */,
+				849539391B7FFC7300B7873E /* ECEditEventMultiPickerCell.m in Sources */,
 				849EA59E1B4EB6F50053549C /* ECAlarmFormatter.m in Sources */,
 				8478F78F1B19A29A0096F1B7 /* ECLogFormatter.m in Sources */,
 				84C4591E1B073DB90066B6A9 /* ECDayViewController.m in Sources */,
