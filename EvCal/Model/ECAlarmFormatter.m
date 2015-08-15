@@ -71,7 +71,7 @@
         _oneHourLocalizedName = NSLocalizedString(@"ECAlarm.One Hour", @"The alarm occurs one hour before the event's start date");
     }
     
-    return _halfHourLocalizedName;
+    return _oneHourLocalizedName;
 }
 
 - (NSString*)twoHoursLocalizedName
