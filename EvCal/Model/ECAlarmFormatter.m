@@ -11,6 +11,8 @@
 
 @interface ECAlarmFormatter()
 
+@property (nonatomic, strong) NSDateFormatter* dateFormatter;
+
 @property (nonatomic, strong, readwrite) NSString* __nonnull noneAlarmLocalizedName; // None
 @property (nonatomic, strong, readwrite) NSString* __nonnull quarterHourAlarmLocalizedName; // 15 Minutes
 @property (nonatomic, strong, readwrite) NSString* __nonnull halfHourLocalizedName; // 30 Minutes
@@ -36,6 +38,16 @@
     });
     
     return formatter;
+}
+
+- (NSDateFormatter*)dateFormatter
+{
+    if (!_dateFormatter) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        _dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    }
+    
+    return _dateFormatter;
 }
 
 - (NSString*)noneAlarmLocalizedName
@@ -184,13 +196,15 @@
 - (NSString*)localizedStringFromAlarm:(nonnull ECAlarm *)alarm
 {
     if (alarm) {
-        if (alarm.type == ECAlarmTypeNone) {
-            return self.noneAlarmLocalizedName;
-        }
-        else if (alarm.type == ECAlarmTypeAbsoluteDate) {
-            return [self localizedStringFromAbsoluteDateAlarm:alarm];
-        } else {
-            return [self localizedStringFromRelativeOffsetAlarm:alarm];
+        switch (alarm.type) {
+            case ECAlarmTypeAbsoluteDate:
+                return [self localizedStringFromAbsoluteDateAlarm:alarm];
+                
+            case ECAlarmTypeOffsetCustom:
+                return [self localizedStringFromCustomAlarm:alarm];
+                
+            default:
+                return [self localizedStringForAlarmType:alarm.type];
         }
     } else {
         return nil;
@@ -199,36 +213,26 @@
 
 - (NSString*)localizedStringFromAbsoluteDateAlarm:(ECAlarm*)alarm
 {
-    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    formatter.dateStyle = NSDateFormatterMediumStyle;
-    return [formatter stringFromDate:alarm.ekAlarm.absoluteDate];
+    return [self.dateFormatter stringFromDate:alarm.ekAlarm.absoluteDate];
 }
 
-const static NSTimeInterval kMinuteTimeInterval = 60;
-const static NSTimeInterval kHourTimeInterval = 60 * kMinuteTimeInterval;
+const static NSTimeInterval kMinuteTimeInterval = 60.0;
+const static NSTimeInterval kHourTimeInterval = 60.0 * kMinuteTimeInterval;
 const static NSTimeInterval kDayTimeInterval = 24 * kHourTimeInterval;
 
-- (NSString*)localizedStringFromRelativeOffsetAlarm:(ECAlarm*)alarm
+- (NSString*)localizedStringFromCustomAlarm:(ECAlarm*)alarm
 {
     NSTimeInterval offset = alarm.ekAlarm.relativeOffset;
     NSInteger days = (NSInteger)(offset / kDayTimeInterval);
     offset -= (days * kDayTimeInterval);
-    NSInteger hours = (NSInteger)(offset / (kHourTimeInterval));
-    offset -= (hours * kHourTimeInterval);
-    
+    NSInteger hours = (NSInteger)(offset / kHourTimeInterval);
+    offset -= (days * kHourTimeInterval);
     NSInteger minutes = (NSInteger)(offset / kMinuteTimeInterval);
     
-    // use explicit if statements so static strings can be fed to genstrings
-    if (hours != 0 && minutes != 0) {
-        return [NSString stringWithFormat:NSLocalizedString(@"ECAlarm.%lu Hours, %lu Minutes Before", @"The alarm occurs [hours] hours and [minutes] minutes before the event start date"), hours, minutes];
-    } else if (hours != 0) {
-        return [NSString stringWithFormat:NSLocalizedString(@"ECAlarm.%lu Hours Before", @"The alarm occurs [hours] hours before the event start date"), hours];
-    } else if (minutes != 0) {
-        return [NSString stringWithFormat:NSLocalizedString(@"ECAlarm.%lu Minutes Before", @"The alarm occurs [minutes] minutes before the event start date"), minutes];
-    } else {
-        return NSLocalizedString(@"ECAlarm.When Event Begins", @"The alarm occurs at the same time as the event start date");
-    }
+    NSString* alarmDescription = [NSString stringWithFormat:NSLocalizedString(@"%lu Days, %lu Hours, %lu Minutes Before", @"Alarm occurs [days] Days, [hours] Hours, [minutes] Minutes prior to event"),
+                                  days, hours, minutes];
+    
+    return alarmDescription;
 }
-
 
 @end
