@@ -398,6 +398,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="infoLabel" destination="swW-KC-1W7" id="BsU-NV-u36"/>
+                                            <outlet property="pickerContainerView" destination="VsC-yn-v1k" id="RrQ-5V-aYu"/>
                                             <outlet property="switchPickerButton" destination="Up0-LS-7BY" id="VPQ-0e-62H"/>
                                             <outlet property="titleLabel" destination="dRS-wx-yxc" id="VKW-CB-G1d"/>
                                         </connections>
