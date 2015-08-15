@@ -8,7 +8,7 @@
 @import EventKit;
 
 #import "ECAlarm.h"
-#import "ECAlarmFormatter.h";
+#import "ECAlarmFormatter.h"
 
 @implementation ECAlarm
 
@@ -79,7 +79,7 @@ const static NSTimeInterval kTwoDayTimeInterval =       60 * 60 * 24 * 2;
         case ECAlarmTypeOffsetHalfHour:
             return [EKAlarm alarmWithRelativeOffset:kHalfHourTimeInterval];
             
-        case ECAlarmTypeOffsetHour:
+        case ECAlarmTypeOffsetOneHour:
             return [EKAlarm alarmWithRelativeOffset:kHourTimeInterval];
             
         case ECAlarmTypeOffsetTwoHours:
@@ -120,7 +120,7 @@ const static NSTimeInterval kTwoDayTimeInterval =       60 * 60 * 24 * 2;
         // NSTimeIntervals are doubles, so case statements cannot be used
         if (ekAlarm.relativeOffset == kQuarterHourTimeInterval) return ECAlarmTypeOffsetQuarterHour;
         if (ekAlarm.relativeOffset == kHalfHourTimeInterval) return ECAlarmTypeOffsetHalfHour;
-        if (ekAlarm.relativeOffset == kHourTimeInterval) return ECAlarmTypeOffsetHour;
+        if (ekAlarm.relativeOffset == kHourTimeInterval) return ECAlarmTypeOffsetOneHour;
         if (ekAlarm.relativeOffset == kTwoHourTimeInterval) return ECAlarmTypeOffsetTwoHours;
         if (ekAlarm.relativeOffset == kSixHourTimeInterval) return ECAlarmTypeOffsetSixHours;
         if (ekAlarm.relativeOffset == kOneDayTimeInterval) return ECAlarmTypeOffsetOneDay;

@@ -187,25 +187,25 @@ const static NSTimeInterval kTwoDayTimeInterval = 2 * 24 * 60 * 60;
 #pragma mark One Hour
 - (void)testAlarmCanBeCreatedWithOneHourType
 {
-    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetHour];
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetOneHour];
     XCTAssertNotNil(alarm);
 }
 
 - (void)testAlarmCreatedWithOneHourTypeHasCorrectTypeProperty
 {
-    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetHour];
-    XCTAssertEqual(alarm.type, ECAlarmTypeOffsetHour);
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetOneHour];
+    XCTAssertEqual(alarm.type, ECAlarmTypeOffsetOneHour);
 }
 
 - (void)testAlarmCreatedWithOneHourTypeHasEKAlarmWithOneHourRelativeOffset
 {
-    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetHour];
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetOneHour];
     XCTAssertEqual(alarm.ekAlarm.relativeOffset, kOneHourTimeInterval);
 }
 
 - (void)testAlarmCreatedWithOneHourTypeHasCorrectLocalizedName
 {
-    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetHour];
+    ECAlarm* alarm = [ECAlarm alarmWithType:ECAlarmTypeOffsetOneHour];
     XCTAssertEqualObjects(alarm.localizedName, [ECAlarmFormatter defaultFormatter].oneHourLocalizedName);
 }
 
