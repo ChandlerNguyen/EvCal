@@ -22,6 +22,8 @@
 
 @implementation ECEditEventMultiPickerCell
 
+#pragma mark - Lifecycle and Properties
+
 - (UIPickerView*)addPickerView
 {
     UIPickerView* pickerView = [[UIPickerView alloc] init];
@@ -51,6 +53,14 @@
     
     return _secondaryPickerView;
 }
+
+
+#pragma mark - Layout
+
+
+
+
+#pragma mark - UI Events
 
 - (IBAction)switchPickerButtonTapped:(UIButton*)sender
 {
