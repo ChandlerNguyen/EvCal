@@ -50,7 +50,7 @@
 - (NSString*)quarterHourAlarmLocalizedName
 {
     if (!_quarterHourAlarmLocalizedName) {
-        _quarterHourAlarmLocalizedName = NSLocalizedString(@"ECAlarm.15 Minutes", @"The alarm occurs 15 minutes before the event's start date");
+        _quarterHourAlarmLocalizedName = NSLocalizedString(@"ECAlarm.15 Minutes Before", @"The alarm occurs 15 minutes before the event's start date");
     }
     
     return _quarterHourAlarmLocalizedName;
@@ -59,7 +59,7 @@
 - (NSString*)halfHourLocalizedName
 {
     if (!_halfHourLocalizedName) {
-        _halfHourLocalizedName = NSLocalizedString(@"ECAlarm.30 Minutes", @"The alarm occurs 30 minutes before the event's start date");
+        _halfHourLocalizedName = NSLocalizedString(@"ECAlarm.30 Minutes Before", @"The alarm occurs 30 minutes before the event's start date");
     }
     
     return _halfHourLocalizedName;
@@ -68,7 +68,7 @@
 - (NSString*)oneHourLocalizedName
 {
     if (!_oneHourLocalizedName) {
-        _oneHourLocalizedName = NSLocalizedString(@"ECAlarm.One Hour", @"The alarm occurs one hour before the event's start date");
+        _oneHourLocalizedName = NSLocalizedString(@"ECAlarm.1 Hour Before", @"The alarm occurs one hour before the event's start date");
     }
     
     return _oneHourLocalizedName;
@@ -77,7 +77,7 @@
 - (NSString*)twoHoursLocalizedName
 {
     if (!_twoHoursLocalizedName) {
-        _twoHoursLocalizedName = NSLocalizedString(@"ECAlarm.Two Hours", @"The alarm occurs two hours before the event's start date");
+        _twoHoursLocalizedName = NSLocalizedString(@"ECAlarm.2 Hours Before", @"The alarm occurs two hours before the event's start date");
     }
     
     return _twoHoursLocalizedName;
@@ -86,7 +86,7 @@
 - (NSString*)sixHoursLocalizedName
 {
     if (!_sixHoursLocalizedName) {
-        _sixHoursLocalizedName = NSLocalizedString(@"ECAlarm.Six Hours", @"The alarm occurs six horus before the event's start date");
+        _sixHoursLocalizedName = NSLocalizedString(@"ECAlarm.6 Hours Before", @"The alarm occurs six horus before the event's start date");
     }
     
     return _sixHoursLocalizedName;
@@ -95,7 +95,7 @@
 - (NSString*)oneDayLocalizedName
 {
     if (!_oneDayLocalizedName) {
-        _oneDayLocalizedName = NSLocalizedString(@"ECAlarm.One Day", @"The alarm occurs one day before the event's start date");
+        _oneDayLocalizedName = NSLocalizedString(@"ECAlarm.1 Day Before", @"The alarm occurs one day before the event's start date");
     }
     
     return _oneDayLocalizedName;
@@ -104,7 +104,7 @@
 - (NSString*)twoDaysLocalizedName
 {
     if (!_twoDaysLocalizedName) {
-        _twoDaysLocalizedName = NSLocalizedString(@"ECAlarm.Two Days", @"THe alarm occurs two days before the event's start date");
+        _twoDaysLocalizedName = NSLocalizedString(@"ECAlarm.2 Days Before", @"THe alarm occurs two days before the event's start date");
     }
     
     return _twoDaysLocalizedName;
@@ -184,8 +184,11 @@
 - (NSString*)localizedStringFromAlarm:(nonnull ECAlarm *)alarm
 {
     if (alarm) {
-        if (alarm.type == ECAlarmTypeAbsoluteDate) {
-            return [self localizedStringFromAbsoluateDateAlarm:alarm];
+        if (alarm.type == ECAlarmTypeNone) {
+            return self.noneAlarmLocalizedName;
+        }
+        else if (alarm.type == ECAlarmTypeAbsoluteDate) {
+            return [self localizedStringFromAbsoluteDateAlarm:alarm];
         } else {
             return [self localizedStringFromRelativeOffsetAlarm:alarm];
         }
@@ -194,7 +197,7 @@
     }
 }
 
-- (NSString*)localizedStringFromAbsoluateDateAlarm:(ECAlarm*)alarm
+- (NSString*)localizedStringFromAbsoluteDateAlarm:(ECAlarm*)alarm
 {
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     formatter.dateStyle = NSDateFormatterMediumStyle;
@@ -203,10 +206,13 @@
 
 const static NSTimeInterval kMinuteTimeInterval = 60;
 const static NSTimeInterval kHourTimeInterval = 60 * kMinuteTimeInterval;
+const static NSTimeInterval kDayTimeInterval = 24 * kHourTimeInterval;
 
 - (NSString*)localizedStringFromRelativeOffsetAlarm:(ECAlarm*)alarm
 {
     NSTimeInterval offset = alarm.ekAlarm.relativeOffset;
+    NSInteger days = (NSInteger)(offset / kDayTimeInterval);
+    offset -= (days * kDayTimeInterval);
     NSInteger hours = (NSInteger)(offset / (kHourTimeInterval));
     offset -= (hours * kHourTimeInterval);
     
