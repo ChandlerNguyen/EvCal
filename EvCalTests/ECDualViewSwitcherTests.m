@@ -12,19 +12,87 @@
 
 @interface ECDualViewSwitcherTests : XCTestCase
 
+@property (nonatomic, weak) UIView* primaryView;
+@property (nonatomic, weak) UIView* secondaryView;
+@property (nonatomic, strong) ECDualViewSwitcher* dualViewSwitcher;
+
 @end
 
 @implementation ECDualViewSwitcherTests
 
+#pragma mark - Setup and Tear down
+
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    UIView* primaryView = [[UIView alloc] init];
+    UIView* secondaryView = [[UIView alloc] init];
+    self.primaryView = primaryView;
+    self.secondaryView = secondaryView;
+    self.dualViewSwitcher = [[ECDualViewSwitcher alloc] initWithFrame:CGRectZero
+                                                          primaryView:self.primaryView
+                                                        secondaryView:self.secondaryView];
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    self.primaryView = nil;
+    self.secondaryView = nil;
+    self.dualViewSwitcher = nil;
+    
     [super tearDown];
 }
+
+
+#pragma mark - Tests
+
+- (void)testDualViewSwitcherCanBeCreated
+{
+    XCTAssertNotNil(self.dualViewSwitcher);
+}
+
+- (void)testDualViewSwitcherHasPrimaryView
+{
+    XCTAssertNotNil(self.dualViewSwitcher.primaryView);
+}
+
+- (void)testDualViewSwitcherPrimaryViewIsSameAsViewProvidedAtInitialization
+{
+    XCTAssertEqual(self.dualViewSwitcher.primaryView, self.primaryView);
+}
+
+- (void)testDualViewSwitcherHasSecondaryView
+{
+    XCTAssertNotNil(self.dualViewSwitcher.secondaryView);
+}
+
+- (void)testDualViewSwitcherSecondaryViewIsSameAsViewProvidedAtInitialization
+{
+    XCTAssertEqual(self.dualViewSwitcher.secondaryView, self.secondaryView);
+}
+
+- (void)testDualViewSwitcherHasVisibleView
+{
+    XCTAssertNotNil(self.dualViewSwitcher.visibleView);
+}
+
+- (void)testDualViewSwitcherVisibleViewIsSameAsPrimaryView
+{
+    XCTAssertEqual(self.dualViewSwitcher.visibleView, self.dualViewSwitcher.primaryView);
+}
+
+- (void)testDualViewSwitcherChangesVisibleViewToSecondaryViewAfterSwitchViewIsCalledOnce
+{
+    [self.dualViewSwitcher switchView:NO];
+    XCTAssertEqual(self.dualViewSwitcher.visibleView, self.dualViewSwitcher.secondaryView);
+}
+
+- (void)testDualViewSwitcherChangesVisibleViewToPrimaryViewAfterSwitchViewIsCalledTwice
+{
+    [self.dualViewSwitcher switchView:NO];
+    [self.dualViewSwitcher switchView:NO];
+    XCTAssertEqual(self.dualViewSwitcher.visibleView, self.dualViewSwitcher.primaryView);
+}
+
 
 
 @end
