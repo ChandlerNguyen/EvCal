@@ -8,6 +8,13 @@
 
 #import "ECDualViewSwitcher.h"
 
+@interface ECDualViewSwitcher()
+
+@property (nonatomic) BOOL primaryViewNeedsLayout;
+@property (nonatomic) BOOL secondaryViewNeedsLayout;
+
+@end
+
 @implementation ECDualViewSwitcher
 
 #pragma mark - Lifecycle and Properties
@@ -24,10 +31,21 @@
     return self;
 }
 
+- (void)setFrame:(CGRect)frame
+{
+    if (!CGRectEqualToRect(self.frame, frame)) {
+        self.primaryViewNeedsLayout = YES;
+        self.secondaryViewNeedsLayout = YES;
+    }
+    
+    [super setFrame:frame];
+}
+
 - (void)setPrimaryView:(UIView *)primaryView
 {
     _primaryView = primaryView;
     
+    self.primaryViewNeedsLayout = YES;
     [self addSubview:primaryView];
 }
 
@@ -35,9 +53,68 @@
 {
     _secondaryView = secondaryView;
     
+    self.secondaryViewNeedsLayout = YES;
     [self addSubview:secondaryView];
 }
 
+
+#pragma mark - Layout
+
+const static NSTimeInterval kSwitchViewsAnimationDuration = 0.2f;
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+   
+    if (self.primaryViewNeedsLayout) {
+        [self layoutPrimaryView];
+    }
+    
+    if (self.secondaryViewNeedsLayout) {
+        [self layoutSecondaryView];
+    }
+}
+
+- (void)layoutPrimaryAndSecondaryView:(BOOL)animated
+{
+    if (animated) {
+        [UIView animateWithDuration:kSwitchViewsAnimationDuration animations:^{
+            [self layoutPrimaryView];
+            [self layoutSecondaryView];
+        }];
+    } else {
+        [self layoutPrimaryView];
+        [self layoutSecondaryView];
+    }
+}
+
+- (void)layoutPrimaryView
+{
+    CGFloat horizontalOffset = (self.visibleView == self.secondaryView) ? 0 : -self.bounds.size.width;
+    [self layoutView:self.primaryView withHorizontalOffset:horizontalOffset];
+    
+    self.primaryViewNeedsLayout = NO;
+}
+
+- (void)layoutSecondaryView
+{
+    CGFloat horizontalOffset = (self.visibleView == self.secondaryView) ? 0 : self.bounds.size.width;
+    [self layoutView:self.secondaryView withHorizontalOffset:horizontalOffset];
+    
+    self.secondaryViewNeedsLayout = NO;
+}
+
+- (void)layoutView:(UIView*)view withHorizontalOffset:(CGFloat)horizontalOffset
+{
+    CGRect viewFrame = CGRectMake(self.bounds.origin.x + horizontalOffset,
+                                           self.bounds.origin.y,
+                                           self.bounds.size.width,
+                                           self.bounds.size.height);
+    
+    view.frame = viewFrame;
+}
+
+#pragma mark - Switching Views
 
 - (void)switchView:(BOOL)animated
 {
@@ -51,14 +128,18 @@
 - (void)switchToPrimaryView:(BOOL)animated
 {
     if (self.visibleView != self.primaryView) {
-        DDLogDebug(@"Switching to primary view");
+        self.visibleView = self.primaryView;
+        
+        [self layoutPrimaryAndSecondaryView:animated];
     }
 }
 
 - (void)switchToSecondayView:(BOOL)animated
 {
     if (self.visibleView != self.secondaryView) {
-        DDLogDebug(@"Switching to secondary view");
+        self.visibleView = self.secondaryView;
+        
+        [self layoutPrimaryAndSecondaryView:animated];
     }
 }
 
