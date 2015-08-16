@@ -45,6 +45,7 @@
 
 #pragma mark - Tests
 
+#pragma mark Initializing
 - (void)testDualViewSwitcherCanBeCreated
 {
     XCTAssertNotNil(self.dualViewSwitcher);
@@ -80,6 +81,7 @@
     XCTAssertEqual(self.dualViewSwitcher.visibleView, self.dualViewSwitcher.primaryView);
 }
 
+#pragma mark Switching
 - (void)testDualViewSwitcherChangesVisibleViewToSecondaryViewAfterSwitchViewIsCalledOnce
 {
     [self.dualViewSwitcher switchView:NO];
@@ -93,6 +95,30 @@
     XCTAssertEqual(self.dualViewSwitcher.visibleView, self.dualViewSwitcher.primaryView);
 }
 
+- (void)testDualViewSwitcherSetsVisibleViewToPrimaryViewAfterSwitchToPrimaryViewIsCalled
+{
+    [self.dualViewSwitcher switchToPrimaryView:NO];
+    XCTAssertEqual(self.dualViewSwitcher.visibleView, self.dualViewSwitcher.primaryView);
+}
 
+- (void)testDualViewSwitcherSetsVisibleViewToSecondaryViewAfterSwitchToSecondaryViewIsCalled
+{
+    [self.dualViewSwitcher switchToSecondayView:NO];
+    XCTAssertEqual(self.dualViewSwitcher.visibleView, self.dualViewSwitcher.secondaryView);
+}
+
+- (void)testDualViewSwitcherSetsVisibleViewToPrimaryViewIfCalledWhenSecondaryViewIsVisible
+{
+    [self.dualViewSwitcher switchToSecondayView:NO];
+    [self.dualViewSwitcher switchToPrimaryView:NO];
+    XCTAssertEqual(self.dualViewSwitcher.visibleView, self.dualViewSwitcher.primaryView);
+}
+
+- (void)testDualViewSwitcherSetsVisibleViewToSecondaryViewIfCalledWhenPrimaryViewIsVisible
+{
+    [self.dualViewSwitcher switchToPrimaryView:NO];
+    [self.dualViewSwitcher switchToSecondayView:NO];
+    XCTAssertEqual(self.dualViewSwitcher.visibleView, self.dualViewSwitcher.secondaryView);
+}
 
 @end
