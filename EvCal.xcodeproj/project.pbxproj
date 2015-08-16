@@ -40,6 +40,7 @@
 		848628421B45976A007E0AA2 /* EKEvent+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 848628411B45976A007E0AA2 /* EKEvent+ECAdditions.m */; };
 		849539391B7FFC7300B7873E /* ECEditEventMultiPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849539381B7FFC7300B7873E /* ECEditEventMultiPickerCell.m */; };
 		8495393C1B80DDCF00B7873E /* ECDualViewSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 8495393B1B80DDCF00B7873E /* ECDualViewSwitcher.m */; };
+		8495393E1B80E5F300B7873E /* ECDualViewSwitcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8495393D1B80E5F300B7873E /* ECDualViewSwitcherTests.m */; };
 		849773F21B3C09710097259F /* ECDateViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 849773F11B3C09710097259F /* ECDateViewTests.m */; };
 		849EA5951B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849EA5941B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m */; };
 		849EA5981B4E3BD80053549C /* ECEditEventRecurrenceCustomRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849EA5971B4E3BD80053549C /* ECEditEventRecurrenceCustomRuleViewController.m */; };
@@ -143,6 +144,7 @@
 		849539381B7FFC7300B7873E /* ECEditEventMultiPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEditEventMultiPickerCell.m; path = Views/ECEditEventMultiPickerCell.m; sourceTree = "<group>"; };
 		8495393A1B80DDCF00B7873E /* ECDualViewSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDualViewSwitcher.h; path = Views/ECDualViewSwitcher.h; sourceTree = "<group>"; };
 		8495393B1B80DDCF00B7873E /* ECDualViewSwitcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDualViewSwitcher.m; path = Views/ECDualViewSwitcher.m; sourceTree = "<group>"; };
+		8495393D1B80E5F300B7873E /* ECDualViewSwitcherTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDualViewSwitcherTests.m; sourceTree = "<group>"; };
 		849773F11B3C09710097259F /* ECDateViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDateViewTests.m; sourceTree = "<group>"; };
 		849EA5931B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventRecurrenceEndViewController.h; path = Controllers/ECEditEventRecurrenceEndViewController.h; sourceTree = "<group>"; };
 		849EA5941B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEditEventRecurrenceEndViewController.m; path = Controllers/ECEditEventRecurrenceEndViewController.m; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 		84443EF91B0DE6E800385E5A /* Test Suites */ = {
 			isa = PBXGroup;
 			children = (
+				8495393D1B80E5F300B7873E /* ECDualViewSwitcherTests.m */,
 				84E5B9951B54383B00522B20 /* ECAlarmFormatterTests.m */,
 				849EA59F1B4FCFE90053549C /* ECAlarmTests.m */,
 				84CAC3B81B4C2B9A00B191B6 /* ECRecurrenceRuleTests.m */,
@@ -709,6 +712,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8495393E1B80E5F300B7873E /* ECDualViewSwitcherTests.m in Sources */,
 				84443EFF1B0DEBF900385E5A /* NSDate+ECTestAdditions.m in Sources */,
 				842DA8FF1B4A3DEE007DC027 /* ECRecurrenceRuleFormatterTests.m in Sources */,
 				846FDB4C1B39A98000910D4F /* ECDayViewTests.m in Sources */,
