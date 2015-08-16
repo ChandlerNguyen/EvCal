@@ -16,7 +16,7 @@
 
 @property (nonatomic, weak) UIView* __nullable primaryView;
 @property (nonatomic, weak) UIView* __nullable secondaryView;
-@property (nonatomic, weak) UIView* __nullable visibleView;
+@property (nonatomic, weak, readonly) UIView* __nullable visibleView;
 
 //------------------------------------------------------------------------------
 // @name Initializing

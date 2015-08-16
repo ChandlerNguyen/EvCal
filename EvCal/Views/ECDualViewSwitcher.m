@@ -13,6 +13,8 @@
 @property (nonatomic) BOOL primaryViewNeedsLayout;
 @property (nonatomic) BOOL secondaryViewNeedsLayout;
 
+@property (nonatomic, weak, readwrite) UIView* visibleView;
+
 @end
 
 @implementation ECDualViewSwitcher
