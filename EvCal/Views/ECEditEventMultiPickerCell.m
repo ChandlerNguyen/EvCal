@@ -7,6 +7,7 @@
 //
 
 #import "ECEditEventMultiPickerCell.h"
+#import "ECDualViewSwitcher.h"
 @interface ECEditEventMultiPickerCell()
 
 @property (nonatomic, weak) IBOutlet UILabel* titleLabel;
@@ -14,7 +15,7 @@
 
 @property (nonatomic, weak) IBOutlet UIButton* switchPickerButton;
 
-@property (nonatomic, weak) IBOutlet UIView* pickerContainerView;
+@property (nonatomic, weak) IBOutlet ECDualViewSwitcher* pickerContainerView;
 @property (nonatomic, weak, readwrite) UIPickerView* primaryPickerView;
 @property (nonatomic, weak, readwrite) UIPickerView* secondaryPickerView;
 
