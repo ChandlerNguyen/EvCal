@@ -305,6 +305,8 @@ const static NSInteger kYearlyRecurrenceRuleRow =       5;
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     [self informDelegateThatRecurrenceRuleWasUpdated];
+    
+    self.infoLabel.text = self.recurrenceRule.localizedName;
 }
 
 - (void)informDelegateThatRecurrenceRuleWasUpdated
