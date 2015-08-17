@@ -16,6 +16,7 @@
 
 @protocol ECEditEventRecurrenceRuleCellDelegate <NSObject>
 
+@optional
 - (void)recurrenceCell:(ECEditEventRecurrenceRuleCell*)cell didSelectRecurrenceRule:(ECRecurrenceRule*)rule;
 
 @end

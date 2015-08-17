@@ -233,4 +233,16 @@ const static NSInteger kYearlyFrequencyRow =            3;
     return self.customRuleTimeUnitNames[row];
 }
 
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    [self informDelegateThatRecurrenceRuleWasUpdated];
+}
+
+- (void)informDelegateThatRecurrenceRuleWasUpdated
+{
+    if ([self.recurrenceRuleDelegate respondsToSelector:@selector(recurrenceCell:didSelectRecurrenceRule:)]) {
+        [self.recurrenceRuleDelegate recurrenceCell:self didSelectRecurrenceRule:self.recurrenceRule];
+    }
+}
+
 @end
