@@ -309,7 +309,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="214" id="41q-Pc-RAt" customClass="ECEditEventRecurrenceRuleCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="214" id="41q-Pc-RAt" customClass="ECRecurrenceRuleCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="41q-Pc-RAt" id="Nvh-cO-ufY">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -435,6 +435,7 @@
                         <outlet property="endDatePickerCell" destination="9xP-KB-6Ka" id="Iqo-EC-292"/>
                         <outlet property="locationCell" destination="MAz-Oe-62N" id="gnq-Cf-jV4"/>
                         <outlet property="recurrenceEndLabel" destination="nkt-3e-oI4" id="APq-OD-f2Z"/>
+                        <outlet property="recurrenceRuleCell" destination="41q-Pc-RAt" id="PvU-TX-WwS"/>
                         <outlet property="startDatePickerCell" destination="HJN-1E-Iad" id="5ce-ec-2kG"/>
                         <outlet property="titleCell" destination="qC9-n0-Ekw" id="1lN-HK-MEX"/>
                     </connections>

@@ -21,12 +21,12 @@
 #import "ECDatePickerCell.h"
 #import "ECCalendarCell.h"
 #import "ECEventTextPropertyCell.h"
+#import "ECRecurrenceRuleCell.h"
 
 #import "ECEditEventCalendarViewController.h"
-#import "ECEditEventRecurrenceRuleTableViewController.h"
 #import "ECEditEventRecurrenceEndViewController.h"
 
-@interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, ECEditEventRecurrenceRuleViewControllerDelegate, ECEditEventRecurrenceEndDelegate, ECEventTextPropertyCellDelegate, UIActionSheetDelegate>
+@interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, ECRecurrenceRuleCellDelegate, ECEditEventRecurrenceEndDelegate, ECEventTextPropertyCellDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSIndexPath* selectedIndexPath;
 
@@ -48,7 +48,7 @@
 
 // Event Recurrence rules
 @property (nonatomic, strong) ECRecurrenceRule* recurrenceRule;
-@property (nonatomic, weak) IBOutlet UILabel* recurrenceRuleLabel;
+@property (nonatomic, weak) IBOutlet ECRecurrenceRuleCell* recurrenceRuleCell;
 @property (nonatomic, weak) IBOutlet UILabel* recurrenceEndLabel;
 @property (nonatomic, strong) NSDate* recurrenceEndDate;
 
@@ -81,6 +81,7 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.startDatePickerCell.pickerDelegate = self;
     self.endDatePickerCell.pickerDelegate = self;
+    self.recurrenceRuleCell.recurrenceRuleDelegate = self;
     [self.allDaySwitch addTarget:self action:@selector(allDaySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
@@ -197,7 +198,7 @@
 - (void)synchronizeRecurrenceRule
 {
     self.recurrenceRule = [[ECRecurrenceRule alloc] initWithRecurrenceRule:[self.event.recurrenceRules firstObject]];
-    self.recurrenceRuleLabel.text = self.recurrenceRule.localizedName;
+    self.recurrenceRuleCell.recurrenceRule = self.recurrenceRule;
     self.recurrenceEndDate = self.recurrenceRule.rule.recurrenceEnd.endDate;
     self.recurrenceEndLabel.text = [self recurrenceEndTextForRecurrenceEndDate:self.recurrenceEndDate];
 }
@@ -358,6 +359,7 @@
     }
 }
 
+
 #pragma mark - UI Events
 
 - (void)saveButtonTapped:(UIBarButtonItem*)sender
@@ -427,15 +429,6 @@
     [self updateCellHeights];
 }
 
-#pragma mark - ECEditEventRecurrenceRuleViewController delegate
-
-- (void)viewController:(ECEditEventRecurrenceRuleTableViewController *)vc didSelectRecurrenceRule:(ECRecurrenceRule *)rule
-{
-    self.recurrenceRule = rule;
-    self.recurrenceRuleLabel.text = rule.localizedName;
-    
-    [self updateCellHeights];
-}
 
 #pragma mark - ECEditEventCalendarViewController Delegate
 
@@ -445,6 +438,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - ECRecurrenceRuleCell Delegate
+
+- (void)recurrenceCell:(ECRecurrenceRuleCell *)cell didSelectRecurrenceRule:(ECRecurrenceRule *)rule
+{
+    self.recurrenceRule = rule;
+}
+
 #pragma mark - ECEditEventRecurrenceEnd Delegate
 
 - (void)viewController:(nonnull ECEditEventRecurrenceEndViewController *)vc didSelectRecurrenceEndDate:(nullable NSDate *)endDate
@@ -452,6 +452,7 @@
     self.recurrenceEndDate = endDate;
     self.recurrenceEndLabel.text = [self recurrenceEndTextForRecurrenceEndDate:endDate];
 }
+
 
 #pragma mark - UITableView Delegate and Datasource
 #pragma mark Cell Heights
@@ -564,10 +565,6 @@ const static NSInteger kAllDayCellRow =                 2;
         ECEditEventCalendarViewController* eceecvc = (ECEditEventCalendarViewController*)segue.destinationViewController;
         eceecvc.calendar = self.calendarCell.calendar;
         eceecvc.calendarDelegate = self;
-    } else if ([segue.identifier isEqualToString:@"recurrenceRule"]) {
-        ECEditEventRecurrenceRuleTableViewController* ecerrtvc = (ECEditEventRecurrenceRuleTableViewController*)segue.destinationViewController;
-        ecerrtvc.recurrenceRule = self.recurrenceRule;
-        ecerrtvc.recurrenceRuleDelegate = self;
     } else if ([segue.identifier isEqualToString:@"recurrenceEnd"]) {
         ECEditEventRecurrenceEndViewController* eceerevc = (ECEditEventRecurrenceEndViewController*)segue.destinationViewController;
         eceerevc.recurrenceEndDelegate = self;

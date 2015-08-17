@@ -1,5 +1,5 @@
 //
-//  ECEditEventRecurrenceRuleCell.h
+//  ECRecurrenceRuleCell.h
 //  EvCal
 //
 //  Created by Tom on 8/16/15.
@@ -7,23 +7,23 @@
 //
 
 @class ECRecurrenceRule;
-@class ECEditEventRecurrenceRuleCell;
+@class ECRecurrenceRuleCell;
 
 /**
  *  The ECEditEventRecurrenceCellDelegate receives updates when the recurrence
  *  cell updates its recurrence rule.
  */
 
-@protocol ECEditEventRecurrenceRuleCellDelegate <NSObject>
+@protocol ECRecurrenceRuleCellDelegate <NSObject>
 
 @optional
-- (void)recurrenceCell:(ECEditEventRecurrenceRuleCell*)cell didSelectRecurrenceRule:(ECRecurrenceRule*)rule;
+- (void)recurrenceCell:(ECRecurrenceRuleCell*)cell didSelectRecurrenceRule:(ECRecurrenceRule*)rule;
 
 @end
 
 #import <UIKit/UIKit.h>
 
-@interface ECEditEventRecurrenceRuleCell : UITableViewCell
+@interface ECRecurrenceRuleCell : UITableViewCell
 
 //------------------------------------------------------------------------------
 // @name Properties
@@ -35,6 +35,6 @@
 
 // The delegate to receive updates concerning changes to the recurrence rule
 // cell
-@property (nonatomic, weak) id<ECEditEventRecurrenceRuleCellDelegate> recurrenceRuleDelegate;
+@property (nonatomic, weak) id<ECRecurrenceRuleCellDelegate> recurrenceRuleDelegate;
 
 @end

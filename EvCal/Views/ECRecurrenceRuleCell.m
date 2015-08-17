@@ -1,17 +1,17 @@
 //
-//  ECEditEventRecurrenceRuleCell.m
+//  ECRecurrenceRuleCell.m
 //  EvCal
 //
 //  Created by Tom on 8/16/15.
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
-#import "ECEditEventRecurrenceRuleCell.h"
+#import "ECRecurrenceRuleCell.h"
 #import "ECDualViewSwitcher.h"
 #import "ECRecurrenceRule.h"
 @import EventKit;
 
-@interface ECEditEventRecurrenceRuleCell() <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface ECRecurrenceRuleCell() <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel* titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel* infoLabel;
@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSArray* customRuleTimeUnitNames;
 @end
 
-@implementation ECEditEventRecurrenceRuleCell
+@implementation ECRecurrenceRuleCell
 
 #pragma mark - Lifecycle and Properties
 
