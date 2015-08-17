@@ -9,6 +9,7 @@
 #import "ECEditEventRecurrenceRuleCell.h"
 #import "ECDualViewSwitcher.h"
 #import "ECRecurrenceRule.h"
+@import EventKit;
 
 @interface ECEditEventRecurrenceRuleCell() <UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -76,6 +77,46 @@
     return _customRuleTimeUnitNames;
 }
 
+- (ECRecurrenceRule*)recurrenceRule
+{
+    if (self.pickerContainerView.visibleView == self.definedRecurrenceRulesPicker) {
+        NSInteger selectedRow = [self.definedRecurrenceRulesPicker selectedRowInComponent:0];
+        return self.definedRecurrenceRules[selectedRow];
+    } else {
+        NSInteger intervalRow = [self.customRecurrenceRulesPicker selectedRowInComponent:kCustomRuleIntervalComponent];
+        NSInteger frequencyRow = [self.customRecurrenceRulesPicker selectedRowInComponent:kCustomRuleFrequencyComponent];
+        ECRecurrenceRule* rule = [ECRecurrenceRule customRecurrenceRuleWithFrequency:[self frequencyForRow:frequencyRow]
+                                                                            interval:[self intervalForCustomRuleAtRow:intervalRow]];
+        
+        return rule;
+    }
+}
+
+- (NSInteger)intervalForCustomRuleAtRow:(NSInteger)row
+{
+    // The starting value for custom rules is 2
+    return row + 2;
+}
+
+- (EKRecurrenceFrequency)frequencyForRow:(NSInteger)row
+{
+    switch (row) {
+        case kDailyFrequencyRow:
+            return EKRecurrenceFrequencyDaily;
+            
+        case kWeeklyFrequencyRow:
+            return EKRecurrenceFrequencyWeekly;
+            
+        case kMonthlyFrequencyRow:
+            return EKRecurrenceFrequencyMonthly;
+            
+        case kYearlyFrequencyRow:
+            return EKRecurrenceFrequencyYearly;
+            
+        default:
+            return EKRecurrenceFrequencyDaily;
+    }
+}
 
 #pragma mark - Recurrence Rules
 
@@ -108,13 +149,13 @@
 
 #pragma mark - UIPickerView Delegate and Data source
 
-const static NSInteger kCustomRuleCountComponent =      0;
-const static NSInteger kCustomRuleTimeUnitComponent =   1;
+const static NSInteger kCustomRuleIntervalComponent =   0;
+const static NSInteger kCustomRuleFrequencyComponent =  1;
 
-const static NSInteger kCustomRuleTimeUnitDayRow =      0;
-const static NSInteger kCustomRuleTimeUnitWeekRow =     1;
-const static NSInteger kCustomRuleTimeUnitMonthRow =    2;
-const static NSInteger kCustomRuleTimeUnitYearRow =     3;
+const static NSInteger kDailyFrequencyRow =             0;
+const static NSInteger kWeeklyFrequencyRow =            1;
+const static NSInteger kMonthlyFrequencyRow =           2;
+const static NSInteger kYearlyFrequencyRow =            3;
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -141,7 +182,7 @@ const static NSInteger kCustomRuleTimeUnitYearRow =     3;
 
 - (NSInteger)numberOfRowsInCustomRecurrenceRulesPicker:(NSInteger)component
 {
-    if (component == kCustomRuleCountComponent) {
+    if (component == kCustomRuleIntervalComponent) {
         return [self numberOfRowsInCustomRowCountComponent];
     } else {
         return [self numberOfRowsInCustomRowTimeUnitComponent];
@@ -175,7 +216,7 @@ const static NSInteger kCustomRuleTimeUnitYearRow =     3;
 
 - (NSString*)customRecurrenceRuleTitleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    if (component == kCustomRuleCountComponent) {
+    if (component == kCustomRuleIntervalComponent) {
         return [self customCountTitleForRow:row];
     } else {
         return [self timeUnitTitleForRow:row];
@@ -184,7 +225,7 @@ const static NSInteger kCustomRuleTimeUnitYearRow =     3;
 
 - (NSString*)customCountTitleForRow:(NSInteger)row
 {
-    return [NSString stringWithFormat:@"%lu", row + 2];
+    return [NSString stringWithFormat:@"%lu", [self intervalForCustomRuleAtRow:row]];
 }
 
 - (NSString*)timeUnitTitleForRow:(NSInteger)row

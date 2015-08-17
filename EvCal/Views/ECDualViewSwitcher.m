@@ -125,6 +125,7 @@ const static NSTimeInterval kSwitchViewsAnimationDuration = 0.2f;
     view.frame = viewFrame;
 }
 
+
 #pragma mark - Switching Views
 
 - (void)switchView:(BOOL)animated
