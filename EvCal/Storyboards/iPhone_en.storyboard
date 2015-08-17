@@ -344,7 +344,7 @@
                                             <segue destination="oSd-sI-5dS" kind="push" identifier="recurrenceRule" id="Fu6-aV-TSf"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="222" id="41q-Pc-RAt" customClass="ECEditEventMultiPickerCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="222" id="41q-Pc-RAt" customClass="ECEditEventRecurrenceRuleCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="41q-Pc-RAt" id="Nvh-cO-ufY">
                                             <autoresizingMask key="autoresizingMask"/>

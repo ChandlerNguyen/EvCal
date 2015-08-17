@@ -25,6 +25,11 @@
 
 #pragma mark - Lifecycle and Properties
 
+- (void)awakeFromNib
+{
+    
+}
+
 - (UIPickerView*)addPickerView
 {
     UIPickerView* pickerView = [[UIPickerView alloc] init];

@@ -41,6 +41,7 @@
 		849539391B7FFC7300B7873E /* ECEditEventMultiPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849539381B7FFC7300B7873E /* ECEditEventMultiPickerCell.m */; };
 		8495393C1B80DDCF00B7873E /* ECDualViewSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 8495393B1B80DDCF00B7873E /* ECDualViewSwitcher.m */; };
 		8495393E1B80E5F300B7873E /* ECDualViewSwitcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8495393D1B80E5F300B7873E /* ECDualViewSwitcherTests.m */; };
+		849539411B80F03D00B7873E /* ECEditEventRecurrenceRuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849539401B80F03D00B7873E /* ECEditEventRecurrenceRuleCell.m */; };
 		849773F21B3C09710097259F /* ECDateViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 849773F11B3C09710097259F /* ECDateViewTests.m */; };
 		849EA5951B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849EA5941B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m */; };
 		849EA5981B4E3BD80053549C /* ECEditEventRecurrenceCustomRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849EA5971B4E3BD80053549C /* ECEditEventRecurrenceCustomRuleViewController.m */; };
@@ -145,6 +146,8 @@
 		8495393A1B80DDCF00B7873E /* ECDualViewSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECDualViewSwitcher.h; path = Views/ECDualViewSwitcher.h; sourceTree = "<group>"; };
 		8495393B1B80DDCF00B7873E /* ECDualViewSwitcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECDualViewSwitcher.m; path = Views/ECDualViewSwitcher.m; sourceTree = "<group>"; };
 		8495393D1B80E5F300B7873E /* ECDualViewSwitcherTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDualViewSwitcherTests.m; sourceTree = "<group>"; };
+		8495393F1B80F03D00B7873E /* ECEditEventRecurrenceRuleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventRecurrenceRuleCell.h; path = Views/ECEditEventRecurrenceRuleCell.h; sourceTree = "<group>"; };
+		849539401B80F03D00B7873E /* ECEditEventRecurrenceRuleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEditEventRecurrenceRuleCell.m; path = Views/ECEditEventRecurrenceRuleCell.m; sourceTree = "<group>"; };
 		849773F11B3C09710097259F /* ECDateViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDateViewTests.m; sourceTree = "<group>"; };
 		849EA5931B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventRecurrenceEndViewController.h; path = Controllers/ECEditEventRecurrenceEndViewController.h; sourceTree = "<group>"; };
 		849EA5941B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEditEventRecurrenceEndViewController.m; path = Controllers/ECEditEventRecurrenceEndViewController.m; sourceTree = "<group>"; };
@@ -429,6 +432,8 @@
 				84CAC3C11B4D3E1700B191B6 /* ECEventCustomRecurrenceRuleCell.m */,
 				849539371B7FFC7300B7873E /* ECEditEventMultiPickerCell.h */,
 				849539381B7FFC7300B7873E /* ECEditEventMultiPickerCell.m */,
+				8495393F1B80F03D00B7873E /* ECEditEventRecurrenceRuleCell.h */,
+				849539401B80F03D00B7873E /* ECEditEventRecurrenceRuleCell.m */,
 				8495393A1B80DDCF00B7873E /* ECDualViewSwitcher.h */,
 				8495393B1B80DDCF00B7873E /* ECDualViewSwitcher.m */,
 			);
@@ -688,6 +693,7 @@
 				84C458F91B073A860066B6A9 /* main.m in Sources */,
 				8495393C1B80DDCF00B7873E /* ECDualViewSwitcher.m in Sources */,
 				84D168FB1B42A49300DBCF17 /* ECEventCache.m in Sources */,
+				849539411B80F03D00B7873E /* ECEditEventRecurrenceRuleCell.m in Sources */,
 				849EA5981B4E3BD80053549C /* ECEditEventRecurrenceCustomRuleViewController.m in Sources */,
 				849EA5951B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m in Sources */,
 				8478F7B21B244AF80096F1B7 /* NSDate+ECEventAdditions.m in Sources */,
