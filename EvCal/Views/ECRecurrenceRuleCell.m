@@ -16,7 +16,7 @@
 @property (nonatomic, weak) IBOutlet UILabel* titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel* infoLabel;
 
-@property (nonatomic, weak) IBOutlet UIButton* switchPickerButton;
+
 
 @property (nonatomic, weak) IBOutlet ECDualViewSwitcher* pickerContainerView;
 @property (nonatomic, weak, readwrite) UIPickerView* definedRecurrenceRulesPicker;

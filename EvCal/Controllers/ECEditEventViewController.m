@@ -82,6 +82,7 @@
     self.startDatePickerCell.pickerDelegate = self;
     self.endDatePickerCell.pickerDelegate = self;
     self.recurrenceRuleCell.recurrenceRuleDelegate = self;
+    self.recurrenceRuleCell.switchPickerButton.hidden = YES;
     [self.allDaySwitch addTarget:self action:@selector(allDaySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
@@ -547,6 +548,10 @@ const static NSInteger kAllDayCellRow =                 2;
         indexPath.row == kCalendarCellRow) {
         self.titleCell.editingProperty = NO;
         self.locationCell.editingProperty = NO;
+    }
+    
+    if (indexPath.section == kRecurrenceSection && indexPath.row == kRecurrenceRulePickerCellRow) {
+        self.recurrenceRuleCell.switchPickerButton.hidden = [indexPath isEqual:self.selectedIndexPath];
     }
     
     if ([self.selectedIndexPath isEqual:indexPath]) {
