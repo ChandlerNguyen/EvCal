@@ -106,6 +106,7 @@
     }
     
     [self updateSwitchPickerButtonTitle];
+    [self updateInfoLabel];
 }
 
 - (NSInteger)rowForDefinedRecurrenceRuleType:(ECRecurrenceRuleType)type
@@ -209,10 +210,15 @@
 {
     [self.pickerContainerView switchView:YES];
     
-    self.infoLabel.text = self.recurrenceRule.localizedName;
     [self informDelegateThatRecurrenceRuleWasUpdated];
     
     [self updateSwitchPickerButtonTitle];
+    [self updateInfoLabel];
+}
+
+- (void)updateInfoLabel
+{
+    self.infoLabel.text = self.recurrenceRule.localizedName;
 }
 
 - (void)updateSwitchPickerButtonTitle

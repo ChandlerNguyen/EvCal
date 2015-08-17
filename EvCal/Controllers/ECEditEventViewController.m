@@ -458,7 +458,7 @@
 #pragma mark Cell Heights
 const static CGFloat kRecurrenceRowHeight =             44.0f;
 const static CGFloat kCalendarCellHeight =              44.0f;
-const static CGFloat kDatesAndAlarmsRowHeight =         52.0f;
+const static CGFloat kCollapsedPickerCellHeight =       52.0f;
 const static CGFloat kTextPropertyHiddenNameHeight =    33.0f;
 const static CGFloat kTextPropertyVisibleNameHeight =   52.0f;
 const static CGFloat kExpandedPickerCellHeight =        214.0f;
@@ -512,15 +512,19 @@ const static NSInteger kAllDayCellRow =                 2;
         if ([indexPath isEqual:self.selectedIndexPath]) {
             return kExpandedPickerCellHeight;
         } else {
-            return kDatesAndAlarmsRowHeight;
+            return kCollapsedPickerCellHeight;
         }
     }
 }
 
 - (CGFloat)heightForCellInRecurrenceSectionAtIndexPath:(NSIndexPath*)indexPath
 {
-    if (indexPath.row == kRecurrenceRulePickerCellRow && [indexPath isEqual:self.selectedIndexPath]) {
-        return kExpandedPickerCellHeight;
+    if (indexPath.row == kRecurrenceRulePickerCellRow ) {
+        if ([indexPath isEqual:self.selectedIndexPath]) {
+            return kExpandedPickerCellHeight;
+        } else {
+            return kCollapsedPickerCellHeight;
+        }
     } else if (indexPath.row == kRecurrenceEndCellRow &&
         self.recurrenceRule.type == ECRecurrenceRuleTypeNone) {
         return 0.0f;
