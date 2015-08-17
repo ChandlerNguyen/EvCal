@@ -104,6 +104,8 @@
         
         [self.definedRecurrenceRulesPicker selectRow:[self rowForDefinedRecurrenceRuleType:recurrenceRule.type] inComponent:0 animated:NO];
     }
+    
+    [self updateSwitchPickerButtonTitle];
 }
 
 - (NSInteger)rowForDefinedRecurrenceRuleType:(ECRecurrenceRuleType)type
@@ -206,6 +208,20 @@
 - (IBAction)switchPickerButtonTapped:(UIButton*)sender
 {
     [self.pickerContainerView switchView:YES];
+    
+    self.infoLabel.text = self.recurrenceRule.localizedName;
+    [self informDelegateThatRecurrenceRuleWasUpdated];
+    
+    [self updateSwitchPickerButtonTitle];
+}
+
+- (void)updateSwitchPickerButtonTitle
+{
+    if (self.pickerContainerView.visibleView == self.definedRecurrenceRulesPicker) {
+        self.switchPickerButton.titleLabel.text = NSLocalizedString(@"ECRecurrenceRuleCell.Custom", @"Switch to custom rule selection mode");
+    } else {
+        self.switchPickerButton.titleLabel.text = NSLocalizedString(@"ECRecurrenceRuleCell.Basic", @"Switch to basic rule selection mode");
+    }
 }
 
 
