@@ -59,6 +59,15 @@
     [self addSubview:secondaryView];
 }
 
+- (UIView*)visibleView
+{
+    if (!_visibleView) {
+        _visibleView = self.primaryView;
+    }
+    
+    return _visibleView;
+}
+
 
 #pragma mark - Layout
 
@@ -92,7 +101,7 @@ const static NSTimeInterval kSwitchViewsAnimationDuration = 0.2f;
 
 - (void)layoutPrimaryView
 {
-    CGFloat horizontalOffset = (self.visibleView == self.secondaryView) ? 0 : -self.bounds.size.width;
+    CGFloat horizontalOffset = (self.visibleView == self.primaryView) ? 0 : -self.bounds.size.width;
     [self layoutView:self.primaryView withHorizontalOffset:horizontalOffset];
     
     self.primaryViewNeedsLayout = NO;

@@ -37,6 +37,7 @@
 
 - (void)setup
 {
+    self.pickerContainerView.backgroundColor = [UIColor whiteColor];
     [self setupPickerViews];
 }
 
@@ -54,7 +55,7 @@
     self.customRecurrenceRulesPicker = customRecurrenceRulesPicker;
     // picker container will add pickers to its subviews
     self.pickerContainerView.primaryView = self.definedRecurrenceRulesPicker;
-    self.pickerContainerView.secondaryView = self.definedRecurrenceRulesPicker;
+    self.pickerContainerView.secondaryView = self.customRecurrenceRulesPicker;
 }
 
 - (NSArray*)definedRecurrenceRules
@@ -97,10 +98,18 @@
 }
 
 
+#pragma mark - UI Events
+
+- (IBAction)switchPickerButtonTapped:(UIButton*)sender
+{
+    [self.pickerContainerView switchView:YES];
+}
+
+
 #pragma mark - UIPickerView Delegate and Data source
 
 const static NSInteger kCustomRuleCountComponent =      0;
-const static NSInteger KCustomRuleTimeUnitComponent =   1;
+const static NSInteger kCustomRuleTimeUnitComponent =   1;
 
 const static NSInteger kCustomRuleTimeUnitDayRow =      0;
 const static NSInteger kCustomRuleTimeUnitWeekRow =     1;
@@ -141,26 +150,46 @@ const static NSInteger kCustomRuleTimeUnitYearRow =     3;
 
 - (NSInteger)numberOfRowsInCustomRowCountComponent
 {
-    switch ([self.customRecurrenceRulesPicker selectedRowInComponent:KCustomRuleTimeUnitComponent]) {
-        case kCustomRuleTimeUnitDayRow:
-            return 364 - 2; // The minimum value is 2
-            
-        case kCustomRuleTimeUnitWeekRow:
-            return 52 - 2;
-            
-        case kCustomRuleTimeUnitMonthRow:
-            return 12 - 2;
-            
-        case kCustomRuleTimeUnitYearRow:
-            return 100 - 2;
-        default:
-            return 0;
-    }
+    return 365 - 2;
 }
 
 - (NSInteger)numberOfRowsInCustomRowTimeUnitComponent
 {
     return self.customRuleTimeUnitNames.count;
+}
+
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    if (pickerView == self.definedRecurrenceRulesPicker) {
+        return [self definedRecurrenceRuleTitleForRow:row forComponent:component];
+    } else {
+        return [self customRecurrenceRuleTitleForRow:row forComponent:component];
+    }
+}
+
+- (NSString*)definedRecurrenceRuleTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    ECRecurrenceRule* recurrenceRule = self.definedRecurrenceRules[row];
+    return recurrenceRule.localizedName;
+}
+
+- (NSString*)customRecurrenceRuleTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    if (component == kCustomRuleCountComponent) {
+        return [self customCountTitleForRow:row];
+    } else {
+        return [self timeUnitTitleForRow:row];
+    }
+}
+
+- (NSString*)customCountTitleForRow:(NSInteger)row
+{
+    return [NSString stringWithFormat:@"%lu", row + 2];
+}
+
+- (NSString*)timeUnitTitleForRow:(NSInteger)row
+{
+    return self.customRuleTimeUnitNames[row];
 }
 
 @end

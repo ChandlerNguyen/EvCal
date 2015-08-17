@@ -460,7 +460,7 @@ const static CGFloat kCalendarCellHeight =              44.0f;
 const static CGFloat kDatesAndAlarmsRowHeight =         52.0f;
 const static CGFloat kTextPropertyHiddenNameHeight =    33.0f;
 const static CGFloat kTextPropertyVisibleNameHeight =   52.0f;
-const static CGFloat kExpandedDatePickerHeight =        214.0f;
+const static CGFloat kExpandedPickerCellHeight =        214.0f;
 const static CGFloat kAllDayCellHeight =                44.0f;
 
 const static NSInteger kTitleLocationCalendarSection =  0;
@@ -469,7 +469,7 @@ const static NSInteger kRecurrenceSection =             2;
 
 const static NSInteger kTitleCellRow =                  0;
 const static NSInteger kCalendarCellRow =               2;
-const static NSInteger kRecurrenceEndCellRow =          2;
+const static NSInteger kRecurrenceEndCellRow =          3;
 const static NSInteger kAllDayCellRow =                 2;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -508,7 +508,7 @@ const static NSInteger kAllDayCellRow =                 2;
     } else {
         // if the date picker cell is highlighted it should be taller
         if ([indexPath isEqual:self.selectedIndexPath]) {
-            return kExpandedDatePickerHeight;
+            return kExpandedPickerCellHeight;
         } else {
             return kDatesAndAlarmsRowHeight;
         }
@@ -517,6 +517,10 @@ const static NSInteger kAllDayCellRow =                 2;
 
 - (CGFloat)heightForCellInRecurrenceSectionAtIndexPath:(NSIndexPath*)indexPath
 {
+    if (indexPath.row == 2) {
+        return kExpandedPickerCellHeight;
+    }
+    
     if (indexPath.row == kRecurrenceEndCellRow &&
         self.recurrenceRule.type == ECRecurrenceRuleTypeNone) {
         return 0.0f;
