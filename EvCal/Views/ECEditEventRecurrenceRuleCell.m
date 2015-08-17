@@ -92,10 +92,55 @@
     }
 }
 
+- (void)setRecurrenceRule:(ECRecurrenceRule *)recurrenceRule
+{
+    if (recurrenceRule.type == ECRecurrenceRuleTypeCustom) {
+        [self.pickerContainerView switchToSecondayView:NO]; // secondary view is custom rule picker
+        
+        [self.customRecurrenceRulesPicker selectRow:[self rowForInterval:recurrenceRule.rule.interval] inComponent:kCustomRuleIntervalComponent animated:NO];
+        [self.customRecurrenceRulesPicker selectRow:[self rowForFrequency:recurrenceRule.rule.frequency] inComponent:kCustomRuleFrequencyComponent animated:NO];
+    } else {
+        [self.pickerContainerView switchToPrimaryView:NO]; // primary view is defined rule picker
+        
+        [self.definedRecurrenceRulesPicker selectRow:[self rowForDefinedRecurrenceRuleType:recurrenceRule.type] inComponent:0 animated:NO];
+    }
+}
+
+- (NSInteger)rowForDefinedRecurrenceRuleType:(ECRecurrenceRuleType)type
+{
+    switch (type) {
+        case ECRecurrenceRuleTypeNone:
+            return kNoneRecurrenceRuleRow;
+            
+        case ECRecurrenceRuleTypeDaily:
+            return kDailyRecurrenceRuleRow;
+            
+        case ECRecurrenceRuleTypeWeekdays:
+            return kWeekdaysRecurrenceRuleRow;
+            
+        case ECRecurrenceRuleTypeWeekly:
+            return kWeeklyRecurrenceRuleRow;
+            
+        case ECRecurrenceRuleTypeMonthly:
+            return kMonthlyRecurrenceRuleRow;
+            
+        case ECRecurrenceRuleTypeYearly:
+            return kYearlyRecurrenceRuleRow;
+            
+        case ECRecurrenceRuleTypeCustom:
+            return 0;
+    }
+}
+
 - (NSInteger)intervalForCustomRuleAtRow:(NSInteger)row
 {
     // The starting value for custom rules is 2
     return row + 2;
+}
+
+- (NSInteger)rowForInterval:(NSInteger)interval
+{
+    return interval - 2;
 }
 
 - (EKRecurrenceFrequency)frequencyForRow:(NSInteger)row
@@ -115,6 +160,23 @@
             
         default:
             return EKRecurrenceFrequencyDaily;
+    }
+}
+
+- (NSInteger)rowForFrequency:(EKRecurrenceFrequency)frequency
+{
+    switch (frequency) {
+        case EKRecurrenceFrequencyDaily:
+            return kDailyFrequencyRow;
+            
+        case EKRecurrenceFrequencyWeekly:
+            return kWeeklyFrequencyRow;
+            
+        case EKRecurrenceFrequencyMonthly:
+            return kMonthlyFrequencyRow;
+            
+        case EKRecurrenceFrequencyYearly:
+            return kYearlyFrequencyRow;
     }
 }
 
@@ -156,6 +218,13 @@ const static NSInteger kDailyFrequencyRow =             0;
 const static NSInteger kWeeklyFrequencyRow =            1;
 const static NSInteger kMonthlyFrequencyRow =           2;
 const static NSInteger kYearlyFrequencyRow =            3;
+
+const static NSInteger kNoneRecurrenceRuleRow =         0;
+const static NSInteger kDailyRecurrenceRuleRow =        1;
+const static NSInteger kWeekdaysRecurrenceRuleRow =     2;
+const static NSInteger kWeeklyRecurrenceRuleRow =       3;
+const static NSInteger kMonthlyRecurrenceRuleRow =      4;
+const static NSInteger kYearlyRecurrenceRuleRow =       5;
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
