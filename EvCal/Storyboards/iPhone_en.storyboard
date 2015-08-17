@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="f92-S2-hBJ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Day View Controller-->
@@ -310,40 +309,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="recurrenceRuleCell" id="plX-eI-YlQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="plX-eI-YlQ" id="4kZ-Fq-WJ6">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGI-Fk-6dD">
-                                                    <rect key="frame" x="245" y="11" width="42" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repeat" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5v-QF-to4">
-                                                    <rect key="frame" x="16" y="11" width="64" height="20.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="20.5" id="Doy-S9-q90"/>
-                                                        <constraint firstAttribute="width" constant="64" id="g4Q-Ig-aZc"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="black" pointSize="15"/>
-                                                    <color key="textColor" red="0.43529411759999997" green="0.21960784310000001" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="OGI-Fk-6dD" secondAttribute="trailing" id="5Tq-b7-vyL"/>
-                                                <constraint firstItem="W5v-QF-to4" firstAttribute="leading" secondItem="4kZ-Fq-WJ6" secondAttribute="leading" constant="16" id="BAN-hv-XB1"/>
-                                                <constraint firstAttribute="centerY" secondItem="OGI-Fk-6dD" secondAttribute="centerY" id="Lpl-oT-XAF"/>
-                                                <constraint firstAttribute="centerY" secondItem="W5v-QF-to4" secondAttribute="centerY" id="Mpp-lx-IdE"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="oSd-sI-5dS" kind="push" identifier="recurrenceRule" id="Fu6-aV-TSf"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="214" id="41q-Pc-RAt" customClass="ECEditEventRecurrenceRuleCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="41q-Pc-RAt" id="Nvh-cO-ufY">
@@ -470,7 +435,6 @@
                         <outlet property="endDatePickerCell" destination="9xP-KB-6Ka" id="Iqo-EC-292"/>
                         <outlet property="locationCell" destination="MAz-Oe-62N" id="gnq-Cf-jV4"/>
                         <outlet property="recurrenceEndLabel" destination="nkt-3e-oI4" id="APq-OD-f2Z"/>
-                        <outlet property="recurrenceRuleLabel" destination="OGI-Fk-6dD" id="tx4-Mh-gxV"/>
                         <outlet property="startDatePickerCell" destination="HJN-1E-Iad" id="5ce-ec-2kG"/>
                         <outlet property="titleCell" destination="qC9-n0-Ekw" id="1lN-HK-MEX"/>
                     </connections>
@@ -521,69 +485,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T7t-si-d38" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1666" y="948"/>
-        </scene>
-        <!--Edit Event Recurrence Rule Table View Controller-->
-        <scene sceneID="rE1-aV-cGw">
-            <objects>
-                <tableViewController id="oSd-sI-5dS" customClass="ECEditEventRecurrenceRuleTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="PeE-VG-L9C">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="specificRecurrenceRuleCell" id="8Xh-uA-KLP">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Xh-uA-KLP" id="VEt-8Y-Atb">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="customRecurrenceRuleCell" id="Pwb-OU-d2t" customClass="ECEventCustomRecurrenceRuleCell">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pwb-OU-d2t" id="aK3-lD-C3O">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UXE-L0-Ay0">
-                                            <rect key="frame" x="255" y="6" width="32" height="32"/>
-                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="32" id="vJy-Ao-Od3"/>
-                                                <constraint firstAttribute="height" constant="32" id="xoI-yn-zvg"/>
-                                            </constraints>
-                                        </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Tl-W2-BWo">
-                                            <rect key="frame" x="16" y="11.5" width="231" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="UXE-L0-Ay0" firstAttribute="leading" secondItem="8Tl-W2-BWo" secondAttribute="trailing" constant="8" id="6EB-wA-MNk"/>
-                                        <constraint firstItem="8Tl-W2-BWo" firstAttribute="leading" secondItem="aK3-lD-C3O" secondAttribute="leading" constant="16" id="Fsc-S1-K28"/>
-                                        <constraint firstAttribute="centerY" secondItem="UXE-L0-Ay0" secondAttribute="centerY" id="LTA-St-1z8"/>
-                                        <constraint firstAttribute="trailing" secondItem="UXE-L0-Ay0" secondAttribute="trailing" id="fcV-Uu-wNp"/>
-                                        <constraint firstAttribute="centerY" secondItem="8Tl-W2-BWo" secondAttribute="centerY" id="irU-la-xEV"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="checkmarkViewContainer" destination="UXE-L0-Ay0" id="fqb-GW-R4L"/>
-                                    <outlet property="ruleLabel" destination="8Tl-W2-BWo" id="3Nm-lv-stP"/>
-                                    <segue destination="icV-y6-BV4" kind="push" identifier="customRule" id="OOi-Wh-aN7"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="oSd-sI-5dS" id="AkW-GN-qz8"/>
-                            <outlet property="delegate" destination="oSd-sI-5dS" id="27E-1c-QSs"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="UR3-tI-tTB"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ofS-Hg-2gb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1666" y="-306"/>
+            <point key="canvasLocation" x="1652" y="638"/>
         </scene>
         <!--End Repeat-->
         <scene sceneID="igu-Kr-ZNW">
@@ -679,65 +581,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0bu-1f-c37" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1666" y="314"/>
-        </scene>
-        <!--Edit Event Recurrence Custom Rule View Controller-->
-        <scene sceneID="hOc-rJ-txl">
-            <objects>
-                <tableViewController id="icV-y6-BV4" customClass="ECEditEventRecurrenceCustomRuleViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Zkm-ai-FvY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
-                        <sections>
-                            <tableViewSection id="ghR-gu-y3e">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="199" id="7GA-JP-Obg">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7GA-JP-Obg" id="T8x-RM-Eet">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repeat every" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7O-7I-9iP">
-                                                    <rect key="frame" x="110" y="8" width="101" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="mXM-X6-PYb"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Tw-dw-jTr">
-                                                    <rect key="frame" x="0.0" y="37" width="320" height="162"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="162" id="69N-WX-jTR"/>
-                                                    </constraints>
-                                                </pickerView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="d7O-7I-9iP" firstAttribute="top" secondItem="T8x-RM-Eet" secondAttribute="topMargin" id="LOP-sZ-V4Z"/>
-                                                <constraint firstItem="d7O-7I-9iP" firstAttribute="centerX" secondItem="T8x-RM-Eet" secondAttribute="centerX" id="Wua-fm-igv"/>
-                                                <constraint firstItem="3Tw-dw-jTr" firstAttribute="top" secondItem="d7O-7I-9iP" secondAttribute="bottom" constant="8" symbolic="YES" id="pYS-cp-M0c"/>
-                                                <constraint firstItem="3Tw-dw-jTr" firstAttribute="centerX" secondItem="d7O-7I-9iP" secondAttribute="centerX" id="vvq-nf-RqA"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="icV-y6-BV4" id="RbY-JF-tWI"/>
-                            <outlet property="delegate" destination="icV-y6-BV4" id="q5M-JV-mVo"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="5zv-BA-sUs"/>
-                    <connections>
-                        <outlet property="recurrenceRulePicker" destination="3Tw-dw-jTr" id="7e5-k5-t1T"/>
-                        <outlet property="repeatLabel" destination="d7O-7I-9iP" id="FOD-kT-6Ea"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rkl-f9-L2I" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2104" y="-306"/>
+            <point key="canvasLocation" x="1652" y="23"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Qfz-Gk-nUb">

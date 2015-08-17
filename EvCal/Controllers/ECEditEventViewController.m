@@ -469,7 +469,8 @@ const static NSInteger kRecurrenceSection =             2;
 
 const static NSInteger kTitleCellRow =                  0;
 const static NSInteger kCalendarCellRow =               2;
-const static NSInteger kRecurrenceEndCellRow =          3;
+const static NSInteger kRecurrenceRulePickerCellRow =   1;
+const static NSInteger kRecurrenceEndCellRow =          2;
 const static NSInteger kAllDayCellRow =                 2;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -517,11 +518,9 @@ const static NSInteger kAllDayCellRow =                 2;
 
 - (CGFloat)heightForCellInRecurrenceSectionAtIndexPath:(NSIndexPath*)indexPath
 {
-    if (indexPath.row == 2) {
+    if (indexPath.row == kRecurrenceRulePickerCellRow && [indexPath isEqual:self.selectedIndexPath]) {
         return kExpandedPickerCellHeight;
-    }
-    
-    if (indexPath.row == kRecurrenceEndCellRow &&
+    } else if (indexPath.row == kRecurrenceEndCellRow &&
         self.recurrenceRule.type == ECRecurrenceRuleTypeNone) {
         return 0.0f;
     } else {
