@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ECRecurrenceRule;
 
 @interface ECEditEventRecurrenceRuleCell : UITableViewCell
+
+@property (nonatomic, strong) ECRecurrenceRule* recurrenceRule;
 
 @end
