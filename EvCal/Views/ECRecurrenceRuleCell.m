@@ -224,9 +224,9 @@
 - (void)updateSwitchPickerButtonTitle
 {
     if (self.pickerContainerView.visibleView == self.definedRecurrenceRulesPicker) {
-        self.switchPickerButton.titleLabel.text = NSLocalizedString(@"ECRecurrenceRuleCell.Custom", @"Switch to custom rule selection mode");
+        [self.switchPickerButton setTitle:NSLocalizedString(@"ECRecurrenceRuleCell.Custom", @"Switch to custom rule selection mode") forState:UIControlStateNormal];
     } else {
-        self.switchPickerButton.titleLabel.text = NSLocalizedString(@"ECRecurrenceRuleCell.Basic", @"Switch to basic rule selection mode");
+        [self.switchPickerButton setTitle:NSLocalizedString(@"ECRecurrenceRuleCell.Basic", @"Switch to basic rule selection mode") forState:UIControlStateNormal];
     }
 }
 
