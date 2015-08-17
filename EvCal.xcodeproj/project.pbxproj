@@ -41,6 +41,7 @@
 		8495393C1B80DDCF00B7873E /* ECDualViewSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 8495393B1B80DDCF00B7873E /* ECDualViewSwitcher.m */; };
 		8495393E1B80E5F300B7873E /* ECDualViewSwitcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8495393D1B80E5F300B7873E /* ECDualViewSwitcherTests.m */; };
 		849539411B80F03D00B7873E /* ECRecurrenceRuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849539401B80F03D00B7873E /* ECRecurrenceRuleCell.m */; };
+		849539441B828C7C00B7873E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 849539421B828C7C00B7873E /* Localizable.strings */; };
 		849773F21B3C09710097259F /* ECDateViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 849773F11B3C09710097259F /* ECDateViewTests.m */; };
 		849EA5951B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849EA5941B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m */; };
 		849EA59B1B4EB6E90053549C /* ECAlarm.m in Sources */ = {isa = PBXBuildFile; fileRef = 849EA59A1B4EB6E90053549C /* ECAlarm.m */; };
@@ -142,6 +143,7 @@
 		8495393D1B80E5F300B7873E /* ECDualViewSwitcherTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDualViewSwitcherTests.m; sourceTree = "<group>"; };
 		8495393F1B80F03D00B7873E /* ECRecurrenceRuleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECRecurrenceRuleCell.h; path = Views/ECRecurrenceRuleCell.h; sourceTree = "<group>"; };
 		849539401B80F03D00B7873E /* ECRecurrenceRuleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECRecurrenceRuleCell.m; path = Views/ECRecurrenceRuleCell.m; sourceTree = "<group>"; };
+		849539431B828C7C00B7873E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		849773F11B3C09710097259F /* ECDateViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECDateViewTests.m; sourceTree = "<group>"; };
 		849EA5931B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventRecurrenceEndViewController.h; path = Controllers/ECEditEventRecurrenceEndViewController.h; sourceTree = "<group>"; };
 		849EA5941B4E28CF0053549C /* ECEditEventRecurrenceEndViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEditEventRecurrenceEndViewController.m; path = Controllers/ECEditEventRecurrenceEndViewController.m; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 		847A81651B09B157008F5168 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				849539421B828C7C00B7873E /* Localizable.strings */,
 				84C459031B073A860066B6A9 /* Images.xcassets */,
 				84C458F71B073A860066B6A9 /* Info.plist */,
 				84C458F81B073A860066B6A9 /* main.m */,
@@ -571,6 +574,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8478F7A91B1DFF010096F1B7 /* iPhone_en.storyboard in Resources */,
+				849539441B828C7C00B7873E /* Localizable.strings in Resources */,
 				84C459041B073A860066B6A9 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -727,6 +731,17 @@
 			targetProxy = 84C4590D1B073A860066B6A9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		849539421B828C7C00B7873E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				849539431B828C7C00B7873E /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		84C459141B073A860066B6A9 /* Debug */ = {
