@@ -581,11 +581,15 @@ const static NSInteger kAllDayCellRow =                 2;
     
     if (indexPath.section == kRecurrenceSection ) {
         if (indexPath.row == kRecurrenceRulePickerCellRow) {
+            self.alarmCell.switchPickerButton.hidden = YES;
             self.recurrenceRuleCell.switchPickerButton.hidden = [indexPath isEqual:self.selectedIndexPath];
         } else if (indexPath.row == kAlarmPickerCellRow) {
+            self.recurrenceRuleCell.switchPickerButton.hidden = YES;
             self.alarmCell.switchPickerButton.hidden = [indexPath isEqual:self.selectedIndexPath];
         }
-        
+    } else {
+        self.recurrenceRuleCell.switchPickerButton.hidden = YES;
+        self.alarmCell.switchPickerButton.hidden = YES;
     }
     
     if ([self.selectedIndexPath isEqual:indexPath]) {
