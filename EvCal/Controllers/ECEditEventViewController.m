@@ -520,17 +520,15 @@ const static NSInteger kAllDayCellRow =                 2;
 
 - (CGFloat)heightForCellInRecurrenceSectionAtIndexPath:(NSIndexPath*)indexPath
 {
-    if (indexPath.row == kRecurrenceRulePickerCellRow ) {
+    if (indexPath.row == kRecurrenceEndCellRow &&
+        self.recurrenceRule.type == ECRecurrenceRuleTypeNone) {
+        return 0.0f;
+    } else {
         if ([indexPath isEqual:self.selectedIndexPath]) {
             return kExpandedPickerCellHeight;
         } else {
             return kCollapsedPickerCellHeight;
         }
-    } else if (indexPath.row == kRecurrenceEndCellRow &&
-        self.recurrenceRule.type == ECRecurrenceRuleTypeNone) {
-        return 0.0f;
-    } else {
-        return kRecurrenceRowHeight;
     }
 }
 

@@ -38,6 +38,7 @@
 
 - (void)setup
 {
+    self.pickerContainerView.backgroundColor = [UIColor whiteColor];
     [self setupPickers];
 }
 
@@ -183,6 +184,11 @@
 }
 
 #pragma mark - UI Events
+
+- (IBAction)switchPickerButtonTapped:(UIButton*)sender
+{
+    [self.pickerContainerView switchView:YES];
+}
 
 - (void)datePickerValueChanged:(UIDatePicker*)sender
 {

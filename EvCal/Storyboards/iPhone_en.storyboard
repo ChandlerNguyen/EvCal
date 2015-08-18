@@ -319,6 +319,9 @@
                                                     <state key="normal" title="Custom">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="switchPickerButtonTapped:" destination="jrn-dj-jNr" eventType="touchUpInside" id="H5i-o3-THd"/>
+                                                    </connections>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giW-vN-fSg" userLabel="Picker Container View" customClass="ECDualViewSwitcher">
                                                     <rect key="frame" x="0.0" y="51" width="320" height="162"/>
