@@ -286,7 +286,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle=" " id="uH3-UF-trb">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="214" id="jrn-dj-jNr" customClass="ECAlarmCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="214" id="jrn-dj-jNr" customClass="ECAlarmCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jrn-dj-jNr" id="orP-63-INo">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -348,7 +348,7 @@
                                             <outlet property="titleLabel" destination="qgq-Za-rJM" id="B2u-42-DXo"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="214" id="41q-Pc-RAt" customClass="ECRecurrenceRuleCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="214" id="41q-Pc-RAt" customClass="ECRecurrenceRuleCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="41q-Pc-RAt" id="Nvh-cO-ufY">
                                             <autoresizingMask key="autoresizingMask"/>
