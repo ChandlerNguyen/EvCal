@@ -6,11 +6,14 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
+@import EventKit;
 #import "ECAlarmCell.h"
 #import "ECDualViewSwitcher.h"
 #import "ECAlarm.h"
 
 @interface ECAlarmCell() <UIPickerViewDataSource, UIPickerViewDelegate>
+
+@property (nonatomic, strong) NSDateFormatter* dateFormatter;
 
 @property (nonatomic, weak) IBOutlet UILabel* titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel* infoLabel;
@@ -45,13 +48,28 @@
     
     offsetAlarmPicker.dataSource = self;
     offsetAlarmPicker.delegate = self;
+    
     [absoluteDatePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+    absoluteDatePicker.maximumDate = self.maximumDate;
+    absoluteDatePicker.minimumDate = self.minimumDate;
+    absoluteDatePicker.datePickerMode = UIDatePickerModeDateAndTime;
     
     self.offsetAlarmPicker = offsetAlarmPicker;
     self.absoluteDatePicker = absoluteDatePicker;
     
     [self.pickerContainerView setPrimaryView:offsetAlarmPicker];
     [self.pickerContainerView setSecondaryView:absoluteDatePicker];
+}
+
+- (NSDateFormatter*)dateFormatter
+{
+    if (!_dateFormatter) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        
+        _dateFormatter.dateStyle = NSDateFormatterLongStyle;
+    }
+    
+    return _dateFormatter;
 }
 
 - (NSArray*)offsetAlarms
@@ -75,6 +93,15 @@
              [ECAlarm alarmWithType:ECAlarmTypeOffsetTwoDays]];
 }
 
+- (void)addCustomAlarmToOffsetAlarms:(ECAlarm*)alarm
+{
+    NSMutableArray* mutableOffsetAlarms = [self.offsetAlarms mutableCopy];
+    [mutableOffsetAlarms addObject:alarm];
+    self.offsetAlarms = [mutableOffsetAlarms copy];
+    
+    [self.offsetAlarmPicker reloadComponent:0];
+}
+
 - (ECAlarm*)alarm
 {
     if (self.pickerContainerView.visibleView == self.offsetAlarmPicker) {
@@ -90,7 +117,9 @@
 - (void)setAlarm:(ECAlarm *)alarm
 {
     if (alarm.type == ECAlarmTypeAbsoluteDate) {
+        self.absoluteDatePicker.date = alarm.ekAlarm.absoluteDate;
         
+        [self.pickerContainerView switchToSecondayView:NO];
     } else {
         if (alarm.type == ECAlarmTypeOffsetCustom) {
             [self addCustomAlarmToOffsetAlarms:alarm];
@@ -101,15 +130,20 @@
         // Offset alarm picker is primary view
         [self.pickerContainerView switchToPrimaryView:NO];
     }
+    
+    [self updateInfoLabel];
 }
 
-- (void)addCustomAlarmToOffsetAlarms:(ECAlarm*)alarm
+- (void)setMaximumDate:(NSDate *)maximumDate
 {
-    NSMutableArray* mutableOffsetAlarms = [self.offsetAlarms mutableCopy];
-    [mutableOffsetAlarms addObject:alarm];
-    self.offsetAlarms = [mutableOffsetAlarms copy];
-    
-    [self.offsetAlarmPicker reloadComponent:0];
+    _maximumDate = maximumDate;
+    self.absoluteDatePicker.maximumDate = maximumDate;
+}
+
+- (void)setMinimumDate:(NSDate *)minimumDate
+{
+    _minimumDate = minimumDate;
+    self.absoluteDatePicker.minimumDate = minimumDate;
 }
 
 - (NSInteger)rowForOffsetAlarm:(ECAlarm*)alarm
@@ -152,7 +186,28 @@
 
 - (void)datePickerValueChanged:(UIDatePicker*)sender
 {
-    DDLogDebug(@"Date picker value changed: %@", sender.date);
+    [self informDelegateThatAlarmWasSelected];
+    
+    [self updateInfoLabel];
+}
+
+- (void)informDelegateThatAlarmWasSelected
+{
+    if ([self.alarmDelegate respondsToSelector:@selector(alarmCell:didSelectAlarm:)]) {
+        [self.alarmDelegate alarmCell:self didSelectAlarm:self.alarm];
+    }
+}
+
+-(void)updateInfoLabel
+{
+    if (self.pickerContainerView.visibleView == self.offsetAlarmPicker) {
+        NSInteger alarmRow = [self.offsetAlarmPicker selectedRowInComponent:0];
+        ECAlarm* alarm = self.offsetAlarms[alarmRow];
+        self.infoLabel.text = alarm.localizedName;
+    } else {
+        NSString* dateString = [self.dateFormatter stringFromDate:self.absoluteDatePicker.date];
+        self.infoLabel.text = dateString;
+    }
 }
 
 
@@ -182,6 +237,12 @@ const static NSInteger kAlarmOffsetCustomRow =      8;
 {
     ECAlarm* alarm = self.offsetAlarms[row];
     return alarm.localizedName;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    [self updateInfoLabel];
+    [self informDelegateThatAlarmWasSelected];
 }
 
 @end

@@ -16,6 +16,7 @@
 
 @protocol ECAlarmCellDelegate <NSObject>
 
+@optional
 /**
  *  Notifies the receiver that the alarm cell has selected an alarm value.
  *
