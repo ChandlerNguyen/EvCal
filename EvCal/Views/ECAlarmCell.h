@@ -39,6 +39,11 @@
 // accordingly.
 @property (nonatomic, strong) ECAlarm* alarm;
 
+// The earliest allowed date for an alarm
+@property (nonatomic, strong) NSDate* minimumDate; // default is nil
+// The latest allowed date for an alarm
+@property (nonatomic, strong) NSDate* maximumDate; // default is nil
+
 // The delegate to receive alarm change notifications
 @property (nonatomic, weak) id<ECAlarmCellDelegate> alarmDelegate;
 

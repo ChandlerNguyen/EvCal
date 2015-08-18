@@ -47,6 +47,9 @@
     offsetAlarmPicker.delegate = self;
     [absoluteDatePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
     
+    self.offsetAlarmPicker = offsetAlarmPicker;
+    self.absoluteDatePicker = absoluteDatePicker;
+    
     [self.pickerContainerView setPrimaryView:offsetAlarmPicker];
     [self.pickerContainerView setSecondaryView:absoluteDatePicker];
 }
@@ -72,6 +75,78 @@
              [ECAlarm alarmWithType:ECAlarmTypeOffsetTwoDays]];
 }
 
+- (ECAlarm*)alarm
+{
+    if (self.pickerContainerView.visibleView == self.offsetAlarmPicker) {
+        NSInteger alarmRow = [self.offsetAlarmPicker selectedRowInComponent:0];
+        ECAlarm* alarm = self.offsetAlarms[alarmRow];
+        return alarm;
+    } else {
+        ECAlarm* alarm = [ECAlarm alarmWithDate:self.absoluteDatePicker.date];
+        return alarm;
+    }
+}
+
+- (void)setAlarm:(ECAlarm *)alarm
+{
+    if (alarm.type == ECAlarmTypeAbsoluteDate) {
+        
+    } else {
+        if (alarm.type == ECAlarmTypeOffsetCustom) {
+            [self addCustomAlarmToOffsetAlarms:alarm];
+        }
+        
+        NSInteger alarmRow = [self rowForOffsetAlarm:alarm];
+        [self.offsetAlarmPicker selectRow:alarmRow inComponent:0 animated:NO];
+        // Offset alarm picker is primary view
+        [self.pickerContainerView switchToPrimaryView:NO];
+    }
+}
+
+- (void)addCustomAlarmToOffsetAlarms:(ECAlarm*)alarm
+{
+    NSMutableArray* mutableOffsetAlarms = [self.offsetAlarms mutableCopy];
+    [mutableOffsetAlarms addObject:alarm];
+    self.offsetAlarms = [mutableOffsetAlarms copy];
+    
+    [self.offsetAlarmPicker reloadComponent:0];
+}
+
+- (NSInteger)rowForOffsetAlarm:(ECAlarm*)alarm
+{
+    switch (alarm.type) {
+        case ECAlarmTypeNone:
+            return kAlarmNoneRow;
+            
+        case ECAlarmTypeOffsetQuarterHour:
+            return kAlarmOffsetQuarterHourRow;
+            
+        case ECAlarmTypeOffsetHalfHour:
+            return kAlarmOffsetHalfHourRow;
+            
+        case ECAlarmTypeOffsetOneHour:
+            return kAlarmOffsetOneHourRow;
+            
+        case ECAlarmTypeOffsetTwoHours:
+            return kAlarmOffsetTwoHoursRow;
+            
+        case ECAlarmTypeOffsetSixHours:
+            return kAlarmOffsetSixHoursRow;
+            
+        case ECAlarmTypeOffsetOneDay:
+            return kAlarmOffsetOneDayRow;
+            
+        case ECAlarmTypeOffsetTwoDays:
+            return kAlarmOffsetTwoDaysRow;
+            
+        case ECAlarmTypeOffsetCustom:
+            return kAlarmOffsetCustomRow;
+            
+        default:
+            // Crash the program if an absolute date is passed to this method
+            return -1;
+    }
+}
 
 #pragma mark - UI Events
 
@@ -82,6 +157,16 @@
 
 
 #pragma mark - UIPickerView delegate and data source
+
+const static NSInteger kAlarmNoneRow              = 0;
+const static NSInteger kAlarmOffsetQuarterHourRow = 1;
+const static NSInteger kAlarmOffsetHalfHourRow =    2;
+const static NSInteger kAlarmOffsetOneHourRow =     3;
+const static NSInteger kAlarmOffsetTwoHoursRow =    4;
+const static NSInteger kAlarmOffsetSixHoursRow =    5;
+const static NSInteger kAlarmOffsetOneDayRow =      6;
+const static NSInteger kAlarmOffsetTwoDaysRow =     7;
+const static NSInteger kAlarmOffsetCustomRow =      8;
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
