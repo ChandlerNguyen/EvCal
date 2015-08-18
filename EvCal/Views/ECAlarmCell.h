@@ -1,0 +1,45 @@
+//
+//  ECAlarmCell.h
+//  EvCal
+//
+//  Created by Tom on 8/18/15.
+//  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+@class ECAlarm;
+@class ECAlarmCell;
+
+//------------------------------------------------------------------------------
+// @name ECAlarmCellDelegate
+//------------------------------------------------------------------------------
+
+@protocol ECAlarmCellDelegate <NSObject>
+
+/**
+ *  Notifies the receiver that the alarm cell has selected an alarm value.
+ *
+ *  @param cell  The cell which selected an alarm
+ *  @param alarm The alarm selected by the cell
+ */
+- (void)alarmCell:(ECAlarmCell*)cell didSelectAlarm:(ECAlarm*)alarm;
+
+@end
+
+@interface ECAlarmCell : UITableViewCell
+
+//------------------------------------------------------------------------------
+// @name Properties
+//------------------------------------------------------------------------------
+
+// The button for switching visible pickers
+@property (nonatomic, weak) IBOutlet UIButton* switchPickerButton;
+
+// The cell's current alarm value. Changing this will update the cell's UI
+// accordingly.
+@property (nonatomic, strong) ECAlarm* alarm;
+
+// The delegate to receive alarm change notifications
+@property (nonatomic, weak) id<ECAlarmCellDelegate> alarmDelegate;
+
+@end
