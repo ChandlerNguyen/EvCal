@@ -342,7 +342,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="infoLabel" destination="7yA-T4-H5V" id="32N-yP-BdZ"/>
+                                            <outlet property="pickerContainerView" destination="giW-vN-fSg" id="pNs-hG-9wH"/>
                                             <outlet property="switchPickerButton" destination="NHt-Ce-Kc1" id="YKV-uq-g4g"/>
+                                            <outlet property="titleLabel" destination="qgq-Za-rJM" id="B2u-42-DXo"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="214" id="41q-Pc-RAt" customClass="ECRecurrenceRuleCell">
