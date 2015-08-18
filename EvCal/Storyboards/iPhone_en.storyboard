@@ -291,7 +291,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jrn-dj-jNr" id="orP-63-INo">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgq-Za-rJM">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alarm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgq-Za-rJM">
                                                     <rect key="frame" x="16" y="4" width="69" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="Feq-8p-7CV"/>
@@ -316,7 +316,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="PzK-Mc-SR7"/>
                                                         <constraint firstAttribute="width" constant="219" id="fGO-wn-ijI"/>
                                                     </constraints>
-                                                    <state key="normal" title="Custom">
+                                                    <state key="normal" title="Date">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -471,6 +471,7 @@
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="alarmCell" destination="jrn-dj-jNr" id="osP-s7-QVZ"/>
                         <outlet property="allDaySwitch" destination="dhu-KP-7eP" id="npf-qp-WMj"/>
                         <outlet property="calendarCell" destination="UK6-Bm-Hog" id="KAk-tH-cze"/>
                         <outlet property="deleteButton" destination="hFa-LO-3xv" id="OgV-Xl-C3O"/>

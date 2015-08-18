@@ -10,10 +10,9 @@
 #import "ECAlarmCell.h"
 #import "ECDualViewSwitcher.h"
 #import "ECAlarm.h"
+#import "NSDateFormatter+ECAdditions.h"
 
 @interface ECAlarmCell() <UIPickerViewDataSource, UIPickerViewDelegate>
-
-@property (nonatomic, strong) NSDateFormatter* dateFormatter;
 
 @property (nonatomic, weak) IBOutlet UILabel* titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel* infoLabel;
@@ -40,6 +39,7 @@
 {
     self.pickerContainerView.backgroundColor = [UIColor whiteColor];
     [self setupPickers];
+    [self updateInfoLabel];
 }
 
 - (void)setupPickers
@@ -60,17 +60,6 @@
     
     [self.pickerContainerView setPrimaryView:offsetAlarmPicker];
     [self.pickerContainerView setSecondaryView:absoluteDatePicker];
-}
-
-- (NSDateFormatter*)dateFormatter
-{
-    if (!_dateFormatter) {
-        _dateFormatter = [[NSDateFormatter alloc] init];
-        
-        _dateFormatter.dateStyle = NSDateFormatterLongStyle;
-    }
-    
-    return _dateFormatter;
 }
 
 - (NSArray*)offsetAlarms
@@ -133,6 +122,7 @@
     }
     
     [self updateInfoLabel];
+    [self updateSwitchPickerButton];
 }
 
 - (void)setMaximumDate:(NSDate *)maximumDate
@@ -188,6 +178,9 @@
 - (IBAction)switchPickerButtonTapped:(UIButton*)sender
 {
     [self.pickerContainerView switchView:YES];
+    
+    [self updateSwitchPickerButton];
+    [self updateInfoLabel];
 }
 
 - (void)datePickerValueChanged:(UIDatePicker*)sender
@@ -204,6 +197,15 @@
     }
 }
 
+- (void)updateSwitchPickerButton
+{
+    if (self.pickerContainerView.visibleView == self.offsetAlarmPicker) {
+        [self.switchPickerButton setTitle:NSLocalizedString(@"ECAlarmCell.Date", @"Switch to absolute date picker") forState:UIControlStateNormal];
+    } else {
+        [self.switchPickerButton setTitle:NSLocalizedString(@"ECAlarmCell.Before Event", @"Switch to relative date picker") forState:UIControlStateNormal];
+    }
+}
+
 -(void)updateInfoLabel
 {
     if (self.pickerContainerView.visibleView == self.offsetAlarmPicker) {
@@ -211,7 +213,7 @@
         ECAlarm* alarm = self.offsetAlarms[alarmRow];
         self.infoLabel.text = alarm.localizedName;
     } else {
-        NSString* dateString = [self.dateFormatter stringFromDate:self.absoluteDatePicker.date];
+        NSString* dateString = [[NSDateFormatter ecEventDatesFormatter] stringFromDate:self.absoluteDatePicker.date];
         self.infoLabel.text = dateString;
     }
 }

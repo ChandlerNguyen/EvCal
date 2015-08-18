@@ -17,16 +17,18 @@
 #import "ECEditEventViewController.h"
 #import "ECEventStoreProxy.h"
 #import "ECRecurrenceRule.h"
+#import "ECAlarm.h"
 
 #import "ECDatePickerCell.h"
 #import "ECCalendarCell.h"
 #import "ECEventTextPropertyCell.h"
 #import "ECRecurrenceRuleCell.h"
+#import "ECAlarmCell.h"
 
 #import "ECEditEventCalendarViewController.h"
 #import "ECEditEventRecurrenceEndViewController.h"
 
-@interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, ECRecurrenceRuleCellDelegate, ECEditEventRecurrenceEndDelegate, ECEventTextPropertyCellDelegate, UIActionSheetDelegate>
+@interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, ECAlarmCellDelegate, ECRecurrenceRuleCellDelegate, ECEditEventRecurrenceEndDelegate, ECEventTextPropertyCellDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSIndexPath* selectedIndexPath;
 
@@ -48,6 +50,8 @@
 
 // Event Recurrence rules
 @property (nonatomic, strong) ECRecurrenceRule* recurrenceRule;
+@property (nonatomic, strong) ECAlarm* alarm;
+@property (nonatomic, weak) IBOutlet ECAlarmCell* alarmCell;
 @property (nonatomic, weak) IBOutlet ECRecurrenceRuleCell* recurrenceRuleCell;
 @property (nonatomic, weak) IBOutlet UILabel* recurrenceEndLabel;
 @property (nonatomic, strong) NSDate* recurrenceEndDate;
@@ -81,6 +85,8 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.startDatePickerCell.pickerDelegate = self;
     self.endDatePickerCell.pickerDelegate = self;
+    self.alarmCell.alarmDelegate = self;
+    self.alarmCell.switchPickerButton.hidden = YES;
     self.recurrenceRuleCell.recurrenceRuleDelegate = self;
     self.recurrenceRuleCell.switchPickerButton.hidden = YES;
     [self.allDaySwitch addTarget:self action:@selector(allDaySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
@@ -130,6 +136,7 @@
     [self synchronizeEventDates];
     [self synchronizeEventCalendarAndNotes];
     [self synchronizeEventRecurrenceRule];
+    [self synchronizeEventAlarm];
 }
 
 - (void)synchronizeEventTitleAndLocation
@@ -164,6 +171,15 @@
     }
 }
 
+- (void)synchronizeEventAlarm
+{
+    if (self.alarm.type == ECAlarmTypeNone) {
+        self.event.alarms = nil;
+    } else {
+        self.event.alarms = @[self.alarm.ekAlarm];
+    }
+}
+
 - (void)synchronizeFields
 {
     if (!self.event) {
@@ -174,6 +190,7 @@
     [self synchronizeDateSectionFields];
     [self synchronizeCalendarAndNotesSectionFields];
     [self synchronizeRecurrenceRule];
+    [self synchronizeAlarm];
 }
 
 - (void)synchronizeTitleAndLocationSectionFields
@@ -202,6 +219,12 @@
     self.recurrenceRuleCell.recurrenceRule = self.recurrenceRule;
     self.recurrenceEndDate = self.recurrenceRule.rule.recurrenceEnd.endDate;
     self.recurrenceEndLabel.text = [self recurrenceEndTextForRecurrenceEndDate:self.recurrenceEndDate];
+}
+
+- (void)synchronizeAlarm
+{
+    self.alarm = [[ECAlarm alloc] initWithEKAlarm:[self.event.alarms firstObject]];
+    self.alarmCell.alarm = self.alarm;
 }
 
 - (NSString*)recurrenceEndTextForRecurrenceEndDate:(NSDate*)endDate
@@ -439,6 +462,14 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+#pragma mark - ECAlarmCell Delegate
+
+- (void)alarmCell:(ECAlarmCell *)cell didSelectAlarm:(ECAlarm *)alarm
+{
+    self.alarm = alarm;
+}
+
 #pragma mark - ECRecurrenceRuleCell Delegate
 
 - (void)recurrenceCell:(ECRecurrenceRuleCell *)cell didSelectRecurrenceRule:(ECRecurrenceRule *)rule
@@ -457,7 +488,6 @@
 
 #pragma mark - UITableView Delegate and Datasource
 #pragma mark Cell Heights
-const static CGFloat kRecurrenceRowHeight =             44.0f;
 const static CGFloat kCalendarCellHeight =              44.0f;
 const static CGFloat kCollapsedPickerCellHeight =       52.0f;
 const static CGFloat kTextPropertyHiddenNameHeight =    33.0f;
@@ -471,6 +501,7 @@ const static NSInteger kRecurrenceSection =             2;
 
 const static NSInteger kTitleCellRow =                  0;
 const static NSInteger kCalendarCellRow =               2;
+const static NSInteger kAlarmPickerCellRow =            0;
 const static NSInteger kRecurrenceRulePickerCellRow =   1;
 const static NSInteger kRecurrenceEndCellRow =          2;
 const static NSInteger kAllDayCellRow =                 2;
@@ -548,8 +579,13 @@ const static NSInteger kAllDayCellRow =                 2;
         self.locationCell.editingProperty = NO;
     }
     
-    if (indexPath.section == kRecurrenceSection && indexPath.row == kRecurrenceRulePickerCellRow) {
-        self.recurrenceRuleCell.switchPickerButton.hidden = [indexPath isEqual:self.selectedIndexPath];
+    if (indexPath.section == kRecurrenceSection ) {
+        if (indexPath.row == kRecurrenceRulePickerCellRow) {
+            self.recurrenceRuleCell.switchPickerButton.hidden = [indexPath isEqual:self.selectedIndexPath];
+        } else if (indexPath.row == kAlarmPickerCellRow) {
+            self.alarmCell.switchPickerButton.hidden = [indexPath isEqual:self.selectedIndexPath];
+        }
+        
     }
     
     if ([self.selectedIndexPath isEqual:indexPath]) {
