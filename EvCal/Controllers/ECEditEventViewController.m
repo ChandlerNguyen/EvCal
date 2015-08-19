@@ -86,9 +86,7 @@
     self.startDatePickerCell.pickerDelegate = self;
     self.endDatePickerCell.pickerDelegate = self;
     self.alarmCell.alarmDelegate = self;
-    self.alarmCell.switchPickerButton.hidden = YES;
     self.recurrenceRuleCell.recurrenceRuleDelegate = self;
-    self.recurrenceRuleCell.switchPickerButton.hidden = YES;
     [self.allDaySwitch addTarget:self action:@selector(allDaySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
@@ -492,7 +490,7 @@ const static CGFloat kCalendarCellHeight =              44.0f;
 const static CGFloat kCollapsedPickerCellHeight =       52.0f;
 const static CGFloat kTextPropertyHiddenNameHeight =    33.0f;
 const static CGFloat kTextPropertyVisibleNameHeight =   52.0f;
-const static CGFloat kExpandedPickerCellHeight =        214.0f;
+const static CGFloat kExpandedPickerCellHeight =        244.0f;
 const static CGFloat kAllDayCellHeight =                44.0f;
 
 const static NSInteger kTitleLocationCalendarSection =  0;
@@ -577,19 +575,6 @@ const static NSInteger kAllDayCellRow =                 2;
         indexPath.row == kCalendarCellRow) {
         self.titleCell.editingProperty = NO;
         self.locationCell.editingProperty = NO;
-    }
-    
-    if (indexPath.section == kRecurrenceSection ) {
-        if (indexPath.row == kRecurrenceRulePickerCellRow) {
-            self.alarmCell.switchPickerButton.hidden = YES;
-            self.recurrenceRuleCell.switchPickerButton.hidden = [indexPath isEqual:self.selectedIndexPath];
-        } else if (indexPath.row == kAlarmPickerCellRow) {
-            self.recurrenceRuleCell.switchPickerButton.hidden = YES;
-            self.alarmCell.switchPickerButton.hidden = [indexPath isEqual:self.selectedIndexPath];
-        }
-    } else {
-        self.recurrenceRuleCell.switchPickerButton.hidden = YES;
-        self.alarmCell.switchPickerButton.hidden = YES;
     }
     
     if ([self.selectedIndexPath isEqual:indexPath]) {

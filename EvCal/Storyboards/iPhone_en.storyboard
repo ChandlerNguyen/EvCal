@@ -321,6 +321,9 @@
                                                             <state key="normal" title="Pick Date &gt;">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="switchViewButtonTapped:" destination="giW-vN-fSg" eventType="touchUpInside" id="6yk-79-lNn"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -387,6 +390,9 @@
                                                             <state key="normal" title="Custom &gt;">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="switchViewButtonTapped:" destination="VsC-yn-v1k" eventType="touchUpInside" id="qeb-v5-SXi"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
