@@ -38,6 +38,8 @@
 - (void)setup
 {
     self.pickerContainerView.backgroundColor = [UIColor whiteColor];
+    self.pickerContainerView.switcherDelegate = self;
+    self.pickerContainerView.switcherDatasource = self;
     [self setupPickers];
     [self updateInfoLabel];
 }
