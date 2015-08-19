@@ -462,6 +462,47 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle=" " id="ImI-rC-Dpb">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="53" id="Dyo-70-TNf" customClass="ECEventTextPropertyCell">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dyo-70-TNf" id="9Jq-cj-AHd">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="67" translatesAutoresizingMaskIntoConstraints="NO" id="bkY-gN-asv">
+                                                    <rect key="frame" x="16" y="4" width="67" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="18" id="Pds-Rd-8FW"/>
+                                                        <constraint firstAttribute="width" constant="67" id="jfd-GF-Gsb"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="black" pointSize="13"/>
+                                                    <color key="textColor" red="0.43529411759999997" green="0.21960784310000001" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Notes" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bWH-8S-Ddg">
+                                                    <rect key="frame" x="16" y="22" width="296" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="n7r-Qe-P0w"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="bkY-gN-asv" firstAttribute="leading" secondItem="bWH-8S-Ddg" secondAttribute="leading" id="0WM-b2-7fd"/>
+                                                <constraint firstItem="bWH-8S-Ddg" firstAttribute="top" secondItem="bkY-gN-asv" secondAttribute="bottom" id="PwM-wW-1qR"/>
+                                                <constraint firstItem="bkY-gN-asv" firstAttribute="leading" secondItem="9Jq-cj-AHd" secondAttribute="leading" constant="16" id="lkp-9B-jZp"/>
+                                                <constraint firstAttribute="trailing" secondItem="bWH-8S-Ddg" secondAttribute="trailing" constant="8" id="pXj-yS-07z"/>
+                                                <constraint firstAttribute="bottom" secondItem="bWH-8S-Ddg" secondAttribute="bottom" constant="0.5" id="srW-qY-PV6"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="propertyNameLabel" destination="bkY-gN-asv" id="qHl-G6-uK1"/>
+                                            <outlet property="propertyValueTextField" destination="bWH-8S-Ddg" id="eNz-Mg-YNr"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="61o-ly-PSA" id="Hal-me-Pbo"/>
