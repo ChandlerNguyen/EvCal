@@ -120,9 +120,28 @@ const static NSTimeInterval kSwitchViewsAnimationDuration = 0.2f;
     CGRect viewFrame = CGRectMake(self.bounds.origin.x + horizontalOffset,
                                            self.bounds.origin.y,
                                            self.bounds.size.width,
-                                           self.bounds.size.height);
+                                           self.bounds.size.height - self.switchViewButton.frame.size.height);
     
     view.frame = viewFrame;
+}
+
+
+#pragma mark - Switch Picker Button
+
+- (IBAction)switchViewButtonTapped:(UIButton*)sender
+{
+    [self switchView:YES];
+}
+
+- (void)updateSwitchPickerButton
+{
+    if (self.visibleView == self.primaryView) {
+        [self.switchViewButton setTitle:[self.switcherDatasource titleForSecondaryView] forState:UIControlStateNormal];
+        self.switchViewButton.titleLabel.textAlignment = NSTextAlignmentRight;
+    } else {
+        [self.switchViewButton setTitle:[self.switcherDatasource titleForPrimaryView] forState:UIControlStateNormal];
+        self.switchViewButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+    }
 }
 
 
@@ -143,6 +162,7 @@ const static NSTimeInterval kSwitchViewsAnimationDuration = 0.2f;
         self.visibleView = self.primaryView;
         
         [self layoutPrimaryAndSecondaryView:animated];
+        [self updateSwitchPickerButton];
     }
 }
 
@@ -152,6 +172,7 @@ const static NSTimeInterval kSwitchViewsAnimationDuration = 0.2f;
         self.visibleView = self.secondaryView;
         
         [self layoutPrimaryAndSecondaryView:animated];
+        [self updateSwitchPickerButton];
     }
 }
 

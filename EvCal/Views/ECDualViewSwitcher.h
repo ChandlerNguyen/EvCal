@@ -10,17 +10,50 @@
 @class ECDualViewSwitcher;
 @protocol ECDualViewSwitcherDelegate <NSObject>
 
-@optional
+//------------------------------------------------------------------------------
+// @name ECDualViewSwitcher Delegate
+//------------------------------------------------------------------------------
 
+@optional
 /**
  *  Informs the delegate that the dual view switcher's visible view was changed.
+ *  This method is not called when the switchView: method is called from an 
+ *  external source.
  *
  *  @param switcher The switcher that changed views.
  *  @param view     The new visible view.
  */
 - (void)dualViewSwitcher:(nonnull ECDualViewSwitcher*)switcher didSwitchViewToVisible:(nullable UIView*)view;
+@end
+
+
+//------------------------------------------------------------------------------
+// @name ECDualViewSwitcher Datasource
+//------------------------------------------------------------------------------
+
+@protocol ECDualViewSwitcherDatasource <NSObject>
+
+@required
+/**
+ *  The title to display on the switch button when secondary view is visible.
+ *  This title should inform the user that pressing the switch button will 
+ *  display the primary view.
+ *
+ *  @return The title of the primary view.
+ */
+- (nullable NSString*)titleForPrimaryView;
+
+/**
+ *  The title to display on the switch button when the primary view is visible. 
+ *  This title should inform the user that pressing the switch button will 
+ *  display the secondary view.
+ *
+ *  @return The title of the secondary view.
+ */
+- (nullable NSString*)titleForSecondaryView;
 
 @end
+
 
 @interface ECDualViewSwitcher : UIView
 
@@ -31,7 +64,10 @@
 @property (nonatomic, weak) UIView* __nullable primaryView;
 @property (nonatomic, weak) UIView* __nullable secondaryView;
 @property (nonatomic, weak, readonly) UIView* __nullable visibleView;
-@property (nonatomic, weak) IBOutlet UIButton* __nullable switchPickerButton;
+@property (nonatomic, weak) IBOutlet UIButton* __nullable switchViewButton;
+
+@property (nonatomic, weak) id<ECDualViewSwitcherDelegate> __nullable switcherDelegate;
+@property (nonatomic, weak) id<ECDualViewSwitcherDatasource> __nullable switcherDatasource;
 
 //------------------------------------------------------------------------------
 // @name Initializing

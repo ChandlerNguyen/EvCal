@@ -412,18 +412,18 @@
 		84D92C941B2998820050015D /* Edit Event View */ = {
 			isa = PBXGroup;
 			children = (
-				8478F7B31B24519B0096F1B7 /* ECDatePickerCell.h */,
-				8478F7B41B24519B0096F1B7 /* ECDatePickerCell.m */,
+				8497599D1B83A20600D2AF40 /* ECAlarmCell.h */,
+				8497599E1B83A20600D2AF40 /* ECAlarmCell.m */,
 				8474BF131B2EDEF000475846 /* ECCalendarCell.h */,
 				8474BF141B2EDEF000475846 /* ECCalendarCell.m */,
+				8478F7B31B24519B0096F1B7 /* ECDatePickerCell.h */,
+				8478F7B41B24519B0096F1B7 /* ECDatePickerCell.m */,
+				8495393A1B80DDCF00B7873E /* ECDualViewSwitcher.h */,
+				8495393B1B80DDCF00B7873E /* ECDualViewSwitcher.m */,
 				842DA8F81B47E5D7007DC027 /* ECEventTextPropertyCell.h */,
 				842DA8F91B47E5D7007DC027 /* ECEventTextPropertyCell.m */,
 				8495393F1B80F03D00B7873E /* ECRecurrenceRuleCell.h */,
 				849539401B80F03D00B7873E /* ECRecurrenceRuleCell.m */,
-				8495393A1B80DDCF00B7873E /* ECDualViewSwitcher.h */,
-				8495393B1B80DDCF00B7873E /* ECDualViewSwitcher.m */,
-				8497599D1B83A20600D2AF40 /* ECAlarmCell.h */,
-				8497599E1B83A20600D2AF40 /* ECAlarmCell.m */,
 			);
 			name = "Edit Event View";
 			sourceTree = "<group>";
