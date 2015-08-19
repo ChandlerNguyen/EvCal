@@ -486,7 +486,7 @@
 
 #pragma mark - UITableView Delegate and Datasource
 #pragma mark Cell Heights
-const static CGFloat kCalendarCellHeight =              44.0f;
+const static CGFloat kDefaultCellHeight =               44.0f;
 const static CGFloat kCollapsedPickerCellHeight =       52.0f;
 const static CGFloat kTextPropertyHiddenNameHeight =    33.0f;
 const static CGFloat kTextPropertyVisibleNameHeight =   52.0f;
@@ -499,8 +499,8 @@ const static NSInteger kRecurrenceSection =             2;
 
 const static NSInteger kTitleCellRow =                  0;
 const static NSInteger kCalendarCellRow =               2;
-const static NSInteger kAlarmPickerCellRow =            0;
-const static NSInteger kRecurrenceRulePickerCellRow =   1;
+//const static NSInteger kAlarmPickerCellRow =            0;
+//const static NSInteger kRecurrenceRulePickerCellRow =   1;
 const static NSInteger kRecurrenceEndCellRow =          2;
 const static NSInteger kAllDayCellRow =                 2;
 
@@ -526,7 +526,7 @@ const static NSInteger kAllDayCellRow =                 2;
     if (indexPath.row == kTitleCellRow) {
         return self.titleCell.propertyNameVisible ? kTextPropertyVisibleNameHeight : kTextPropertyHiddenNameHeight;
     } else if (indexPath.row == kCalendarCellRow) {
-        return kCalendarCellHeight;
+        return kDefaultCellHeight;
     } else {
         return self.locationCell.propertyNameVisible ? kTextPropertyVisibleNameHeight : kTextPropertyHiddenNameHeight;
     }
@@ -549,9 +549,12 @@ const static NSInteger kAllDayCellRow =                 2;
 
 - (CGFloat)heightForCellInRecurrenceSectionAtIndexPath:(NSIndexPath*)indexPath
 {
-    if (indexPath.row == kRecurrenceEndCellRow &&
-        self.recurrenceRule.type == ECRecurrenceRuleTypeNone) {
-        return 0.0f;
+    if (indexPath.row == kRecurrenceEndCellRow) {
+        if (self.recurrenceRule.type == ECRecurrenceRuleTypeNone) {
+            return 0.0f;
+        } else {
+            return kDefaultCellHeight;
+        }
     } else {
         if ([indexPath isEqual:self.selectedIndexPath]) {
             return kExpandedPickerCellHeight;
@@ -585,8 +588,20 @@ const static NSInteger kAllDayCellRow =                 2;
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    [tableView beginUpdates];
-    [tableView endUpdates];
+    [self updateCellHeights];
+    [self scrollTableViewToRectIfNecessary];
+}
+
+- (void)scrollTableViewToRectIfNecessary
+{
+    UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:self.selectedIndexPath];
+    CGFloat cellFrameMaxY = CGRectGetMaxY(cell.frame) + kCollapsedPickerCellHeight; // add a little cushion at the bottom
+    CGFloat tableViewMaxY = self.tableView.contentOffset.y + self.tableView.bounds.size.height;
+    
+    if (cellFrameMaxY > tableViewMaxY) {
+        CGPoint contentOffset = CGPointMake(0, cellFrameMaxY - self.tableView.bounds.size.height);
+        [self.tableView setContentOffset:contentOffset animated:YES];
+    }
 }
 
 #pragma mark - Navigation
