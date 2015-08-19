@@ -11,7 +11,7 @@
 #import "ECRecurrenceRule.h"
 @import EventKit;
 
-@interface ECRecurrenceRuleCell() <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface ECRecurrenceRuleCell() <UIPickerViewDataSource, UIPickerViewDelegate, ECDualViewSwitcherDatasource, ECDualViewSwitcherDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel* titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel* infoLabel;
@@ -39,6 +39,8 @@
 - (void)setup
 {
     self.pickerContainerView.backgroundColor = [UIColor whiteColor];
+    self.pickerContainerView.switcherDelegate = self;
+    self.pickerContainerView.switcherDatasource = self;
     [self setupPickerViews];
 }
 
@@ -105,7 +107,6 @@
         [self.definedRecurrenceRulesPicker selectRow:[self rowForDefinedRecurrenceRuleType:recurrenceRule.type] inComponent:0 animated:NO];
     }
     
-    [self updateSwitchPickerButtonTitle];
     [self updateInfoLabel];
 }
 
@@ -204,15 +205,22 @@
 }
 
 
-#pragma mark - UI Events
+#pragma mark - ECDualViewSwitcher Delegate and Datasource
 
-- (IBAction)switchPickerButtonTapped:(UIButton*)sender
+- (NSString*)titleForPrimaryView
 {
-    [self.pickerContainerView switchView:YES];
-    
+    return NSLocalizedString(@"ECRecurrenceRuleCell.Custom", @"Switch to custom rule selection mode");
+}
+
+- (NSString*)titleForSecondaryView
+{
+    return NSLocalizedString(@"ECRecurrenceRuleCell.Basic", @"Switch to basic rule selection mode");
+}
+
+- (void)dualViewSwitcher:(nonnull ECDualViewSwitcher *)switcher didSwitchViewToVisible:(nullable UIView *)view
+{
     [self informDelegateThatRecurrenceRuleWasUpdated];
     
-    [self updateSwitchPickerButtonTitle];
     [self updateInfoLabel];
 }
 
@@ -220,16 +228,6 @@
 {
     self.infoLabel.text = self.recurrenceRule.localizedName;
 }
-
-- (void)updateSwitchPickerButtonTitle
-{
-    if (self.pickerContainerView.visibleView == self.definedRecurrenceRulesPicker) {
-        [self.switchPickerButton setTitle:NSLocalizedString(@"ECRecurrenceRuleCell.Custom", @"Switch to custom rule selection mode") forState:UIControlStateNormal];
-    } else {
-        [self.switchPickerButton setTitle:NSLocalizedString(@"ECRecurrenceRuleCell.Basic", @"Switch to basic rule selection mode") forState:UIControlStateNormal];
-    }
-}
-
 
 #pragma mark - UIPickerView Delegate and Data source
 

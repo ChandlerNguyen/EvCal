@@ -12,7 +12,7 @@
 #import "ECAlarm.h"
 #import "NSDateFormatter+ECAdditions.h"
 
-@interface ECAlarmCell() <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface ECAlarmCell() <UIPickerViewDataSource, UIPickerViewDelegate, ECDualViewSwitcherDelegate, ECDualViewSwitcherDatasource>
 
 @property (nonatomic, weak) IBOutlet UILabel* titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel* infoLabel;
@@ -122,7 +122,6 @@
     }
     
     [self updateInfoLabel];
-    [self updateSwitchPickerButton];
 }
 
 - (void)setMaximumDate:(NSDate *)maximumDate
@@ -173,15 +172,25 @@
     }
 }
 
-#pragma mark - UI Events
 
-- (IBAction)switchPickerButtonTapped:(UIButton*)sender
+#pragma mark - ECDualViewSwitcher Delegate and Datasource
+
+- (NSString*)titleForPrimaryView
 {
-    [self.pickerContainerView switchView:YES];
-    
-    [self updateSwitchPickerButton];
+    return NSLocalizedString(@"ECAlarmCell.Before Event", @"Switch to relative date picker");
+}
+
+- (NSString*)titleForSecondaryView
+{
+    return NSLocalizedString(@"ECAlarmCell.Date", @"Switch to absolute date picker");
+}
+
+- (void)dualViewSwitcher:(nonnull ECDualViewSwitcher *)switcher didSwitchViewToVisible:(nullable UIView *)view
+{
     [self updateInfoLabel];
 }
+
+#pragma mark - UI Events
 
 - (void)datePickerValueChanged:(UIDatePicker*)sender
 {
@@ -194,15 +203,6 @@
 {
     if ([self.alarmDelegate respondsToSelector:@selector(alarmCell:didSelectAlarm:)]) {
         [self.alarmDelegate alarmCell:self didSelectAlarm:self.alarm];
-    }
-}
-
-- (void)updateSwitchPickerButton
-{
-    if (self.pickerContainerView.visibleView == self.offsetAlarmPicker) {
-        [self.switchPickerButton setTitle:NSLocalizedString(@"ECAlarmCell.Date", @"Switch to absolute date picker") forState:UIControlStateNormal];
-    } else {
-        [self.switchPickerButton setTitle:NSLocalizedString(@"ECAlarmCell.Before Event", @"Switch to relative date picker") forState:UIControlStateNormal];
     }
 }
 
