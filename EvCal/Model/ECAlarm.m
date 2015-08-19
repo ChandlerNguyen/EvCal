@@ -14,13 +14,13 @@
 
 #pragma mark - Offset Constants
 
-const static NSTimeInterval kQuarterHourTimeInterval =  60 * 15;
-const static NSTimeInterval kHalfHourTimeInterval =     60 * 30;
-const static NSTimeInterval kHourTimeInterval =         60 * 60;
-const static NSTimeInterval kTwoHourTimeInterval =      60 * 60 * 2;
-const static NSTimeInterval kSixHourTimeInterval =      60 * 60 * 6;
-const static NSTimeInterval kOneDayTimeInterval =       60 * 60 * 24; // Using hard coded offset might cause problems during daylight savings time
-const static NSTimeInterval kTwoDayTimeInterval =       60 * 60 * 24 * 2;
+const static NSTimeInterval kQuarterHourTimeInterval =  -60 * 15;
+const static NSTimeInterval kHalfHourTimeInterval =     -60 * 30;
+const static NSTimeInterval kHourTimeInterval =         -60 * 60;
+const static NSTimeInterval kTwoHourTimeInterval =      -60 * 60 * 2;
+const static NSTimeInterval kSixHourTimeInterval =      -60 * 60 * 6;
+const static NSTimeInterval kOneDayTimeInterval =       -60 * 60 * 24; // Using hard coded offset might cause problems during daylight savings time
+const static NSTimeInterval kTwoDayTimeInterval =       -60 * 60 * 24 * 2;
 
 - (nonnull instancetype)initWithEKAlarm:(nullable EKAlarm *)ekAlarm
 {
