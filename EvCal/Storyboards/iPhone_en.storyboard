@@ -318,6 +318,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="nrU-hx-sDM"/>
                                                             </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <state key="normal" title="Pick Date &gt;">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
@@ -387,6 +388,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="re2-JQ-dQw"/>
                                                             </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <state key="normal" title="Custom &gt;">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
