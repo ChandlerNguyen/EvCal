@@ -36,7 +36,4 @@
 // The delegate to receive updates concerning changes to the recurrence rule
 // cell
 @property (nonatomic, weak) id<ECRecurrenceRuleCellDelegate> recurrenceRuleDelegate;
-
-// The button for switching between defined and custom recurrence rule pickers
-@property (nonatomic, weak) IBOutlet UIButton* switchPickerButton;
 @end

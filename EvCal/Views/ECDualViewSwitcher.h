@@ -7,6 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ECDualViewSwitcher;
+@protocol ECDualViewSwitcherDelegate <NSObject>
+
+@optional
+
+/**
+ *  Informs the delegate that the dual view switcher's visible view was changed.
+ *
+ *  @param switcher The switcher that changed views.
+ *  @param view     The new visible view.
+ */
+- (void)dualViewSwitcher:(nonnull ECDualViewSwitcher*)switcher didSwitchViewToVisible:(nullable UIView*)view;
+
+@end
 
 @interface ECDualViewSwitcher : UIView
 
@@ -17,6 +31,7 @@
 @property (nonatomic, weak) UIView* __nullable primaryView;
 @property (nonatomic, weak) UIView* __nullable secondaryView;
 @property (nonatomic, weak, readonly) UIView* __nullable visibleView;
+@property (nonatomic, weak) IBOutlet UIButton* __nullable switchPickerButton;
 
 //------------------------------------------------------------------------------
 // @name Initializing

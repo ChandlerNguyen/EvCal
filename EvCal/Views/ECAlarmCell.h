@@ -33,9 +33,6 @@
 // @name Properties
 //------------------------------------------------------------------------------
 
-// The button for switching visible pickers
-@property (nonatomic, weak) IBOutlet UIButton* switchPickerButton;
-
 // The cell's current alarm value. Changing this will update the cell's UI
 // accordingly.
 @property (nonatomic, strong) ECAlarm* alarm;

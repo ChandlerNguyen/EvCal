@@ -286,7 +286,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle=" " id="uH3-UF-trb">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="214" id="jrn-dj-jNr" customClass="ECAlarmCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="244" id="jrn-dj-jNr" customClass="ECAlarmCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jrn-dj-jNr" id="orP-63-INo">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -311,11 +311,22 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giW-vN-fSg" userLabel="Picker Container View" customClass="ECDualViewSwitcher">
-                                                    <rect key="frame" x="0.0" y="51" width="320" height="162"/>
+                                                    <rect key="frame" x="0.0" y="51" width="320" height="192"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Izx-It-lhT">
+                                                            <rect key="frame" x="8" y="162" width="304" height="30"/>
+                                                            <state key="normal" title="Pick Date &gt;">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                        </button>
+                                                    </subviews>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="162" id="agr-Cg-EnK"/>
+                                                        <constraint firstAttribute="height" constant="192" id="agr-Cg-EnK"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <outlet property="switchPickerButton" destination="Izx-It-lhT" id="9cw-fc-NGY"/>
+                                                    </connections>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -335,7 +346,7 @@
                                             <outlet property="titleLabel" destination="qgq-Za-rJM" id="B2u-42-DXo"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="214" id="41q-Pc-RAt" customClass="ECRecurrenceRuleCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="244" id="41q-Pc-RAt" customClass="ECRecurrenceRuleCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="41q-Pc-RAt" id="Nvh-cO-ufY">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -360,11 +371,22 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VsC-yn-v1k" userLabel="Picker Container View" customClass="ECDualViewSwitcher">
-                                                    <rect key="frame" x="0.0" y="51" width="320" height="162"/>
+                                                    <rect key="frame" x="0.0" y="51" width="320" height="192"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qvt-Ix-sdg">
+                                                            <rect key="frame" x="16" y="162" width="296" height="30"/>
+                                                            <state key="normal" title="Custom &gt;">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                        </button>
+                                                    </subviews>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="162" id="Ibg-5o-GuT"/>
+                                                        <constraint firstAttribute="height" constant="192" id="Ibg-5o-GuT"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <outlet property="switchPickerButton" destination="qvt-Ix-sdg" id="REQ-Mu-V1I"/>
+                                                    </connections>
                                                 </view>
                                             </subviews>
                                             <constraints>
