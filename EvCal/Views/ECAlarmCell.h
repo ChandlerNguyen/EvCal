@@ -40,10 +40,6 @@
 // The initial value for the cell's date picker. This value should only be set
 // if the alarm property does not already have an absolute date specified.
 @property (nonatomic, strong) NSDate* defaultDate;
-// The earliest allowed date for an alarm
-@property (nonatomic, strong) NSDate* minimumDate; // default is nil
-// The latest allowed date for an alarm
-@property (nonatomic, strong) NSDate* maximumDate; // default is nil
 
 // The delegate to receive alarm change notifications
 @property (nonatomic, weak) id<ECAlarmCellDelegate> alarmDelegate;

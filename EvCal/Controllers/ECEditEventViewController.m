@@ -118,11 +118,10 @@
 - (void)setupAlarmCell
 {
     self.alarmCell.alarmDelegate = self;
-    self.alarmCell.maximumDate = self.startDate;
 
     EKAlarm* eventAlarm = [self.event.alarms firstObject];
     if (!eventAlarm.absoluteDate) {
-        self.alarmCell.defaultDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:-1 toDate:self.startDate options:0];
+        self.alarmCell.defaultDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMinute value:-15 toDate:self.startDatePickerCell.date options:0];
     }
 }
 

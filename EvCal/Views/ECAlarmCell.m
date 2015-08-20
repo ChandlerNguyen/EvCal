@@ -53,8 +53,6 @@
     offsetAlarmPicker.delegate = self;
     
     [absoluteDatePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
-    absoluteDatePicker.maximumDate = self.maximumDate;
-    absoluteDatePicker.minimumDate = self.minimumDate;
     absoluteDatePicker.datePickerMode = UIDatePickerModeDateAndTime;
     
     self.offsetAlarmPicker = offsetAlarmPicker;
@@ -98,26 +96,6 @@
 {
     _defaultDate = defaultDate;
     self.absoluteDatePicker.date = defaultDate;
-}
-
-- (void)setMaximumDate:(NSDate *)maximumDate
-{
-    self.absoluteDatePicker.maximumDate = maximumDate;
-}
-
-- (void)setMinimumDate:(NSDate *)minimumDate
-{
-    self.absoluteDatePicker.minimumDate = minimumDate;
-}
-
-- (NSDate*)maximumDate
-{
-    return self.absoluteDatePicker.maximumDate;
-}
-
-- (NSDate*)minimumDate
-{
-    return self.absoluteDatePicker.minimumDate;
 }
 
 - (ECAlarm*)alarm
