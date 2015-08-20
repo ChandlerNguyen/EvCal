@@ -47,6 +47,8 @@
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* startDatePickerCell;
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* endDatePickerCell;
 @property (nonatomic, weak) IBOutlet UISwitch *allDaySwitch;
+@property (nonatomic) BOOL didSelectStartDate;
+@property (nonatomic) BOOL didSelectEndDate;
 
 // Event Recurrence rules
 @property (nonatomic, strong) ECRecurrenceRule* recurrenceRule;
@@ -79,13 +81,12 @@
     [self setupNavigationBar];
     [self synchronizeFields];
     [self setupTextPropertyCells];
+    [self setupDateCells];
     [self setupAlarmCell];
     
     self.navigationController.toolbarHidden = NO;
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tableView.tableFooterView = [[UIView alloc] init];
-    self.startDatePickerCell.pickerDelegate = self;
-    self.endDatePickerCell.pickerDelegate = self;
     self.recurrenceRuleCell.recurrenceRuleDelegate = self;
     self.notesView.delegate = self;
     [self.allDaySwitch addTarget:self action:@selector(allDaySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
@@ -106,6 +107,14 @@
     
     self.titleCell.propertyCellDelegate = self;
     self.locationCell.propertyCellDelegate = self;
+}
+
+- (void)setupDateCells
+{
+    self.startDatePickerCell.pickerDelegate = self;
+    self.endDatePickerCell.pickerDelegate = self;
+    self.didSelectStartDate = NO;
+    self.didSelectEndDate = NO;
 }
 
 - (void)setupAlarmCell
@@ -257,15 +266,29 @@
 
 - (BOOL)eventIsValidWithTitle:(NSString*)title startDate:(NSDate*)startDate endDate:(NSDate*)endDate
 {
-    if (!title || [title isEqualToString:@""]) {
-        return NO;
+    if ([self validateTitle:title]) {
+        if ([self validateStartDate:startDate endDate:endDate]) {
+            return YES;
+        }
     }
     
+    return NO;
+}
+
+- (BOOL)validateTitle:(NSString*)title
+{
+    BOOL titleNotNil = (title != nil);
+    BOOL titleNotEmpty = ![title isEqualToString:@""];
+    return titleNotNil && titleNotEmpty;
+}
+
+- (BOOL)validateStartDate:(NSDate*)startDate endDate:(NSDate*)endDate
+{
     if (!startDate || !endDate || [startDate compare:endDate] != NSOrderedAscending) {
         return NO;
+    } else {
+        return YES;
     }
-    
-    return YES;
 }
 
 - (NSDate*)startDateForEvent:(EKEvent*)event
@@ -428,7 +451,20 @@
 
 - (void)datePickerCell:(ECDatePickerCell *)cell didChangeDate:(NSDate *)date
 {
-    self.saveButton.enabled = [self eventIsValidWithTitle:self.titleCell.propertyValue startDate:self.startDatePickerCell.date endDate:self.endDatePickerCell.date];
+    if (cell == self.startDatePickerCell) {
+        self.didSelectStartDate = YES;
+    } else {
+        self.didSelectEndDate = YES;
+    }
+    
+    BOOL validDates = [self validateStartDate:self.startDatePickerCell.date endDate:self.endDatePickerCell.date];
+    if (!validDates) {
+        self.endDatePickerCell.dateLabel.textColor = [UIColor ecGreenColor];
+    } else {
+        self.endDatePickerCell.dateLabel.textColor = [UIColor darkTextColor];
+    }
+    
+    self.saveButton.enabled = validDates && [self validateTitle:self.title];
 }
 
 

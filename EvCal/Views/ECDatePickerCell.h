@@ -30,6 +30,9 @@
 // The date displayed by the cell and in its picker.
 @property (nonatomic, weak) NSDate* date;
 
+// The label displaying the cell's selected date.
+@property (nonatomic, weak) IBOutlet UILabel* dateLabel;
+
 // The cell's date picker mode.
 @property (nonatomic) UIDatePickerMode datePickerMode; // default is UIDatePickerModeDateAndTime
 

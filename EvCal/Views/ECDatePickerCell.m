@@ -11,7 +11,6 @@
 
 @interface ECDatePickerCell()
 
-@property (nonatomic, weak) IBOutlet UILabel* dateLabel;
 @property (nonatomic, weak) IBOutlet UIDatePicker* datePicker;
 
 @property (nonatomic, strong) NSDateFormatter* dateFormatter;
