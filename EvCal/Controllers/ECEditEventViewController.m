@@ -47,7 +47,6 @@
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* startDatePickerCell;
 @property (nonatomic, weak) IBOutlet ECDatePickerCell* endDatePickerCell;
 @property (nonatomic, weak) IBOutlet UISwitch *allDaySwitch;
-@property (nonatomic) BOOL didSelectStartDate;
 @property (nonatomic) BOOL didSelectEndDate;
 
 // Event Recurrence rules
@@ -113,8 +112,7 @@
 {
     self.startDatePickerCell.pickerDelegate = self;
     self.endDatePickerCell.pickerDelegate = self;
-    self.didSelectStartDate = NO;
-    self.didSelectEndDate = NO;
+    self.didSelectEndDate = !!self.event;
 }
 
 - (void)setupAlarmCell
@@ -452,7 +450,9 @@
 - (void)datePickerCell:(ECDatePickerCell *)cell didChangeDate:(NSDate *)date
 {
     if (cell == self.startDatePickerCell) {
-        self.didSelectStartDate = YES;
+        if (!self.didSelectEndDate) {
+            self.endDatePickerCell.date = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:date options:0];
+        }
     } else {
         self.didSelectEndDate = YES;
     }
