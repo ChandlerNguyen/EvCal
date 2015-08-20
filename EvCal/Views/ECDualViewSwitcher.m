@@ -71,7 +71,7 @@
 
 #pragma mark - Layout
 
-const static NSTimeInterval kSwitchViewsAnimationDuration = 0.2f;
+const static NSTimeInterval kSwitchViewsAnimationDuration = 0.3f;
 
 - (void)layoutSubviews
 {
