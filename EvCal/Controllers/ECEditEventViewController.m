@@ -118,9 +118,9 @@
 - (void)setupAlarmCell
 {
     self.alarmCell.alarmDelegate = self;
+    self.alarmCell.alarm = [[ECAlarm alloc] initWithEKAlarm:[self.event.alarms firstObject]];
 
-    EKAlarm* eventAlarm = [self.event.alarms firstObject];
-    if (!eventAlarm.absoluteDate) {
+    if (self.alarmCell.alarm.type != ECAlarmTypeAbsoluteDate) {
         self.alarmCell.defaultDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMinute value:-15 toDate:self.startDatePickerCell.date options:0];
     }
 }
@@ -192,7 +192,7 @@
     if (self.alarm.type == ECAlarmTypeNone) {
         self.event.alarms = nil;
     } else {
-        self.event.alarms = @[self.alarm.ekAlarm];
+        self.event.alarms = @[self.alarmCell.alarm.ekAlarm];
     }
 }
 
