@@ -28,7 +28,7 @@
 #import "ECEditEventCalendarViewController.h"
 #import "ECEditEventRecurrenceEndViewController.h"
 
-@interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, ECAlarmCellDelegate, ECRecurrenceRuleCellDelegate, ECEditEventRecurrenceEndDelegate, ECEventTextPropertyCellDelegate, UIActionSheetDelegate>
+@interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, ECAlarmCellDelegate, ECRecurrenceRuleCellDelegate, ECEditEventRecurrenceEndDelegate, ECEventTextPropertyCellDelegate, UIActionSheetDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) NSIndexPath* selectedIndexPath;
 
@@ -87,6 +87,7 @@
     self.startDatePickerCell.pickerDelegate = self;
     self.endDatePickerCell.pickerDelegate = self;
     self.recurrenceRuleCell.recurrenceRuleDelegate = self;
+    self.notesView.delegate = self;
     [self.allDaySwitch addTarget:self action:@selector(allDaySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
@@ -495,6 +496,15 @@
 }
 
 
+#pragma mark - UITextView Delegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    self.selectedIndexPath = [NSIndexPath indexPathForRow:kNotesCellRow inSection:kNotesSection];
+    [self updateCellHeights];
+}
+
+
 #pragma mark - UITableView Delegate and Datasource
 #pragma mark Cell Heights
 const static CGFloat kDefaultCellHeight =               44.0f;
@@ -511,10 +521,9 @@ const static NSInteger kNotesSection =                  3;
 
 const static NSInteger kTitleCellRow =                  0;
 const static NSInteger kCalendarCellRow =               2;
-//const static NSInteger kAlarmPickerCellRow =            0;
-//const static NSInteger kRecurrenceRulePickerCellRow =   1;
 const static NSInteger kRecurrenceEndCellRow =          2;
 const static NSInteger kAllDayCellRow =                 2;
+const static NSInteger kNotesCellRow =                  0;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -598,6 +607,10 @@ const static NSInteger kAllDayCellRow =                 2;
         indexPath.row == kCalendarCellRow) {
         self.titleCell.editingProperty = NO;
         self.locationCell.editingProperty = NO;
+    }
+    
+    if (indexPath.section != kNotesSection) {
+        [self.notesView resignFirstResponder];
     }
     
     if ([self.selectedIndexPath isEqual:indexPath]) {
