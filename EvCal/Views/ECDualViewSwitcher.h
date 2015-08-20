@@ -88,8 +88,13 @@
 
 
 //------------------------------------------------------------------------------
-// @name Switching Views
+// @name Managing Views
 //------------------------------------------------------------------------------
+
+/**
+ *  Informs the receiver that it should layout its contained views.
+ */
+- (void)setViewsNeedLayout;
 
 /**
  *  Switches the currently visible view with the switchers other view.

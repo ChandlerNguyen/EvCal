@@ -73,6 +73,12 @@
 
 const static NSTimeInterval kSwitchViewsAnimationDuration = 0.3f;
 
+- (void)setViewsNeedLayout
+{
+    self.primaryViewNeedsLayout = YES;
+    self.secondaryViewNeedsLayout = YES;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];

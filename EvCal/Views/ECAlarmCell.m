@@ -127,6 +127,7 @@
         [self.pickerContainerView switchToPrimaryView:NO];
     }
     
+    [self.pickerContainerView setViewsNeedLayout];
     [self updateInfoLabel];
 }
 
