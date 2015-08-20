@@ -94,6 +94,32 @@
     [self.offsetAlarmPicker reloadComponent:0];
 }
 
+- (void)setDefaultDate:(NSDate *)defaultDate
+{
+    _defaultDate = defaultDate;
+    self.absoluteDatePicker.date = defaultDate;
+}
+
+- (void)setMaximumDate:(NSDate *)maximumDate
+{
+    self.absoluteDatePicker.maximumDate = maximumDate;
+}
+
+- (void)setMinimumDate:(NSDate *)minimumDate
+{
+    self.absoluteDatePicker.minimumDate = minimumDate;
+}
+
+- (NSDate*)maximumDate
+{
+    return self.absoluteDatePicker.maximumDate;
+}
+
+- (NSDate*)minimumDate
+{
+    return self.absoluteDatePicker.minimumDate;
+}
+
 - (ECAlarm*)alarm
 {
     if (self.pickerContainerView.visibleView == self.offsetAlarmPicker) {
