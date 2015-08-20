@@ -39,9 +39,11 @@
    
     if (!oldEditing && editingProperty) {
         [self.propertyValueTextField becomeFirstResponder];
+        
         [self informDelegatePropertyCellBeganEditing];
     } else if (oldEditing && !editingProperty) {
         [self.propertyValueTextField resignFirstResponder];
+        
         [self informDelegatePropertyCellEndedEditing];
     }
 }
@@ -54,6 +56,7 @@
 - (void)setPropertyValue:(NSString *)propertyValue
 {
     self.propertyValueTextField.text = propertyValue;
+    
     [self updatePropertyNameLabelVisibilityForString:propertyValue animated:YES];
 }
 
@@ -65,19 +68,6 @@
 - (void)setPropertyName:(NSString *)propertyName
 {
     self.propertyNameLabel.text = propertyName;
-}
-
-- (UITextField*)propertyValueTextField
-{
-    if (!_propertyValueTextField) {
-        UITextField* propertyValueTextField = [[UITextField alloc] initWithFrame:CGRectZero];
-        propertyValueTextField.placeholder = self.propertyName;
-        
-        [self addSubview:propertyValueTextField];
-        _propertyValueTextField = propertyValueTextField;
-    }
-    
-    return _propertyValueTextField;
 }
 
 - (UILabel*)propertyNameLabel
@@ -192,20 +182,21 @@ static CGFloat kPropertyNameLabelAnimationDuration = 0.3f;
 }
 
 
-#pragma mark - UITextFieldDelegate
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+#pragma mark - Text Element
+
+- (void)didBeginEditing
 {
     [self showPropertyNameLabel:YES];
     self.editingProperty = YES;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (void)didEndEditingWithText:(NSString*)text
 {
-    [self updatePropertyNameLabelVisibilityForString:textField.text animated:YES];
+    [self updatePropertyNameLabelVisibilityForString:text animated:YES];
     self.editingProperty = NO;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+- (BOOL)shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString*)string
 {
     NSString* newValue = [self.propertyValue stringByReplacingCharactersInRange:range withString:string];
     BOOL shouldChangeCharacters = [self getShouldChangePropertyValue:newValue];
@@ -214,6 +205,23 @@ static CGFloat kPropertyNameLabelAnimationDuration = 0.3f;
     }
     
     return shouldChangeCharacters;
+}
+
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self didBeginEditing];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [self didEndEditingWithText:textField.text];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    return [self shouldChangeCharactersInRange:range replacementString:string];
 }
 
 @end

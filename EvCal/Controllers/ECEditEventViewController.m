@@ -57,7 +57,7 @@
 @property (nonatomic, strong) NSDate* recurrenceEndDate;
 
 // Notes
-@property (nonatomic, weak) UITextView* notesView;
+@property (nonatomic, weak) IBOutlet UITextView* notesView;
 
 @end
 
@@ -496,6 +496,7 @@ const static CGFloat kAllDayCellHeight =                44.0f;
 const static NSInteger kTitleLocationCalendarSection =  0;
 const static NSInteger kDateAndAllDaySection =          1;
 const static NSInteger kRecurrenceSection =             2;
+const static NSInteger kNotesSection =                  3;
 
 const static NSInteger kTitleCellRow =                  0;
 const static NSInteger kCalendarCellRow =               2;
@@ -515,6 +516,9 @@ const static NSInteger kAllDayCellRow =                 2;
             
         case kRecurrenceSection:
             return [self heightForCellInRecurrenceSectionAtIndexPath:indexPath];
+            
+        case kNotesSection:
+            return [self heightForCellInNotesSectionAtIndexPath:indexPath];
             
         default:
             return 0.0f;
@@ -562,6 +566,11 @@ const static NSInteger kAllDayCellRow =                 2;
             return kCollapsedPickerCellHeight;
         }
     }
+}
+
+- (CGFloat)heightForCellInNotesSectionAtIndexPath:(NSIndexPath*)indexPath
+{
+    return kExpandedPickerCellHeight;
 }
 
 - (void)updateCellHeights

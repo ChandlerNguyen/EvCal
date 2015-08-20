@@ -464,7 +464,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle=" " id="ImI-rC-Dpb">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="53" id="Dyo-70-TNf" customClass="ECEventTextPropertyCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="244" id="Dyo-70-TNf">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dyo-70-TNf" id="9Jq-cj-AHd">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -480,25 +480,22 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Notes" translatesAutoresizingMaskIntoConstraints="NO" id="fHa-KY-MfK">
-                                                    <rect key="frame" x="16" y="22" width="296" height="30.5"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                    <rect key="frame" x="16" y="22" width="296" height="221.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                                 </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="bkY-gN-asv" firstAttribute="top" secondItem="9Jq-cj-AHd" secondAttribute="top" constant="4" id="1he-0P-NgB"/>
                                                 <constraint firstAttribute="trailing" secondItem="fHa-KY-MfK" secondAttribute="trailing" constant="8" id="8Ec-bj-nAk"/>
                                                 <constraint firstAttribute="bottom" secondItem="fHa-KY-MfK" secondAttribute="bottom" id="FCK-b2-9bh"/>
+                                                <constraint firstAttribute="bottom" secondItem="fHa-KY-MfK" secondAttribute="bottom" id="JhZ-Cs-8ax"/>
+                                                <constraint firstItem="bkY-gN-asv" firstAttribute="top" secondItem="9Jq-cj-AHd" secondAttribute="top" constant="4" id="MB0-JF-0Bo"/>
+                                                <constraint firstItem="fHa-KY-MfK" firstAttribute="top" secondItem="bkY-gN-asv" secondAttribute="bottom" id="VYr-bd-d6C"/>
                                                 <constraint firstItem="fHa-KY-MfK" firstAttribute="leading" secondItem="9Jq-cj-AHd" secondAttribute="leading" constant="16" id="Yki-E2-Emf"/>
-                                                <constraint firstItem="fHa-KY-MfK" firstAttribute="top" secondItem="bkY-gN-asv" secondAttribute="bottom" id="cwF-GJ-49D"/>
                                                 <constraint firstItem="bkY-gN-asv" firstAttribute="leading" secondItem="9Jq-cj-AHd" secondAttribute="leading" constant="16" id="lkp-9B-jZp"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="propertyNameLabel" destination="bkY-gN-asv" id="qHl-G6-uK1"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -527,6 +524,7 @@
                         <outlet property="deleteButton" destination="hFa-LO-3xv" id="OgV-Xl-C3O"/>
                         <outlet property="endDatePickerCell" destination="9xP-KB-6Ka" id="Iqo-EC-292"/>
                         <outlet property="locationCell" destination="MAz-Oe-62N" id="gnq-Cf-jV4"/>
+                        <outlet property="notesView" destination="fHa-KY-MfK" id="TjN-wL-Cq8"/>
                         <outlet property="recurrenceEndLabel" destination="nkt-3e-oI4" id="APq-OD-f2Z"/>
                         <outlet property="recurrenceRuleCell" destination="41q-Pc-RAt" id="PvU-TX-WwS"/>
                         <outlet property="startDatePickerCell" destination="HJN-1E-Iad" id="5ce-ec-2kG"/>
