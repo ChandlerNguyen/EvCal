@@ -9,14 +9,19 @@
 @class ECRecurrenceRule;
 @class ECRecurrenceRuleCell;
 
-/**
- *  The ECEditEventRecurrenceCellDelegate receives updates when the recurrence
- *  cell updates its recurrence rule.
- */
+//------------------------------------------------------------------------------
+// @name ECRecurrenceRuleCell Delegate
+//------------------------------------------------------------------------------
 
 @protocol ECRecurrenceRuleCellDelegate <NSObject>
 
 @optional
+/**
+ *  Informs the delegate that the a recurrence rule was selected.
+ *
+ *  @param cell The cell within which the rule was selected.
+ *  @param rule The new recurrence rule.
+ */
 - (void)recurrenceCell:(ECRecurrenceRuleCell*)cell didSelectRecurrenceRule:(ECRecurrenceRule*)rule;
 
 @end
