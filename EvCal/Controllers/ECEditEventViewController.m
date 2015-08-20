@@ -79,13 +79,13 @@
     [self setupNavigationBar];
     [self synchronizeFields];
     [self setupTextPropertyCells];
+    [self setupAlarmCell];
     
     self.navigationController.toolbarHidden = NO;
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.startDatePickerCell.pickerDelegate = self;
     self.endDatePickerCell.pickerDelegate = self;
-    self.alarmCell.alarmDelegate = self;
     self.recurrenceRuleCell.recurrenceRuleDelegate = self;
     [self.allDaySwitch addTarget:self action:@selector(allDaySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
 }
@@ -105,6 +105,17 @@
     
     self.titleCell.propertyCellDelegate = self;
     self.locationCell.propertyCellDelegate = self;
+}
+
+- (void)setupAlarmCell
+{
+    self.alarmCell.alarmDelegate = self;
+    self.alarmCell.maximumDate = self.startDate;
+
+    EKAlarm* eventAlarm = [self.event.alarms firstObject];
+    if (!eventAlarm.absoluteDate) {
+        self.alarmCell.defaultDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:-1 toDate:self.startDate options:0];
+    }
 }
 
 - (NSDate*)startDate

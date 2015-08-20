@@ -152,18 +152,6 @@
     [self updateInfoLabel];
 }
 
-- (void)setMaximumDate:(NSDate *)maximumDate
-{
-    _maximumDate = maximumDate;
-    self.absoluteDatePicker.maximumDate = maximumDate;
-}
-
-- (void)setMinimumDate:(NSDate *)minimumDate
-{
-    _minimumDate = minimumDate;
-    self.absoluteDatePicker.minimumDate = minimumDate;
-}
-
 - (NSInteger)rowForOffsetAlarm:(ECAlarm*)alarm
 {
     switch (alarm.type) {
