@@ -463,7 +463,7 @@
         self.endDatePickerCell.dateLabel.textColor = [UIColor darkTextColor];
     }
     
-    self.saveButton.enabled = validDates && [self validateTitle:self.title];
+    self.saveButton.enabled = validDates && [self validateTitle:self.titleCell.propertyValue];
 }
 
 
