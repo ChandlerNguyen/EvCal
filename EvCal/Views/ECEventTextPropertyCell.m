@@ -29,6 +29,7 @@
 {
     self.clipsToBounds = YES;
     self.propertyValueTextField.delegate = self;
+    [self.propertyValueTextField addTarget:self action:@selector(informDelegatePropertyValueChanged) forControlEvents:UIControlEventEditingChanged];
     [self updatePropertyNameLabelVisibilityForString:self.propertyValue animated:NO];
 }
 
@@ -178,6 +179,13 @@ static CGFloat kPropertyNameLabelAnimationDuration = 0.3f;
         return [self.propertyCellDelegate propertyCell:self shouldChangePropertyValue:newValue];
     } else {
         return YES;
+    }
+}
+
+- (void)informDelegatePropertyValueChanged
+{
+    if ([self.propertyCellDelegate respondsToSelector:@selector(propertyCell:didChangePropertyVale:)]) {
+        [self.propertyCellDelegate propertyCell:self didChangePropertyVale:self.propertyValue];
     }
 }
 

@@ -489,11 +489,9 @@
 
 #pragma mark - ECTextPropertyCell delegate
 
-- (BOOL)propertyCell:(ECEventTextPropertyCell *)cell shouldChangePropertyValue:(NSString *)newValue
+- (void)propertyCell:(ECEventTextPropertyCell *)cell didChangePropertyVale:(NSString *)value
 {
     self.eventChanged = YES;
-    
-    return YES;
 }
 
 - (void)propertyCellWillShowPropertyName:(ECEventTextPropertyCell *)cell

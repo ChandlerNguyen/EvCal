@@ -42,6 +42,14 @@
 - (BOOL)propertyCell:(ECEventTextPropertyCell*)cell shouldChangePropertyValue:(NSString*)newValue; // default is YES
 
 /**
+ *  Informs the receiver that the property cell changed its value.
+ *
+ *  @param cell  The cell whose value has changed.
+ *  @param value The new property value.
+ */
+- (void)propertyCell:(ECEventTextPropertyCell*)cell didChangePropertyVale:(NSString*)value;
+
+/**
  *  Informs the delegate that the cell will hide its property name.
  *
  *  @param cell The cell that is hiding its property name.
