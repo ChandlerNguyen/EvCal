@@ -30,7 +30,11 @@
 
 @interface ECEditEventViewController() <ECDatePickerCellDelegate, ECEditEventCalendarViewControllerDelegate, ECAlarmCellDelegate, ECRecurrenceRuleCellDelegate, ECEditEventRecurrenceEndDelegate, ECEventTextPropertyCellDelegate, UIActionSheetDelegate, UITextViewDelegate>
 
+
+// State
 @property (nonatomic, strong) NSIndexPath* selectedIndexPath;
+@property (nonatomic) BOOL newEvent;
+@property (nonatomic) BOOL eventChanged;
 
 // Navigation Elements
 @property (nonatomic, weak) UIBarButtonItem* saveButton;
@@ -77,6 +81,9 @@
 {
     [super viewDidLoad];
     
+    self.newEvent = !self.event;
+    self.eventChanged = NO;
+    
     [self setupNavigationBar];
     [self synchronizeFields];
     [self setupTextPropertyCells];
@@ -96,7 +103,7 @@
     UIBarButtonItem* saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonTapped:)];
     self.navigationItem.rightBarButtonItem = saveButton;
     self.saveButton = saveButton;
-    self.saveButton.enabled = [self eventIsValidWithTitle:self.event.title startDate:self.event.startDate endDate:self.event.endDate];
+    self.saveButton.enabled = self.eventChanged && [self eventIsValidWithTitle:self.event.title startDate:self.event.startDate endDate:self.event.endDate];
 }
 
 - (void)setupTextPropertyCells
@@ -141,6 +148,18 @@
     }
     
     return _endDate;
+}
+
+- (void)setEventChanged:(BOOL)eventChanged
+{
+    _eventChanged = eventChanged;
+    
+    if (eventChanged) {
+        self.saveButton.enabled = [self validateStartDate:self.startDatePickerCell.date endDate:self.endDatePickerCell.date] &&
+                                  [self validateTitle:self.titleCell.propertyValue];
+    } else {
+        self.saveButton.enabled = NO;
+    }
 }
 
 
@@ -441,6 +460,7 @@
 - (void)allDaySwitchValueChanged:(UISwitch*)sender
 {
     [self updateDatePickersForAllDayStatus:sender.isOn];
+    self.eventChanged = YES;
 }
 
 
@@ -463,7 +483,7 @@
         self.endDatePickerCell.dateLabel.textColor = [UIColor darkTextColor];
     }
     
-    self.saveButton.enabled = validDates && [self validateTitle:self.titleCell.propertyValue];
+    self.eventChanged = YES;
 }
 
 
@@ -471,13 +491,7 @@
 
 - (BOOL)propertyCell:(ECEventTextPropertyCell *)cell shouldChangePropertyValue:(NSString *)newValue
 {
-    if ([cell isEqual:self.titleCell]) {
-        if ([self eventIsValidWithTitle:newValue startDate:self.startDatePickerCell.date endDate:self.endDatePickerCell.date]) {
-            self.saveButton.enabled = YES;
-        } else {
-            self.saveButton.enabled = NO;
-        }
-    }
+    self.eventChanged = YES;
     
     return YES;
 }
@@ -504,6 +518,7 @@
 - (void)viewController:(ECEditEventCalendarViewController *)vc didSelectCalendar:(EKCalendar *)calendar
 {
     self.calendarCell.calendar = calendar;
+    self.eventChanged = YES;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -513,6 +528,7 @@
 - (void)alarmCell:(ECAlarmCell *)cell didSelectAlarm:(ECAlarm *)alarm
 {
     self.alarm = alarm;
+    self.eventChanged = YES;
 }
 
 #pragma mark - ECRecurrenceRuleCell Delegate
@@ -520,6 +536,7 @@
 - (void)recurrenceCell:(ECRecurrenceRuleCell *)cell didSelectRecurrenceRule:(ECRecurrenceRule *)rule
 {
     self.recurrenceRule = rule;
+    self.eventChanged = YES;
 }
 
 #pragma mark - ECEditEventRecurrenceEnd Delegate
@@ -528,6 +545,7 @@
 {
     self.recurrenceEndDate = endDate;
     self.recurrenceEndLabel.text = [self recurrenceEndTextForRecurrenceEndDate:endDate];
+    self.eventChanged = YES;
 }
 
 
@@ -539,21 +557,27 @@
     [self updateCellHeights];
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    self.eventChanged = YES;
+    
+    return YES;
+}
 
 #pragma mark - UITableView Delegate and Datasource
-#pragma mark Cell Heights
+// Cell Heights
 const static CGFloat kDefaultCellHeight =               44.0f;
 const static CGFloat kCollapsedPickerCellHeight =       52.0f;
 const static CGFloat kTextPropertyHiddenNameHeight =    33.0f;
 const static CGFloat kTextPropertyVisibleNameHeight =   52.0f;
 const static CGFloat kExpandedPickerCellHeight =        244.0f;
 const static CGFloat kAllDayCellHeight =                44.0f;
-
+// Sections
 const static NSInteger kTitleLocationCalendarSection =  0;
 const static NSInteger kDateAndAllDaySection =          1;
 const static NSInteger kRecurrenceSection =             2;
 const static NSInteger kNotesSection =                  3;
-
+// Rows
 const static NSInteger kTitleCellRow =                  0;
 const static NSInteger kCalendarCellRow =               2;
 const static NSInteger kRecurrenceEndCellRow =          2;
