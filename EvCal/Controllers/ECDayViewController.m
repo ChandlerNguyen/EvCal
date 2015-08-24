@@ -23,7 +23,7 @@
 @interface ECDayViewController () <ECDayViewDataSource, ECDayViewDelegate, ECWeekdayPickerDelegate, ECWeekdayPickerDataSource, ECEditEventViewControllerDelegate>
 
 // Buttons
-@property (nonatomic, weak) IBOutlet UIBarButtonItem* addEventButton;
+@property (nonatomic, weak) IBOutlet UIButton* addEventButton;
 
 // Day view
 @property (nonatomic) BOOL userDidScrollDayViewSinceDateChange;
@@ -45,7 +45,6 @@
     [super viewDidLoad];
     
     self.title = [self.dateFormatter stringFromDate:self.displayDate];
-    self.navigationController.toolbarHidden = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEvents) name:ECEventStoreProxyAuthorizationStatusChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEvents) name:ECEventStoreProxyCalendarChangedNotification object:nil];
@@ -64,6 +63,8 @@
 {
     [super viewWillAppear:animated];
     
+    self.navigationController.toolbarHidden = YES;
+    
     [self.dayView updateCurrentTime];
 }
 
@@ -81,7 +82,7 @@
         
         [self setupDayView:dayView];
         
-        [self.view addSubview:_dayView];
+        [self.view insertSubview:_dayView belowSubview:self.addEventButton];
     }
     
     return _dayView;
@@ -167,7 +168,7 @@
     CGRect dayViewFrame = CGRectMake(self.view.bounds.origin.x,
                                      CGRectGetMaxY(self.weekdayPicker.frame),
                                      self.view.bounds.size.width,
-                                     self.navigationController.toolbar.frame.origin.y - CGRectGetMaxY(self.weekdayPicker.frame) - 1); // -1 so toolbar separator will show
+                                     self.view.bounds.size.height - CGRectGetMaxY(self.weekdayPicker.frame));
     
     self.dayView.frame = dayViewFrame;
 }
@@ -298,7 +299,7 @@
 
 #pragma mark - UI Events
 
-- (IBAction)addEventButtonTapped:(UIBarButtonItem *)sender
+- (IBAction)addEventButtonTapped:(UIButton*)sender
 {
     [self presentEditEventViewControllerWithEvent:nil];
 }

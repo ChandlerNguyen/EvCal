@@ -15,16 +15,28 @@
                     <view key="view" contentMode="scaleToFill" id="wde-oB-yac">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yc3-xo-iGI">
+                                <rect key="frame" x="272" y="516" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="LiU-44-1ur"/>
+                                    <constraint firstAttribute="height" constant="32" id="OBQ-45-jKH"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="PlusButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addEventButtonTapped:" destination="qNj-KM-reM" eventType="touchUpInside" id="n5z-AV-Vuv"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Yc3-xo-iGI" secondAttribute="trailing" constant="16" id="Wqo-2D-mP5"/>
+                            <constraint firstItem="HQi-PI-mQN" firstAttribute="top" secondItem="Yc3-xo-iGI" secondAttribute="bottom" constant="20" id="vap-Q0-jjJ"/>
+                        </constraints>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Axr-Nd-4sa"/>
-                        <barButtonItem title="+" id="d84-A1-Dgy">
-                            <connections>
-                                <action selector="addEventButtonTapped:" destination="qNj-KM-reM" id="AdT-e1-1JE"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="Twq-eO-8SM">
                         <barButtonItem key="leftBarButtonItem" title="Today" id="U40-U2-b7U">
                             <connections>
@@ -32,9 +44,8 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="addEventButton" destination="d84-A1-Dgy" id="5Qo-BL-6th"/>
+                        <outlet property="addEventButton" destination="Yc3-xo-iGI" id="nQ7-H5-uas"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7z-dO-wZi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -693,6 +704,9 @@
             <point key="canvasLocation" x="313" y="314"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="PlusButton" width="32" height="32"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
