@@ -268,8 +268,9 @@
         return NSLocalizedString(@"ECEditEventViewController.RecurrenceEnd.Never", @"The event never stops repeating");
     } else {
         NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"MMMM d, YYYY" options:0 locale:[NSLocale autoupdatingCurrentLocale]];
-        return [formatter stringFromDate:endDate];
+        formatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"MMMM d, yyyy" options:0 locale:[NSLocale currentLocale]];
+        NSString* endDateString = [formatter stringFromDate:endDate];
+        return endDateString;
     }
 }
 
