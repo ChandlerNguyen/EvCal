@@ -70,11 +70,15 @@
 
 #pragma mark - Lifecycle and Properties
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
     
-    self.selectedIndexPath = nil;
+    if (self.newEvent && !self.eventChanged) {
+        self.titleCell.editingProperty = YES;
+    } else {
+        self.selectedIndexPath = nil;
+    }
 }
 
 - (void)viewDidLoad
