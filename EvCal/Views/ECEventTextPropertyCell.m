@@ -104,13 +104,9 @@ static CGFloat kPropertyNameLabelAnimationDuration = 0.3f;
 - (void)updatePropertyNameLabelVisibilityForString:(NSString*)newValue animated:(BOOL)animated
 {
     if (!newValue || [newValue isEqualToString:@""]) {
-        if (animated) {
-            [self hidePropertyNameLabel:animated];
-        }
-    } else if (![newValue isEqualToString:@""]){
-        if (animated) {
-            [self showPropertyNameLabel:animated];
-        }
+        [self hidePropertyNameLabel:animated];
+    } else if (newValue && ![newValue isEqualToString:@""]){
+        [self showPropertyNameLabel:animated];
     }
 }
 
@@ -194,7 +190,7 @@ static CGFloat kPropertyNameLabelAnimationDuration = 0.3f;
 
 - (void)didBeginEditing
 {
-    [self showPropertyNameLabel:YES];
+    [self updatePropertyNameLabelVisibilityForString:self.propertyValue animated:YES];
     self.editingProperty = YES;
 }
 
