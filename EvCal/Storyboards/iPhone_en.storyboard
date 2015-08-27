@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="f92-S2-hBJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="f92-S2-hBJ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -297,7 +297,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle=" " id="uH3-UF-trb">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="244" id="jrn-dj-jNr" customClass="ECAlarmCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="246" id="jrn-dj-jNr" customClass="ECAlarmCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jrn-dj-jNr" id="orP-63-INo">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -322,31 +322,55 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giW-vN-fSg" userLabel="Picker Container View" customClass="ECDualViewSwitcher">
-                                                    <rect key="frame" x="0.0" y="51" width="320" height="192"/>
+                                                    <rect key="frame" x="0.0" y="51" width="320" height="194"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Izx-It-lhT">
-                                                            <rect key="frame" x="8" y="162" width="304" height="30"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvc-44-XKp" customClass="ECSwitchViewButton">
+                                                            <rect key="frame" x="0.0" y="162" width="320" height="32"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CY7-h7-liX">
+                                                                    <rect key="frame" x="280" y="0.0" width="32" height="32"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="32" id="9Tn-D6-Gxv"/>
+                                                                        <constraint firstAttribute="width" constant="32" id="buw-Se-oyp"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sba-7x-YlE">
+                                                                    <rect key="frame" x="18" y="1" width="284" height="30"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <state key="normal" title="Date">
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="switchViewButtonTapped:" destination="giW-vN-fSg" eventType="touchUpInside" id="pC7-3A-sbR"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="nrU-hx-sDM"/>
+                                                                <constraint firstAttribute="bottom" secondItem="CY7-h7-liX" secondAttribute="bottom" id="Fwv-Rd-0v4"/>
+                                                                <constraint firstItem="sba-7x-YlE" firstAttribute="leading" secondItem="cvc-44-XKp" secondAttribute="leading" constant="18" id="PwE-Ny-hzA"/>
+                                                                <constraint firstItem="sba-7x-YlE" firstAttribute="top" secondItem="cvc-44-XKp" secondAttribute="top" constant="1" id="cEu-XX-WW5"/>
+                                                                <constraint firstAttribute="trailing" secondItem="sba-7x-YlE" secondAttribute="trailing" constant="18" id="cjb-HU-t1R"/>
+                                                                <constraint firstAttribute="trailing" secondItem="CY7-h7-liX" secondAttribute="trailing" constant="8" id="koy-X0-8rc"/>
+                                                                <constraint firstAttribute="height" constant="32" id="nct-bi-Zsb"/>
+                                                                <constraint firstAttribute="bottom" secondItem="sba-7x-YlE" secondAttribute="bottom" constant="1" id="qTv-3Y-MmF"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <state key="normal" title="Pick Date &gt;">
-                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </state>
                                                             <connections>
-                                                                <action selector="switchViewButtonTapped:" destination="giW-vN-fSg" eventType="touchUpInside" id="6yk-79-lNn"/>
+                                                                <outlet property="accessoryView" destination="CY7-h7-liX" id="10L-0Q-Iaf"/>
+                                                                <outlet property="button" destination="sba-7x-YlE" id="bE3-ee-JMV"/>
                                                             </connections>
-                                                        </button>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="Izx-It-lhT" secondAttribute="bottom" id="4ow-7Y-Gip"/>
-                                                        <constraint firstItem="Izx-It-lhT" firstAttribute="leading" secondItem="giW-vN-fSg" secondAttribute="leading" constant="8" id="WDQ-qh-6Sf"/>
-                                                        <constraint firstAttribute="height" constant="192" id="agr-Cg-EnK"/>
-                                                        <constraint firstAttribute="trailing" secondItem="Izx-It-lhT" secondAttribute="trailing" constant="8" id="fO7-8D-Hhd"/>
+                                                        <constraint firstAttribute="trailing" secondItem="cvc-44-XKp" secondAttribute="trailing" id="984-El-cLx"/>
+                                                        <constraint firstItem="cvc-44-XKp" firstAttribute="leading" secondItem="giW-vN-fSg" secondAttribute="leading" id="H5c-cy-sc5"/>
+                                                        <constraint firstAttribute="bottom" secondItem="cvc-44-XKp" secondAttribute="bottom" id="SvU-27-UAp"/>
+                                                        <constraint firstAttribute="height" constant="194" id="agr-Cg-EnK"/>
                                                     </constraints>
                                                     <connections>
-                                                        <outlet property="switchViewButton" destination="Izx-It-lhT" id="61h-4T-h2u"/>
+                                                        <outlet property="switchViewButton" destination="cvc-44-XKp" id="VXr-7i-1mY"/>
                                                     </connections>
                                                 </view>
                                             </subviews>
@@ -392,31 +416,56 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VsC-yn-v1k" userLabel="Picker Container View" customClass="ECDualViewSwitcher">
-                                                    <rect key="frame" x="0.0" y="51" width="320" height="192"/>
+                                                    <rect key="frame" x="0.0" y="51" width="320" height="194"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qvt-Ix-sdg">
-                                                            <rect key="frame" x="8" y="162" width="304" height="30"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckK-3V-FOU" customClass="ECSwitchViewButton">
+                                                            <rect key="frame" x="0.0" y="162" width="320" height="32"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QV2-vT-OH5">
+                                                                    <rect key="frame" x="280" y="0.0" width="32" height="32"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="32" id="O7g-tB-q3o"/>
+                                                                        <constraint firstAttribute="width" constant="32" id="TEo-X5-5fd"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTK-0B-Tw7">
+                                                                    <rect key="frame" x="18" y="1" width="284" height="30"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <state key="normal" title="Custom">
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="switchViewButtonTapped:" destination="VsC-yn-v1k" eventType="touchUpInside" id="gKC-RM-33u"/>
+                                                                        <action selector="switchViewButtonTapped:" destination="giW-vN-fSg" eventType="touchUpInside" id="ygT-Fd-YMs"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="re2-JQ-dQw"/>
+                                                                <constraint firstItem="fTK-0B-Tw7" firstAttribute="top" secondItem="ckK-3V-FOU" secondAttribute="top" constant="1" id="5Ph-bS-hHN"/>
+                                                                <constraint firstAttribute="bottom" secondItem="fTK-0B-Tw7" secondAttribute="bottom" constant="1" id="VB6-Mn-pSw"/>
+                                                                <constraint firstAttribute="trailing" secondItem="fTK-0B-Tw7" secondAttribute="trailing" constant="18" id="VL8-II-Xub"/>
+                                                                <constraint firstAttribute="height" constant="32" id="b5j-Vz-hPG"/>
+                                                                <constraint firstAttribute="bottom" secondItem="QV2-vT-OH5" secondAttribute="bottom" id="cf1-FA-hUB"/>
+                                                                <constraint firstAttribute="trailing" secondItem="QV2-vT-OH5" secondAttribute="trailing" constant="8" id="iXI-cU-FgP"/>
+                                                                <constraint firstItem="fTK-0B-Tw7" firstAttribute="leading" secondItem="ckK-3V-FOU" secondAttribute="leading" constant="18" id="vud-Qz-Vg5"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <state key="normal" title="Custom &gt;">
-                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </state>
                                                             <connections>
-                                                                <action selector="switchViewButtonTapped:" destination="VsC-yn-v1k" eventType="touchUpInside" id="qeb-v5-SXi"/>
+                                                                <outlet property="accessoryView" destination="QV2-vT-OH5" id="uEy-e4-doz"/>
+                                                                <outlet property="button" destination="fTK-0B-Tw7" id="cyO-Tt-cBA"/>
                                                             </connections>
-                                                        </button>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="qvt-Ix-sdg" firstAttribute="leading" secondItem="VsC-yn-v1k" secondAttribute="leading" constant="8" id="2qw-lp-1AK"/>
-                                                        <constraint firstAttribute="height" constant="192" id="Ibg-5o-GuT"/>
-                                                        <constraint firstAttribute="trailing" secondItem="qvt-Ix-sdg" secondAttribute="trailing" constant="8" id="K1I-Yp-paK"/>
-                                                        <constraint firstAttribute="bottom" secondItem="qvt-Ix-sdg" secondAttribute="bottom" id="Vb0-bu-C4B"/>
+                                                        <constraint firstAttribute="height" constant="194" id="Ibg-5o-GuT"/>
+                                                        <constraint firstItem="ckK-3V-FOU" firstAttribute="leading" secondItem="VsC-yn-v1k" secondAttribute="leading" id="Qj8-56-4yz"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ckK-3V-FOU" secondAttribute="trailing" id="jXW-Zs-IZ4"/>
+                                                        <constraint firstAttribute="bottom" secondItem="ckK-3V-FOU" secondAttribute="bottom" id="wy7-Db-Kxi"/>
                                                     </constraints>
                                                     <connections>
-                                                        <outlet property="switchViewButton" destination="qvt-Ix-sdg" id="xcC-11-cVt"/>
+                                                        <outlet property="switchViewButton" destination="ckK-3V-FOU" id="1dU-yw-IKl"/>
                                                     </connections>
                                                 </view>
                                             </subviews>

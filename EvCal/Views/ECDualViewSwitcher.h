@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECSwitchViewButton.h"
 @class ECDualViewSwitcher;
 @protocol ECDualViewSwitcherDelegate <NSObject>
 
@@ -64,7 +65,7 @@
 @property (nonatomic, weak) UIView* __nullable primaryView;
 @property (nonatomic, weak) UIView* __nullable secondaryView;
 @property (nonatomic, weak, readonly) UIView* __nullable visibleView;
-@property (nonatomic, weak) IBOutlet UIButton* __nullable switchViewButton;
+@property (nonatomic, weak) IBOutlet ECSwitchViewButton* __nullable switchViewButton;
 
 @property (nonatomic, weak) id<ECDualViewSwitcherDelegate> __nullable switcherDelegate;
 @property (nonatomic, weak) id<ECDualViewSwitcherDatasource> __nullable switcherDatasource;

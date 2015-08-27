@@ -144,11 +144,11 @@ const static NSTimeInterval kSwitchViewsAnimationDuration = 0.3f;
 - (void)updateSwitchPickerButton
 {
     if (self.visibleView == self.primaryView) {
-        [self.switchViewButton setTitle:[self.switcherDatasource titleForSecondaryView] forState:UIControlStateNormal];
-        self.switchViewButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [self.switchViewButton.button setTitle:[self.switcherDatasource titleForSecondaryView] forState:UIControlStateNormal];
+        self.switchViewButton.direction = ECSwitchViewButtonDirectionRight;
     } else {
-        [self.switchViewButton setTitle:[self.switcherDatasource titleForPrimaryView] forState:UIControlStateNormal];
-        self.switchViewButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [self.switchViewButton.button setTitle:[self.switcherDatasource titleForPrimaryView] forState:UIControlStateNormal];
+        self.switchViewButton.direction = ECSwitchViewButtonDirectionLeft;
     }
 }
 

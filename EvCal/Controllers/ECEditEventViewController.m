@@ -573,7 +573,7 @@ const static CGFloat kDefaultCellHeight =               44.0f;
 const static CGFloat kCollapsedPickerCellHeight =       52.0f;
 const static CGFloat kTextPropertyHiddenNameHeight =    33.0f;
 const static CGFloat kTextPropertyVisibleNameHeight =   52.0f;
-const static CGFloat kExpandedPickerCellHeight =        244.0f;
+const static CGFloat kExpandedPickerCellHeight =        246.0f;
 const static CGFloat kAllDayCellHeight =                44.0f;
 // Sections
 const static NSInteger kTitleLocationCalendarSection =  0;

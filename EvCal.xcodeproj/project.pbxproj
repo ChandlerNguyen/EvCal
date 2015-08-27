@@ -837,6 +837,7 @@
 				INFOPLIST_FILE = EvCal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "";
 			};
 			name = Debug;
@@ -850,6 +851,7 @@
 				INFOPLIST_FILE = EvCal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "";
 			};
 			name = Release;
