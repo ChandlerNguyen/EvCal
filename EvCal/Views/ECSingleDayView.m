@@ -19,7 +19,7 @@
 #import "ECEventView.h"
 #import "ECTimeLine.h"
 
-@interface ECSingleDayView() <ECDayViewEventsLayoutDataSource>
+@interface ECSingleDayView() <ECDayViewEventsLayoutDataSource, ECEventViewDelegate>
 
 @property (nonatomic, strong) ECDayViewEventsLayout* eventsLayout;
 @property (nonatomic) BOOL eventViewsLayoutIsValid;
@@ -33,6 +33,8 @@
 
 @property (nonatomic) BOOL dateIsSameDayAsToday;
 @property (nonatomic, weak) ECTimeLine* currentTimeLine;
+@property (nonatomic, weak) ECTimeLine* draggingEventViewTimeLine;
+@property (nonatomic) CGFloat previousDragLocationY;
 @property (nonatomic, strong) NSArray* hourLines;
 
 @end
@@ -408,6 +410,7 @@ const static CGFloat kHourLineHeight =      15.0f;
 - (void)addEventViewToView:(ECEventView*)eventView
 {
     if (!eventView.event.isAllDay) {
+        eventView.eventViewDelegate = self;
         [self.durationEventsView insertSubview:eventView belowSubview:self.currentTimeLine];
     } else {
         [self.allDayEventsView addSubview:eventView];
@@ -507,5 +510,43 @@ const static CGFloat kHourLineHeight =      15.0f;
     CGPoint timeOffset = CGPointMake(self.bounds.origin.x, timeOffsetY);
     
     [self.dayScrollView setContentOffset:timeOffset animated:animated];
+}
+
+
+#pragma mark ECEventView Delegate
+
+- (void)eventView:(ECEventView *)eventView didBeginDragging:(UILongPressGestureRecognizer *)dragRecognizer
+{
+    ECTimeLine* eventTimeLine = [[ECTimeLine alloc] initWithDate:eventView.event.startDate];
+    
+    eventTimeLine.lineThickness = ECTimeLineThicknessBold;
+    eventTimeLine.color = [UIColor eventViewBackgroundColorForCGColor:eventView.event.calendar.CGColor];
+    
+    CGFloat eventTimeLineY = [self.eventsLayout verticalPositionForDate:eventTimeLine.date relativeToDate:self.date bounds:[self adjustedDurationEventsBounds]] - kHourLineHeight / 2.0f;
+    CGRect eventTimeLineFrame = CGRectMake(self.bounds.origin.x,
+                                           eventTimeLineY,
+                                           self.bounds.size.width,
+                                           kHourLineHeight);
+    eventTimeLine.frame = eventTimeLineFrame;
+    self.draggingEventViewTimeLine = eventTimeLine;
+    self.previousDragLocationY = [dragRecognizer locationInView:self.durationEventsView].y;
+    
+    [self.durationEventsView addSubview:eventTimeLine];
+}
+
+- (void)eventView:(ECEventView *)eventView didDrag:(UILongPressGestureRecognizer *)dragRecognizer
+{
+    CGFloat dragLocationY = [dragRecognizer locationInView:self.durationEventsView].y;
+    CGFloat deltaY = dragLocationY - self.previousDragLocationY;
+    self.previousDragLocationY = dragLocationY;
+    
+    CGPoint newEventViewCenter = CGPointMake(eventView.center.x, eventView.center.y + deltaY);
+    eventView.center = newEventViewCenter;
+}
+
+- (void)eventView:(ECEventView *)eventView didEndDragging:(UILongPressGestureRecognizer *)dragRecognizer
+{
+    [self.draggingEventViewTimeLine removeFromSuperview];
+    self.draggingEventViewTimeLine = nil;
 }
 @end
