@@ -51,7 +51,7 @@
  *  @param event     The event whose start date should be changed.
  *  @param startDate The new start date for the event.
  */
-- (void)dayView:(ECDayView*)dayView event:(EKEvent*)event startDateChanged:(NSDate*)startDate;
+- (void)dayView:(ECDayView*)dayView event:(EKEvent*)event startDateChanged:(NSDate*)startDate span:(EKSpan)span;
 
 @end
 

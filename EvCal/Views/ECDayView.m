@@ -9,15 +9,19 @@
 
 
 // EvCal Classes
+@import EventKit;
 #import "ECDayView.h"
 #import "ECSingleDayView.h"
 #import "ECInfiniteDatePagingView.h"
 #import "ECEventViewFactory.h"
 
-@interface ECDayView() <UIScrollViewDelegate, ECInfiniteDatePagingViewDataSource, ECInfiniteDatePagingViewDelegate, ECSingleDayViewDelegate>
+@interface ECDayView() <UIScrollViewDelegate, UIActionSheetDelegate, ECInfiniteDatePagingViewDataSource, ECInfiniteDatePagingViewDelegate, ECSingleDayViewDelegate>
 
 @property (nonatomic, weak) ECInfiniteDatePagingView* dayViewContainer;
 @property (nonatomic, strong) NSMutableArray* singleDayViews;
+
+@property (nonatomic, strong) NSDate* changedEventStartDate;
+@property (nonatomic, weak) EKEvent* changedEvent;
 
 @end
 
@@ -213,18 +217,52 @@
 }
 
 
+#pragma mark - Action Sheets
+
+- (void)presentEventChangeSpanActionSheet
+{
+    UIActionSheet* saveSpanActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"ECDayView.This is a repeating event", @"The changed event repeats")
+                                                                     delegate:self
+                                                            cancelButtonTitle:nil
+                                                       destructiveButtonTitle:nil
+                                                            otherButtonTitles:NSLocalizedString(@"ECDayView.Save for this event only", @"Only this occurrence of the event should be changed"), NSLocalizedString(@"ECDayView.Save for future events", @"All future occurrences of the event should be changed"), nil];
+    
+    [saveSpanActionSheet showInView:self];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"ECDayView.Save for this event only", @"Only this occurrence of the event should be changed")]) {
+        [self informDelegateEvent:self.changedEvent dateChanged:self.changedEventStartDate span:EKSpanThisEvent];
+    } else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"ECDayView.Save for future events", @"All future occurrences of the event should be changed")]) {
+        [self informDelegateEvent:self.changedEvent dateChanged:self.changedEventStartDate span:EKSpanFutureEvents];
+    }
+}
+
+
 #pragma mark - ECSingleDayView Delegate
 
 - (void)eventView:(ECEventView *)eventView wasDraggedToDate:(NSDate *)date
 {
-    [self informDelegateEvent:eventView.event dateChanged:date];
+    EKEvent* event = eventView.event;
+    
+    if (event.hasRecurrenceRules) {
+        self.changedEvent = event;
+        self.changedEventStartDate = date;
+        [self presentEventChangeSpanActionSheet];
+    } else {
+        [self informDelegateEvent:eventView.event dateChanged:date span:EKSpanThisEvent];
+    }
 }
 
-- (void)informDelegateEvent:(EKEvent*)event dateChanged:(NSDate*)date
+- (void)informDelegateEvent:(EKEvent*)event dateChanged:(NSDate*)date span:(EKSpan)span
 {
-    if ([self.dayViewDelegate respondsToSelector:@selector(dayView:event:startDateChanged:)]) {
-        [self.dayViewDelegate dayView:self event:event startDateChanged:date];
+    if ([self.dayViewDelegate respondsToSelector:@selector(dayView:event:startDateChanged:span:)]) {
+        [self.dayViewDelegate dayView:self event:event startDateChanged:date span:span];
     }
+    
+    self.changedEvent = nil;
+    self.changedEventStartDate = nil;
 }
 
 #pragma mark - UI Events
