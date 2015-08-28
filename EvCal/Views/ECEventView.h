@@ -7,18 +7,55 @@
 //
 
 @class EKEvent;
+@class ECEventView;
 #import <UIKit/UIKit.h>
+
+@protocol ECEventViewDelegate <NSObject>
+
+@optional
+/**
+ *  Informs the delegate that the event view fired a long press gesture 
+ *  recognizer and began dragging.
+ *
+ *  @param eventView      The event view being dragged.
+ *  @param dragRecognizer The gesture recognizer that fired the dragging.
+ */
+- (void)eventView:(ECEventView*)eventView didBeginDragging:(UILongPressGestureRecognizer*)dragRecognizer;
+
+/**
+ *  Informs the delegate that the event view was dragged.
+ *
+ *  @param eventView      The event view being dragged.
+ *  @param dragRecognizer The gesture recognizer responsible for the dragging.
+ */
+- (void)eventView:(ECEventView*)eventView didDrag:(UILongPressGestureRecognizer*)dragRecognizer;
+
+/**
+ *  Informs the delegate that the event view ended dragging.
+ *
+ *  @param eventView      The event view that was dragged.
+ *  @param dragRecognizer The gesture recognizer responsible for the dragging.
+ */
+- (void)eventView:(ECEventView*)eventView didEndDragging:(UILongPressGestureRecognizer*)dragRecognizer;
+
+@end
 
 @interface ECEventView : UIControl
 
 //------------------------------------------------------------------------------
-// @name Changing events
+// @name Properties
 //------------------------------------------------------------------------------
 
-/**
- *  The event represented by the event view
- */
+// The event represented by the event view
 @property (nonatomic, strong) EKEvent* event;
+
+// The event view's delegate for receiving drag events
+@property (nonatomic, weak) id<ECEventViewDelegate> eventViewDelegate;
+
+
+//------------------------------------------------------------------------------
+// @name Changing events
+//------------------------------------------------------------------------------
 
 /**
  *  ECEventView's default init method.
@@ -51,7 +88,5 @@
  *          other event view are identical.
  */
 - (NSComparisonResult)compare:(ECEventView*)other;
-
-
 
 @end

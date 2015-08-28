@@ -354,7 +354,6 @@ static NSInteger kPageRightIndex = 2;
 
 #pragma mark - Page Control
 
-
 - (NSInteger)indexOfPageWithDate:(NSDate*)date
 {
     for (NSInteger i = 0; i < self.pages.count; i++) {

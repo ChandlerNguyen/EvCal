@@ -40,12 +40,28 @@ typedef NS_ENUM(NSInteger, ECEventViewLayoutType) {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         self.event = event;
-        self.opaque = YES;
-        self.layer.cornerRadius = 5.0;
-        self.layer.borderWidth = 0.5;
+        [self setup];
     }
     
     return self;
+}
+
+- (void)setup
+{
+    [self setupLayer];
+    [self addLongPressGestureRecognizer];
+}
+
+- (void)setupLayer
+{
+    self.layer.cornerRadius = 5.0;
+    self.layer.borderWidth = 0.5;
+}
+
+- (void)addLongPressGestureRecognizer
+{
+    UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGestureFired:)];
+    [self addGestureRecognizer:longPressRecognizer];
 }
 
 #define EVENT_VIEW_ALPHA    0.55
@@ -231,17 +247,17 @@ CG_INLINE CGSize ceilCGSize(CGSize size)
     self.locationLabel.frame = locationLabelFrame;
 }
 
-#define FORTY_MINUTES   60 * 40
-#define THIRTY_MINUTES  60 * 30
-#define FIFTEEN_MINUTES 60 * 15
+const static NSTimeInterval kFortyMinuteTimeInterval =      60 * 40;
+const static NSTimeInterval kThirtyMinuteTimeInterval =     60 * 30;
+const static NSTimeInterval kFifteenMinuteTimeInterval =    60 * 15;
 
 - (CGFloat)fontSizeForDuration:(NSTimeInterval)duration
 {
-    if (duration > FORTY_MINUTES) {
+    if (duration > kFortyMinuteTimeInterval) {
         return 12.0f;
-    } else if (duration > THIRTY_MINUTES) {
+    } else if (duration > kThirtyMinuteTimeInterval) {
         return 10.0f;
-    } else if (duration > FIFTEEN_MINUTES) {
+    } else if (duration > kFifteenMinuteTimeInterval) {
         return 9.0f;
     } else {
         return 8.0f;
@@ -253,4 +269,50 @@ CG_INLINE CGSize ceilCGSize(CGSize size)
     return [event.endDate timeIntervalSinceDate:event.startDate];
 }
 
+
+#pragma mark - UI Events
+
+- (void)longPressGestureFired:(UILongPressGestureRecognizer*)recognizer
+{
+    switch (recognizer.state) {
+        case UIGestureRecognizerStateBegan:
+            [self informDelegateThatDraggingBegan:recognizer];
+            break;
+        
+        case UIGestureRecognizerStateChanged:
+            [self informDelegateThatDraggingContinued:recognizer];
+            break;
+            
+        case UIGestureRecognizerStateEnded:
+            [self informDelegateThatDraggingEnded:recognizer];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)informDelegateThatDraggingBegan:(UILongPressGestureRecognizer*)recogznier
+{
+    DDLogDebug(@"Event view dragging began");
+    if ([self.eventViewDelegate respondsToSelector:@selector(eventView:didBeginDragging:)]) {
+        [self.eventViewDelegate eventView:self didBeginDragging:recogznier];
+    }
+}
+
+- (void)informDelegateThatDraggingContinued:(UILongPressGestureRecognizer*)recognizer
+{
+    DDLogDebug(@"Event view dragging continued");
+    if ([self.eventViewDelegate respondsToSelector:@selector(eventView:didDrag:)]) {
+        [self.eventViewDelegate eventView:self didDrag:recognizer];
+    }
+}
+
+- (void)informDelegateThatDraggingEnded:(UILongPressGestureRecognizer*)recognizer
+{
+    DDLogDebug(@"Event view dragging ended");
+    if ([self.eventViewDelegate respondsToSelector:@selector(eventView:didEndDragging:)]) {
+        [self.eventViewDelegate eventView:self didEndDragging:recognizer];
+    }
+}
 @end
