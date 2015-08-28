@@ -275,6 +275,15 @@
     [self presentEditEventViewControllerWithEvent:event];
 }
 
+- (void)dayView:(ECDayView *)dayView event:(EKEvent *)event startDateChanged:(NSDate *)startDate
+{
+    NSTimeInterval eventDuration = [event.endDate timeIntervalSinceDate:event.startDate];
+    
+    event.startDate = startDate;
+    event.endDate = [startDate dateByAddingTimeInterval:eventDuration];
+    
+    [[ECEventStoreProxy sharedInstance] saveEvent:event span:EKSpanThisEvent];
+}
 
 #pragma mark - Editing Events
 

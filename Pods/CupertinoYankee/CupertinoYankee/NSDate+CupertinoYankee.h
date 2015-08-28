@@ -140,4 +140,14 @@
  */
 - (NSDate *)endOfYear;
 
+///------------------------------------------------------------------------------
+/// @name Calculating Nearest Incremental Time
+///------------------------------------------------------------------------------
+
+/**
+ Returns a new date with the nearest five minute increment before or after the receiver.
+ */
+- (NSDate *)nearestFiveMinutes;
+
+
 @end

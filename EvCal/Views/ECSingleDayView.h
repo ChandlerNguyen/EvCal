@@ -9,6 +9,13 @@
 #import "ECDatePage.h"
 #import <UIKit/UIKit.h>
 @class ECEventView;
+@class ECSingleDayView;
+
+@protocol ECSingleDayViewDelegate <NSObject>
+
+- (void)eventView:(ECEventView*)eventView wasDraggedToDate:(NSDate*)date;
+
+@end
 
 @interface ECSingleDayView : ECDatePage
 
@@ -24,6 +31,9 @@
 
 // The earliest time visible on the day view
 @property (nonatomic, strong, readonly) NSDate* visibleDate;
+
+// The delegate for event view changes
+@property (nonatomic, weak) id<ECSingleDayViewDelegate> singleDayViewDelegate;
 
 //------------------------------------------------------------------------------
 // @name Manging Event Views

@@ -14,7 +14,7 @@
 #import "ECInfiniteDatePagingView.h"
 #import "ECEventViewFactory.h"
 
-@interface ECDayView() <UIScrollViewDelegate, ECInfiniteDatePagingViewDataSource, ECInfiniteDatePagingViewDelegate>
+@interface ECDayView() <UIScrollViewDelegate, ECInfiniteDatePagingViewDataSource, ECInfiniteDatePagingViewDelegate, ECSingleDayViewDelegate>
 
 @property (nonatomic, weak) ECInfiniteDatePagingView* dayViewContainer;
 @property (nonatomic, strong) NSMutableArray* singleDayViews;
@@ -186,6 +186,7 @@
 {
     if ([page isKindOfClass:[ECSingleDayView class]]) {
         ECSingleDayView* dayView = (ECSingleDayView*)page;
+        dayView.singleDayViewDelegate = self;
         
         dayView.dayScrollView.delegate = self;
         
@@ -208,6 +209,21 @@
     if (![[NSCalendar currentCalendar] isDate:toDate inSameDayAsDate:self.displayDate]) {
         _displayDate = toDate;
         [self informDelegateDateScrolledFromDate:fromDate toDate:toDate];
+    }
+}
+
+
+#pragma mark - ECSingleDayView Delegate
+
+- (void)eventView:(ECEventView *)eventView wasDraggedToDate:(NSDate *)date
+{
+    [self informDelegateEvent:eventView.event dateChanged:date];
+}
+
+- (void)informDelegateEvent:(EKEvent*)event dateChanged:(NSDate*)date
+{
+    if ([self.dayViewDelegate respondsToSelector:@selector(dayView:event:startDateChanged:)]) {
+        [self.dayViewDelegate dayView:self event:event startDateChanged:date];
     }
 }
 

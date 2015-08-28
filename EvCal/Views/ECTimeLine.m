@@ -95,6 +95,7 @@
     return _color;
 }
 
+@synthesize dateFormatTemplate = _dateFormatTemplate;
 - (NSString*)dateFormatTemplate
 {
     if (!_dateFormatTemplate) {
@@ -102,6 +103,12 @@
     }
     
     return _dateFormatTemplate;
+}
+
+- (void)setDateFormatTemplate:(NSString *)dateFormatTemplate
+{
+    _dateFormatTemplate = dateFormatTemplate;
+    [self updateTimeLabel:self.date];
 }
 
 - (BOOL)timeHidden

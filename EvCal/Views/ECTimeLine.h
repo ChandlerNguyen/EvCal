@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-static CGFloat ECTimeLineThicknessNormal = 0.5f;
-static CGFloat ECTimeLineThicknessBold = 1.0f;
+const static CGFloat ECTimeLineThicknessNormal = 0.5f;
+const static CGFloat ECTimeLineThicknessBold = 1.0f;
+const static CGFloat ECTimeLineThicknessBlack = 2.0f;
 
 @interface ECTimeLine : UIView
 

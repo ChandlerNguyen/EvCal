@@ -200,4 +200,24 @@
     return [[calendar dateByAddingComponents:components toDate:[self beginningOfYear] options:0] dateByAddingTimeInterval:-1];
 }
 
+#pragma mark -
+
+- (NSDate*)nearestFiveMinutes
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents* components = [calendar components:(NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:self];
+    NSInteger totalSeconds = components.minute * 60 + components.second;
+    
+    NSInteger offset = totalSeconds % (5 * 60);
+    NSDateComponents* deltaComponents = [[NSDateComponents alloc] init];
+    if (offset > 2.5 * 60) {
+        deltaComponents.second = (5 * 60) - offset;
+    } else {
+        deltaComponents.second = -offset;
+    }
+    
+    return [calendar dateByAddingComponents:deltaComponents toDate:self options:0];
+}
+
 @end

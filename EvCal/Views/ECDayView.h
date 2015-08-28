@@ -41,6 +41,18 @@
  */
 - (void)dayView:(ECDayView*)dayView eventWasSelected:(EKEvent*)event;
 
+/**
+ *  Informs the receiver that an event's start date was changed within the day 
+ *  view's UI. The new start date is provided, but the event has not been 
+ *  changed. The receiver can decide whether to accept this change and make it 
+ *  permanent.
+ *
+ *  @param dayView   The day view that controls the event view that was changed.
+ *  @param event     The event whose start date should be changed.
+ *  @param startDate The new start date for the event.
+ */
+- (void)dayView:(ECDayView*)dayView event:(EKEvent*)event startDateChanged:(NSDate*)startDate;
+
 @end
 
 //------------------------------------------------------------------------------

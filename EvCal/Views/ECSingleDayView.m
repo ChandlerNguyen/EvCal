@@ -519,8 +519,9 @@ const static CGFloat kHourLineHeight =      15.0f;
 {
     ECTimeLine* eventTimeLine = [[ECTimeLine alloc] initWithDate:eventView.event.startDate];
     
-    eventTimeLine.lineThickness = ECTimeLineThicknessBold;
+    eventTimeLine.lineThickness = ECTimeLineThicknessBlack;
     eventTimeLine.color = [UIColor eventViewBackgroundColorForCGColor:eventView.event.calendar.CGColor];
+    eventTimeLine.dateFormatTemplate = @"j:mm";
     
     CGFloat eventTimeLineY = [self.eventsLayout verticalPositionForDate:eventTimeLine.date relativeToDate:self.date bounds:[self adjustedDurationEventsBounds]] - kHourLineHeight / 2.0f;
     CGRect eventTimeLineFrame = CGRectMake(self.bounds.origin.x,
@@ -542,11 +543,39 @@ const static CGFloat kHourLineHeight =      15.0f;
     
     CGPoint newEventViewCenter = CGPointMake(eventView.center.x, eventView.center.y + deltaY);
     eventView.center = newEventViewCenter;
+    
+    NSDate* draggedDate = [self.eventsLayout dateForVerticalPosition:eventView.frame.origin.y
+                                                      relativeToDate:self.date
+                                                              bounds:[self layout:self.eventsLayout boundsForEventViews:nil]];
+    
+    NSDate* newEventStartDate = [draggedDate nearestFiveMinutes];
+    self.draggingEventViewTimeLine.date = newEventStartDate;
+    CGFloat eventTimeLineY = [self.eventsLayout verticalPositionForDate:self.draggingEventViewTimeLine.date
+                                                         relativeToDate:self.date
+                                                                 bounds:[self adjustedDurationEventsBounds]] - kHourLineHeight / 2.0f;
+    CGRect eventTimeLineFrame = CGRectMake(self.bounds.origin.x,
+                                           eventTimeLineY,
+                                           self.bounds.size.width,
+                                           kHourLineHeight);
+    self.draggingEventViewTimeLine.frame = eventTimeLineFrame;
 }
 
 - (void)eventView:(ECEventView *)eventView didEndDragging:(UILongPressGestureRecognizer *)dragRecognizer
 {
+    [self informDelegateThatEventViewDateChanged:eventView];
+    
     [self.draggingEventViewTimeLine removeFromSuperview];
     self.draggingEventViewTimeLine = nil;
+    
+    [self.eventsLayout invalidateLayout];
+    [self setEventViewsNeedLayout];
 }
+
+- (void)informDelegateThatEventViewDateChanged:(ECEventView*)eventView
+{
+    if ([self.singleDayViewDelegate respondsToSelector:@selector(eventView:wasDraggedToDate:)]) {
+        [self.singleDayViewDelegate eventView:eventView wasDraggedToDate:self.draggingEventViewTimeLine.date];
+    }
+}
+
 @end
