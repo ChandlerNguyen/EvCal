@@ -312,37 +312,35 @@ static NSInteger kPageRightIndex = 2;
     if (date && ![self.calendar isDate:date equalToDate:self.date toUnitGranularity:self.calendarUnit]) {
         DDLogDebug(@"Scrolling to date %@", [[ECLogFormatter logMessageDateFormatter] stringFromDate:date]);
         self.date = date;
-        if (animated) {
-            if (![self.calendar isDate:date equalToDate:self.centerPageDate toUnitGranularity:self.calendarUnit]) {
-                NSComparisonResult dateOrder = [date compare:self.centerPageDate];
-                switch (dateOrder) {
-                    case NSOrderedAscending: // scroll to date prior to current date
-                        self.scrollingToDate = YES;
-                        [self movePageAtIndex:kPageRightIndex toIndex:kPageLeftIndex];
-                        [self updatePageDates];
-                        [self scrollToPageAtIndex:kPageLeftIndex];
-                        break;
-                        
-                    case NSOrderedDescending: // scroll to date following current date
-                        self.scrollingToDate = YES;
-                        [self movePageAtIndex:kPageLeftIndex toIndex:kPageRightIndex];
-                        [self updatePageDates];
-                        [self scrollToPageAtIndex:kPageRightIndex];
-                        break;
-                        
-                    case NSOrderedSame:
-                        break;
-                }
+        
+        if (![self.calendar isDate:date equalToDate:self.centerPageDate toUnitGranularity:self.calendarUnit]) {
+            NSComparisonResult dateOrder = [date compare:self.centerPageDate];
+            switch (dateOrder) {
+                case NSOrderedAscending: // scroll to date prior to current date
+                    self.scrollingToDate = YES;
+                    [self movePageAtIndex:kPageRightIndex toIndex:kPageLeftIndex];
+                    [self updatePageDates];
+                    [self scrollToPageAtIndex:kPageLeftIndex animated:animated];
+                    break;
+                    
+                case NSOrderedDescending: // scroll to date following current date
+                    self.scrollingToDate = YES;
+                    [self movePageAtIndex:kPageLeftIndex toIndex:kPageRightIndex];
+                    [self updatePageDates];
+                    [self scrollToPageAtIndex:kPageRightIndex animated:animated];
+                    break;
+                    
+                case NSOrderedSame:
+                    // do nothing
+                    break;
             }
-        } else { // do not animate transition
-            
         }
     } else {
-        DDLogWarn(@"Attempted to scorll to nil date");
+        DDLogWarn(@"Attempted to scroll to nil date");
     }
 }
 
-- (void)scrollToPageAtIndex:(NSInteger)index
+- (void)scrollToPageAtIndex:(NSInteger)index animated:(BOOL)animated
 {
     CGRect visibleBounds = CGRectMake(self.bounds.origin.x - self.contentOffset.x + index * self.contentSize.width / 3.0f,
                                       self.bounds.origin.y,
