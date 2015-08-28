@@ -86,6 +86,9 @@
 // The currently visible page which represents the given date
 @property (nonatomic, weak, readonly) ECDatePage* visiblePage;
 
+// All of the pages currently held by the pager
+@property (nonatomic, strong, readonly) NSArray* pages;
+
 // The data source for page views
 @property (nonatomic, weak) id<ECInfiniteDatePagingViewDataSource> pageViewDataSource;
 

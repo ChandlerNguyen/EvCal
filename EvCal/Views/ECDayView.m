@@ -17,6 +17,7 @@
 @interface ECDayView() <UIScrollViewDelegate, ECInfiniteDatePagingViewDataSource, ECInfiniteDatePagingViewDelegate>
 
 @property (nonatomic, weak) ECInfiniteDatePagingView* dayViewContainer;
+@property (nonatomic, strong) NSMutableArray* singleDayViews;
 
 @end
 
@@ -57,6 +58,15 @@
         [self informDelegateDateScrolledFromDate:oldDisplayDate toDate:displayDate];
     }
     
+}
+
+- (NSMutableArray*)singleDayViews
+{
+    if (!_singleDayViews) {
+        _singleDayViews = [[NSMutableArray alloc] init];
+    }
+    
+    return _singleDayViews;
 }
 
 - (ECInfiniteDatePagingView*)dayViewContainer
@@ -153,15 +163,21 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if ([scrollView isKindOfClass:[ECSingleDayView class]]) {
-        [self informDelegateTimeScrolled];
+    ECSingleDayView* visibleDayView = (ECSingleDayView*)self.dayViewContainer.visiblePage;
+    NSDate* visibleDate = visibleDayView.visibleDate;
+    for (ECSingleDayView* dayView in self.dayViewContainer.pages) {
+        if (dayView != visibleDayView) {
+            [dayView scrollToTime:visibleDate animated:NO];
+        }
     }
+    [self informDelegateTimeScrolled];
 }
 
 #pragma mark - ECInfiniatePagingDateView data source and delegate
 
 - (UIView*)pageViewForInfiniteDateView:(ECInfiniteDatePagingView *)idv
 {
+    
     return [[ECSingleDayView alloc] init];
 }
 

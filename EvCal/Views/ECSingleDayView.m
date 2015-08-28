@@ -91,6 +91,16 @@
     return _eventViews;
 }
 
+- (NSDate*)visibleDate
+{
+    CGRect displayBounds = [self layout:self.eventsLayout boundsForEventViews:nil];
+    NSDate* visibleDate = [self.eventsLayout dateForVerticalPosition:self.dayScrollView.contentOffset.y + kHourLineHeight / 2.0f
+                                                      relativeToDate:self.date
+                                                              bounds:displayBounds];
+    
+    return visibleDate;
+}
+
 - (ECDayViewEventsLayout*)eventsLayout
 {
     if (!_eventsLayout) {
@@ -241,8 +251,8 @@
 
 #pragma mark - Layout
 
-#define ALL_DAY_VIEW_HEIGHT             44.0f
-#define HOUR_LINE_HEIGHT                15.0f
+const static CGFloat kAllDayViewHeight =    44.0f;
+const static CGFloat kHourLineHeight =      15.0f;
 #define EVENT_VIEW_HORIZONTAL_PADDING   4.0f
 
 - (void)layoutSubviews
@@ -260,7 +270,7 @@
         allDayFrame = CGRectMake(self.dayScrollView.bounds.origin.x,
                                  self.dayScrollView.bounds.origin.y - self.dayScrollView.contentOffset.y,
                                  self.dayScrollView.contentSize.width,
-                                 ALL_DAY_VIEW_HEIGHT);
+                                 kAllDayViewHeight);
     }
     
     self.allDayEventsView.frame = allDayFrame;
@@ -285,7 +295,7 @@
     CGRect currentTimeLineFrame = CGRectMake(self.durationEventsView.bounds.origin.x,
                                              self.durationEventsView.bounds.origin.y,
                                              self.durationEventsView.bounds.size.width,
-                                             HOUR_LINE_HEIGHT);
+                                             kHourLineHeight);
     self.currentTimeLine.frame = currentTimeLineFrame;
     [self changeCurrentTimeLinePosition];
 }
@@ -294,7 +304,7 @@
 {
     CGFloat currentTimeLineOriginY = [self.eventsLayout verticalPositionForDate:self.currentTimeLine.date
                                                                  relativeToDate:self.date
-                                                                         bounds:[self adjustedDurationEventsBounds]] - HOUR_LINE_HEIGHT / 2.0f;
+                                                                         bounds:[self adjustedDurationEventsBounds]] - kHourLineHeight / 2.0f;
     CGPoint currentTimeLineOrigin = CGPointMake(self.durationEventsView.bounds.origin.x, currentTimeLineOriginY);
     
     CGRect currentTimeLineFrame = self.currentTimeLine.frame;
@@ -308,11 +318,11 @@
         CGRect adjustedBounds = [self adjustedDurationEventsBounds];
         
         for (ECTimeLine* timeLine in self.hourLines) {
-            CGFloat originY = [self.eventsLayout verticalPositionForDate:timeLine.date relativeToDate:self.date bounds:adjustedBounds] - HOUR_LINE_HEIGHT / 2.0f;
+            CGFloat originY = [self.eventsLayout verticalPositionForDate:timeLine.date relativeToDate:self.date bounds:adjustedBounds] - kHourLineHeight / 2.0f;
             CGRect timeLineFrame = CGRectMake(self.durationEventsView.bounds.origin.x,
                                               originY,
                                               self.durationEventsView.bounds.size.width,
-                                              HOUR_LINE_HEIGHT);
+                                              kHourLineHeight);
             timeLine.frame = timeLineFrame;
         }
         
@@ -347,9 +357,9 @@
 - (CGRect)adjustedDurationEventsBounds
 {
     return CGRectMake(self.durationEventsView.bounds.origin.x,
-                      self.durationEventsView.bounds.origin.y + HOUR_LINE_HEIGHT / 2.0f,
+                      self.durationEventsView.bounds.origin.y + kHourLineHeight / 2.0f,
                       self.durationEventsView.bounds.size.width,
-                      self.durationEventsView.bounds.size.height - HOUR_LINE_HEIGHT);
+                      self.durationEventsView.bounds.size.height - kHourLineHeight);
 }
 
 
@@ -461,9 +471,9 @@
 - (CGRect)layout:(ECDayViewEventsLayout *)layout boundsForEventViews:(NSArray *)eventViews
 {
     CGRect eventViewsBounds = CGRectMake(self.durationEventsView.bounds.origin.x + self.currentTimeLine.timeLineInset + EVENT_VIEW_HORIZONTAL_PADDING,
-                                         self.durationEventsView.bounds.origin.y + HOUR_LINE_HEIGHT / 2.0f,
+                                         self.durationEventsView.bounds.origin.y + kHourLineHeight / 2.0f,
                                          self.durationEventsView.bounds.size.width - (self.currentTimeLine.timeLineInset + 2 * EVENT_VIEW_HORIZONTAL_PADDING),
-                                         self.durationEventsView.bounds.size.height - HOUR_LINE_HEIGHT);
+                                         self.durationEventsView.bounds.size.height - kHourLineHeight);
     
     return eventViewsBounds;
 }
@@ -493,7 +503,7 @@
 - (void)scrollToTime:(NSDate*)time animated:(BOOL)animated
 {
     CGFloat timeOffsetY = [self.eventsLayout verticalPositionForDate:time relativeToDate:self.date bounds:self.durationEventsView.bounds] + self.allDayEventsView.frame.size.height;
-    timeOffsetY = MIN(timeOffsetY, self.dayScrollView.contentSize.height - self.dayScrollView.bounds.size.height) - HOUR_LINE_HEIGHT / 2.0f;
+    timeOffsetY = MIN(timeOffsetY, self.dayScrollView.contentSize.height - self.dayScrollView.bounds.size.height) - kHourLineHeight / 2.0f;
     CGPoint timeOffset = CGPointMake(self.bounds.origin.x, timeOffsetY);
     
     [self.dayScrollView setContentOffset:timeOffset animated:animated];

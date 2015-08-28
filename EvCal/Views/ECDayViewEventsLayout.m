@@ -273,5 +273,20 @@
     return nil;
 }
 
+- (NSDate*)dateForVerticalPosition:(CGFloat)verticalPosition relativeToDate:(NSDate *)date bounds:(CGRect)bounds
+{
+    if (date) {
+        NSDate* beginningOfDay = [date beginningOfDay];
+        NSDate* endOfDay = [date endOfDay];
+        
+        CGFloat secondHeight = bounds.size.height / [endOfDay timeIntervalSinceDate:beginningOfDay];
+        NSTimeInterval timeIntervalFromStartOfDay = (verticalPosition -bounds.origin.y) / secondHeight;
+        
+        return [beginningOfDay dateByAddingTimeInterval:timeIntervalFromStartOfDay];
+    } else {
+        DDLogError(@"Value for relative date should not be nil");
+        return date;
+    }
+}
 
 @end

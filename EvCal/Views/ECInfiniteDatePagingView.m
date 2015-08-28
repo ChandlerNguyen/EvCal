@@ -13,8 +13,8 @@
 @property (nonatomic, strong) NSCalendar* calendar;
 @property (nonatomic, strong, readonly) NSDate* centerPageDate;
 
-@property (nonatomic, strong) NSMutableArray* pages;
 @property (nonatomic, weak) UIView* pageContainerView;
+@property (nonatomic, strong, readwrite) NSArray* pages;
 
 @property (nonatomic) BOOL scrollingToDate;
 @property (nonatomic, weak) ECDatePage* pageView;
@@ -143,12 +143,14 @@
 
 #pragma mark Private
 
-- (NSMutableArray*)pages
+- (NSArray*)pages
 {
     if (!_pages) {
-        _pages = [[NSMutableArray alloc] init];
+        NSMutableArray* mutablePages = [[NSMutableArray alloc] init];
         
-        [_pages addObjectsFromArray:[self createPages]];
+        [mutablePages addObjectsFromArray:[self createPages]];
+        
+        _pages = [mutablePages copy];
     }
     
     return _pages;
@@ -278,8 +280,12 @@ static NSInteger kPageRightIndex = 2;
 {
     DDLogDebug(@"Moving page from index %lu to index %lu", (long)fromIndex, (long)toIndex);
     UIView* movedPage = self.pages[fromIndex];
-    [self.pages removeObject:movedPage];
-    [self.pages insertObject:movedPage atIndex:toIndex];
+    
+    NSMutableArray* mutablePages = [self.pages mutableCopy];
+    [mutablePages removeObject:movedPage];
+    [mutablePages insertObject:movedPage atIndex:toIndex];
+    self.pages = [mutablePages copy];
+    
     [self informDelegateVisiblePageChangedTo:self.pages[kPageCenterIndex]];
 }
 
