@@ -116,7 +116,7 @@
 - (UIView*)allDayEventsView
 {
     if (!_allDayEventsView) {
-        _allDayEventsView = [self createallDayEventsView];
+        _allDayEventsView = [self createAllDayEventsView];
     }
     
     return _allDayEventsView;
@@ -197,9 +197,11 @@
     return currentTimeLine;
 }
 
-- (UIView*)createallDayEventsView
+- (UIView*)createAllDayEventsView
 {
     UIView* allDayEventsView = [[UIView alloc] initWithFrame:CGRectZero];
+    allDayEventsView.layer.borderWidth = 1.0f;
+    allDayEventsView.layer.borderColor = [UIColor blackColor].CGColor;
     
     [self.dayScrollView addSubview:allDayEventsView];
     
