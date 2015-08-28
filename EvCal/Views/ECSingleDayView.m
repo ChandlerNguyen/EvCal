@@ -243,7 +243,8 @@
 - (void)updateHourLinesVisibility
 {
     for (ECTimeLine* hourLine in self.hourLines) {
-        if (CGRectIntersectsRect(self.currentTimeLine.frame, hourLine.frame)) {
+        if (CGRectIntersectsRect(self.currentTimeLine.frame, hourLine.frame) ||
+            CGRectIntersectsRect(self.draggingEventViewTimeLine.frame, hourLine.frame)) {
             hourLine.timeHidden = self.dateIsSameDayAsToday;
         } else {
             hourLine.timeHidden = NO;
@@ -533,6 +534,7 @@ const static CGFloat kHourLineHeight =      15.0f;
     self.previousDragLocationY = [dragRecognizer locationInView:self.durationEventsView].y;
     
     [self.durationEventsView addSubview:eventTimeLine];
+    [self updateHourLinesVisibility];
 }
 
 - (void)eventView:(ECEventView *)eventView didDrag:(UILongPressGestureRecognizer *)dragRecognizer
@@ -558,6 +560,8 @@ const static CGFloat kHourLineHeight =      15.0f;
                                            self.bounds.size.width,
                                            kHourLineHeight);
     self.draggingEventViewTimeLine.frame = eventTimeLineFrame;
+    
+    [self updateHourLinesVisibility];
 }
 
 - (void)eventView:(ECEventView *)eventView didEndDragging:(UILongPressGestureRecognizer *)dragRecognizer
@@ -569,6 +573,7 @@ const static CGFloat kHourLineHeight =      15.0f;
     
     [self.eventsLayout invalidateLayout];
     [self setEventViewsNeedLayout];
+    [self updateHourLinesVisibility];
 }
 
 - (void)informDelegateThatEventViewDateChanged:(ECEventView*)eventView
