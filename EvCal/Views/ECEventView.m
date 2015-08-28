@@ -284,21 +284,13 @@ const static NSTimeInterval kFifteenMinuteTimeInterval =    60 * 15;
             [self informDelegateThatDraggingContinued:recognizer];
             break;
             
+        case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateEnded:
             [self informDelegateThatDraggingEnded:recognizer];
             self.backgroundColor = [UIColor eventViewBackgroundColorForCGColor:self.event.calendar.CGColor];
             break;
             
-        case UIGestureRecognizerStatePossible:
-            DDLogDebug(@"Long press gesture recognizer possible");
-            break;
-            
-        case UIGestureRecognizerStateCancelled:
-            DDLogDebug(@"Long press gesture recognizer cancelled");
-            break;
-            
-        case UIGestureRecognizerStateFailed:
-            DDLogDebug(@"Long press gesture recognizer failed");
+        default:
             break;
     }
 }

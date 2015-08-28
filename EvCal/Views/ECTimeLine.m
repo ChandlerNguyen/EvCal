@@ -58,6 +58,7 @@
         timeLabel.textAlignment = NSTextAlignmentRight;
         timeLabel.font = [UIFont boldSystemFontOfSize:11.0f];
         timeLabel.textColor = self.color;
+        timeLabel.userInteractionEnabled = NO;
         
         _timeLabel = timeLabel;
         
