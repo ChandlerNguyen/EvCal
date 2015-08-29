@@ -274,24 +274,26 @@ const static NSTimeInterval kFifteenMinuteTimeInterval =    60 * 15;
 
 - (void)longPressGestureFired:(UILongPressGestureRecognizer*)recognizer
 {
-    switch (recognizer.state) {
-        case UIGestureRecognizerStateBegan:
-            [self informDelegateThatDraggingBegan:recognizer];
-            self.backgroundColor = [UIColor colorWithCGColor:self.event.calendar.CGColor];
-            break;
-        
-        case UIGestureRecognizerStateChanged:
-            [self informDelegateThatDraggingContinued:recognizer];
-            break;
+    if (!self.event.isAllDay) {
+        switch (recognizer.state) {
+            case UIGestureRecognizerStateBegan:
+                [self informDelegateThatDraggingBegan:recognizer];
+                self.backgroundColor = [UIColor colorWithCGColor:self.event.calendar.CGColor];
+                break;
             
-        case UIGestureRecognizerStateCancelled:
-        case UIGestureRecognizerStateEnded:
-            [self informDelegateThatDraggingEnded:recognizer];
-            self.backgroundColor = [UIColor eventViewBackgroundColorForCGColor:self.event.calendar.CGColor];
-            break;
-            
-        default:
-            break;
+            case UIGestureRecognizerStateChanged:
+                [self informDelegateThatDraggingContinued:recognizer];
+                break;
+                
+            case UIGestureRecognizerStateCancelled:
+            case UIGestureRecognizerStateEnded:
+                [self informDelegateThatDraggingEnded:recognizer];
+                self.backgroundColor = [UIColor eventViewBackgroundColorForCGColor:self.event.calendar.CGColor];
+                break;
+                
+            default:
+                break;
+        }
     }
 }
 
