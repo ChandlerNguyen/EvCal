@@ -21,22 +21,29 @@
 
 @interface ECSingleDayView() <ECDayViewEventsLayoutDataSource, ECEventViewDelegate>
 
+// Layout
 @property (nonatomic, strong) ECDayViewEventsLayout* eventsLayout;
 @property (nonatomic) BOOL eventViewsLayoutIsValid;
 @property (nonatomic) BOOL timeLabelsLayoutIsValid;
 
+// Views
 @property (nonatomic, weak, readwrite) UIScrollView* dayScrollView;
 @property (nonatomic, weak) UIView* allDayEventsView;
+@property (nonatomic, weak) UILabel* allDayLabel;
 @property (nonatomic, weak) UIView* durationEventsView;
 @property (nonatomic, strong, readwrite) NSArray* eventViews;
 @property (nonatomic, strong) NSMutableDictionary* eventViewFrames;
 
+// State
 @property (nonatomic) BOOL dateIsSameDayAsToday;
+
+// Time Lines
 @property (nonatomic, weak) ECTimeLine* currentTimeLine;
-@property (nonatomic, weak) ECTimeLine* draggingEventViewTimeLine;
-@property (nonatomic) CGFloat previousDragLocationY;
 @property (nonatomic, strong) NSArray* hourLines;
 
+// Dragging Events
+@property (nonatomic, weak) ECTimeLine* draggingEventViewTimeLine;
+@property (nonatomic) CGFloat previousDragLocationY;
 @end
 
 @implementation ECSingleDayView
@@ -200,12 +207,22 @@
 - (UIView*)createAllDayEventsView
 {
     UIView* allDayEventsView = [[UIView alloc] initWithFrame:CGRectZero];
-    allDayEventsView.layer.borderWidth = 1.0f;
-    allDayEventsView.layer.borderColor = [UIColor blackColor].CGColor;
+    allDayEventsView.backgroundColor = [UIColor lightGrayColor];
+    
+    [self addLabelToAllDayView:allDayEventsView];
     
     [self.dayScrollView addSubview:allDayEventsView];
     
     return allDayEventsView;
+}
+
+- (void)addLabelToAllDayView:(UIView*)allDayEventsView
+{
+    UILabel* allDayLabel = [[UILabel alloc] init];
+    allDayLabel.textColor = [UIColor darkGrayColor];
+    allDayLabel.text = NSLocalizedString(@"ECSingleDayView.All Day", @"Events that last all day");
+    self.allDayLabel = allDayLabel;
+    [allDayEventsView addSubview:allDayLabel];
 }
 
 - (UIView*)createDurationEventsView
@@ -245,8 +262,9 @@
 - (void)updateHourLinesVisibility
 {
     for (ECTimeLine* hourLine in self.hourLines) {
-        if (CGRectIntersectsRect(self.currentTimeLine.frame, hourLine.frame) ||
-            CGRectIntersectsRect(self.draggingEventViewTimeLine.frame, hourLine.frame)) {
+        BOOL currentTimeLineIntersectsHourLine = CGRectIntersectsRect(self.currentTimeLine.frame, hourLine.frame);
+        BOOL draggingTimeLineIntersectsHourLine = (!!self.draggingEventViewTimeLine) && CGRectIntersectsRect(self.draggingEventViewTimeLine.frame, hourLine.frame);
+        if (currentTimeLineIntersectsHourLine || draggingTimeLineIntersectsHourLine) {
             hourLine.timeHidden = self.dateIsSameDayAsToday;
         } else {
             hourLine.timeHidden = NO;
@@ -256,9 +274,9 @@
 
 #pragma mark - Layout
 
-const static CGFloat kAllDayViewHeight =    44.0f;
-const static CGFloat kHourLineHeight =      15.0f;
-#define EVENT_VIEW_HORIZONTAL_PADDING   4.0f
+const static CGFloat kAllDayViewHeight =            44.0f;
+const static CGFloat kHourLineHeight =              15.0f;
+const static CGFloat kEventViewHorizontalPadding =  4.0f;
 
 - (void)layoutSubviews
 {
@@ -279,6 +297,20 @@ const static CGFloat kHourLineHeight =      15.0f;
     }
     
     self.allDayEventsView.frame = allDayFrame;
+    [self layoutAllDayLabel];
+}
+
+- (void)layoutAllDayLabel
+{
+    CGFloat allDayLabelWidth = ceilf([self.allDayLabel.text boundingRectWithSize:self.allDayEventsView.frame.size
+                                                                         options:0
+                                                                      attributes:@{NSFontAttributeName : self.allDayLabel.font}
+                                                                         context:nil].size.width);
+    CGRect allDayLabelFrame = CGRectMake(self.allDayEventsView.bounds.origin.x + kEventViewHorizontalPadding,
+                                         self.allDayEventsView.bounds.origin.y,
+                                         allDayLabelWidth,
+                                         self.allDayEventsView.bounds.size.height);
+    self.allDayLabel.frame = allDayLabelFrame;
 }
 
 - (void)layoutDurationEventsView
@@ -339,9 +371,29 @@ const static CGFloat kHourLineHeight =      15.0f;
 {
     if (!self.eventViewsLayoutIsValid) {
         
+        NSMutableArray* allDayEvents = [[NSMutableArray alloc] init];
+        
         [self.eventsLayout invalidateLayout];
         for (ECEventView* eventView in self.eventViews) {
-            eventView.frame = [self.eventsLayout frameForEventView:eventView];
+            if (!eventView.event.isAllDay) {
+                eventView.frame = [self.eventsLayout frameForEventView:eventView];
+            } else {
+                [allDayEvents addObject:eventView];
+            }
+        }
+        
+        if (allDayEvents.count > 0) {
+            CGFloat allDayEventViewsCurrentOffsetX = CGRectGetMaxX(self.allDayLabel.frame) + kEventViewHorizontalPadding;
+            CGFloat allDayEventViewsWidth = floor((self.allDayEventsView.bounds.size.width - self.allDayLabel.frame.size.width - 3 * kEventViewHorizontalPadding) / allDayEvents.count);
+            for (ECEventView* allDayEventView in allDayEvents) {
+                CGRect allDayEventViewFrame = CGRectMake(allDayEventViewsCurrentOffsetX,
+                                                         self.allDayEventsView.bounds.origin.y,
+                                                         allDayEventViewsWidth,
+                                                         kAllDayViewHeight);
+                allDayEventView.frame = allDayEventViewFrame;
+                
+                allDayEventViewsCurrentOffsetX = CGRectGetMaxX(allDayEventViewFrame);
+            }
         }
         
         self.eventViewsLayoutIsValid = YES;
@@ -476,9 +528,9 @@ const static CGFloat kHourLineHeight =      15.0f;
 
 - (CGRect)layout:(ECDayViewEventsLayout *)layout boundsForEventViews:(NSArray *)eventViews
 {
-    CGRect eventViewsBounds = CGRectMake(self.durationEventsView.bounds.origin.x + self.currentTimeLine.timeLineInset + EVENT_VIEW_HORIZONTAL_PADDING,
+    CGRect eventViewsBounds = CGRectMake(self.durationEventsView.bounds.origin.x + self.currentTimeLine.timeLineInset + kEventViewHorizontalPadding,
                                          self.durationEventsView.bounds.origin.y + kHourLineHeight / 2.0f,
-                                         self.durationEventsView.bounds.size.width - (self.currentTimeLine.timeLineInset + 2 * EVENT_VIEW_HORIZONTAL_PADDING),
+                                         self.durationEventsView.bounds.size.width - (self.currentTimeLine.timeLineInset + 2 * kEventViewHorizontalPadding),
                                          self.durationEventsView.bounds.size.height - kHourLineHeight);
     
     return eventViewsBounds;
