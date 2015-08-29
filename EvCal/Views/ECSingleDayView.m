@@ -211,7 +211,11 @@
     
     [self addLabelToAllDayView:allDayEventsView];
     
-    [self.dayScrollView addSubview:allDayEventsView];
+    if (_durationEventsView) {
+        [self.dayScrollView insertSubview:allDayEventsView aboveSubview:_durationEventsView];
+    } else {
+        [self.dayScrollView addSubview:allDayEventsView];
+    }
     
     return allDayEventsView;
 }
@@ -229,7 +233,11 @@
 {
     UIView* durationEventsView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    [self.dayScrollView addSubview:durationEventsView];
+    if (_allDayEventsView) {
+        [self.dayScrollView insertSubview:durationEventsView belowSubview:_allDayEventsView];
+    } else {
+        [self.dayScrollView addSubview:durationEventsView];
+    }
     
     return durationEventsView;
 }
@@ -274,7 +282,7 @@
 
 #pragma mark - Layout
 
-const static CGFloat kAllDayViewHeight =            44.0f;
+const static CGFloat kAllDayViewHeight =            33.0f;
 const static CGFloat kHourLineHeight =              15.0f;
 const static CGFloat kEventViewHorizontalPadding =  4.0f;
 
