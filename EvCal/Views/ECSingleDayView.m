@@ -171,7 +171,7 @@
 {
     self.eventViewsLayoutIsValid = NO;
     self.timeLabelsLayoutIsValid = NO;
-    self.dayScrollView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+    
     [super setFrame:frame];
 
 }
@@ -210,12 +210,7 @@
     allDayEventsView.backgroundColor = [UIColor lightGrayColor];
     
     [self addLabelToAllDayView:allDayEventsView];
-    
-    if (_durationEventsView) {
-        [self.dayScrollView insertSubview:allDayEventsView aboveSubview:_durationEventsView];
-    } else {
-        [self.dayScrollView addSubview:allDayEventsView];
-    }
+    [self addSubview:allDayEventsView];
     
     return allDayEventsView;
 }
@@ -233,11 +228,7 @@
 {
     UIView* durationEventsView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    if (_allDayEventsView) {
-        [self.dayScrollView insertSubview:durationEventsView belowSubview:_allDayEventsView];
-    } else {
-        [self.dayScrollView addSubview:durationEventsView];
-    }
+    [self.dayScrollView addSubview:durationEventsView];
     
     return durationEventsView;
 }
@@ -290,17 +281,28 @@ const static CGFloat kEventViewHorizontalPadding =  4.0f;
 {
     [super layoutSubviews];
     
+    [self layoutDayScrollView];
     [self layoutAllDayEventsView];
     [self layoutDurationEventsView];
+}
+
+- (void)layoutDayScrollView
+{
+    CGFloat allDayEventViewHeight = ([self containsAllDayEventView]) ? self.bounds.size.height - kAllDayViewHeight : self.bounds.size.height;
+    CGRect dayScrollViewFrame = CGRectMake(self.bounds.origin.x,
+                                           CGRectGetMaxY(self.allDayEventsView.frame),
+                                           self.bounds.size.width,
+                                           allDayEventViewHeight);
+    self.dayScrollView.frame = dayScrollViewFrame;
 }
 
 - (void)layoutAllDayEventsView
 {
     CGRect allDayFrame = CGRectZero;
     if ([self containsAllDayEventView]) {
-        allDayFrame = CGRectMake(self.dayScrollView.bounds.origin.x,
-                                 self.dayScrollView.bounds.origin.y - self.dayScrollView.contentOffset.y,
-                                 self.dayScrollView.contentSize.width,
+        allDayFrame = CGRectMake(self.bounds.origin.x,
+                                 self.bounds.origin.y,
+                                 self.bounds.size.width,
                                  kAllDayViewHeight);
     }
     
@@ -324,9 +326,9 @@ const static CGFloat kEventViewHorizontalPadding =  4.0f;
 - (void)layoutDurationEventsView
 {
     CGRect durationEventsViewFrame = CGRectMake(self.dayScrollView.bounds.origin.x,
-                                                CGRectGetMaxY(self.allDayEventsView.frame),
+                                                self.dayScrollView.bounds.origin.y - self.dayScrollView.contentOffset.y,
                                                 self.dayScrollView.contentSize.width,
-                                                self.dayScrollView.contentSize.height - self.allDayEventsView.frame.size.height);
+                                                self.dayScrollView.contentSize.height);
     
     self.durationEventsView.frame = durationEventsViewFrame;
     
