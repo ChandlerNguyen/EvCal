@@ -13,6 +13,15 @@
 @protocol ECEventViewDelegate <NSObject>
 
 @optional
+
+/**
+ *  Informs the delegate that the event view received a tap gesture.
+ *
+ *  @param eventView     The event view that was tapped.
+ *  @param tapRecognizer The tap gesture recognizer that fired the event.
+ */
+- (void)eventView:(ECEventView*)eventView wasTapped:(UITapGestureRecognizer*)tapRecognizer;
+
 /**
  *  Informs the delegate that the event view fired a long press gesture 
  *  recognizer and began dragging.
@@ -40,7 +49,7 @@
 
 @end
 
-@interface ECEventView : UIControl
+@interface ECEventView : UIView
 
 //------------------------------------------------------------------------------
 // @name Properties

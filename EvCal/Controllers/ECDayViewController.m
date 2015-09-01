@@ -150,7 +150,7 @@
 {
     dayView.dayViewDataSource = self;
     dayView.dayViewDelegate = self;
-    [dayView setDisplayDate:self.displayDate animated:NO];
+    dayView.displayDate = self.displayDate;
 }
 
 - (void)layoutWeekdayPicker

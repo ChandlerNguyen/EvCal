@@ -13,11 +13,14 @@
 
 @protocol ECSingleDayViewDelegate <NSObject>
 
+@optional
+- (void)eventViewWasSelected:(ECEventView*)eventView;
+
 - (void)eventView:(ECEventView*)eventView wasDraggedToDate:(NSDate*)date;
 
 @end
 
-@interface ECSingleDayView : ECDatePage
+@interface ECSingleDayView : UIView
 
 //------------------------------------------------------------------------------
 // @name Properties
@@ -26,11 +29,8 @@
 // The day views current list of event views
 @property (nonatomic, strong, readonly) NSArray* eventViews;
 
-// The scroll view contained by the day view
-@property (nonatomic, weak, readonly) UIScrollView* dayScrollView;
-
-// The earliest time visible on the day view
-@property (nonatomic, strong, readonly) NSDate* visibleDate;
+// The date being displayed by the single day view.
+@property (nonatomic, strong) NSDate* date;
 
 // The delegate for event view changes
 @property (nonatomic, weak) id<ECSingleDayViewDelegate> singleDayViewDelegate;
@@ -83,7 +83,7 @@
  *
  *  @param animated Determines whether the scroll will be animated.
  */
-- (void)scrollToCurrentTime:(BOOL)animated;
+//- (void)scrollToCurrentTime:(BOOL)animated;
 
 /**
  *  Scrolls the day view to a rect containing the given time.
@@ -91,7 +91,7 @@
  *  @param time     The time to which to scroll
  *  @param animated Determines whether the scroll will be animated.
  */
-- (void)scrollToTime:(NSDate*)time animated:(BOOL)animated;
+//- (void)scrollToTime:(NSDate*)time animated:(BOOL)animated;
 
 /**
  *  Causes the receiver to update its current time line (if one is visible)

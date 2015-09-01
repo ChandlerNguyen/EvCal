@@ -73,17 +73,6 @@
  */
 - (NSArray*)dayView:(ECDayView*)dayView eventsForDate:(NSDate*)date;
 
-/**
- *  Requests the size of the content to be displayed within a single day. 
- *  Default is the day view bound's size.
- *
- *
- *  @param dayView The day view making the request
- *
- *  @return The size of the day view's content
- */
-- (CGSize)contentSizeForDayView:(ECDayView*)dayView;
-
 @end
 
 @interface ECDayView : UIView
@@ -94,17 +83,7 @@
 //------------------------------------------------------------------------------
 
 // The date currently being displayed by the day view.
-@property (nonatomic, strong, readonly) NSDate* displayDate;
-
-/**
- *  Sets the receiver's display date to the given value and can animate the
- *  changes if needed.
- *
- *  @param displayDate The value to which to set display date
- *  @param animated    Determines whether the change should be animated
- */
-- (void)setDisplayDate:(NSDate *)displayDate animated:(BOOL)animated;
-
+@property (nonatomic, strong) NSDate* displayDate;
 
 // The data source for the day view's event views and content size
 @property (nonatomic, weak) id<ECDayViewDataSource> dayViewDataSource;
@@ -112,8 +91,24 @@
 // The delegate for the day view's scroll events
 @property (nonatomic, weak) id<ECDayViewDelegate> dayViewDelegate;
 
+// The height on screen for the day view
+@property (nonatomic) CGFloat dayViewHeight; // default is 3 * bounds.size.height
 
+
+//------------------------------------------------------------------------------
+// @name Initialization
+//------------------------------------------------------------------------------
+
+/**
+ *  Creates a new day view with the given date and frame.
+ *
+ *  @param frame The frame to display the day view within.
+ *  @param date  The date to be dispalyed within the day view.
+ *
+ *  @return The newly created day view.
+ */
 - (instancetype)initWithFrame:(CGRect)frame displayDate:(NSDate*)date;
+
 
 //------------------------------------------------------------------------------
 // @name Refreshing day view

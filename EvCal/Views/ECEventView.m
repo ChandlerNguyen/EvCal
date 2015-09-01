@@ -49,6 +49,7 @@ typedef NS_ENUM(NSInteger, ECEventViewLayoutType) {
 - (void)setup
 {
     [self setupLayer];
+    [self addTapGestureRecognizer];
     [self addLongPressGestureRecognizer];
 }
 
@@ -56,6 +57,12 @@ typedef NS_ENUM(NSInteger, ECEventViewLayoutType) {
 {
     self.layer.cornerRadius = 5.0;
     self.layer.borderWidth = 0.5;
+}
+
+- (void)addTapGestureRecognizer
+{
+    UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureFired:)];
+    [self addGestureRecognizer:tapGestureRecognizer];
 }
 
 - (void)addLongPressGestureRecognizer
@@ -272,6 +279,18 @@ const static NSTimeInterval kFifteenMinuteTimeInterval =    60 * 15;
 
 #pragma mark - UI Events
 
+- (void)tapGestureFired:(UITapGestureRecognizer*)recognizer
+{
+    [self informDelegateThatViewWasTapped:recognizer];
+}
+
+- (void)informDelegateThatViewWasTapped:(UITapGestureRecognizer*)recognizer
+{
+    if ([self.eventViewDelegate respondsToSelector:@selector(eventView:wasTapped:)]) {
+        [self.eventViewDelegate eventView:self wasTapped:recognizer];
+    }
+}
+
 - (void)longPressGestureFired:(UILongPressGestureRecognizer*)recognizer
 {
     if (!self.event.isAllDay) {
@@ -319,7 +338,5 @@ const static NSTimeInterval kFifteenMinuteTimeInterval =    60 * 15;
     if ([self.eventViewDelegate respondsToSelector:@selector(eventView:didEndDragging:)]) {
         [self.eventViewDelegate eventView:self didEndDragging:recognizer];
     }
-    
-    
 }
 @end

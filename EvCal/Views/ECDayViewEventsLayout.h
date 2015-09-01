@@ -122,17 +122,4 @@
  */
 - (CGFloat)verticalPositionForDate:(NSDate*)date relativeToDate:(NSDate*)displayDate bounds:(CGRect)bounds;
 
-/**
- *  Calculates the approximate date (rounded to the closest second) of the 
- *  vertical position within the given bounds relative to the given date. This 
- *  assumes that the bounds represent a single day.
- *
- *  @param verticalPosition The vertical position for which to calculate a date.
- *  @param date             The date to be considered as the start of the day
- *  @param bounds           The bounds within which the position is found.
- *
- *  @return A newly created date rounded to the closest second representing the 
- *          given point.
- */
-- (NSDate*)dateForVerticalPosition:(CGFloat)verticalPosition relativeToDate:(NSDate*)date bounds:(CGRect)bounds;
 @end
