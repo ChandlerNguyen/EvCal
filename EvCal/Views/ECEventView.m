@@ -88,6 +88,7 @@ typedef NS_ENUM(NSInteger, ECEventViewLayoutType) {
     if (!_titleLabel) {
         _titleLabel = [self addLabel];
         _titleLabel.font = [self titleLabelFont];
+        _titleLabel.numberOfLines = 0;
     }
     
     return _titleLabel;
