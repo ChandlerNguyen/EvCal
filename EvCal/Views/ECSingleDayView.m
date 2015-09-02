@@ -177,7 +177,7 @@
     self.timeLabelsLayoutIsValid = NO;
     
     if (!CGRectEqualToRect(self.frame, frame)) {
-        CGSize dayScrollViewContentSize = CGSizeMake(frame.size.width, 1200);
+        CGSize dayScrollViewContentSize = CGSizeMake(frame.size.width, 1400);
         self.dayScrollView.contentSize = dayScrollViewContentSize;
     }
     
@@ -248,8 +248,6 @@
     NSTimer* timer = [[NSTimer alloc] initWithFireDate:[[NSDate date] beginningOfMinute] interval:60 target:self selector:@selector(updateCurrentTime) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 }
-
-
 
 - (void)updateCurrentTime
 {
@@ -662,7 +660,6 @@ const static CGFloat kEventViewHorizontalPadding =  4.0f;
     self.draggingEventViewTimeLine = nil;
     
     [self.eventsLayout invalidateLayout];
-    //[self setEventViewsNeedLayout];
     [self updateHourLinesVisibility];
 }
 
