@@ -17,7 +17,6 @@
 @interface ECDayView() <UIScrollViewDelegate, UIActionSheetDelegate, ECSingleDayViewDelegate>
 
 @property (nonatomic, weak) UIScrollView* dayViewHorizontalScrollView;
-@property (nonatomic, weak) UIScrollView* dayViewVerticalScrollView;
 
 @property (nonatomic, strong) NSMutableArray* singleDayViews;
 @property (nonatomic, weak, readonly) ECSingleDayView* leftDayView;
@@ -86,21 +85,21 @@ const static NSInteger kRightDayViewIndex =             2;
     return _dayViewHorizontalScrollView;
 }
 
-- (UIScrollView*)dayViewVerticalScrollView
-{
-    if (!_dayViewVerticalScrollView) {
-        UIScrollView* dayViewVerticalScrollView = [[UIScrollView alloc] init];
-        
-        dayViewVerticalScrollView.showsHorizontalScrollIndicator = NO;
-        dayViewVerticalScrollView.showsVerticalScrollIndicator = NO;
-        
-        dayViewVerticalScrollView.delegate = self;
-        _dayViewVerticalScrollView = dayViewVerticalScrollView;
-        [self.dayViewHorizontalScrollView addSubview:dayViewVerticalScrollView];
-    }
-    
-    return _dayViewVerticalScrollView;
-}
+//- (UIScrollView*)dayViewVerticalScrollView
+//{
+//    if (!_dayViewVerticalScrollView) {
+//        UIScrollView* dayViewVerticalScrollView = [[UIScrollView alloc] init];
+//        
+//        dayViewVerticalScrollView.showsHorizontalScrollIndicator = NO;
+//        dayViewVerticalScrollView.showsVerticalScrollIndicator = NO;
+//        
+//        dayViewVerticalScrollView.delegate = self;
+//        _dayViewVerticalScrollView = dayViewVerticalScrollView;
+//        [self.dayViewHorizontalScrollView addSubview:dayViewVerticalScrollView];
+//    }
+//    
+//    return _dayViewVerticalScrollView;
+//}
 
 
 - (NSMutableArray*)singleDayViews
@@ -122,7 +121,7 @@ const static NSInteger kRightDayViewIndex =             2;
         dayView.date = [self.calendar dateByAddingUnit:NSCalendarUnitDay value:kCenterDayViewIndex - i toDate:self.displayDate options:0];
         
         [mutableSingleDayViews addObject:dayView];
-        [self.dayViewVerticalScrollView addSubview:dayView];
+        [self.dayViewHorizontalScrollView addSubview:dayView];
     }
     
     return mutableSingleDayViews;
@@ -137,8 +136,8 @@ const static NSInteger kRightDayViewIndex =             2;
         self.dayViewHorizontalScrollView.contentOffset = CGPointMake(frame.size.width, 0);
         // vertical scroll view's width should be equal to its horizontal content size which is the same as horizontal scroll view's.
         // this allows vertical scroll view to scroll within the horizontal scroll view and not pick up horizontal scroll movements.
-        CGSize verticalScrollViewContentSize = CGSizeMake(frame.size.width * kSingleDayViewCount, self.dayViewHeight);
-        self.dayViewVerticalScrollView.contentSize = verticalScrollViewContentSize;
+//        CGSize verticalScrollViewContentSize = CGSizeMake(frame.size.width * kSingleDayViewCount, self.dayViewHeight);
+//        self.dayViewVerticalScrollView.contentSize = verticalScrollViewContentSize;
     }
     [super setFrame:frame];
     
@@ -245,7 +244,7 @@ const static NSInteger kRightDayViewIndex =             2;
     [super layoutSubviews];
     
     [self layoutHorizontalDayScrollView];
-    [self layoutVerticalDayScrollView];
+//    [self layoutVerticalDayScrollView];
     [self layoutSingleDayViews];
 }
 
@@ -256,10 +255,10 @@ const static NSInteger kRightDayViewIndex =             2;
     for (NSInteger i = kLeftDayViewIndex; i <= kRightDayViewIndex; i++) {
         ECSingleDayView* singleDayView = self.singleDayViews[i];
         
-        CGRect singleDayViewFrame = CGRectMake(self.dayViewVerticalScrollView.bounds.origin.x + i * horizontalOffset,
-                                               self.dayViewVerticalScrollView.bounds.origin.y - self.dayViewVerticalScrollView.contentOffset.y,
-                                               self.dayViewVerticalScrollView.bounds.size.width / kSingleDayViewCount,
-                                               self.dayViewHeight);
+        CGRect singleDayViewFrame = CGRectMake(self.dayViewHorizontalScrollView.bounds.origin.x + (i - 1) * horizontalOffset,
+                                               self.dayViewHorizontalScrollView.bounds.origin.y,
+                                               self.dayViewHorizontalScrollView.bounds.size.width,
+                                               self.dayViewHorizontalScrollView.bounds.size.height);
         
         singleDayView.frame = singleDayViewFrame;
     }
@@ -271,15 +270,15 @@ const static NSInteger kRightDayViewIndex =             2;
     self.dayViewHorizontalScrollView.frame = dayViewHorizontalScrollViewFrame;
 }
 
-- (void)layoutVerticalDayScrollView
-{
-    CGRect verticalDayScrollViewFrame = CGRectMake(self.dayViewHorizontalScrollView.bounds.origin.x - self.dayViewHorizontalScrollView.contentOffset.x,
-                                                   self.dayViewHorizontalScrollView.bounds.origin.y,
-                                                   self.dayViewVerticalScrollView.contentSize.width,
-                                                   self.bounds.size.height);
-    
-    self.dayViewVerticalScrollView.frame = verticalDayScrollViewFrame;
-}
+//- (void)layoutVerticalDayScrollView
+//{
+//    CGRect verticalDayScrollViewFrame = CGRectMake(self.dayViewHorizontalScrollView.bounds.origin.x - self.dayViewHorizontalScrollView.contentOffset.x,
+//                                                   self.dayViewHorizontalScrollView.bounds.origin.y,
+//                                                   self.dayViewVerticalScrollView.contentSize.width,
+//                                                   self.bounds.size.height);
+//    
+//    self.dayViewVerticalScrollView.frame = verticalDayScrollViewFrame;
+//}
 
 
 #pragma mark - Scrolling
@@ -316,19 +315,29 @@ const static NSInteger kRightDayViewIndex =             2;
         NSComparisonResult dateComparison = [visibleDayView.date compare:self.displayDate];
         
         switch (dateComparison) {
-            case NSOrderedDescending: // center day view date is after current display date
-                
+            case NSOrderedDescending:
                 [self swapSingleDayViewAtIndex:kLeftDayViewIndex toIndex:kRightDayViewIndex withCenterDate:visibleDayView.date];
-                
-                // reset scroll view to center
+            
+                // recenter scroll view content offset
                 self.dayViewHorizontalScrollView.contentOffset = CGPointMake(self.dayViewHorizontalScrollView.bounds.size.width, 0);
-                // reset views within scroll view
-                [self layoutVerticalDayScrollView];
+                // move single day screens into new positions
                 [self layoutSingleDayViews];
                 
+                [self informDelegateDateScrolledFromDate:self.displayDate toDate:visibleDayView.date];
+                self.displayDate = visibleDayView.date;
                 break;
                 
-            default:
+            case NSOrderedAscending:
+                [self swapSingleDayViewAtIndex:kRightDayViewIndex toIndex:kLeftDayViewIndex withCenterDate:visibleDayView.date];
+                
+                self.dayViewHorizontalScrollView.contentOffset = CGPointMake(self.dayViewHorizontalScrollView.bounds.size.width, 0);
+                
+                [self layoutSingleDayViews];
+                [self informDelegateDateScrolledFromDate:self.displayDate toDate:visibleDayView.date];
+                self.displayDate = visibleDayView.date;
+                break;
+                
+            case NSOrderedSame:
                 break;
         }
     }
@@ -350,7 +359,7 @@ const static NSInteger kRightDayViewIndex =             2;
 // The center date is the new center date after the page is swapped
 - (void)swapSingleDayViewAtIndex:(NSInteger)oldIndex toIndex:(NSInteger)newIndex withCenterDate:(NSDate*)date
 {
-    NSInteger dateDelta = kCenterDayViewIndex - newIndex;
+    NSInteger dateDelta = kCenterDayViewIndex - oldIndex;
     NSDate* newSwappedPageDate = [self.calendar dateByAddingUnit:NSCalendarUnitDay value:dateDelta toDate:date options:0];
     
     ECSingleDayView* swappedSingleDayView = self.singleDayViews[oldIndex];
@@ -359,38 +368,6 @@ const static NSInteger kRightDayViewIndex =             2;
     [self.singleDayViews removeObjectAtIndex:oldIndex];
     [self.singleDayViews insertObject:swappedSingleDayView atIndex:newIndex];
 }
-
-
-
-//- (void)infiniteDateView:(ECInfiniteDatePagingView *)idv preparePage:(UIView *)page
-//{
-//    if ([page isKindOfClass:[ECSingleDayView class]]) {
-//        ECSingleDayView* dayView = (ECSingleDayView*)page;
-//        dayView.singleDayViewDelegate = self;
-//        
-//        dayView.dayScrollView.delegate = self;
-//        
-//        dayView.dayScrollView.contentSize = [self getDayViewContentSize];
-//        
-//        NSArray* events = [self.dayViewDataSource dayView:self eventsForDate:dayView.date];
-//        NSArray* eventViews = [ECEventViewFactory eventViewsForEvents:events reusingViews:dayView.eventViews];
-//        
-//        for (ECEventView* eventView in eventViews) {
-//            [eventView addTarget:self action:@selector(eventViewTapped:) forControlEvents:UIControlEventTouchUpInside];
-//        }
-//        
-//        [dayView clearEventViews];
-//        [dayView addEventViews:eventViews];
-//    }
-//}
-
-//- (void)infiniteDateView:(ECInfiniteDatePagingView *)idv dateChangedFrom:(NSDate *)fromDate to:(NSDate *)toDate
-//{
-//    if (![[NSCalendar currentCalendar] isDate:toDate inSameDayAsDate:self.displayDate]) {
-//        _displayDate = toDate;
-//        [self informDelegateDateScrolledFromDate:fromDate toDate:toDate];
-//    }
-//}
 
 
 #pragma mark - Action Sheets

@@ -27,6 +27,7 @@
 @property (nonatomic) BOOL timeLabelsLayoutIsValid;
 
 // Views
+@property (nonatomic, weak, readwrite) UIScrollView* dayScrollView;
 @property (nonatomic, weak) UIView* allDayEventsView;
 @property (nonatomic, weak) UILabel* allDayLabel;
 @property (nonatomic, weak) UIView* durationEventsView;
@@ -67,10 +68,27 @@
 
 - (void)setup
 {
+    self.dayScrollView.showsHorizontalScrollIndicator = NO;
+    self.dayScrollView.showsVerticalScrollIndicator = NO;
+    
     self.eventViewsLayoutIsValid = NO;
     self.timeLabelsLayoutIsValid = NO;
     
     [self addCurrentTimeLineTimer];
+}
+
+- (UIScrollView*)dayScrollView
+{
+    if (!_dayScrollView) {
+        UIScrollView* dayScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+        
+        dayScrollView.backgroundColor = [UIColor whiteColor];
+        
+        _dayScrollView = dayScrollView;
+        [self addSubview:dayScrollView];
+    }
+    
+    return _dayScrollView;
 }
 
 - (NSArray*)eventViews
@@ -80,6 +98,16 @@
     }
     
     return _eventViews;
+}
+
+- (NSDate*)visibleDate
+{
+    CGRect displayBounds = [self layout:self.eventsLayout boundsForEventViews:nil];
+    NSDate* visibleDate = [self.eventsLayout dateForVerticalPosition:self.dayScrollView.contentOffset.y + kHourLineHeight / 2.0f
+                                                      relativeToDate:self.date
+                                                              bounds:displayBounds];
+    
+    return visibleDate;
 }
 
 - (ECDayViewEventsLayout*)eventsLayout
@@ -144,6 +172,11 @@
     self.eventViewsLayoutIsValid = NO;
     self.timeLabelsLayoutIsValid = NO;
     
+    if (!CGRectEqualToRect(self.frame, frame)) {
+        CGSize dayScrollViewContentSize = CGSizeMake(frame.size.width, 1200);
+        self.dayScrollView.contentSize = dayScrollViewContentSize;
+    }
+    
     [super setFrame:frame];
 }
 
@@ -199,7 +232,7 @@
 {
     UIView* durationEventsView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    [self addSubview:durationEventsView];
+    [self.dayScrollView addSubview:durationEventsView];
     
     return durationEventsView;
 }
@@ -252,30 +285,30 @@ const static CGFloat kEventViewHorizontalPadding =  4.0f;
 {
     [super layoutSubviews];
     
-//    [self layoutDayScrollView];
+    [self layoutDayScrollView];
     [self layoutAllDayEventsView];
     [self layoutDurationEventsView];
 }
 
-//- (void)layoutDayScrollView
-//{
-//    CGFloat allDayEventViewHeight = ([self containsAllDayEventView]) ? self.bounds.size.height - kAllDayViewHeight : self.bounds.size.height;
-//    CGRect dayScrollViewFrame = CGRectMake(self.bounds.origin.x,
-//                                           CGRectGetMaxY(self.allDayEventsView.frame),
-//                                           self.bounds.size.width,
-//                                           allDayEventViewHeight);
-//    self.dayScrollView.frame = dayScrollViewFrame;
-//}
+- (void)layoutDayScrollView
+{
+    CGFloat allDayEventViewHeight = ([self containsAllDayEventView]) ? self.bounds.size.height - kAllDayViewHeight : self.bounds.size.height;
+    CGRect dayScrollViewFrame = CGRectMake(self.bounds.origin.x,
+                                           CGRectGetMaxY(self.allDayEventsView.frame),
+                                           self.bounds.size.width,
+                                           allDayEventViewHeight);
+    self.dayScrollView.frame = dayScrollViewFrame;
+}
 
 - (void)layoutAllDayEventsView
 {
     CGRect allDayFrame = CGRectZero;
-//    if ([self containsAllDayEventView]) {
-//        allDayFrame = CGRectMake(self.bounds.origin.x,
-//                                 self.bounds.origin.y,
-//                                 self.bounds.size.width,
-//                                 kAllDayViewHeight);
-//    }
+    if ([self containsAllDayEventView]) {
+        allDayFrame = CGRectMake(self.bounds.origin.x,
+                                 self.bounds.origin.y,
+                                 self.bounds.size.width,
+                                 kAllDayViewHeight);
+    }
     
     self.allDayEventsView.frame = allDayFrame;
     [self layoutAllDayLabel];
@@ -296,10 +329,10 @@ const static CGFloat kEventViewHorizontalPadding =  4.0f;
 
 - (void)layoutDurationEventsView
 {
-    CGRect durationEventsViewFrame = CGRectMake(self.bounds.origin.x,
-                                                self.bounds.origin.y + CGRectGetMaxY(self.allDayLabel.frame),
-                                                self.bounds.size.width,
-                                                self.bounds.size.height - self.allDayLabel.frame.size.height);
+    CGRect durationEventsViewFrame = CGRectMake(self.dayScrollView.bounds.origin.x,
+                                                self.dayScrollView.bounds.origin.y - self.dayScrollView.contentOffset.y,
+                                                self.dayScrollView.contentSize.width,
+                                                self.dayScrollView.contentSize.height);
     
     self.durationEventsView.frame = durationEventsViewFrame;
     
@@ -520,33 +553,33 @@ const static CGFloat kEventViewHorizontalPadding =  4.0f;
 
 #pragma mark - Auto Scrolling
 
-//- (void)scrollToCurrentTime:(BOOL)animated
-//{
-//    CGRect topHalfOfVisibleRect = CGRectMake(self.dayScrollView.contentOffset.x,
-//                                             self.dayScrollView.contentOffset.y,
-//                                             self.dayScrollView.bounds.size.width,
-//                                             self.dayScrollView.bounds.size.height / 2.0f);
-//    CGRect convertedCurrentTimeLineFrame = [self convertRect:self.currentTimeLine.frame fromView:self.durationEventsView];
-//    
-//    if (!CGRectIntersectsRect(topHalfOfVisibleRect, convertedCurrentTimeLineFrame)) {
-//        [self scrollToTime:[[NSDate date] beginningOfHour] animated:animated];
-//    }
-//}
-//
-//- (void)scrollToFirstEvent:(BOOL)animated
-//{
-//    ECEventView* firstEventView = [self.eventViews sortedArrayUsingSelector:@selector(compare:)].firstObject;
-//    [self scrollToTime:firstEventView.event.startDate animated:animated];
-//}
-//
-////- (void)scrollToTime:(NSDate*)time animated:(BOOL)animated
-////{
-////    CGFloat timeOffsetY = [self.eventsLayout verticalPositionForDate:time relativeToDate:self.date bounds:self.durationEventsView.bounds] + self.allDayEventsView.frame.size.height;
-////    timeOffsetY = MIN(timeOffsetY, self.dayScrollView.contentSize.height - self.dayScrollView.bounds.size.height) - kHourLineHeight / 2.0f;
-////    CGPoint timeOffset = CGPointMake(self.bounds.origin.x, timeOffsetY);
-////    
-////    [self.dayScrollView setContentOffset:timeOffset animated:animated];
-////}
+- (void)scrollToCurrentTime:(BOOL)animated
+{
+    CGRect topHalfOfVisibleRect = CGRectMake(self.dayScrollView.contentOffset.x,
+                                             self.dayScrollView.contentOffset.y,
+                                             self.dayScrollView.bounds.size.width,
+                                             self.dayScrollView.bounds.size.height / 2.0f);
+    CGRect convertedCurrentTimeLineFrame = [self convertRect:self.currentTimeLine.frame fromView:self.durationEventsView];
+    
+    if (!CGRectIntersectsRect(topHalfOfVisibleRect, convertedCurrentTimeLineFrame)) {
+        [self scrollToTime:[[NSDate date] beginningOfHour] animated:animated];
+    }
+}
+
+- (void)scrollToFirstEvent:(BOOL)animated
+{
+    ECEventView* firstEventView = [self.eventViews sortedArrayUsingSelector:@selector(compare:)].firstObject;
+    [self scrollToTime:firstEventView.event.startDate animated:animated];
+}
+
+- (void)scrollToTime:(NSDate*)time animated:(BOOL)animated
+{
+    CGFloat timeOffsetY = [self.eventsLayout verticalPositionForDate:time relativeToDate:self.date bounds:self.durationEventsView.bounds] + self.allDayEventsView.frame.size.height;
+    timeOffsetY = MIN(timeOffsetY, self.dayScrollView.contentSize.height - self.dayScrollView.bounds.size.height) - kHourLineHeight / 2.0f;
+    CGPoint timeOffset = CGPointMake(self.bounds.origin.x, timeOffsetY);
+    
+    [self.dayScrollView setContentOffset:timeOffset animated:animated];
+}
 
 
 #pragma mark ECEventView Delegate
@@ -563,65 +596,65 @@ const static CGFloat kEventViewHorizontalPadding =  4.0f;
     }
 }
 
-//- (void)eventView:(ECEventView *)eventView didBeginDragging:(UILongPressGestureRecognizer *)dragRecognizer
-//{
-//    ECTimeLine* eventTimeLine = [[ECTimeLine alloc] initWithDate:eventView.event.startDate];
-//    
-//    eventTimeLine.lineThickness = ECTimeLineThicknessBlack;
-//    eventTimeLine.color = [UIColor eventViewBackgroundColorForCGColor:eventView.event.calendar.CGColor];
-//    eventTimeLine.dateFormatTemplate = @"j:mm";
-//    
-//    CGFloat eventTimeLineY = [self.eventsLayout verticalPositionForDate:eventTimeLine.date relativeToDate:self.date bounds:[self adjustedDurationEventsBounds]] - kHourLineHeight / 2.0f;
-//    CGRect eventTimeLineFrame = CGRectMake(self.bounds.origin.x,
-//                                           eventTimeLineY,
-//                                           self.bounds.size.width,
-//                                           kHourLineHeight);
-//    eventTimeLine.frame = eventTimeLineFrame;
-//    self.draggingEventViewTimeLine = eventTimeLine;
-//    self.previousDragLocationY = [dragRecognizer locationInView:self.durationEventsView].y;
-//    
-//    [self.durationEventsView addSubview:eventTimeLine];
-//    [self updateHourLinesVisibility];
-//}
-//
-//- (void)eventView:(ECEventView *)eventView didDrag:(UILongPressGestureRecognizer *)dragRecognizer
-//{
-//    CGFloat dragLocationY = [dragRecognizer locationInView:self.durationEventsView].y;
-//    CGFloat deltaY = dragLocationY - self.previousDragLocationY;
-//    self.previousDragLocationY = dragLocationY;
-//    
-//    CGPoint newEventViewCenter = CGPointMake(eventView.center.x, eventView.center.y + deltaY);
-//    eventView.center = newEventViewCenter;
-//    
-//    NSDate* draggedDate = [self.eventsLayout dateForVerticalPosition:eventView.frame.origin.y
-//                                                      relativeToDate:self.date
-//                                                              bounds:[self layout:self.eventsLayout boundsForEventViews:nil]];
-//    
-//    NSDate* newEventStartDate = [draggedDate nearestFiveMinutes];
-//    self.draggingEventViewTimeLine.date = newEventStartDate;
-//    CGFloat eventTimeLineY = [self.eventsLayout verticalPositionForDate:self.draggingEventViewTimeLine.date
-//                                                         relativeToDate:self.date
-//                                                                 bounds:[self adjustedDurationEventsBounds]] - kHourLineHeight / 2.0f;
-//    CGRect eventTimeLineFrame = CGRectMake(self.bounds.origin.x,
-//                                           eventTimeLineY,
-//                                           self.bounds.size.width,
-//                                           kHourLineHeight);
-//    self.draggingEventViewTimeLine.frame = eventTimeLineFrame;
-//    
-//    [self updateHourLinesVisibility];
-//}
-//
-//- (void)eventView:(ECEventView *)eventView didEndDragging:(UILongPressGestureRecognizer *)dragRecognizer
-//{
-//    [self informDelegateThatEventViewDateChanged:eventView];
-//    
-//    [self.draggingEventViewTimeLine removeFromSuperview];
-//    self.draggingEventViewTimeLine = nil;
-//    
-//    [self.eventsLayout invalidateLayout];
-//    [self setEventViewsNeedLayout];
-//    [self updateHourLinesVisibility];
-//}
+- (void)eventView:(ECEventView *)eventView didBeginDragging:(UILongPressGestureRecognizer *)dragRecognizer
+{
+    ECTimeLine* eventTimeLine = [[ECTimeLine alloc] initWithDate:eventView.event.startDate];
+    
+    eventTimeLine.lineThickness = ECTimeLineThicknessBlack;
+    eventTimeLine.color = [UIColor eventViewBackgroundColorForCGColor:eventView.event.calendar.CGColor];
+    eventTimeLine.dateFormatTemplate = @"j:mm";
+    
+    CGFloat eventTimeLineY = [self.eventsLayout verticalPositionForDate:eventTimeLine.date relativeToDate:self.date bounds:[self adjustedDurationEventsBounds]] - kHourLineHeight / 2.0f;
+    CGRect eventTimeLineFrame = CGRectMake(self.bounds.origin.x,
+                                           eventTimeLineY,
+                                           self.bounds.size.width,
+                                           kHourLineHeight);
+    eventTimeLine.frame = eventTimeLineFrame;
+    self.draggingEventViewTimeLine = eventTimeLine;
+    self.previousDragLocationY = [dragRecognizer locationInView:self.durationEventsView].y;
+    
+    [self.durationEventsView addSubview:eventTimeLine];
+    [self updateHourLinesVisibility];
+}
+
+- (void)eventView:(ECEventView *)eventView didDrag:(UILongPressGestureRecognizer *)dragRecognizer
+{
+    CGFloat dragLocationY = [dragRecognizer locationInView:self.durationEventsView].y;
+    CGFloat deltaY = dragLocationY - self.previousDragLocationY;
+    self.previousDragLocationY = dragLocationY;
+    
+    CGPoint newEventViewCenter = CGPointMake(eventView.center.x, eventView.center.y + deltaY);
+    eventView.center = newEventViewCenter;
+    
+    NSDate* draggedDate = [self.eventsLayout dateForVerticalPosition:eventView.frame.origin.y
+                                                      relativeToDate:self.date
+                                                              bounds:[self layout:self.eventsLayout boundsForEventViews:nil]];
+    
+    NSDate* newEventStartDate = [draggedDate nearestFiveMinutes];
+    self.draggingEventViewTimeLine.date = newEventStartDate;
+    CGFloat eventTimeLineY = [self.eventsLayout verticalPositionForDate:self.draggingEventViewTimeLine.date
+                                                         relativeToDate:self.date
+                                                                 bounds:[self adjustedDurationEventsBounds]] - kHourLineHeight / 2.0f;
+    CGRect eventTimeLineFrame = CGRectMake(self.bounds.origin.x,
+                                           eventTimeLineY,
+                                           self.bounds.size.width,
+                                           kHourLineHeight);
+    self.draggingEventViewTimeLine.frame = eventTimeLineFrame;
+    
+    [self updateHourLinesVisibility];
+}
+
+- (void)eventView:(ECEventView *)eventView didEndDragging:(UILongPressGestureRecognizer *)dragRecognizer
+{
+    [self informDelegateThatEventViewDateChanged:eventView];
+    
+    [self.draggingEventViewTimeLine removeFromSuperview];
+    self.draggingEventViewTimeLine = nil;
+    
+    [self.eventsLayout invalidateLayout];
+    [self setEventViewsNeedLayout];
+    [self updateHourLinesVisibility];
+}
 
 - (void)informDelegateThatEventViewDateChanged:(ECEventView*)eventView
 {
