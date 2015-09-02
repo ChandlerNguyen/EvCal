@@ -285,12 +285,12 @@ const static NSInteger kRightDayViewIndex =             2;
 
 - (void)updateCurrentTime
 {
-#warning implement
+    [self.centerDayView updateCurrentTime];
 }
 
 - (void)scrollToCurrentTime:(BOOL)animated
 {
-#warning Implement
+    [self.centerDayView scrollToCurrentTime:animated];
     [self informDelegateTimeScrolled];
 }
 

@@ -83,7 +83,7 @@
  *
  *  @param animated Determines whether the scroll will be animated.
  */
-//- (void)scrollToCurrentTime:(BOOL)animated;
+- (void)scrollToCurrentTime:(BOOL)animated;
 
 /**
  *  Scrolls the day view to a rect containing the given time.
@@ -91,7 +91,7 @@
  *  @param time     The time to which to scroll
  *  @param animated Determines whether the scroll will be animated.
  */
-//- (void)scrollToTime:(NSDate*)time animated:(BOOL)animated;
+- (void)scrollToTime:(NSDate*)time animated:(BOOL)animated;
 
 /**
  *  Causes the receiver to update its current time line (if one is visible)
