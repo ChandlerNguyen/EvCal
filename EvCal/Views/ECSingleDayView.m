@@ -527,6 +527,11 @@ const static CGFloat kEventViewHorizontalPadding =  4.0f;
     [self setEventViewsNeedLayout];
 }
 
+- (void)refreshEventViewLayout
+{
+    [self setEventViewsNeedLayout];
+}
+
 
 #pragma mark - ECDayViewEventsLayout Datasource
 
@@ -652,7 +657,7 @@ const static CGFloat kEventViewHorizontalPadding =  4.0f;
     self.draggingEventViewTimeLine = nil;
     
     [self.eventsLayout invalidateLayout];
-    [self setEventViewsNeedLayout];
+    //[self setEventViewsNeedLayout];
     [self updateHourLinesVisibility];
 }
 

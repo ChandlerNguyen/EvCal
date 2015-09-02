@@ -73,6 +73,11 @@
  */
 - (void)clearEventViews;
 
+/**
+ *  Invalidate current event views layout and refresh them on next layout cycle.
+ */
+- (void)refreshEventViewLayout;
+
 //------------------------------------------------------------------------------
 // @name Current time
 //------------------------------------------------------------------------------

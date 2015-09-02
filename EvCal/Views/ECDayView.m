@@ -394,11 +394,7 @@ const static NSInteger kRightDayViewIndex =             2;
 // The center date is the new center date after the page is swapped
 - (void)swapSingleDayViewAtIndex:(NSInteger)oldIndex toIndex:(NSInteger)newIndex withCenterDate:(NSDate*)date
 {
-    NSInteger dateDelta = kCenterDayViewIndex - oldIndex;
-    NSDate* newSwappedPageDate = [self.calendar dateByAddingUnit:NSCalendarUnitDay value:dateDelta toDate:date options:0];
-    
     ECSingleDayView* swappedSingleDayView = self.singleDayViews[oldIndex];
-    //[self updateSingleDayView:swappedSingleDayView forDate:newSwappedPageDate];
     
     [self.singleDayViews removeObjectAtIndex:oldIndex];
     [self.singleDayViews insertObject:swappedSingleDayView atIndex:newIndex];
@@ -411,7 +407,7 @@ const static NSInteger kRightDayViewIndex =             2;
 {
     UIActionSheet* saveSpanActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"ECDayView.This is a repeating event", @"The changed event repeats")
                                                                      delegate:self
-                                                            cancelButtonTitle:nil
+                                                            cancelButtonTitle:NSLocalizedString(@"ECDayView.Cancel", @"Cancel changes to the repeating event")
                                                        destructiveButtonTitle:nil
                                                             otherButtonTitles:NSLocalizedString(@"ECDayView.Save for this event only", @"Only this occurrence of the event should be changed"), NSLocalizedString(@"ECDayView.Save for future events", @"All future occurrences of the event should be changed"), nil];
     
@@ -425,6 +421,8 @@ const static NSInteger kRightDayViewIndex =             2;
     } else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"ECDayView.Save for future events", @"All future occurrences of the event should be changed")]) {
         [self informDelegateEvent:self.changedEvent dateChanged:self.changedEventStartDate span:EKSpanFutureEvents];
     }
+    
+    [self.centerDayView refreshEventViewLayout];
 }
 
 
@@ -444,6 +442,7 @@ const static NSInteger kRightDayViewIndex =             2;
         self.changedEventStartDate = date;
         [self presentEventChangeSpanActionSheet];
     } else {
+        [self.centerDayView refreshEventViewLayout];
         [self informDelegateEvent:eventView.event dateChanged:date span:EKSpanThisEvent];
     }
 }
