@@ -19,7 +19,7 @@
 #import "ECEventView.h"
 #import "ECTimeLine.h"
 
-@interface ECSingleDayView() <ECDayViewEventsLayoutDataSource, ECEventViewDelegate>
+@interface ECSingleDayView() <UIScrollViewDelegate, ECDayViewEventsLayoutDataSource, ECEventViewDelegate>
 
 // Layout
 @property (nonatomic, strong) ECDayViewEventsLayout* eventsLayout;
@@ -36,6 +36,7 @@
 
 // State
 @property (nonatomic) BOOL dateIsSameDayAsToday;
+@property (nonatomic) BOOL scrollingToTime;
 
 // Time Lines
 @property (nonatomic, weak) ECTimeLine* currentTimeLine;
@@ -74,6 +75,8 @@
     self.eventViewsLayoutIsValid = NO;
     self.timeLabelsLayoutIsValid = NO;
     
+    self.scrollingToTime = NO;
+    
     [self addCurrentTimeLineTimer];
 }
 
@@ -83,6 +86,7 @@
         UIScrollView* dayScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         
         dayScrollView.backgroundColor = [UIColor whiteColor];
+        dayScrollView.delegate = self;
         
         _dayScrollView = dayScrollView;
         [self addSubview:dayScrollView];
@@ -583,6 +587,7 @@ const static CGFloat kEventViewHorizontalPadding =  4.0f;
     timeOffsetY = MIN(timeOffsetY, self.dayScrollView.contentSize.height - self.dayScrollView.bounds.size.height) - kHourLineHeight / 2.0f;
     CGPoint timeOffset = CGPointMake(self.bounds.origin.x, timeOffsetY);
     
+    self.scrollingToTime = YES;
     [self.dayScrollView setContentOffset:timeOffset animated:animated];
 }
 
@@ -665,6 +670,25 @@ const static CGFloat kEventViewHorizontalPadding =  4.0f;
 {
     if ([self.singleDayViewDelegate respondsToSelector:@selector(eventView:wasDraggedToDate:)]) {
         [self.singleDayViewDelegate eventView:eventView wasDraggedToDate:self.draggingEventViewTimeLine.date];
+    }
+}
+
+
+#pragma mark - UIScrollView Delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (!self.scrollingToTime) {
+        [self informDelegateThatVisibleDateWasChanged];
+    }
+    
+    self.scrollingToTime = NO;
+}
+
+- (void)informDelegateThatVisibleDateWasChanged
+{
+    if ([self.singleDayViewDelegate respondsToSelector:@selector(singleDayView:visibleDateChanged:)]) {
+        [self.singleDayViewDelegate singleDayView:self visibleDateChanged:self.visibleDate];
     }
 }
 

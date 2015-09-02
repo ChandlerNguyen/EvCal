@@ -14,8 +14,32 @@
 @protocol ECSingleDayViewDelegate <NSObject>
 
 @optional
+
+/**
+ *  Informs the receiver that the single day view's visible date was changed.
+ *
+ *  @param singleDayView The single day view that had its visible date changed.
+ *  @param date          The new value for the visible date.
+ */
+- (void)singleDayView:(ECSingleDayView*)singleDayView visibleDateChanged:(NSDate*)date;
+
+/**
+ *  Informs the receiver that an event view within the sender's list was 
+ *  selected.
+ *
+ *  @param eventView The event view that was selected.
+ */
 - (void)eventViewWasSelected:(ECEventView*)eventView;
 
+/**
+ *  Informs the receiver that an event view within the sender's list was dragged
+ *  to a new start date. The receiver of this message is responsible for
+ *  comitting or undoing the change to the user event represented by the event 
+ *  view.
+ *
+ *  @param eventView The event view that was dragged.
+ *  @param date      The date to which the event view was dragged.
+ */
 - (void)eventView:(ECEventView*)eventView wasDraggedToDate:(NSDate*)date;
 
 @end

@@ -428,6 +428,15 @@ const static NSInteger kRightDayViewIndex =             2;
 
 #pragma mark - ECSingleDayView Delegate
 
+- (void)singleDayView:(ECSingleDayView *)singleDayView visibleDateChanged:(NSDate *)date
+{
+    for (ECSingleDayView* dayView in self.singleDayViews) {
+        if (dayView != singleDayView) {
+            [dayView scrollToTime:date animated:NO];
+        }
+    }
+}
+
 - (void)eventViewWasSelected:(ECEventView *)eventView
 {
     [self informDelegateEventWasSelected:eventView.event];
