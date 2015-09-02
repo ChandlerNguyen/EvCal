@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) NSMutableDictionary* tempEventViewFrames;
 @property (nonatomic, strong) NSDictionary* eventViewFrames;
+@property (nonatomic) CGFloat minimumEventViewHeight;
 
 @end
 
@@ -51,9 +52,15 @@
 
 - (NSDictionary*)createEventViewFrames
 {
+    NSDate* defaultDate = [NSDate date];
     NSArray* eventViews = [self.layoutDataSource eventViewsForLayout:self];
     CGRect eventViewsBounds = [self.layoutDataSource layout:self boundsForEventViews:eventViews];
-    NSDate* displayDate = [self requestDisplayDateForEventViews:eventViews defaultDate:[NSDate date]];
+    NSDate* displayDate = [self requestDisplayDateForEventViews:eventViews defaultDate:defaultDate];
+    
+    self.minimumEventViewHeight = [self heightOfEventWithStartDate:defaultDate
+                                                           endDate:[defaultDate dateByAddingTimeInterval:15 * 60]
+                                                       displayDate:[defaultDate beginningOfDay]
+                                                            bounds:eventViewsBounds];
     
     return [self framesForEventViews:eventViews bounds:eventViewsBounds displayDate:displayDate];
 }
