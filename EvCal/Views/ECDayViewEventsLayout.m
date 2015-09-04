@@ -26,6 +26,8 @@
 
 @implementation ECDayViewEventsLayout
 
+#pragma mark - Lifecycle and Properties
+
 - (instancetype)init
 {
     self = [super init];
@@ -41,6 +43,9 @@
     _minimumEventViewTimeInterval = minimumEventViewTimeInterval;
     [self invalidateLayout];
 }
+
+
+#pragma mark - Event View Frames
 
 - (void)invalidateLayout
 {
@@ -91,11 +96,8 @@
 {
     NSMutableDictionary* mutableEventViewFrames = [[NSMutableDictionary alloc] init];
     
-    
-    
     // Prepare layout state
     CGFloat lastEndPoint = -1;
-    
     NSArray* sortedEventViews = [eventViews sortedArrayUsingSelector:@selector(compare:)];
     
     // Columns is a jagged two dimensional array
@@ -203,7 +205,7 @@
 }
 
 
-#pragma mark Height and Positioning
+#pragma mark Layout Calculations
 
 const static NSTimeInterval kFifteenMinuteTimeInterval =    15 * 60;
 const static NSTimeInterval kOneHourTimeInterval =          60 * 60;
