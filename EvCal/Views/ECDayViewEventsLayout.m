@@ -30,7 +30,7 @@
 {
     self = [super init];
     if (self) {
-        self.minimumEventViewTimeInterval = 15 * 60; // 15 minutes
+        self.minimumEventViewTimeInterval = kFifteenMinuteTimeInterval;
     }
     
     return self;
@@ -205,7 +205,8 @@
 
 #pragma mark Height and Positioning
 
-const static NSTimeInterval kOneHourTimeInterval =  60 * 60;
+const static NSTimeInterval kFifteenMinuteTimeInterval =    15 * 60;
+const static NSTimeInterval kOneHourTimeInterval =          60 * 60;
 
 - (CGFloat)heightOfEventWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate displayDate:(NSDate *)displayDate bounds:(CGRect)bounds
 {
