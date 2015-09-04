@@ -21,11 +21,26 @@
 
 @property (nonatomic, strong) NSMutableDictionary* tempEventViewFrames;
 @property (nonatomic, strong) NSDictionary* eventViewFrames;
-@property (nonatomic) CGFloat minimumEventViewHeight;
 
 @end
 
 @implementation ECDayViewEventsLayout
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.minimumEventViewTimeInterval = 15 * 60; // 15 minutes
+    }
+    
+    return self;
+}
+
+- (void)setMinimumEventViewTimeInterval:(NSTimeInterval)minimumEventViewTimeInterval
+{
+    _minimumEventViewTimeInterval = minimumEventViewTimeInterval;
+    [self invalidateLayout];
+}
 
 - (void)invalidateLayout
 {
@@ -57,11 +72,6 @@
     CGRect eventViewsBounds = [self.layoutDataSource layout:self boundsForEventViews:eventViews];
     NSDate* displayDate = [self requestDisplayDateForEventViews:eventViews defaultDate:defaultDate];
     
-    self.minimumEventViewHeight = [self heightOfEventWithStartDate:defaultDate
-                                                           endDate:[defaultDate dateByAddingTimeInterval:15 * 60]
-                                                       displayDate:[defaultDate beginningOfDay]
-                                                            bounds:eventViewsBounds];
-    
     return [self framesForEventViews:eventViews bounds:eventViewsBounds displayDate:displayDate];
 }
 
@@ -80,6 +90,8 @@
 - (NSDictionary*)framesForEventViews:(NSArray*)eventViews bounds:(CGRect)bounds displayDate:(NSDate*)displayDate
 {
     NSMutableDictionary* mutableEventViewFrames = [[NSMutableDictionary alloc] init];
+    
+    
     
     // Prepare layout state
     NSDate* lastEndDate = nil;
@@ -190,15 +202,18 @@
 
 #pragma mark Height and Positioning
 
+const static NSTimeInterval kOneHourTimeInterval =  60 * 60;
+
 - (CGFloat)heightOfEventWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate displayDate:(NSDate *)displayDate bounds:(CGRect)bounds
 {
     CGFloat height = 0;
+    NSArray* hours = [displayDate hoursOfDay];
+    CGFloat minimumHeightForBounds = floorf(bounds.size.height * ((self.minimumEventViewTimeInterval / kOneHourTimeInterval) * hours.count));
     
     if (bounds.size.height > 0) {
-        NSArray* hours = [displayDate hoursOfDay];
         float eventHoursInDay = [self hoursBetweenStartDate:startDate endDate:endDate relativeToDate:displayDate];
         
-        height = floorf(bounds.size.height * (eventHoursInDay / hours.count));
+        height = MAX(floorf(bounds.size.height * (eventHoursInDay / hours.count)), minimumHeightForBounds);
     }
     
     return height;
@@ -224,7 +239,7 @@
         end = endDate;
     }
     
-    return (float)[end timeIntervalSinceDate:start] / 3600.0f;
+    return (float)[end timeIntervalSinceDate:start] / kOneHourTimeInterval;
 }
 
 - (CGFloat)verticalPositionForDate:(NSDate *)date relativeToDate:(NSDate *)displayDate bounds:(CGRect)bounds
@@ -248,7 +263,7 @@
         
         NSArray* hours = [date hoursOfDay];
         
-        float hoursAfterBeginningOfDay = ([date timeIntervalSinceDate:beginningOfDay] / (60 * 60));
+        float hoursAfterBeginningOfDay = ([date timeIntervalSinceDate:beginningOfDay] / kOneHourTimeInterval);
         
         position += (bounds.size.height / hours.count) * hoursAfterBeginningOfDay;
     }

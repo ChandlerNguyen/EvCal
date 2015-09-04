@@ -62,6 +62,9 @@
 // The data source for providing required layout information
 @property (nonatomic, weak) id<ECDayViewEventsLayoutDataSource> layoutDataSource;
 
+// The minimum time interval to consider when calculating event view heights.
+@property (nonatomic) NSTimeInterval minimumEventViewTimeInterval; // default is 900 (15 minutes)
+
 //------------------------------------------------------------------------------
 // @name Creating Event View frames
 //------------------------------------------------------------------------------
