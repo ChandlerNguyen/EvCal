@@ -94,7 +94,7 @@
     
     
     // Prepare layout state
-    NSDate* lastEndDate = nil;
+    CGFloat lastEndPoint = -1;
     
     NSArray* sortedEventViews = [eventViews sortedArrayUsingSelector:@selector(compare:)];
     
@@ -106,13 +106,16 @@
         if (eventView.event.isAllDay) {
             [mutableEventViewFrames setObject:[NSValue valueWithCGRect:CGRectZero] forKey:eventView.event.eventIdentifier];
         } else {
+            NSValue* eventViewFrameValue = [self.tempEventViewFrames objectForKey:eventView.event.eventIdentifier];
+            CGRect tempEventViewFrame = [eventViewFrameValue CGRectValue];
+            
             // this view doesn't overlap the previous cluster of views
-            if (lastEndDate && [eventView.event.startDate compare:lastEndDate] == NSOrderedDescending) {
+            if (lastEndPoint != -1 && tempEventViewFrame.origin.y > lastEndPoint) {
                 [mutableEventViewFrames addEntriesFromDictionary:[self framesForColumns:columns bounds:bounds displayDate:displayDate]];
                 
                 // start new cluster
                 columns = [@[] mutableCopy];
-                lastEndDate = nil;
+                lastEndPoint = -1;
             }
             
             BOOL placed = NO;
@@ -133,8 +136,8 @@
             }
             
             // last date isn't set or the view's end date is later than current end date
-            if (!lastEndDate || [eventView.event.endDate compare:lastEndDate] == NSOrderedAscending) {
-                lastEndDate = eventView.event.endDate;
+            if (lastEndPoint == -1 || CGRectGetMaxY(tempEventViewFrame) > lastEndPoint) {
+                lastEndPoint = CGRectGetMaxY(tempEventViewFrame);
             }
             
             // layout current column setup
@@ -208,7 +211,7 @@ const static NSTimeInterval kOneHourTimeInterval =  60 * 60;
 {
     CGFloat height = 0;
     NSArray* hours = [displayDate hoursOfDay];
-    CGFloat minimumHeightForBounds = floorf(bounds.size.height * ((self.minimumEventViewTimeInterval / kOneHourTimeInterval) * hours.count));
+    CGFloat minimumHeightForBounds = floorf(bounds.size.height * ((self.minimumEventViewTimeInterval / kOneHourTimeInterval) / hours.count));
     
     if (bounds.size.height > 0) {
         float eventHoursInDay = [self hoursBetweenStartDate:startDate endDate:endDate relativeToDate:displayDate];
