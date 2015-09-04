@@ -13,6 +13,7 @@
 		842DA9021B4A3E33007DC027 /* ECRecurrenceRuleFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 842DA9011B4A3E33007DC027 /* ECRecurrenceRuleFormatter.m */; };
 		843535821B2D8F1F00A8E404 /* UIColor+ECAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 843535811B2D8F1F00A8E404 /* UIColor+ECAdditions.m */; };
 		843535851B2DAFD000A8E404 /* ECEditEventCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843535841B2DAFD000A8E404 /* ECEditEventCalendarViewController.m */; };
+		84405DA01B9A427C00784C9A /* ECMonthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84405D9F1B9A427C00784C9A /* ECMonthView.m */; };
 		84443EFF1B0DEBF900385E5A /* NSDate+ECTestAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443EFE1B0DEBF900385E5A /* NSDate+ECTestAdditions.m */; };
 		84443F021B0DFDF300385E5A /* ECTestsEventQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443F011B0DFDF300385E5A /* ECTestsEventQuery.m */; };
 		84443F0D1B1076B300385E5A /* ECEventViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84443F0C1B1076B300385E5A /* ECEventViewTests.m */; };
@@ -96,6 +97,8 @@
 		843535811B2D8F1F00A8E404 /* UIColor+ECAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+ECAdditions.m"; path = "Support/UIColor+ECAdditions.m"; sourceTree = "<group>"; };
 		843535831B2DAFD000A8E404 /* ECEditEventCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEditEventCalendarViewController.h; path = Controllers/ECEditEventCalendarViewController.h; sourceTree = "<group>"; };
 		843535841B2DAFD000A8E404 /* ECEditEventCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEditEventCalendarViewController.m; path = Controllers/ECEditEventCalendarViewController.m; sourceTree = "<group>"; };
+		84405D9E1B9A427C00784C9A /* ECMonthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECMonthView.h; path = Views/ECMonthView.h; sourceTree = "<group>"; };
+		84405D9F1B9A427C00784C9A /* ECMonthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECMonthView.m; path = Views/ECMonthView.m; sourceTree = "<group>"; };
 		84443EFD1B0DEBF900385E5A /* NSDate+ECTestAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+ECTestAdditions.h"; path = "Support/NSDate+ECTestAdditions.h"; sourceTree = "<group>"; };
 		84443EFE1B0DEBF900385E5A /* NSDate+ECTestAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+ECTestAdditions.m"; path = "Support/NSDate+ECTestAdditions.m"; sourceTree = "<group>"; };
 		84443F001B0DFDF300385E5A /* ECTestsEventQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECTestsEventQuery.h; path = Classes/ECTestsEventQuery.h; sourceTree = "<group>"; };
@@ -225,6 +228,15 @@
 				8404E07B1B329B31009B1923 /* ECInfiniteDatePagingView.m */,
 			);
 			name = "Infinite Date Paging View";
+			sourceTree = "<group>";
+		};
+		84405DA11B9A428000784C9A /* Month Picker */ = {
+			isa = PBXGroup;
+			children = (
+				84405D9E1B9A427C00784C9A /* ECMonthView.h */,
+				84405D9F1B9A427C00784C9A /* ECMonthView.m */,
+			);
+			name = "Month Picker";
 			sourceTree = "<group>";
 		};
 		84443EF81B0DE6DF00385E5A /* Test Objects */ = {
@@ -357,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				842DA8F71B47ABFD007DC027 /* Infinite Date Paging View */,
+				84405DA11B9A428000784C9A /* Month Picker */,
 				84D92C921B2998490050015D /* Day View */,
 				84D92C931B29986D0050015D /* Weekday Picker */,
 				84D92C941B2998820050015D /* Edit Event View */,
@@ -688,6 +701,7 @@
 				84C459221B074BDD0066B6A9 /* ECDayView.m in Sources */,
 				849EA59B1B4EB6E90053549C /* ECAlarm.m in Sources */,
 				842DA8FA1B47E5D7007DC027 /* ECEventTextPropertyCell.m in Sources */,
+				84405DA01B9A427C00784C9A /* ECMonthView.m in Sources */,
 				84CD51991B3124D500902BDE /* ECSingleDayView.m in Sources */,
 				84D92C991B29A52E0050015D /* ECDayViewEventsLayout.m in Sources */,
 				84EF226C1B08D5BD003DA610 /* ECEventView.m in Sources */,
