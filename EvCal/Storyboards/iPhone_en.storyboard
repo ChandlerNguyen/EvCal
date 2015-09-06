@@ -29,9 +29,21 @@
                                     <action selector="addEventButtonTapped:" destination="qNj-KM-reM" eventType="touchUpInside" id="n5z-AV-Vuv"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lUC-bb-fR6">
+                                <rect key="frame" x="16" y="516" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="U2C-hb-TKN"/>
+                                    <constraint firstAttribute="width" constant="32" id="wA4-1e-g11"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="CalendarButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="HQi-PI-mQN" firstAttribute="top" secondItem="lUC-bb-fR6" secondAttribute="bottom" constant="20" id="8S6-sC-NkV"/>
+                            <constraint firstItem="lUC-bb-fR6" firstAttribute="leading" secondItem="wde-oB-yac" secondAttribute="leading" constant="16" id="C7U-6W-Icd"/>
                             <constraint firstAttribute="trailing" secondItem="Yc3-xo-iGI" secondAttribute="trailing" constant="16" id="Wqo-2D-mP5"/>
                             <constraint firstItem="HQi-PI-mQN" firstAttribute="top" secondItem="Yc3-xo-iGI" secondAttribute="bottom" constant="20" id="vap-Q0-jjJ"/>
                         </constraints>
@@ -754,6 +766,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="CalendarButton" width="32" height="32"/>
         <image name="PlusButton" width="32" height="32"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
