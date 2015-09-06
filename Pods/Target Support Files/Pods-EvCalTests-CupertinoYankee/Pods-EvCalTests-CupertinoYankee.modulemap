@@ -1,0 +1,6 @@
+framework module CupertinoYankee {
+  umbrella header "Pods-EvCalTests-CupertinoYankee-umbrella.h"
+
+  export *
+  module * { export * }
+}
