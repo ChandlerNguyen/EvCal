@@ -12,6 +12,7 @@
 
 @interface ECMonthView()
 
+@property (nonatomic, strong) NSArray* weekdayLabels;
 @property (nonatomic, strong) NSArray* dateLabels;
 
 @end
@@ -28,6 +29,30 @@
     }
     
     return _daysOfMonth;
+}
+
+- (NSArray*)weekdayLabels
+{
+    if (!_weekdayLabels) {
+        _weekdayLabels = [self createWeekdayLabels];
+    }
+    
+    return _weekdayLabels;
+}
+
+- (NSArray*)createWeekdayLabels
+{
+    NSMutableArray* weekdayLabels = [[NSMutableArray alloc] init];
+    for (NSString* weekdaySymbol in [NSCalendar currentCalendar].weekdaySymbols) {
+        UILabel* weekdayLabel = [[UILabel alloc] init];
+        
+        weekdayLabel.text = weekdaySymbol;
+        
+        [self addSubview:weekdayLabel];
+        [weekdayLabels addObject:weekdayLabel];
+    }
+    
+    return [weekdayLabels copy];
 }
 
 - (NSArray*)dateLabels
@@ -73,7 +98,65 @@
 
 #pragma mark - Layout
 
+const static NSInteger kCalendarMaximumRows =   7;
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    [self layoutWeekdayLabels];
+    [self layoutDateLabels];
+}
+
+- (void)layoutWeekdayLabels
+{
+    if (self.weekdayLabels.count > 0) {
+        CGFloat horizontalOffset = 0.0f;
+        CGFloat labelWidth = self.bounds.size.width / self.weekdayLabels.count;
+        CGFloat labelHeight = self.bounds.size.height / kCalendarMaximumRows;
+        
+        for (UILabel* weekdayLabel in self.weekdayLabels) {
+            CGRect weekdayLabelFrame = CGRectMake(self.bounds.origin.x + horizontalOffset,
+                                                  self.bounds.origin.y,
+                                                  labelWidth,
+                                                  labelHeight);
+            weekdayLabel.frame = weekdayLabelFrame;
+            
+            horizontalOffset += labelWidth;
+        }
+    }
+}
+
+- (void)layoutDateLabels
+{
+    if (self.dateLabels.count > 0) {
+        UILabel* firstWeekdayLabel = [self.weekdayLabels firstObject];
+        CGFloat firstWeekdayLabelMaxY = CGRectGetMaxY(firstWeekdayLabel.frame);
+        CGFloat labelWidth = firstWeekdayLabel.frame.size.width;
+        CGFloat labelHeight = firstWeekdayLabel.frame.size.height;
+        
+        NSDate* firstDayOfMonth = [self.daysOfMonth firstObject];
+        NSInteger firstWeekdayOfMonth = [[NSCalendar currentCalendar] component:NSCalendarUnitWeekday fromDate:firstDayOfMonth];
+        
+        for (NSInteger i = 0; i < self.dateLabels.count; i++) {
+            UILabel* dateLabel = self.dateLabels[i];
+            
+            // minus 1 because arrays are 0-based but weekdays are 1-based
+            NSInteger row = (i + firstWeekdayOfMonth - 1) / 7;
+            NSInteger column = (i + firstWeekdayOfMonth - 1) % 7;
+            
+            CGFloat dateLabelOriginY = firstWeekdayLabelMaxY + labelHeight * row;
+            CGFloat dateLabelOriginX = self.bounds.origin.x + labelWidth * column;
+            
+            CGRect dateLabelFrame = CGRectMake(dateLabelOriginX,
+                                               dateLabelOriginY,
+                                               labelWidth,
+                                               labelHeight);
+            
+            dateLabel.frame = dateLabelFrame;
+        }
+    }
+}
 
 #pragma mark - UI Events
 
