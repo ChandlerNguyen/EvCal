@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08ABEF4E3EA5701185D583C1 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D75FD94E1145212C5A039D /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8404E07C1B329B31009B1923 /* ECInfiniteDatePagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8404E07B1B329B31009B1923 /* ECInfiniteDatePagingView.m */; };
 		842DA8FA1B47E5D7007DC027 /* ECEventTextPropertyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 842DA8F91B47E5D7007DC027 /* ECEventTextPropertyCell.m */; };
 		842DA8FF1B4A3DEE007DC027 /* ECRecurrenceRuleFormatterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 842DA8FE1B4A3DEE007DC027 /* ECRecurrenceRuleFormatterTests.m */; };
@@ -68,8 +69,7 @@
 		84EF22611B08769A003DA610 /* ECEventStoreProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EF22601B08769A003DA610 /* ECEventStoreProxy.m */; };
 		84EF22691B08D59E003DA610 /* ECEventViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EF22681B08D59E003DA610 /* ECEventViewFactory.m */; };
 		84EF226C1B08D5BD003DA610 /* ECEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EF226B1B08D5BD003DA610 /* ECEventView.m */; };
-		912BB4FF0F4523544ADB3876 /* libPods-EvCalTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAB285E20467D2619601A2EC /* libPods-EvCalTests.a */; };
-		CC4E4F7120FF97FF238954E4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C545F2A12B052E9FA014F156 /* libPods.a */; };
+		D1A22B1CD1D1EC4C9F15AF5B /* Pods_EvCalTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DA478CF758CC621888642D2 /* Pods_EvCalTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +85,7 @@
 /* Begin PBXFileReference section */
 		0CD2922DCA6CD50DC54BED4D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		26A52386135E7399D21E9C48 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		4DA478CF758CC621888642D2 /* Pods_EvCalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EvCalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F3614751A065418C790A255 /* Pods-EvCalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvCalTests/Pods-EvCalTests.release.xcconfig"; sourceTree = "<group>"; };
 		8404E07A1B329B31009B1923 /* ECInfiniteDatePagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECInfiniteDatePagingView.h; path = Views/ECInfiniteDatePagingView.h; sourceTree = "<group>"; };
 		8404E07B1B329B31009B1923 /* ECInfiniteDatePagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECInfiniteDatePagingView.m; path = Views/ECInfiniteDatePagingView.m; sourceTree = "<group>"; };
@@ -194,8 +195,7 @@
 		84EF22681B08D59E003DA610 /* ECEventViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEventViewFactory.m; path = Views/ECEventViewFactory.m; sourceTree = "<group>"; };
 		84EF226A1B08D5BD003DA610 /* ECEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEventView.h; path = Views/ECEventView.h; sourceTree = "<group>"; };
 		84EF226B1B08D5BD003DA610 /* ECEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEventView.m; path = Views/ECEventView.m; sourceTree = "<group>"; };
-		C545F2A12B052E9FA014F156 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		CAB285E20467D2619601A2EC /* libPods-EvCalTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EvCalTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		88D75FD94E1145212C5A039D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD17AAA6E4F9A168802C453D /* Pods-EvCalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EvCalTests/Pods-EvCalTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -204,7 +204,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC4E4F7120FF97FF238954E4 /* libPods.a in Frameworks */,
+				08ABEF4E3EA5701185D583C1 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +212,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				912BB4FF0F4523544ADB3876 /* libPods-EvCalTests.a in Frameworks */,
+				D1A22B1CD1D1EC4C9F15AF5B /* Pods_EvCalTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,8 +490,8 @@
 		CD5360421152C667B1D9EB7A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C545F2A12B052E9FA014F156 /* libPods.a */,
-				CAB285E20467D2619601A2EC /* libPods-EvCalTests.a */,
+				88D75FD94E1145212C5A039D /* Pods.framework */,
+				4DA478CF758CC621888642D2 /* Pods_EvCalTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -519,6 +519,7 @@
 				84C458F01B073A850066B6A9 /* Frameworks */,
 				84C458F11B073A850066B6A9 /* Resources */,
 				4A91993D458FF8F7E41C330B /* Copy Pods Resources */,
+				02C9CC784AF75517F7A6E21D /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -538,6 +539,7 @@
 				84C459091B073A860066B6A9 /* Frameworks */,
 				84C4590A1B073A860066B6A9 /* Resources */,
 				3A9ADE36D44AF142AB7C4804 /* Copy Pods Resources */,
+				C301FED02F461F6FC34E8E4E /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -607,6 +609,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		02C9CC784AF75517F7A6E21D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3A9ADE36D44AF142AB7C4804 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -650,6 +667,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C301FED02F461F6FC34E8E4E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EvCalTests/Pods-EvCalTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E353D1FB578AA42979BAAC17 /* Check Pods Manifest.lock */ = {

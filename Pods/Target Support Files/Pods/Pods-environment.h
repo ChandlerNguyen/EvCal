@@ -48,3 +48,9 @@
 #define COCOAPODS_VERSION_MINOR_MSCellAccessory 1
 #define COCOAPODS_VERSION_PATCH_MSCellAccessory 2
 
+// Tunits
+#define COCOAPODS_POD_AVAILABLE_Tunits
+#define COCOAPODS_VERSION_MAJOR_Tunits 0
+#define COCOAPODS_VERSION_MINOR_Tunits 1
+#define COCOAPODS_VERSION_PATCH_Tunits 0
+
