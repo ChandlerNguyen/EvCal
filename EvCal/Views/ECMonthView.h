@@ -64,4 +64,14 @@
  */
 - (nonnull instancetype)initWithDate:(nonnull NSDate*)date;
 
+//------------------------------------------------------------------------------
+// @name Updating Dates
+//------------------------------------------------------------------------------
+
+/**
+ *  Causes the receiver to update its layout. This includes changing the current
+ *  date.
+ */
+- (void)updateDates;
+
 @end

@@ -15,6 +15,8 @@
 
 @interface ECMonthView()
 
+@property (nonatomic, strong) NSCalendar* calendar;
+
 @property (nonatomic, weak) UILabel* monthLabel;
 @property (nonatomic, weak) ECSelectedDateHighlightView* selectedDateHighlightView;
 @property (nonatomic, strong) NSArray* weekdayLabels;
@@ -23,6 +25,12 @@
 @end
 
 @implementation ECMonthView
+
+#pragma mark - Constants
+
+const static CGFloat kDefaultDateLabelFontSize =    17.0f;
+const static CGFloat kTodaysDateLabelFontSize =     18.0f;
+const static CGFloat kMonthLabelFontSize =          19.0f;
 
 #pragma mark - Lifecycle and Properties
 
@@ -33,6 +41,7 @@
         TimeUnit* tunit = [[TimeUnit alloc] init];
         _daysOfMonth = [tunit daysOfMonth:date];
         [self updateMonthLabel];
+        [self updateDates];
         
         UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(monthViewTapped:)];
         [self addGestureRecognizer:tapRecognizer];
@@ -62,7 +71,7 @@
         _monthLabel = [self addLabel];
         
         _monthLabel.textAlignment = NSTextAlignmentCenter;
-        _monthLabel.font = [UIFont boldSystemFontOfSize:17.0f];
+        _monthLabel.font = [UIFont boldSystemFontOfSize:kMonthLabelFontSize];
     }
     
     return _monthLabel;
@@ -80,7 +89,7 @@
 - (NSArray*)createWeekdayLabels
 {
     NSMutableArray* weekdayLabels = [[NSMutableArray alloc] init];
-    for (NSString* weekdaySymbol in [NSCalendar currentCalendar].shortWeekdaySymbols) {
+    for (NSString* weekdaySymbol in self.calendar.shortWeekdaySymbols) {
         UILabel* weekdayLabel = [[UILabel alloc] init];
         
         weekdayLabel.text = weekdaySymbol;
@@ -142,6 +151,15 @@
     return _selectedDateHighlightView;
 }
 
+- (NSCalendar*)calendar
+{
+    if (!_calendar) {
+        _calendar = [NSCalendar currentCalendar];
+    }
+    
+    return _calendar;
+}
+
 
 #pragma mark - Layout
 // Month Label, Weekdays Labels, 6 max weeks of dates
@@ -197,7 +215,7 @@ const static NSInteger kCalendarMaximumRows =   8;
         CGFloat labelHeight = firstWeekdayLabel.frame.size.height;
         
         NSDate* firstDayOfMonth = [self.daysOfMonth firstObject];
-        NSInteger firstWeekdayOfMonth = [[NSCalendar currentCalendar] component:NSCalendarUnitWeekday fromDate:firstDayOfMonth];
+        NSInteger firstWeekdayOfMonth = [self.calendar component:NSCalendarUnitWeekday fromDate:firstDayOfMonth];
         
         for (NSInteger i = 0; i < self.dateLabels.count; i++) {
             UILabel* dateLabel = self.dateLabels[i];
@@ -227,19 +245,45 @@ const static NSInteger kCalendarMaximumRows =   8;
     self.monthLabel.text = [[NSDateFormatter ecMonthFormatter] stringFromDate:firstDayOfMonth];
 }
 
-- (void)updateLabelHighlights
+- (void)updateDates
 {
-    NSCalendar* calendar = [NSCalendar currentCalendar];
     for (NSInteger i = 0; i < self.dateLabels.count; i++) {
         NSDate* dayOfMonth = self.daysOfMonth[i];
         UILabel* dateLabel = self.dateLabels[i];
-        if ([calendar isDate:dayOfMonth inSameDayAsDate:self.selectedDate]) {
-            dateLabel.textColor = [UIColor whiteColor];
-            self.selectedDateHighlightView.frame = dateLabel.frame;
+        
+        if ([self.calendar isDateInToday:dayOfMonth]) {
+            dateLabel.font = [UIFont boldSystemFontOfSize:kTodaysDateLabelFontSize];
         } else {
-            dateLabel.textColor = [UIColor darkTextColor];
+            dateLabel.font = [UIFont systemFontOfSize:kDefaultDateLabelFontSize];
         }
     }
+    
+    [self updateLabelHighlights];
+}
+
+- (void)updateLabelHighlights
+{
+    for (NSInteger i = 0; i < self.dateLabels.count; i++) {
+        NSDate* dayOfMonth = self.daysOfMonth[i];
+        UILabel* dateLabel = self.dateLabels[i];
+        if (self.selectedDate && [self.calendar isDate:dayOfMonth inSameDayAsDate:self.selectedDate]) {
+            [self highlightDateLabel:dateLabel date:dayOfMonth];
+        } else {
+            dateLabel.textColor = [self.calendar isDateInToday:dayOfMonth] ? [UIColor ecGreenColor] : [UIColor darkTextColor];
+        }
+    }
+    
+    // make selectedDateHighlightView invisible
+    if (!self.selectedDate) {
+        self.selectedDateHighlightView.frame = CGRectZero;
+    }
+}
+
+- (void)highlightDateLabel:(UILabel*)dateLabel date:(NSDate*)date
+{
+    dateLabel.textColor = [UIColor whiteColor];
+    self.selectedDateHighlightView.highlightColor = [self.calendar isDateInToday:date] ? [UIColor ecGreenColor] : [UIColor ecPurpleColor];
+    self.selectedDateHighlightView.frame = dateLabel.frame;
 }
 
 - (void)monthViewTapped:(UITapGestureRecognizer*)sender
