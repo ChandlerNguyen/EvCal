@@ -8,10 +8,12 @@
 
 @import Tunits;
 #import "NSDateFormatter+ECAdditions.h"
+#import "UIView+ECAdditions.h"
 #import "ECMonthView.h"
 
 @interface ECMonthView()
 
+@property (nonatomic, weak) UILabel* monthLabel;
 @property (nonatomic, strong) NSArray* weekdayLabels;
 @property (nonatomic, strong) NSArray* dateLabels;
 
@@ -27,6 +29,10 @@
     if (self) {
         TimeUnit* tunit = [[TimeUnit alloc] init];
         _daysOfMonth = [tunit daysOfMonth:date];
+        [self updateMonthLabel];
+        
+        UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(monthViewTapped:)];
+        [self addGestureRecognizer:tapRecognizer];
     }
     
     return self;
@@ -45,6 +51,18 @@
     }
     
     return _daysOfMonth;
+}
+
+- (UILabel*)monthLabel
+{
+    if (!_monthLabel) {
+        _monthLabel = [self addLabel];
+        
+        _monthLabel.textAlignment = NSTextAlignmentCenter;
+        _monthLabel.font = [UIFont boldSystemFontOfSize:17.0f];
+    }
+    
+    return _monthLabel;
 }
 
 - (NSArray*)weekdayLabels
@@ -88,11 +106,9 @@
     NSDateFormatter* dateFormatter = [NSDateFormatter ecDateViewFormatter];
     for (NSDate* date in self.daysOfMonth) {
         UILabel* dateLabel = [[UILabel alloc] init];
+        dateLabel.textAlignment = NSTextAlignmentCenter;
         
         dateLabel.text = [dateFormatter stringFromDate:date];
-        
-        UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dateLabelTapped:)];
-        [dateLabel addGestureRecognizer:tapRecognizer];
         
         [self addSubview:dateLabel];
         [dateLabels addObject:dateLabel];
@@ -104,27 +120,41 @@
 
 
 #pragma mark - Layout
-
-const static NSInteger kCalendarMaximumRows =   7;
+// Month Label, Weekdays Labels, 6 max weeks of dates
+const static NSInteger kCalendarMaximumRows =   8;
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
+    [self layoutMonthLabel];
     [self layoutWeekdayLabels];
     [self layoutDateLabels];
+}
+
+- (void)layoutMonthLabel
+{
+    CGFloat labelHeight = self.bounds.size.height / kCalendarMaximumRows;
+    
+    CGRect monthLabelFrame = CGRectMake(self.bounds.origin.x,
+                                        self.bounds.origin.y,
+                                        self.bounds.size.width,
+                                        labelHeight);
+    
+    self.monthLabel.frame = monthLabelFrame;
 }
 
 - (void)layoutWeekdayLabels
 {
     if (self.weekdayLabels.count > 0) {
+        CGFloat vertialOffset = CGRectGetMaxY(self.monthLabel.frame);
         CGFloat horizontalOffset = 0.0f;
         CGFloat labelWidth = self.bounds.size.width / self.weekdayLabels.count;
         CGFloat labelHeight = self.bounds.size.height / kCalendarMaximumRows;
         
         for (UILabel* weekdayLabel in self.weekdayLabels) {
             CGRect weekdayLabelFrame = CGRectMake(self.bounds.origin.x + horizontalOffset,
-                                                  self.bounds.origin.y,
+                                                  self.bounds.origin.y + vertialOffset,
                                                   labelWidth,
                                                   labelHeight);
             weekdayLabel.frame = weekdayLabelFrame;
@@ -167,13 +197,32 @@ const static NSInteger kCalendarMaximumRows =   7;
 
 #pragma mark - UI Events
 
-- (void)dateLabelTapped:(UITapGestureRecognizer*)sender
+- (void)updateMonthLabel
 {
-    NSInteger dateIndex = [self.dateLabels indexOfObject:sender.view];
-    NSDate* date = self.daysOfMonth[dateIndex];
+    NSDate* firstDayOfMonth = [self.daysOfMonth firstObject];
+    self.monthLabel.text = [[NSDateFormatter ecMonthFormatter] stringFromDate:firstDayOfMonth];
+}
+
+- (void)monthViewTapped:(UITapGestureRecognizer*)sender
+{
+    NSDate* tappedDate = [self getTappedDate:sender];
     
-    self.selectedDate = date;
-    [self informDelegateDateWasSelected:date];
+    self.selectedDate = tappedDate;
+    [self informDelegateDateWasSelected:tappedDate];
+}
+
+- (NSDate*)getTappedDate:(UITapGestureRecognizer*)tapRecognizer
+{
+    CGPoint tapLocation = [tapRecognizer locationInView:self];
+    for (NSInteger i = 0; i < self.dateLabels.count; i++) {
+        UILabel* dateLabel = self.dateLabels[i];
+        if (CGRectContainsPoint(dateLabel.frame, tapLocation)) {
+            NSDate* tappedDate = self.daysOfMonth[i];
+            return tappedDate;
+        }
+    }
+    
+    return nil;
 }
 
 - (void)informDelegateDateWasSelected:(NSDate*)date

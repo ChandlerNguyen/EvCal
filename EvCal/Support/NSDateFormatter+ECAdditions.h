@@ -26,4 +26,10 @@
  */
 + (instancetype)ecEventDatesFormatter;
 
+/**
+ *  @return A date formatter with the proper regional formatting for displaying
+ *          month and year.
+ */
++ (instancetype)ecMonthFormatter;
+
 @end

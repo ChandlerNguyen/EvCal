@@ -43,13 +43,14 @@
 
 - (void)layoutMonthViews
 {
-    CGFloat horizontalGutterHeight = self.view.bounds.size.height / 20;
+    CGFloat visibleHeight = self.view.bounds.size.height - self.navigationController.navigationBar.frame.size.height;
+    CGFloat horizontalGutterHeight = visibleHeight / 20;
     CGFloat monthViewHeight = horizontalGutterHeight * 8;
     CGFloat verticalGutterWidth = self.view.bounds.size.width / 9;
     CGFloat monthViewWidth = verticalGutterWidth * 7;
     
     CGRect monthViewFrame = CGRectMake(self.view.bounds.origin.x + verticalGutterWidth,
-                                       self.view.bounds.origin.y + horizontalGutterHeight,
+                                       CGRectGetMaxY(self.navigationController.navigationBar.frame) + horizontalGutterHeight,
                                        monthViewWidth,
                                        monthViewHeight);
     self.monthView.frame = monthViewFrame;
