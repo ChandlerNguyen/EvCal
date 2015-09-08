@@ -9,11 +9,13 @@
 @import Tunits;
 #import "NSDateFormatter+ECAdditions.h"
 #import "UIView+ECAdditions.h"
+#import "UIColor+ECAdditions.h"
 #import "ECMonthView.h"
 
 @interface ECMonthView()
 
 @property (nonatomic, weak) UILabel* monthLabel;
+@property (nonatomic, weak) UIView* selectedDateHighlightView;
 @property (nonatomic, strong) NSArray* weekdayLabels;
 @property (nonatomic, strong) NSArray* dateLabels;
 
@@ -117,6 +119,11 @@
     return [dateLabels copy];
 }
 
+- (void)setSelectedDate:(NSDate * __nullable)selectedDate
+{
+    _selectedDate = selectedDate;
+    [self updateLabelHighlights];
+}
 
 
 #pragma mark - Layout
@@ -134,7 +141,7 @@ const static NSInteger kCalendarMaximumRows =   8;
 
 - (void)layoutMonthLabel
 {
-    CGFloat labelHeight = self.bounds.size.height / kCalendarMaximumRows;
+    CGFloat labelHeight = ceilf(self.bounds.size.height / kCalendarMaximumRows);
     
     CGRect monthLabelFrame = CGRectMake(self.bounds.origin.x,
                                         self.bounds.origin.y,
@@ -149,8 +156,8 @@ const static NSInteger kCalendarMaximumRows =   8;
     if (self.weekdayLabels.count > 0) {
         CGFloat vertialOffset = CGRectGetMaxY(self.monthLabel.frame);
         CGFloat horizontalOffset = 0.0f;
-        CGFloat labelWidth = self.bounds.size.width / self.weekdayLabels.count;
-        CGFloat labelHeight = self.bounds.size.height / kCalendarMaximumRows;
+        CGFloat labelWidth = ceilf(self.bounds.size.width / self.weekdayLabels.count);
+        CGFloat labelHeight = ceilf(self.bounds.size.height / kCalendarMaximumRows);
         
         for (UILabel* weekdayLabel in self.weekdayLabels) {
             CGRect weekdayLabelFrame = CGRectMake(self.bounds.origin.x + horizontalOffset,
@@ -201,6 +208,22 @@ const static NSInteger kCalendarMaximumRows =   8;
 {
     NSDate* firstDayOfMonth = [self.daysOfMonth firstObject];
     self.monthLabel.text = [[NSDateFormatter ecMonthFormatter] stringFromDate:firstDayOfMonth];
+}
+
+- (void)updateLabelHighlights
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    for (NSInteger i = 0; i < self.dateLabels.count; i++) {
+        NSDate* dayOfMonth = self.daysOfMonth[i];
+        UILabel* dateLabel = self.dateLabels[i];
+        if ([calendar isDate:dayOfMonth inSameDayAsDate:self.selectedDate]) {
+            dateLabel.textColor = [UIColor whiteColor];
+            dateLabel.backgroundColor = [UIColor ecPurpleColor];
+        } else {
+            dateLabel.textColor = [UIColor darkTextColor];
+            dateLabel.backgroundColor = [UIColor whiteColor];
+        }
+    }
 }
 
 - (void)monthViewTapped:(UITapGestureRecognizer*)sender
