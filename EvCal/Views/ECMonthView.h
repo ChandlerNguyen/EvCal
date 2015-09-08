@@ -54,4 +54,14 @@
  */
 - (nonnull instancetype)initWithDate:(nonnull NSDate*)date frame:(CGRect)frame;
 
+/**
+ *  Initializes a new month view with the days of the month for the given date
+ *  and a frame of CGRectZero.
+ *
+ *  @param date Any date within the desired month for the month view.
+ *
+ *  @return The newly created month view.
+ */
+- (nonnull instancetype)initWithDate:(nonnull NSDate*)date;
+
 @end

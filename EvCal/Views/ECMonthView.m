@@ -21,6 +21,22 @@
 
 #pragma mark - Lifecycle and Properties
 
+- (instancetype)initWithDate:(nonnull NSDate *)date frame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        TimeUnit* tunit = [[TimeUnit alloc] init];
+        _daysOfMonth = [tunit daysOfMonth:date];
+    }
+    
+    return self;
+}
+
+- (instancetype)initWithDate:(nonnull NSDate *)date
+{
+    return [self initWithDate:date frame:CGRectZero];
+}
+
 - (NSArray*)daysOfMonth
 {
     if (!_daysOfMonth) {
@@ -43,10 +59,11 @@
 - (NSArray*)createWeekdayLabels
 {
     NSMutableArray* weekdayLabels = [[NSMutableArray alloc] init];
-    for (NSString* weekdaySymbol in [NSCalendar currentCalendar].weekdaySymbols) {
+    for (NSString* weekdaySymbol in [NSCalendar currentCalendar].shortWeekdaySymbols) {
         UILabel* weekdayLabel = [[UILabel alloc] init];
         
         weekdayLabel.text = weekdaySymbol;
+        weekdayLabel.textAlignment = NSTextAlignmentCenter;
         
         [self addSubview:weekdayLabel];
         [weekdayLabels addObject:weekdayLabel];
@@ -84,16 +101,6 @@
     return [dateLabels copy];
 }
 
-- (instancetype)initWithDate:(nonnull NSDate *)date frame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        TimeUnit* tunit = [[TimeUnit alloc] init];
-        _daysOfMonth = [tunit daysOfMonth:date];
-    }
-    
-    return self;
-}
 
 
 #pragma mark - Layout
