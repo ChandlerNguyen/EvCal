@@ -38,6 +38,9 @@
                                 <state key="normal" title="Button" image="CalendarButton">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="Cf1-CG-UCe" kind="push" id="5Zr-oS-nIP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -63,6 +66,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7z-dO-wZi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="845" y="314"/>
+        </scene>
+        <!--Month View Controller-->
+        <scene sceneID="ewu-we-OfN">
+            <objects>
+                <viewController id="Cf1-CG-UCe" customClass="ECMonthViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QY7-LO-GmC"/>
+                        <viewControllerLayoutGuide type="bottom" id="pR8-Xi-bqx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="puk-C1-uYx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZXl-gm-ulx"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="REA-SI-aOH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="845" y="1005"/>
         </scene>
         <!--Edit Event View Controller-->
         <scene sceneID="ZBd-aU-iau">
