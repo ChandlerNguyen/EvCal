@@ -45,16 +45,6 @@
 
 /**
  *  DESIGNATED INITIALIZER
- *  Initializes a new month with the days of the month for the given date.
- *
- *  @param date  Any date within the desired month for the month view.
- *  @param frame The frame for the view.
- *
- *  @return The newly created month view.
- */
-- (nonnull instancetype)initWithDate:(nonnull NSDate*)date frame:(CGRect)frame;
-
-/**
  *  Initializes a new month view with the days of the month for the given date
  *  and a frame of CGRectZero.
  *
@@ -63,6 +53,18 @@
  *  @return The newly created month view.
  */
 - (nonnull instancetype)initWithDate:(nonnull NSDate*)date;
+
+
+/**
+ *  Initializes a new month view the days of the month for the given date and
+ *  the selectedDate property set to the same day as the given date.
+ *
+ *  @param selectedDate The date to be selected when month view is presented.
+ *
+ *  @return The newly created month view.
+ */
+- (nonnull instancetype)initWithSelectedDate:(nonnull NSDate*)selectedDate;
+
 
 //------------------------------------------------------------------------------
 // @name Updating Dates

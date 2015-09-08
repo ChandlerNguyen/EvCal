@@ -24,7 +24,7 @@
     
     NSDate* date = [NSDate date];
     NSDate* nextMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:1 toDate:date options:0];
-    ECMonthView* monthView = [[ECMonthView alloc] initWithDate:date];
+    ECMonthView* monthView = [[ECMonthView alloc] initWithSelectedDate:date];
     ECMonthView* nextMonthView = [[ECMonthView alloc] initWithDate:nextMonth];
     
     [self.view addSubview:monthView];

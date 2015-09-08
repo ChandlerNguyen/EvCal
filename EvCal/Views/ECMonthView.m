@@ -55,6 +55,16 @@ const static CGFloat kMonthLabelFontSize =          19.0f;
     return [self initWithDate:date frame:CGRectZero];
 }
 
+- (instancetype)initWithSelectedDate:(nonnull NSDate *)selectedDate
+{
+    self = [self initWithDate:selectedDate];
+    if (self) {
+        self.selectedDate = selectedDate;
+    }
+    
+    return self;
+}
+
 - (NSArray*)daysOfMonth
 {
     if (!_daysOfMonth) {
@@ -172,6 +182,7 @@ const static NSInteger kCalendarMaximumRows =   8;
     [self layoutMonthLabel];
     [self layoutWeekdayLabels];
     [self layoutDateLabels];
+    [self updateLabelHighlights];
 }
 
 - (void)layoutMonthLabel
@@ -290,8 +301,10 @@ const static NSInteger kCalendarMaximumRows =   8;
 {
     NSDate* tappedDate = [self getTappedDate:sender];
     
-    self.selectedDate = tappedDate;
-    [self informDelegateDateWasSelected:tappedDate];
+    if (tappedDate) {
+        self.selectedDate = tappedDate;
+        [self informDelegateDateWasSelected:tappedDate];
+    }
 }
 
 - (NSDate*)getTappedDate:(UITapGestureRecognizer*)tapRecognizer
