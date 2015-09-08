@@ -70,6 +70,7 @@
 		84EF22691B08D59E003DA610 /* ECEventViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EF22681B08D59E003DA610 /* ECEventViewFactory.m */; };
 		84EF226C1B08D5BD003DA610 /* ECEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EF226B1B08D5BD003DA610 /* ECEventView.m */; };
 		84FB23CA1B9F2B2E00F2DFEF /* ECMonthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FB23C91B9F2B2E00F2DFEF /* ECMonthViewController.m */; };
+		84FB23CD1B9F3A5E00F2DFEF /* ECSelectedDateHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FB23CC1B9F3A5E00F2DFEF /* ECSelectedDateHighlightView.m */; };
 		D1A22B1CD1D1EC4C9F15AF5B /* Pods_EvCalTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DA478CF758CC621888642D2 /* Pods_EvCalTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -198,6 +199,8 @@
 		84EF226B1B08D5BD003DA610 /* ECEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEventView.m; path = Views/ECEventView.m; sourceTree = "<group>"; };
 		84FB23C81B9F2B2E00F2DFEF /* ECMonthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECMonthViewController.h; path = Controllers/ECMonthViewController.h; sourceTree = "<group>"; };
 		84FB23C91B9F2B2E00F2DFEF /* ECMonthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECMonthViewController.m; path = Controllers/ECMonthViewController.m; sourceTree = "<group>"; };
+		84FB23CB1B9F3A5E00F2DFEF /* ECSelectedDateHighlightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSelectedDateHighlightView.h; path = Views/ECSelectedDateHighlightView.h; sourceTree = "<group>"; };
+		84FB23CC1B9F3A5E00F2DFEF /* ECSelectedDateHighlightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSelectedDateHighlightView.m; path = Views/ECSelectedDateHighlightView.m; sourceTree = "<group>"; };
 		88D75FD94E1145212C5A039D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD17AAA6E4F9A168802C453D /* Pods-EvCalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EvCalTests/Pods-EvCalTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -238,6 +241,8 @@
 			children = (
 				84405D9E1B9A427C00784C9A /* ECMonthView.h */,
 				84405D9F1B9A427C00784C9A /* ECMonthView.m */,
+				84FB23CB1B9F3A5E00F2DFEF /* ECSelectedDateHighlightView.h */,
+				84FB23CC1B9F3A5E00F2DFEF /* ECSelectedDateHighlightView.m */,
 			);
 			name = "Month Picker";
 			sourceTree = "<group>";
@@ -729,6 +734,7 @@
 				8478F7871B1741EE0096F1B7 /* ECTimeLine.m in Sources */,
 				84EF22691B08D59E003DA610 /* ECEventViewFactory.m in Sources */,
 				84C458F91B073A860066B6A9 /* main.m in Sources */,
+				84FB23CD1B9F3A5E00F2DFEF /* ECSelectedDateHighlightView.m in Sources */,
 				8495393C1B80DDCF00B7873E /* ECDualViewSwitcher.m in Sources */,
 				84D168FB1B42A49300DBCF17 /* ECEventCache.m in Sources */,
 				849539411B80F03D00B7873E /* ECRecurrenceRuleCell.m in Sources */,
