@@ -10,6 +10,16 @@
 
 @implementation ECSelectedDateHighlightView
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+    }
+    
+    return self;
+}
+
 - (void)setHighlightColor:(UIColor *)highlightColor
 {
     _highlightColor = highlightColor;
@@ -20,17 +30,20 @@
 {
     [super drawRect:rect];
     
-    [self drawHighlightCircle];
+    if (self.highlightColor) {
+        [self drawHighlightCircle];
+    }
 }
 
 - (void)drawHighlightCircle
 {
     CGFloat circleRadius = floorf(MIN(self.bounds.size.width, self.bounds.size.height) / 2);
     
-    CGFloat circleHorizontalInset = self.center.x - circleRadius;
-    CGFloat circleVerticalInset = self.center.y - circleRadius;
-    CGRect ovalRect = CGRectMake(self.bounds.origin.x + circleHorizontalInset,
-                                 self.bounds.origin.y + circleVerticalInset,
+    CGFloat circleHorizontalInset = (self.bounds.size.width - 2 * circleRadius) / 2;
+    CGFloat circleVerticalInset = (self.bounds.size.height - 2 * circleRadius) / 2;
+    CGPoint circleOrigin = CGPointMake(self.bounds.origin.x + circleHorizontalInset, self.bounds.origin.y + circleVerticalInset);
+    CGRect ovalRect = CGRectMake(circleOrigin.x,
+                                 circleOrigin.y,
                                  2 * circleRadius,
                                  2 * circleRadius);
     UIBezierPath* circlePath = [UIBezierPath bezierPathWithOvalInRect:ovalRect];

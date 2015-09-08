@@ -11,11 +11,12 @@
 #import "UIView+ECAdditions.h"
 #import "UIColor+ECAdditions.h"
 #import "ECMonthView.h"
+#import "ECSelectedDateHighlightView.h"
 
 @interface ECMonthView()
 
 @property (nonatomic, weak) UILabel* monthLabel;
-@property (nonatomic, weak) UIView* selectedDateHighlightView;
+@property (nonatomic, weak) ECSelectedDateHighlightView* selectedDateHighlightView;
 @property (nonatomic, strong) NSArray* weekdayLabels;
 @property (nonatomic, strong) NSArray* dateLabels;
 
@@ -111,6 +112,8 @@
         dateLabel.textAlignment = NSTextAlignmentCenter;
         
         dateLabel.text = [dateFormatter stringFromDate:date];
+        dateLabel.backgroundColor = [UIColor clearColor];
+        dateLabel.opaque = NO;
         
         [self addSubview:dateLabel];
         [dateLabels addObject:dateLabel];
@@ -123,6 +126,20 @@
 {
     _selectedDate = selectedDate;
     [self updateLabelHighlights];
+}
+
+- (ECSelectedDateHighlightView*)selectedDateHighlightView
+{
+    if (!_selectedDateHighlightView) {
+        ECSelectedDateHighlightView* selectedDateHighlightView = [[ECSelectedDateHighlightView alloc] init];
+        selectedDateHighlightView.highlightColor = [UIColor ecPurpleColor];
+        
+        UILabel* firstDateLabel = [self.dateLabels firstObject];
+        [self insertSubview:selectedDateHighlightView belowSubview:firstDateLabel];
+        _selectedDateHighlightView = selectedDateHighlightView;
+    }
+    
+    return _selectedDateHighlightView;
 }
 
 
@@ -218,10 +235,9 @@ const static NSInteger kCalendarMaximumRows =   8;
         UILabel* dateLabel = self.dateLabels[i];
         if ([calendar isDate:dayOfMonth inSameDayAsDate:self.selectedDate]) {
             dateLabel.textColor = [UIColor whiteColor];
-            dateLabel.backgroundColor = [UIColor ecPurpleColor];
+            self.selectedDateHighlightView.frame = dateLabel.frame;
         } else {
             dateLabel.textColor = [UIColor darkTextColor];
-            dateLabel.backgroundColor = [UIColor whiteColor];
         }
     }
 }
