@@ -6,12 +6,14 @@
 //  Copyright (c) 2015 spitzgoby LLC. All rights reserved.
 //
 
+@import Tunits;
 #import "ECMonthPicker.h"
 #import "ECMonthView.h"
 #import "NSDate+CupertinoYankee.h"
 @interface ECMonthPicker() <UIScrollViewDelegate, ECMonthViewDelegate>
 
 @property (nonatomic, strong) NSCalendar* calendar;
+@property (nonatomic, strong) TimeUnit* tunit;
 
 @property (nonatomic, weak) UIScrollView* monthViewContainer;
 
@@ -24,11 +26,23 @@
 
 const static NSInteger kMonthViewPageCount =    3;
 
+- (void)awakeFromNib
+{
+    self.selectedDate = [self.tunit beginningOfDay:[NSDate date]];
+    [self updateMonthViewPagesForDate:self.selectedDate];
+}
+
+- (instancetype)init
+{
+    self = [self initWithSelectedDate:[NSDate date]];
+    return self;
+}
+
 - (instancetype)initWithSelectedDate:(nullable NSDate *)date
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
-        _selectedDate = date;
+        _selectedDate = [self.tunit beginningOfDay:date];
     }
     
     return self;
@@ -57,6 +71,15 @@ const static NSInteger kMonthViewPageCount =    3;
     }
     
     return _calendar;
+}
+
+- (TimeUnit*)tunit
+{
+    if (!_tunit) {
+        _tunit = [[TimeUnit alloc] init];
+    }
+    
+    return _tunit;
 }
 
 - (UIScrollView*)monthViewContainer
@@ -104,6 +127,7 @@ const static NSInteger kMonthViewPageCount =    3;
 {
     if (!_monthViews) {
         _monthViews = [self createMonthViews];
+        [self updateMonthViewPagesForDate:self.firstVisibleDate];
     }
     
     return _monthViews;
@@ -113,13 +137,15 @@ const static NSInteger kMonthViewPageCount =    3;
 {
     NSMutableArray* monthViews = [[NSMutableArray alloc] init];
     
+    // The dates for month views will be updated after creation, so use dummy date
+    NSDate* date = [NSDate date];
     for (NSInteger i = 0; i < kMonthViewPageCount; i++) {
         
-        NSDate* firstMonthViewDate = [self.calendar dateByAddingUnit:NSCalendarUnitMonth value:(2 * i - 2) toDate:self.firstVisibleDate options:0];
-        ECMonthView* firstMonthView = [[ECMonthView alloc] initWithDate:firstMonthViewDate];
-
-        NSDate* secondMonthViewDate = [self.calendar dateByAddingUnit:NSCalendarUnitMonth value:(2 * i - 1) toDate:self.firstVisibleDate options:0];
-        ECMonthView* secondMonthView = [[ECMonthView alloc] initWithDate:secondMonthViewDate];
+        ECMonthView* firstMonthView = [[ECMonthView alloc] initWithDate:date];
+        ECMonthView* secondMonthView = [[ECMonthView alloc] initWithDate:date];
+        
+        firstMonthView.monthViewDelegate = self;
+        secondMonthView.monthViewDelegate = self;
         
         UIView* monthViewPage = self.monthViewPages[i];
         [monthViewPage addSubview:firstMonthView];
@@ -149,6 +175,8 @@ const static NSInteger kMonthViewPageCount =    3;
         
         [self updateMonthViews:monthViews forDates:monthViewDates];
     }
+    
+    [self updateMonthViewSelectedDate];
 }
 
 - (void)updateMonthViews:(NSArray*)monthViews forDates:(NSArray*)dates
@@ -158,6 +186,17 @@ const static NSInteger kMonthViewPageCount =    3;
         NSDate* date = dates[i];
         
         [monthView updateDatesToMonthContainingDate:date];
+    }
+}
+
+- (void)updateMonthViewSelectedDate
+{
+    for (ECMonthView* monthView in self.monthViews) {
+        if ([self.tunit monthContainsDate:self.selectedDate month:monthView.firstDate]) {
+            monthView.selectedDate = self.selectedDate;
+        } else {
+            monthView.selectedDate = nil;
+        }
     }
 }
 //- (void)updateSingleDayView:(ECSingleDayView*)singleDayView forDate:(NSDate*)date
@@ -308,6 +347,8 @@ static const NSInteger kBottomPageMonthViewIndex =  4;
     [self layoutMonthViewPages];
 }
 
+//
+// Used for scrollToDate functionality
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 //{
 //    CGFloat horizontalContentOffset = scrollView.contentOffset.x;
@@ -321,4 +362,26 @@ static const NSInteger kBottomPageMonthViewIndex =  4;
 //    }
 //}
 //
+
+
+#pragma mark - Month View Delegate
+
+- (void)monthView:(ECMonthView * __nonnull)monthView didSelectDate:(NSDate * __nonnull)date
+{
+    self.selectedDate = date;
+    [self updateMonthViewSelectedDate];
+    [self informDelegateThatDateWasSelected];
+}
+
+
+
+#pragma mark - Month Picker Delegate
+
+- (void)informDelegateThatDateWasSelected
+{
+    if ([self.monthPickerDelegate respondsToSelector:@selector(monthPicker:didSelectDate:)]) {
+        [self.monthPickerDelegate monthPicker:self didSelectDate:self.selectedDate];
+    }
+}
+
 @end
