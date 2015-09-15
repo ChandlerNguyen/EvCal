@@ -3,7 +3,7 @@ pod 'CupertinoYankee', '1.0.2'
 pod 'CocoaLumberjack'
 pod 'EDColor'
 pod 'MSCellAccessory'
-pod 'Tunits', '0.1.2'
+pod 'Tunits' 
 use_frameworks!
 
 target :EvCalTests do

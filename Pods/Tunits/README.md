@@ -7,9 +7,21 @@
 
 ## Usage
 
+### Example Project ###
+
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+### Swift ###
+    let tunit = TimeUnit() // init new TimeUnit object
+    let daysOfCurrentMonth = tunit.daysOfMonth(NSDate()) // create array of days
+    var hoursOfCurrentMonth : [NSDate] = []
+    for day in daysOfCurrentMonth { // enumerate over days to create array of hours
+      hoursOfCurrentMonth += tunit.hoursOfDay(day)
+    }
+
 ## Requirements
+
+Requires XCode 6 and iOS 7+ sdk.
 
 ## Installation
 

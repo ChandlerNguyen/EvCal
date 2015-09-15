@@ -11,7 +11,7 @@ PODS:
   - EDColor (1.0.0)
   - JPSimulatorHacks (1.2.0)
   - MSCellAccessory (1.1.2)
-  - Tunits (0.1.2)
+  - Tunits (0.3.0)
 
 DEPENDENCIES:
   - CocoaLumberjack
@@ -19,7 +19,7 @@ DEPENDENCIES:
   - EDColor
   - JPSimulatorHacks (= 1.2.0)
   - MSCellAccessory
-  - Tunits (= 0.1.2)
+  - Tunits
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 019d1361244274a6138c788c6cb80baabc13fb8f
@@ -27,6 +27,6 @@ SPEC CHECKSUMS:
   EDColor: c83f9a61f9f9b3c23d541f1feb561558e29cb088
   JPSimulatorHacks: 022d7dbd8e503fde4be274bf374a54f36f6ebc10
   MSCellAccessory: 8265f3cd2386c1f372da00232472605ab11426e4
-  Tunits: 351d38e8d77930957a9df8c1114f635a8caffb7f
+  Tunits: c649b5031f66920fc96ff2e418946de929a63153
 
 COCOAPODS: 0.37.1
