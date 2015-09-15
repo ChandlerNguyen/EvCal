@@ -34,13 +34,20 @@ const static NSInteger kMonthViewPageCount =    3;
     return self;
 }
 
-- (NSDate*)selectedDate
+- (NSDate*)firstVisibleDate
 {
-    if (!_selectedDate) {
-        _selectedDate = [[NSDate date] beginningOfDay];
+    if (!_firstVisibleDate) {
+        NSDate* today = [[NSDate date] beginningOfMonth];
+        NSInteger monthComponent = [self.calendar component:NSCalendarUnitMonth fromDate:today];
+        
+        if (monthComponent % 2 != 0) {
+            _firstVisibleDate = [today beginningOfMonth];
+        } else {
+            _firstVisibleDate = [[self.calendar dateByAddingUnit:NSCalendarUnitMonth value:-1 toDate:today options:0] beginningOfMonth];
+        }
     }
     
-    return _selectedDate;
+    return _firstVisibleDate;
 }
 
 - (NSCalendar*)calendar
@@ -105,14 +112,13 @@ const static NSInteger kMonthViewPageCount =    3;
 - (NSMutableArray*)createMonthViews
 {
     NSMutableArray* monthViews = [[NSMutableArray alloc] init];
-    NSDate* firstMonthDisplayDate = [self getDisplayDateOfFirstMonth];
     
     for (NSInteger i = 0; i < kMonthViewPageCount; i++) {
         
-        NSDate* firstMonthViewDate = [self.calendar dateByAddingUnit:NSCalendarUnitMonth value:(2 * i - 2) toDate:firstMonthDisplayDate options:0];
+        NSDate* firstMonthViewDate = [self.calendar dateByAddingUnit:NSCalendarUnitMonth value:(2 * i - 2) toDate:self.firstVisibleDate options:0];
         ECMonthView* firstMonthView = [[ECMonthView alloc] initWithDate:firstMonthViewDate];
 
-        NSDate* secondMonthViewDate = [self.calendar dateByAddingUnit:NSCalendarUnitMonth value:(2 * i - 1) toDate:firstMonthDisplayDate options:0];
+        NSDate* secondMonthViewDate = [self.calendar dateByAddingUnit:NSCalendarUnitMonth value:(2 * i - 1) toDate:self.firstVisibleDate options:0];
         ECMonthView* secondMonthView = [[ECMonthView alloc] initWithDate:secondMonthViewDate];
         
         UIView* monthViewPage = self.monthViewPages[i];
@@ -126,17 +132,44 @@ const static NSInteger kMonthViewPageCount =    3;
     return monthViews;
 }
 
-- (NSDate*)getDisplayDateOfFirstMonth
+
+- (void)updateMonthViewPagesForDate:(NSDate*)date
 {
-    NSInteger monthComponent = [self.calendar component:NSCalendarUnitMonth fromDate:self.selectedDate];
+    NSDate* centerPageFirstDate = date;
+    NSDate* centerPageSecondDate = [self.calendar dateByAddingUnit:NSCalendarUnitMonth value:1 toDate:centerPageFirstDate options:0];
+    NSDate* topPageFirstDate = [self.calendar dateByAddingUnit:NSCalendarUnitMonth value:-2 toDate:centerPageFirstDate options:0];
+    NSDate* topPageSecondDate = [self.calendar dateByAddingUnit:NSCalendarUnitMonth value:1 toDate:topPageFirstDate options:0];
+    NSDate* bottomPageFirstDate = [self.calendar dateByAddingUnit:NSCalendarUnitMonth value:2 toDate:centerPageFirstDate options:0];
+    NSDate* bottomPageSecondDate = [self.calendar dateByAddingUnit:NSCalendarUnitMonth value:1 toDate:bottomPageFirstDate options:0];
+    NSArray* dates = @[topPageFirstDate, topPageSecondDate, centerPageFirstDate, centerPageSecondDate, bottomPageFirstDate, bottomPageSecondDate];
     
-    if (monthComponent % 2 != 0) {
-        return [self.selectedDate beginningOfMonth];
-    } else {
-        return [[self.calendar dateByAddingUnit:NSCalendarUnitMonth value:-1 toDate:self.selectedDate options:0] beginningOfMonth];
+    for (NSInteger i = 0; i < kMonthViewPageCount; i++) {
+        NSArray* monthViews = [self.monthViews subarrayWithRange:NSMakeRange(2 * i, 2)];
+        NSArray* monthViewDates = [dates subarrayWithRange:NSMakeRange(2 * i, 2)];
+        
+        [self updateMonthViews:monthViews forDates:monthViewDates];
     }
 }
 
+- (void)updateMonthViews:(NSArray*)monthViews forDates:(NSArray*)dates
+{
+    for (NSInteger i = 0; i < monthViews.count; i++) {
+        ECMonthView* monthView = monthViews[i];
+        NSDate* date = dates[i];
+        
+        [monthView updateDatesToMonthContainingDate:date];
+    }
+}
+//- (void)updateSingleDayView:(ECSingleDayView*)singleDayView forDate:(NSDate*)date
+//{
+//    NSArray* events = [self.dayViewDataSource dayView:self eventsForDate:date];
+//    NSArray* eventViews = [ECEventViewFactory eventViewsForEvents:events reusingViews:singleDayView.eventViews];
+//    
+//    singleDayView.date = date;
+//    
+//    [singleDayView clearEventViews];
+//    [singleDayView addEventViews:eventViews];
+//}
 
 #pragma mark - Layout
 
@@ -159,6 +192,7 @@ static const NSInteger kMonthViewNumRows = 8;
     
     self.monthViewContainer.frame = self.bounds;
     self.monthViewContainer.contentSize = monthViewContainerContentSize;
+    self.monthViewContainer.contentOffset = CGPointMake(0, self.bounds.size.height);
 }
 
 - (void)layoutMonthViewPages
@@ -199,59 +233,81 @@ static const NSInteger kMonthViewNumRows = 8;
 
 #pragma mark - UIScrollView Delegate
 
-static const NSInteger kTopMonthViewPageIndex =     0;
-static const NSInteger kCenterMonthViewPageIndex =  1;
-static const NSInteger kBottomMonthViewPageIndex =  2;
+static const NSInteger kTopPageIndex =              0;
+static const NSInteger kBottomPageIndex =           2;
+
+static const NSInteger kTopPageMonthViewIndex =     0;
+static const NSInteger kCenterPageMonthViewIndex =  2;
+static const NSInteger kBottomPageMonthViewIndex =  4;
 
 // This method assumes that the date of the page in the center page index should
 // be used to determine the values of the other pages. The center page date MUST
 // be updated and correct prior to this method's invocation.
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-//{
-//    if ([scrollView isEqual:self.dayViewHorizontalScrollView]) {
-//        
-//        ECSingleDayView* visibleDayView = [self getVisibleDayView];
-//        NSComparisonResult dateComparison = [visibleDayView.date compare:self.displayDate];
-//        
-//        switch (dateComparison) {
-//            case NSOrderedDescending:
-//                [self swapSingleDayViewAtIndex:kLeftDayViewIndex toIndex:kRightDayViewIndex withCenterDate:visibleDayView.date];
-//                
-//                [self resetSingleDayViewsLayout];
-//                
-//                self.displayDate = visibleDayView.date;
-//                [self updateSingleDayViewsForDate:self.displayDate];
-//                break;
-//                
-//            case NSOrderedAscending:
-//                [self swapSingleDayViewAtIndex:kRightDayViewIndex toIndex:kLeftDayViewIndex withCenterDate:visibleDayView.date];
-//                
-//                [self resetSingleDayViewsLayout];
-//                
-//                self.displayDate = visibleDayView.date;
-//                [self updateSingleDayViewsForDate:self.displayDate];
-//                break;
-//                
-//            case NSOrderedSame:
-//                break;
-//        }
-//    }
-//}
-//
-
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
+    ECMonthView* firstVisibleMonthView = [self getFirstVisibleMonth];
+    NSComparisonResult dateComparison = [firstVisibleMonthView.firstDate compare:self.firstVisibleDate];
     
-    
+    switch (dateComparison) {
+        case NSOrderedDescending: // visible month view date is after previous visible date
+        case NSOrderedAscending: // visible month view date is before previous visible date
+            if (dateComparison == NSOrderedAscending) {
+                [self swapMonthViewPageAtIndex:kBottomPageIndex toIndex:kTopPageIndex];
+            } else {
+                [self swapMonthViewPageAtIndex:kTopPageIndex toIndex:kBottomPageIndex];
+            }
+            
+            [self resetMonthViewPagesLayout];
+            
+            self.firstVisibleDate = firstVisibleMonthView.firstDate;
+            [self updateMonthViewPagesForDate:self.firstVisibleDate];
+            break;
+            
+        case NSOrderedSame:
+            break;
+    }
 }
-//- (void)resetSingleDayViewsLayout
-//{
-//    // recenter scroll view content offset
-//    self.dayViewHorizontalScrollView.contentOffset = CGPointMake(self.dayViewHorizontalScrollView.bounds.size.width, 0);
-//    // move single day screens into new positions
-//    [self layoutSingleDayViews];
-//}
-//
+
+- (ECMonthView*)getFirstVisibleMonth
+{
+    CGFloat verticalOffset = self.monthViewContainer.bounds.origin.y;
+    
+    if (verticalOffset < self.monthViewContainer.bounds.size.height) {
+        return self.monthViews[kTopPageMonthViewIndex];
+    } else if (verticalOffset >= self.monthViewContainer.bounds.size.height * 2) {
+        return self.monthViews[kBottomPageMonthViewIndex];
+    } else {
+        return self.monthViews[kCenterPageMonthViewIndex];
+    }
+}
+
+// The center date is the new center date after the page is swapped
+- (void)swapMonthViewPageAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
+{
+    // move month view pages
+    UIView* monthViewPage = self.monthViewPages[fromIndex];
+    
+    [self.monthViewPages removeObject:monthViewPage];
+    [self.monthViewPages insertObject:monthViewPage atIndex:toIndex];
+    
+    // move month views
+    ECMonthView* firstMonthView = self.monthViews[fromIndex * 2];
+    ECMonthView* secondMonthView = self.monthViews[fromIndex * 2 + 1];
+    
+    [self.monthViews removeObject:firstMonthView];
+    [self.monthViews removeObject:secondMonthView];
+    
+    [self.monthViews insertObject:firstMonthView atIndex:toIndex * 2];
+    [self.monthViews insertObject:secondMonthView atIndex:toIndex * 2 + 1];
+}
+
+- (void)resetMonthViewPagesLayout
+{
+    self.monthViewContainer.contentOffset = CGPointMake(0, self.monthViewContainer.bounds.size.height);
+    
+    [self layoutMonthViewPages];
+}
+
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 //{
 //    CGFloat horizontalContentOffset = scrollView.contentOffset.x;
@@ -265,26 +321,4 @@ static const NSInteger kBottomMonthViewPageIndex =  2;
 //    }
 //}
 //
-//- (ECSingleDayView*)getVisibleDayView
-//{
-//    CGFloat horizontalOffset = self.dayViewHorizontalScrollView.bounds.origin.x;
-//    
-//    if (horizontalOffset < self.dayViewHorizontalScrollView.bounds.size.width) {
-//        return self.leftDayView;
-//    } else if (horizontalOffset >= self.dayViewHorizontalScrollView.bounds.size.width * 2) {
-//        return self.rightDayView;
-//    } else {
-//        return self.centerDayView;
-//    }
-//}
-//
-//// The center date is the new center date after the page is swapped
-//- (void)swapSingleDayViewAtIndex:(NSInteger)oldIndex toIndex:(NSInteger)newIndex withCenterDate:(NSDate*)date
-//{
-//    ECSingleDayView* swappedSingleDayView = self.singleDayViews[oldIndex];
-//    
-//    [self.singleDayViews removeObjectAtIndex:oldIndex];
-//    [self.singleDayViews insertObject:swappedSingleDayView atIndex:newIndex];
-//}
-
 @end

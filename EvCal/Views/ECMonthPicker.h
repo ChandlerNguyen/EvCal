@@ -28,6 +28,9 @@
 // @name Properties
 //------------------------------------------------------------------------------
 
+// The month picker's first displayed date
+@property (nonatomic, strong) NSDate* __nonnull firstVisibleDate;
+
 // The month picker's currently selected date. Setting this value will not cause
 // the didSelectDate: delegate method to be called.
 @property (nonatomic, strong) NSDate* __nullable selectedDate;
