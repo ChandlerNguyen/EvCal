@@ -41,7 +41,7 @@ const static CGFloat kMonthLabelFontSize =          19.0f;
         TimeUnit* tunit = [[TimeUnit alloc] init];
         _daysOfMonth = [tunit daysOfMonth:date];
         [self updateMonthLabel];
-        [self updateDates];
+        [self updateDatesLayout];
         
         UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(monthViewTapped:)];
         [self addGestureRecognizer:tapRecognizer];
@@ -63,6 +63,11 @@ const static CGFloat kMonthLabelFontSize =          19.0f;
     }
     
     return self;
+}
+
+- (NSDate*)firstDate
+{
+    return [self.daysOfMonth firstObject];
 }
 
 - (NSArray*)daysOfMonth
@@ -248,7 +253,26 @@ const static NSInteger kCalendarMaximumRows =   8;
     }
 }
 
-#pragma mark - UI Events
+
+#pragma mark - Update Dates
+
+- (void)updateDatesToMonthContainingDate:(nullable NSDate *)date
+{
+    _daysOfMonth = [[[TimeUnit alloc] init] daysOfMonth:date];
+    [self clearDateLabels];
+    
+    [self updateMonthLabel];
+    [self updateDatesLayout];
+}
+
+- (void)clearDateLabels
+{
+    for (UILabel* label in self.dateLabels) {
+        [label removeFromSuperview];
+    }
+    
+    _dateLabels = nil;
+}
 
 - (void)updateMonthLabel
 {
@@ -256,7 +280,7 @@ const static NSInteger kCalendarMaximumRows =   8;
     self.monthLabel.text = [[NSDateFormatter ecMonthFormatter] stringFromDate:firstDayOfMonth];
 }
 
-- (void)updateDates
+- (void)updateDatesLayout
 {
     for (NSInteger i = 0; i < self.dateLabels.count; i++) {
         NSDate* dayOfMonth = self.daysOfMonth[i];
@@ -296,6 +320,9 @@ const static NSInteger kCalendarMaximumRows =   8;
     self.selectedDateHighlightView.highlightColor = [self.calendar isDateInToday:date] ? [UIColor ecGreenColor] : [UIColor ecPurpleColor];
     self.selectedDateHighlightView.frame = dateLabel.frame;
 }
+
+
+#pragma mark - UI Events
 
 - (void)monthViewTapped:(UITapGestureRecognizer*)sender
 {

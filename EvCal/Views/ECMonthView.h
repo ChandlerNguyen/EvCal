@@ -32,6 +32,9 @@
 // The date currently selected in the month view. A nil value means no date is selected
 @property (nonatomic, strong) NSDate* __nullable selectedDate; // default is nil
 
+// The first day of the month for the month view
+@property (nonatomic, strong, readonly) NSDate* __nonnull firstDate;
+
 // The days of the month represented by the month view. Use the initWithDate:
 // method to automatically create days of month.
 @property (nonatomic, strong) NSArray* __nonnull daysOfMonth; // defaults to days of current month
@@ -71,9 +74,17 @@
 //------------------------------------------------------------------------------
 
 /**
+ *  Causes the receiver to update is visible dates.
+ *
+ *  @param date Any date within the month which the month view should present.
+ *              If nil is passed the current date will be used.
+ */
+- (void)updateDatesToMonthContainingDate:(nullable NSDate*)date;
+
+/**
  *  Causes the receiver to update its layout. This includes changing the current
  *  date.
  */
-- (void)updateDates;
+- (void)updateDatesLayout;
 
 @end
