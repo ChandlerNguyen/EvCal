@@ -19,8 +19,9 @@
 #import "ECDayView.h"
 #import "ECEventStoreProxy.h"
 #import "ECWeekdayPicker.h"
+#import "ECMonthPicker.h"
 
-@interface ECDayViewController () <ECDayViewDataSource, ECDayViewDelegate, ECWeekdayPickerDelegate, ECWeekdayPickerDataSource, ECEditEventViewControllerDelegate>
+@interface ECDayViewController () <ECDayViewDataSource, ECDayViewDelegate, ECWeekdayPickerDelegate, ECWeekdayPickerDataSource, ECMonthPickerDelegate, ECEditEventViewControllerDelegate>
 
 // Buttons
 @property (nonatomic, weak) IBOutlet UIButton* addEventButton;
@@ -33,7 +34,11 @@
 @property (nonatomic, weak) ECWeekdayPicker* weekdayPicker;
 @property (nonatomic, strong) NSDateFormatter* dateFormatter;
 
+// Month Picker
+@property (nonatomic, weak) ECMonthPicker* monthPicker;
+
 // State
+@property (nonatomic) BOOL monthPickerVisible;
 
 @end
 
@@ -57,6 +62,7 @@
     
     [self layoutWeekdayPicker];
     [self layoutDayView];
+    [self layoutMonthPicker];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -102,6 +108,20 @@
     }
     
     return _weekdayPicker;
+}
+
+- (ECMonthPicker*)monthPicker
+{
+    if (!_monthPicker) {
+        ECMonthPicker* monthPicker = [[ECMonthPicker alloc] initWithSelectedDate:self.displayDate];
+        
+        monthPicker.monthPickerDelegate = self;
+        
+        _monthPicker = monthPicker;
+        [self.view addSubview:monthPicker];
+    }
+    
+    return _monthPicker;
 }
 
 @synthesize displayDate = _displayDate;
@@ -173,6 +193,19 @@
     self.dayView.frame = dayViewFrame;
 }
 
+- (void)layoutMonthPicker
+{
+    CGRect monthPickerFrame = CGRectMake(self.view.bounds.origin.x,
+                                         CGRectGetMaxY(self.view.bounds),
+                                         self.view.bounds.size.width,
+                                         self.view.bounds.size.height - self.navigationController.navigationBar.frame.size.height);
+    if (self.monthPickerVisible) {
+        monthPickerFrame.origin.y = CGRectGetMaxY(self.navigationController.navigationBar.frame);
+    }
+    
+    self.monthPicker.frame = monthPickerFrame;
+}
+
 
 #pragma mark - ECWeekdayPicker delegate and data source
 
@@ -217,6 +250,21 @@
     }
     
     return [mutableCalendars copy];
+}
+
+
+#pragma mark - ECMonthPicker Delegate
+
+- (void)monthPicker:(nonnull ECMonthPicker *)picker didSelectDate:(nullable NSDate *)date
+{
+    if (![[NSCalendar currentCalendar] isDate:self.displayDate inSameDayAsDate:date]) {
+        self.displayDate = date;
+        
+        [self.dayView scrollToDate:date animated:YES];
+        self.weekdayPicker.selectedDate = date;
+    }
+    
+    [self dismissMonthPicker];
 }
 
 #pragma mark - ECEditEventViewController Delegate
@@ -308,6 +356,9 @@
 
 #pragma mark - UI Events
 
+const static NSTimeInterval kMonthPickerDimissDelay = 0.1;
+const static NSTimeInterval kMonthPickerAnimationDuration = 0.3;
+
 - (IBAction)addEventButtonTapped:(UIButton*)sender
 {
     [self presentEditEventViewControllerWithEvent:nil];
@@ -324,4 +375,35 @@
         [self.weekdayPicker setSelectedDate:todayDate];
     }
 }
+
+- (IBAction)monthPickerButtonTapped:(UIButton*)sender
+{
+    if (self.monthPickerVisible) {
+        [self dismissMonthPicker];
+    } else {
+        [self presentMonthPicker];
+    }
+}
+
+- (void)presentMonthPicker
+{
+    self.monthPicker.selectedDate = self.displayDate;
+    
+    self.monthPickerVisible = YES;
+    [self animateMonthPickerTransitionWithDelay:0];
+}
+
+- (void)dismissMonthPicker
+{
+    self.monthPickerVisible = NO;
+    [self animateMonthPickerTransitionWithDelay:kMonthPickerDimissDelay];
+}
+
+- (void)animateMonthPickerTransitionWithDelay:(NSTimeInterval)delay
+{
+    [UIView animateWithDuration:kMonthPickerAnimationDuration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self layoutMonthPicker];
+    } completion:nil];
+}
+
 @end

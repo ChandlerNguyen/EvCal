@@ -39,7 +39,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="RsZ-kA-Aqe" kind="push" id="Srr-n2-iaX"/>
+                                    <action selector="monthPickerButtonTapped:" destination="qNj-KM-reM" eventType="touchDragInside" id="z4c-Zm-MYq"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -66,38 +66,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7z-dO-wZi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="845" y="314"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="xw0-qU-JPX">
-            <objects>
-                <viewController id="RsZ-kA-Aqe" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1Ru-qo-6Z6"/>
-                        <viewControllerLayoutGuide type="bottom" id="02r-bq-jur"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zxC-4c-GdL">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nqt-bo-1Qh" customClass="ECMonthPicker">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Nqt-bo-1Qh" secondAttribute="trailing" id="Ddi-rX-Fn3"/>
-                            <constraint firstItem="Nqt-bo-1Qh" firstAttribute="leading" secondItem="zxC-4c-GdL" secondAttribute="leading" id="IqS-RD-LXS"/>
-                            <constraint firstItem="Nqt-bo-1Qh" firstAttribute="top" secondItem="zxC-4c-GdL" secondAttribute="top" id="QqC-Lf-shQ"/>
-                            <constraint firstItem="Nqt-bo-1Qh" firstAttribute="bottom" secondItem="02r-bq-jur" secondAttribute="top" id="lVk-oX-tMA"/>
-                        </constraints>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="YxA-5g-lnp"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="P4f-ee-A4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="845" y="968"/>
         </scene>
         <!--Edit Event View Controller-->
         <scene sceneID="ZBd-aU-iau">

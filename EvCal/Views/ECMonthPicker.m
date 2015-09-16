@@ -28,6 +28,7 @@ const static NSInteger kMonthViewPageCount =    3;
 
 - (void)awakeFromNib
 {
+    self.backgroundColor = [UIColor whiteColor];
     self.selectedDate = [self.tunit beginningOfDay:[NSDate date]];
     [self updateMonthViewPagesForDate:self.selectedDate];
 }
@@ -42,6 +43,7 @@ const static NSInteger kMonthViewPageCount =    3;
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
         _selectedDate = [self.tunit beginningOfDay:date];
     }
     
@@ -80,6 +82,12 @@ const static NSInteger kMonthViewPageCount =    3;
     }
     
     return _tunit;
+}
+
+- (void)setSelectedDate:(NSDate * __nullable)selectedDate
+{
+    _selectedDate = selectedDate;
+    [self updateMonthViewPagesForDate:selectedDate];
 }
 
 - (UIScrollView*)monthViewContainer
