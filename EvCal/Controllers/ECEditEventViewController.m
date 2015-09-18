@@ -10,7 +10,7 @@
 @import EventKit;
 
 // Helpers
-#import "NSDate+CupertinoYankee.h"
+@import Tunits;
 #import "UIColor+ECAdditions.h"
 
 // EvCal Classes
@@ -139,7 +139,7 @@
 - (NSDate*)startDate
 {
     if (!_startDate) {
-        _startDate = [[NSDate date] beginningOfHour];
+        _startDate = [TimeUnit beginningOfHour:[NSDate date]];
     }
     
     return _startDate;

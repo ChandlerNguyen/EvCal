@@ -11,7 +11,7 @@
 @import EventKit;
 
 // Helpers
-#import "NSDate+CupertinoYankee.h"
+@import Tunits;
 
 #import "ECEventView.h"
 #import "ECDayViewEventsLayout.h"
@@ -213,7 +213,7 @@ const static NSTimeInterval kOneHourTimeInterval =          60 * 60;
 - (CGFloat)heightOfEventWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate displayDate:(NSDate *)displayDate bounds:(CGRect)bounds
 {
     CGFloat height = 0;
-    NSArray* hours = [displayDate hoursOfDay];
+    NSArray* hours = [TimeUnit hoursOfDay:displayDate];
     CGFloat minimumHeightForBounds = floorf(bounds.size.height * ((self.minimumEventViewTimeInterval / kOneHourTimeInterval) / hours.count));
     
     if (bounds.size.height > 0) {
@@ -227,8 +227,8 @@ const static NSTimeInterval kOneHourTimeInterval =          60 * 60;
 
 - (float)hoursBetweenStartDate:(NSDate*)startDate endDate:(NSDate*)endDate relativeToDate:(NSDate*)date
 {
-    NSDate* beginningOfDay = [date beginningOfDay];
-    NSDate* endOfDay = [date endOfDay];
+    NSDate* beginningOfDay = [TimeUnit beginningOfDay:date];
+    NSDate* endOfDay = [TimeUnit endOfDay:date];
     
     NSDate* start = nil;
     NSDate* end = nil;
@@ -254,12 +254,12 @@ const static NSTimeInterval kOneHourTimeInterval =          60 * 60;
         return bounds.origin.y;
     }
     
-    NSDate* beginningOfDay = [date beginningOfDay];
+    NSDate* beginningOfDay = [TimeUnit beginningOfDay:displayDate];
     if ([date compare:beginningOfDay] == NSOrderedAscending) {
         return bounds.origin.y;
     }
     
-    NSDate* endOfDay = [date endOfDay];
+    NSDate* endOfDay = [TimeUnit endOfDay:displayDate];
     if ([date compare:endOfDay] == NSOrderedDescending) {
         return CGRectGetMaxY(bounds);
     }
@@ -267,7 +267,7 @@ const static NSTimeInterval kOneHourTimeInterval =          60 * 60;
     CGFloat position = bounds.origin.y;
     if (bounds.size.height > 0) {
         
-        NSArray* hours = [date hoursOfDay];
+        NSArray* hours = [TimeUnit hoursOfDay:displayDate];
         
         float hoursAfterBeginningOfDay = ([date timeIntervalSinceDate:beginningOfDay] / kOneHourTimeInterval);
         
@@ -304,8 +304,9 @@ const static NSTimeInterval kOneHourTimeInterval =          60 * 60;
 - (NSDate*)dateForVerticalPosition:(CGFloat)verticalPosition relativeToDate:(NSDate *)date bounds:(CGRect)bounds
 {
     if (date) {
-        NSDate* beginningOfDay = [date beginningOfDay];
-        NSDate* endOfDay = [date endOfDay];
+    
+        NSDate* beginningOfDay = [TimeUnit beginningOfDay:date];
+        NSDate* endOfDay = [TimeUnit endOfDay:date];
         
         CGFloat secondHeight = bounds.size.height / [endOfDay timeIntervalSinceDate:beginningOfDay];
         NSTimeInterval timeIntervalFromStartOfDay = (verticalPosition -bounds.origin.y) / secondHeight;

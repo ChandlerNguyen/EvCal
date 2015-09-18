@@ -1,6 +1,0 @@
-framework module Tunits {
-  umbrella header "Pods-EvCalTests-Tunits-umbrella.h"
-
-  export *
-  module * { export * }
-}

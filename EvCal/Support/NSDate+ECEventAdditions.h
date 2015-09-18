@@ -25,4 +25,6 @@
  */
 - (NSDate*)dateWithTimeOfDate:(NSDate*)time;
 
+- (NSDate*)nearestFiveMinutes;
+
 @end

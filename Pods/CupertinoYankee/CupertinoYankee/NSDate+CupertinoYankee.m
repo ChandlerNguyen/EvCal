@@ -46,83 +46,6 @@
 
 @implementation NSDate (CupertinoYankee)
 
-- (NSDate*)tomorrow {
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    
-    NSDateComponents* components = [calendar components:(CYCalendarUnitYear | CYCalendarUnitMonth | CYCalendarUnitDay | CYCalendarUnitHour | CYCalendarUnitMinute | CYCalendarUnitSecond) fromDate:self];
-    components.day += 1;
-    
-    return [calendar dateFromComponents:components];
-}
-
-- (NSDate*)yesterday {
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    
-    NSDateComponents* components = [calendar components:(CYCalendarUnitYear | CYCalendarUnitMonth | CYCalendarUnitDay | CYCalendarUnitHour | CYCalendarUnitMinute | CYCalendarUnitSecond) fromDate:self];
-    components.day -= 1;
-    return [calendar dateFromComponents:components];
-}
-
-#pragma mark -
-
-- (NSArray*)hoursOfDay
-{
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDate* beginningOfDay = [self beginningOfDay];
-    NSRange hours = [calendar rangeOfUnit:NSCalendarUnitHour inUnit:NSCalendarUnitDay forDate:beginningOfDay];
-    
-    NSMutableArray* mutableHoursOfDay = [[NSMutableArray alloc] init];
-    for (NSInteger i = hours.location; i < hours.location + hours.length; i++) {
-        [mutableHoursOfDay addObject:[calendar dateByAddingUnit:NSCalendarUnitHour value:i toDate:beginningOfDay options:0]];
-    }
-    
-    return [mutableHoursOfDay copy];
-}
-
-#pragma mark -
-
-- (NSDate*)beginningOfMinute {
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    
-    NSDateComponents* components = [calendar components:(CYCalendarUnitYear | CYCalendarUnitMonth | CYCalendarUnitDay | CYCalendarUnitHour | CYCalendarUnitMinute) fromDate:self];
-    
-    return [calendar dateFromComponents:components];
-}
-
-- (NSDate*)endOfMinute {
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    
-    NSDateComponents* components = [[NSDateComponents alloc] init];
-    components.minute = 1;
-    
-    return [[calendar dateByAddingComponents:components toDate:self options:0] dateByAddingTimeInterval:-1];
-}
-
-#pragma mark - 
-
-- (NSDate*)beginningOfHour {
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    
-    NSDateComponents* components = [calendar components:(CYCalendarUnitYear | CYCalendarUnitMonth | CYCalendarUnitDay | CYCalendarUnitHour) fromDate:self];
-    
-    return [calendar dateFromComponents:components];
-}
-
-- (NSDate*)endOfHour {
-    return [[self nextHour] dateByAddingTimeInterval:-1];
-}
-
-- (NSDate*)nextHour {
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    
-    NSDateComponents* components = [calendar components:(CYCalendarUnitYear | CYCalendarUnitMonth | CYCalendarUnitDay | CYCalendarUnitHour) fromDate:self];
-    components.hour += 1;
-    
-    return [calendar dateFromComponents:components];
-}
-
-#pragma mark -
-
 - (NSDate *)beginningOfDay {
     NSCalendar *calendar = [NSCalendar currentCalendar];
 
@@ -198,26 +121,6 @@
     components.year = 1;
 
     return [[calendar dateByAddingComponents:components toDate:[self beginningOfYear] options:0] dateByAddingTimeInterval:-1];
-}
-
-#pragma mark -
-
-- (NSDate*)nearestFiveMinutes
-{
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    
-    NSDateComponents* components = [calendar components:(NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:self];
-    NSInteger totalSeconds = components.minute * 60 + components.second;
-    
-    NSInteger offset = totalSeconds % (5 * 60);
-    NSDateComponents* deltaComponents = [[NSDateComponents alloc] init];
-    if (offset > 2.5 * 60) {
-        deltaComponents.second = (5 * 60) - offset;
-    } else {
-        deltaComponents.second = -offset;
-    }
-    
-    return [calendar dateByAddingComponents:deltaComponents toDate:self options:0];
 }
 
 @end

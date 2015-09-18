@@ -24,4 +24,27 @@
     return [calendar dateFromComponents:dateComponents];
 }
 
+const static NSTimeInterval kFiveMinuteTimeInterval = 5.0 * 60.0;
+
+- (NSDate*)nearestFiveMinutes
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents* dateComponents = [calendar components:(NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:self];
+    
+    NSInteger minutes = dateComponents.minute % 5;
+    NSTimeInterval secondsSinceFiveMinuteInterval = minutes * 60 + dateComponents.second;
+    
+    NSTimeInterval delta = 0.0;
+    if (secondsSinceFiveMinuteInterval >= kFiveMinuteTimeInterval / 2.0) {
+        // round up
+        delta = kFiveMinuteTimeInterval - secondsSinceFiveMinuteInterval; // difference between current minutes seconds and five minutes
+    } else {
+        // round down
+        delta = -secondsSinceFiveMinuteInterval;
+    }
+    
+    return [self dateByAddingTimeInterval:delta];
+}
+
 @end

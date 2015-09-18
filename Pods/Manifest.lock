@@ -9,15 +9,13 @@ PODS:
     - CocoaLumberjack/Default
   - CupertinoYankee (1.0.2)
   - EDColor (1.0.0)
-  - JPSimulatorHacks (1.2.0)
   - MSCellAccessory (1.1.2)
-  - Tunits (0.3.0)
+  - Tunits (0.4.0)
 
 DEPENDENCIES:
   - CocoaLumberjack
   - CupertinoYankee (= 1.0.2)
   - EDColor
-  - JPSimulatorHacks (= 1.2.0)
   - MSCellAccessory
   - Tunits
 
@@ -25,8 +23,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 019d1361244274a6138c788c6cb80baabc13fb8f
   CupertinoYankee: c288994087c791657fce35a43d2a604e64eef23e
   EDColor: c83f9a61f9f9b3c23d541f1feb561558e29cb088
-  JPSimulatorHacks: 022d7dbd8e503fde4be274bf374a54f36f6ebc10
   MSCellAccessory: 8265f3cd2386c1f372da00232472605ab11426e4
-  Tunits: c649b5031f66920fc96ff2e418946de929a63153
+  Tunits: f0c423bf31e52a83c17622458f3797075268e45f
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.38.2

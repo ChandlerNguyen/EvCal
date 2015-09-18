@@ -1,0 +1,6 @@
+framework module CupertinoYankee {
+  umbrella header "CupertinoYankee-umbrella.h"
+
+  export *
+  module * { export * }
+}

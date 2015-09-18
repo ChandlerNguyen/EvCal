@@ -161,11 +161,11 @@ static NSArray* weekdays = nil;
 + (NSArray*)weekdays
 {
     if (!weekdays) {
-        weekdays = @[[EKRecurrenceDayOfWeek dayOfWeek:EKMonday],
-                     [EKRecurrenceDayOfWeek dayOfWeek:EKTuesday],
-                     [EKRecurrenceDayOfWeek dayOfWeek:EKWednesday],
-                     [EKRecurrenceDayOfWeek dayOfWeek:EKThursday],
-                     [EKRecurrenceDayOfWeek dayOfWeek:EKFriday]];
+        weekdays = @[[EKRecurrenceDayOfWeek dayOfWeek:EKWeekdayMonday],
+                     [EKRecurrenceDayOfWeek dayOfWeek:EKWeekdayTuesday],
+                     [EKRecurrenceDayOfWeek dayOfWeek:EKWeekdayWednesday],
+                     [EKRecurrenceDayOfWeek dayOfWeek:EKWeekdayThursday],
+                     [EKRecurrenceDayOfWeek dayOfWeek:EKWeekdayFriday]];
     }
     
     return weekdays;

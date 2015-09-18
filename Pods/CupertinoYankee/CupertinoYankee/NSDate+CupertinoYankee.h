@@ -28,61 +28,6 @@
  @discussion All date calculations are based on `NSCalendar +currentCalendar`.
  */
 @interface NSDate (CupertinoYankee)
-///-----------------------------------------
-/// @name Calculating a relative day
-///-----------------------------------------
-
-/**
-*  Returns a new date with the same hour, second, and minute on the day following the receiver.
-*/
-- (NSDate*)tomorrow;
-
-/**
- *  Returns a new date with the same hour, second, and minute on the day preceding the receiver.
- */
-- (NSDate*)yesterday;
-
-///------------------------------------------------------------------------------
-/// @name Calculating Hours In A Day
-///------------------------------------------------------------------------------
-
-/**
- *  Returns an array of date objects with the first second of each hour in the same day as the receiver.
- */
-- (NSArray*)hoursOfDay;
-
-///------------------------------------------------------------------------------
-/// @name Calculating Beginning / End of Minute
-///------------------------------------------------------------------------------
-
-/**
- *  Returns a new date with the first second of the minute of the receiver
- */
-- (NSDate*)beginningOfMinute;
-
-/**
- *  Returns a new date with the last second of the minute of the receiver
- */
-- (NSDate*)endOfMinute;
-
-///------------------------------------------------------------------------------
-/// @name Calculating Beginning / End of Hour
-///------------------------------------------------------------------------------
-
-/**
- *  Returns a new date with the first second of the hour of the receiver
- */
-- (NSDate*)beginningOfHour;
-
-/**
- * Returns a new date with the last second of the hour of the receiver
- */
-- (NSDate*)endOfHour;
-
-/**
- * Returns a new date with the first second of the hour following the receiver's
- */
-- (NSDate*)nextHour;
 
 ///-----------------------------------------
 /// @name Calculating Beginning / End of Day
@@ -139,15 +84,5 @@
  Returns a new date with the last second of the last day of the year of the receiver.
  */
 - (NSDate *)endOfYear;
-
-///------------------------------------------------------------------------------
-/// @name Calculating Nearest Incremental Time
-///------------------------------------------------------------------------------
-
-/**
- Returns a new date with the nearest five minute increment before or after the receiver.
- */
-- (NSDate *)nearestFiveMinutes;
-
 
 @end

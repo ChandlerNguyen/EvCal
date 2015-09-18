@@ -10,8 +10,9 @@
 @import EventKit;
 
 // Helpers
-#import "NSDate+CupertinoYankee.h"
+@import Tunits;
 #import "UIColor+ECAdditions.h"
+#import "NSDate+ECEventAdditions.h"
 
 // EvCal Classes
 #import "ECSingleDayView.h"
@@ -190,7 +191,7 @@
 {
     NSMutableArray* mutableHourLines = [[NSMutableArray alloc] init];
     
-    for (NSDate* date in [self.date hoursOfDay]) {
+    for (NSDate* date in [TimeUnit hoursOfDay:self.date]) {
         ECTimeLine* line = [[ECTimeLine alloc] initWithDate:date];
         
         [mutableHourLines addObject:line];
@@ -245,8 +246,9 @@
 
 - (void)addCurrentTimeLineTimer
 {
-    NSTimer* timer = [[NSTimer alloc] initWithFireDate:[[NSDate date] beginningOfMinute] interval:60 target:self selector:@selector(updateCurrentTime) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+#warning add beginning of minute class to Tunits
+//    NSTimer* timer = [[NSTimer alloc] initWithFireDate:[[[TimeUnit alloc] init] ] interval:60 target:self selector:@selector(updateCurrentTime) userInfo:nil repeats:YES];
+//    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 }
 
 - (void)updateCurrentTime
@@ -569,7 +571,7 @@ const static CGFloat kEventViewHorizontalPadding =  4.0f;
     CGRect convertedCurrentTimeLineFrame = [self convertRect:self.currentTimeLine.frame fromView:self.durationEventsView];
     
     if (!CGRectIntersectsRect(topHalfOfVisibleRect, convertedCurrentTimeLineFrame)) {
-        [self scrollToTime:[[NSDate date] beginningOfHour] animated:animated];
+        [self scrollToTime:[TimeUnit beginningOfHour:[NSDate date]] animated:animated];
     }
 }
 

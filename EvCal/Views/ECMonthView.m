@@ -38,8 +38,7 @@ const static CGFloat kMonthLabelFontSize =          19.0f;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        TimeUnit* tunit = [[TimeUnit alloc] init];
-        _daysOfMonth = [tunit daysOfMonth:date];
+        _daysOfMonth = [TimeUnit daysOfMonth:date];
         [self updateMonthLabel];
         [self updateDatesLayout];
         
@@ -73,8 +72,7 @@ const static CGFloat kMonthLabelFontSize =          19.0f;
 - (NSArray*)daysOfMonth
 {
     if (!_daysOfMonth) {
-        TimeUnit* tunit = [[TimeUnit alloc] init];
-        _daysOfMonth = [tunit daysOfMonth:[NSDate date]];
+        _daysOfMonth = [TimeUnit daysOfMonth:[NSDate date]];
     }
     
     return _daysOfMonth;
@@ -258,7 +256,7 @@ const static NSInteger kCalendarMaximumRows =   8;
 
 - (void)updateDatesToMonthContainingDate:(nullable NSDate *)date
 {
-    _daysOfMonth = [[[TimeUnit alloc] init] daysOfMonth:date];
+    _daysOfMonth = [TimeUnit daysOfMonth:date];
     [self clearDateLabels];
     
     [self updateMonthLabel];

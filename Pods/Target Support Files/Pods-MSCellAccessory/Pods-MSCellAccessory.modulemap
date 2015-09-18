@@ -1,6 +1,0 @@
-framework module MSCellAccessory {
-  umbrella header "Pods-MSCellAccessory-umbrella.h"
-
-  export *
-  module * { export * }
-}
