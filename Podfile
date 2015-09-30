@@ -5,3 +5,7 @@ pod 'EDColor'
 pod 'MSCellAccessory'
 pod 'Tunits'
 use_frameworks!
+
+target :EvCalTests do
+	pod 'Tunits'
+end

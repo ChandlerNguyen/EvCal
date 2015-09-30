@@ -12,14 +12,11 @@
 #import <XCTest/XCTest.h>
 
 // Pods
-#if !(TARGET_IPHONE_SIMULATOR)
-    #import <JPSimulatorHacks/JPSimulatorHacks.h>
-#endif
 #import <CocoaLumberjack/CocoaLumberjack.h>
 static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaLumberjack
 
 // Categories
-#import "NSDate+CupertinoYankee.h"
+@import Tunits;
 #import "NSArray+ECTesting.h"
 
 // EvCalTests Classes
@@ -33,6 +30,7 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
 
 @property (nonatomic, strong) EKCalendar* testCalendar;
 
+@property (nonatomic, strong) TimeUnit* tunit;
 @property (nonatomic, strong) NSDate* testStartDate;
 
 @end
@@ -44,6 +42,7 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
 - (void)setUp {
     [super setUp];
     
+    self.tunit = [[TimeUnit alloc] init];
     self.testStartDate = [NSDate date];
 
     self.eventStore = [[EKEventStore alloc] init];
@@ -226,7 +225,7 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     singleEvent.title = @"First Event Title";
     singleEvent.location = @"123 Fake Street";
     singleEvent.startDate = self.testStartDate;
-    singleEvent.endDate = [singleEvent.startDate endOfHour];
+    singleEvent.endDate = [self.tunit endOfHour:singleEvent.startDate];
     singleEvent.calendar = self.testCalendar;
 
     XCTAssert([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]);
@@ -241,11 +240,11 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     singleEvent.title = @"First Event Title";
     singleEvent.location = @"123 Fake Street";
     singleEvent.startDate = self.testStartDate;
-    singleEvent.endDate = [singleEvent.startDate endOfHour];
+    singleEvent.endDate = [self.tunit endOfHour:singleEvent.startDate];
     singleEvent.calendar = self.testCalendar;
 
     [self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent];
-    NSArray* events = [self.eventStoreProxy eventsFrom:[singleEvent.startDate beginningOfDay] to:[singleEvent.endDate endOfDay] in:@[self.testCalendar]];
+    NSArray* events = [self.eventStoreProxy eventsFrom:[self.tunit beginningOfDay:singleEvent.startDate] to:[self.tunit endOfDay:singleEvent.endDate] in:@[self.testCalendar]];
     NSString* singleEventID = singleEvent.eventIdentifier;
     
     XCTAssertNotNil([events eventWithIdentifier:singleEventID]);
@@ -259,7 +258,7 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     recurringEvent.title = @"Recurring Event Title";
     recurringEvent.location = @"123 Fake Street";
     recurringEvent.startDate = self.testStartDate;
-    recurringEvent.endDate = [recurringEvent.startDate endOfHour];
+    recurringEvent.endDate = [self.tunit endOfHour:recurringEvent.startDate];
     recurringEvent.calendar = self.testCalendar;
     EKRecurrenceRule* weeklyRecurrence = [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:EKRecurrenceFrequencyWeekly
                                                                                       interval:1
@@ -267,7 +266,8 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     [recurringEvent addRecurrenceRule:weeklyRecurrence];
     [self.eventStoreProxy saveEvent:recurringEvent span:EKSpanFutureEvents];
     
-    XCTAssert([self.eventStoreProxy eventsFrom:[self.testStartDate beginningOfDay] to:[[[self.testStartDate endOfYear]tomorrow] endOfYear] in:@[self.testCalendar]].count == 50);
+    NSDate* endOfNextYear = [self.tunit endOfYear:[self.tunit dayAfter:[self.tunit endOfYear:self.testStartDate]]];
+    XCTAssert([self.eventStoreProxy eventsFrom:[self.tunit beginningOfDay:self.testStartDate] to:endOfNextYear in:@[self.testCalendar]].count == 50);
     
     [self.eventStore removeEvent:recurringEvent span:EKSpanFutureEvents commit:YES error:nil];
 }
@@ -281,7 +281,7 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     singleEvent.title = @"First Event Title";
     singleEvent.location = @"123 Fake Street";
     singleEvent.startDate = self.testStartDate;
-    singleEvent.endDate = [singleEvent.startDate endOfHour];
+    singleEvent.endDate = [self.tunit endOfHour:singleEvent.startDate];
     singleEvent.calendar = self.testCalendar;
     
     [self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent];
@@ -295,7 +295,7 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     singleEvent.title = @"First Event Title";
     singleEvent.location = @"123 Fake Street";
     singleEvent.startDate = self.testStartDate;
-    singleEvent.endDate = [singleEvent.startDate endOfHour];
+    singleEvent.endDate = [self.tunit endOfHour:singleEvent.startDate];
     singleEvent.calendar = self.testCalendar;
     
     [self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent];
@@ -310,12 +310,12 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     singleEvent.title = @"First Event Title";
     singleEvent.location = @"123 Fake Street";
     singleEvent.startDate = self.testStartDate;
-    singleEvent.endDate = [singleEvent.startDate endOfHour];
+    singleEvent.endDate = [self.tunit endOfHour:singleEvent.startDate];
     singleEvent.calendar = self.testCalendar;
 
     [self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent];
     [self.eventStoreProxy removeEvent:singleEvent span:EKSpanThisEvent];
-    NSArray* events = [self.eventStoreProxy eventsFrom:[singleEvent.startDate beginningOfDay] to:[singleEvent.endDate endOfDay] in:@[self.testCalendar]];
+    NSArray* events = [self.eventStoreProxy eventsFrom:[self.tunit beginningOfDay:singleEvent.startDate] to:[self.tunit endOfDay:singleEvent.startDate] in:@[self.testCalendar]];
     XCTAssertNil(events);
 }
 
@@ -325,7 +325,7 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     recurringEvent.title = @"Recurring Event Title";
     recurringEvent.location = @"123 Fake Street";
     recurringEvent.startDate = self.testStartDate;
-    recurringEvent.endDate = [recurringEvent.startDate endOfHour];
+    recurringEvent.endDate = [self.tunit endOfHour:recurringEvent.startDate];
     recurringEvent.calendar = self.testCalendar;
     EKRecurrenceRule* weeklyRecurrence = [[EKRecurrenceRule alloc] initRecurrenceWithFrequency:EKRecurrenceFrequencyWeekly
                                                                                       interval:1
@@ -334,7 +334,8 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     [self.eventStoreProxy saveEvent:recurringEvent span:EKSpanFutureEvents];
     [self.eventStoreProxy removeEvent:recurringEvent span:EKSpanFutureEvents];
     
-    XCTAssert([self.eventStoreProxy eventsFrom:[self.testStartDate beginningOfDay] to:[[[self.testStartDate endOfYear]tomorrow] endOfYear] in:@[self.testCalendar]].count == 0);
+    NSDate* endOfNextYear = [self.tunit endOfYear:[self.tunit dayAfter:[self.tunit endOfYear:self.testStartDate]]];
+    XCTAssert([self.eventStoreProxy eventsFrom:[self.tunit beginningOfDay:self.testStartDate] to:endOfNextYear in:@[self.testCalendar]].count == 0);
 }
 
 - (void)testSavingNilEventFails
@@ -370,7 +371,7 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     
     singleEvent.title = @"Single Event Title";
     singleEvent.endDate = self.testStartDate;
-    singleEvent.startDate = [self.testStartDate endOfHour];
+    singleEvent.startDate = [self.tunit endOfHour:self.testStartDate];
     singleEvent.calendar = self.testCalendar;
     
     XCTAssertFalse([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]); // end date prior to start date
@@ -382,9 +383,10 @@ static const DDLogLevel ddLogLevel __unused = DDLogLevelDebug; // Used by CocoaL
     
     singleEvent.title = @"Single Event Title";
     singleEvent.startDate = self.testStartDate;
-    singleEvent.endDate = [self.testStartDate endOfHour];
+    singleEvent.endDate = [self.tunit endOfHour:self.testStartDate];
     
-    singleEvent.calendar = nil;
+    EKCalendar* nilCalendar = nil;
+    singleEvent.calendar = nilCalendar;
     XCTAssertFalse([self.eventStoreProxy saveEvent:singleEvent span:EKSpanThisEvent]); // no end date
 }
 

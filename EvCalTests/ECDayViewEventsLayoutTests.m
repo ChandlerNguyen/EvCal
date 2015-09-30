@@ -11,7 +11,7 @@
 #import <XCTest/XCTest.h>
 
 // Helpers
-#import "NSDate+CupertinoYankee.h"
+@import Tunits;
 
 // EvCal Classes
 #import "ECDayViewEventsLayout.h"
@@ -25,6 +25,7 @@
 @property (nonatomic, strong) EKCalendar* testCalendar;
 @property (nonatomic, strong) NSMutableArray* createdEvents;
 @property (nonatomic, strong) NSDate* testStartDate;
+@property (nonatomic, strong) TimeUnit* tunit;
 
 @property (nonatomic) CGFloat minimumHeight;
 @property (nonatomic) CGRect testBounds;
@@ -45,6 +46,7 @@
     
     // Grab start date
     self.testStartDate = [NSDate date];
+    self.tunit = [[TimeUnit alloc] init];
     
     // Init layout
     self.layout = [[ECDayViewEventsLayout alloc] init];
@@ -76,6 +78,7 @@
 
 - (void)tearDown {
     
+    self.tunit = nil;
     self.testStartDate = nil;
     self.layout = nil;
     self.eventViews = nil;
@@ -153,7 +156,7 @@
 #pragma mark Testing Data Source calls
 - (void)testEventViewLayoutAsksDataSourceForBounds
 {
-    self.eventViews = @[[self createEventViewWithStartDate:self.testStartDate endDate:[self.testStartDate endOfHour] allDay:NO]];
+    self.eventViews = @[[self createEventViewWithStartDate:self.testStartDate endDate:[self.tunit endOfHour:self.testStartDate] allDay:NO]];
     
     [self.layout frameForEventView:self.eventViews.firstObject];
     XCTAssertTrue(self.eventViewBoundsRequested);
@@ -161,7 +164,7 @@
 
 - (void)testEventViewLayoutAsksDataSourceForEventViews
 {
-    self.eventViews = @[[self createEventViewWithStartDate:self.testStartDate endDate:[self.testStartDate endOfHour] allDay:NO]];
+    self.eventViews = @[[self createEventViewWithStartDate:self.testStartDate endDate:[self.tunit endOfHour:self.testStartDate] allDay:NO]];
     
     [self.layout frameForEventView:self.eventViews.firstObject];
     XCTAssertTrue(self.eventViewsRequested);
@@ -169,7 +172,7 @@
 
 - (void)testEventViewLayoutAsksDataSourceForDisplayDate
 {
-    ECEventView* eventView = [self createEventViewWithStartDate:self.testStartDate endDate:[self.testStartDate endOfHour] allDay:NO];
+    ECEventView* eventView = [self createEventViewWithStartDate:self.testStartDate endDate:[self.tunit endOfHour:self.testStartDate] allDay:NO];
     
     [self.layout frameForEventView:eventView];
     XCTAssertTrue(self.displayDateRequested);
@@ -178,7 +181,7 @@
 
 - (void)testEventViewLayoutRequestsBoundsAfterLayoutInvalidation
 {
-    ECEventView* eventView = [self createEventViewWithStartDate:self.testStartDate endDate:[self.testStartDate endOfHour] allDay:NO];
+    ECEventView* eventView = [self createEventViewWithStartDate:self.testStartDate endDate:[self.tunit endOfHour:self.testStartDate] allDay:NO];
     
     [self.layout frameForEventView:eventView];
     [self.layout invalidateLayout];
@@ -190,7 +193,7 @@
 
 - (void)testEventViewLayoutRequestsEventViewsAfterLayoutInvalidation
 {
-    self.eventViews = @[[self createEventViewWithStartDate:self.testStartDate endDate:[self.testStartDate endOfHour] allDay:NO]];
+    self.eventViews = @[[self createEventViewWithStartDate:self.testStartDate endDate:[self.tunit endOfHour:self.testStartDate] allDay:NO]];
     
     [self.layout frameForEventView:self.eventViews.firstObject];
     [self.layout invalidateLayout];
@@ -202,7 +205,7 @@
 
 - (void)testEventViewLayoutRequestsNumberOfHoursAfterLayoutInvalidation
 {
-    self.eventViews = @[[self createEventViewWithStartDate:self.testStartDate endDate:[self.testStartDate endOfHour] allDay:NO]];
+    self.eventViews = @[[self createEventViewWithStartDate:self.testStartDate endDate:[self.tunit endOfHour:self.testStartDate] allDay:NO]];
     
     [self.layout frameForEventView:self.eventViews.firstObject];
     [self.layout invalidateLayout];
@@ -221,7 +224,7 @@
 
 - (void)testEventViewLayoutReturnsZeroFrameIfBoundAreZero
 {
-    self.eventViews = @[[self createEventViewWithStartDate:self.testStartDate endDate:[self.testStartDate endOfHour] allDay:NO]];
+    self.eventViews = @[[self createEventViewWithStartDate:self.testStartDate endDate:[self.tunit endOfHour:self.testStartDate] allDay:NO]];
     
     self.testBounds = CGRectZero;
     [self.layout invalidateLayout];
@@ -234,7 +237,7 @@
 #pragma mark Height
 - (void)testEventViewHeightForCGRectZero
 {
-    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* startDate = [self.tunit beginningOfDay:[NSDate date]];
     NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
@@ -244,7 +247,7 @@
 
 - (void)testEventViewHeightForEventWithinDay
 {
-    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* startDate = [self.tunit beginningOfDay:[NSDate date]];
     NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
@@ -256,8 +259,8 @@
 {
     // Start date is the the beginning of the previous day and end date is one
     // hour into the day
-    NSDate* startDate = [[[NSDate date] yesterday] beginningOfDay];
-    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:[[startDate tomorrow] beginningOfDay] options:0];
+    NSDate* startDate = [self.tunit beginningOfDay:[self.tunit dayBefore:[NSDate date]]];
+    NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:[self.tunit beginningOfDay:[self.tunit dayAfter:startDate]] options:0];
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
     
@@ -266,7 +269,7 @@
 
 - (void)testEventViewHeightForEventWithEndDateInFollowingDay
 {
-    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* startDate = [self.tunit beginningOfDay:[NSDate date]];
     NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:2 toDate:startDate options:0];
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
@@ -278,7 +281,7 @@
 
 - (void)testEventViewPositionForCGRectZeroIsZero
 {
-    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* startDate = [self.tunit beginningOfDay:[NSDate date]];
     NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
@@ -288,7 +291,7 @@
 
 - (void)testEventViewPositionForDateAtStartOfDay
 {
-    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* startDate = [self.tunit beginningOfDay:[NSDate date]];
     NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
@@ -298,7 +301,7 @@
 
 - (void)testEventViewPositionForDateLaterInDay
 {
-    NSDate* startDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:[[NSDate date] beginningOfDay] options:0];
+    NSDate* startDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:[self.tunit beginningOfDay:[NSDate date]] options:0];
     NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
@@ -310,7 +313,7 @@
 {
     self.testBounds = CGRectMake(0, 100, self.testBounds.size.width, self.testBounds.size.height);
     
-    NSDate* startDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:[[NSDate date] beginningOfDay] options:0];
+    NSDate* startDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:[self.tunit beginningOfDay:[NSDate date]] options:0];
     NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
@@ -320,22 +323,22 @@
 
 - (void)testEventViewPositionForStartDateBeforeDay
 {
-    NSDate* startDate = [[[NSDate date] yesterday] beginningOfDay];
+    NSDate* startDate = [self.tunit beginningOfDay:[self.tunit dayBefore:[NSDate date]]];
     NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:NO];
     
-    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:[startDate tomorrow] bounds:self.testBounds] == 0);
+    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:[self.tunit dayAfter:startDate] bounds:self.testBounds] == 0);
 }
 
 - (void)testEventViewPositionForAllDayEvent
 {
-    NSDate* startDate = [[NSDate date] beginningOfDay];
+    NSDate* startDate = [self.tunit beginningOfDay:[NSDate date]];
     NSDate* endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:startDate options:0];
     
     ECEventView* eventView = [self createEventViewWithStartDate:startDate endDate:endDate allDay:YES];
     
-    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:[startDate tomorrow] bounds:self.testBounds] == 0);
+    XCTAssert([self.layout verticalPositionForDate:eventView.event.startDate relativeToDate:[self.tunit dayAfter:startDate] bounds:self.testBounds] == 0);
 }
 
 //  12:00 AM *+----------------------+
@@ -346,7 +349,7 @@
 - (void)testEventViewLayoutCreatesCorrectFrameForOneEvent
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDate* midnight = [self.testStartDate beginningOfDay];
+    NSDate* midnight = [self.tunit beginningOfDay:self.testStartDate];
     NSDate* oneAM = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:midnight options:0];
 
     self.eventViews = @[[self createEventViewWithStartDate:midnight endDate:oneAM allDay:NO]];
@@ -366,7 +369,7 @@
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
     
-    NSDate* midnight = [self.testStartDate beginningOfDay];
+    NSDate* midnight = [self.tunit beginningOfDay:self.testStartDate];
     NSDate* twoAM = [calendar dateByAddingUnit:NSCalendarUnitHour value:2 toDate:midnight options:0];
     NSDate* threeAM = [calendar dateByAddingUnit:NSCalendarUnitHour value:3 toDate:midnight options:0];
 
@@ -396,7 +399,7 @@
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
     
-    NSDate* midnight = [self.testStartDate beginningOfDay];
+    NSDate* midnight = [self.tunit beginningOfDay:self.testStartDate];
     NSDate* fourAM = [calendar dateByAddingUnit:NSCalendarUnitHour value:4 toDate:midnight options:0];
     NSDate* fiveAM = [calendar dateByAddingUnit:NSCalendarUnitHour value:5 toDate:midnight options:0];
     NSDate* sixAM = [calendar dateByAddingUnit:NSCalendarUnitHour value:6 toDate:midnight options:0];
@@ -431,7 +434,7 @@
 {
     NSCalendar* calendar = [NSCalendar autoupdatingCurrentCalendar];
     
-    NSDate* midnight = [self.testStartDate beginningOfDay];
+    NSDate* midnight = [self.tunit beginningOfDay:self.testStartDate];
     NSDate* sevenAM = [calendar dateByAddingUnit:NSCalendarUnitHour value:7 toDate:midnight options:0];
     NSDate* eightAM = [calendar dateByAddingUnit:NSCalendarUnitHour value:8 toDate:midnight options:0];
     NSDate* nineAM = [calendar dateByAddingUnit:NSCalendarUnitHour value:9 toDate:midnight options:0];

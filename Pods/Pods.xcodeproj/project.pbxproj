@@ -7,223 +7,272 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		021BF8B4367958FE862A57C81920B4FA /* EDColor-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D6323160368F189FCCBEF71EC0459BC5 /* EDColor-dummy.m */; };
-		18E94E17555FA3B0AF30D358736DF7CB /* UIColor+iOS7.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F8D227F2FF52B98D11A39B10A35894 /* UIColor+iOS7.m */; };
-		1AA42204D0C5E50D95ACAF993B7A7D0D /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = 913FFF1BB20731ACD92502EAD42B0AD1 /* DDLog+LOGV.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5757F41247B1E6A68E77CC143666D7 /* CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A6396296027A7AB1276BEC2662110EEB /* CocoaLumberjack-dummy.m */; };
-		1E74AACE1618B9B427C55A4A32E48995 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 58463E3EB40202005AAEB09C8E901DF9 /* DDASLLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FF5FD217F0DEF5D4C03A68E5D85F38F /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = C63C940B45BD0F6C11CDAEC1202802A9 /* DDFileLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		067BE4C6EA007263D2F4A33C835BF6BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DA688B65BDB5155E6E3D81EBB80B39 /* Foundation.framework */; };
+		0CADD4597CF060665422AB0E173C9406 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 81BF4EA56E0FFFFB8979DF719F8D91A4 /* UIColor+Hex.m */; };
+		0CB94DDE64527667C3A4C81E014D180A /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B09BF7139588F1F330BDB8F2C3424B0A /* DDMultiFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		10BEE3E627D832F76D75ED187FA883AA /* UIColor+HSL.h in Headers */ = {isa = PBXBuildFile; fileRef = BA417B232143835413C594B0B6FBE951 /* UIColor+HSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		13745B746346BFE486D67821D736D40B /* MSCellAccessory-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CB24F2BBCD377F41291D89F8B2EFF38B /* MSCellAccessory-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1B44DE6CF147E5A55EF8E78D47065523 /* Pods-EvCalTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 76086CBC5797BD9FB5E17124CD5BE7F4 /* Pods-EvCalTests-dummy.m */; };
+		1B7AC20EC043B9CFAF5DF222B8BDDC36 /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C1EE75EE1918B3AE89F33F9FDCA9B56 /* DDLog+LOGV.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2181563AB97453FBC2DF3699A4BB692D /* TimeUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74724BF64FFBE12485D55F5A5B2D3CA1 /* TimeUnit.swift */; };
-		27F3A77075739A37BB761F984C03DE4D /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CAE442E5D3CF068C8A723371A14E232 /* DDMultiFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2FB75C9B6E672348FDDA0E3A39A3C80C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DA688B65BDB5155E6E3D81EBB80B39 /* Foundation.framework */; };
-		3E48F33E6719B938109AD17479505D30 /* MSCellAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = E6C84DDB0FEE4F61F5EA120E13DF34B4 /* MSCellAccessory.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		42A48F1E47D8F15BBF9F3063FB6B8329 /* UIView+AccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC4C43676549340D8D3D4A9387A6BCD5 /* UIView+AccessViewController.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		462AE01A5BD44357E338FEE3D0111B82 /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D37E34BB1DB8FEBBA95FE107C15A4E28 /* DDDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		4F3713610ABC3662CEEDDDC84132A3EB /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = D69955B4D8353175481C683B98E0CF38 /* DDLogMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		57C8FFB2BC193654D83C6D8E93615AE3 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2242717D06B516D52EFACEF0B26A478B /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		57DC8B047F1DDFDDD52B342C3103E98F /* UIColor+CIELAB.h in Headers */ = {isa = PBXBuildFile; fileRef = DD96FD66C4FD9D2958ED19059611D819 /* UIColor+CIELAB.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		59B61426B0556EC5AD9507A03A6344AC /* UIColor+HSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D18FB2F6A6EEEBECDA6B59B0ABA5FFF /* UIColor+HSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5BB3DD9DB18D7EBB1453E87BE2A35AF3 /* NSDate+CupertinoYankee.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D0081E7ADED77B6FD3C3F478BC9CE8 /* NSDate+CupertinoYankee.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		63846AE6E37B0C190240E3D2E0162C6E /* CupertinoYankee-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C1C8999A88FDB74A1D15B9E888E2F281 /* CupertinoYankee-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		651A4E978A3B46B44F14CA3E3EDB71A2 /* UIColor+CIELAB.m in Sources */ = {isa = PBXBuildFile; fileRef = EB77F7EBB332E8D81E0B011794B2E5A8 /* UIColor+CIELAB.m */; };
+		2285C5996EBD1FDABE63CBD0C8C07F45 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4083A56267BBF208EC7EA0E6AB2A64 /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2A16A1674E787203C160C1A402683EC1 /* Crayola.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A4FA0CAFDA4F3E74896E9663D48B83A /* Crayola.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2B088BD773F88E34724D56440726EB5E /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E681B9975B9FF3C983A42A55ACB92FFF /* DDContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		34EDCD8ACB287E249F891299073D6899 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199125806ACA97D0DF6B3B617444C990 /* UIKit.framework */; };
+		3C13563EF1F14D41AEC78CB2BA31B36A /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D448779BE5C16B7A6733D9A263F184 /* DDLog.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		4337E3F935C56A4136D8EE19EB3BA393 /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = A1F2D0187B492E8E3E05E32D47794591 /* DDContextFilterLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4C739487517BEE5B1A81E11C3EB63574 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DA688B65BDB5155E6E3D81EBB80B39 /* Foundation.framework */; };
+		524F65896E9AF49EDEE9BA71729A5315 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DA688B65BDB5155E6E3D81EBB80B39 /* Foundation.framework */; };
+		552E31A4C712D674A77D9EF75D79AA6B /* NSDate+CupertinoYankee.h in Headers */ = {isa = PBXBuildFile; fileRef = A6C0C640BD9A6DEAA6309A45F38AE7C8 /* NSDate+CupertinoYankee.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		59488BE4BFE70E67F85CF7753AA38AD5 /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = D1352E213B70D025D09FB266C56FC7C0 /* DDLogMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5B585E62074E5C0AB230C33D7E97EFC7 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = FBD64827DCFE77077705790B8D5FDE20 /* DDASLLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C4B6F5EE21A2A5B951DC46FB960F2A1 /* UIColor+CIELAB.m in Sources */ = {isa = PBXBuildFile; fileRef = 78470F36990847224B4A175E4F4B8C29 /* UIColor+CIELAB.m */; };
+		5C6CB7EAC06849083E4F763CFD2247EF /* Pods-EvCalTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B98E5EB5C4F5E2DC0495533D64CC6D4 /* Pods-EvCalTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C802F787EE31887D86522A75F5839EC /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A1ADF11D86C020A34E7590E3E7C71009 /* DDLegacyMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5DC4F53473877E026D9974901D88C78D /* UIColor+Hex.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A9FD41788C2B8506859AF0CDFDFA19A /* UIColor+Hex.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		65E083A49522A91D9AD6268088C00376 /* UIColor+iOS7.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C11549520925CCB4518578B1B59C81 /* UIColor+iOS7.m */; };
+		65EB793C23CB0CE0BBED297801857763 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DA688B65BDB5155E6E3D81EBB80B39 /* Foundation.framework */; };
 		6B9554B7715420F7F4F2B4081AF5F072 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DA688B65BDB5155E6E3D81EBB80B39 /* Foundation.framework */; };
-		6BA5E1F81D6B673A300F8FA5A643546C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D1CECA3090865A1EF366DA8B6BA5DDF /* UIKit.framework */; };
-		7684AAC639224B9BF624AC317891A4E6 /* MSCellAccessory-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA627AD53E789B73FD81B591172A61A9 /* MSCellAccessory-dummy.m */; };
-		7936EF152EB3C4AAF47996F70F4DC748 /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE8B436F59EFC2B9F91071BB094ED3E /* DDAssertMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C211E9320F025725AA9FEDEC151AF5D /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = B2F4E30E858AAEBAD1C3F2513849E8FA /* DDASLLogCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D59BD33868C4F21421CAA2811BF4BAF /* MSCellAccessory-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B9BABA42AEB8DC0F5660838A1AD89A3 /* MSCellAccessory-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D6E6FD5226B3931F4C6B743A6053A53 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = F4802407392BCB3F069E1834F9F33F06 /* UIColor+Hex.m */; };
-		7D7D17E252A62DD58793B2E55869B149 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A02E8706C35B261D534690FE08678A8F /* DDLog.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		6D3A56AC5BEBA3CC748DB6D38FC29F13 /* MSCellAccessory.h in Headers */ = {isa = PBXBuildFile; fileRef = CC34013D062950BBDC014E372466C62F /* MSCellAccessory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		708820C26D252EA61FF1768E32AA3391 /* MSCellAccessory-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB212F2CFC6872570188967B23A31AA0 /* MSCellAccessory-dummy.m */; };
+		727B944A787608DA8942EFFD54FC87B5 /* CupertinoYankee-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D734D0E087DCA742BF1258ACE839F19 /* CupertinoYankee-dummy.m */; };
+		777F35B4C2297D2E64779685FCD77E7B /* UIView+AccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 234152541A72DEBEF07E37770025E7F5 /* UIView+AccessViewController.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		788C457D063E22CBFBDBB844606D65CC /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 233EC4C3754AABFAC8CFAAADDBF28E28 /* DDDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		79AC687094B566D7D149BB66DE746944 /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 7114BE46416B022E2975EFE8D5CED8FD /* DDTTYLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AB23C8029339BBD5BB3DE5A235366AC /* UIView+AccessViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0560C8FE4268847EE4739D395ECE72E9 /* UIView+AccessViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AD17494C6ABF6B1FA803402066D1600 /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C622BC2A3AF7547AE3A09D7167103AF /* CocoaLumberjack.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7DE75E77515100B47495F3D004DFABCF /* Tunits-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D17379C5237CDC1279CD6495CFB9972 /* Tunits-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7F30EDD3A73FC4ECEDFC6BDF140A8A12 /* EDColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 29BAB7096E02769ABA294BC31A0C27D2 /* EDColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		812E7C9F77AD3DF9C782322738808A88 /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E5E0ECDA5062DC0DBDD8B2E91D84EBA /* DDDispatchQueueLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		85D4E5EF8D02CA2FAB61EDFF3A085511 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DA688B65BDB5155E6E3D81EBB80B39 /* Foundation.framework */; };
+		826B34262DFA41D4E294444AE6F322CF /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4374B26D8C0BCAE9FE4ECF055DB63AE6 /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		83B19CABE3E4A93A25902965006D04CD /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BE3A1B1A6F05F3704FB648C39E2D45 /* DDFileLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85F13965F61781905D005371924B7650 /* UIColor+HSB.h in Headers */ = {isa = PBXBuildFile; fileRef = BBBBB002D8528416B87DC3FC9222564D /* UIColor+HSB.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		874230BB8378360CB552804DE7D283D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DA688B65BDB5155E6E3D81EBB80B39 /* Foundation.framework */; };
-		8D7646403A459A01A5338C58E92B2E23 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = F70BCEC2BB497040D81DB2C42D5B5581 /* DDAbstractDatabaseLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E2AA1EDA4BAC32F6473F69D799B74D2 /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A06716605AE8CEFCBDCD49C1673FBD0 /* DDLegacyMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		95F3589D7DF92BA9540074B06D55F210 /* UIColor+Hex.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E76F7ADBFF36792EE48740FB2F0A804 /* UIColor+Hex.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		96B703CEC2AA90A550AC6607CAACA5AE /* CupertinoYankee-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A667EBE3124A495B2C9B111D9A562CE /* CupertinoYankee-dummy.m */; };
-		97EFC4FB8FF9B0FB5BF02F9EAEC9656D /* UIView+AccessViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 47724DAECF6ED845107B759626C60DFC /* UIView+AccessViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9F6A4DFB9B761B28ECFAC81AC8F0138C /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 40207F18AD326575446CA543FB3BAF50 /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		A38B936671BDE6C32064BFA21FE07E79 /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C57187653F6D0597F35A107240C175D /* DDTTYLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A65AFB4D90E346E40F6227D5107D7722 /* UIColor+Crayola.h in Headers */ = {isa = PBXBuildFile; fileRef = 42D237B80DEA195EE0990B96B86ED51A /* UIColor+Crayola.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A71A031CBF0326A43CBD47B69090ED38 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DA688B65BDB5155E6E3D81EBB80B39 /* Foundation.framework */; };
+		8EB145EB1142B41AFE439DB0C95D2D0A /* NSDate+CupertinoYankee.m in Sources */ = {isa = PBXBuildFile; fileRef = 7284130427EC584B28D26EBC22510C67 /* NSDate+CupertinoYankee.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		987D50FEDCC37149C28842DF8B1B1121 /* UIColor+HSL.m in Sources */ = {isa = PBXBuildFile; fileRef = C812327038B60AC52DA79CA1D3F69635 /* UIColor+HSL.m */; };
+		9CDAA5C72B5120B66745AF6801745972 /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E556292DE28EE109F676D4559653B3C /* DDMultiFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A90F300D30BD38F1A21852E34140D1C0 /* Tunits.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C8E7D23FB5E339F501FB577839358269 /* Tunits.bundle */; };
-		AA6F2D9723345C83A1EE4D6440B96F7F /* UIColor+Crayola.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6FE77A9E49E77FED029D02908FCEF4 /* UIColor+Crayola.m */; };
-		AF26AD16D1BDAF3506725D772A999BBB /* UIColor+HSB.m in Sources */ = {isa = PBXBuildFile; fileRef = D4EDD468649FD587EE883083DC5D6262 /* UIColor+HSB.m */; };
-		B2B661C744A7FEB9B55331242498023B /* UIColor+HSB.h in Headers */ = {isa = PBXBuildFile; fileRef = 78BC458CA62033FFF5C910A5B61C4330 /* UIColor+HSB.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B5DC8AC99F10E0974C57D523ECCF3FBA /* Crayola.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B5B21C3DC51DA2F374601E4521D11B3 /* Crayola.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BC47DB4B80988B59ED6A2493D48ECA1D /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 54887D88F27272DB37DAEB02CF52529D /* DDMultiFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		BD74E8F4A62DBFB662BAC497E00C25A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DA688B65BDB5155E6E3D81EBB80B39 /* Foundation.framework */; };
-		C3D80D7881ED592F5A5F8F2755F224F7 /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A55F73D04E8E5A7A356B90BB97DD2A /* DDContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		CB19FEEF75CA775EF3D21E09A81989C3 /* UIColor+iOS7.h in Headers */ = {isa = PBXBuildFile; fileRef = D5CB897B8B436D91EBDA44EF2C649FD5 /* UIColor+iOS7.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B218B1894E23F15B8BD5ED38F23B6A45 /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 888DB6EA76E2F453D04086205E9C45E2 /* DDASLLogCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B9EFEFCD75712B3ADCB7E348F6A9115F /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DC45ABF3447DFA397C5DCC4882EB6A /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		BBB30146772846667C4AD01CCC0C79E8 /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4433FB174CF253865B8B74FDCADA9282 /* DDDispatchQueueLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE2803DBD9B1176E5F61EAB1227B0B62 /* EDColor-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EF738D477C7C11788340653CE1B48438 /* EDColor-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE5A340A78BB1F252154BF416E00F847 /* EDColor.h in Headers */ = {isa = PBXBuildFile; fileRef = A54F0A9C782A76A006A187F9969C7625 /* EDColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C0D63463B42AA213A760631D4EE6D5FE /* UIColor+iOS7.h in Headers */ = {isa = PBXBuildFile; fileRef = 5558AB7E2E0ED30038CDD4513E53983C /* UIColor+iOS7.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CFA85473D9546BEDB89A8E871FC7CE81 /* Pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F65848B9D098C065E41A74FE83171A30 /* Pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D4098B5E5A347EDB7766F914DAE13A1B /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EB21FB859BF8E3C107253791C20C4CF1 /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		D41BC2563A6A91E538AF2AECE30DA2F5 /* Tunits-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB11EDB0C8CC30EB5DB65E37DA131ADB /* Tunits-dummy.m */; };
-		D544EB8094B832BF43F6991CF83E0F37 /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = FC86CB9E1753743DDEACDFA7B1EEEE5B /* CocoaLumberjack.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D6C0A4639EB057DD86C48F63A76B8325 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0063C7D1B8B8BDEEABC103F2DAF18CF1 /* Pods-dummy.m */; };
-		D776E84FB193EDC22715466E2EBAEB22 /* MSCellAccessory.h in Headers */ = {isa = PBXBuildFile; fileRef = E0B4A9E61A44EB3CA7F52B7F8E1FA858 /* MSCellAccessory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DACD7D25BB3D40934121BE93FAA02A6F /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A153A714BAE4B1EC8DD5674BD7597AD /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		DDFAE0438BB8E1FCE6606776F3ED8EC7 /* EDColor-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EF4F889589412B2DA77DEAA1E3BEF10 /* EDColor-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E432862A97EB2A71FD34F8F70F00DEB9 /* NSDate+CupertinoYankee.h in Headers */ = {isa = PBXBuildFile; fileRef = B696660B28DC71387F37F3968EA0B367 /* NSDate+CupertinoYankee.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EDC0121FF465197DEE6814C8758CCB84 /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4082C1113D277D29819CDCC1FBEFF932 /* DDContextFilterLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F8B99A1466397E977101EEB015891B64 /* UIColor+HSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 4103DA632AC1882B1CFF78EBD0819BD2 /* UIColor+HSL.m */; };
-		FC7DBBA651C55BCAD0817EE36FC5AE1F /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C6EE4EBBA21AC72943FDC7A467B2A5 /* DDASLLogCapture.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		FF35167282F94F3DEE39F966BA3F9D7B /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = E6F1A7091140B572A3F4ABAFBB1F1981 /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FFB529A783459C95937838888304CC16 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 081EE0B11A0C43BCD168F3547086222F /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		D7EF5FCE106E3CC1DC2317C5713CBAD7 /* UIColor+HSB.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C0D3DE5D164527CD69D0B4949707DE4 /* UIColor+HSB.m */; };
+		DAEB01088388BF0969CE1A3A4BFED458 /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = ADC7D0D6374B4D3920B92815CC1ED6EC /* DDAssertMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCD7428586488CD54A0E999A4D19C854 /* EDColor-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9B88077D5D3731D0BA9E3B8D81E399 /* EDColor-dummy.m */; };
+		E1B5DB2E3CFD7375D54AED9A678CC2A1 /* MSCellAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = 80AF0FBCAD2291E602B4688D7C4BE872 /* MSCellAccessory.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		E21141C0E0DE31F22D1B54D9847F2966 /* UIColor+Crayola.m in Sources */ = {isa = PBXBuildFile; fileRef = 35223907B67EEF982B5F6980B89A087A /* UIColor+Crayola.m */; };
+		E497B674CB31AAC1F49C0EE4FD69165F /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = B876F3BE3104A1815C5441CE7E2C6547 /* DDAbstractDatabaseLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E681F17235F232C04A4E1FC173A51A00 /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 8108A632AD64FFD15AF31E5756B45AB0 /* DDASLLogCapture.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		E75631D56482541F9FF65C2F472A5866 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DA688B65BDB5155E6E3D81EBB80B39 /* Foundation.framework */; };
+		E7ADAA139AB74BFE69FCF24A88C33B44 /* CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 215621CCEDD6755FE622FC06CF31504B /* CocoaLumberjack-dummy.m */; };
+		E8DD5C9B9401B74474CE5250E0DCC5AC /* UIColor+Crayola.h in Headers */ = {isa = PBXBuildFile; fileRef = 768A4F0548825F4C16DBA2E9A7256184 /* UIColor+Crayola.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EDD1F7321D414D48F47DBEF0F52BC891 /* UIColor+CIELAB.h in Headers */ = {isa = PBXBuildFile; fileRef = 2116D5D2B4833784EEEDBAAE89B25850 /* UIColor+CIELAB.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F3BAC16BB87883733C0291C8FD2909CA /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = D421BB60674A3CC11EEF0ABD178B5653 /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F6B3A8DB57D70B5894D043C77FF260F0 /* CupertinoYankee-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 95A22BD7E458D26C2D3E4B1E9FAD0464 /* CupertinoYankee-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1BD23B8C90ED60ADEC6BDE371E00124E /* PBXContainerItemProxy */ = {
+		4AA3D1EDDB137EA1481F4105FEB90416 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4E6E14E8A0C1231A1D7939F4EE166942;
-			remoteInfo = CupertinoYankee;
-		};
-		4C11A6054CB7ED971A10B8FF9649C8CA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D634427B0CD4160FA7EC895B29BAC961;
+			remoteGlobalIDString = C396B638CFC846977DB886FDC1E73533;
 			remoteInfo = MSCellAccessory;
 		};
-		93BFB3BA38C2516B549402CB4EF44308 /* PBXContainerItemProxy */ = {
+		8243A3FEE4657C6EA432ED625AC279F4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA567B347FC77042AE5EC6357544820;
+			remoteGlobalIDString = C396B638CFC846977DB886FDC1E73533;
+			remoteInfo = MSCellAccessory;
+		};
+		98B7A4DDB50876093CBB196832FFB062 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7334CE048B5D2E9F1BFF7DC9A66EEB05;
+			remoteInfo = CupertinoYankee;
+		};
+		A410E6A491E34EEA7C7A9FAFB815DB05 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A32DFB65200832A03ACB5A31CEEA73C;
 			remoteInfo = EDColor;
 		};
-		B49D04DEF85744AFD7D97D48DE870DB1 /* PBXContainerItemProxy */ = {
+		B39CB0A67BC014C90E5F61258C58051D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 39EA0D422F6C92F51E358D32058CAC9D;
 			remoteInfo = "Tunits-Tunits";
 		};
-		C9F39778BEE068978BCFC3B5904D60FD /* PBXContainerItemProxy */ = {
+		C4888CCC61786AF452B84EE59AEB8F6B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5963DC5773D19EA190DA8F91FADC5784;
+			remoteGlobalIDString = C1BB0F8C3B6B0A1174BAC28A604D2F46;
 			remoteInfo = CocoaLumberjack;
 		};
-		EDC32001922DB60BE5E538EB1F7E6AD2 /* PBXContainerItemProxy */ = {
+		CE8D72A76A6D944DF00B41246CEF33A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C1BB0F8C3B6B0A1174BAC28A604D2F46;
+			remoteInfo = CocoaLumberjack;
+		};
+		CF7036AC0054C47ABD02DA286D0B2135 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 24763386F062EAE6B00648D6E839A7DC;
 			remoteInfo = Tunits;
 		};
+		D023DF2E70A77704545EBEFE0E4BA2CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7334CE048B5D2E9F1BFF7DC9A66EEB05;
+			remoteInfo = CupertinoYankee;
+		};
+		E03FD5E3F7934243DB941223FA014CB1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 24763386F062EAE6B00648D6E839A7DC;
+			remoteInfo = Tunits;
+		};
+		EEF6A29FC2954539E63B3987E5D10E61 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A32DFB65200832A03ACB5A31CEEA73C;
+			remoteInfo = EDColor;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0063C7D1B8B8BDEEABC103F2DAF18CF1 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
-		02DA6B660760B2A8DD150DCEF2E562E2 /* CocoaLumberjack-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "CocoaLumberjack-Private.xcconfig"; sourceTree = "<group>"; };
-		081EE0B11A0C43BCD168F3547086222F /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Classes/DDFileLogger.m; sourceTree = "<group>"; };
+		0293E153852341E41B84CBA3EDDEE5B3 /* EDColor-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "EDColor-Private.xcconfig"; sourceTree = "<group>"; };
+		0525DD4D9D8A67177331517D7F5E2793 /* Pods-EvCalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EvCalTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0560C8FE4268847EE4739D395ECE72E9 /* UIView+AccessViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+AccessViewController.h"; path = "MSCellAccessory/UIView+AccessViewController.h"; sourceTree = "<group>"; };
+		07C11549520925CCB4518578B1B59C81 /* UIColor+iOS7.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+iOS7.m"; path = "EDColor/UIColor+iOS7.m"; sourceTree = "<group>"; };
 		0B79504471853AFA532E89B0A1A5FC7F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0B9BABA42AEB8DC0F5660838A1AD89A3 /* MSCellAccessory-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MSCellAccessory-umbrella.h"; sourceTree = "<group>"; };
-		0F42E67B49FEC9A357290442A4D9F0EF /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0FCDE65D188ED46A4F42F7AD9F2CB868 /* CupertinoYankee.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CupertinoYankee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D734D0E087DCA742BF1258ACE839F19 /* CupertinoYankee-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CupertinoYankee-dummy.m"; sourceTree = "<group>"; };
+		0DB6D5D72F8520998DE9377876507E24 /* Pods-EvCalTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EvCalTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		12A41D4D09C89EC6002EC26BFA0115B9 /* CocoaLumberjack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaLumberjack.xcconfig; sourceTree = "<group>"; };
 		1384AF8C48A320300045EBE2446B0BBA /* Tunits.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Tunits.xcconfig; sourceTree = "<group>"; };
 		16AC88981B279840E09735545B864900 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		199125806ACA97D0DF6B3B617444C990 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		19C07D4770FD5D8C84B38103FB94750C /* Tunits.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tunits.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1E5BC51CDA0E75D262D4A319EEFB1A9B /* CupertinoYankee-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "CupertinoYankee-Private.xcconfig"; sourceTree = "<group>"; };
-		2242717D06B516D52EFACEF0B26A478B /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		1CD88D43C8EE7169A7C2BC5C59728E38 /* EDColor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EDColor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E4083A56267BBF208EC7EA0E6AB2A64 /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Classes/DDFileLogger.m; sourceTree = "<group>"; };
+		2073710DCD14AF4AE5D4A8CDAA1318A6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2116D5D2B4833784EEEDBAAE89B25850 /* UIColor+CIELAB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+CIELAB.h"; path = "EDColor/UIColor+CIELAB.h"; sourceTree = "<group>"; };
+		215621CCEDD6755FE622FC06CF31504B /* CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
+		233EC4C3754AABFAC8CFAAADDBF28E28 /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDDispatchQueueLogFormatter.m; path = Classes/Extensions/DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		234152541A72DEBEF07E37770025E7F5 /* UIView+AccessViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+AccessViewController.m"; path = "MSCellAccessory/UIView+AccessViewController.m"; sourceTree = "<group>"; };
+		259AF6392DCBBABBA91CEA2CC74F7DCF /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		25AC043E0E3FA0E5C4D2EEE1DB8D2B42 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		287D4C2194F1CA7E347CE7D6E7897448 /* MSCellAccessory.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MSCellAccessory.modulemap; sourceTree = "<group>"; };
-		29BAB7096E02769ABA294BC31A0C27D2 /* EDColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EDColor.h; path = EDColor/EDColor.h; sourceTree = "<group>"; };
+		29F261FCDD3BC7276073187EC5CB0B24 /* MSCellAccessory-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MSCellAccessory-Private.xcconfig"; sourceTree = "<group>"; };
+		2B13ABAF2CE6F0BFA4ACA472644FF9A5 /* Pods-EvCalTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-EvCalTests.modulemap"; sourceTree = "<group>"; };
+		2B98E5EB5C4F5E2DC0495533D64CC6D4 /* Pods-EvCalTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EvCalTests-umbrella.h"; sourceTree = "<group>"; };
 		2D09E77D0B8FEDDB4118ED0A5A5DCF25 /* CupertinoYankee.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = CupertinoYankee.modulemap; sourceTree = "<group>"; };
-		2D6FE77A9E49E77FED029D02908FCEF4 /* UIColor+Crayola.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Crayola.m"; path = "EDColor/UIColor+Crayola.m"; sourceTree = "<group>"; };
 		30CA611CD01EAA208539217C920D72F1 /* CocoaLumberjack.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = CocoaLumberjack.modulemap; sourceTree = "<group>"; };
 		3185BA12F631952AAE357001591A144D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		35223907B67EEF982B5F6980B89A087A /* UIColor+Crayola.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Crayola.m"; path = "EDColor/UIColor+Crayola.m"; sourceTree = "<group>"; };
 		38736AB4400A2BC2FA5125A5170F0DB9 /* MSCellAccessory.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MSCellAccessory.xcconfig; sourceTree = "<group>"; };
-		3A667EBE3124A495B2C9B111D9A562CE /* CupertinoYankee-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CupertinoYankee-dummy.m"; sourceTree = "<group>"; };
+		3986E02B50F61DC43F0E7140C03C37C0 /* Pods_EvCalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EvCalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D17379C5237CDC1279CD6495CFB9972 /* Tunits-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Tunits-umbrella.h"; sourceTree = "<group>"; };
-		40207F18AD326575446CA543FB3BAF50 /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
-		4082C1113D277D29819CDCC1FBEFF932 /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
-		4103DA632AC1882B1CFF78EBD0819BD2 /* UIColor+HSL.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+HSL.m"; path = "EDColor/UIColor+HSL.m"; sourceTree = "<group>"; };
-		42D237B80DEA195EE0990B96B86ED51A /* UIColor+Crayola.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+Crayola.h"; path = "EDColor/UIColor+Crayola.h"; sourceTree = "<group>"; };
-		47724DAECF6ED845107B759626C60DFC /* UIView+AccessViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+AccessViewController.h"; path = "MSCellAccessory/UIView+AccessViewController.h"; sourceTree = "<group>"; };
-		47F8D227F2FF52B98D11A39B10A35894 /* UIColor+iOS7.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+iOS7.m"; path = "EDColor/UIColor+iOS7.m"; sourceTree = "<group>"; };
-		4A06716605AE8CEFCBDCD49C1673FBD0 /* DDLegacyMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLegacyMacros.h; path = Classes/DDLegacyMacros.h; sourceTree = "<group>"; };
-		4A153A714BAE4B1EC8DD5674BD7597AD /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Classes/DDTTYLogger.m; sourceTree = "<group>"; };
-		4C57187653F6D0597F35A107240C175D /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Classes/DDTTYLogger.h; sourceTree = "<group>"; };
-		4D1CECA3090865A1EF366DA8B6BA5DDF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		54887D88F27272DB37DAEB02CF52529D /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Classes/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
-		54A55F73D04E8E5A7A356B90BB97DD2A /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDContextFilterLogFormatter.m; path = Classes/Extensions/DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
-		58463E3EB40202005AAEB09C8E901DF9 /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = Classes/DDASLLogger.h; sourceTree = "<group>"; };
+		4374B26D8C0BCAE9FE4ECF055DB63AE6 /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
+		4433FB174CF253865B8B74FDCADA9282 /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDDispatchQueueLogFormatter.h; path = Classes/Extensions/DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		4640520E8F2456D43B4DFE4C5A6D097F /* Pods-EvCalTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EvCalTests-resources.sh"; sourceTree = "<group>"; };
+		4A4FA0CAFDA4F3E74896E9663D48B83A /* Crayola.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Crayola.h; path = EDColor/Crayola.h; sourceTree = "<group>"; };
+		4A9FD41788C2B8506859AF0CDFDFA19A /* UIColor+Hex.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+Hex.h"; path = "EDColor/UIColor+Hex.h"; sourceTree = "<group>"; };
+		4C622BC2A3AF7547AE3A09D7167103AF /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
+		5558AB7E2E0ED30038CDD4513E53983C /* UIColor+iOS7.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+iOS7.h"; path = "EDColor/UIColor+iOS7.h"; sourceTree = "<group>"; };
 		5C498E990C7280DE6F7FFCB5FC32BCB0 /* CupertinoYankee.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CupertinoYankee.xcconfig; sourceTree = "<group>"; };
-		5E5E0ECDA5062DC0DBDD8B2E91D84EBA /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDDispatchQueueLogFormatter.h; path = Classes/Extensions/DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
-		6B5B21C3DC51DA2F374601E4521D11B3 /* Crayola.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Crayola.h; path = EDColor/Crayola.h; sourceTree = "<group>"; };
-		6F9E44E7E67F4D3BF70E71785A9E4AC5 /* MSCellAccessory-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MSCellAccessory-Private.xcconfig"; sourceTree = "<group>"; };
+		5CFDA49EB22B790093DE3D4F780E55AF /* CupertinoYankee-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "CupertinoYankee-Private.xcconfig"; sourceTree = "<group>"; };
+		66EC5DF74846D21C6052BFF954114CF0 /* Pods-EvCalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EvCalTests.release.xcconfig"; sourceTree = "<group>"; };
+		6E556292DE28EE109F676D4559653B3C /* DDMultiFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDMultiFormatter.h; path = Classes/Extensions/DDMultiFormatter.h; sourceTree = "<group>"; };
+		7114BE46416B022E2975EFE8D5CED8FD /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Classes/DDTTYLogger.h; sourceTree = "<group>"; };
 		7204C40749BA424606F30B5D41CD0875 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7284130427EC584B28D26EBC22510C67 /* NSDate+CupertinoYankee.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDate+CupertinoYankee.m"; path = "CupertinoYankee/NSDate+CupertinoYankee.m"; sourceTree = "<group>"; };
 		731BCFA1CD96CAB7807C7388975F4A46 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74724BF64FFBE12485D55F5A5B2D3CA1 /* TimeUnit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TimeUnit.swift; path = Pod/Classes/TimeUnit.swift; sourceTree = "<group>"; };
-		78BC458CA62033FFF5C910A5B61C4330 /* UIColor+HSB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+HSB.h"; path = "EDColor/UIColor+HSB.h"; sourceTree = "<group>"; };
-		79A9DEDC89FE8336BF5FEDAAF75BF7FC /* Pods.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Pods.modulemap; sourceTree = "<group>"; };
-		7E76F7ADBFF36792EE48740FB2F0A804 /* UIColor+Hex.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+Hex.h"; path = "EDColor/UIColor+Hex.h"; sourceTree = "<group>"; };
-		7EF4F889589412B2DA77DEAA1E3BEF10 /* EDColor-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EDColor-umbrella.h"; sourceTree = "<group>"; };
+		76086CBC5797BD9FB5E17124CD5BE7F4 /* Pods-EvCalTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EvCalTests-dummy.m"; sourceTree = "<group>"; };
+		768A4F0548825F4C16DBA2E9A7256184 /* UIColor+Crayola.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+Crayola.h"; path = "EDColor/UIColor+Crayola.h"; sourceTree = "<group>"; };
+		78470F36990847224B4A175E4F4B8C29 /* UIColor+CIELAB.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+CIELAB.m"; path = "EDColor/UIColor+CIELAB.m"; sourceTree = "<group>"; };
+		78D448779BE5C16B7A6733D9A263F184 /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = Classes/DDLog.m; sourceTree = "<group>"; };
+		7C0D3DE5D164527CD69D0B4949707DE4 /* UIColor+HSB.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+HSB.m"; path = "EDColor/UIColor+HSB.m"; sourceTree = "<group>"; };
+		7C1EE75EE1918B3AE89F33F9FDCA9B56 /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Classes/DDLog+LOGV.h"; sourceTree = "<group>"; };
 		80204255F37D2D253CF010A7349EDEDD /* Tunits-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Tunits-prefix.pch"; sourceTree = "<group>"; };
-		87B213035BAC5F75386F62D3C75D2342 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
-		8CAE442E5D3CF068C8A723371A14E232 /* DDMultiFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDMultiFormatter.h; path = Classes/Extensions/DDMultiFormatter.h; sourceTree = "<group>"; };
-		90D0081E7ADED77B6FD3C3F478BC9CE8 /* NSDate+CupertinoYankee.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDate+CupertinoYankee.m"; path = "CupertinoYankee/NSDate+CupertinoYankee.m"; sourceTree = "<group>"; };
-		913FFF1BB20731ACD92502EAD42B0AD1 /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Classes/DDLog+LOGV.h"; sourceTree = "<group>"; };
-		9D18FB2F6A6EEEBECDA6B59B0ABA5FFF /* UIColor+HSL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+HSL.h"; path = "EDColor/UIColor+HSL.h"; sourceTree = "<group>"; };
+		80AF0FBCAD2291E602B4688D7C4BE872 /* MSCellAccessory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MSCellAccessory.m; path = MSCellAccessory/MSCellAccessory.m; sourceTree = "<group>"; };
+		8108A632AD64FFD15AF31E5756B45AB0 /* DDASLLogCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogCapture.m; path = Classes/DDASLLogCapture.m; sourceTree = "<group>"; };
+		81BF4EA56E0FFFFB8979DF719F8D91A4 /* UIColor+Hex.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Hex.m"; path = "EDColor/UIColor+Hex.m"; sourceTree = "<group>"; };
+		888DB6EA76E2F453D04086205E9C45E2 /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Classes/DDASLLogCapture.h; sourceTree = "<group>"; };
+		9572D23DEE9D98176467A0DEACF4A5A2 /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		95A22BD7E458D26C2D3E4B1E9FAD0464 /* CupertinoYankee-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CupertinoYankee-umbrella.h"; sourceTree = "<group>"; };
+		9852A64A9070BC8B6DEC442EEBCEE15C /* CocoaLumberjack-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "CocoaLumberjack-Private.xcconfig"; sourceTree = "<group>"; };
 		9FCA770CC99D5926E410F6138E41D10C /* Tunits-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Tunits-Private.xcconfig"; sourceTree = "<group>"; };
-		A02E8706C35B261D534690FE08678A8F /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = Classes/DDLog.m; sourceTree = "<group>"; };
-		A6396296027A7AB1276BEC2662110EEB /* CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
-		AA627AD53E789B73FD81B591172A61A9 /* MSCellAccessory-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MSCellAccessory-dummy.m"; sourceTree = "<group>"; };
-		AAE8B436F59EFC2B9F91071BB094ED3E /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Classes/DDAssertMacros.h; sourceTree = "<group>"; };
-		AC4C43676549340D8D3D4A9387A6BCD5 /* UIView+AccessViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+AccessViewController.m"; path = "MSCellAccessory/UIView+AccessViewController.m"; sourceTree = "<group>"; };
+		A1ADF11D86C020A34E7590E3E7C71009 /* DDLegacyMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLegacyMacros.h; path = Classes/DDLegacyMacros.h; sourceTree = "<group>"; };
+		A1F2D0187B492E8E3E05E32D47794591 /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		A54F0A9C782A76A006A187F9969C7625 /* EDColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EDColor.h; path = EDColor/EDColor.h; sourceTree = "<group>"; };
+		A5DC45ABF3447DFA397C5DCC4882EB6A /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		A6C0C640BD9A6DEAA6309A45F38AE7C8 /* NSDate+CupertinoYankee.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDate+CupertinoYankee.h"; path = "CupertinoYankee/NSDate+CupertinoYankee.h"; sourceTree = "<group>"; };
+		ADC7D0D6374B4D3920B92815CC1ED6EC /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Classes/DDAssertMacros.h; sourceTree = "<group>"; };
+		AF6EA22164E95E6979A68610B65AB9BA /* Pods-EvCalTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EvCalTests-frameworks.sh"; sourceTree = "<group>"; };
 		AFDCCB196471F7D4554376EA1EF71C15 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B01E46AD69FC159FBDB04CEECD5B1EEB /* MSCellAccessory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MSCellAccessory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B2F4E30E858AAEBAD1C3F2513849E8FA /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Classes/DDASLLogCapture.h; sourceTree = "<group>"; };
+		B09BF7139588F1F330BDB8F2C3424B0A /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Classes/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
 		B6697253E850CDBECC24705A987FAF50 /* EDColor-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EDColor-prefix.pch"; sourceTree = "<group>"; };
-		B696660B28DC71387F37F3968EA0B367 /* NSDate+CupertinoYankee.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDate+CupertinoYankee.h"; path = "CupertinoYankee/NSDate+CupertinoYankee.h"; sourceTree = "<group>"; };
+		B876F3BE3104A1815C5441CE7E2C6547 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Classes/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		BA417B232143835413C594B0B6FBE951 /* UIColor+HSL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+HSL.h"; path = "EDColor/UIColor+HSL.h"; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BBBBB002D8528416B87DC3FC9222564D /* UIColor+HSB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+HSB.h"; path = "EDColor/UIColor+HSB.h"; sourceTree = "<group>"; };
 		C017690CFBEAFAC7CCE263EE8196D963 /* CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
-		C1C8999A88FDB74A1D15B9E888E2F281 /* CupertinoYankee-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CupertinoYankee-umbrella.h"; sourceTree = "<group>"; };
-		C63C940B45BD0F6C11CDAEC1202802A9 /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Classes/DDFileLogger.h; sourceTree = "<group>"; };
+		C812327038B60AC52DA79CA1D3F69635 /* UIColor+HSL.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+HSL.m"; path = "EDColor/UIColor+HSL.m"; sourceTree = "<group>"; };
 		C8AB8DD741B169242055F70510B580C4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
 		C8E7D23FB5E339F501FB577839358269 /* Tunits.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tunits.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		CBC0F7C552B739C909B650A0F42F7F38 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		CB24F2BBCD377F41291D89F8B2EFF38B /* MSCellAccessory-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MSCellAccessory-umbrella.h"; sourceTree = "<group>"; };
+		CBAA80528681142153C6D6B89DE4A396 /* MSCellAccessory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MSCellAccessory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC34013D062950BBDC014E372466C62F /* MSCellAccessory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MSCellAccessory.h; path = MSCellAccessory/MSCellAccessory.h; sourceTree = "<group>"; };
 		D00DB1A7E88B822F871C1DED9678AC3B /* MSCellAccessory-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MSCellAccessory-prefix.pch"; sourceTree = "<group>"; };
-		D0405803033A2A777B8E4DFA0C1800ED /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D0DA688B65BDB5155E6E3D81EBB80B39 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		D37E34BB1DB8FEBBA95FE107C15A4E28 /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDDispatchQueueLogFormatter.m; path = Classes/Extensions/DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
-		D4EDD468649FD587EE883083DC5D6262 /* UIColor+HSB.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+HSB.m"; path = "EDColor/UIColor+HSB.m"; sourceTree = "<group>"; };
-		D5CB897B8B436D91EBDA44EF2C649FD5 /* UIColor+iOS7.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+iOS7.h"; path = "EDColor/UIColor+iOS7.h"; sourceTree = "<group>"; };
-		D6323160368F189FCCBEF71EC0459BC5 /* EDColor-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "EDColor-dummy.m"; sourceTree = "<group>"; };
+		D1352E213B70D025D09FB266C56FC7C0 /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
+		D421BB60674A3CC11EEF0ABD178B5653 /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Classes/DDLog.h; sourceTree = "<group>"; };
 		D6437A083B64229D2728F33BD1D16175 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
-		D69955B4D8353175481C683B98E0CF38 /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
+		DA0749C5783F7DB8715B899F414E346D /* CupertinoYankee.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CupertinoYankee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB11EDB0C8CC30EB5DB65E37DA131ADB /* Tunits-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Tunits-dummy.m"; sourceTree = "<group>"; };
-		DD96FD66C4FD9D2958ED19059611D819 /* UIColor+CIELAB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+CIELAB.h"; path = "EDColor/UIColor+CIELAB.h"; sourceTree = "<group>"; };
+		DB212F2CFC6872570188967B23A31AA0 /* MSCellAccessory-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MSCellAccessory-dummy.m"; sourceTree = "<group>"; };
+		DE670D566A255622A1D741945959B00B /* Pods-EvCalTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-EvCalTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		DED11E8AF62A329344823C8761EF7659 /* Tunits.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Tunits.modulemap; sourceTree = "<group>"; };
-		E0B4A9E61A44EB3CA7F52B7F8E1FA858 /* MSCellAccessory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MSCellAccessory.h; path = MSCellAccessory/MSCellAccessory.h; sourceTree = "<group>"; };
-		E3C6EE4EBBA21AC72943FDC7A467B2A5 /* DDASLLogCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogCapture.m; path = Classes/DDASLLogCapture.m; sourceTree = "<group>"; };
-		E6C84DDB0FEE4F61F5EA120E13DF34B4 /* MSCellAccessory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MSCellAccessory.m; path = MSCellAccessory/MSCellAccessory.m; sourceTree = "<group>"; };
-		E6F1A7091140B572A3F4ABAFBB1F1981 /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Classes/DDLog.h; sourceTree = "<group>"; };
-		E7F21354943D9F42A70697D5A5EF72E9 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
-		E8446514FBAD26C0E18F24A5715AEF67 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EB77F7EBB332E8D81E0B011794B2E5A8 /* UIColor+CIELAB.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+CIELAB.m"; path = "EDColor/UIColor+CIELAB.m"; sourceTree = "<group>"; };
-		EFA506617ACCEB5088C27A8212731B8F /* EDColor-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "EDColor-Private.xcconfig"; sourceTree = "<group>"; };
+		E100F38049336D9A85225830F02D41EB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E630DD9821A052E78632B63B81B8EE0A /* Pods.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Pods.modulemap; sourceTree = "<group>"; };
+		E681B9975B9FF3C983A42A55ACB92FFF /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDContextFilterLogFormatter.m; path = Classes/Extensions/DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		E821B28554C30D8CF1BFF2754F96FBD3 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
+		EB21FB859BF8E3C107253791C20C4CF1 /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Classes/DDTTYLogger.m; sourceTree = "<group>"; };
+		EF738D477C7C11788340653CE1B48438 /* EDColor-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EDColor-umbrella.h"; sourceTree = "<group>"; };
+		EF9B88077D5D3731D0BA9E3B8D81E399 /* EDColor-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "EDColor-dummy.m"; sourceTree = "<group>"; };
 		F01648730317AC98D880244A7927D1B2 /* CupertinoYankee-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CupertinoYankee-prefix.pch"; sourceTree = "<group>"; };
-		F4802407392BCB3F069E1834F9F33F06 /* UIColor+Hex.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Hex.m"; path = "EDColor/UIColor+Hex.m"; sourceTree = "<group>"; };
 		F65848B9D098C065E41A74FE83171A30 /* Pods-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-umbrella.h"; sourceTree = "<group>"; };
-		F70BCEC2BB497040D81DB2C42D5B5581 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Classes/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		F854E9E963FFC9523B3DDE063B584775 /* EDColor.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = EDColor.modulemap; sourceTree = "<group>"; };
-		FC86CB9E1753743DDEACDFA7B1EEEE5B /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
-		FCD25CA4EAB8CD5C66B1144F7EEEEB3B /* EDColor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EDColor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8BE3A1B1A6F05F3704FB648C39E2D45 /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Classes/DDFileLogger.h; sourceTree = "<group>"; };
+		FBD64827DCFE77077705790B8D5FDE20 /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = Classes/DDASLLogger.h; sourceTree = "<group>"; };
+		FD9FAD1AC617F5EC1B2992FE6D08CE61 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
 		FF3A4F05375340CA133399E8769FADDC /* EDColor.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = EDColor.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		06A24593C512BFAADD0BB2A082C1363F /* Frameworks */ = {
+		0470DCDEABBE82D5E6DD96771D3D5B42 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85D4E5EF8D02CA2FAB61EDFF3A085511 /* Foundation.framework in Frameworks */,
+				E75631D56482541F9FF65C2F472A5866 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +284,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1428D26162D587FB3D0C291F396F8129 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				067BE4C6EA007263D2F4A33C835BF6BF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		217EF715787A94E6C6DC1F665D77CBA4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -243,20 +300,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2ED3D21B73CC2AFA06EC819C59F5F06E /* Frameworks */ = {
+		840EBCCD53189456C646E7F71D92E544 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FB75C9B6E672348FDDA0E3A39A3C80C /* Foundation.framework in Frameworks */,
-				6BA5E1F81D6B673A300F8FA5A643546C /* UIKit.framework in Frameworks */,
+				65EB793C23CB0CE0BBED297801857763 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		31E3BB403A287D927B5BA0DD5AA76C8D /* Frameworks */ = {
+		9983DA93F139A5AA8A922CA81A5B273E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD74E8F4A62DBFB662BAC497E00C25A1 /* Foundation.framework in Frameworks */,
+				4C739487517BEE5B1A81E11C3EB63574 /* Foundation.framework in Frameworks */,
+				34EDCD8ACB287E249F891299073D6899 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,11 +324,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CCC19ABD3AB3A70ADAE4B56E9D63B4C4 /* Frameworks */ = {
+		FEDE9462364C8AC4BBA1649BCE5863E4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A71A031CBF0326A43CBD47B69090ED38 /* Foundation.framework in Frameworks */,
+				524F65896E9AF49EDEE9BA71729A5315 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,10 +356,10 @@
 				AFDCCB196471F7D4554376EA1EF71C15 /* Info.plist */,
 				287D4C2194F1CA7E347CE7D6E7897448 /* MSCellAccessory.modulemap */,
 				38736AB4400A2BC2FA5125A5170F0DB9 /* MSCellAccessory.xcconfig */,
-				6F9E44E7E67F4D3BF70E71785A9E4AC5 /* MSCellAccessory-Private.xcconfig */,
-				AA627AD53E789B73FD81B591172A61A9 /* MSCellAccessory-dummy.m */,
+				29F261FCDD3BC7276073187EC5CB0B24 /* MSCellAccessory-Private.xcconfig */,
+				DB212F2CFC6872570188967B23A31AA0 /* MSCellAccessory-dummy.m */,
 				D00DB1A7E88B822F871C1DED9678AC3B /* MSCellAccessory-prefix.pch */,
-				0B9BABA42AEB8DC0F5660838A1AD89A3 /* MSCellAccessory-umbrella.h */,
+				CB24F2BBCD377F41291D89F8B2EFF38B /* MSCellAccessory-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/MSCellAccessory";
@@ -311,7 +368,7 @@
 		1C721F25082045E144F1B7554D8C6ED6 /* Default */ = {
 			isa = PBXGroup;
 			children = (
-				FC86CB9E1753743DDEACDFA7B1EEEE5B /* CocoaLumberjack.h */,
+				4C622BC2A3AF7547AE3A09D7167103AF /* CocoaLumberjack.h */,
 			);
 			name = Default;
 			sourceTree = "<group>";
@@ -340,32 +397,32 @@
 			children = (
 				2D09E77D0B8FEDDB4118ED0A5A5DCF25 /* CupertinoYankee.modulemap */,
 				5C498E990C7280DE6F7FFCB5FC32BCB0 /* CupertinoYankee.xcconfig */,
-				1E5BC51CDA0E75D262D4A319EEFB1A9B /* CupertinoYankee-Private.xcconfig */,
-				3A667EBE3124A495B2C9B111D9A562CE /* CupertinoYankee-dummy.m */,
+				5CFDA49EB22B790093DE3D4F780E55AF /* CupertinoYankee-Private.xcconfig */,
+				0D734D0E087DCA742BF1258ACE839F19 /* CupertinoYankee-dummy.m */,
 				F01648730317AC98D880244A7927D1B2 /* CupertinoYankee-prefix.pch */,
-				C1C8999A88FDB74A1D15B9E888E2F281 /* CupertinoYankee-umbrella.h */,
+				95A22BD7E458D26C2D3E4B1E9FAD0464 /* CupertinoYankee-umbrella.h */,
 				3185BA12F631952AAE357001591A144D /* Info.plist */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/CupertinoYankee";
 			sourceTree = "<group>";
 		};
-		75D98FF52E597A11900E131B6C4E1ADA /* Pods */ = {
+		7628BEF5F4CE5E33130DCB2C0E99B5DC /* Pods-EvCalTests */ = {
 			isa = PBXGroup;
 			children = (
-				E8446514FBAD26C0E18F24A5715AEF67 /* Info.plist */,
-				79A9DEDC89FE8336BF5FEDAAF75BF7FC /* Pods.modulemap */,
-				D0405803033A2A777B8E4DFA0C1800ED /* Pods-acknowledgements.markdown */,
-				87B213035BAC5F75386F62D3C75D2342 /* Pods-acknowledgements.plist */,
-				0063C7D1B8B8BDEEABC103F2DAF18CF1 /* Pods-dummy.m */,
-				E7F21354943D9F42A70697D5A5EF72E9 /* Pods-frameworks.sh */,
-				CBC0F7C552B739C909B650A0F42F7F38 /* Pods-resources.sh */,
-				F65848B9D098C065E41A74FE83171A30 /* Pods-umbrella.h */,
-				C8AB8DD741B169242055F70510B580C4 /* Pods.debug.xcconfig */,
-				D6437A083B64229D2728F33BD1D16175 /* Pods.release.xcconfig */,
+				2073710DCD14AF4AE5D4A8CDAA1318A6 /* Info.plist */,
+				2B13ABAF2CE6F0BFA4ACA472644FF9A5 /* Pods-EvCalTests.modulemap */,
+				DE670D566A255622A1D741945959B00B /* Pods-EvCalTests-acknowledgements.markdown */,
+				0DB6D5D72F8520998DE9377876507E24 /* Pods-EvCalTests-acknowledgements.plist */,
+				76086CBC5797BD9FB5E17124CD5BE7F4 /* Pods-EvCalTests-dummy.m */,
+				AF6EA22164E95E6979A68610B65AB9BA /* Pods-EvCalTests-frameworks.sh */,
+				4640520E8F2456D43B4DFE4C5A6D097F /* Pods-EvCalTests-resources.sh */,
+				2B98E5EB5C4F5E2DC0495533D64CC6D4 /* Pods-EvCalTests-umbrella.h */,
+				0525DD4D9D8A67177331517D7F5E2793 /* Pods-EvCalTests.debug.xcconfig */,
+				66EC5DF74846D21C6052BFF954114CF0 /* Pods-EvCalTests.release.xcconfig */,
 			);
-			name = Pods;
-			path = "Target Support Files/Pods";
+			name = "Pods-EvCalTests";
+			path = "Target Support Files/Pods-EvCalTests";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -375,7 +432,7 @@
 				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
 				7F3AC111353A8FA1F39B0EA0E03E1C9C /* Pods */,
 				CCA510CFBEA2D207524CDA0D73C3B561 /* Products */,
-				B7B80995527643776607AFFA75B91E24 /* Targets Support Files */,
+				C447C9B558EC2FAC2D004C26EE751688 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -403,10 +460,10 @@
 		90CFD9A4BD0E233142F6D873F263FFFA /* MSCellAccessory */ = {
 			isa = PBXGroup;
 			children = (
-				E0B4A9E61A44EB3CA7F52B7F8E1FA858 /* MSCellAccessory.h */,
-				E6C84DDB0FEE4F61F5EA120E13DF34B4 /* MSCellAccessory.m */,
-				47724DAECF6ED845107B759626C60DFC /* UIView+AccessViewController.h */,
-				AC4C43676549340D8D3D4A9387A6BCD5 /* UIView+AccessViewController.m */,
+				CC34013D062950BBDC014E372466C62F /* MSCellAccessory.h */,
+				80AF0FBCAD2291E602B4688D7C4BE872 /* MSCellAccessory.m */,
+				0560C8FE4268847EE4739D395ECE72E9 /* UIView+AccessViewController.h */,
+				234152541A72DEBEF07E37770025E7F5 /* UIView+AccessViewController.m */,
 				13AD2881D272A9A1586B541781C7E515 /* Support Files */,
 			);
 			path = MSCellAccessory;
@@ -415,20 +472,20 @@
 		9C8CA0913E0BBA37DCAD09EFB329ECD3 /* EDColor */ = {
 			isa = PBXGroup;
 			children = (
-				6B5B21C3DC51DA2F374601E4521D11B3 /* Crayola.h */,
-				29BAB7096E02769ABA294BC31A0C27D2 /* EDColor.h */,
-				DD96FD66C4FD9D2958ED19059611D819 /* UIColor+CIELAB.h */,
-				EB77F7EBB332E8D81E0B011794B2E5A8 /* UIColor+CIELAB.m */,
-				42D237B80DEA195EE0990B96B86ED51A /* UIColor+Crayola.h */,
-				2D6FE77A9E49E77FED029D02908FCEF4 /* UIColor+Crayola.m */,
-				78BC458CA62033FFF5C910A5B61C4330 /* UIColor+HSB.h */,
-				D4EDD468649FD587EE883083DC5D6262 /* UIColor+HSB.m */,
-				9D18FB2F6A6EEEBECDA6B59B0ABA5FFF /* UIColor+HSL.h */,
-				4103DA632AC1882B1CFF78EBD0819BD2 /* UIColor+HSL.m */,
-				7E76F7ADBFF36792EE48740FB2F0A804 /* UIColor+Hex.h */,
-				F4802407392BCB3F069E1834F9F33F06 /* UIColor+Hex.m */,
-				D5CB897B8B436D91EBDA44EF2C649FD5 /* UIColor+iOS7.h */,
-				47F8D227F2FF52B98D11A39B10A35894 /* UIColor+iOS7.m */,
+				4A4FA0CAFDA4F3E74896E9663D48B83A /* Crayola.h */,
+				A54F0A9C782A76A006A187F9969C7625 /* EDColor.h */,
+				2116D5D2B4833784EEEDBAAE89B25850 /* UIColor+CIELAB.h */,
+				78470F36990847224B4A175E4F4B8C29 /* UIColor+CIELAB.m */,
+				768A4F0548825F4C16DBA2E9A7256184 /* UIColor+Crayola.h */,
+				35223907B67EEF982B5F6980B89A087A /* UIColor+Crayola.m */,
+				BBBBB002D8528416B87DC3FC9222564D /* UIColor+HSB.h */,
+				7C0D3DE5D164527CD69D0B4949707DE4 /* UIColor+HSB.m */,
+				BA417B232143835413C594B0B6FBE951 /* UIColor+HSL.h */,
+				C812327038B60AC52DA79CA1D3F69635 /* UIColor+HSL.m */,
+				4A9FD41788C2B8506859AF0CDFDFA19A /* UIColor+Hex.h */,
+				81BF4EA56E0FFFFB8979DF719F8D91A4 /* UIColor+Hex.m */,
+				5558AB7E2E0ED30038CDD4513E53983C /* UIColor+iOS7.h */,
+				07C11549520925CCB4518578B1B59C81 /* UIColor+iOS7.m */,
 				AA1764DE60CA6744477CEC4F0BAFD9E5 /* Support Files */,
 			);
 			path = EDColor;
@@ -439,22 +496,14 @@
 			children = (
 				F854E9E963FFC9523B3DDE063B584775 /* EDColor.modulemap */,
 				FF3A4F05375340CA133399E8769FADDC /* EDColor.xcconfig */,
-				EFA506617ACCEB5088C27A8212731B8F /* EDColor-Private.xcconfig */,
-				D6323160368F189FCCBEF71EC0459BC5 /* EDColor-dummy.m */,
+				0293E153852341E41B84CBA3EDDEE5B3 /* EDColor-Private.xcconfig */,
+				EF9B88077D5D3731D0BA9E3B8D81E399 /* EDColor-dummy.m */,
 				B6697253E850CDBECC24705A987FAF50 /* EDColor-prefix.pch */,
-				7EF4F889589412B2DA77DEAA1E3BEF10 /* EDColor-umbrella.h */,
+				EF738D477C7C11788340653CE1B48438 /* EDColor-umbrella.h */,
 				0B79504471853AFA532E89B0A1A5FC7F /* Info.plist */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/EDColor";
-			sourceTree = "<group>";
-		};
-		B7B80995527643776607AFFA75B91E24 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				75D98FF52E597A11900E131B6C4E1ADA /* Pods */,
-			);
-			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		BFE794BD018C016FB808699A6D3FF50B /* Support Files */ = {
@@ -462,8 +511,8 @@
 			children = (
 				30CA611CD01EAA208539217C920D72F1 /* CocoaLumberjack.modulemap */,
 				12A41D4D09C89EC6002EC26BFA0115B9 /* CocoaLumberjack.xcconfig */,
-				02DA6B660760B2A8DD150DCEF2E562E2 /* CocoaLumberjack-Private.xcconfig */,
-				A6396296027A7AB1276BEC2662110EEB /* CocoaLumberjack-dummy.m */,
+				9852A64A9070BC8B6DEC442EEBCEE15C /* CocoaLumberjack-Private.xcconfig */,
+				215621CCEDD6755FE622FC06CF31504B /* CocoaLumberjack-dummy.m */,
 				C017690CFBEAFAC7CCE263EE8196D963 /* CocoaLumberjack-prefix.pch */,
 				16AC88981B279840E09735545B864900 /* Info.plist */,
 			);
@@ -471,14 +520,42 @@
 			path = "../Target Support Files/CocoaLumberjack";
 			sourceTree = "<group>";
 		};
+		C447C9B558EC2FAC2D004C26EE751688 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C98B2FFEA56C7E60E9711768EB7433C3 /* Pods */,
+				7628BEF5F4CE5E33130DCB2C0E99B5DC /* Pods-EvCalTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		C98B2FFEA56C7E60E9711768EB7433C3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E100F38049336D9A85225830F02D41EB /* Info.plist */,
+				E630DD9821A052E78632B63B81B8EE0A /* Pods.modulemap */,
+				9572D23DEE9D98176467A0DEACF4A5A2 /* Pods-acknowledgements.markdown */,
+				FD9FAD1AC617F5EC1B2992FE6D08CE61 /* Pods-acknowledgements.plist */,
+				0063C7D1B8B8BDEEABC103F2DAF18CF1 /* Pods-dummy.m */,
+				E821B28554C30D8CF1BFF2754F96FBD3 /* Pods-frameworks.sh */,
+				259AF6392DCBBABBA91CEA2CC74F7DCF /* Pods-resources.sh */,
+				F65848B9D098C065E41A74FE83171A30 /* Pods-umbrella.h */,
+				C8AB8DD741B169242055F70510B580C4 /* Pods.debug.xcconfig */,
+				D6437A083B64229D2728F33BD1D16175 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			path = "Target Support Files/Pods";
+			sourceTree = "<group>";
+		};
 		CCA510CFBEA2D207524CDA0D73C3B561 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0F42E67B49FEC9A357290442A4D9F0EF /* CocoaLumberjack.framework */,
-				0FCDE65D188ED46A4F42F7AD9F2CB868 /* CupertinoYankee.framework */,
-				FCD25CA4EAB8CD5C66B1144F7EEEEB3B /* EDColor.framework */,
-				B01E46AD69FC159FBDB04CEECD5B1EEB /* MSCellAccessory.framework */,
+				25AC043E0E3FA0E5C4D2EEE1DB8D2B42 /* CocoaLumberjack.framework */,
+				DA0749C5783F7DB8715B899F414E346D /* CupertinoYankee.framework */,
+				1CD88D43C8EE7169A7C2BC5C59728E38 /* EDColor.framework */,
+				CBAA80528681142153C6D6B89DE4A396 /* MSCellAccessory.framework */,
 				731BCFA1CD96CAB7807C7388975F4A46 /* Pods.framework */,
+				3986E02B50F61DC43F0E7140C03C37C0 /* Pods_EvCalTests.framework */,
 				C8E7D23FB5E339F501FB577839358269 /* Tunits.bundle */,
 				19C07D4770FD5D8C84B38103FB94750C /* Tunits.framework */,
 			);
@@ -489,7 +566,7 @@
 			isa = PBXGroup;
 			children = (
 				D0DA688B65BDB5155E6E3D81EBB80B39 /* Foundation.framework */,
-				4D1CECA3090865A1EF366DA8B6BA5DDF /* UIKit.framework */,
+				199125806ACA97D0DF6B3B617444C990 /* UIKit.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -497,8 +574,8 @@
 		D18F4D5A8555BD37BFFC7E84B08B7A76 /* CupertinoYankee */ = {
 			isa = PBXGroup;
 			children = (
-				B696660B28DC71387F37F3968EA0B367 /* NSDate+CupertinoYankee.h */,
-				90D0081E7ADED77B6FD3C3F478BC9CE8 /* NSDate+CupertinoYankee.m */,
+				A6C0C640BD9A6DEAA6309A45F38AE7C8 /* NSDate+CupertinoYankee.h */,
+				7284130427EC584B28D26EBC22510C67 /* NSDate+CupertinoYankee.m */,
 				45ECDB14E6D1923CAA5BBF80222B02D7 /* Support Files */,
 			);
 			path = CupertinoYankee;
@@ -507,22 +584,22 @@
 		D2210E9CF118E63F74E451B122EF89EE /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				B2F4E30E858AAEBAD1C3F2513849E8FA /* DDASLLogCapture.h */,
-				E3C6EE4EBBA21AC72943FDC7A467B2A5 /* DDASLLogCapture.m */,
-				58463E3EB40202005AAEB09C8E901DF9 /* DDASLLogger.h */,
-				40207F18AD326575446CA543FB3BAF50 /* DDASLLogger.m */,
-				F70BCEC2BB497040D81DB2C42D5B5581 /* DDAbstractDatabaseLogger.h */,
-				2242717D06B516D52EFACEF0B26A478B /* DDAbstractDatabaseLogger.m */,
-				AAE8B436F59EFC2B9F91071BB094ED3E /* DDAssertMacros.h */,
-				C63C940B45BD0F6C11CDAEC1202802A9 /* DDFileLogger.h */,
-				081EE0B11A0C43BCD168F3547086222F /* DDFileLogger.m */,
-				4A06716605AE8CEFCBDCD49C1673FBD0 /* DDLegacyMacros.h */,
-				E6F1A7091140B572A3F4ABAFBB1F1981 /* DDLog.h */,
-				A02E8706C35B261D534690FE08678A8F /* DDLog.m */,
-				913FFF1BB20731ACD92502EAD42B0AD1 /* DDLog+LOGV.h */,
-				D69955B4D8353175481C683B98E0CF38 /* DDLogMacros.h */,
-				4C57187653F6D0597F35A107240C175D /* DDTTYLogger.h */,
-				4A153A714BAE4B1EC8DD5674BD7597AD /* DDTTYLogger.m */,
+				888DB6EA76E2F453D04086205E9C45E2 /* DDASLLogCapture.h */,
+				8108A632AD64FFD15AF31E5756B45AB0 /* DDASLLogCapture.m */,
+				FBD64827DCFE77077705790B8D5FDE20 /* DDASLLogger.h */,
+				4374B26D8C0BCAE9FE4ECF055DB63AE6 /* DDASLLogger.m */,
+				B876F3BE3104A1815C5441CE7E2C6547 /* DDAbstractDatabaseLogger.h */,
+				A5DC45ABF3447DFA397C5DCC4882EB6A /* DDAbstractDatabaseLogger.m */,
+				ADC7D0D6374B4D3920B92815CC1ED6EC /* DDAssertMacros.h */,
+				F8BE3A1B1A6F05F3704FB648C39E2D45 /* DDFileLogger.h */,
+				1E4083A56267BBF208EC7EA0E6AB2A64 /* DDFileLogger.m */,
+				A1ADF11D86C020A34E7590E3E7C71009 /* DDLegacyMacros.h */,
+				D421BB60674A3CC11EEF0ABD178B5653 /* DDLog.h */,
+				78D448779BE5C16B7A6733D9A263F184 /* DDLog.m */,
+				7C1EE75EE1918B3AE89F33F9FDCA9B56 /* DDLog+LOGV.h */,
+				D1352E213B70D025D09FB266C56FC7C0 /* DDLogMacros.h */,
+				7114BE46416B022E2975EFE8D5CED8FD /* DDTTYLogger.h */,
+				EB21FB859BF8E3C107253791C20C4CF1 /* DDTTYLogger.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -530,12 +607,12 @@
 		DEAD23241B9890488FEF7E07315682B0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				4082C1113D277D29819CDCC1FBEFF932 /* DDContextFilterLogFormatter.h */,
-				54A55F73D04E8E5A7A356B90BB97DD2A /* DDContextFilterLogFormatter.m */,
-				5E5E0ECDA5062DC0DBDD8B2E91D84EBA /* DDDispatchQueueLogFormatter.h */,
-				D37E34BB1DB8FEBBA95FE107C15A4E28 /* DDDispatchQueueLogFormatter.m */,
-				8CAE442E5D3CF068C8A723371A14E232 /* DDMultiFormatter.h */,
-				54887D88F27272DB37DAEB02CF52529D /* DDMultiFormatter.m */,
+				A1F2D0187B492E8E3E05E32D47794591 /* DDContextFilterLogFormatter.h */,
+				E681B9975B9FF3C983A42A55ACB92FFF /* DDContextFilterLogFormatter.m */,
+				4433FB174CF253865B8B74FDCADA9282 /* DDDispatchQueueLogFormatter.h */,
+				233EC4C3754AABFAC8CFAAADDBF28E28 /* DDDispatchQueueLogFormatter.m */,
+				6E556292DE28EE109F676D4559653B3C /* DDMultiFormatter.h */,
+				B09BF7139588F1F330BDB8F2C3424B0A /* DDMultiFormatter.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -543,6 +620,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		1201B911B82D15A630D918E2132158CE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C6CB7EAC06849083E4F763CFD2247EF /* Pods-EvCalTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		133A645EC810D24FB3EF1385863B1789 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -551,22 +636,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5DE9DE604CB99F9E22029C0F812B8266 /* Headers */ = {
+		566411B7CD7B303CFC7246CB1429CDDF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63846AE6E37B0C190240E3D2E0162C6E /* CupertinoYankee-umbrella.h in Headers */,
-				E432862A97EB2A71FD34F8F70F00DEB9 /* NSDate+CupertinoYankee.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		67542E82EF725F13526C967AED746A4D /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7D59BD33868C4F21421CAA2811BF4BAF /* MSCellAccessory-umbrella.h in Headers */,
-				D776E84FB193EDC22715466E2EBAEB22 /* MSCellAccessory.h in Headers */,
-				97EFC4FB8FF9B0FB5BF02F9EAEC9656D /* UIView+AccessViewController.h in Headers */,
+				2A16A1674E787203C160C1A402683EC1 /* Crayola.h in Headers */,
+				BE2803DBD9B1176E5F61EAB1227B0B62 /* EDColor-umbrella.h in Headers */,
+				BE5A340A78BB1F252154BF416E00F847 /* EDColor.h in Headers */,
+				EDD1F7321D414D48F47DBEF0F52BC891 /* UIColor+CIELAB.h in Headers */,
+				E8DD5C9B9401B74474CE5250E0DCC5AC /* UIColor+Crayola.h in Headers */,
+				85F13965F61781905D005371924B7650 /* UIColor+HSB.h in Headers */,
+				10BEE3E627D832F76D75ED187FA883AA /* UIColor+HSL.h in Headers */,
+				5DC4F53473877E026D9974901D88C78D /* UIColor+Hex.h in Headers */,
+				C0D63463B42AA213A760631D4EE6D5FE /* UIColor+iOS7.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,40 +660,43 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		91AECDCC8E7923D60857801600731782 /* Headers */ = {
+		BCB489FBC1545B43CA881BE3B1EA5093 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D544EB8094B832BF43F6991CF83E0F37 /* CocoaLumberjack.h in Headers */,
-				7C211E9320F025725AA9FEDEC151AF5D /* DDASLLogCapture.h in Headers */,
-				1E74AACE1618B9B427C55A4A32E48995 /* DDASLLogger.h in Headers */,
-				8D7646403A459A01A5338C58E92B2E23 /* DDAbstractDatabaseLogger.h in Headers */,
-				7936EF152EB3C4AAF47996F70F4DC748 /* DDAssertMacros.h in Headers */,
-				EDC0121FF465197DEE6814C8758CCB84 /* DDContextFilterLogFormatter.h in Headers */,
-				812E7C9F77AD3DF9C782322738808A88 /* DDDispatchQueueLogFormatter.h in Headers */,
-				1FF5FD217F0DEF5D4C03A68E5D85F38F /* DDFileLogger.h in Headers */,
-				8E2AA1EDA4BAC32F6473F69D799B74D2 /* DDLegacyMacros.h in Headers */,
-				1AA42204D0C5E50D95ACAF993B7A7D0D /* DDLog+LOGV.h in Headers */,
-				FF35167282F94F3DEE39F966BA3F9D7B /* DDLog.h in Headers */,
-				4F3713610ABC3662CEEDDDC84132A3EB /* DDLogMacros.h in Headers */,
-				27F3A77075739A37BB761F984C03DE4D /* DDMultiFormatter.h in Headers */,
-				A38B936671BDE6C32064BFA21FE07E79 /* DDTTYLogger.h in Headers */,
+				F6B3A8DB57D70B5894D043C77FF260F0 /* CupertinoYankee-umbrella.h in Headers */,
+				552E31A4C712D674A77D9EF75D79AA6B /* NSDate+CupertinoYankee.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D7370D90036679FCA8D0790AE0E957E5 /* Headers */ = {
+		C4686579BCF7FFDD62EFBE039902E12F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5DC8AC99F10E0974C57D523ECCF3FBA /* Crayola.h in Headers */,
-				DDFAE0438BB8E1FCE6606776F3ED8EC7 /* EDColor-umbrella.h in Headers */,
-				7F30EDD3A73FC4ECEDFC6BDF140A8A12 /* EDColor.h in Headers */,
-				57DC8B047F1DDFDDD52B342C3103E98F /* UIColor+CIELAB.h in Headers */,
-				A65AFB4D90E346E40F6227D5107D7722 /* UIColor+Crayola.h in Headers */,
-				B2B661C744A7FEB9B55331242498023B /* UIColor+HSB.h in Headers */,
-				59B61426B0556EC5AD9507A03A6344AC /* UIColor+HSL.h in Headers */,
-				95F3589D7DF92BA9540074B06D55F210 /* UIColor+Hex.h in Headers */,
-				CB19FEEF75CA775EF3D21E09A81989C3 /* UIColor+iOS7.h in Headers */,
+				13745B746346BFE486D67821D736D40B /* MSCellAccessory-umbrella.h in Headers */,
+				6D3A56AC5BEBA3CC748DB6D38FC29F13 /* MSCellAccessory.h in Headers */,
+				7AB23C8029339BBD5BB3DE5A235366AC /* UIView+AccessViewController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAF503626B51CF943DD079D660BE357B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AD17494C6ABF6B1FA803402066D1600 /* CocoaLumberjack.h in Headers */,
+				B218B1894E23F15B8BD5ED38F23B6A45 /* DDASLLogCapture.h in Headers */,
+				5B585E62074E5C0AB230C33D7E97EFC7 /* DDASLLogger.h in Headers */,
+				E497B674CB31AAC1F49C0EE4FD69165F /* DDAbstractDatabaseLogger.h in Headers */,
+				DAEB01088388BF0969CE1A3A4BFED458 /* DDAssertMacros.h in Headers */,
+				4337E3F935C56A4136D8EE19EB3BA393 /* DDContextFilterLogFormatter.h in Headers */,
+				BBB30146772846667C4AD01CCC0C79E8 /* DDDispatchQueueLogFormatter.h in Headers */,
+				83B19CABE3E4A93A25902965006D04CD /* DDFileLogger.h in Headers */,
+				5C802F787EE31887D86522A75F5839EC /* DDLegacyMacros.h in Headers */,
+				1B7AC20EC043B9CFAF5DF222B8BDDC36 /* DDLog+LOGV.h in Headers */,
+				F3BAC16BB87883733C0291C8FD2909CA /* DDLog.h in Headers */,
+				59488BE4BFE70E67F85CF7753AA38AD5 /* DDLogMacros.h in Headers */,
+				9CDAA5C72B5120B66745AF6801745972 /* DDMultiFormatter.h in Headers */,
+				79AC687094B566D7D149BB66DE746944 /* DDTTYLogger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,11 +714,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				638E6358C7D31663A646A3FC53C792DB /* PBXTargetDependency */,
-				5BEA1F544F99AF0BD9ADD5EB01134476 /* PBXTargetDependency */,
-				65271140DD787C138C00CFF0A7227F7A /* PBXTargetDependency */,
-				572A34483D062527AF27AF13BFCE20AE /* PBXTargetDependency */,
-				5456C357CDE8C283B5EC25E71AB77DA5 /* PBXTargetDependency */,
+				CA14EB1FEF43D66795A6A742EF8ADF54 /* PBXTargetDependency */,
+				2C76274709720CF69FE3CF10A35A4478 /* PBXTargetDependency */,
+				C285BEA408C4A7CBD5312BBCD40AC725 /* PBXTargetDependency */,
+				7E5F4F193B1FCB695886EB3739A2E82B /* PBXTargetDependency */,
+				B6E189AAB878AD190BE38DBB2C8BFEC8 /* PBXTargetDependency */,
 			);
 			name = Pods;
 			productName = Pods;
@@ -652,7 +737,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				2ABA93BBE3BB272F2A7D273748F1754C /* PBXTargetDependency */,
+				07ABDA9BC550AE5F666BFE5E2EEC66DB /* PBXTargetDependency */,
 			);
 			name = Tunits;
 			productName = Tunits;
@@ -676,47 +761,13 @@
 			productReference = C8E7D23FB5E339F501FB577839358269 /* Tunits.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		4E6E14E8A0C1231A1D7939F4EE166942 /* CupertinoYankee */ = {
+		6A32DFB65200832A03ACB5A31CEEA73C /* EDColor */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5C1F382BA49DFC51C3FC42FA1F220B1F /* Build configuration list for PBXNativeTarget "CupertinoYankee" */;
+			buildConfigurationList = B01B248CBD31EEED619CC503C099E69C /* Build configuration list for PBXNativeTarget "EDColor" */;
 			buildPhases = (
-				CBF7E9D2303D5A7E1EB7A8EA545120BD /* Sources */,
-				CCC19ABD3AB3A70ADAE4B56E9D63B4C4 /* Frameworks */,
-				5DE9DE604CB99F9E22029C0F812B8266 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CupertinoYankee;
-			productName = CupertinoYankee;
-			productReference = 0FCDE65D188ED46A4F42F7AD9F2CB868 /* CupertinoYankee.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		5963DC5773D19EA190DA8F91FADC5784 /* CocoaLumberjack */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E93D8F27C91CB5A4786B9A341E493748 /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */;
-			buildPhases = (
-				71C91AAC36A16C4C36B57D9F5D7FDEFA /* Sources */,
-				31E3BB403A287D927B5BA0DD5AA76C8D /* Frameworks */,
-				91AECDCC8E7923D60857801600731782 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CocoaLumberjack;
-			productName = CocoaLumberjack;
-			productReference = 0F42E67B49FEC9A357290442A4D9F0EF /* CocoaLumberjack.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		6DA567B347FC77042AE5EC6357544820 /* EDColor */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 90D5577F31214B301A2609F85F49A114 /* Build configuration list for PBXNativeTarget "EDColor" */;
-			buildPhases = (
-				7D934C392672115895A6FCA153D7C6F3 /* Sources */,
-				2ED3D21B73CC2AFA06EC819C59F5F06E /* Frameworks */,
-				D7370D90036679FCA8D0790AE0E957E5 /* Headers */,
+				38CAA27A279573578BE61DDE70DCAD3B /* Sources */,
+				9983DA93F139A5AA8A922CA81A5B273E /* Frameworks */,
+				566411B7CD7B303CFC7246CB1429CDDF /* Headers */,
 			);
 			buildRules = (
 			);
@@ -724,16 +775,72 @@
 			);
 			name = EDColor;
 			productName = EDColor;
-			productReference = FCD25CA4EAB8CD5C66B1144F7EEEEB3B /* EDColor.framework */;
+			productReference = 1CD88D43C8EE7169A7C2BC5C59728E38 /* EDColor.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D634427B0CD4160FA7EC895B29BAC961 /* MSCellAccessory */ = {
+		7334CE048B5D2E9F1BFF7DC9A66EEB05 /* CupertinoYankee */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DCE7F60D3A087EDAA90948397868FF4C /* Build configuration list for PBXNativeTarget "MSCellAccessory" */;
+			buildConfigurationList = 62DDD5E5247734B68E316E869A9CABDF /* Build configuration list for PBXNativeTarget "CupertinoYankee" */;
 			buildPhases = (
-				963A2E6C2B65612537716D625DBC3B75 /* Sources */,
-				06A24593C512BFAADD0BB2A082C1363F /* Frameworks */,
-				67542E82EF725F13526C967AED746A4D /* Headers */,
+				F79BB6288257B99B22259603328A87D1 /* Sources */,
+				1428D26162D587FB3D0C291F396F8129 /* Frameworks */,
+				BCB489FBC1545B43CA881BE3B1EA5093 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CupertinoYankee;
+			productName = CupertinoYankee;
+			productReference = DA0749C5783F7DB8715B899F414E346D /* CupertinoYankee.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8E9C805FB414B731C0532388B6039A1B /* Pods-EvCalTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 825BBFEC804651930242A792D815073C /* Build configuration list for PBXNativeTarget "Pods-EvCalTests" */;
+			buildPhases = (
+				8C183FAB70911A49D79CF39343568D55 /* Sources */,
+				0470DCDEABBE82D5E6DD96771D3D5B42 /* Frameworks */,
+				1201B911B82D15A630D918E2132158CE /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				90FCD6F70741B33253E697AE01AEC809 /* PBXTargetDependency */,
+				036882F3EC1480D45CFB0B53A0E7BC36 /* PBXTargetDependency */,
+				95C89BE76A45033D7194B893CCE04765 /* PBXTargetDependency */,
+				F81756BFA28B9924AF203B966B44BF92 /* PBXTargetDependency */,
+				E467CD852932D7923355F7ACF514FFB6 /* PBXTargetDependency */,
+			);
+			name = "Pods-EvCalTests";
+			productName = "Pods-EvCalTests";
+			productReference = 3986E02B50F61DC43F0E7140C03C37C0 /* Pods_EvCalTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		C1BB0F8C3B6B0A1174BAC28A604D2F46 /* CocoaLumberjack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04BD22E64042E71C9380167101B92570 /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */;
+			buildPhases = (
+				1903F916DC517DA9BE91D195EF233E72 /* Sources */,
+				FEDE9462364C8AC4BBA1649BCE5863E4 /* Frameworks */,
+				FAF503626B51CF943DD079D660BE357B /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CocoaLumberjack;
+			productName = CocoaLumberjack;
+			productReference = 25AC043E0E3FA0E5C4D2EEE1DB8D2B42 /* CocoaLumberjack.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		C396B638CFC846977DB886FDC1E73533 /* MSCellAccessory */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E54C3E86C8ED4326EF52E64F9A5AE70B /* Build configuration list for PBXNativeTarget "MSCellAccessory" */;
+			buildPhases = (
+				F120C741ED56A60F6CE74EEFDB1A208F /* Sources */,
+				840EBCCD53189456C646E7F71D92E544 /* Frameworks */,
+				C4686579BCF7FFDD62EFBE039902E12F /* Headers */,
 			);
 			buildRules = (
 			);
@@ -741,7 +848,7 @@
 			);
 			name = MSCellAccessory;
 			productName = MSCellAccessory;
-			productReference = B01E46AD69FC159FBDB04CEECD5B1EEB /* MSCellAccessory.framework */;
+			productReference = CBAA80528681142153C6D6B89DE4A396 /* MSCellAccessory.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -765,11 +872,12 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5963DC5773D19EA190DA8F91FADC5784 /* CocoaLumberjack */,
-				4E6E14E8A0C1231A1D7939F4EE166942 /* CupertinoYankee */,
-				6DA567B347FC77042AE5EC6357544820 /* EDColor */,
-				D634427B0CD4160FA7EC895B29BAC961 /* MSCellAccessory */,
+				C1BB0F8C3B6B0A1174BAC28A604D2F46 /* CocoaLumberjack */,
+				7334CE048B5D2E9F1BFF7DC9A66EEB05 /* CupertinoYankee */,
+				6A32DFB65200832A03ACB5A31CEEA73C /* EDColor */,
+				C396B638CFC846977DB886FDC1E73533 /* MSCellAccessory */,
 				1EB3B872964BF61FEFBB9D5E798D8FAF /* Pods */,
+				8E9C805FB414B731C0532388B6039A1B /* Pods-EvCalTests */,
 				24763386F062EAE6B00648D6E839A7DC /* Tunits */,
 				39EA0D422F6C92F51E358D32058CAC9D /* Tunits-Tunits */,
 			);
@@ -795,11 +903,42 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1903F916DC517DA9BE91D195EF233E72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7ADAA139AB74BFE69FCF24A88C33B44 /* CocoaLumberjack-dummy.m in Sources */,
+				E681F17235F232C04A4E1FC173A51A00 /* DDASLLogCapture.m in Sources */,
+				826B34262DFA41D4E294444AE6F322CF /* DDASLLogger.m in Sources */,
+				B9EFEFCD75712B3ADCB7E348F6A9115F /* DDAbstractDatabaseLogger.m in Sources */,
+				2B088BD773F88E34724D56440726EB5E /* DDContextFilterLogFormatter.m in Sources */,
+				788C457D063E22CBFBDBB844606D65CC /* DDDispatchQueueLogFormatter.m in Sources */,
+				2285C5996EBD1FDABE63CBD0C8C07F45 /* DDFileLogger.m in Sources */,
+				3C13563EF1F14D41AEC78CB2BA31B36A /* DDLog.m in Sources */,
+				0CB94DDE64527667C3A4C81E014D180A /* DDMultiFormatter.m in Sources */,
+				D4098B5E5A347EDB7766F914DAE13A1B /* DDTTYLogger.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1F39371F489F163637D4598DC51782E6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D6C0A4639EB057DD86C48F63A76B8325 /* Pods-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38CAA27A279573578BE61DDE70DCAD3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCD7428586488CD54A0E999A4D19C854 /* EDColor-dummy.m in Sources */,
+				5C4B6F5EE21A2A5B951DC46FB960F2A1 /* UIColor+CIELAB.m in Sources */,
+				E21141C0E0DE31F22D1B54D9847F2966 /* UIColor+Crayola.m in Sources */,
+				D7EF5FCE106E3CC1DC2317C5713CBAD7 /* UIColor+HSB.m in Sources */,
+				987D50FEDCC37149C28842DF8B1B1121 /* UIColor+HSL.m in Sources */,
+				0CADD4597CF060665422AB0E173C9406 /* UIColor+Hex.m in Sources */,
+				65E083A49522A91D9AD6268088C00376 /* UIColor+iOS7.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -819,94 +958,101 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		71C91AAC36A16C4C36B57D9F5D7FDEFA /* Sources */ = {
+		8C183FAB70911A49D79CF39343568D55 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D5757F41247B1E6A68E77CC143666D7 /* CocoaLumberjack-dummy.m in Sources */,
-				FC7DBBA651C55BCAD0817EE36FC5AE1F /* DDASLLogCapture.m in Sources */,
-				9F6A4DFB9B761B28ECFAC81AC8F0138C /* DDASLLogger.m in Sources */,
-				57C8FFB2BC193654D83C6D8E93615AE3 /* DDAbstractDatabaseLogger.m in Sources */,
-				C3D80D7881ED592F5A5F8F2755F224F7 /* DDContextFilterLogFormatter.m in Sources */,
-				462AE01A5BD44357E338FEE3D0111B82 /* DDDispatchQueueLogFormatter.m in Sources */,
-				FFB529A783459C95937838888304CC16 /* DDFileLogger.m in Sources */,
-				7D7D17E252A62DD58793B2E55869B149 /* DDLog.m in Sources */,
-				BC47DB4B80988B59ED6A2493D48ECA1D /* DDMultiFormatter.m in Sources */,
-				DACD7D25BB3D40934121BE93FAA02A6F /* DDTTYLogger.m in Sources */,
+				1B44DE6CF147E5A55EF8E78D47065523 /* Pods-EvCalTests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7D934C392672115895A6FCA153D7C6F3 /* Sources */ = {
+		F120C741ED56A60F6CE74EEFDB1A208F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				021BF8B4367958FE862A57C81920B4FA /* EDColor-dummy.m in Sources */,
-				651A4E978A3B46B44F14CA3E3EDB71A2 /* UIColor+CIELAB.m in Sources */,
-				AA6F2D9723345C83A1EE4D6440B96F7F /* UIColor+Crayola.m in Sources */,
-				AF26AD16D1BDAF3506725D772A999BBB /* UIColor+HSB.m in Sources */,
-				F8B99A1466397E977101EEB015891B64 /* UIColor+HSL.m in Sources */,
-				7D6E6FD5226B3931F4C6B743A6053A53 /* UIColor+Hex.m in Sources */,
-				18E94E17555FA3B0AF30D358736DF7CB /* UIColor+iOS7.m in Sources */,
+				708820C26D252EA61FF1768E32AA3391 /* MSCellAccessory-dummy.m in Sources */,
+				E1B5DB2E3CFD7375D54AED9A678CC2A1 /* MSCellAccessory.m in Sources */,
+				777F35B4C2297D2E64779685FCD77E7B /* UIView+AccessViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		963A2E6C2B65612537716D625DBC3B75 /* Sources */ = {
+		F79BB6288257B99B22259603328A87D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7684AAC639224B9BF624AC317891A4E6 /* MSCellAccessory-dummy.m in Sources */,
-				3E48F33E6719B938109AD17479505D30 /* MSCellAccessory.m in Sources */,
-				42A48F1E47D8F15BBF9F3063FB6B8329 /* UIView+AccessViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CBF7E9D2303D5A7E1EB7A8EA545120BD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				96B703CEC2AA90A550AC6607CAACA5AE /* CupertinoYankee-dummy.m in Sources */,
-				5BB3DD9DB18D7EBB1453E87BE2A35AF3 /* NSDate+CupertinoYankee.m in Sources */,
+				727B944A787608DA8942EFFD54FC87B5 /* CupertinoYankee-dummy.m in Sources */,
+				8EB145EB1142B41AFE439DB0C95D2D0A /* NSDate+CupertinoYankee.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2ABA93BBE3BB272F2A7D273748F1754C /* PBXTargetDependency */ = {
+		036882F3EC1480D45CFB0B53A0E7BC36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CupertinoYankee;
+			target = 7334CE048B5D2E9F1BFF7DC9A66EEB05 /* CupertinoYankee */;
+			targetProxy = D023DF2E70A77704545EBEFE0E4BA2CD /* PBXContainerItemProxy */;
+		};
+		07ABDA9BC550AE5F666BFE5E2EEC66DB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Tunits-Tunits";
 			target = 39EA0D422F6C92F51E358D32058CAC9D /* Tunits-Tunits */;
-			targetProxy = B49D04DEF85744AFD7D97D48DE870DB1 /* PBXContainerItemProxy */;
+			targetProxy = B39CB0A67BC014C90E5F61258C58051D /* PBXContainerItemProxy */;
 		};
-		5456C357CDE8C283B5EC25E71AB77DA5 /* PBXTargetDependency */ = {
+		2C76274709720CF69FE3CF10A35A4478 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CupertinoYankee;
+			target = 7334CE048B5D2E9F1BFF7DC9A66EEB05 /* CupertinoYankee */;
+			targetProxy = 98B7A4DDB50876093CBB196832FFB062 /* PBXContainerItemProxy */;
+		};
+		7E5F4F193B1FCB695886EB3739A2E82B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MSCellAccessory;
+			target = C396B638CFC846977DB886FDC1E73533 /* MSCellAccessory */;
+			targetProxy = 4AA3D1EDDB137EA1481F4105FEB90416 /* PBXContainerItemProxy */;
+		};
+		90FCD6F70741B33253E697AE01AEC809 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CocoaLumberjack;
+			target = C1BB0F8C3B6B0A1174BAC28A604D2F46 /* CocoaLumberjack */;
+			targetProxy = CE8D72A76A6D944DF00B41246CEF33A0 /* PBXContainerItemProxy */;
+		};
+		95C89BE76A45033D7194B893CCE04765 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EDColor;
+			target = 6A32DFB65200832A03ACB5A31CEEA73C /* EDColor */;
+			targetProxy = A410E6A491E34EEA7C7A9FAFB815DB05 /* PBXContainerItemProxy */;
+		};
+		B6E189AAB878AD190BE38DBB2C8BFEC8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Tunits;
 			target = 24763386F062EAE6B00648D6E839A7DC /* Tunits */;
-			targetProxy = EDC32001922DB60BE5E538EB1F7E6AD2 /* PBXContainerItemProxy */;
+			targetProxy = E03FD5E3F7934243DB941223FA014CB1 /* PBXContainerItemProxy */;
 		};
-		572A34483D062527AF27AF13BFCE20AE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MSCellAccessory;
-			target = D634427B0CD4160FA7EC895B29BAC961 /* MSCellAccessory */;
-			targetProxy = 4C11A6054CB7ED971A10B8FF9649C8CA /* PBXContainerItemProxy */;
-		};
-		5BEA1F544F99AF0BD9ADD5EB01134476 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CupertinoYankee;
-			target = 4E6E14E8A0C1231A1D7939F4EE166942 /* CupertinoYankee */;
-			targetProxy = 1BD23B8C90ED60ADEC6BDE371E00124E /* PBXContainerItemProxy */;
-		};
-		638E6358C7D31663A646A3FC53C792DB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CocoaLumberjack;
-			target = 5963DC5773D19EA190DA8F91FADC5784 /* CocoaLumberjack */;
-			targetProxy = C9F39778BEE068978BCFC3B5904D60FD /* PBXContainerItemProxy */;
-		};
-		65271140DD787C138C00CFF0A7227F7A /* PBXTargetDependency */ = {
+		C285BEA408C4A7CBD5312BBCD40AC725 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = EDColor;
-			target = 6DA567B347FC77042AE5EC6357544820 /* EDColor */;
-			targetProxy = 93BFB3BA38C2516B549402CB4EF44308 /* PBXContainerItemProxy */;
+			target = 6A32DFB65200832A03ACB5A31CEEA73C /* EDColor */;
+			targetProxy = EEF6A29FC2954539E63B3987E5D10E61 /* PBXContainerItemProxy */;
+		};
+		CA14EB1FEF43D66795A6A742EF8ADF54 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CocoaLumberjack;
+			target = C1BB0F8C3B6B0A1174BAC28A604D2F46 /* CocoaLumberjack */;
+			targetProxy = C4888CCC61786AF452B84EE59AEB8F6B /* PBXContainerItemProxy */;
+		};
+		E467CD852932D7923355F7ACF514FFB6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Tunits;
+			target = 24763386F062EAE6B00648D6E839A7DC /* Tunits */;
+			targetProxy = CF7036AC0054C47ABD02DA286D0B2135 /* PBXContainerItemProxy */;
+		};
+		F81756BFA28B9924AF203B966B44BF92 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MSCellAccessory;
+			target = C396B638CFC846977DB886FDC1E73533 /* MSCellAccessory */;
+			targetProxy = 8243A3FEE4657C6EA432ED625AC279F4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -939,6 +1085,33 @@
 			};
 			name = Debug;
 		};
+		130922A635DF840AC63D651597A007F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5CFDA49EB22B790093DE3D4F780E55AF /* CupertinoYankee-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1.0.2;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CupertinoYankee/CupertinoYankee-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CupertinoYankee/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CupertinoYankee/CupertinoYankee.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = CupertinoYankee;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		1F6C3FF37F316C152312FCABE7B42586 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9FCA770CC99D5926E410F6138E41D10C /* Tunits-Private.xcconfig */;
@@ -966,25 +1139,27 @@
 			};
 			name = Release;
 		};
-		2734A7861E676EF78BB7CC141A4D78A6 /* Release */ = {
+		25E7FC4E0D0F54ED2344E770F9CE605A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EFA506617ACCEB5088C27A8212731B8F /* EDColor-Private.xcconfig */;
+			baseConfigurationReference = 66EC5DF74846D21C6052BFF954114CF0 /* Pods-EvCalTests.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1.0.0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/EDColor/EDColor-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/EDColor/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-EvCalTests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/EDColor/EDColor.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-EvCalTests/Pods-EvCalTests.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = EDColor;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_EvCalTests;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1061,6 +1236,33 @@
 			};
 			name = Debug;
 		};
+		609775D7591E395FC0AE34D588AE7ED5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29F261FCDD3BC7276073187EC5CB0B24 /* MSCellAccessory-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1.1.2;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MSCellAccessory/MSCellAccessory-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MSCellAccessory/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MSCellAccessory/MSCellAccessory.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = MSCellAccessory;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		74857149DC1E0D599B8A01A78349A926 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1095,33 +1297,6 @@
 			};
 			name = Release;
 		};
-		7C797E590B9734683431916DD2D9BCA8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F9E44E7E67F4D3BF70E71785A9E4AC5 /* MSCellAccessory-Private.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1.1.2;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MSCellAccessory/MSCellAccessory-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MSCellAccessory/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MSCellAccessory/MSCellAccessory.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = MSCellAccessory;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		8733C3F0235512256094AB93F59E907A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9FCA770CC99D5926E410F6138E41D10C /* Tunits-Private.xcconfig */;
@@ -1134,36 +1309,36 @@
 			};
 			name = Debug;
 		};
-		8B3E82ED80E4D9A232CB6C2AECF8F547 /* Release */ = {
+		A867A4B3BBFE4F6B80E35C41E45EF899 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F9E44E7E67F4D3BF70E71785A9E4AC5 /* MSCellAccessory-Private.xcconfig */;
+			baseConfigurationReference = 5CFDA49EB22B790093DE3D4F780E55AF /* CupertinoYankee-Private.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1.1.2;
+				CURRENT_PROJECT_VERSION = 1.0.2;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MSCellAccessory/MSCellAccessory-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MSCellAccessory/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/CupertinoYankee/CupertinoYankee-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CupertinoYankee/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MSCellAccessory/MSCellAccessory.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = MSCellAccessory;
+				MODULEMAP_FILE = "Target Support Files/CupertinoYankee/CupertinoYankee.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = CupertinoYankee;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
-		B903673EFFBFA2C5DD8326B601E99FD5 /* Release */ = {
+		AE846309F67872856728D5CCA0896DAD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 02DA6B660760B2A8DD150DCEF2E562E2 /* CocoaLumberjack-Private.xcconfig */;
+			baseConfigurationReference = 9852A64A9070BC8B6DEC442EEBCEE15C /* CocoaLumberjack-Private.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 2.0.1;
@@ -1178,7 +1353,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/CocoaLumberjack/CocoaLumberjack.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = CocoaLumberjack;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1186,7 +1361,7 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		BC98F124BD9FE84CC9D964FF94CE4314 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1200,90 +1375,9 @@
 			};
 			name = Release;
 		};
-		CE87B3E32C938BA8A613F4209689344D /* Debug */ = {
+		BE7FE180C147FBA7CCDA85C349BA8C5D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 02DA6B660760B2A8DD150DCEF2E562E2 /* CocoaLumberjack-Private.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.0.1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 2;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/CocoaLumberjack/CocoaLumberjack-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CocoaLumberjack/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/CocoaLumberjack/CocoaLumberjack.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = CocoaLumberjack;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		D90B375C89046B50DCBEDDAB860BE310 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1E5BC51CDA0E75D262D4A319EEFB1A9B /* CupertinoYankee-Private.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1.0.2;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/CupertinoYankee/CupertinoYankee-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CupertinoYankee/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/CupertinoYankee/CupertinoYankee.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = CupertinoYankee;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		DB4BE05D28FC50623523483E4D95CB5A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1E5BC51CDA0E75D262D4A319EEFB1A9B /* CupertinoYankee-Private.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1.0.2;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/CupertinoYankee/CupertinoYankee-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CupertinoYankee/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/CupertinoYankee/CupertinoYankee.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = CupertinoYankee;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		E14AA0EDC533F22238EA017D2F8A5C0B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EFA506617ACCEB5088C27A8212731B8F /* EDColor-Private.xcconfig */;
+			baseConfigurationReference = 0293E153852341E41B84CBA3EDDEE5B3 /* EDColor-Private.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1.0.0;
@@ -1307,6 +1401,117 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		C21D6F4262C60CCBFA20BE26C6C2B46F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0525DD4D9D8A67177331517D7F5E2793 /* Pods-EvCalTests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-EvCalTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-EvCalTests/Pods-EvCalTests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_EvCalTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C612BD319F488202AE25B29D44D71796 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29F261FCDD3BC7276073187EC5CB0B24 /* MSCellAccessory-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1.1.2;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MSCellAccessory/MSCellAccessory-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MSCellAccessory/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MSCellAccessory/MSCellAccessory.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = MSCellAccessory;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DB58EC33FB19DE70F7964FC4F1A9F455 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9852A64A9070BC8B6DEC442EEBCEE15C /* CocoaLumberjack-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2.0.1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 2;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CocoaLumberjack/CocoaLumberjack-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CocoaLumberjack/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CocoaLumberjack/CocoaLumberjack.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = CocoaLumberjack;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		EC13C9B6F4E4A625880EE7DC806ED9F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0293E153852341E41B84CBA3EDDEE5B3 /* EDColor-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/EDColor/EDColor-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/EDColor/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/EDColor/EDColor.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = EDColor;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		FE659B7F0F4132523DB8D0D2A1B08DE5 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1341,6 +1546,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		04BD22E64042E71C9380167101B92570 /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE846309F67872856728D5CCA0896DAD /* Debug */,
+				DB58EC33FB19DE70F7964FC4F1A9F455 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1350,11 +1564,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5C1F382BA49DFC51C3FC42FA1F220B1F /* Build configuration list for PBXNativeTarget "CupertinoYankee" */ = {
+		62DDD5E5247734B68E316E869A9CABDF /* Build configuration list for PBXNativeTarget "CupertinoYankee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DB4BE05D28FC50623523483E4D95CB5A /* Debug */,
-				D90B375C89046B50DCBEDDAB860BE310 /* Release */,
+				A867A4B3BBFE4F6B80E35C41E45EF899 /* Debug */,
+				130922A635DF840AC63D651597A007F8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1368,20 +1582,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		825BBFEC804651930242A792D815073C /* Build configuration list for PBXNativeTarget "Pods-EvCalTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C21D6F4262C60CCBFA20BE26C6C2B46F /* Debug */,
+				25E7FC4E0D0F54ED2344E770F9CE605A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8FF797F5B0EC56F3F1EA31C594ABA96F /* Build configuration list for PBXNativeTarget "Tunits" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0BF0C32F1D67F866D674FB45487BFA22 /* Debug */,
 				1F6C3FF37F316C152312FCABE7B42586 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		90D5577F31214B301A2609F85F49A114 /* Build configuration list for PBXNativeTarget "EDColor" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E14AA0EDC533F22238EA017D2F8A5C0B /* Debug */,
-				2734A7861E676EF78BB7CC141A4D78A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1395,20 +1609,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DCE7F60D3A087EDAA90948397868FF4C /* Build configuration list for PBXNativeTarget "MSCellAccessory" */ = {
+		B01B248CBD31EEED619CC503C099E69C /* Build configuration list for PBXNativeTarget "EDColor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7C797E590B9734683431916DD2D9BCA8 /* Debug */,
-				8B3E82ED80E4D9A232CB6C2AECF8F547 /* Release */,
+				BE7FE180C147FBA7CCDA85C349BA8C5D /* Debug */,
+				EC13C9B6F4E4A625880EE7DC806ED9F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E93D8F27C91CB5A4786B9A341E493748 /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */ = {
+		E54C3E86C8ED4326EF52E64F9A5AE70B /* Build configuration list for PBXNativeTarget "MSCellAccessory" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CE87B3E32C938BA8A613F4209689344D /* Debug */,
-				B903673EFFBFA2C5DD8326B601E99FD5 /* Release */,
+				C612BD319F488202AE25B29D44D71796 /* Debug */,
+				609775D7591E395FC0AE34D588AE7ED5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

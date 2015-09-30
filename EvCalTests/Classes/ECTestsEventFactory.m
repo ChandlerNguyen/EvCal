@@ -9,7 +9,7 @@
 #import "ECTestsEventFactory.h"
 
 #import "NSDate+ECTestAdditions.h"
-#import "NSDate+CupertinoYankee.h"
+@import Tunits;
 
 @implementation ECTestsEventFactory
 
@@ -53,7 +53,8 @@
 
 + (EKEvent*)randomEventInDay:(NSDate *)date store:(EKEventStore *)store calendar:(EKCalendar *)calendar allowMultipleDays:(BOOL)multipleDays
 {
-    NSArray* todayHours = [date hoursOfDay];
+    TimeUnit* tunit = [[TimeUnit alloc] init];
+    NSArray* todayHours = [tunit hoursOfDay:date];
     
     NSInteger startIndex = (NSInteger)arc4random_uniform((u_int32_t)todayHours.count - 1);
     NSInteger duration = (NSInteger)arc4random_uniform((u_int32_t)todayHours.count * 60 * 60);
@@ -61,8 +62,8 @@
     NSDate* endDate = [startDate dateByAddingTimeInterval:duration];
     
     // multiple days not allowed and end date is after the given date
-    if (!multipleDays && [endDate compare:[date endOfDay]] == NSOrderedDescending) {
-        endDate = [date endOfDay];
+    if (!multipleDays && [endDate compare:[tunit endOfDay:date]] == NSOrderedDescending) {
+        endDate = [tunit endOfDay:date];
     }
     
     EKEvent* event = [EKEvent eventWithEventStore:store];

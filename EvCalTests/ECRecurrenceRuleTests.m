@@ -151,11 +151,11 @@
 - (void)testRecurrenceRuleFormatterCreatesRecurrenceRuleForWeekdayRecurrenceTypeWithWeekdays
 {
     ECRecurrenceRule* weekdayRecurrenceRule = [ECRecurrenceRule recurrenceRuleForRecurrenceType:ECRecurrenceRuleTypeWeekdays];
-    NSArray* weekdays = @[[EKRecurrenceDayOfWeek dayOfWeek:EKMonday],
-                          [EKRecurrenceDayOfWeek dayOfWeek:EKTuesday],
-                          [EKRecurrenceDayOfWeek dayOfWeek:EKWednesday],
-                          [EKRecurrenceDayOfWeek dayOfWeek:EKThursday],
-                          [EKRecurrenceDayOfWeek dayOfWeek:EKFriday]];
+    NSArray* weekdays = @[[EKRecurrenceDayOfWeek dayOfWeek:EKWeekdayMonday],
+                          [EKRecurrenceDayOfWeek dayOfWeek:EKWeekdayTuesday],
+                          [EKRecurrenceDayOfWeek dayOfWeek:EKWeekdayWednesday],
+                          [EKRecurrenceDayOfWeek dayOfWeek:EKWeekdayThursday],
+                          [EKRecurrenceDayOfWeek dayOfWeek:EKWeekdayFriday]];
     
     XCTAssertEqualObjects(weekdayRecurrenceRule.rule.daysOfTheWeek, weekdays);
 }

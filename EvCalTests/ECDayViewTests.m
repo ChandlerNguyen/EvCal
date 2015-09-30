@@ -11,7 +11,7 @@
 @import EventKit;
 
 // Helpers
-#import "NSDate+CupertinoYankee.h"
+@import Tunits;
 
 // EvCal Classes
 #import "ECDayView.h"
@@ -19,6 +19,7 @@
 
 @interface ECDayViewTests : XCTestCase <ECDayViewDataSource, ECDayViewDelegate>
 
+@property (nonatomic, strong) TimeUnit* tunit;
 @property (nonatomic, strong) NSDate* testStartDate;
 @property (nonatomic, strong) ECDayView* dayView;
 
@@ -38,6 +39,7 @@
 - (void)setUp {
     [super setUp];
    
+    self.tunit = [[TimeUnit alloc] init];
     self.testStartDate = [NSDate date];
     
     self.dayView = [[ECDayView alloc] initWithFrame:CGRectZero displayDate:self.testStartDate];
@@ -53,6 +55,7 @@
 - (void)tearDown {
     
     self.dayView = nil;
+    self.tunit = nil;
     self.testStartDate = nil;
     self.eventStore = nil;
     
@@ -67,8 +70,8 @@
         self.eventStore = [[EKEventStore alloc] init];
     }
     self.eventsRequested = YES;
-    NSArray* events = [self.eventStore eventsMatchingPredicate:[self.eventStore predicateForEventsWithStartDate:[date beginningOfDay]
-                                                                                                        endDate:[date endOfDay]
+    NSArray* events = [self.eventStore eventsMatchingPredicate:[self.eventStore predicateForEventsWithStartDate:[self.tunit beginningOfDay:date]
+                                                                                                        endDate:[self.tunit endOfDay:date]
                                                                                                       calendars:nil]];
     return events;
 }
@@ -103,7 +106,7 @@
 
 - (void)testDayViewSetDisplayDateChangesDisplayDate
 {
-    NSDate* tomorrow = [self.testStartDate tomorrow];
+    NSDate* tomorrow = [self.tunit dayAfter:self.testStartDate];
     [self.dayView setDisplayDate:tomorrow];
     
     XCTAssertTrue([[NSCalendar currentCalendar] isDate:tomorrow inSameDayAsDate:self.dayView.displayDate]);
@@ -111,7 +114,7 @@
 
 - (void)testDayViewSetDisplayDateDoesCallDelegateIfAnimated
 {
-    NSDate* tomorrow = [self.testStartDate tomorrow];
+    NSDate* tomorrow = [self.tunit dayAfter:self.testStartDate];
     [self.dayView setDisplayDate:tomorrow];
     
     XCTAssertTrue(self.dayViewScrolledCalled);

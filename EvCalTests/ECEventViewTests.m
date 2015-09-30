@@ -13,7 +13,7 @@
 
 // Helpers
 #import "NSArray+ECTesting.h"
-#import "NSDate+CupertinoYankee.h"
+@import Tunits;
 #import "ECTestsEventFactory.h"
 
 // EvCal Classes
@@ -26,6 +26,7 @@
 @property (nonatomic, strong) ECDayView* dayView;
 @property (nonatomic, strong) EKEventStore* eventStore;
 @property (nonatomic, strong) EKCalendar* testCalendar;
+@property (nonatomic, strong) TimeUnit* tunit;
 @property (nonatomic, strong) NSDate* testStartDate;
 @property (nonatomic) CGRect testFrame;
 
@@ -38,6 +39,7 @@
 - (void)setUp {
     [super setUp];
     
+    self.tunit = [[TimeUnit alloc] init];
     self.testStartDate = [NSDate date];
     self.dayView = [[ECDayView alloc] initWithFrame:CGRectZero];
     self.eventStore = [[EKEventStore alloc] init];
@@ -66,6 +68,8 @@
     
     [self.eventStore removeCalendar:self.testCalendar commit:YES error:nil];
     
+    self.tunit = nil;
+    self.testStartDate = nil;
     self.dayView = nil;
     self.eventStore = nil;
 }
@@ -95,7 +99,7 @@
 
 - (void)testEventViewsCanBeCreated
 {
-    ECEventView* eventView = [self createEventViewWithStartDate:self.testStartDate endDate:[self.testStartDate endOfHour] allDay:NO];
+    ECEventView* eventView = [self createEventViewWithStartDate:self.testStartDate endDate:[self.tunit endOfHour:self.testStartDate] allDay:NO];
     
     XCTAssertNotNil(eventView);
 }
@@ -106,7 +110,7 @@
     event.title = @"Test Event View Creation";
     event.location = @"Simulator/iOS Device";
     event.startDate = self.testStartDate;
-    event.endDate = [self.testStartDate endOfHour];
+    event.endDate = [self.tunit endOfHour:self.testStartDate];
     event.allDay = NO;
     event.calendar = self.testCalendar;
     
@@ -117,7 +121,7 @@
 - (void)testEventViewCompareForEventsWithAscendingStartAndEndDates
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDate* firstEventStartDate = [self.testStartDate beginningOfHour];
+    NSDate* firstEventStartDate = [self.tunit beginningOfHour:self.testStartDate];
     NSDate* firstEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventStartDate options:0];
     NSDate* secondEventStartDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventEndDate options:0];
     NSDate* secondEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:secondEventStartDate options:0];
@@ -131,7 +135,7 @@
 - (void)testEventViewCompareForEventsWithAscendingStartAndSameEndDates
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDate* firstEventStartDate = [self.testStartDate beginningOfHour];
+    NSDate* firstEventStartDate = [self.tunit beginningOfHour:self.testStartDate];
     NSDate* secondEventStartDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventStartDate options:0];
     NSDate* eventsEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:2 toDate:firstEventStartDate options:0];
     
@@ -144,7 +148,7 @@
 - (void)testEventViewCompareForEventsWithAscendingStartAndDescendingEndDates
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDate* firstEventStartDate = [self.testStartDate beginningOfHour];
+    NSDate* firstEventStartDate = [self.tunit beginningOfHour:self.testStartDate];
     NSDate* firstEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:3 toDate:firstEventStartDate options:0];
     NSDate* secondEventStartDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventStartDate options:0];
     NSDate* secondEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:secondEventStartDate options:0];
@@ -158,7 +162,7 @@
 - (void)testEventViewCompareWithSameStartAndAscendingEndDates
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDate* eventsStartDate = [self.testStartDate beginningOfHour];
+    NSDate* eventsStartDate = [self.tunit beginningOfHour:self.testStartDate];
     NSDate* firstEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:eventsStartDate options:0];
     NSDate* secondEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:2 toDate:eventsStartDate options:0];
     
@@ -172,7 +176,7 @@
 - (void)testEventViewCompareWithSameStartAndEndDates
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDate* eventsStartDate = [self.testStartDate beginningOfHour];
+    NSDate* eventsStartDate = [self.tunit beginningOfHour:self.testStartDate];
     NSDate* eventsEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:eventsStartDate options:0];
     
     ECEventView* earlyEventView = [self createEventViewWithStartDate:eventsStartDate endDate:eventsEndDate allDay:NO];
@@ -184,7 +188,7 @@
 - (void)testEventViewCompareWithSameStartAndDescendingEndDates
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDate* eventsStartDate = [self.testStartDate beginningOfHour];
+    NSDate* eventsStartDate = [self.tunit beginningOfHour:self.testStartDate];
     NSDate* firstEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:2 toDate:eventsStartDate options:0];
     NSDate* secondEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:eventsStartDate options:0];
     
@@ -197,7 +201,7 @@
 - (void)testEventViewCompareWithDescendingStartAndAscendingEndDates
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDate* firstEventStartDate = [self.testStartDate beginningOfHour];
+    NSDate* firstEventStartDate = [self.tunit beginningOfHour:self.testStartDate];
     NSDate* firstEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventStartDate options:0];
     NSDate* secondEventStartDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:-1 toDate:firstEventStartDate options:0];
     NSDate* secondEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventEndDate options:0];
@@ -211,7 +215,7 @@
 - (void)testEventViewCompareWithDescendingStartAndSameEndDates
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDate* firstEventStartDate = [self.testStartDate beginningOfHour];
+    NSDate* firstEventStartDate = [self.tunit beginningOfHour:self.testStartDate];
     NSDate* secondEventStartDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:-1 toDate:firstEventStartDate options:0];
     NSDate* eventsEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventStartDate options:0];
     
@@ -224,7 +228,7 @@
 - (void)testEventViewCompareWithDescendingStartAndEndDates
 {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDate* firstEventStartDate = [self.testStartDate beginningOfHour];
+    NSDate* firstEventStartDate = [self.tunit beginningOfHour:self.testStartDate];
     NSDate* firstEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:firstEventStartDate options:0];
     NSDate* secondEventStartDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:-2 toDate:firstEventStartDate options:0];
     NSDate* secondEventEndDate = [calendar dateByAddingUnit:NSCalendarUnitHour value:1 toDate:secondEventStartDate options:0];

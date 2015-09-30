@@ -11,7 +11,7 @@
 #import <XCTest/XCTest.h>
 
 // Helpers
-#import "NSDate+CupertinoYankee.h"
+@import Tunits;
 #import "EKEvent+ECAdditions.h"
 
 // EvCal Classes
@@ -22,6 +22,7 @@
 @property (nonatomic, strong) ECEventCache* eventCache;
 @property (nonatomic, strong) EKEventStore* eventStore;
 @property (nonatomic, strong) NSDate* testStartDate;
+@property (nonatomic, strong) TimeUnit* tunit;
 @property (nonatomic, strong) EKCalendar* testCalendar;
 @end
 
@@ -32,6 +33,7 @@
 - (void)setUp {
     [super setUp];
     
+    self.tunit = [[TimeUnit alloc] init];
     self.testStartDate = [NSDate date];
     
     self.eventCache = [[ECEventCache alloc] init];
@@ -59,6 +61,7 @@
     
     [self removeEventsFromTestCalendar];
     [self.eventStore removeCalendar:self.testCalendar commit:YES error:nil];
+    self.tunit = nil;
     self.testStartDate = nil;
     self.testCalendar = nil;
     self.eventCache = nil;
@@ -71,14 +74,14 @@
 {
 //    EKEvent* eventWithinDay = [EKEvent eventWithEventStore:self.eventStore];
 //    eventWithinDay.title = @"Event Within Day";
-//    eventWithinDay.startDate = [self.testStartDate beginningOfDay];
+//    eventWithinDay.startDate = [self.tunit beginningOfDay:self.testStartDate];
 //    eventWithinDay.endDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitHour value:1 toDate:eventWithinDay.startDate options:0];
 //    eventWithinDay.calendar = self.testCalendar;
     
     EKEvent* eventSpanningMultipleDays = [EKEvent eventWithEventStore:self.eventStore];
     eventSpanningMultipleDays.title = @"Event Spanning Multiple Days";
-    eventSpanningMultipleDays.startDate = [self.testStartDate beginningOfDay];
-    eventSpanningMultipleDays.endDate = [[self.testStartDate tomorrow] endOfDay];
+    eventSpanningMultipleDays.startDate = [self.tunit beginningOfDay:self.testStartDate];
+    eventSpanningMultipleDays.endDate = [self.tunit endOfDay:[self.tunit dayAfter:self.testStartDate]];
     eventSpanningMultipleDays.calendar = self.testCalendar;
     
     //[self.eventStore saveEvent:eventWithinDay span:EKSpanThisEvent commit:NO error:nil];
@@ -88,7 +91,9 @@
 
 - (void)removeEventsFromTestCalendar
 {
-    NSArray* testEvents = [self.eventStore eventsMatchingPredicate:[self.eventStore predicateForEventsWithStartDate:[self.testStartDate beginningOfDay] endDate:[[self.testStartDate tomorrow] endOfDay] calendars:@[self.testCalendar]]];
+    NSArray* testEvents = [self.eventStore eventsMatchingPredicate:[self.eventStore predicateForEventsWithStartDate:[self.tunit beginningOfDay:self.testStartDate]
+                                                                                                            endDate:[self.tunit endOfDay:[self.tunit dayAfter:self.testStartDate]]
+                                                                                                          calendars:@[self.testCalendar]]];
     
     for (EKEvent* event in testEvents) {
         [self.eventStore removeEvent:event span:EKSpanThisEvent commit:NO error:nil];
@@ -121,10 +126,10 @@
 
 - (void)testCacheReturnsSameEventsAsEventStore
 {
-    NSDate* startDate = [self.testStartDate beginningOfYear];
-    NSDate* endDate = [self.testStartDate endOfYear];
+    NSDate* startDate = [self.tunit beginningOfYear:self.testStartDate];
+    NSDate* endDate = [self.tunit endOfYear:self.testStartDate];
     
-    NSArray* cacheEvents = [self.eventCache eventsFrom:[self.testStartDate beginningOfYear] to:[self.testStartDate endOfYear] in:nil];
+    NSArray* cacheEvents = [self.eventCache eventsFrom:[self.tunit beginningOfYear:self.testStartDate] to:[self.tunit endOfYear:self.testStartDate] in:nil];
     
     NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:startDate endDate:endDate calendars:nil];
     NSArray* eventStoreEvents = [self.eventStore eventsMatchingPredicate:eventsPredicate];
@@ -137,8 +142,8 @@
 
 - (void)testCacheReturnsSameEventsAsEventStoreFromAGivenCalendar
 {
-    NSDate* startOfYear = [self.testStartDate beginningOfYear];
-    NSDate* endOfYear = [self.testStartDate endOfYear];
+    NSDate* startOfYear = [self.tunit beginningOfYear:self.testStartDate];
+    NSDate* endOfYear = [self.tunit endOfYear:self.testStartDate];
     NSArray* cacheEvents = [self.eventCache eventsFrom:startOfYear to:endOfYear in:@[self.testCalendar]];
     
     NSPredicate* eventsPredicate = [self.eventStore predicateForEventsWithStartDate:startOfYear endDate:endOfYear calendars:@[self.testCalendar]];
@@ -151,8 +156,8 @@
 {
     // test calendar contains a multiple day event that starts in the day of
     // test start date and continues into the next day
-    NSDate* startOfDay = [self.testStartDate beginningOfDay];
-    NSDate* endOfDay = [self.testStartDate endOfDay];
+    NSDate* startOfDay = [self.tunit beginningOfDay:self.testStartDate];
+    NSDate* endOfDay = [self.tunit endOfDay:self.testStartDate];
     
     NSArray* cacheEvents = [self.eventCache eventsFrom:startOfDay to:endOfDay in:@[self.testCalendar]];
     
@@ -165,8 +170,8 @@
 
 - (void)testCacheReturnsSameEventsAsEventStoreForDatePrecedingPreviousDateRange
 {
-    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
-    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* startOfMonth = [self.tunit beginningOfMonth:self.testStartDate];
+    NSDate* endOfMonth = [self.tunit endOfMonth:self.testStartDate];
     NSDate* startOfPreviousMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:-1 toDate:startOfMonth options:0];
     
     // initializes cache with a month of events
@@ -186,8 +191,8 @@
 
 - (void)testCacheReturnsSameEventsAsEventStoreForEndDateFollowingPreviousDateRange
 {
-    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
-    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* startOfMonth = [self.tunit beginningOfMonth:self.testStartDate];
+    NSDate* endOfMonth = [self.tunit endOfMonth:self.testStartDate];
     NSDate* endOfNextMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:1 toDate:endOfMonth options:0];
     
     // initialize cache with a month of events
@@ -207,10 +212,10 @@
 
 - (void)testCacheReturnsSameEventsAsEventStoreForStartAndEndDateThatPrecedePreviousDateRange
 {
-    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
-    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* startOfMonth = [self.tunit beginningOfMonth:self.testStartDate];
+    NSDate* endOfMonth = [self.tunit endOfMonth:self.testStartDate];
     NSDate* startOfTwoMonthsAgo = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:-2 toDate:startOfMonth options:0];
-    NSDate* endOfTwoMonthsAgo = [startOfTwoMonthsAgo endOfMonth];
+    NSDate* endOfTwoMonthsAgo = [self.tunit endOfMonth:startOfTwoMonthsAgo];
     
     [self.eventCache eventsFrom:startOfMonth to:endOfMonth in:nil];
     
@@ -227,8 +232,8 @@
 
 - (void)testCacheReturnsSameEventsAsEventStoreForStartDatePrecedingAndEndDateWithinPreviousDateRange
 {
-    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
-    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* startOfMonth = [self.tunit beginningOfMonth:self.testStartDate];
+    NSDate* endOfMonth = [self.tunit endOfMonth:self.testStartDate];
     NSDate* previousMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:-1 toDate:startOfMonth options:0];
     NSDate* twoDaysIntoMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:2 toDate:startOfMonth options:0];
     
@@ -247,8 +252,8 @@
 
 - (void)testCacheReturnsSameEventAsEventStoreForStartAndEndDateWithinPreviousDateRange
 {
-    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
-    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* startOfMonth = [self.tunit beginningOfMonth:self.testStartDate];
+    NSDate* endOfMonth = [self.tunit endOfMonth:self.testStartDate];
     NSDate* twoDaysIntoMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:2 toDate:startOfMonth options:0];
     NSDate* tenDaysIntoMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:10 toDate:startOfMonth options:0];
     
@@ -267,8 +272,8 @@
 
 - (void)testCacheReturnsSameEventAsEventStoreForStartDateWithinAndEndDateFollowingPreviousDateRange
 {
-    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
-    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* startOfMonth = [self.tunit beginningOfMonth:self.testStartDate];
+    NSDate* endOfMonth = [self.tunit endOfMonth:self.testStartDate];
     NSDate* twoDaysBeforeEndOfMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:-2 toDate:endOfMonth options:0];
     NSDate* endOfNextMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:1 toDate:endOfMonth options:0];
     
@@ -287,10 +292,10 @@
 
 - (void)testcacheReturnsSameEventAsEventStoreForStartAndDateFollowingPreviousDateRange
 {
-    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
-    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* startOfMonth = [self.tunit beginningOfMonth:self.testStartDate];
+    NSDate* endOfMonth = [self.tunit endOfMonth:self.testStartDate];
     NSDate* startOfNextMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:2 toDate:endOfMonth options:0];
-    NSDate* endOfNextMonth = [startOfNextMonth endOfMonth];
+    NSDate* endOfNextMonth = [self.tunit endOfMonth:startOfNextMonth];
     
     [self.eventCache eventsFrom:startOfMonth to:endOfMonth in:nil];
     
@@ -307,8 +312,8 @@
 
 - (void)testCacheReturnsSameEventAsEventStoreForStartDatePrecedingAndEndDateFollowingPreviousDateRange
 {
-    NSDate* startOfMonth = [self.testStartDate beginningOfMonth];
-    NSDate* endOfMonth = [self.testStartDate endOfMonth];
+    NSDate* startOfMonth = [self.tunit beginningOfMonth:self.testStartDate];
+    NSDate* endOfMonth = [self.tunit endOfMonth:self.testStartDate];
     NSDate* startOfPreviousMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:-1 toDate:startOfMonth options:0];
     NSDate* endOfNextMonth = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitMonth value:1 toDate:endOfMonth options:0];
     
@@ -327,8 +332,8 @@
 
 - (void)testCacheReturnsNilIfDataSourceNotSet
 {
-    NSDate* startOfYear = [self.testStartDate beginningOfYear];
-    NSDate* endOfYear = [self.testStartDate endOfYear];
+    NSDate* startOfYear = [self.tunit beginningOfYear:self.testStartDate];
+    NSDate* endOfYear = [self.tunit endOfYear:self.testStartDate];
     self.eventCache.cacheDataSource = nil;
     
     XCTAssertNil([self.eventCache eventsFrom:startOfYear to:endOfYear in:nil], @"Event cache should always return nil if data source is not set");
@@ -354,8 +359,8 @@
 - (void)testCacheReturnsCorrectEventsAfterInvalidation
 {
     // Ensure that cache loads events
-    NSDate* startOfYear = [self.testStartDate beginningOfYear];
-    NSDate* endOfYear = [self.testStartDate endOfYear];
+    NSDate* startOfYear = [self.tunit beginningOfYear:self.testStartDate];
+    NSDate* endOfYear = [self.tunit endOfYear:self.testStartDate];
     [self.eventCache eventsFrom:startOfYear to:endOfYear in:nil];
     
     // Ensure data source method returns nil

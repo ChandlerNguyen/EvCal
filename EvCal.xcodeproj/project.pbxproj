@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		08ABEF4E3EA5701185D583C1 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D75FD94E1145212C5A039D /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8404E07C1B329B31009B1923 /* ECInfiniteDatePagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8404E07B1B329B31009B1923 /* ECInfiniteDatePagingView.m */; };
 		842DA8FA1B47E5D7007DC027 /* ECEventTextPropertyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 842DA8F91B47E5D7007DC027 /* ECEventTextPropertyCell.m */; };
 		842DA8FF1B4A3DEE007DC027 /* ECRecurrenceRuleFormatterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 842DA8FE1B4A3DEE007DC027 /* ECRecurrenceRuleFormatterTests.m */; };
@@ -71,7 +70,8 @@
 		84EF226C1B08D5BD003DA610 /* ECEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EF226B1B08D5BD003DA610 /* ECEventView.m */; };
 		84FB23CD1B9F3A5E00F2DFEF /* ECSelectedDateHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FB23CC1B9F3A5E00F2DFEF /* ECSelectedDateHighlightView.m */; };
 		84FB23D01B9F683900F2DFEF /* ECMonthPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FB23CF1B9F683900F2DFEF /* ECMonthPicker.m */; };
-		D1A22B1CD1D1EC4C9F15AF5B /* Pods_EvCalTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DA478CF758CC621888642D2 /* Pods_EvCalTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F26B6F0460F3AC5ACFC57868 /* Pods_EvCalTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 613EF4450C0AB345B82E1AC9 /* Pods_EvCalTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FC0C35B2ECFC5204B3996FFF /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C297301BA4B444E8F83BA7D /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,10 +85,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0CD2922DCA6CD50DC54BED4D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		26A52386135E7399D21E9C48 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		4DA478CF758CC621888642D2 /* Pods_EvCalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EvCalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5F3614751A065418C790A255 /* Pods-EvCalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvCalTests/Pods-EvCalTests.release.xcconfig"; sourceTree = "<group>"; };
+		28870AEF83122A98A77D365E /* Pods-EvCalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvCalTests/Pods-EvCalTests.release.xcconfig"; sourceTree = "<group>"; };
+		613EF4450C0AB345B82E1AC9 /* Pods_EvCalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EvCalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		711A0B5B4281A068CBFD63F6 /* Pods-EvCalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EvCalTests/Pods-EvCalTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8404E07A1B329B31009B1923 /* ECInfiniteDatePagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECInfiniteDatePagingView.h; path = Views/ECInfiniteDatePagingView.h; sourceTree = "<group>"; };
 		8404E07B1B329B31009B1923 /* ECInfiniteDatePagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECInfiniteDatePagingView.m; path = Views/ECInfiniteDatePagingView.m; sourceTree = "<group>"; };
 		842DA8F81B47E5D7007DC027 /* ECEventTextPropertyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEventTextPropertyCell.h; path = Views/ECEventTextPropertyCell.h; sourceTree = "<group>"; };
@@ -201,8 +200,9 @@
 		84FB23CC1B9F3A5E00F2DFEF /* ECSelectedDateHighlightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSelectedDateHighlightView.m; path = Views/ECSelectedDateHighlightView.m; sourceTree = "<group>"; };
 		84FB23CE1B9F683900F2DFEF /* ECMonthPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECMonthPicker.h; path = Views/ECMonthPicker.h; sourceTree = "<group>"; };
 		84FB23CF1B9F683900F2DFEF /* ECMonthPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECMonthPicker.m; path = Views/ECMonthPicker.m; sourceTree = "<group>"; };
-		88D75FD94E1145212C5A039D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CD17AAA6E4F9A168802C453D /* Pods-EvCalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvCalTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EvCalTests/Pods-EvCalTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8C297301BA4B444E8F83BA7D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2038148BF66C66EC33BDAB7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		CA4452E3CBE2E20619B0A4FC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,7 +210,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08ABEF4E3EA5701185D583C1 /* Pods.framework in Frameworks */,
+				FC0C35B2ECFC5204B3996FFF /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,7 +218,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1A22B1CD1D1EC4C9F15AF5B /* Pods_EvCalTests.framework in Frameworks */,
+				F26B6F0460F3AC5ACFC57868 /* Pods_EvCalTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,8 +500,8 @@
 		CD5360421152C667B1D9EB7A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				88D75FD94E1145212C5A039D /* Pods.framework */,
-				4DA478CF758CC621888642D2 /* Pods_EvCalTests.framework */,
+				8C297301BA4B444E8F83BA7D /* Pods.framework */,
+				613EF4450C0AB345B82E1AC9 /* Pods_EvCalTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -509,10 +509,10 @@
 		D93D40FC1C2E10D342AD6CDC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				26A52386135E7399D21E9C48 /* Pods.debug.xcconfig */,
-				0CD2922DCA6CD50DC54BED4D /* Pods.release.xcconfig */,
-				CD17AAA6E4F9A168802C453D /* Pods-EvCalTests.debug.xcconfig */,
-				5F3614751A065418C790A255 /* Pods-EvCalTests.release.xcconfig */,
+				CA4452E3CBE2E20619B0A4FC /* Pods.debug.xcconfig */,
+				C2038148BF66C66EC33BDAB7 /* Pods.release.xcconfig */,
+				711A0B5B4281A068CBFD63F6 /* Pods-EvCalTests.debug.xcconfig */,
+				28870AEF83122A98A77D365E /* Pods-EvCalTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -524,12 +524,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84C459161B073A860066B6A9 /* Build configuration list for PBXNativeTarget "EvCal" */;
 			buildPhases = (
-				E353D1FB578AA42979BAAC17 /* Check Pods Manifest.lock */,
+				CA6007C02B3C6D481FC81FD7 /* Check Pods Manifest.lock */,
 				84C458EF1B073A850066B6A9 /* Sources */,
 				84C458F01B073A850066B6A9 /* Frameworks */,
 				84C458F11B073A850066B6A9 /* Resources */,
-				4A91993D458FF8F7E41C330B /* Copy Pods Resources */,
-				02C9CC784AF75517F7A6E21D /* Embed Pods Frameworks */,
+				E0E604A9B93A1A2756C006CC /* Embed Pods Frameworks */,
+				72B1AF1A5FADF9B73914078D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -619,21 +619,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		02C9CC784AF75517F7A6E21D /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3A9ADE36D44AF142AB7C4804 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -649,7 +634,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EvCalTests/Pods-EvCalTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4A91993D458FF8F7E41C330B /* Copy Pods Resources */ = {
+		72B1AF1A5FADF9B73914078D /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -694,7 +679,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EvCalTests/Pods-EvCalTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E353D1FB578AA42979BAAC17 /* Check Pods Manifest.lock */ = {
+		CA6007C02B3C6D481FC81FD7 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -707,6 +692,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E0E604A9B93A1A2756C006CC /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -891,7 +891,7 @@
 		};
 		84C459171B073A860066B6A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 26A52386135E7399D21E9C48 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = CA4452E3CBE2E20619B0A4FC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
@@ -907,7 +907,7 @@
 		};
 		84C459181B073A860066B6A9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0CD2922DCA6CD50DC54BED4D /* Pods.release.xcconfig */;
+			baseConfigurationReference = C2038148BF66C66EC33BDAB7 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
@@ -923,7 +923,7 @@
 		};
 		84C4591A1B073A860066B6A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD17AAA6E4F9A168802C453D /* Pods-EvCalTests.debug.xcconfig */;
+			baseConfigurationReference = 711A0B5B4281A068CBFD63F6 /* Pods-EvCalTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -944,7 +944,7 @@
 		};
 		84C4591B1B073A860066B6A9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5F3614751A065418C790A255 /* Pods-EvCalTests.release.xcconfig */;
+			baseConfigurationReference = 28870AEF83122A98A77D365E /* Pods-EvCalTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
