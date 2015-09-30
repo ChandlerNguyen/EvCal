@@ -32,11 +32,11 @@ public class TimeUnit : NSObject {
     
 // MARK: - Properties and Lifecycle
     
-    // Private static instance for static methods
+    /// Private static instance for static methods
     private static let sharedInstance = TimeUnit()
     
     /// The calendar to be used for date calculations
-    lazy var calendar : NSCalendar = {
+    public lazy var calendar : NSCalendar = {
        return NSCalendar.autoupdatingCurrentCalendar()
     }()
     
@@ -92,6 +92,33 @@ public class TimeUnit : NSObject {
     */
     static public func beginningOfDay(date:NSDate) -> NSDate {
         return sharedInstance.beginningOfDay(date)
+    }
+    
+    /**
+        Creates a new date at the first second of the same week as the given date
+    
+        - parameter date: The date for which to calculate the beginning of the week
+    
+        - returns: The newly created date representing the first second of the week
+    */
+    public func beginningOfWeek(date:NSDate) -> NSDate {
+        let components = self.calendar.components([.Year, .Month, .Day, .Weekday], fromDate: date)
+        
+        let weekdayOffset = components.weekday - self.calendar.firstWeekday
+        components.day -= weekdayOffset;
+        
+        return self.calendar.dateFromComponents(components)!
+    }
+    
+    /**
+        Creates a new date at the first second of the same week as the given date
+    
+        - parameter date: The date for which to calculate the beginning of the week
+    
+        - returns: The newly created date representing the first second of the week
+    */
+    static public func beginningOfWeek(date:NSDate) -> NSDate {
+        return sharedInstance.beginningOfWeek(date)
     }
     
     /**
@@ -199,6 +226,32 @@ public class TimeUnit : NSObject {
     }
     
     /**
+        Creates a new date at the last second of the same week as the given date.
+    
+        - parameter date: The date for which to calculate the end of the week.
+    
+        - returns: The newly created date representing the last second of the week.
+    */
+    public func endOfWeek(date:NSDate) -> NSDate {
+        let firstSecondOfNextWeek = self.beginningOfWeek(
+            self.calendar.dateByAddingUnit(.WeekOfYear, value: 1, toDate: date, options: [])!
+        )
+        
+        return firstSecondOfNextWeek.dateByAddingTimeInterval(-1)
+    }
+    
+    /**
+        Creates a new date at the last second of the same week as the given date.
+    
+        - parameter date: The date for which to calculate the end of the week.
+    
+        - returns: The newly created date representing the last second of the week.
+    */
+    static public func endOfWeek(date:NSDate) -> NSDate {
+        return sharedInstance.endOfWeek(date)
+    }
+    
+    /**
         Creates a new date at the last second of the same month as the given date
     
         - parameter date: The date for which to calculate the end of the month
@@ -249,6 +302,7 @@ public class TimeUnit : NSObject {
     static public func endOfYear(date:NSDate) -> NSDate {
         return sharedInstance.endOfYear(date)
     }
+    
     
     
 // MARK: - Build time units
@@ -322,6 +376,35 @@ public class TimeUnit : NSObject {
     */
     static public func hoursOfDay(date:NSDate) -> [NSDate] {
         return sharedInstance.hoursOfDay(date)
+    }
+    
+    /**
+        Creates an array of dates at the first second of each day of the week of
+        the given date.
+    
+        - parameter date: A date within the week for which to create dates.
+    
+        - returns: The newly created array of dates.
+    */
+    public func daysOfWeek(date:NSDate) -> [NSDate] {
+        let firstDayOfWeek = self.beginningOfWeek(date)
+        let firstDayOfNextWeek = self.beginningOfWeek(
+            self.calendar.dateByAddingUnit(.WeekOfYear, value: 1, toDate: date, options: [])!
+        )
+        
+        return self.timeUnits(.Day, fromDate: firstDayOfWeek, toDate: firstDayOfNextWeek)
+    }
+    
+    /**
+        Creates an array of dates at the first second of each day of the week of
+        the given date.
+    
+        - parameter date: A date within the week for which to create dates.
+    
+        - returns: The newly created array of dates.
+    */
+    static public func daysOfWeek(date:NSDate) -> [NSDate] {
+        return sharedInstance.daysOfWeek(date)
     }
     
     /**
@@ -463,6 +546,35 @@ public class TimeUnit : NSObject {
     }
     
     /**
+        Returns true if the given date falls within the week of the given week or
+        false otherwise.
+    
+        - parameter date: The date being tested.
+        - parameter week: Any date within the week of the test range.
+    
+        - returns: True if the given date falls within the week or false otherwise.
+    */
+    public func weekContainsDate(date:NSDate, week:NSDate) -> Bool {
+        let beginningOfWeek = self.beginningOfWeek(week)
+        let endOfWeek = self.endOfWeek(week)
+        
+        return self.dateIsBetween(date, startDate: beginningOfWeek, endDate: endOfWeek)
+    }
+    
+    /**
+        Returns true if the given date falls within the week of the given week or
+        false otherwise.
+    
+        - parameter date: The date being tested.
+        - parameter week: Any date within the week of the test range.
+    
+        - returns: True if the given date falls within the week or false otherwise.
+    */
+    static public func weekContainsDate(date:NSDate, week:NSDate) -> Bool {
+        return sharedInstance.weekContainsDate(date, week: week)
+    }
+    
+    /**
         Returns true if the given date falls within the day of the given month 
         or false otherwise.
     
@@ -519,4 +631,238 @@ public class TimeUnit : NSObject {
     static public func yearContainsDate(date:NSDate, year:NSDate) -> Bool {
         return sharedInstance.yearContainsDate(date, year: year)
     }
+    
+    
+// MARK: - Previous and Next Time Units
+    
+    /**
+        Creates a new date at the first second of the hour prior to the given date.
+    
+        - parameter date: The date for which to find the previous hour
+    
+        - returns: The newly created date.
+    */
+    public func hourBefore(date:NSDate) -> NSDate {
+        let previousHour = self.calendar.dateByAddingUnit(.Hour, value: -1, toDate: date, options: [])!
+        return self.beginningOfHour(previousHour)
+    }
+    
+    /**
+        Creates a new date at the first second of the hour prior to the given date.
+    
+        - parameter date: The date for which to find the previous hour
+    
+        - returns: The newly created date.
+    */
+    static public func hourBefore(date:NSDate) -> NSDate {
+        return sharedInstance.hourBefore(date)
+    }
+    
+    /**
+        Creates a new date at the first second of the hour following the given date.
+    
+        - parameter date: The date for which to find the next hour
+    
+        - returns: The newly created date.
+    */
+    public func hourAfter(date:NSDate) -> NSDate {
+        let nextHour = self.calendar.dateByAddingUnit(.Hour, value: 1, toDate: date, options: [])!
+        return self.beginningOfHour(nextHour)
+    }
+    
+    /**
+        Creates a new date at the first second of the hour following the given date.
+    
+        - parameter date: The date for which to find the next hour
+    
+        - returns: The newly created date.
+    */
+    static public func hourAfter(date:NSDate) -> NSDate {
+        return sharedInstance.hourAfter(date)
+    }
+    
+    /**
+        Creates a new date at the first second of the day prior to the given date.
+    
+        - parameter date: The date for which to find the previous day.
+    
+        - returns: The newly created date.
+    */
+    public func dayBefore(date:NSDate) -> NSDate {
+        let previousDay = self.calendar.dateByAddingUnit(.Day, value: -1, toDate: date, options: [])!
+        return self.beginningOfDay(previousDay)
+    }
+    
+    /**
+        Creates a new date at the first second of the day prior to the given date.
+    
+        - parameter date: The date for which to find the previous day.
+    
+        - returns: The newly created date.
+    */
+    static public func dayBefore(date:NSDate) -> NSDate {
+        return sharedInstance.dayBefore(date)
+    }
+    
+    /**
+        Creates a new date at the first second of the day following the given date.
+    
+        - parameter date: The date for which to find the next day.
+    
+        - returns: The newly created date.
+    */
+    public func dayAfter(date:NSDate) -> NSDate {
+        let nextDay = self.calendar.dateByAddingUnit(.Day, value: 1, toDate: date, options: [])!
+        return self.beginningOfDay(nextDay)
+    }
+    
+    /**
+        Creates a new date at the first second of the day following the given date.
+    
+        - parameter date: The date for which to find the next day.
+    
+        - returns: The newly created date.
+    */
+    static public func dayAfter(date:NSDate) -> NSDate {
+        return sharedInstance.dayAfter(date)
+    }
+    
+    /**
+        Creates a new date at the first second of the week prior to the given date.
+    
+        - parameter date: The date for which to find the previous week
+    
+        - returns: The newly created date.
+    */
+    public func weekBefore(date:NSDate) -> NSDate {
+        let previousWeek = self.calendar.dateByAddingUnit(.WeekOfYear, value: -1, toDate: date, options: [])!
+        return self.beginningOfWeek(previousWeek)
+    }
+    
+    /**
+        Creates a new date at the first second of the week prior to the given date.
+    
+        - parameter date: The date for which to find the previous week
+    
+        - returns: The newly created date.
+    */
+    static public func weekBefore(date:NSDate) -> NSDate {
+        return sharedInstance.weekBefore(date)
+    }
+    
+    /**
+        Creates a new date at the first second of the week following the given date.
+    
+        - parameter date: The date for which to find the next week
+    
+        - returns: The newly created date.
+    */
+    public func weekAfter(date:NSDate) -> NSDate {
+        let nextWeek = self.calendar.dateByAddingUnit(.WeekOfYear, value: 1, toDate: date, options: [])!
+        return self.beginningOfWeek(nextWeek)
+    }
+    
+    /**
+        Creates a new date at the first second of the week following the given date.
+    
+        - parameter date: The date for which to find the next week
+    
+        - returns: The newly created date.
+    */
+    static public func weekAfter(date:NSDate) -> NSDate {
+        return sharedInstance.weekAfter(date)
+    }
+    
+    /**
+        Creates a new date at the first second of the month prior to the given date.
+    
+        - parameter date: The date for which to find the previous month.
+    
+        - returns: The newly created date.
+    */
+    public func monthBefore(date:NSDate) -> NSDate {
+        let previousMonth = self.calendar.dateByAddingUnit(.Month, value: -1, toDate: date, options: [])!
+        return self.beginningOfMonth(previousMonth)
+    }
+    
+    /**
+        Creates a new date at the first second of the month prior to the given date.
+    
+        - parameter date: The date for which to find the previous month.
+    
+        - returns: The newly created date.
+    */
+    static public func monthBefore(date:NSDate) -> NSDate {
+        return sharedInstance.monthBefore(date)
+    }
+    
+    /**
+        Creates a new date at the first second of the month following the given date.
+    
+        - parameter date: The date for which to find the next month.
+    
+        - returns: The newly created date.
+    */
+    public func monthAfter(date:NSDate) -> NSDate {
+        let nextMonth = self.calendar.dateByAddingUnit(.Month, value: 1, toDate: date, options: [])!
+        return self.beginningOfMonth(nextMonth)
+    }
+    
+    /**
+        Creates a new date at the first second of the month following the given date.
+    
+        - parameter date: The date for which to find the next month.
+    
+        - returns: The newly created date.
+    */
+    static public func monthAfter(date:NSDate) -> NSDate {
+        return sharedInstance.monthAfter(date)
+    }
+    
+    /**
+        Creates a new date at the first second of the year prior to the given date.
+    
+        - parameter date: The date for which to find the previous year.
+    
+        - returns: The newly created date.
+    */
+    public func yearBefore(date:NSDate) -> NSDate {
+        let previousYear = self.calendar.dateByAddingUnit(.Year, value: -1, toDate: date, options: [])!
+        return self.beginningOfYear(previousYear)
+    }
+    
+    /**
+        Creates a new date at the first second of the year prior to the given date.
+    
+        - parameter date: The date for which to find the previous year.
+    
+        - returns: The newly created date.
+    */
+    static public func yearBefore(date:NSDate) -> NSDate {
+        return sharedInstance.yearBefore(date)
+    }
+    
+    /**
+        Creates a new date at the first second of the year following the given date.
+    
+        - parameter date: The date for which to find the next year.
+    
+        - returns: The newly created date.
+    */
+    public func yearAfter(date:NSDate) -> NSDate {
+        let nextYear = self.calendar.dateByAddingUnit(.Year, value: 1, toDate: date, options: [])!
+        return self.beginningOfYear(nextYear)
+    }
+    
+    /**
+        Creates a new date at the first second of the year following the given date.
+    
+        - parameter date: The date for which to find the next year.
+    
+        - returns: The newly created date.
+    */
+    static public func yearAfter(date:NSDate) -> NSDate {
+        return sharedInstance.yearAfter(date)
+    }
+    
 }

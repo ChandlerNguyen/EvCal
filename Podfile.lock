@@ -10,7 +10,7 @@ PODS:
   - CupertinoYankee (1.0.2)
   - EDColor (1.0.0)
   - MSCellAccessory (1.1.2)
-  - Tunits (0.4.0)
+  - Tunits (0.5.0)
 
 DEPENDENCIES:
   - CocoaLumberjack
@@ -24,6 +24,6 @@ SPEC CHECKSUMS:
   CupertinoYankee: c288994087c791657fce35a43d2a604e64eef23e
   EDColor: c83f9a61f9f9b3c23d541f1feb561558e29cb088
   MSCellAccessory: 8265f3cd2386c1f372da00232472605ab11426e4
-  Tunits: f0c423bf31e52a83c17622458f3797075268e45f
+  Tunits: 12906675b84cb79b8e38129fe7b8ebe4e71676d5
 
 COCOAPODS: 0.38.2
