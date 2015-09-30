@@ -1,0 +1,6 @@
+framework module Pods_EvCalTests {
+  umbrella header "Pods-EvCalTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
