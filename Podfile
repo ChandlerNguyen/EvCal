@@ -7,5 +7,6 @@ pod 'Tunits'
 use_frameworks!
 
 target :EvCalTests do
+	# this line is added so CocoaPods creates EvCalTest debug files
 	pod 'Tunits'
 end
